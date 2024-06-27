@@ -1,0 +1,16 @@
+<div
+    #panzoom
+    class="panzoom"
+    [style.cursor]="cursor$ | async"
+    [style.transform]="wrapperTransform$ | async"
+    [style.transition-duration]="(transitioned$ | async) ? zoomAnimationDuration + 'ms' : '0s'"
+    (dfDragDrop)="onPan($event)"
+    (dfZoom)="onZoom($event)"
+>
+    <div
+        class="panzoom__container"
+        [style.transform]="panzoomContainerTransform$ | async"
+    >
+        <ng-content />
+    </div>
+</div>

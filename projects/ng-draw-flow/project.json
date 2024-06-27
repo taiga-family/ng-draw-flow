@@ -1,0 +1,33 @@
+{
+    "name": "ng-draw-flow",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "projects/ng-draw-flow/src",
+    "prefix": "df",
+    "tags": [],
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:ng-packagr-lite",
+            "outputs": ["{workspaceRoot}/dist/projects/ng-draw-flow"],
+            "options": {
+                "project": "projects/ng-draw-flow/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "projects/ng-draw-flow/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "projects/ng-draw-flow/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production"
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/projects/ng-draw-flow"],
+            "options": {
+                "jestConfig": "projects/ng-draw-flow/jest.config.ts"
+            }
+        }
+    }
+}

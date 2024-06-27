@@ -1,0 +1,17 @@
+.draw-flow-node {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    touch-action: none;
+
+    &:hover {
+        will-change: transform;
+    }
+
+    .drag-handle {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}

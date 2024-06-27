@@ -1,0 +1,23 @@
+.connection {
+    position: absolute;
+    pointer-events: none;
+    aspect-ratio: 1 / 1;
+
+    .main-path {
+        z-index: 0;
+        fill: none;
+        stroke-width: var(--df-connection-stroke-width);
+        stroke: var(--df-connection-color);
+        pointer-events: all;
+        transform: translateZ(0);
+
+        &:hover {
+            stroke: var(--df-connection-color-hover);
+            cursor: pointer;
+        }
+
+        &.df-selected {
+            stroke: var(--df-connection-color-active);
+        }
+    }
+}

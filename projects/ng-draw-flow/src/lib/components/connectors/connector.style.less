@@ -1,0 +1,54 @@
+:host {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    background: transparent;
+    border-radius: 50%;
+    cursor: crosshair;
+    box-sizing: border-box;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        width: 0.5rem;
+        height: 0.5rem;
+    }
+
+    &:before {
+        z-index: 1;
+        background: var(--df-connector-color);
+        transform: translate(-50%, -50%);
+    }
+
+    &:after {
+        z-index: 0;
+        width: 1rem;
+        height: 1rem;
+        background: var(--df-connector-color-hover);
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover:after {
+        animation: dfPulse 1.5s infinite;
+    }
+
+    &.df-disabled {
+        pointer-events: none;
+    }
+}
+
+@keyframes dfPulse {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

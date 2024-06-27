@@ -1,0 +1,26 @@
+<div
+    class="scene"
+    [style.height.px]="panSize"
+    [style.width.px]="panSize"
+>
+    <ng-container *ngFor="let node of model?.nodes | keyvalue: originalOrder; trackBy: trackByNodeFn">
+        <df-node
+            [node]="node.value"
+            (nodeDeleted)="onNodeDeleted(node.key)"
+            (nodeMoved)="onNodeMoved(node.key, $event)"
+            (nodeSelected)="onNodeSelected($event)"
+        />
+    </ng-container>
+
+    <ng-container *ngFor="let connection of model?.connections; trackBy: trackByConnectionsFn">
+        <df-connection
+            [connection]="connection"
+            (connectionDeleted)="onConnectionDeleted(connection)"
+        />
+    </ng-container>
+
+    <df-draft-connection
+        *ngIf="isConnectionCreating$ | async"
+        (connectionCreated)="onConnectionCreated($event)"
+    />
+</div>

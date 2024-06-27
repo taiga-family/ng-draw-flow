@@ -1,0 +1,16 @@
+<div
+    class="drawflow"
+    (waResizeObserver)="onResize($event)"
+>
+    <df-panzoom (scale)="scale.emit($event)">
+        <df-scene
+            *ngIf="rootReady$ | async"
+            [formControl]="form"
+            (connectionCreated)="connectionCreated.emit($event)"
+            (connectionDeleted)="onConnectionDeleted($event)"
+            (nodeDeleted)="nodeDeleted.emit($event)"
+            (nodeMoved)="nodeMoved.emit($event)"
+            (nodeSelected)="nodeSelected.emit($event)"
+        />
+    </df-panzoom>
+</div>

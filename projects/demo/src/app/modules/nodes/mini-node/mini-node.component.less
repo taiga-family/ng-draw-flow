@@ -1,0 +1,34 @@
+@import '@taiga-ui/core/styles/taiga-ui-local';
+
+:host {
+    display: flex;
+    background: var(--tui-base-09);
+    width: 3.125rem;
+    height: 3.125rem;
+    padding: 0.5rem;
+    border: 0.0625rem solid var(--tui-base-01);
+    transition: border-color 0.2s ease-in-out;
+    color: var(--tui-base-01);
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.input,
+.output {
+    position: absolute;
+}
+
+.input {
+    left: -0.5rem;
+    top: 0.5rem;
+}
+
+.output-wrapper {
+    position: relative;
+}
+
+.output {
+    right: -0.5rem;
+    bottom: 0.5rem;
+}

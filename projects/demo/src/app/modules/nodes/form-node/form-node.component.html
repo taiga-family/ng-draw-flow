@@ -1,0 +1,37 @@
+<df-input
+    *ngIf="!startNode"
+    class="input"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+/>
+
+<div class="tui-space_bottom-4 tui-text_body-s">
+    {{ model.text }}
+</div>
+
+<form [formGroup]="form">
+    <div
+        *ngFor="let fieldName of fieldNames; let i = index"
+        [formGroupName]="fieldName"
+    >
+        <div class="field tui-space_bottom-1">
+            <tui-input
+                formControlName="fieldValue"
+                [tuiTextfieldSize]="'s'"
+            />
+
+            <df-output
+                class="output"
+                [connectorData]="{nodeId, connectorId: form.value[fieldName].connectorId, single: false}"
+            />
+        </div>
+    </div>
+</form>
+
+<button
+    size="s"
+    tuiButton
+    type="button"
+    (click)="add()"
+>
+    Add field
+</button>
