@@ -1,0 +1,44 @@
+name: Lint
+on: [pull_request]
+
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: taiga-family/ci/actions/setup/checkout@v1.65.1
+      - uses: taiga-family/ci/actions/setup/variables@v1.65.1
+      - uses: taiga-family/ci/actions/setup/node@v1.65.1
+      - run: npm run typecheck
+
+  stylelint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: taiga-family/ci/actions/setup/checkout@v1.65.1
+      - uses: taiga-family/ci/actions/setup/variables@v1.65.1
+      - uses: taiga-family/ci/actions/setup/node@v1.65.1
+      - run: npm run stylelint ${{ env.SUPPORT_AUTO_PUSH == 'true' && '-- --fix' || '' }}
+      - uses: taiga-family/ci/actions/auto/push@v1.65.1
+        with:
+          token: ${{ secrets.TAIGA_FAMILY_BOT_PAT }}
+
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: taiga-family/ci/actions/setup/checkout@v1.65.1
+      - uses: taiga-family/ci/actions/setup/variables@v1.65.1
+      - uses: taiga-family/ci/actions/setup/node@v1.65.1
+      - run: npm run lint ${{ env.SUPPORT_AUTO_PUSH == 'true' && '-- --fix' || '' }}
+      - uses: taiga-family/ci/actions/auto/push@v1.65.1
+        with:
+          token: ${{ secrets.TAIGA_FAMILY_BOT_PAT }}
+
+  result:
+    needs: [typecheck, stylelint, eslint]
+    runs-on: ubuntu-latest
+    name: Lint result
+    steps:
+      - run: echo "Success"
+
+concurrency:
+  group: lint-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true

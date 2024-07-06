@@ -50,6 +50,9 @@
             "inputs": ["production", "^production"],
             "cache": true
         },
+        "lint": {
+            "cache": true
+        },
         "@nx/jest:jest": {
             "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
             "cache": true,
@@ -64,16 +67,7 @@
             }
         }
     },
-    "nxCloudAccessToken": "465fd219133a51a9374323344999d17a70069c692ab858075cdd299c6aad049d",
-    "parallel": 1,
+    "parallel": 3,
     "useInferencePlugins": false,
-    "defaultBase": "origin/main",
-    "tasksRunnerOptions": {
-        "default": {
-            "runner": "nx-cloud",
-            "options": {
-                "accessToken": "c86d7aac6c22b3a48d9c856ecd4cb31e47c06c3fcfed848536c845ecf1e64f34"
-            }
-        }
-    }
+    "defaultBase": "origin/main"
 }

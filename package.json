@@ -141,7 +141,6 @@
         "lint-staged": "^12.3.7",
         "ng-packagr": "16.0.0",
         "nx": "18.2.1",
-        "nx-cloud": "^18.0.0",
         "prettier": "3.2.5",
         "standard-version": "^9.3.2",
         "ts-jest": "29.1.0",
