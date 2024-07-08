@@ -7,20 +7,24 @@
     "tags": [],
     "targets": {
         "build": {
-            "executor": "@nx/angular:ng-packagr-lite",
-            "outputs": ["{workspaceRoot}/dist/projects/ng-draw-flow"],
+            "executor": "@nx/rollup:rollup",
+            "outputs": ["{options.outputPath}"],
             "options": {
-                "project": "projects/ng-draw-flow/ng-package.json"
-            },
-            "configurations": {
-                "production": {
-                    "tsConfig": "projects/ng-draw-flow/tsconfig.lib.prod.json"
-                },
-                "development": {
-                    "tsConfig": "projects/ng-draw-flow/tsconfig.lib.json"
-                }
-            },
-            "defaultConfiguration": "production"
+                "project": "projects/ng-draw-flow/package.json",
+                "outputPath": "dist/ng-draw-flow",
+                "entryFile": "projects/ng-draw-flow/src/index.ts",
+                "tsConfig": "projects/ng-draw-flow/tsconfig.lib.json",
+                "format": ["esm", "cjs"],
+                "compiler": "tsc",
+                "external": "all",
+                "assets": [
+                    {
+                        "glob": "projects/ng-draw-flow/README.md",
+                        "input": ".",
+                        "output": "."
+                    }
+                ]
+            }
         },
         "test": {
             "executor": "@nx/jest:jest",
@@ -28,6 +32,18 @@
             "options": {
                 "jestConfig": "projects/ng-draw-flow/jest.config.ts"
             }
+        },
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "ts-node ./scripts/npm-publish.ts --path ./dist/ng-draw-flow --dry-run {args.dry-run}"
+            },
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "params": "ignore"
+                }
+            ]
         }
     }
 }
