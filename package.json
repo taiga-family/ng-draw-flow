@@ -1,6 +1,6 @@
 {
     "name": "ng-draw-flow",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A customizable Angular component for building node-based editors and interactive diagrams",
     "keywords": [
         "angular",
@@ -122,6 +122,7 @@
         "@nx/jest": "18.2.1",
         "@nx/js": "18.2.1",
         "@nx/node": "18.2.1",
+        "@nx/rollup": "18.2.1",
         "@nx/workspace": "18.2.1",
         "@schematics/angular": "16.0.0",
         "@taiga-ui/browserslist-config": "^0.6.0",
