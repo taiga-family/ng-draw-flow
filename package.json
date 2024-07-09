@@ -1,13 +1,17 @@
 {
     "name": "ng-draw-flow",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A customizable Angular component for building node-based editors and interactive diagrams",
     "keywords": [
-        "angular",
+        "draw flow",
         "ng",
-        "library",
-        "tinkoff",
-        "draw flow"
+        "angular",
+        "graph",
+        "editor",
+        "flow",
+        "draw",
+        "diagram",
+        "chart"
     ],
     "homepage": "",
     "bugs": "",

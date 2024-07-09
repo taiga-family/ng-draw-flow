@@ -4,7 +4,7 @@
     "projectType": "library",
     "sourceRoot": "projects/ng-draw-flow/src",
     "prefix": "df",
-    "tags": ["angular", "graph", "editor", "flow", "draw", "diagram", "chart"],
+    "tags": ["draw flow", "ng", "angular", "graph", "editor", "flow", "draw", "diagram", "chart"],
     "targets": {
         "build": {
             "executor": "@nx/angular:package",
