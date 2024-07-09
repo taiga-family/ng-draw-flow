@@ -122,7 +122,6 @@
         "@nx/jest": "18.2.1",
         "@nx/js": "18.2.1",
         "@nx/node": "18.2.1",
-        "@nx/rollup": "18.2.1",
         "@nx/workspace": "18.2.1",
         "@schematics/angular": "16.0.0",
         "@taiga-ui/browserslist-config": "^0.6.0",

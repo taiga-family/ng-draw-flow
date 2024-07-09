@@ -4,27 +4,30 @@
     "projectType": "library",
     "sourceRoot": "projects/ng-draw-flow/src",
     "prefix": "df",
-    "tags": [],
+    "tags": ["angular", "graph", "editor", "flow", "draw", "diagram", "chart"],
     "targets": {
         "build": {
-            "executor": "@nx/rollup:rollup",
-            "outputs": ["{options.outputPath}"],
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/ng-draw-flow"],
             "options": {
-                "project": "projects/ng-draw-flow/package.json",
-                "outputPath": "dist/ng-draw-flow",
-                "entryFile": "projects/ng-draw-flow/src/index.ts",
-                "tsConfig": "projects/ng-draw-flow/tsconfig.lib.json",
-                "format": ["esm", "cjs"],
-                "compiler": "tsc",
-                "external": "all",
-                "assets": [
-                    {
-                        "glob": "projects/ng-draw-flow/README.md",
-                        "input": ".",
-                        "output": "."
-                    }
-                ]
-            }
+                "project": "projects/ng-draw-flow/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "projects/ng-draw-flow/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "tsconfig.build.json"
+                }
+            },
+            "defaultConfiguration": "production",
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "params": "forward",
+                    "dependencies": true
+                }
+            ]
         },
         "test": {
             "executor": "@nx/jest:jest",
