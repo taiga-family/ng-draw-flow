@@ -1,6 +1,6 @@
 {
     "extends": "@taiga-ui/tsconfig",
-    "exclude": ["projects/**/*.spec.ts", "projects/**/*.spec.tsx"],
+    "exclude": ["projects/**/*.spec.ts"],
     "angularCompilerOptions": {
         "strictTemplates": true
     },
