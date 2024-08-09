@@ -19,10 +19,12 @@
                 [tuiTextfieldSize]="'s'"
             />
 
-            <df-output
-                class="output"
-                [connectorData]="{nodeId, connectorId: form.value[fieldName].connectorId, single: false}"
-            />
+            <ng-container *ngIf="!!getConnectorId(fieldName)">
+                <df-output
+                    class="output"
+                    [connectorData]="{nodeId, connectorId: getConnectorId(fieldName)!, single: false}"
+                />
+            </ng-container>
         </div>
     </div>
 </form>
