@@ -121,8 +121,8 @@ import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-fl
   standalone: true,
   selector: 'app-your-node',
   imports: [NgIf, DfInputComponent, DfOutputComponent],
-  templateUrl: './your-node.component.html',
-  styleUrls: ['./your-node.component.less'],
+  templateUrl: './your-connectors.component.html',
+  styleUrls: ['./your-connectors.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YourNodeComponent extends DrawFlowBaseNode {}

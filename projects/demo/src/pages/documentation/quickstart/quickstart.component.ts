@@ -8,20 +8,22 @@ import {
 } from '@ng-draw-flow/core';
 import type {TuiDocExample} from '@taiga-ui/addon-doc';
 import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import {TuiLinkModule} from '@taiga-ui/core';
 
 import FirstExampleComponent from './examples/first-example/component';
 
 @Component({
     standalone: true,
-    selector: 'getting-started-doc-page',
+    selector: 'quickstart-doc-page',
     imports: [
         TuiAddonDocModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
         FirstExampleComponent,
+        TuiLinkModule,
     ],
-    templateUrl: './getting-started.component.html',
-    styleUrls: ['./getting-started.component.less'],
+    templateUrl: './quickstart.component.html',
+    styleUrls: ['./quickstart.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         dfPanzoomOptionsProvider({
@@ -29,7 +31,7 @@ import FirstExampleComponent from './examples/first-example/component';
         }),
     ],
 })
-export default class GettingStartedComponent {
+export default class QuickstartComponent {
     public gettingStarted = {
         imports: import('./examples/imports.md?raw'),
         providing: import('./examples/providing.md?raw'),
@@ -39,9 +41,9 @@ export default class GettingStartedComponent {
     };
 
     public readonly customNodeExample: TuiDocExample = {
-        TypeScript: import('../getting-started/examples/node.component.ts?raw'),
-        Styles: import('../getting-started/examples/node.styles.less?raw'),
-        Template: import('../getting-started/examples/node.template.html?raw'),
+        TypeScript: import('./examples/node.component.ts?raw'),
+        Styles: import('./examples/node.styles.less?raw'),
+        Template: import('./examples/node.template.html?raw'),
     };
 
     protected data: DfDataModel = {
