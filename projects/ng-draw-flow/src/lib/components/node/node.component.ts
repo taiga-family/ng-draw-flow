@@ -342,8 +342,8 @@ export class NodeComponent implements AfterViewInit {
         const {x: panPositionX, y: panPositionY, zoom} = this.panzoomService.panzoomModel;
         const {
             panSize,
-            leftPosition: panzoomLeftPosition,
-            topPosition: panzoomTopPosition,
+            leftPosition: panZoomLeftPosition,
+            topPosition: panZoomTopPosition,
         } = this.panZoomOptions;
 
         // Get current pan position
@@ -356,14 +356,14 @@ export class NodeComponent implements AfterViewInit {
             y: scaledPanPositionY - panSize / 2,
         };
 
-        if (panzoomLeftPosition) {
+        if (panZoomLeftPosition) {
             position.x -=
-                (this.drawFlowElement.offsetWidth / 2) * -1 + panzoomLeftPosition;
+                (this.drawFlowElement.offsetWidth / 2) * -1 + panZoomLeftPosition;
         }
 
-        if (panzoomTopPosition) {
+        if (panZoomTopPosition) {
             position.y -=
-                (this.drawFlowElement.offsetHeight / 2) * -1 + panzoomTopPosition;
+                (this.drawFlowElement.offsetHeight / 2) * -1 + panZoomTopPosition;
         }
 
         return position;

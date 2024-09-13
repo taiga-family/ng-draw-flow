@@ -104,18 +104,18 @@ export class PanZoomComponent {
         map(([translate, zoom]) => `translate(${translate}) scale(${zoom}) rotate(0deg)`),
     );
 
-    protected readonly panzoomContainerTransform$: Observable<string> =
+    protected readonly panZoomContainerTransform$: Observable<string> =
         this.resizeObserver$.pipe(
             map((entries: readonly ResizeObserverEntry[]) => entries[0].contentRect),
             map((rootSize: DOMRectReadOnly) => {
                 let translate = '';
                 const {
-                    leftPosition: panzoomLeftPosition,
-                    topPosition: panzoomTopPosition,
+                    leftPosition: panZoomLeftPosition,
+                    topPosition: panZoomTopPosition,
                 } = this.panZoomOptions;
 
-                if (panzoomLeftPosition || panzoomLeftPosition === 0) {
-                    const offset = (rootSize.width / 2) * -1 + panzoomLeftPosition;
+                if (panZoomLeftPosition || panZoomLeftPosition === 0) {
+                    const offset = (rootSize.width / 2) * -1 + panZoomLeftPosition;
 
                     this.panzoomService.panzoomModel.offsetX = offset * -1;
 
@@ -124,8 +124,8 @@ export class PanZoomComponent {
                     this.panzoomService.panzoomModel.offsetX = 0;
                 }
 
-                if (panzoomTopPosition || panzoomTopPosition === 0) {
-                    const offset = (rootSize.height / 2) * -1 + panzoomTopPosition;
+                if (panZoomTopPosition || panZoomTopPosition === 0) {
+                    const offset = (rootSize.height / 2) * -1 + panZoomTopPosition;
 
                     this.panzoomService.panzoomModel.offsetY = offset * -1;
 
