@@ -15,8 +15,8 @@ export const DEMO_PAGES: TuiDocPages = [
     },
     {
         section: 'Documentation',
-        title: 'Camera',
-        route: DemoPath.Camera,
+        title: 'PanZoom Configuration Guide',
+        route: DemoPath.PanZoom,
     },
     {
         section: 'Examples',

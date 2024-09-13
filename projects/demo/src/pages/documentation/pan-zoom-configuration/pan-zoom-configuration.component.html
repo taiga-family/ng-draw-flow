@@ -1,0 +1,122 @@
+<tui-doc-page header="PanZoom Configuration Guide">
+    <h2>Introduction to PanZoom Component</h2>
+    <p>
+        The PanZoom component is a critical element in NgDrawFlow. It provides an interactive "board" on which nodes are
+        placed, allowing users to easily navigate the graph by moving (panning) and zooming the viewport to focus on
+        different parts of the data set. The component enhances the user experience by making complex graphs readable
+        and navigable, even when dealing with extensive data.
+    </p>
+    <h2>Customizing PanZoom</h2>
+    <p>
+        The PanZoom component is highly customizable, offering several options to tailor the graph layout to your
+        specific needs. Below is a detailed guide on the available
+        <code>DfPanZoomOptions</code>
+        :
+    </p>
+    <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
+        <li class="tui-list__item">
+            <code>panSize</code>
+            (default: 20000): Defines the total size of the layout where the nodes are placed. This determines the
+            area&#39;s dimensions that can be panned around. By default, the panSize is set to 20000, which provides a
+            substantial canvas for most use cases.
+        </li>
+        <li class="tui-list__item">
+            <code>topPosition</code>
+            (default: null): Sets the y-coordinate of the base node&#39;s position. When set to null, the base node is
+            centered vertically. Specifying 0 will align the base node to the top of the layout.
+        </li>
+        <li class="tui-list__item">
+            <code>leftPosition</code>
+            (default: null): Similar to topPosition, but for the x-coordinate. A null value centers the base node
+            horizontally, while setting it to 0 aligns it to the left edge of the layout.
+        </li>
+        <li class="tui-list__item">
+            <code>minZoom</code>
+            (default: 0.25): The minimum zoom level allowed. This can prevent the graph from becoming too small to
+            interact with. The default value 0.25 implies that the graph can be reduced to a quarter of its original
+            size.
+        </li>
+        <li class="tui-list__item">
+            <code>maxZoom</code>
+            (default: 3): The maximum zoom level. It restricts how much the graph can be enlarged, thus avoiding
+            excessive zoom-ins that can disrupt the layout. A default value of 3 means that the graph can be magnified
+            up to three times its normal size.
+        </li>
+        <li class="tui-list__item">
+            <code>zoomStep</code>
+            (default: 0.25): The incremental step for zooming in or out. Setting the zoomStep to 0.25 offers a
+            comfortable gradual scaling at each zoom action, providing smooth transitions.
+        </li>
+        <li class="tui-list__item">
+            <code>zoomAnimationDuration</code>
+            (default: 300): The time, in milliseconds, it takes to animate the zoom action. A value of 300 represents a
+            quick yet smooth transition that enhances the interactivity without causing disorientation.
+        </li>
+        <li class="tui-list__item">
+            <code>zoomWheelSensitivity</code>
+            (default: 0.01): Controls the zoom sensitivity when using a mouse wheel. The recommended value 0.01 ensures
+            that each scroll step results in a slight, controlled zoom change.
+        </li>
+        <li class="tui-list__item">
+            <code>touchSensitivity</code>
+            (default: 0.01): Adjusts the pan and zoom sensitivity on touch devices. A low value such as 0.01 is used to
+            achieve a fine-tuned control over the touch interactions.
+        </li>
+    </ul>
+
+    <h2>Configuring PanZoom in Your Application</h2>
+    <p>
+        To configure the Panzoom component for your Angular application, you can set up the PanzoomOptions in your
+        app.module.ts file as follows:
+    </p>
+    <tui-doc-code [code]="gettingStarted.data0" />
+
+    <h2>Placement of Elements on the Screen.</h2>
+
+    <app-pan-zoom-configuration-example-3 />
+
+    <p>
+        By default, the base node is positioned at the coordinates
+        <code>x&#58; 0, y&#58; 0</code>
+        , which is centered on the screen.
+    </p>
+
+    <div class="pan-position-demo">
+        <div class="pan-position-demo-item">
+            <div class="content">
+                <h3>Horizontal Alignment</h3>
+                <app-pan-zoom-configuration-example-1 />
+                <p>
+                    However, the
+                    <code>x&#58; 0, y&#58; 0</code>
+                    position can be altered. If you prefer the base node to be aligned to the left, you need to
+                    configure the leftPosition in dfPanzoomOptionsProvider.
+                </p>
+            </div>
+            <div class="code-example">
+                <tui-doc-code
+                    filename="app.module.ts"
+                    [code]="gettingStarted.data1"
+                />
+            </div>
+        </div>
+
+        <div class="pan-position-demo-item">
+            <div class="content">
+                <h3>Vertical Alignment</h3>
+
+                <app-pan-zoom-configuration-example-2 />
+
+                <p>
+                    Similarly, to adjust the positioning towards the top of the viewport, you should set up topPosition.
+                </p>
+            </div>
+            <div class="code-example">
+                <tui-doc-code
+                    filename="app.module.ts"
+                    [code]="gettingStarted.data2"
+                />
+            </div>
+        </div>
+    </div>
+</tui-doc-page>

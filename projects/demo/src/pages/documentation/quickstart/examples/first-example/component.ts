@@ -3,7 +3,7 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
-    dfPanzoomOptionsProvider,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
 
@@ -15,7 +15,7 @@ import {
     styleUrls: ['./styles.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        dfPanzoomOptionsProvider({
+        dfPanZoomOptionsProvider({
             leftPosition: 150,
         }),
     ],

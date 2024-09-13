@@ -25,11 +25,13 @@ export const appRoutes: Routes = [
         },
     },
     {
-        path: DemoPath.Camera,
+        path: DemoPath.PanZoom,
         loadComponent: async () =>
-            import('../pages/documentation/camera/camera.component'),
+            import(
+                '../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'
+            ),
         data: {
-            title: 'Camera',
+            title: 'PanZoom Configuration Guide',
         },
     },
 

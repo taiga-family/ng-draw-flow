@@ -14,7 +14,7 @@ import type {
 } from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
-    dfPanzoomOptionsProvider,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
 import type {TuiDocExample} from '@taiga-ui/addon-doc';
@@ -40,7 +40,7 @@ import {BehaviorSubject} from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        dfPanzoomOptionsProvider({
+        dfPanZoomOptionsProvider({
             leftPosition: 150,
         }),
     ],

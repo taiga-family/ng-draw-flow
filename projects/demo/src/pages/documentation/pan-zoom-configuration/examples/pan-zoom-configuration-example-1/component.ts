@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
-    dfPanzoomOptionsProvider,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
@@ -11,22 +11,22 @@ import {PanComponent} from '../../nodes/pan/pan.component';
 
 @Component({
     standalone: true,
-    selector: 'app-camera-example-3',
+    selector: 'app-pan-zoom-configuration-example-1',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
-    templateUrl: './camera-example-3.component.html',
-    styleUrls: ['./camera-example-3.component.less'],
+    templateUrl: './template.html',
+    styleUrls: ['./styles.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         provideNgDrawFlowConfigs({
             pan: PanComponent,
         }),
-        dfPanzoomOptionsProvider({
+        dfPanZoomOptionsProvider({
             topPosition: null,
-            leftPosition: null,
+            leftPosition: 0,
         }),
     ],
 })
-export default class CameraExample3Component {
+export class PanZoomConfigurationExample1Component {
     protected data: DfDataModel = {
         nodes: new Map().set('node-1', {
             id: 'node-1',

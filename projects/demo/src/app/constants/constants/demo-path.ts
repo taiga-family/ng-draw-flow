@@ -1,7 +1,7 @@
 export const DemoPath = {
     Quickstart: 'documentation/quickstart',
     TermsAndDefinitions: 'documentation/terms-and-definitions',
-    Camera: 'documentation/camera',
+    PanZoom: 'documentation/pan-zoom-configuration',
     SimpleExample: 'examples/quickstart',
     Overview: 'examples/overview',
     Editor: 'examples/editor',

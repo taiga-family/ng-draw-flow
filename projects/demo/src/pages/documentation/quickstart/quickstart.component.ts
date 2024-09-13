@@ -3,7 +3,7 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
-    dfPanzoomOptionsProvider,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
 import type {TuiDocExample} from '@taiga-ui/addon-doc';
@@ -26,7 +26,7 @@ import FirstExampleComponent from './examples/first-example/component';
     styleUrls: ['./quickstart.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        dfPanzoomOptionsProvider({
+        dfPanZoomOptionsProvider({
             leftPosition: 150,
         }),
     ],

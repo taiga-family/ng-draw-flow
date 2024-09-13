@@ -4,7 +4,7 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataConnection, DfDataModel, DfDataNode} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
-    dfPanzoomOptionsProvider,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
 import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
@@ -25,7 +25,7 @@ import {MarkdownModule} from 'ngx-markdown';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        dfPanzoomOptionsProvider({
+        dfPanZoomOptionsProvider({
             topPosition: 50,
             leftPosition: 50,
         }),
