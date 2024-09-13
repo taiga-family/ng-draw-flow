@@ -26,7 +26,7 @@ import {ConnectionsService} from '../connections/connections.service';
 import {DraftConnectionComponent} from '../connections/draft-connection/draft-connection.component';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {NodeComponent} from '../node/node.component';
-import {DF_PANZOOM_OPTIONS} from '../panzoom/panzoom.options';
+import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 
 @Component({
     standalone: true,
@@ -70,7 +70,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected form: FormControl = this.fb.control({});
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
-    protected readonly panSize = inject(DF_PANZOOM_OPTIONS).panSize;
+    protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
     protected model!: DfDataModel;
 
     public ngOnInit(): void {

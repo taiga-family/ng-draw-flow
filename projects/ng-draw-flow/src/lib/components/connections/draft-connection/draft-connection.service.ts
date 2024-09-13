@@ -28,12 +28,12 @@ import type {
 } from '../../../ng-draw-flow.interfaces';
 import {DfConnectionPoint} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
-import {PanzoomService} from '../../panzoom/panzoom.service';
+import {PanZoomService} from '../../pan-zoom/pan-zoom.service';
 import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
 
 @Injectable()
 export class DraftConnectionService implements OnDestroy {
-    private readonly panzoomService = inject(PanzoomService);
+    private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     protected readonly destroy$ = new Subject<void>();
     private sourceConnector!: DfDataConnector;
@@ -97,7 +97,7 @@ export class DraftConnectionService implements OnDestroy {
 
     private onDragMove(previousEvent: PointerEvent, currentEvent: PointerEvent): void {
         const {deltaX, deltaY} = dfDistanceBetweenPoints(previousEvent, currentEvent);
-        const {zoom} = this.panzoomService.panzoomModel;
+        const {zoom} = this.panZoomService.panzoomModel;
 
         this.target$.next({
             x: this.target$.value.x + deltaX / zoom,

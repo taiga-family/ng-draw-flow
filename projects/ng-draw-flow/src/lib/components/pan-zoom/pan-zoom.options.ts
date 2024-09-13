@@ -1,7 +1,7 @@
 import type {FactoryProvider} from '@angular/core';
 import {InjectionToken} from '@angular/core';
 
-export interface DfPanzoomOptions {
+export interface DfPanZoomOptions {
     panSize: number;
     topPosition: number | null;
     leftPosition: number | null;
@@ -13,7 +13,7 @@ export interface DfPanzoomOptions {
     touchSensitivity: number;
 }
 
-export const DF_PANZOOM_DEFAULT_OPTIONS: DfPanzoomOptions = {
+export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
     panSize: 20000,
     topPosition: null,
     leftPosition: null,
@@ -25,20 +25,20 @@ export const DF_PANZOOM_DEFAULT_OPTIONS: DfPanzoomOptions = {
     touchSensitivity: 0.01,
 };
 
-export const DF_PANZOOM_OPTIONS = new InjectionToken(
-    '[DF_PANZOOM_OPTIONS]: [PANZOOM_OPTIONS]',
+export const DF_PAN_ZOOM_OPTIONS = new InjectionToken(
+    '[DF_PAN_ZOOM_OPTIONS]: [PAN_ZOOM_OPTIONS]',
     {
-        factory: () => DF_PANZOOM_DEFAULT_OPTIONS,
+        factory: () => DF_PAN_ZOOM_DEFAULT_OPTIONS,
     },
 );
 
-export function dfPanzoomOptionsProvider(
-    options: Partial<DfPanzoomOptions>,
+export function dfPanZoomOptionsProvider(
+    options: Partial<DfPanZoomOptions>,
 ): FactoryProvider {
     return {
-        provide: DF_PANZOOM_OPTIONS,
-        useFactory: (): DfPanzoomOptions => ({
-            ...DF_PANZOOM_DEFAULT_OPTIONS,
+        provide: DF_PAN_ZOOM_OPTIONS,
+        useFactory: (): DfPanZoomOptions => ({
+            ...DF_PAN_ZOOM_DEFAULT_OPTIONS,
             ...options,
         }),
     };

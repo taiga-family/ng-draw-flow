@@ -30,8 +30,8 @@ import {DRAW_FLOW_COMPONENTS, DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.t
 import type {DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
 import type {DfInputComponent, DfOutputComponent} from '../connectors';
-import {DF_PANZOOM_OPTIONS} from '../panzoom/panzoom.options';
-import {PanzoomService} from '../panzoom/panzoom.service';
+import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
+import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 
 @Component({
     standalone: true,
@@ -43,12 +43,12 @@ import {PanzoomService} from '../panzoom/panzoom.service';
 })
 export class NodeComponent implements AfterViewInit {
     private readonly cdr = inject(ChangeDetectorRef);
-    private readonly panzoomService = inject(PanzoomService);
+    private readonly panzoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly drawFlowComponents = inject<DfComponents>(DRAW_FLOW_COMPONENTS);
 
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
-    private readonly panzoomOptions = inject(DF_PANZOOM_OPTIONS);
+    private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
 
     private readonly isDynamicComponentCreated = false;
     private nodeContentComponentRef!: ComponentRef<any>;
@@ -303,7 +303,7 @@ export class NodeComponent implements AfterViewInit {
     }
 
     private getCenteredPosition(): DfPoint {
-        const {panSize} = this.panzoomOptions;
+        const {panSize} = this.panZoomOptions;
 
         return {
             x: this.value.position.x + panSize / 2 - this.nodeWidth / 2,
@@ -344,7 +344,7 @@ export class NodeComponent implements AfterViewInit {
             panSize,
             leftPosition: panzoomLeftPosition,
             topPosition: panzoomTopPosition,
-        } = this.panzoomOptions;
+        } = this.panZoomOptions;
 
         // Get current pan position
         const scaledPanPositionX = panSize / 2 + (panPositionX * -1) / zoom;

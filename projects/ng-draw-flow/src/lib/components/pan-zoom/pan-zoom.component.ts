@@ -29,19 +29,19 @@ import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {DF_FALSE_HANDLER, dfClamp, dfPx, INITIAL_COORDINATES} from '../../helpers';
 import type {DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
-import {DF_PANZOOM_INITIAL_SCALE} from './panzoom.const';
-import type {DfPanzoomOptions} from './panzoom.options';
-import {DF_PANZOOM_OPTIONS} from './panzoom.options';
-import {PanzoomService} from './panzoom.service';
+import {DF_PAN_ZOOM_INITIAL_SCALE} from './pan-zoom.const';
+import type {DfPanZoomOptions} from './pan-zoom.options';
+import {DF_PAN_ZOOM_OPTIONS} from './pan-zoom.options';
+import {PanZoomService} from './pan-zoom.service';
 import {ZoomDirective} from './zoom';
 import type {DfZoom} from './zoom/zoom.interfaces';
 
 @Component({
     standalone: true,
-    selector: 'df-panzoom',
+    selector: 'df-pan-zoom',
     imports: [DragDropDirective, ZoomDirective, AsyncPipe, ResizeObserverModule, NgIf],
-    templateUrl: './panzoom.component.html',
-    styleUrls: ['./panzoom.component.less'],
+    templateUrl: './pan-zoom.component.html',
+    styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         ResizeObserverService,
@@ -51,15 +51,15 @@ import type {DfZoom} from './zoom/zoom.interfaces';
         },
     ],
 })
-export class PanzoomComponent {
+export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-    private readonly panzoomService = inject(PanzoomService);
+    private readonly panzoomService = inject(PanZoomService);
     private readonly drawFlowRootElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
-    private readonly panzoomOptions: DfPanzoomOptions =
-        inject<DfPanzoomOptions>(DF_PANZOOM_OPTIONS);
+    private readonly panZoomOptions: DfPanZoomOptions =
+        inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
     private readonly resizeObserver$ = inject(ResizeObserverService);
-    private readonly zoom$ = new BehaviorSubject<number>(DF_PANZOOM_INITIAL_SCALE);
+    private readonly zoom$ = new BehaviorSubject<number>(DF_PAN_ZOOM_INITIAL_SCALE);
     private readonly coordinates$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
     private readonly manualZoomAnimation$ = new Subject<boolean>();
     private readonly dragStage$ = new Subject<DfDragDropStage>();
@@ -67,7 +67,7 @@ export class PanzoomComponent {
     @Output()
     protected readonly scale = new EventEmitter<number>();
 
-    protected readonly zoomAnimationDuration = this.panzoomOptions.zoomAnimationDuration;
+    protected readonly zoomAnimationDuration = this.panZoomOptions.zoomAnimationDuration;
     protected readonly cursor$ = this.dragStage$.pipe(
         map(stage => (stage === DfDragDropStage.Move ? 'grabbing' : 'initial')),
         startWith('initial'),
@@ -112,9 +112,9 @@ export class PanzoomComponent {
                 const {
                     leftPosition: panzoomLeftPosition,
                     topPosition: panzoomTopPosition,
-                } = this.panzoomOptions;
+                } = this.panZoomOptions;
 
-                if (panzoomLeftPosition) {
+                if (panzoomLeftPosition || panzoomLeftPosition === 0) {
                     const offset = (rootSize.width / 2) * -1 + panzoomLeftPosition;
 
                     this.panzoomService.panzoomModel.offsetX = offset * -1;
@@ -124,7 +124,7 @@ export class PanzoomComponent {
                     this.panzoomService.panzoomModel.offsetX = 0;
                 }
 
-                if (panzoomTopPosition) {
+                if (panzoomTopPosition || panzoomTopPosition === 0) {
                     const offset = (rootSize.height / 2) * -1 + panzoomTopPosition;
 
                     this.panzoomService.panzoomModel.offsetY = offset * -1;
@@ -160,19 +160,19 @@ export class PanzoomComponent {
     }
 
     public resetPanzoom(): void {
-        this.zoom$.next(DF_PANZOOM_INITIAL_SCALE);
+        this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
         this.coordinates$.next(INITIAL_COORDINATES);
     }
 
     public zoomIn(): void {
-        const {zoomStep, maxZoom} = this.panzoomOptions;
+        const {zoomStep, maxZoom} = this.panZoomOptions;
         const zoom = this.panzoomService.panzoomModel.zoom + zoomStep;
 
         this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
     }
 
     public zoomOut(): void {
-        const {zoomStep, minZoom} = this.panzoomOptions;
+        const {zoomStep, minZoom} = this.panZoomOptions;
         const zoom = this.panzoomService.panzoomModel.zoom - zoomStep;
 
         this.setZoom(zoom >= minZoom ? zoom : minZoom);
@@ -192,7 +192,7 @@ export class PanzoomComponent {
 
     private processZoom(clientX: number, clientY: number, delta: number): void {
         const oldScale = this.zoom$.value;
-        const {minZoom, maxZoom} = this.panzoomOptions;
+        const {minZoom, maxZoom} = this.panZoomOptions;
         const newScale = dfClamp(oldScale + delta, minZoom, maxZoom);
 
         const center = this.getScaleCenter(
@@ -236,7 +236,7 @@ export class PanzoomComponent {
     }
 
     private offsets(): {offsetX: number; offsetY: number} {
-        const {panSize} = this.panzoomOptions;
+        const {panSize} = this.panZoomOptions;
         const offsetX = this.zoom$.value * panSize;
         const offsetY = this.zoom$.value * panSize;
 

@@ -11,15 +11,15 @@ import {
 } from 'rxjs';
 
 import {dfDistanceBetweenTouches, dfPreventDefault} from '../../../helpers';
-import {DF_PANZOOM_OPTIONS} from '../panzoom.options';
+import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom.options';
 import type {DfZoom} from './zoom.interfaces';
 
 @Injectable()
 export class ZoomService extends Observable<DfZoom> {
     constructor() {
         const nativeElement: HTMLElement = inject(ElementRef).nativeElement;
-        const wheelSensitivity = inject(DF_PANZOOM_OPTIONS)?.zoomWheelSensitivity;
-        const touchSensitivity = inject(DF_PANZOOM_OPTIONS)?.touchSensitivity;
+        const wheelSensitivity = inject(DF_PAN_ZOOM_OPTIONS)?.zoomWheelSensitivity;
+        const touchSensitivity = inject(DF_PAN_ZOOM_OPTIONS)?.touchSensitivity;
 
         super(subscriber => {
             merge(

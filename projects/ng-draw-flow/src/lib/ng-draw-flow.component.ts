@@ -19,8 +19,8 @@ import {BehaviorSubject, debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
-import {PanzoomComponent} from './components/panzoom/panzoom.component';
-import {PanzoomService} from './components/panzoom/panzoom.service';
+import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
+import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
 import type {
     DfDataConnection,
@@ -39,14 +39,14 @@ import {CoordinatesService} from './services/coordinates.service';
         AsyncPipe,
         ReactiveFormsModule,
         SceneComponent,
-        PanzoomComponent,
+        PanZoomComponent,
         ResizeObserverModule,
     ],
     templateUrl: './ng-draw-flow.component.html',
     styleUrls: ['./ng-draw-flow.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        PanzoomService,
+        PanZoomService,
         ConnectionsService,
         CoordinatesService,
         DraftConnectionService,
@@ -68,8 +68,8 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
 
     private readonly destroyRef = inject(DestroyRef);
 
-    @ViewChild(PanzoomComponent)
-    protected panzoom!: PanzoomComponent;
+    @ViewChild(PanZoomComponent)
+    protected panzoom!: PanZoomComponent;
 
     @Output()
     protected readonly scale = new EventEmitter<number>();

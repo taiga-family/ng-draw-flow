@@ -2,7 +2,7 @@
     class="drawflow"
     (waResizeObserver)="onResize($event)"
 >
-    <df-panzoom (scale)="scale.emit($event)">
+    <df-pan-zoom (scale)="scale.emit($event)">
         <df-scene
             *ngIf="rootReady$ | async"
             [formControl]="form"
@@ -12,5 +12,5 @@
             (nodeMoved)="nodeMoved.emit($event)"
             (nodeSelected)="nodeSelected.emit($event)"
         />
-    </df-panzoom>
+    </df-pan-zoom>
 </div>

@@ -1,6 +1,6 @@
 <div
-    #panzoom
-    class="panzoom"
+    #panZoom
+    class="pan-zoom"
     [style.cursor]="cursor$ | async"
     [style.transform]="wrapperTransform$ | async"
     [style.transition-duration]="(transitioned$ | async) ? zoomAnimationDuration + 'ms' : '0s'"
