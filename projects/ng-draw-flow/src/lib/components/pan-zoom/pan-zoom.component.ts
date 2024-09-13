@@ -53,7 +53,7 @@ import type {DfZoom} from './zoom/zoom.interfaces';
 })
 export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-    private readonly panzoomService = inject(PanZoomService);
+    private readonly panZoomService = inject(PanZoomService);
     private readonly drawFlowRootElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions: DfPanZoomOptions =
         inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
@@ -89,15 +89,15 @@ export class PanZoomComponent {
     protected readonly wrapperTransform$ = combineLatest([
         this.coordinates$.pipe(
             tap(({x, y}: DfPoint) => {
-                this.panzoomService.panzoomModel.x = x;
-                this.panzoomService.panzoomModel.y = y;
+                this.panZoomService.panzoomModel.x = x;
+                this.panZoomService.panzoomModel.y = y;
             }),
             map(({x, y}: DfPoint) => `${dfPx(x)}, ${dfPx(y)}`),
         ),
         this.zoom$.pipe(
             tap((zoom: number) => {
                 this.scale.emit(Math.round(zoom * 100));
-                this.panzoomService.panzoomModel.zoom = zoom;
+                this.panZoomService.panzoomModel.zoom = zoom;
             }),
         ),
     ]).pipe(
@@ -117,21 +117,21 @@ export class PanZoomComponent {
                 if (panZoomLeftPosition || panZoomLeftPosition === 0) {
                     const offset = (rootSize.width / 2) * -1 + panZoomLeftPosition;
 
-                    this.panzoomService.panzoomModel.offsetX = offset * -1;
+                    this.panZoomService.panzoomModel.offsetX = offset * -1;
 
                     translate = `translateX(${offset}px)`;
                 } else {
-                    this.panzoomService.panzoomModel.offsetX = 0;
+                    this.panZoomService.panzoomModel.offsetX = 0;
                 }
 
                 if (panZoomTopPosition || panZoomTopPosition === 0) {
                     const offset = (rootSize.height / 2) * -1 + panZoomTopPosition;
 
-                    this.panzoomService.panzoomModel.offsetY = offset * -1;
+                    this.panZoomService.panzoomModel.offsetY = offset * -1;
 
                     translate = `${translate}translateY(${offset}px)`;
                 } else {
-                    this.panzoomService.panzoomModel.offsetY = 0;
+                    this.panZoomService.panzoomModel.offsetY = 0;
                 }
 
                 return translate;
@@ -139,7 +139,7 @@ export class PanZoomComponent {
         );
 
     protected onPan({distance, stage}: DfDragDrop): void {
-        if (this.panzoomService.panzoomDisabled) {
+        if (this.panZoomService.panzoomDisabled) {
             return;
         }
 
@@ -166,14 +166,14 @@ export class PanZoomComponent {
 
     public zoomIn(): void {
         const {zoomStep, maxZoom} = this.panZoomOptions;
-        const zoom = this.panzoomService.panzoomModel.zoom + zoomStep;
+        const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
 
         this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
     }
 
     public zoomOut(): void {
         const {zoomStep, minZoom} = this.panZoomOptions;
-        const zoom = this.panzoomService.panzoomModel.zoom - zoomStep;
+        const zoom = this.panZoomService.panzoomModel.zoom - zoomStep;
 
         this.setZoom(zoom >= minZoom ? zoom : minZoom);
     }

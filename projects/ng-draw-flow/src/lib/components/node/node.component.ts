@@ -43,7 +43,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 })
 export class NodeComponent implements AfterViewInit {
     private readonly cdr = inject(ChangeDetectorRef);
-    private readonly panzoomService = inject(PanZoomService);
+    private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly drawFlowComponents = inject<DfComponents>(DRAW_FLOW_COMPONENTS);
 
@@ -57,7 +57,7 @@ export class NodeComponent implements AfterViewInit {
     private nodeHeight!: number;
     private selected = false;
     private innerComponent!: DrawFlowBaseNode;
-    private value!: DfDataNode;
+    private value!: any;
 
     @ViewChild('nodeElement')
     private readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -90,15 +90,15 @@ export class NodeComponent implements AfterViewInit {
     }
 
     public ngAfterViewInit(): void {
-        this.fillValue();
-        this.createNodeContentComponent(this.value);
+        this.createNodeContentComponent(this.node);
         this.subscribeToConnectorsChanges();
         this.saveInnerNodeSize();
+        this.fillValue();
         this.setInitialPosition();
         this.updateConnectorsCoordinates();
     }
 
-    protected createNodeContentComponent(node: DfDataNode): void {
+    protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {
         if (this.isDynamicComponentCreated) {
             return;
         }
@@ -143,21 +143,21 @@ export class NodeComponent implements AfterViewInit {
     }
 
     private onDragMove(distance: DfDragDropDistance): void {
-        const {zoom} = this.panzoomService.panzoomModel;
+        const {zoom} = this.panZoomService.panzoomModel;
 
         this.cursor = 'grabbing';
 
         this.value.position = this.calculatePosition(distance, zoom);
         const centeredPosition = this.getCenteredPosition();
 
-        this.panzoomService.panzoomDisabled = true;
+        this.panZoomService.panzoomDisabled = true;
         this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition);
         this.recalculateConnectorsPosition(distance);
     }
 
     private onDragEnd(): void {
         this.cursor = 'initial';
-        this.panzoomService.panzoomDisabled = false;
+        this.panZoomService.panzoomDisabled = false;
         this.nodeMoved.emit(this.value);
     }
 
@@ -206,7 +206,7 @@ export class NodeComponent implements AfterViewInit {
     }
 
     private recalculateConnectorsPosition(distance: DfDragDropDistance): void {
-        const {zoom} = this.panzoomService.panzoomModel;
+        const {zoom} = this.panZoomService.panzoomModel;
         const currentMoveDistance = {
             deltaX: distance.deltaX / zoom,
             deltaY: distance.deltaY / zoom,
@@ -303,12 +303,26 @@ export class NodeComponent implements AfterViewInit {
     }
 
     private getCenteredPosition(): DfPoint {
-        const {panSize} = this.panZoomOptions;
+        const {
+            panSize,
+            leftPosition: panZoomLeftPosition,
+            topPosition: panZoomTopPosition,
+        } = this.panZoomOptions;
 
-        return {
+        const centeredPosition = {
             x: this.value.position.x + panSize / 2 - this.nodeWidth / 2,
             y: this.value.position.y + panSize / 2 - this.nodeHeight / 2,
         };
+
+        if (panZoomTopPosition || panZoomTopPosition === 0) {
+            centeredPosition.y += this.nodeHeight / 2;
+        }
+
+        if (panZoomLeftPosition || panZoomLeftPosition === 0) {
+            centeredPosition.x += this.nodeWidth / 2;
+        }
+
+        return centeredPosition;
     }
 
     private subscribeToConnectorsChanges(): void {
@@ -339,7 +353,7 @@ export class NodeComponent implements AfterViewInit {
 
     private getCenterOfViewport(): DfPoint {
         // Get the current scale of the pan
-        const {x: panPositionX, y: panPositionY, zoom} = this.panzoomService.panzoomModel;
+        const {x: panPositionX, y: panPositionY, zoom} = this.panZoomService.panzoomModel;
         const {
             panSize,
             leftPosition: panZoomLeftPosition,
@@ -358,18 +372,29 @@ export class NodeComponent implements AfterViewInit {
 
         if (panZoomLeftPosition) {
             position.x -=
-                (this.drawFlowElement.offsetWidth / 2) * -1 + panZoomLeftPosition;
+                (this.drawFlowElement.offsetWidth / 2) * -1 +
+                panZoomLeftPosition +
+                this.nodeWidth / 2;
         }
 
         if (panZoomTopPosition) {
             position.y -=
-                (this.drawFlowElement.offsetHeight / 2) * -1 + panZoomTopPosition;
+                (this.drawFlowElement.offsetHeight / 2) * -1 +
+                panZoomTopPosition +
+                this.nodeHeight / 2;
         }
 
         return position;
     }
 
-    private calculatePosition(distance: DfDragDropDistance, zoom: number): DfPoint {
+    private calculatePosition(
+        distance: DfDragDropDistance,
+        zoom: number,
+    ): DfPoint | null {
+        if (!('position' in this.value)) {
+            return null;
+        }
+
         return {
             x: this.value.position.x + distance.deltaX / zoom,
             y: this.value.position.y + distance.deltaY / zoom,
