@@ -19,6 +19,11 @@ export const DEMO_PAGES: TuiDocPages = [
         route: DemoPath.PanZoom,
     },
     {
+        section: 'Documentation',
+        title: 'Creating Nodes',
+        route: DemoPath.Nodes,
+    },
+    {
         section: 'Examples',
         title: 'Simple example',
         route: DemoPath.SimpleExample,
