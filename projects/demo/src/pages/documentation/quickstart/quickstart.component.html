@@ -1,0 +1,197 @@
+<tui-doc-page header="Getting started">
+    <section>
+        <img
+            alt="ng-draw-flow logo"
+            src="assets/icons/logo.svg"
+            class="logo"
+        />
+
+        <p>
+            If you're looking to get up and running swiftly, you're in the right spot! This guide will expedite your
+            journey from the starting point to a working application with NgDrawFlow in just a few minutes. Following
+            this, you'll have the opportunity to explore NgDrawFlow more thoroughly through examples or by delving into
+            the API documentation.
+        </p>
+    </section>
+    <section>
+        <h2>Play online</h2>
+        <p>
+            You can try React Flow without setting anything up locally by checking out the starter projects we have on
+            <a
+                href="https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts"
+                target="_blank"
+                tuiLink
+            >
+                CodeSandbox
+            </a>
+        </p>
+    </section>
+    <section>
+        <h2>Installation</h2>
+        <p>To get started locally you should have a few things:</p>
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <a
+                    href="https://nodejs.org/"
+                    tuiLink
+                >
+                    Node.js
+                </a>
+                installed.
+            </li>
+            <li class="tui-list__item">
+                A working knowledge of
+                <a
+                    href="https://angular.dev/"
+                    tuiLink
+                >
+                    Angular
+                </a>
+                . You don't need to be an expert, but you should be comfortable with the basics.
+            </li>
+        </ul>
+        <p>First, spin up a new Angular project</p>
+        <code>ng new my-app</code>
+        <p>NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.</p>
+        <code>npm i &commat;ng-draw-flow/core --save</code>
+        <p>Lastly, spin up the dev server and we're good to go!</p>
+        <code>ng serve</code>
+    </section>
+
+    <section>
+        <h2>Import Dependencies and Register Node Components</h2>
+
+        <p>
+            To get started with the ng-draw-flow library, begin by setting up your module with the necessary imports and
+            component registrations.
+        </p>
+        <p>
+            Add the
+            <code>NgDrawFlowComponent</code>
+            and
+            <code>ReactiveFormsModule</code>
+            to your module's imports array:
+        </p>
+
+        <tui-doc-code
+            filename="app.module.ts"
+            [code]="gettingStarted.imports"
+        />
+
+        <p>
+            Then, within the providers section, register the components that you want to be available for use as nodes
+            within the graph editor:
+        </p>
+
+        <tui-doc-code
+            filename="app.module.ts"
+            [code]="gettingStarted.providing"
+        />
+
+        <p>
+            Make sure to replace
+            <code>yourNode</code>
+            with your specific component identifier for the node within the editor, and
+            <code>YourNodeComponent</code>
+            with the actual component class you intend to use.
+        </p>
+    </section>
+
+    <section>
+        <h2>Set Up Data Model and Control for Graph Structure</h2>
+
+        <p>
+            In the component where you intend to construct your graph, you need to create a data structure that defines
+            the nodes and connections.
+        </p>
+
+        <tui-doc-code
+            filename="app.connectors.component.ts"
+            [code]="gettingStarted.data1"
+        />
+
+        <p>
+            Next, link this data structure to your ng-draw-flow component using a
+            <code>FormControl</code>
+            . This will allow for reactive updates and interactions within your graph editor:
+        </p>
+
+        <tui-doc-code
+            filename="app.component.html"
+            [code]="gettingStarted.template"
+        />
+
+        <p>
+            This setup ensures that your ng-draw-flow component is fully integrated with the Angular forms system,
+            enabling seamless data flow and state management for your graph.
+        </p>
+    </section>
+
+    <section>
+        <h2>Populate Example DfDataModel</h2>
+
+        <p>
+            To illustrate how to set up the
+            <code>DfDataModel</code>
+            with actual data, the following example lays out a scenario with a collection of nodes and their
+            connections:
+        </p>
+
+        <tui-doc-code
+            filename="app.connectors.component.ts"
+            [code]="gettingStarted.data2"
+        />
+
+        <p>
+            Each
+            <code>node</code>
+            mainly consists of an
+            <code>id</code>
+            , a
+            <code>position</code>
+            , and a
+            <code>data</code>
+            field. Inside the
+            <code>data</code>
+            field, you need to specify the node type that was previously registered and all the data you want to provide
+            to the node.
+        </p>
+        <p>
+            The
+            <code>connections</code>
+            array contains objects that describe the start and end points of each connection. The
+            <code>source</code>
+            and
+            <code>target</code>
+            holds information about which node and specific connector are used for each connection.
+        </p>
+    </section>
+
+    <section class="tui-space_top-4">
+        <first-example />
+    </section>
+
+    <section>
+        <h2>Creating Custom Nodes</h2>
+        <p>
+            In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
+            node, you should develop a component that extends from the
+            <code>NgDrawFlowBaseNode</code>
+            class. This component will incorporate directives such as
+            <code>DrawFlowInputDirective</code>
+            and
+            <code>DrawFlowOutputDirective</code>
+            .
+        </p>
+        <p>Here is a basic blueprint for a simple node component:</p>
+
+        <tui-doc-example
+            style="padding: 0"
+            [content]="customNodeExample"
+        >
+            <div class="node-demo">
+                <ng-draw-flow [formControl]="nodeForm" />
+            </div>
+        </tui-doc-example>
+    </section>
+</tui-doc-page>

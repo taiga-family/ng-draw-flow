@@ -4,7 +4,7 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
-    dfPanzoomOptionsProvider,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
 import type {TuiDocExample} from '@taiga-ui/addon-doc';
@@ -26,9 +26,9 @@ import {MarkdownModule} from 'ngx-markdown';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        dfPanzoomOptionsProvider({
-            topPosition: 100,
-            leftPosition: 120,
+        dfPanZoomOptionsProvider({
+            topPosition: 50,
+            leftPosition: 50,
         }),
     ],
 })
@@ -70,7 +70,7 @@ export default class OverviewComponent {
             .set('info-node', {
                 id: 'info-node',
                 data: {type: 'infoNode', text: 'This base node'},
-                position: {x: 160, y: 20},
+                position: {x: 0, y: 0},
             })
             .set('node-1', {
                 id: 'node-1',
@@ -113,7 +113,7 @@ export default class OverviewComponent {
                     value: {},
                     text: 'Nodes can contain any kind of content, for example, a form for user interaction.',
                 },
-                position: {x: 200, y: 550},
+                position: {x: 200, y: 500},
             }),
         connections: [
             {

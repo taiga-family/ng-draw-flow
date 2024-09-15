@@ -56,6 +56,16 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
         return Object.keys(this.form.controls);
     }
 
+    public getConnectorId(fieldName: string | null): string | null {
+        if (!fieldName) {
+            return null;
+        }
+
+        const group = this.form.get(fieldName) as FormGroup<NodeFormGroup>;
+
+        return group.controls.connectorId.value;
+    }
+
     public ngAfterViewInit(): void {
         this.form.valueChanges
             .pipe(takeUntilDestroyed(this.destroyRef))

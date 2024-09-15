@@ -9,7 +9,7 @@
     //... (other necessary providers)
     provideNgDrawFlowConfigs({
       infoNode: InfoNodeComponent,
-      simpleNode: SimpleNodeComponent,
+      simpleNode: NodeWithoutConnectorsComponent,
       formNode: FormNodeComponent,
     }),
   ];

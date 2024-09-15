@@ -9,7 +9,7 @@
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     dfPanzoomOptionsProvider({
-      leftPosition: 150,
+      leftPosition: 50,
     }),
   ],
 })

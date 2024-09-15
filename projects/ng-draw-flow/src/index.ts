@@ -1,5 +1,5 @@
 export * from './lib/components/connectors';
-export * from './lib/components/panzoom/panzoom.options';
+export * from './lib/components/pan-zoom/pan-zoom.options';
 export * from './lib/ng-draw-flow.component';
 export * from './lib/ng-draw-flow.interfaces';
 export * from './lib/ng-draw-flow.providers';

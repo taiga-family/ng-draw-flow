@@ -5,13 +5,33 @@ import {RouterModule} from '@angular/router';
 import {DemoPath} from './constants/constants';
 
 export const appRoutes: Routes = [
-    // Documentation
+    // Quickstart
     {
-        path: DemoPath.GettingStarted,
+        path: DemoPath.Quickstart,
         loadComponent: async () =>
-            import('../pages/documentation/getting-started/getting-started.component'),
+            import('../pages/documentation/quickstart/quickstart.component'),
         data: {
-            title: 'Getting started',
+            title: 'Quickstart',
+        },
+    },
+    {
+        path: DemoPath.TermsAndDefinitions,
+        loadComponent: async () =>
+            import(
+                '../pages/documentation/terms-and-definitions/terms-and-definitions.component'
+            ),
+        data: {
+            title: 'Terms and Definitions',
+        },
+    },
+    {
+        path: DemoPath.PanZoom,
+        loadComponent: async () =>
+            import(
+                '../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'
+            ),
+        data: {
+            title: 'PanZoom Configuration',
         },
     },
 
@@ -49,7 +69,7 @@ export const appRoutes: Routes = [
     },
     {
         path: '**',
-        redirectTo: DemoPath.GettingStarted,
+        redirectTo: DemoPath.Quickstart,
     },
 ];
 

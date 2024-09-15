@@ -1,0 +1,69 @@
+<tui-doc-page header="Terms and Definitions">
+    <p>
+        In this part of the docs we are explaining some basic NgDrawFlow terms and definition. Three things you’ll be
+        using a lot in NgDrawFlow are nodes, connections, and connectors.
+    </p>
+    <section>
+        <h2>Nodes</h2>
+
+        <app-nodes-example />
+
+        <p>
+            Node in NgDrawFlow is an Angular component. This means it can display anything you desire. Each node has X
+            and Y coordinates that refer to the point at the center of the node, relative to the workspace. To create a
+            node, you need to extend from
+            <code>DrawFlowBaseNode</code>
+            .
+        </p>
+
+        <p>
+            To delete a node, select it and press
+            <code>Delete</code>
+            or
+            <code>Backspace</code>
+        </p>
+
+        <p>Some of the things you might do with a custom node are:</p>
+
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">Render form elements</li>
+            <li class="tui-list__item">Visualize data</li>
+            <li class="tui-list__item">Support multiple connectors</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Connectors</h2>
+
+        <app-connectors-example />
+
+        <p>
+            A Connector is used to link nodes together. Connectors can be placed anywhere and styled in any way you
+            prefer; they are simply div elements. By default, they are displayed as blue circles. When creating a custom
+            node, you may use as many connector handles as you need. The main requirement is that each connector has a
+            unique name starting with its nodeId (example:
+            <code>node-1-input-1</code>
+            ). More information can be found in the connector documentation. [TODO]: documentation
+        </p>
+        <p>Connectors are divided into two types: input connectors and output connectors.</p>
+        <p>
+            To connect two nodes, simply drag an output connector from one node to an input connector of another node.
+        </p>
+    </section>
+    <section>
+        <h2>Connections</h2>
+
+        <app-connections-example />
+
+        <p>
+            A Connection links two nodes together. It is represented by a Bezier curve. An edge is an SVG path, allowing
+            its line thickness and color to be adjusted through CSS variables.
+        </p>
+        <p>
+            To delete a connection, select it and press the
+            <code>Delete</code>
+            or
+            <code>Backspace key</code>
+            .
+        </p>
+    </section>
+</tui-doc-page>

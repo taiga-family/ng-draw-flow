@@ -5,8 +5,18 @@ import {DemoPath} from '../app/constants/constants';
 export const DEMO_PAGES: TuiDocPages = [
     {
         section: 'Documentation',
-        title: 'Getting started',
-        route: DemoPath.GettingStarted,
+        title: 'Quickstart',
+        route: DemoPath.Quickstart,
+    },
+    {
+        section: 'Documentation',
+        title: 'Terms and Definitions',
+        route: DemoPath.TermsAndDefinitions,
+    },
+    {
+        section: 'Documentation',
+        title: 'PanZoom Configuration',
+        route: DemoPath.PanZoom,
     },
     {
         section: 'Examples',

@@ -1,0 +1,34 @@
+:host {
+    display: flex;
+    background: var(--tui-base-09);
+    height: 5rem;
+    width: 5rem;
+    box-shadow: var(--tui-shadow);
+    border-radius: 0.5rem;
+    transition: border-color 0.2s ease-in-out;
+    color: var(--tui-base-01);
+
+    &:before,
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: var(--df-connection-color);
+    }
+
+    &:before {
+        width: 100%;
+        top: 50%;
+        left: 0;
+        height: 0.125rem;
+        transform: translateY(-50%);
+    }
+
+    &:after {
+        height: 100%;
+        top: 0;
+        left: 50%;
+        width: 0.125rem;
+        transform: translateX(-50%);
+    }
+}

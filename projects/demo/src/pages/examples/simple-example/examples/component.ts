@@ -1,7 +1,11 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
-import {DfConnectionPoint, NgDrawFlowComponent} from '@ng-draw-flow/core';
+import {
+    DfConnectionPoint,
+    dfPanZoomOptionsProvider,
+    NgDrawFlowComponent,
+} from '@ng-draw-flow/core';
 
 @Component({
     standalone: true,
@@ -10,6 +14,11 @@ import {DfConnectionPoint, NgDrawFlowComponent} from '@ng-draw-flow/core';
     templateUrl: '../simple-example.component.html',
     styleUrls: ['../simple-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        dfPanZoomOptionsProvider({
+            leftPosition: 0,
+        }),
+    ],
 })
 export default class GettingStartedDocComponent {
     public data: DfDataModel = {
@@ -17,18 +26,18 @@ export default class GettingStartedDocComponent {
             .set('node-1', {
                 id: 'node-1',
                 data: {type: 'simpleNode', text: 'This base node'},
-                position: {x: -150, y: 0},
+                position: {x: 50, y: 0},
                 startNode: true,
             })
             .set('node-2', {
                 id: 'node-2',
                 data: {type: 'simpleNode', text: 'This child node 1'},
-                position: {x: 250, y: -50},
+                position: {x: 350, y: -50},
             })
             .set('node-3', {
                 id: 'node-3',
                 data: {type: 'simpleNode', text: 'This child node 2'},
-                position: {x: 250, y: 50},
+                position: {x: 350, y: 50},
             }),
         connections: [
             {
