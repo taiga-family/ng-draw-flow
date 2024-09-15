@@ -42,6 +42,14 @@ export const appRoutes: Routes = [
             title: 'Creating Nodes',
         },
     },
+    {
+        path: DemoPath.Connectors,
+        loadComponent: async () =>
+            import('../pages/documentation/connectors/connectors.component'),
+        data: {
+            title: 'Connectors',
+        },
+    },
     // Examples
     {
         path: DemoPath.SimpleExample,
