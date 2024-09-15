@@ -27,8 +27,8 @@ import {MarkdownModule} from 'ngx-markdown';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         dfPanZoomOptionsProvider({
-            topPosition: 100,
-            leftPosition: 120,
+            topPosition: 50,
+            leftPosition: 50,
         }),
     ],
 })
@@ -70,7 +70,7 @@ export default class OverviewComponent {
             .set('info-node', {
                 id: 'info-node',
                 data: {type: 'infoNode', text: 'This base node'},
-                position: {x: 160, y: 20},
+                position: {x: 0, y: 0},
             })
             .set('node-1', {
                 id: 'node-1',
@@ -113,7 +113,7 @@ export default class OverviewComponent {
                     value: {},
                     text: 'Nodes can contain any kind of content, for example, a form for user interaction.',
                 },
-                position: {x: 200, y: 550},
+                position: {x: 200, y: 500},
             }),
         connections: [
             {

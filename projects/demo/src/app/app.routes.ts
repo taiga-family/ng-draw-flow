@@ -31,7 +31,7 @@ export const appRoutes: Routes = [
                 '../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'
             ),
         data: {
-            title: 'PanZoom Configuration Guide',
+            title: 'PanZoom Configuration',
         },
     },
 

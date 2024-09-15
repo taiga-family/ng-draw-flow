@@ -2,7 +2,7 @@ export const DemoPath = {
     Quickstart: 'documentation/quickstart',
     TermsAndDefinitions: 'documentation/terms-and-definitions',
     PanZoom: 'documentation/pan-zoom-configuration',
-    SimpleExample: 'examples/quickstart',
+    SimpleExample: 'examples/simple-example',
     Overview: 'examples/overview',
     Editor: 'examples/editor',
     StressTest: 'examples/stress-test',

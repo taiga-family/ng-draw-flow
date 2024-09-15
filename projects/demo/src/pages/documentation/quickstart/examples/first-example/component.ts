@@ -16,7 +16,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         dfPanZoomOptionsProvider({
-            leftPosition: 150,
+            leftPosition: 50,
         }),
     ],
 })

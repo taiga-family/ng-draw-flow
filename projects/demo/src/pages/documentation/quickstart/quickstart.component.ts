@@ -1,11 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
-import {
-    DfConnectionPoint,
-    dfPanZoomOptionsProvider,
-    NgDrawFlowComponent,
-} from '@ng-draw-flow/core';
+import {DfConnectionPoint, NgDrawFlowComponent} from '@ng-draw-flow/core';
 import type {TuiDocExample} from '@taiga-ui/addon-doc';
 import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
 import {TuiLinkModule} from '@taiga-ui/core';
@@ -25,11 +21,6 @@ import FirstExampleComponent from './examples/first-example/component';
     templateUrl: './quickstart.component.html',
     styleUrls: ['./quickstart.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        dfPanZoomOptionsProvider({
-            leftPosition: 150,
-        }),
-    ],
 })
 export default class QuickstartComponent {
     public gettingStarted = {
