@@ -10,6 +10,9 @@ import {
 import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
 import {MarkdownModule} from 'ngx-markdown';
 
+const ROWS_COUNT = 13;
+const COLUMNS_COUNT = 13;
+
 @Component({
     standalone: true,
     selector: 'stress-test',
@@ -33,8 +36,8 @@ import {MarkdownModule} from 'ngx-markdown';
 })
 export default class StressTestComponent {
     public data: DfDataModel = {
-        nodes: this.createNodesMap(15, 15),
-        connections: this.createConnectionsArray(15, 15),
+        nodes: this.createNodesMap(ROWS_COUNT, COLUMNS_COUNT),
+        connections: this.createConnectionsArray(ROWS_COUNT, COLUMNS_COUNT),
     };
 
     public form = new FormControl(this.data);

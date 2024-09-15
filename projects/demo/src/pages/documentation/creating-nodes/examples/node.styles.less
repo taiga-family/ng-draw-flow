@@ -1,0 +1,34 @@
+.node {
+    background: var(--tui-base-09);
+    width: 10rem;
+    box-shadow: var(--tui-shadow);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 0.0625rem solid transparent;
+    transition: border-color 0.2s ease-in-out;
+    color: var(--tui-base-01);
+
+    &.df-selected {
+        border-color: var(--tui-background-accent-2);
+    }
+}
+
+.input,
+.output {
+    position: absolute;
+    z-index: 1;
+}
+
+.input {
+    left: -0.5rem;
+    top: 0.25rem;
+}
+
+.output-wrapper {
+    position: relative;
+}
+
+.output {
+    right: -0.5rem;
+    top: 0;
+}

@@ -1,0 +1,58 @@
+<tui-doc-page header="Creating Nodes">
+    <p>
+        In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
+        node, you should develop a component that extends from the
+        <code>NgDrawFlowBaseNode</code>
+        class. This component will incorporate directives such as
+        <code>DrawFlowInputDirective</code>
+        and
+        <code>DrawFlowOutputDirective</code>
+        .
+    </p>
+
+    <p>Here is what the DrawFlowBaseNode class entails:</p>
+    <tui-doc-code [code]="gettingStarted.baseNode" />
+
+    <p>
+        The use of ViewChildren with QueryList
+        <code>DfInputComponent</code>
+        and QueryList
+        <code>DfOutputComponent</code>
+        is crucial for managing input and output connectors of the node. These properties ensure the component remains
+        aware of the existing connectors and detects any changes in their count, which is essential for maintaining the
+        flow&#39;s data integrity and interaction logic.
+    </p>
+
+    <p>
+        The
+        <code>nodeId</code>
+        provides a unique identifier for each node while
+        <code>model</code>
+        holds the necessary data for the node&#39;s functionality.
+    </p>
+    <p>
+        The
+        <code>selected</code>
+        attribute aids in reflecting the node&#39;s selected state in the UI, enhancing the user&#39;s experience by
+        providing visual feedback.
+    </p>
+    <p>
+        The optional
+        <code>startNode</code>
+        and
+        <code>endNode</code>
+        inputs determine the node&#39;s ability to connect with others, defining its role within the flow as either the
+        initiation or termination point.
+    </p>
+
+    <p>Here is a basic blueprint for a simple node component:</p>
+
+    <tui-doc-example
+        style="padding: 0"
+        [content]="customNodeExample"
+    >
+        <div class="node-demo">
+            <ng-draw-flow [formControl]="nodeForm" />
+        </div>
+    </tui-doc-example>
+</tui-doc-page>

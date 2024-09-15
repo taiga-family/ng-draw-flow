@@ -34,6 +34,14 @@ export const appRoutes: Routes = [
             title: 'PanZoom Configuration',
         },
     },
+    {
+        path: DemoPath.Nodes,
+        loadComponent: async () =>
+            import('../pages/documentation/creating-nodes/creating-nodes.component'),
+        data: {
+            title: 'Creating Nodes',
+        },
+    },
     // Examples
     {
         path: DemoPath.SimpleExample,
