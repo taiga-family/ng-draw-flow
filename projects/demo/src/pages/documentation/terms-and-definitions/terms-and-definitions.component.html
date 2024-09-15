@@ -37,12 +37,18 @@
         <app-connectors-example />
 
         <p>
-            A Connector is used to link nodes together. Connectors can be placed anywhere and styled in any way you
-            prefer; they are simply div elements. By default, they are displayed as blue circles. When creating a custom
-            node, you may use as many connector handles as you need. The main requirement is that each connector has a
-            unique name starting with its nodeId (example:
+            A Connector is used to link nodes together. By default they are displayed as blue circles but the colour can
+            be changed using css variables. When creating a custom node, you may use as many connector handles as you
+            need. The main requirement is that each connector has a unique name starting with its nodeId (example:
             <code>node-1-input-1</code>
-            ). More information can be found in the connector documentation. [TODO]: documentation
+            ). More information can be found in
+            <a
+                routerLink="/documentation/connectors"
+                tuiLink
+            >
+                the connector documentation
+            </a>
+            .
         </p>
         <p>Connectors are divided into two types: input connectors and output connectors.</p>
         <p>
