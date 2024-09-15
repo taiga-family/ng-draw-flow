@@ -34,7 +34,6 @@ export const appRoutes: Routes = [
             title: 'PanZoom Configuration',
         },
     },
-
     // Examples
     {
         path: DemoPath.SimpleExample,

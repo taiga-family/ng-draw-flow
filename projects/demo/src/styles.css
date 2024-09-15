@@ -2,6 +2,6 @@ tui-root {
     height: 100%;
 }
 
-tui-doc-navigation.tui-doc-navigation {
+tui-doc-navigation {
     z-index: 0;
 }
