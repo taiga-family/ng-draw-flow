@@ -1,5 +1,35 @@
 # NgDrawFlow
 
+## Documentation
+
+[taiga-family.github.io/ng-draw-flow](https://taiga-family.github.io/ng-draw-flow)
+
+## Installation
+
+To get started locally you should have a few things:
+
+- [Node.js](https://nodejs.org/) installed.
+- A working knowledge of [Angular](https://angular.dev/). You don't need to be an expert, but you should be comfortable
+  with the basics.
+
+First, spin up a new Angular project
+
+```bash
+ng new my-app
+```
+
+NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.
+
+```bash
+npm i &commat;ng-draw-flow/core --save
+```
+
+Lastly, spin up the dev server and we're good to go!
+
+```bash
+ng serve
+```
+
 ## Import Dependencies and Register Node Components
 
 To get started with the ng-draw-flow library, begin by setting up your module with the necessary imports and component
@@ -166,22 +196,17 @@ export class YourNodeComponent extends DrawFlowBaseNode {}
 ```
 
 ```html
-<div
-  class="node"
-  [class.df-selected]="selected$ | async"
->
-  <df-input
-    class="input"
-    *ngIf="!startNode"
-    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
-  />
+<df-input
+  class="input"
+  *ngIf="!startNode"
+  [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+/>
 
-  <p class="tui-text_body-xs">{{ model.text }}</p>
+<p class="tui-text_body-xs">{{ model.text }}</p>
 
-  <df-output
-    class="output"
-    *ngIf="!endNode"
-    [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
-  />
-</div>
+<df-output
+  class="output"
+  *ngIf="!endNode"
+  [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+/>
 ```

@@ -1,18 +1,13 @@
-<div
-    class="node"
-    [class.df-selected]="selected$ | async"
->
-    <df-input
-        *ngIf="!startNode"
-        class="input"
-        [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
-    />
+<df-input
+    *ngIf="!startNode"
+    class="input"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+/>
 
-    <p class="tui-text_body-xs">{{ model.text }}</p>
+<p class="tui-text_body-xs">{{ model.text }}</p>
 
-    <df-output
-        *ngIf="!endNode"
-        class="output"
-        [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
-    />
-</div>
+<df-output
+    *ngIf="!endNode"
+    class="output"
+    [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+/>
