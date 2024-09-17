@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[1863],{1863:n=>{n.exports="```ts\ndfPanzoomOptionsProvider({\n  topPosition: 0,\n  leftPosition: null,\n});\n```\n"}}]);
