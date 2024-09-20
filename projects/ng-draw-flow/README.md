@@ -1,5 +1,10 @@
 # NgDrawFlow
 
+NgDrawFlow is a library for creating interfaces based on displaying data as nodes. A node is a div container into which
+you can place any Angular component. The library takes care of all the state management of the node on the canvas.
+Thanks to this, it allows you to create both simple diagrams and complex editors for building customised charts and
+graphs.
+
 ## Documentation
 
 [taiga-family.github.io/ng-draw-flow](https://taiga-family.github.io/ng-draw-flow)
@@ -21,7 +26,7 @@ ng new my-app
 NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.
 
 ```bash
-npm i &commat;ng-draw-flow/core --save
+npm i @ng-draw-flow/core --save
 ```
 
 Lastly, spin up the dev server and we're good to go!
