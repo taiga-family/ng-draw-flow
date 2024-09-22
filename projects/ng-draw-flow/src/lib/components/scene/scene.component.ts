@@ -31,7 +31,7 @@ import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 @Component({
     standalone: true,
     selector: 'df-scene',
-    imports: [CommonModule, NodeComponent, ConnectionComponent, DraftConnectionComponent],
+    imports: [CommonModule, ConnectionComponent, DraftConnectionComponent, NodeComponent],
     templateUrl: './scene.component.html',
     styleUrls: ['./scene.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

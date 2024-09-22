@@ -20,22 +20,22 @@ interface NodeFormGroup {
 @Component({
     standalone: true,
     selector: 'app-form-node',
-    host: {
-        '(keydown.delete.stop)': '0',
-        '(keydown.backspace.stop)': '0',
-    },
     imports: [
         CommonModule,
-        TuiInputModule,
-        TuiButtonModule,
-        ReactiveFormsModule,
-        TuiTextfieldControllerModule,
         DfInputComponent,
         DfOutputComponent,
+        ReactiveFormsModule,
+        TuiButtonModule,
+        TuiInputModule,
+        TuiTextfieldControllerModule,
     ],
     templateUrl: './form-node.component.html',
     styleUrls: ['./form-node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(keydown.delete.stop)': '0',
+        '(keydown.backspace.stop)': '0',
+    },
 })
 export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit {
     public currentIndex = 1;
@@ -69,7 +69,7 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
     public ngAfterViewInit(): void {
         this.form.valueChanges
             .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(value => {
+            .subscribe((value) => {
                 this.model.value = value;
             });
     }

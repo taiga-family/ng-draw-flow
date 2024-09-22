@@ -1,5 +1,5 @@
 tui-root {
-    height: 100%;
+    block-size: 100%;
 }
 
 tui-doc-navigation {

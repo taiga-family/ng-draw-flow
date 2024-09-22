@@ -42,9 +42,11 @@ export abstract class BaseConnector {
         });
 
     protected setupDisabledState(connected: boolean): void {
-        connected
-            ? this.nativeElement.setAttribute('data-connected', 'true')
-            : this.nativeElement.removeAttribute('data-connected');
+        if (connected) {
+            this.nativeElement.setAttribute('data-connected', 'true');
+        } else {
+            this.nativeElement.removeAttribute('data-connected');
+        }
 
         this.isDisabled = this.data.single && connected;
 

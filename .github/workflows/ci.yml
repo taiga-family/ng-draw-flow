@@ -1,0 +1,34 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: taiga-family/ci/actions/setup/checkout@v1.83.0
+      - uses: taiga-family/ci/actions/setup/variables@v1.83.0
+      - uses: taiga-family/ci/actions/setup/node@v1.83.0
+      - run: |
+          if [[ "${{ env.SUPPORT_AUTO_PUSH }}" == "true" ]]; then
+              npm run stylelint -- --fix
+              npm run prettier -- --write
+              npm run lint -- --fix
+          else
+              npm run stylelint
+              npm run prettier -- --check
+              npm run lint
+          fi
+
+      - run: npx nx run-many --target build
+      - run: npx nx run-many -t test
+
+      - uses: taiga-family/ci/actions/auto/push@v1.83.0
+        with:
+          token: ${{ secrets.TAIGA_FAMILY_BOT_PAT }}
+
+concurrency:
+  group: ci-${{ github.head_ref }}
+  cancel-in-progress: true

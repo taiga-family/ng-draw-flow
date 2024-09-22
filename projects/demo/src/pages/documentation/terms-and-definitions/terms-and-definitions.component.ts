@@ -16,17 +16,17 @@ import NodesExampleComponent from './examplaes/nodes-example/nodes-example.compo
     standalone: true,
     selector: 'quickstart-doc-page',
     imports: [
-        TuiAddonDocModule,
-        NodesExampleComponent,
-        ConnectorsExampleComponent,
         ConnectionsExampleComponent,
+        ConnectorsExampleComponent,
+        NodesExampleComponent,
         PanZoomConfigurationExample1Component,
         PanZoomConfigurationExample2Component,
         PanZoomConfigurationExample3Component,
         RouterLink,
+        TuiAddonDocModule,
         TuiLinkModule,
     ],
-    templateUrl: './terms-and-definitions.component.html',
+    template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TermsAndDefinitionsComponent {}

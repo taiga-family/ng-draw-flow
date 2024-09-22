@@ -12,10 +12,10 @@ import FirstExampleComponent from './examples/first-example/component';
     standalone: true,
     selector: 'quickstart-doc-page',
     imports: [
-        TuiAddonDocModule,
+        FirstExampleComponent,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        FirstExampleComponent,
+        TuiAddonDocModule,
         TuiLinkModule,
     ],
     templateUrl: './quickstart.component.html',

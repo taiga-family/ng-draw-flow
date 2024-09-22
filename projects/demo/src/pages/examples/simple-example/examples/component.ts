@@ -10,7 +10,7 @@ import {
 @Component({
     standalone: true,
     selector: 'simple-example-doc-page',
-    imports: [ReactiveFormsModule, NgDrawFlowComponent],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: '../simple-example.component.html',
     styleUrls: ['../simple-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

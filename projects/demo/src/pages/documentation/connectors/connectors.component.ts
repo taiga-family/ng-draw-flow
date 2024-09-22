@@ -6,7 +6,7 @@ import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
 @Component({
     standalone: true,
     selector: 'app-connectors',
-    imports: [ReactiveFormsModule, TuiAddonDocModule, NgDrawFlowComponent],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDocModule],
     templateUrl: './connectors.component.html',
     styleUrls: ['./connectors.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

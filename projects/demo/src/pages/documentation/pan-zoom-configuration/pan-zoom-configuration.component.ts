@@ -11,10 +11,10 @@ import {
     standalone: true,
     selector: 'app-pan-zoom-configuration',
     imports: [
-        TuiAddonDocModule,
         PanZoomConfigurationExample1Component,
         PanZoomConfigurationExample2Component,
         PanZoomConfigurationExample3Component,
+        TuiAddonDocModule,
     ],
     templateUrl: './pan-zoom-configuration.component.html',
     styleUrls: ['./pan-zoom-configuration.component.less'],

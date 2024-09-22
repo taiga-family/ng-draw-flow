@@ -21,11 +21,11 @@ export class ZoomService extends Observable<DfZoom> {
         const wheelSensitivity = inject(DF_PAN_ZOOM_OPTIONS)?.zoomWheelSensitivity;
         const touchSensitivity = inject(DF_PAN_ZOOM_OPTIONS)?.touchSensitivity;
 
-        super(subscriber => {
+        super((subscriber) => {
             merge(
                 fromEvent<TouchEvent>(nativeElement, 'touchstart', {passive: true}).pipe(
                     filter(({touches}) => touches.length > 1),
-                    switchMap(startEvent =>
+                    switchMap((startEvent) =>
                         fromEvent<TouchEvent>(nativeElement, 'touchmove', {
                             passive: true,
                         }).pipe(
@@ -65,7 +65,7 @@ export class ZoomService extends Observable<DfZoom> {
                 ),
                 fromEvent<WheelEvent>(nativeElement, 'wheel', {passive: false}).pipe(
                     dfPreventDefault(),
-                    map(wheel => ({
+                    map((wheel) => ({
                         clientX: wheel.clientX,
                         clientY: wheel.clientY,
                         delta: -wheel.deltaY * wheelSensitivity,

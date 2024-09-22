@@ -5,7 +5,7 @@ import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-fl
 @Component({
     standalone: true,
     selector: 'app-simple-node',
-    imports: [NgIf, AsyncPipe, DfInputComponent, DfOutputComponent],
+    imports: [AsyncPipe, DfInputComponent, DfOutputComponent, NgIf],
     templateUrl: './simple-node.component.html',
     styleUrls: ['./simple-node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

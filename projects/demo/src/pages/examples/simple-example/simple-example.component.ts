@@ -12,7 +12,7 @@ import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
 @Component({
     standalone: true,
     selector: 'simple-example',
-    imports: [ReactiveFormsModule, TuiAddonDocModule, NgDrawFlowComponent],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDocModule],
     templateUrl: './simple-example.component.html',
     styleUrls: ['./simple-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

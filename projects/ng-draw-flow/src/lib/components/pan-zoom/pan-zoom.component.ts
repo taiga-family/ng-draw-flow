@@ -39,7 +39,7 @@ import type {DfZoom} from './zoom/zoom.interfaces';
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [DragDropDirective, ZoomDirective, AsyncPipe, ResizeObserverModule, NgIf],
+    imports: [AsyncPipe, DragDropDirective, NgIf, ResizeObserverModule, ZoomDirective],
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -69,7 +69,7 @@ export class PanZoomComponent {
 
     protected readonly zoomAnimationDuration = this.panZoomOptions.zoomAnimationDuration;
     protected readonly cursor$ = this.dragStage$.pipe(
-        map(stage => (stage === DfDragDropStage.Move ? 'grabbing' : 'initial')),
+        map((stage) => (stage === DfDragDropStage.Move ? 'grabbing' : 'initial')),
         startWith('initial'),
     );
 

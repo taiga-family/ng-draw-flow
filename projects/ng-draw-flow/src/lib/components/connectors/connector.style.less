@@ -1,39 +1,39 @@
 :host {
     display: block;
-    width: 1rem;
-    height: 1rem;
+    inline-size: 1rem;
+    block-size: 1rem;
     background: transparent;
     border-radius: 50%;
     cursor: crosshair;
     box-sizing: border-box;
 
-    &:before,
-    &:after {
+    &::before,
+    &::after {
         content: '';
         position: absolute;
         left: 50%;
         top: 50%;
         border-radius: 50%;
-        width: 0.5rem;
-        height: 0.5rem;
+        inline-size: 0.5rem;
+        block-size: 0.5rem;
     }
 
-    &:before {
+    &::before {
         z-index: 1;
         background: var(--df-connector-color);
         transform: translate(-50%, -50%);
     }
 
-    &:after {
+    &::after {
         z-index: 0;
-        width: 1rem;
-        height: 1rem;
+        inline-size: 1rem;
+        block-size: 1rem;
         background: var(--df-connector-color-hover);
         transform: translate(-50%, -50%) scale(0);
         transition: transform 0.2s ease-in-out;
     }
 
-    &:hover:after {
+    &:hover::after {
         animation: dfPulse 1.5s infinite;
     }
 

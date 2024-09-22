@@ -6,7 +6,7 @@ import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
 @Component({
     standalone: true,
     selector: 'logo',
-    imports: [TuiLinkModule, RouterLink],
+    imports: [RouterLink, TuiLinkModule],
     templateUrl: './logo.template.html',
     styleUrls: ['./logo.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

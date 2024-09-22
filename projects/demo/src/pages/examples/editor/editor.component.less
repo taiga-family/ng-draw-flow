@@ -1,17 +1,17 @@
 .editor {
-    height: 31.25rem;
-    width: 100%;
+    position: relative;
+    block-size: 31.25rem;
+    inline-size: 100%;
     margin: 0 auto;
     background: #fff;
-    position: relative;
 
     &.fullscreen {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
         z-index: 1;
+        inline-size: 100%;
+        block-size: 100%;
         background-color: #fff;
 
         .add {
@@ -45,7 +45,7 @@
 }
 
 .scale-value {
-    width: 3.125rem;
+    inline-size: 3.125rem;
     text-align: center;
-    color: #333333;
+    color: #333;
 }

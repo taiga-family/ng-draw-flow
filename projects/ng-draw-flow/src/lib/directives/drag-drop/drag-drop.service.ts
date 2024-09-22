@@ -25,7 +25,7 @@ export class DragDropService extends Observable<DfDragDrop> {
     constructor() {
         const nativeElement = inject(ElementRef<Element>).nativeElement;
 
-        super(subscriber => {
+        super((subscriber) => {
             const pointerDown$ = fromEvent<PointerEvent>(
                 nativeElement,
                 'pointerdown',

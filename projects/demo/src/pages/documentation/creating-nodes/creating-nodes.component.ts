@@ -8,7 +8,7 @@ import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
 @Component({
     standalone: true,
     selector: 'app-creating-nodes',
-    imports: [ReactiveFormsModule, TuiAddonDocModule, NgDrawFlowComponent],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDocModule],
     templateUrl: './creating-nodes.component.html',
     styleUrls: ['./creating-nodes.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

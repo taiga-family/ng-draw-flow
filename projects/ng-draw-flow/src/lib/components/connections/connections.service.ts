@@ -9,7 +9,7 @@ export class ConnectionsService {
     public readonly usedConnectors$ = new BehaviorSubject<string[]>([]);
 
     public addConnections(connections: DfDataConnection[]): void {
-        connections.forEach(connection => {
+        connections.forEach((connection) => {
             const usedConnectors = [
                 ...this.usedConnectors$.value,
                 connection.source.connectorId,
@@ -24,13 +24,13 @@ export class ConnectionsService {
 
     public removeConnection(connectionToRemove: DfDataConnection): void {
         const filteredConnections = this.connections$.value.filter(
-            existingConnection =>
+            (existingConnection) =>
                 !this.areConnectionsEqual(existingConnection, connectionToRemove),
         );
 
         const usedConnectors = this.usedConnectors$.value.filter((connectorId: string) =>
             filteredConnections.some(
-                connection =>
+                (connection) =>
                     connection.source.connectorId === connectorId ||
                     connection.target.connectorId === connectorId,
             ),
@@ -42,13 +42,13 @@ export class ConnectionsService {
 
     public removeConnectionsByNodeId(id: string): void {
         const connectionsToKeep = this.connections$.value.filter(
-            connection =>
+            (connection) =>
                 connection.source.nodeId !== id && connection.target.nodeId !== id,
         );
 
         const usedConnectors = this.usedConnectors$.value.filter((connectorId: string) =>
             connectionsToKeep.some(
-                connection =>
+                (connection) =>
                     connection.source.connectorId === connectorId ||
                     connection.target.connectorId === connectorId,
             ),
@@ -64,13 +64,13 @@ export class ConnectionsService {
         }
 
         const connectionsToKeep = this.connections$.value.filter(
-            connection =>
+            (connection) =>
                 connection.source.connectorId !== connectorIdToRemove &&
                 connection.target.connectorId !== connectorIdToRemove,
         );
 
         const usedConnectors = this.usedConnectors$.value.filter(
-            connectorId => connectorId !== connectorIdToRemove,
+            (connectorId) => connectorId !== connectorIdToRemove,
         );
 
         this.usedConnectors$.next(usedConnectors);
