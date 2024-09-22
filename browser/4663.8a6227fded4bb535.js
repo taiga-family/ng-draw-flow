@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[4663],{4663:e=>{e.exports=".editor {\n    block-size: 25rem;\n    inline-size: 100%;\n    margin: 0 auto;\n    background: #fff;\n}\n"}}]);

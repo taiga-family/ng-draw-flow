@@ -1,0 +1,1 @@
+"use strict";exports.id=999,exports.ids=[999],exports.modules={62999:module=>{module.exports="```ts\ndfPanzoomOptionsProvider({\n  topPosition: null,\n  leftPosition: 0,\n});\n```\n"}};

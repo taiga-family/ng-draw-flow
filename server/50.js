@@ -1,0 +1,1 @@
+"use strict";exports.id=50,exports.ids=[50],exports.modules={92050:module=>{module.exports="```ts\nproviders: [\n  provideNgDrawFlowConfigs({\n    yourNode: YourNodeComponent,\n  }),\n];\n```\n"}};

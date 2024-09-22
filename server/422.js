@@ -1,0 +1,1 @@
+"use strict";exports.id=422,exports.ids=[422],exports.modules={54422:module=>{module.exports="```ts\ndata: DfDataModel = {\n  nodes: new Map(),\n  connections: [],\n};\nform = new FormControl(this.data);\n```\n"}};
