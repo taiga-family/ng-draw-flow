@@ -22,7 +22,8 @@ jobs:
               npm run lint
           fi
 
-      - run: npx nx run-many --target build
+      - run: npx nx run-many --target build --exclude=demo
+      - run: npx nx build-gh-pages demo
       - run: npx nx run-many -t test
 
       - uses: taiga-family/ci/actions/auto/push@v1.83.0

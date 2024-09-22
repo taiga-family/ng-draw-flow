@@ -1,0 +1,24 @@
+name: 🚀 Deploy / preview
+
+jobs:
+  build_and_preview:
+    name: Firebase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: taiga-family/ci/actions/setup/checkout@v1.83.0
+      - uses: taiga-family/ci/actions/setup/variables@v1.83.0
+      - uses: taiga-family/ci/actions/setup/node@v1.83.0
+      - run: npx nx build-gh-pages demo
+
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        continue-on-error: true
+        if: ${{ env.SUPPORT_AUTO_PUSH == 'true' }}
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_NG_WEB_APIS_COMMON }}
+          projectId: ng-web-apis-common
+          expires: 1d
+
+concurrency:
+  group: deploy-preview-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
