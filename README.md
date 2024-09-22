@@ -1,5 +1,7 @@
 # NgDrawFlow
 
+[![npm version](https://img.shields.io/npm/v/@ng-draw-flow/core.svg)](https://npmjs.com/package/@ng-draw-flow/core)
+
 NgDrawFlow is a library for creating interfaces based on displaying data as nodes. A node is a div container into which
 you can place any Angular component. The library takes care of all the state management of the node on the canvas.
 Thanks to this, it allows you to create both simple diagrams and complex editors for building customised charts and
