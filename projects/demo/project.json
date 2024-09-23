@@ -68,6 +68,9 @@
                         }
                     ]
                 },
+                "github": {
+                    "baseHref": "/ng-draw-flow/"
+                },
                 "development": {}
             },
             "defaultConfiguration": "production"
@@ -80,9 +83,9 @@
                     "echo 'Github pages require special 404.html'",
                     "echo 'Read more: https://angular.io/guide/deployment#deploy-to-github-pages'",
                     "echo ------",
-                    "nx build demo -c production",
+                    "nx build demo -c production,github",
                     "cp dist/demo/browser/index.html dist/demo/browser/404.html",
-                    "nx run demo:prerender"
+                    "nx run demo:prerender -c github"
                 ]
             }
         },
@@ -185,7 +188,10 @@
                 "routes": ["/"]
             },
             "configurations": {
-                "production": {}
+                "production": {},
+                "github": {
+                    "browserTarget": "demo:build:github"
+                }
             }
         }
     }
