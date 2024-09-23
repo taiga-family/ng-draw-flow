@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[4422],{4422:n=>{n.exports="```ts\ndata: DfDataModel = {\n  nodes: new Map(),\n  connections: [],\n};\nform = new FormControl(this.data);\n```\n"}}]);

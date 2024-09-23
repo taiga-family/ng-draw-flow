@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[8592],{9078:(i,t,d)=>{d.d(t,{TuiAddonDocModule:()=>n});var u=d(755),e=d(6194);let n=(()=>{class o{}return o.\u0275fac=function(_){return new(_||o)},o.\u0275mod=u.oAB({type:o}),o.\u0275inj=u.cJS({imports:[e.JF,e.mG,e.Lx,e.Lq,e.u4]}),o})()}}]);
