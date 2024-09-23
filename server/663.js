@@ -1,1 +1,0 @@
-"use strict";exports.id=663,exports.ids=[663],exports.modules={64663:module=>{module.exports=".editor {\n    block-size: 25rem;\n    inline-size: 100%;\n    margin: 0 auto;\n    background: #fff;\n}\n"}};

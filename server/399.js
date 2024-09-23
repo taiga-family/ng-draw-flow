@@ -1,1 +1,0 @@
-"use strict";exports.id=399,exports.ids=[399],exports.modules={88399:module=>{module.exports="```ts\nimport {dfPanZoomOptionsProvider} from '@ng-draw-flow/core';\n\nproviders: [\n  dfPanzoomOptionsProvider({\n    panSize: 20000,\n    // ...other options\n  }),\n];\n```\n"}};
