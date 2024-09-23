@@ -29,7 +29,7 @@
         "lint": "eslint .",
         "prettier": "prettier '**/*.{svg,yml,js,ts,html,md,less,json}'",
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
-        "bump": "npx syncer && npx nx run-many -t publish"
+        "release": "npx syncer && npx nx run-many -t publish"
     },
     "commitlint": {
         "extends": [
