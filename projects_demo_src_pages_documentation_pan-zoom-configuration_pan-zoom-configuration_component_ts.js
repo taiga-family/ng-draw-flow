@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_pan-zoom-configuration_pan-zoom-configuration_component_ts"],{
 
-/***/ 436:
+/***/ 3680:
 /*!****************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/index.ts ***!
   \****************************************************************************************/
@@ -9,20 +9,20 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanZoomConfigurationExample1Component: () => (/* reexport safe */ _pan_zoom_configuration_example_1_component__WEBPACK_IMPORTED_MODULE_0__.PanZoomConfigurationExample1Component),
-/* harmony export */   PanZoomConfigurationExample2Component: () => (/* reexport safe */ _pan_zoom_configuration_example_2_component__WEBPACK_IMPORTED_MODULE_1__.PanZoomConfigurationExample2Component),
-/* harmony export */   PanZoomConfigurationExample3Component: () => (/* reexport safe */ _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomConfigurationExample3Component)
+/* harmony export */   "PanZoomConfigurationExample1Component": () => (/* reexport safe */ _pan_zoom_configuration_example_1_component__WEBPACK_IMPORTED_MODULE_0__.PanZoomConfigurationExample1Component),
+/* harmony export */   "PanZoomConfigurationExample2Component": () => (/* reexport safe */ _pan_zoom_configuration_example_2_component__WEBPACK_IMPORTED_MODULE_1__.PanZoomConfigurationExample2Component),
+/* harmony export */   "PanZoomConfigurationExample3Component": () => (/* reexport safe */ _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomConfigurationExample3Component)
 /* harmony export */ });
-/* harmony import */ var _pan_zoom_configuration_example_1_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pan-zoom-configuration-example-1/component */ 2314);
-/* harmony import */ var _pan_zoom_configuration_example_2_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pan-zoom-configuration-example-2/component */ 9548);
-/* harmony import */ var _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pan-zoom-configuration-example-3/component */ 2462);
+/* harmony import */ var _pan_zoom_configuration_example_1_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pan-zoom-configuration-example-1/component */ 6003);
+/* harmony import */ var _pan_zoom_configuration_example_2_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pan-zoom-configuration-example-2/component */ 8768);
+/* harmony import */ var _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pan-zoom-configuration-example-3/component */ 1171);
 
 
 
 
 /***/ }),
 
-/***/ 2314:
+/***/ 6003:
 /*!*****************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/pan-zoom-configuration-example-1/component.ts ***!
   \*****************************************************************************************************************************/
@@ -30,12 +30,12 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanZoomConfigurationExample1Component: () => (/* binding */ PanZoomConfigurationExample1Component)
+/* harmony export */   "PanZoomConfigurationExample1Component": () => (/* binding */ PanZoomConfigurationExample1Component)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 997);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 2168);
-/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 9209);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 1197);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4747);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 9629);
+/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 6481);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 390);
 var _PanZoomConfigurationExample1Component;
 
 
@@ -86,13 +86,13 @@ _PanZoomConfigurationExample1Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
     }
   },
   dependencies: [_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlDirective],
-  styles: ["[_nghost-%COMP%] {\n  display: block;\n  block-size: 12.5rem;\n  inline-size: 100%;\n  background: #fff;\n  border-radius: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoic3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTIuNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9leGFtcGxlcy9wYW4tem9vbS1jb25maWd1cmF0aW9uLWV4YW1wbGUtMS9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtBQUNKOztBQUVBLHdjQUF3YyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMi41cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
+  styles: ["[_nghost-%COMP%] {\n  display: block;\n  block-size: 12.5rem;\n  inline-size: 100%;\n  background: #fff;\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoic3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTIuNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9leGFtcGxlcy9wYW4tem9vbS1jb25maWd1cmF0aW9uLWV4YW1wbGUtMS9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtBQUNKOztBQUVBLHdjQUF3YyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMi41cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 
 /***/ }),
 
-/***/ 9548:
+/***/ 8768:
 /*!*****************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/pan-zoom-configuration-example-2/component.ts ***!
   \*****************************************************************************************************************************/
@@ -100,12 +100,12 @@ _PanZoomConfigurationExample1Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanZoomConfigurationExample2Component: () => (/* binding */ PanZoomConfigurationExample2Component)
+/* harmony export */   "PanZoomConfigurationExample2Component": () => (/* binding */ PanZoomConfigurationExample2Component)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 997);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 2168);
-/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 9209);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 1197);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4747);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 9629);
+/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 6481);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 390);
 var _PanZoomConfigurationExample2Component;
 
 
@@ -156,13 +156,13 @@ _PanZoomConfigurationExample2Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
     }
   },
   dependencies: [_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlDirective],
-  styles: ["[_nghost-%COMP%] {\n  display: block;\n  block-size: 12.5rem;\n  inline-size: 100%;\n  background: #fff;\n  border-radius: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoic3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTIuNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9leGFtcGxlcy9wYW4tem9vbS1jb25maWd1cmF0aW9uLWV4YW1wbGUtMi9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtBQUNKOztBQUVBLHdjQUF3YyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMi41cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
+  styles: ["[_nghost-%COMP%] {\n  display: block;\n  block-size: 12.5rem;\n  inline-size: 100%;\n  background: #fff;\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoic3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTIuNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9leGFtcGxlcy9wYW4tem9vbS1jb25maWd1cmF0aW9uLWV4YW1wbGUtMi9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtBQUNKOztBQUVBLHdjQUF3YyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMi41cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 
 /***/ }),
 
-/***/ 2462:
+/***/ 1171:
 /*!*****************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/pan-zoom-configuration-example-3/component.ts ***!
   \*****************************************************************************************************************************/
@@ -170,12 +170,12 @@ _PanZoomConfigurationExample2Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanZoomConfigurationExample3Component: () => (/* binding */ PanZoomConfigurationExample3Component)
+/* harmony export */   "PanZoomConfigurationExample3Component": () => (/* binding */ PanZoomConfigurationExample3Component)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 997);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 2168);
-/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 9209);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 1197);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 4747);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 9629);
+/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 6481);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 390);
 var _PanZoomConfigurationExample3Component;
 
 
@@ -226,13 +226,13 @@ _PanZoomConfigurationExample3Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
     }
   },
   dependencies: [_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlDirective],
-  styles: ["[_nghost-%COMP%] {\n  display: block;\n  block-size: 12.5rem;\n  inline-size: 100%;\n  background: #fff;\n  border-radius: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoic3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTIuNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9leGFtcGxlcy9wYW4tem9vbS1jb25maWd1cmF0aW9uLWV4YW1wbGUtMy9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtBQUNKOztBQUVBLHdjQUF3YyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMi41cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
+  styles: ["[_nghost-%COMP%] {\n  display: block;\n  block-size: 12.5rem;\n  inline-size: 100%;\n  background: #fff;\n  border-radius: 5px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLGtCQUFBO0FBQ0oiLCJmaWxlIjoic3R5bGVzLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTIuNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJvcmRlci1yYWRpdXM6IDVweDtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9leGFtcGxlcy9wYW4tem9vbS1jb25maWd1cmF0aW9uLWV4YW1wbGUtMy9zdHlsZXMubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGNBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxrQkFBQTtBQUNKOztBQUVBLHdjQUF3YyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMi41cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 
 /***/ }),
 
-/***/ 9209:
+/***/ 6481:
 /*!*************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/nodes/pan/pan.component.ts ***!
   \*************************************************************************************************/
@@ -240,10 +240,10 @@ _PanZoomConfigurationExample3Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PanComponent: () => (/* binding */ PanComponent)
+/* harmony export */   "PanComponent": () => (/* binding */ PanComponent)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 2168);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 1197);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 9629);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 390);
 var _PanComponent;
 
 
@@ -263,13 +263,13 @@ _PanComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["�
   decls: 0,
   vars: 0,
   template: function PanComponent_Template(rf, ctx) {},
-  styles: ["[_nghost-%COMP%] {\n  display: flex;\n  background: var(--tui-base-09);\n  block-size: 5rem;\n  inline-size: 5rem;\n  box-shadow: var(--tui-shadow);\n  border-radius: 0.5rem;\n  transition: border-color 0.2s ease-in-out;\n  color: var(--tui-base-01);\n}\n[_nghost-%COMP%]::before, [_nghost-%COMP%]::after {\n  content: '';\n  position: absolute;\n  display: block;\n  background: var(--df-connection-color);\n}\n[_nghost-%COMP%]::before {\n  top: 50%;\n  left: 0;\n  inline-size: 100%;\n  block-size: 0.125rem;\n  transform: translateY(-50%);\n}\n[_nghost-%COMP%]::after {\n  top: 0;\n  left: 50%;\n  block-size: 100%;\n  inline-size: 0.125rem;\n  transform: translateX(-50%);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSw4QkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSw2QkFBQTtFQUNBLHFCQUFBO0VBQ0EseUNBQUE7RUFDQSx5QkFBQTtBQUNKO0FBQ0k7O0VBRUksV0FBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtFQUNBLHNDQUFBO0FBQ1I7QUFFSTtFQUNJLFFBQUE7RUFDQSxPQUFBO0VBQ0EsaUJBQUE7RUFDQSxvQkFBQTtFQUNBLDJCQUFBO0FBQVI7QUFHSTtFQUNJLE1BQUE7RUFDQSxTQUFBO0VBQ0EsZ0JBQUE7RUFDQSxxQkFBQTtFQUNBLDJCQUFBO0FBRFIiLCJmaWxlIjoicGFuLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tdHVpLWJhc2UtMDkpO1xuICAgIGJsb2NrLXNpemU6IDVyZW07XG4gICAgaW5saW5lLXNpemU6IDVyZW07XG4gICAgYm94LXNoYWRvdzogdmFyKC0tdHVpLXNoYWRvdyk7XG4gICAgYm9yZGVyLXJhZGl1czogMC41cmVtO1xuICAgIHRyYW5zaXRpb246IGJvcmRlci1jb2xvciAwLjJzIGVhc2UtaW4tb3V0O1xuICAgIGNvbG9yOiB2YXIoLS10dWktYmFzZS0wMSk7XG5cbiAgICAmOjpiZWZvcmUsXG4gICAgJjo6YWZ0ZXIge1xuICAgICAgICBjb250ZW50OiAnJztcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgfVxuXG4gICAgJjo6YmVmb3JlIHtcbiAgICAgICAgdG9wOiA1MCU7XG4gICAgICAgIGxlZnQ6IDA7XG4gICAgICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgICAgICBibG9jay1zaXplOiAwLjEyNXJlbTtcbiAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpO1xuICAgIH1cblxuICAgICY6OmFmdGVyIHtcbiAgICAgICAgdG9wOiAwO1xuICAgICAgICBsZWZ0OiA1MCU7XG4gICAgICAgIGJsb2NrLXNpemU6IDEwMCU7XG4gICAgICAgIGlubGluZS1zaXplOiAwLjEyNXJlbTtcbiAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpO1xuICAgIH1cbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9ub2Rlcy9wYW4vcGFuLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtFQUNBLDhCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxpQkFBQTtFQUNBLDZCQUFBO0VBQ0EscUJBQUE7RUFDQSx5Q0FBQTtFQUNBLHlCQUFBO0FBQ0o7QUFDSTs7RUFFSSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxjQUFBO0VBQ0Esc0NBQUE7QUFDUjtBQUVJO0VBQ0ksUUFBQTtFQUNBLE9BQUE7RUFDQSxpQkFBQTtFQUNBLG9CQUFBO0VBQ0EsMkJBQUE7QUFBUjtBQUdJO0VBQ0ksTUFBQTtFQUNBLFNBQUE7RUFDQSxnQkFBQTtFQUNBLHFCQUFBO0VBQ0EsMkJBQUE7QUFEUjs7QUFFQSx3aURBQXdpRCIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGJhY2tncm91bmQ6IHZhcigtLXR1aS1iYXNlLTA5KTtcbiAgICBibG9jay1zaXplOiA1cmVtO1xuICAgIGlubGluZS1zaXplOiA1cmVtO1xuICAgIGJveC1zaGFkb3c6IHZhcigtLXR1aS1zaGFkb3cpO1xuICAgIGJvcmRlci1yYWRpdXM6IDAuNXJlbTtcbiAgICB0cmFuc2l0aW9uOiBib3JkZXItY29sb3IgMC4ycyBlYXNlLWluLW91dDtcbiAgICBjb2xvcjogdmFyKC0tdHVpLWJhc2UtMDEpO1xuXG4gICAgJjo6YmVmb3JlLFxuICAgICY6OmFmdGVyIHtcbiAgICAgICAgY29udGVudDogJyc7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3IpO1xuICAgIH1cblxuICAgICY6OmJlZm9yZSB7XG4gICAgICAgIHRvcDogNTAlO1xuICAgICAgICBsZWZ0OiAwO1xuICAgICAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICAgICAgYmxvY2stc2l6ZTogMC4xMjVyZW07XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgICB9XG5cbiAgICAmOjphZnRlciB7XG4gICAgICAgIHRvcDogMDtcbiAgICAgICAgbGVmdDogNTAlO1xuICAgICAgICBibG9jay1zaXplOiAxMDAlO1xuICAgICAgICBpbmxpbmUtc2l6ZTogMC4xMjVyZW07XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
+  styles: ["[_nghost-%COMP%] {\n  display: flex;\n  background: var(--tui-base-09);\n  block-size: 5rem;\n  inline-size: 5rem;\n  box-shadow: var(--tui-shadow);\n  border-radius: 0.5rem;\n  transition: border-color 0.2s ease-in-out;\n  color: var(--tui-base-01);\n}\n[_nghost-%COMP%]::before, [_nghost-%COMP%]::after {\n  content: '';\n  position: absolute;\n  display: block;\n  background: var(--df-connection-color);\n}\n[_nghost-%COMP%]::before {\n  top: 50%;\n  left: 0;\n  inline-size: 100%;\n  block-size: 0.125rem;\n  transform: translateY(-50%);\n}\n[_nghost-%COMP%]::after {\n  top: 0;\n  left: 50%;\n  block-size: 100%;\n  inline-size: 0.125rem;\n  transform: translateX(-50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSw4QkFBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSw2QkFBQTtFQUNBLHFCQUFBO0VBQ0EseUNBQUE7RUFDQSx5QkFBQTtBQUNKO0FBQ0k7O0VBRUksV0FBQTtFQUNBLGtCQUFBO0VBQ0EsY0FBQTtFQUNBLHNDQUFBO0FBQ1I7QUFFSTtFQUNJLFFBQUE7RUFDQSxPQUFBO0VBQ0EsaUJBQUE7RUFDQSxvQkFBQTtFQUNBLDJCQUFBO0FBQVI7QUFHSTtFQUNJLE1BQUE7RUFDQSxTQUFBO0VBQ0EsZ0JBQUE7RUFDQSxxQkFBQTtFQUNBLDJCQUFBO0FBRFIiLCJmaWxlIjoicGFuLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tdHVpLWJhc2UtMDkpO1xuICAgIGJsb2NrLXNpemU6IDVyZW07XG4gICAgaW5saW5lLXNpemU6IDVyZW07XG4gICAgYm94LXNoYWRvdzogdmFyKC0tdHVpLXNoYWRvdyk7XG4gICAgYm9yZGVyLXJhZGl1czogMC41cmVtO1xuICAgIHRyYW5zaXRpb246IGJvcmRlci1jb2xvciAwLjJzIGVhc2UtaW4tb3V0O1xuICAgIGNvbG9yOiB2YXIoLS10dWktYmFzZS0wMSk7XG5cbiAgICAmOjpiZWZvcmUsXG4gICAgJjo6YWZ0ZXIge1xuICAgICAgICBjb250ZW50OiAnJztcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgfVxuXG4gICAgJjo6YmVmb3JlIHtcbiAgICAgICAgdG9wOiA1MCU7XG4gICAgICAgIGxlZnQ6IDA7XG4gICAgICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgICAgICBibG9jay1zaXplOiAwLjEyNXJlbTtcbiAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpO1xuICAgIH1cblxuICAgICY6OmFmdGVyIHtcbiAgICAgICAgdG9wOiAwO1xuICAgICAgICBsZWZ0OiA1MCU7XG4gICAgICAgIGJsb2NrLXNpemU6IDEwMCU7XG4gICAgICAgIGlubGluZS1zaXplOiAwLjEyNXJlbTtcbiAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpO1xuICAgIH1cbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9ub2Rlcy9wYW4vcGFuLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtFQUNBLDhCQUFBO0VBQ0EsZ0JBQUE7RUFDQSxpQkFBQTtFQUNBLDZCQUFBO0VBQ0EscUJBQUE7RUFDQSx5Q0FBQTtFQUNBLHlCQUFBO0FBQ0o7QUFDSTs7RUFFSSxXQUFBO0VBQ0Esa0JBQUE7RUFDQSxjQUFBO0VBQ0Esc0NBQUE7QUFDUjtBQUVJO0VBQ0ksUUFBQTtFQUNBLE9BQUE7RUFDQSxpQkFBQTtFQUNBLG9CQUFBO0VBQ0EsMkJBQUE7QUFBUjtBQUdJO0VBQ0ksTUFBQTtFQUNBLFNBQUE7RUFDQSxnQkFBQTtFQUNBLHFCQUFBO0VBQ0EsMkJBQUE7QUFEUjs7QUFFQSx3aURBQXdpRCIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGJhY2tncm91bmQ6IHZhcigtLXR1aS1iYXNlLTA5KTtcbiAgICBibG9jay1zaXplOiA1cmVtO1xuICAgIGlubGluZS1zaXplOiA1cmVtO1xuICAgIGJveC1zaGFkb3c6IHZhcigtLXR1aS1zaGFkb3cpO1xuICAgIGJvcmRlci1yYWRpdXM6IDAuNXJlbTtcbiAgICB0cmFuc2l0aW9uOiBib3JkZXItY29sb3IgMC4ycyBlYXNlLWluLW91dDtcbiAgICBjb2xvcjogdmFyKC0tdHVpLWJhc2UtMDEpO1xuXG4gICAgJjo6YmVmb3JlLFxuICAgICY6OmFmdGVyIHtcbiAgICAgICAgY29udGVudDogJyc7XG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3IpO1xuICAgIH1cblxuICAgICY6OmJlZm9yZSB7XG4gICAgICAgIHRvcDogNTAlO1xuICAgICAgICBsZWZ0OiAwO1xuICAgICAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICAgICAgYmxvY2stc2l6ZTogMC4xMjVyZW07XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTtcbiAgICB9XG5cbiAgICAmOjphZnRlciB7XG4gICAgICAgIHRvcDogMDtcbiAgICAgICAgbGVmdDogNTAlO1xuICAgICAgICBibG9jay1zaXplOiAxMDAlO1xuICAgICAgICBpbmxpbmUtc2l6ZTogMC4xMjVyZW07XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgtNTAlKTtcbiAgICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
   changeDetection: 0
 });
 
 /***/ }),
 
-/***/ 8191:
+/***/ 8279:
 /*!**********************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component.ts ***!
   \**********************************************************************************************************/
@@ -279,10 +279,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ PanZoomConfigurationComponent)
 /* harmony export */ });
-/* harmony import */ var _taiga_ui_addon_doc__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/addon-doc */ 2895);
-/* harmony import */ var _examples__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examples */ 436);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 1197);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 5706);
+/* harmony import */ var _taiga_ui_addon_doc__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/addon-doc */ 3730);
+/* harmony import */ var _examples__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examples */ 3680);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 390);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 5546);
 var _PanZoomConfigurationComponent;
 
 
@@ -433,7 +433,7 @@ _PanZoomConfigurationComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPOR
     }
   },
   dependencies: [_examples__WEBPACK_IMPORTED_MODULE_0__.PanZoomConfigurationExample1Component, _examples__WEBPACK_IMPORTED_MODULE_0__.PanZoomConfigurationExample2Component, _examples__WEBPACK_IMPORTED_MODULE_0__.PanZoomConfigurationExample3Component, _taiga_ui_addon_doc__WEBPACK_IMPORTED_MODULE_2__.TuiAddonDocModule, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__.TuiDocCodeComponent, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__.TuiDocPageComponent],
-  styles: [".pan-position-demo[_ngcontent-%COMP%] {\n  display: flex;\n}\n.pan-position-demo-item[_ngcontent-%COMP%] {\n  display: flex;\n  padding-right: 5px;\n  inline-size: 50%;\n  box-sizing: border-box;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.pan-position-demo-item[_ngcontent-%COMP%]:last-child {\n  padding-left: 5px;\n  padding-right: 0;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhbi16b29tLWNvbmZpZ3VyYXRpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0FBQ0o7QUFDSTtFQUNJLGFBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0Esc0JBQUE7RUFDQSxzQkFBQTtFQUNBLDhCQUFBO0FBQ1I7QUFDUTtFQUNJLGlCQUFBO0VBQ0EsZ0JBQUE7QUFDWiIsImZpbGUiOiJwYW4tem9vbS1jb25maWd1cmF0aW9uLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbi1wb3NpdGlvbi1kZW1vIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuXG4gICAgJi1pdGVtIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgcGFkZGluZy1yaWdodDogNXB4O1xuICAgICAgICBpbmxpbmUtc2l6ZTogNTAlO1xuICAgICAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG5cbiAgICAgICAgJjpsYXN0LWNoaWxkIHtcbiAgICAgICAgICAgIHBhZGRpbmctbGVmdDogNXB4O1xuICAgICAgICAgICAgcGFkZGluZy1yaWdodDogMDtcbiAgICAgICAgfVxuICAgIH1cbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9wYW4tem9vbS1jb25maWd1cmF0aW9uLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtBQUNKO0FBQ0k7RUFDSSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLHNCQUFBO0VBQ0Esc0JBQUE7RUFDQSw4QkFBQTtBQUNSO0FBQ1E7RUFDSSxpQkFBQTtFQUNBLGdCQUFBO0FBQ1o7O0FBRUEsNDRCQUE0NEIiLCJzb3VyY2VzQ29udGVudCI6WyIucGFuLXBvc2l0aW9uLWRlbW8ge1xuICAgIGRpc3BsYXk6IGZsZXg7XG5cbiAgICAmLWl0ZW0ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBwYWRkaW5nLXJpZ2h0OiA1cHg7XG4gICAgICAgIGlubGluZS1zaXplOiA1MCU7XG4gICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAgICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcblxuICAgICAgICAmOmxhc3QtY2hpbGQge1xuICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gICAgICAgICAgICBwYWRkaW5nLXJpZ2h0OiAwO1xuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
+  styles: [".pan-position-demo[_ngcontent-%COMP%] {\n  display: flex;\n}\n.pan-position-demo-item[_ngcontent-%COMP%] {\n  display: flex;\n  padding-right: 5px;\n  inline-size: 50%;\n  box-sizing: border-box;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.pan-position-demo-item[_ngcontent-%COMP%]:last-child {\n  padding-left: 5px;\n  padding-right: 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhbi16b29tLWNvbmZpZ3VyYXRpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxhQUFBO0FBQ0o7QUFDSTtFQUNJLGFBQUE7RUFDQSxrQkFBQTtFQUNBLGdCQUFBO0VBQ0Esc0JBQUE7RUFDQSxzQkFBQTtFQUNBLDhCQUFBO0FBQ1I7QUFDUTtFQUNJLGlCQUFBO0VBQ0EsZ0JBQUE7QUFDWiIsImZpbGUiOiJwYW4tem9vbS1jb25maWd1cmF0aW9uLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLnBhbi1wb3NpdGlvbi1kZW1vIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuXG4gICAgJi1pdGVtIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgcGFkZGluZy1yaWdodDogNXB4O1xuICAgICAgICBpbmxpbmUtc2l6ZTogNTAlO1xuICAgICAgICBib3gtc2l6aW5nOiBib3JkZXItYm94O1xuICAgICAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47XG5cbiAgICAgICAgJjpsYXN0LWNoaWxkIHtcbiAgICAgICAgICAgIHBhZGRpbmctbGVmdDogNXB4O1xuICAgICAgICAgICAgcGFkZGluZy1yaWdodDogMDtcbiAgICAgICAgfVxuICAgIH1cbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcGFuLXpvb20tY29uZmlndXJhdGlvbi9wYW4tem9vbS1jb25maWd1cmF0aW9uLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtBQUNKO0FBQ0k7RUFDSSxhQUFBO0VBQ0Esa0JBQUE7RUFDQSxnQkFBQTtFQUNBLHNCQUFBO0VBQ0Esc0JBQUE7RUFDQSw4QkFBQTtBQUNSO0FBQ1E7RUFDSSxpQkFBQTtFQUNBLGdCQUFBO0FBQ1o7O0FBRUEsNDRCQUE0NEIiLCJzb3VyY2VzQ29udGVudCI6WyIucGFuLXBvc2l0aW9uLWRlbW8ge1xuICAgIGRpc3BsYXk6IGZsZXg7XG5cbiAgICAmLWl0ZW0ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBwYWRkaW5nLXJpZ2h0OiA1cHg7XG4gICAgICAgIGlubGluZS1zaXplOiA1MCU7XG4gICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gICAgICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG4gICAgICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcblxuICAgICAgICAmOmxhc3QtY2hpbGQge1xuICAgICAgICAgICAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gICAgICAgICAgICBwYWRkaW5nLXJpZ2h0OiAwO1xuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 
