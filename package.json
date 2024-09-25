@@ -137,7 +137,7 @@
         "tsutils": "3.21.0",
         "typescript": "4.9.5",
         "webpack": "5.94.0",
-        "webpack-merge": "5.10.0"
+        "webpack-merge": "6.0.1"
     },
     "syncer": {
         "includePaths": [
