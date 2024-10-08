@@ -4,3 +4,4 @@ package-lock.json
 .husky
 
 /.nx/cache
+/.nx/workspace-data
