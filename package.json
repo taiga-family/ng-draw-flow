@@ -27,6 +27,7 @@
         "start": "nx serve demo",
         "test": "nx test",
         "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "prettier": "prettier '**/*.{svg,yml,js,ts,html,md,less,json}'",
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
         "release": "npx syncer && npx nx run-many -t publish"
