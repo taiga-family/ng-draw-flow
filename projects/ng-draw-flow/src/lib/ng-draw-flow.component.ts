@@ -139,7 +139,6 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     protected onResize(event: any): void {
-        console.warn('onResize');
         const {width, height} = event[0].contentRect;
 
         this.rootReady$.next(width && height);
