@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. See
 [`conventional commits`](https://www.conventionalcommits.org/) guidelines.
 
+### [0.1.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.0.6...v0.1.0) (2024-10-08)
+
+### 🚀 Features
+
+- dropped the ng-web-apis dependency. Moved resize-observer into the project
+  [(9ec9c0e)](https://github.com/taiga-family/ng-draw-flow/commit/9ec9c0e90384393136887854b8ac6c6488245e74)
+- removed the duplication from ng-web-apis. Made the df-resize-observer directive workaround
+  [(b7fe057)](https://github.com/taiga-family/ng-draw-flow/commit/b7fe05717652e0dda027bf24c70c02ccbeb924b6)
+- fix after review
+  [(ddb4b58)](https://github.com/taiga-family/ng-draw-flow/commit/ddb4b585776052a04b2282ec148ecc487fb2e190)
+
+### 🐞 Bug Fixes
+
+- small fix [(2900efd)](https://github.com/taiga-family/ng-draw-flow/commit/2900efd1884da2be4018f05199d5b62e9e42f7e8)
+- **deps**: update taiga-ui (#42)
+  [(95ab5f2)](https://github.com/taiga-family/ng-draw-flow/commit/95ab5f20fd2bfd9189f6d0f07526ab7fcfba4ecd)
+
 ### [0.0.6]() (2024-09-22)
 
 ### 🚀 Features
