@@ -5,6 +5,10 @@ import {
     ResizeObserverService,
 } from '@ng-web-apis/resize-observer';
 
+/**
+ * @deprecated: internal use only
+ * TODO: Remove this directive after EOL Taiga UI 3
+ */
 @Directive({
     standalone: true,
     selector: '[dfResizeObserver]',
@@ -21,7 +25,6 @@ import {
     ],
 })
 export class DfResizeObserver {
-    // TODO: Remove this directive after EOL Taiga UI 3
     protected readonly dfResizeObserver = inject(ResizeObserverService);
 
     public box: ResizeObserverBoxOptions = RESIZE_OPTION_BOX_DEFAULT;
