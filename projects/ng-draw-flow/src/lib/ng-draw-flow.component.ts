@@ -14,7 +14,6 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import type {ControlValueAccessor} from '@angular/forms';
 import {FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
-import {ResizeObserverModule} from '@ng-web-apis/resize-observer';
 import {BehaviorSubject, debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
@@ -22,6 +21,7 @@ import {DraftConnectionService} from './components/connections/draft-connection/
 import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
+import {DfResizeObserver} from './directives/resize-observer';
 import type {
     DfDataConnection,
     DfDataModel,
@@ -36,10 +36,10 @@ import {CoordinatesService} from './services/coordinates.service';
     selector: 'ng-draw-flow',
     imports: [
         AsyncPipe,
+        DfResizeObserver,
         NgIf,
         PanZoomComponent,
         ReactiveFormsModule,
-        ResizeObserverModule,
         SceneComponent,
     ],
     templateUrl: './ng-draw-flow.component.html',
@@ -139,6 +139,7 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     protected onResize(event: any): void {
+        console.warn('onResize');
         const {width, height} = event[0].contentRect;
 
         this.rootReady$.next(width && height);

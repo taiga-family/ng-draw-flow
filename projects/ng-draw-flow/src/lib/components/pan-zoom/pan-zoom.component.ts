@@ -7,11 +7,6 @@ import {
     inject,
     Output,
 } from '@angular/core';
-import {
-    RESIZE_OPTION_BOX,
-    ResizeObserverModule,
-    ResizeObserverService,
-} from '@ng-web-apis/resize-observer';
 import type {Observable} from 'rxjs';
 import {
     BehaviorSubject,
@@ -26,6 +21,11 @@ import {
 
 import type {DfDragDrop} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
+import {
+    DF_RESIZE_OPTION_BOX,
+    DfResizeObserver,
+    ResizeObserverService,
+} from '../../directives/resize-observer';
 import {DF_FALSE_HANDLER, dfClamp, dfPx, INITIAL_COORDINATES} from '../../helpers';
 import type {DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
@@ -39,14 +39,14 @@ import type {DfZoom} from './zoom/zoom.interfaces';
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [AsyncPipe, DragDropDirective, NgIf, ResizeObserverModule, ZoomDirective],
+    imports: [AsyncPipe, DfResizeObserver, DragDropDirective, NgIf, ZoomDirective],
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         ResizeObserverService,
         {
-            provide: RESIZE_OPTION_BOX,
+            provide: DF_RESIZE_OPTION_BOX,
             useValue: 'border-box',
         },
     ],
