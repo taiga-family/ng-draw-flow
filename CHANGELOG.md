@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file. See
 [`conventional commits`](https://www.conventionalcommits.org/) guidelines.
 
+### [0.2.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.1.0...v0.2.0) (2024-10-08)
+
 ### [0.1.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.0.6...v0.1.0) (2024-10-08)
 
 ### 🚀 Features
