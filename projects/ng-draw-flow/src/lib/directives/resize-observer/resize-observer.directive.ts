@@ -1,10 +1,9 @@
 import {Directive, ElementRef, inject} from '@angular/core';
-
-import {ResizeObserverService} from './services/resize-observer.service';
 import {
-    DF_RESIZE_OPTION_BOX,
-    DF_RESIZE_OPTION_BOX_DEFAULT,
-} from './tokens/resize-option-box';
+    RESIZE_OPTION_BOX,
+    RESIZE_OPTION_BOX_DEFAULT,
+    ResizeObserverService,
+} from '@ng-web-apis/resize-observer';
 
 @Directive({
     standalone: true,
@@ -14,15 +13,16 @@ import {
     providers: [
         ResizeObserverService,
         {
-            provide: DF_RESIZE_OPTION_BOX,
+            provide: RESIZE_OPTION_BOX,
             useFactory: (): ResizeObserverBoxOptions =>
                 inject(ElementRef).nativeElement.getAttribute('dfResizeBox') ||
-                DF_RESIZE_OPTION_BOX_DEFAULT,
+                RESIZE_OPTION_BOX_DEFAULT,
         },
     ],
 })
 export class DfResizeObserver {
+    // TODO: Remove this directive after EOL Taiga UI 3
     protected readonly dfResizeObserver = inject(ResizeObserverService);
 
-    public box: ResizeObserverBoxOptions = DF_RESIZE_OPTION_BOX_DEFAULT;
+    public box: ResizeObserverBoxOptions = RESIZE_OPTION_BOX_DEFAULT;
 }

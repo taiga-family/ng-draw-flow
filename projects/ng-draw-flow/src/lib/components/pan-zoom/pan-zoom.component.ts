@@ -7,6 +7,7 @@ import {
     inject,
     Output,
 } from '@angular/core';
+import {RESIZE_OPTION_BOX, ResizeObserverService} from '@ng-web-apis/resize-observer';
 import type {Observable} from 'rxjs';
 import {
     BehaviorSubject,
@@ -21,11 +22,7 @@ import {
 
 import type {DfDragDrop} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
-import {
-    DF_RESIZE_OPTION_BOX,
-    DfResizeObserver,
-    ResizeObserverService,
-} from '../../directives/resize-observer';
+import {DfResizeObserver} from '../../directives/resize-observer';
 import {DF_FALSE_HANDLER, dfClamp, dfPx, INITIAL_COORDINATES} from '../../helpers';
 import type {DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
@@ -46,7 +43,7 @@ import type {DfZoom} from './zoom/zoom.interfaces';
     providers: [
         ResizeObserverService,
         {
-            provide: DF_RESIZE_OPTION_BOX,
+            provide: RESIZE_OPTION_BOX,
             useValue: 'border-box',
         },
     ],
