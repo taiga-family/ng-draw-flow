@@ -1,3 +1,5 @@
+### [0.3.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.2.0...v0.3.0) (2024-10-08)
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See
