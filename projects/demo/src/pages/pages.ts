@@ -27,11 +27,11 @@ export const DEMO_PAGES: TuiDocPages = [
         title: 'Connectors',
         route: DemoPath.Connectors,
     },
-    {
-        section: 'Documentation',
-        title: 'Connections',
-        route: DemoPath.Connections,
-    },
+    // {
+    //     section: 'Documentation',
+    //     title: 'Connections',
+    //     route: DemoPath.Connections,
+    // },
     {
         section: 'Examples',
         title: 'Simple example',
