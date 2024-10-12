@@ -1,5 +1,5 @@
-import type {DfConnectorData} from '@ng-draw-flow/core';
-import {DfConnectorPosition} from '@ng-draw-flow/core';
+import type {DfConnectorData} from '../../../ng-draw-flow.interfaces';
+import {DfConnectorPosition} from '../../../ng-draw-flow.interfaces';
 
 export function createBezierPath(
     startConnector: DfConnectorData,

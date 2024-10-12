@@ -13,13 +13,13 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {DRAW_FLOW_OPTIONS} from '@ng-draw-flow/core';
 import {merge} from 'rxjs';
 
 import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {SelectableElementDirective} from '../../directives/selectable-element';
 import {connectorName} from '../../helpers';
+import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
     DfDataInitialNode,
     DfDataNode,

@@ -7,11 +7,12 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import type {DfOptions} from '@ng-draw-flow/core';
-import {DfConnectionType, DRAW_FLOW_OPTIONS} from '@ng-draw-flow/core';
 import type {Observable} from 'rxjs';
 import {animationFrameScheduler, combineLatest, map, observeOn} from 'rxjs';
 
+import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
+import type {DfOptions} from '../../../ng-draw-flow.interfaces';
+import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
 import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
 import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
 import {DraftConnectionService} from './draft-connection.service';
