@@ -79,7 +79,7 @@ export interface DfDataConnectorConfig {
 
 export interface DfConnectorData {
     point: DfPoint;
-    position: string | null;
+    position: DfConnectorPosition | null;
 }
 
 export enum DfConnectionPoint {

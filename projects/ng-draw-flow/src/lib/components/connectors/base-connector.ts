@@ -4,6 +4,7 @@ import {filter} from 'rxjs';
 
 import type {
     DfConnectionPoint,
+    DfConnectorPosition,
     DfDataConnectorConfig,
     DfPoint,
 } from '../../ng-draw-flow.interfaces';
@@ -14,7 +15,8 @@ export abstract class BaseConnector {
     protected abstract data: DfDataConnectorConfig;
     protected readonly destroyRef = inject(DestroyRef);
     protected isDisabled = false;
-    public position!: DfPoint;
+    public coordinates!: DfPoint;
+    public position!: DfConnectorPosition;
 
     @HostBinding('attr.data-node-id')
     public get bindNodeId(): string {
@@ -24,6 +26,11 @@ export abstract class BaseConnector {
     @HostBinding('attr.data-connector-id')
     public get bindConnectorId(): string {
         return this.data?.connectorId;
+    }
+
+    @HostBinding('attr.data-position')
+    public get bindPosition(): DfConnectorPosition {
+        return this.position;
     }
 
     @HostBinding('attr.data-connector-type')

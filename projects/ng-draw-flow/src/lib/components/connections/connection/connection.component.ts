@@ -22,9 +22,9 @@ import {
 import {SelectableElementDirective} from '../../../directives/selectable-element';
 import {connectorName} from '../../../helpers';
 import type {
+    DfConnectorData,
     DfDataConnection,
     DfDataConnector,
-    DfPoint,
 } from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {ConnectionsService} from '../connections.service';
@@ -87,11 +87,17 @@ export class ConnectionComponent {
                 );
             }),
             map(([start, end]) => {
-                const distance = calculateDistance(start, end);
+                const distance = calculateDistance(start.point, end.point);
                 const curvature = calculateCurvature(distance, this.maxCurvature);
 
                 return start && end
-                    ? createCurvature(start.x, start.y, end.x, end.y, curvature)
+                    ? createCurvature(
+                          start.point.x,
+                          start.point.y,
+                          end.point.x,
+                          end.point.y,
+                          curvature,
+                      )
                     : '';
             }),
         );
@@ -102,11 +108,11 @@ export class ConnectionComponent {
 
     private getConnectionPoint(
         connector: DfDataConnector,
-    ): BehaviorSubject<DfPoint> | undefined {
-        const {nodeId, connectorType, connectorId} = connector;
+    ): BehaviorSubject<DfConnectorData> | undefined {
+        const {nodeId, connectorType, connectorId, position} = connector;
 
         return this.coordinatesService.getConnectionPoint(
-            connectorName({nodeId, connectorType, connectorId}),
+            connectorName({nodeId, connectorType, connectorId, position}),
         );
     }
 }

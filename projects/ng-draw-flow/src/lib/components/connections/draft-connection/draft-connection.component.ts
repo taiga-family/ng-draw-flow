@@ -4,10 +4,11 @@ import {
     ChangeDetectionStrategy,
     Component,
     inject,
-    Input,
     Output,
     ViewChild,
 } from '@angular/core';
+import type {DfOptions} from '@ng-draw-flow/core';
+import {DRAW_FLOW_OPTIONS} from '@ng-draw-flow/core';
 import type {Observable} from 'rxjs';
 import {animationFrameScheduler, combineLatest, map, observeOn} from 'rxjs';
 
@@ -24,9 +25,8 @@ import {DraftConnectionService} from './draft-connection.service';
 })
 export class DraftConnectionComponent {
     private readonly draftConnectionService = inject(DraftConnectionService);
-
-    @Input()
-    private readonly maxCurvature = 50;
+    private readonly options: DfOptions = inject(DRAW_FLOW_OPTIONS);
+    private readonly maxCurvature = this.options.connection.curvature;
 
     @ViewChild('connectionPath')
     protected connectionPath!: ElementRef;
@@ -40,14 +40,14 @@ export class DraftConnectionComponent {
     ]).pipe(
         observeOn(animationFrameScheduler),
         map(([sourcePoint, targetPoint]) => {
-            const distance = calculateDistance(sourcePoint, targetPoint);
+            const distance = calculateDistance(sourcePoint.point, targetPoint.point);
             const curvature = calculateCurvature(distance, this.maxCurvature);
 
             return createCurvature(
-                sourcePoint.x,
-                sourcePoint.y,
-                targetPoint.x,
-                targetPoint.y,
+                sourcePoint.point.x,
+                sourcePoint.point.y,
+                targetPoint.point.x,
+                targetPoint.point.y,
                 curvature,
             );
         }),

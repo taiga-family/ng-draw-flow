@@ -62,9 +62,11 @@ export const APP_PROVIDERS: Provider[] = [
         },
     },
     provideNgDrawFlowConfigs({
-        infoNode: InfoNodeComponent,
-        simpleNode: SimpleNodeComponent,
-        miniNode: MiniNodeComponent,
-        formNode: FormNodeComponent,
+        nodes: {
+            infoNode: InfoNodeComponent,
+            simpleNode: SimpleNodeComponent,
+            miniNode: MiniNodeComponent,
+            formNode: FormNodeComponent,
+        },
     }),
 ];

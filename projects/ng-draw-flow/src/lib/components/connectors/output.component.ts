@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import type {DfDataConnectorConfig} from '../../ng-draw-flow.interfaces';
-import {DfConnectionPoint} from '../../ng-draw-flow.interfaces';
+import {DfConnectionPoint, DfConnectorPosition} from '../../ng-draw-flow.interfaces';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {BaseConnector} from './base-connector';
 
@@ -26,6 +26,9 @@ export class DfOutputComponent extends BaseConnector implements OnDestroy {
     @Input('connectorData')
     public data!: DfDataConnectorConfig;
 
+    @Input()
+    public override position = DfConnectorPosition.Right;
+
     @HostListener('pointerdown.stop')
     protected onDragStart(_event: PointerEvent): void {
         const {nodeId, connectorId} = this.data;
@@ -38,6 +41,7 @@ export class DfOutputComponent extends BaseConnector implements OnDestroy {
             nodeId,
             connectorId,
             connectorType: DfConnectionPoint.Output,
+            position: this.position,
         });
     }
 
