@@ -21,14 +21,17 @@ import {
 
 import {SelectableElementDirective} from '../../../directives/selectable-element';
 import {connectorName} from '../../../helpers';
+import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {
     DfConnectorData,
     DfDataConnection,
     DfDataConnector,
 } from '../../../ng-draw-flow.interfaces';
+import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {ConnectionsService} from '../connections.service';
-import {calculateCurvature, calculateDistance, createCurvature} from '../utils';
+import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
+import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
 
 @Component({
     standalone: true,
@@ -41,10 +44,8 @@ import {calculateCurvature, calculateDistance, createCurvature} from '../utils';
 export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
+    private readonly options = inject(DRAW_FLOW_OPTIONS);
     private connectionSelected = false;
-
-    @Input()
-    private readonly maxCurvature = 50;
 
     @Input()
     public connection!: DfDataConnection;
@@ -87,18 +88,26 @@ export class ConnectionComponent {
                 );
             }),
             map(([start, end]) => {
-                const distance = calculateDistance(start.point, end.point);
-                const curvature = calculateCurvature(distance, this.maxCurvature);
+                if (!start || !end) {
+                    return '';
+                }
 
-                return start && end
-                    ? createCurvature(
-                          start.point.x,
-                          start.point.y,
-                          end.point.x,
-                          end.point.y,
-                          curvature,
-                      )
-                    : '';
+                switch (this.options.connection.type) {
+                    case DfConnectionType.SmoothStep:
+                        return createSmoothstepPath(
+                            start,
+                            end,
+                            this.options.connection.curvature,
+                        );
+                    case DfConnectionType.Bezier:
+                    default: {
+                        const distance = calculateDistance(start.point, end.point);
+                        const maxCurvature = this.options.connection.curvature;
+                        const curvature = calculateCurvature(distance, maxCurvature);
+
+                        return createBezierPath(start, end, curvature);
+                    }
+                }
             }),
         );
 
@@ -109,10 +118,10 @@ export class ConnectionComponent {
     private getConnectionPoint(
         connector: DfDataConnector,
     ): BehaviorSubject<DfConnectorData> | undefined {
-        const {nodeId, connectorType, connectorId, position} = connector;
+        const {nodeId, connectorType, connectorId} = connector;
 
         return this.coordinatesService.getConnectionPoint(
-            connectorName({nodeId, connectorType, connectorId, position}),
+            connectorName({nodeId, connectorType, connectorId}),
         );
     }
 }

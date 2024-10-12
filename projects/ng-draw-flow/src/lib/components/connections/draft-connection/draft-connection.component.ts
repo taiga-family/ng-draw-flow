@@ -8,11 +8,12 @@ import {
     ViewChild,
 } from '@angular/core';
 import type {DfOptions} from '@ng-draw-flow/core';
-import {DRAW_FLOW_OPTIONS} from '@ng-draw-flow/core';
+import {DfConnectionType, DRAW_FLOW_OPTIONS} from '@ng-draw-flow/core';
 import type {Observable} from 'rxjs';
 import {animationFrameScheduler, combineLatest, map, observeOn} from 'rxjs';
 
-import {calculateCurvature, calculateDistance, createCurvature} from '../utils';
+import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
+import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
 import {DraftConnectionService} from './draft-connection.service';
 
 @Component({
@@ -40,16 +41,24 @@ export class DraftConnectionComponent {
     ]).pipe(
         observeOn(animationFrameScheduler),
         map(([sourcePoint, targetPoint]) => {
-            const distance = calculateDistance(sourcePoint.point, targetPoint.point);
-            const curvature = calculateCurvature(distance, this.maxCurvature);
+            switch (this.options.connection.type) {
+                case DfConnectionType.SmoothStep:
+                    return createSmoothstepPath(
+                        sourcePoint,
+                        targetPoint,
+                        this.maxCurvature,
+                    );
+                case DfConnectionType.Bezier:
+                default: {
+                    const distance = calculateDistance(
+                        sourcePoint.point,
+                        targetPoint.point,
+                    );
+                    const curvature = calculateCurvature(distance, this.maxCurvature);
 
-            return createCurvature(
-                sourcePoint.point.x,
-                sourcePoint.point.y,
-                targetPoint.point.x,
-                targetPoint.point.y,
-                curvature,
-            );
+                    return createBezierPath(sourcePoint, targetPoint, curvature);
+                }
+            }
         }),
     );
 }
