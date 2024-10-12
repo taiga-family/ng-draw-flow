@@ -28,7 +28,7 @@
         "test": "nx test",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "prettier": "prettier '**/*.{svg,yml,js,ts,html,md,less,json}'",
+        "prettier": "prettier --write !package-lock.json . --ignore-path .gitignore",
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
         "release": "npx syncer && npx nx run-many -t publish"
     },

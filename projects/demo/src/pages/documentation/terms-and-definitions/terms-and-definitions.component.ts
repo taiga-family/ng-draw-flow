@@ -14,7 +14,7 @@ import NodesExampleComponent from './examplaes/nodes-example/nodes-example.compo
 
 @Component({
     standalone: true,
-    selector: 'quickstart-doc-page',
+    selector: 'terms-and-definitions',
     imports: [
         ConnectionsExampleComponent,
         ConnectorsExampleComponent,
@@ -26,7 +26,7 @@ import NodesExampleComponent from './examplaes/nodes-example/nodes-example.compo
         TuiAddonDocModule,
         TuiLinkModule,
     ],
-    template: '',
+    templateUrl: './terms-and-definitions.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class TermsAndDefinitionsComponent {}
