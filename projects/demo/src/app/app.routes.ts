@@ -1,8 +1,7 @@
 import {NgModule} from '@angular/core';
 import type {Routes} from '@angular/router';
 import {RouterModule} from '@angular/router';
-
-import {DemoPath} from './constants/constants';
+import {DemoPath} from '@demo/constants';
 
 export const appRoutes: Routes = [
     // Quickstart
@@ -48,6 +47,14 @@ export const appRoutes: Routes = [
             import('../pages/documentation/connectors/connectors.component'),
         data: {
             title: 'Connectors',
+        },
+    },
+    {
+        path: DemoPath.Connections,
+        loadComponent: async () =>
+            import('../pages/documentation/connections/connections.component'),
+        data: {
+            title: 'Connections',
         },
     },
     // Examples
