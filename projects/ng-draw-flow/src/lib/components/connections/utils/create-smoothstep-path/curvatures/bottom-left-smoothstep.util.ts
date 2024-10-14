@@ -1,3 +1,5 @@
+import type {DfPathCoords} from '@ng-draw-flow/core';
+
 import {MIN_LINE_SIZE} from '../consts';
 import {
     createEndPoint,
@@ -7,13 +9,13 @@ import {
     createVerticalLineToRightWithCurve,
 } from '../utils';
 
-export function createBottomLeftCurve(
-    startX: number,
-    startY: number,
-    endX: number,
-    endY: number,
-    radius: number,
-): string {
+export function createBottomLeftCurve({
+    startX,
+    startY,
+    endX,
+    endY,
+    radius,
+}: DfPathCoords): string {
     const isEndPointOnLeftSide = startX > endX;
     const isEndPointOnUpSide = startY > endY;
     const halfY = (startY + endY) / 2;

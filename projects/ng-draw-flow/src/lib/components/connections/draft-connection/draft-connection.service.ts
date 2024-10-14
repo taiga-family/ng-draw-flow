@@ -1,6 +1,6 @@
 import {DOCUMENT} from '@angular/common';
-import type {OnDestroy} from '@angular/core';
-import {inject, Injectable} from '@angular/core';
+import type {OnDestroy, WritableSignal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {
     animationFrameScheduler,
     BehaviorSubject,
@@ -38,12 +38,12 @@ export class DraftConnectionService implements OnDestroy {
     protected readonly destroy$ = new Subject<void>();
     private sourceConnector!: DfDataConnector;
 
-    public readonly source$ = new BehaviorSubject<DfConnectorData>({
+    public source: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
         point: INITIAL_COORDINATES,
         position: DfConnectorPosition.Right,
     });
 
-    public readonly target$ = new BehaviorSubject<DfConnectorData>({
+    public target: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
         point: INITIAL_COORDINATES,
         position: DfConnectorPosition.Left,
     });
@@ -99,19 +99,19 @@ export class DraftConnectionService implements OnDestroy {
             return;
         }
 
-        this.source$.next(sourcePoint);
-        this.target$.next({
+        this.source.set(sourcePoint);
+        this.target.set({
             ...sourcePoint,
-            position: this.getTargetPosition(this.source$.value.position),
+            position: this.getTargetPosition(this.source().position),
         });
     }
 
     private onDragMove(previousEvent: PointerEvent, currentEvent: PointerEvent): void {
         const {deltaX, deltaY} = dfDistanceBetweenPoints(previousEvent, currentEvent);
         const {zoom} = this.panZoomService.panzoomModel;
-        const target: DfConnectorData = this.target$.value;
+        const target: DfConnectorData = this.target();
 
-        this.target$.next({
+        this.target.set({
             position: target.position,
             point: {
                 x: target.point.x + deltaX / zoom,
@@ -156,11 +156,11 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private resetConnectors(): void {
-        this.source$.next({
+        this.source.set({
             point: INITIAL_COORDINATES,
             position: DfConnectorPosition.Right,
         });
-        this.target$.next({
+        this.target.set({
             point: INITIAL_COORDINATES,
             position: null,
         });

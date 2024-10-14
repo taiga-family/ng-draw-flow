@@ -1,10 +1,5 @@
 import {AsyncPipe, CommonModule} from '@angular/common';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    ViewChild,
-    ViewEncapsulation,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
@@ -51,9 +46,6 @@ import {InputNodeComponent, OutputNodeComponent} from '../../../app/modules/node
     ],
 })
 export default class ConnectionsComponent {
-    @ViewChild(NgDrawFlowComponent)
-    public editor!: NgDrawFlowComponent;
-
     public data: DfDataModel = {
         nodes: new Map()
             .set('node-1', {
@@ -67,18 +59,6 @@ export default class ConnectionsComponent {
                 position: {x: 90, y: -150},
             }),
         connections: [
-            // {
-            //     source: {
-            //         nodeId: 'node-1',
-            //         connectorType: DfConnectionPoint.Output,
-            //         connectorId: 'node-1-output-1',
-            //     },
-            //     target: {
-            //         nodeId: 'node-2',
-            //         connectorType: DfConnectionPoint.Input,
-            //         connectorId: 'node-2-input-3',
-            //     },
-            // },
             {
                 source: {
                     nodeId: 'node-1',

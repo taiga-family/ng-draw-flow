@@ -91,3 +91,11 @@ export interface DfEvent<T> {
     readonly target: T;
     readonly model: DfDataModel;
 }
+
+export interface DfPathCoords {
+    startX: number;
+    startY: number;
+    endX: number;
+    endY: number;
+    radius: number;
+}

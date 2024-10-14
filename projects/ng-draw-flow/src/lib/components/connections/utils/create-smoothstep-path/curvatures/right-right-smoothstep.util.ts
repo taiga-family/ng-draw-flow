@@ -1,3 +1,5 @@
+import type {DfPathCoords} from '@ng-draw-flow/core';
+
 import {MIN_LINE_SIZE} from '../consts';
 import {
     adjustRadius,
@@ -7,13 +9,13 @@ import {
     createVerticalLineToLeftWithCurve,
 } from '../utils';
 
-export function createRightRightCurve(
-    startX: number,
-    startY: number,
-    endX: number,
-    endY: number,
-    radius: number,
-): string {
+export function createRightRightCurve({
+    startX,
+    startY,
+    endX,
+    endY,
+    radius,
+}: DfPathCoords): string {
     const verticalDifference = startY - endY;
 
     radius = adjustRadius(verticalDifference, radius);

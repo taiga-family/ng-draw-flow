@@ -1,3 +1,5 @@
+import type {DfPathCoords} from '@ng-draw-flow/core';
+
 import {MIN_LINE_SIZE} from '../consts';
 import {
     adjustRadius,
@@ -8,13 +10,13 @@ import {
     createVerticalLineToRightWithCurve,
 } from '../utils';
 
-export function createTopRightCurve(
-    startX: number,
-    startY: number,
-    endX: number,
-    endY: number,
-    radius: number,
-): string {
+export function createTopRightCurve({
+    startX,
+    startY,
+    endX,
+    endY,
+    radius,
+}: DfPathCoords): string {
     const isEndPointOnRightSide = startX + MIN_LINE_SIZE + radius < endX;
     const isEndPointOnUpSide = startY > endY;
     const verticalDifference = startY - endY - MIN_LINE_SIZE;

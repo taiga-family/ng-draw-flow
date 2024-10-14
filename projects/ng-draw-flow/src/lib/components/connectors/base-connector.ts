@@ -15,8 +15,8 @@ export abstract class BaseConnector {
     protected abstract data: DfDataConnectorConfig;
     protected readonly destroyRef = inject(DestroyRef);
     protected isDisabled = false;
-    public coordinates!: DfPoint;
-    public position!: DfConnectorPosition;
+    public coordinates?: DfPoint;
+    public position?: DfConnectorPosition;
 
     @HostBinding('attr.data-node-id')
     public get bindNodeId(): string {
@@ -29,7 +29,7 @@ export abstract class BaseConnector {
     }
 
     @HostBinding('attr.data-position')
-    public get bindPosition(): DfConnectorPosition {
+    public get bindPosition(): DfConnectorPosition | undefined {
         return this.position;
     }
 

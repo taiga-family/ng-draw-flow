@@ -32,56 +32,56 @@ export function createSmoothstepPath(
     if (startConnectorPosition === DfConnectorPosition.Right) {
         switch (endConnectorPosition) {
             case DfConnectorPosition.Bottom:
-                return createRightBottomCurve(startX, startY, endX, endY, radius);
+                return createRightBottomCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Right:
-                return createRightRightCurve(startX, startY, endX, endY, radius);
+                return createRightRightCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Top:
-                return createRightTopCurve(startX, startY, endX, endY, radius);
+                return createRightTopCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Left:
             default:
-                return createRightLeftCurve(startX, startY, endX, endY, radius);
+                return createRightLeftCurve({startX, startY, endX, endY, radius});
         }
     }
 
     if (startConnectorPosition === DfConnectorPosition.Left) {
         switch (endConnectorPosition) {
             case DfConnectorPosition.Bottom:
-                return createLeftBottomCurve(startX, startY, endX, endY, radius);
+                return createLeftBottomCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Left:
-                return createLeftLeftCurve(startX, startY, endX, endY, radius);
+                return createLeftLeftCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Top:
-                return createLeftTopCurve(startX, startY, endX, endY, radius);
+                return createLeftTopCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Right:
             default:
-                return createLeftRightCurve(startX, startY, endX, endY, radius);
+                return createLeftRightCurve({startX, startY, endX, endY, radius});
         }
     }
 
     if (startConnectorPosition === DfConnectorPosition.Bottom) {
         switch (endConnectorPosition) {
             case DfConnectorPosition.Bottom:
-                return createBottomBottomCurve(startX, startY, endX, endY, radius);
+                return createBottomBottomCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Left:
-                return createBottomLeftCurve(startX, startY, endX, endY, radius);
+                return createBottomLeftCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Right:
-                return createBottomRightCurve(startX, startY, endX, endY, radius);
+                return createBottomRightCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Top:
             default:
-                return createBottomTopCurve(startX, startY, endX, endY, radius);
+                return createBottomTopCurve({startX, startY, endX, endY, radius});
         }
     }
 
     if (startConnectorPosition === DfConnectorPosition.Top) {
         switch (endConnectorPosition) {
             case DfConnectorPosition.Left:
-                return createTopLeftCurve(startX, startY, endX, endY, radius);
+                return createTopLeftCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Right:
-                return createTopRightCurve(startX, startY, endX, endY, radius);
+                return createTopRightCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Top:
-                return createTopTopCurve(startX, startY, endX, endY, radius);
+                return createTopTopCurve({startX, startY, endX, endY, radius});
             case DfConnectorPosition.Bottom:
             default:
-                return createTopBottomCurve(startX, startY, endX, endY, radius);
+                return createTopBottomCurve({startX, startY, endX, endY, radius});
         }
     }
 

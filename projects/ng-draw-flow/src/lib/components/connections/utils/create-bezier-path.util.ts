@@ -4,7 +4,7 @@ import {DfConnectorPosition} from '../../../ng-draw-flow.interfaces';
 export function createBezierPath(
     startConnector: DfConnectorData,
     endConnector: DfConnectorData,
-    curvature = 2,
+    curvature: number,
 ): string {
     const {x: startX, y: startY} = startConnector.point;
     const startConnectorPosition = startConnector.position;

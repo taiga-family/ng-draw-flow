@@ -47,7 +47,7 @@ import {BehaviorSubject} from 'rxjs';
 })
 export default class EditorComponent {
     @ViewChild(NgDrawFlowComponent)
-    public editor!: NgDrawFlowComponent;
+    public editor?: NgDrawFlowComponent;
 
     public readonly customNodeExample: TuiDocExample = {
         Typescript: import('./examples/editor.component.md?raw'),
@@ -162,11 +162,11 @@ export default class EditorComponent {
 
     public toggleFullscreen(): void {
         this.fullscreen$.next(!this.fullscreen$.value);
-        this.editor.resetPosition();
+        this.editor?.resetPosition();
     }
 
     public addNodeToDrawFlow(): void {
-        const id = `qwqe${this.counter}`;
+        const id = `new-node-id-${this.counter}`;
 
         this.data.nodes.set(id, {
             id,

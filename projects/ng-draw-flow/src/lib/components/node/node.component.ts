@@ -240,8 +240,8 @@ export class NodeComponent implements AfterViewInit {
         connectorType: DfConnectionPoint,
     ): void {
         const newConnectorPosition = {
-            x: connector.coordinates.x + distance.deltaX,
-            y: connector.coordinates.y + distance.deltaY,
+            x: (connector.coordinates?.x ?? 0) + distance.deltaX,
+            y: (connector.coordinates?.y ?? 0) + distance.deltaY,
         };
 
         const connectorData = connectorName({
