@@ -28,7 +28,7 @@
         "test": "nx test",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
-        "prettier": "prettier '**/*.{svg,yml,js,ts,html,md,less,json}'",
+        "prettier": "prettier --write !package-lock.json . --ignore-path .gitignore",
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
         "release": "npx syncer && npx nx run-many -t publish"
     },
@@ -62,6 +62,7 @@
             "@typescript-eslint/consistent-type-assertions": "off",
             "@typescript-eslint/member-ordering": "off",
             "rxjs/no-implicit-any-catch": "off",
+            "sonarjs/no-gratuitous-expressions": "off",
             "sonarjs/prefer-nullish-coalescing": "off",
             "sonarjs/redundant-type-aliases": "off",
             "@taiga-ui/experience/strict-tui-doc-example": "off"

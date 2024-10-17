@@ -1,6 +1,5 @@
+import {DemoPath} from '@demo/constants';
 import type {TuiDocPages} from '@taiga-ui/addon-doc';
-
-import {DemoPath} from '../app/constants/constants';
 
 export const DEMO_PAGES: TuiDocPages = [
     {
@@ -28,6 +27,11 @@ export const DEMO_PAGES: TuiDocPages = [
         title: 'Connectors',
         route: DemoPath.Connectors,
     },
+    // {
+    //     section: 'Documentation',
+    //     title: 'Connections',
+    //     route: DemoPath.Connections,
+    // },
     {
         section: 'Examples',
         title: 'Simple example',

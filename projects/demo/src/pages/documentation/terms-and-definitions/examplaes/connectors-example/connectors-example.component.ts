@@ -14,7 +14,9 @@ import {ConnectorsComponent} from '../nodes/connectors/connectors.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         provideNgDrawFlowConfigs({
-            connectors: ConnectorsComponent,
+            nodes: {
+                connectors: ConnectorsComponent,
+            },
         }),
     ],
 })

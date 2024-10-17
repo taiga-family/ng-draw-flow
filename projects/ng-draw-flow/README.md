@@ -58,7 +58,9 @@ graph editor:
 ```ts
 providers: [
   provideNgDrawFlowConfigs({
-    yourNode: YourNodeComponent,
+    nodes: {
+      yourNode: YourNodeComponent,
+    },
   }),
 ];
 ```

@@ -18,7 +18,9 @@ import {SimpleNodeComponent} from '../../../../../app/modules/nodes';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         provideNgDrawFlowConfigs({
-            simpleNode: SimpleNodeComponent,
+            nodes: {
+                simpleNode: SimpleNodeComponent,
+            },
         }),
     ],
 })

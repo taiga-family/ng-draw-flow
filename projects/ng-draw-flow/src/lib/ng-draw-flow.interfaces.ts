@@ -2,6 +2,30 @@ import type {Type} from '@angular/core';
 
 import type {DrawFlowBaseNode} from './ng-draw-flow-node.base';
 
+export enum DfConnectionType {
+    Bezier = 'bezier',
+    SmoothStep = 'smoothStep',
+    Step = 'step',
+}
+
+export enum DfConnectorPosition {
+    Top = 'top',
+    Right = 'right',
+    Bottom = 'bottom',
+    Left = 'left',
+}
+
+export interface DfConnectionOptions {
+    type: DfConnectionType;
+    arrowhead: 'none' | 'triangle';
+    curvature: number;
+}
+
+export interface DfOptions {
+    connection: DfConnectionOptions;
+    nodes: DfComponents;
+}
+
 export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;
 
 export interface DfPoint {
@@ -44,12 +68,18 @@ export interface DfDataConnector {
     readonly nodeId: DfId;
     readonly connectorType: DfConnectionPoint;
     readonly connectorId: DfId;
+    readonly position?: string;
 }
 
 export interface DfDataConnectorConfig {
     readonly nodeId: DfId;
     readonly connectorId: DfId;
     readonly single: boolean;
+}
+
+export interface DfConnectorData {
+    point: DfPoint;
+    position: DfConnectorPosition | null;
 }
 
 export enum DfConnectionPoint {
@@ -60,4 +90,12 @@ export enum DfConnectionPoint {
 export interface DfEvent<T> {
     readonly target: T;
     readonly model: DfDataModel;
+}
+
+export interface DfPathCoords {
+    startX: number;
+    startY: number;
+    endX: number;
+    endY: number;
+    radius: number;
 }

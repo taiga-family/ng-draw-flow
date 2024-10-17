@@ -1,0 +1,25 @@
+<df-input
+    class="input input_left"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+    [position]="connectorPosition.Left"
+/>
+
+<df-input
+    class="input input_top"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-2', single: false}"
+    [position]="connectorPosition.Top"
+/>
+
+<p class="tui-text_body-xs">{{ model.text }}</p>
+
+<df-input
+    class="input input_right"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-3', single: false}"
+    [position]="connectorPosition.Right"
+/>
+
+<df-input
+    class="input input_bottom"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-4', single: false}"
+    [position]="connectorPosition.Bottom"
+/>

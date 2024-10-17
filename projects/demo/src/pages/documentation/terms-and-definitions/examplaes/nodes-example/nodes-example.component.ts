@@ -14,7 +14,9 @@ import {NodeComponent} from '../nodes/node/node.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         provideNgDrawFlowConfigs({
-            node: NodeComponent,
+            nodes: {
+                node: NodeComponent,
+            },
         }),
     ],
 })

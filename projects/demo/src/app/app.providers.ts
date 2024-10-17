@@ -15,7 +15,9 @@ import {LOGO_CONTENT} from './modules/logo/logo.component';
 import {
     FormNodeComponent,
     InfoNodeComponent,
+    InputNodeComponent,
     MiniNodeComponent,
+    OutputNodeComponent,
     SimpleNodeComponent,
 } from './modules/nodes';
 
@@ -62,9 +64,13 @@ export const APP_PROVIDERS: Provider[] = [
         },
     },
     provideNgDrawFlowConfigs({
-        infoNode: InfoNodeComponent,
-        simpleNode: SimpleNodeComponent,
-        miniNode: MiniNodeComponent,
-        formNode: FormNodeComponent,
+        nodes: {
+            infoNode: InfoNodeComponent,
+            simpleNode: SimpleNodeComponent,
+            inputNode: InputNodeComponent,
+            outputNode: OutputNodeComponent,
+            miniNode: MiniNodeComponent,
+            formNode: FormNodeComponent,
+        },
     }),
 ];

@@ -19,14 +19,15 @@ import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {SelectableElementDirective} from '../../directives/selectable-element';
 import {connectorName} from '../../helpers';
+import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
-    DfComponents,
     DfDataInitialNode,
     DfDataNode,
+    DfOptions,
     DfPoint,
 } from '../../ng-draw-flow.interfaces';
 import {DfConnectionPoint} from '../../ng-draw-flow.interfaces';
-import {DRAW_FLOW_COMPONENTS, DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
+import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import type {DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
 import type {DfInputComponent, DfOutputComponent} from '../connectors';
@@ -45,7 +46,7 @@ export class NodeComponent implements AfterViewInit {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
-    private readonly drawFlowComponents = inject<DfComponents>(DRAW_FLOW_COMPONENTS);
+    private readonly drawFlowComponents = inject<DfOptions>(DRAW_FLOW_OPTIONS).nodes;
 
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
@@ -239,8 +240,8 @@ export class NodeComponent implements AfterViewInit {
         connectorType: DfConnectionPoint,
     ): void {
         const newConnectorPosition = {
-            x: connector.position.x + distance.deltaX,
-            y: connector.position.y + distance.deltaY,
+            x: (connector.coordinates?.x ?? 0) + distance.deltaX,
+            y: (connector.coordinates?.y ?? 0) + distance.deltaY,
         };
 
         const connectorData = connectorName({
@@ -249,9 +250,13 @@ export class NodeComponent implements AfterViewInit {
             connectorId: connector.data.connectorId,
         });
 
-        connector.position = newConnectorPosition;
+        connector.coordinates = newConnectorPosition;
 
-        this.coordinatesService.addConnectionPoint(connectorData, newConnectorPosition);
+        this.coordinatesService.addConnectionPoint(
+            connectorData,
+            newConnectorPosition,
+            connector.position,
+        );
     }
 
     private updateConnectorCoordinates(
@@ -265,7 +270,7 @@ export class NodeComponent implements AfterViewInit {
             position,
         );
 
-        connector.position = calculatedConnectorPosition;
+        connector.coordinates = calculatedConnectorPosition;
 
         const connectorData = connectorName({
             nodeId,
@@ -276,6 +281,7 @@ export class NodeComponent implements AfterViewInit {
         this.coordinatesService.addConnectionPoint(
             connectorData,
             calculatedConnectorPosition,
+            connector.position,
         );
     }
 

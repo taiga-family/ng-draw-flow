@@ -1,6 +1,6 @@
 import {DOCUMENT} from '@angular/common';
-import type {OnDestroy} from '@angular/core';
-import {inject, Injectable} from '@angular/core';
+import type {OnDestroy, WritableSignal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {
     animationFrameScheduler,
     BehaviorSubject,
@@ -22,11 +22,11 @@ import {
     INITIAL_COORDINATES,
 } from '../../../helpers';
 import type {
+    DfConnectorData,
     DfDataConnection,
     DfDataConnector,
-    DfPoint,
 } from '../../../ng-draw-flow.interfaces';
-import {DfConnectionPoint} from '../../../ng-draw-flow.interfaces';
+import {DfConnectionPoint, DfConnectorPosition} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {PanZoomService} from '../../pan-zoom/pan-zoom.service';
 import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
@@ -38,8 +38,16 @@ export class DraftConnectionService implements OnDestroy {
     protected readonly destroy$ = new Subject<void>();
     private sourceConnector!: DfDataConnector;
 
-    public readonly source$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
-    public readonly target$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
+    public source: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
+        point: INITIAL_COORDINATES,
+        position: DfConnectorPosition.Right,
+    });
+
+    public target: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
+        point: INITIAL_COORDINATES,
+        position: DfConnectorPosition.Left,
+    });
+
     public readonly isConnectionCreating$ = new BehaviorSubject<boolean>(false);
     public readonly connectionCreated$ = new Subject<DfDataConnection>();
     public readonly connection$ = new Subject<DfDataConnector>();
@@ -84,25 +92,49 @@ export class DraftConnectionService implements OnDestroy {
         this.sourceConnector = connector;
         this.isConnectionCreating$.next(true);
         const sourceId = connectorName(connector);
-        const sourcePoint: DfPoint | undefined =
+        const sourcePoint: DfConnectorData | undefined =
             this.coordinatesService.getConnectionPoint(sourceId)?.value;
 
         if (!sourcePoint) {
             return;
         }
 
-        this.source$.next(sourcePoint);
-        this.target$.next(sourcePoint);
+        this.source.set(sourcePoint);
+        this.target.set({
+            ...sourcePoint,
+            position: this.getTargetPosition(this.source().position),
+        });
     }
 
     private onDragMove(previousEvent: PointerEvent, currentEvent: PointerEvent): void {
         const {deltaX, deltaY} = dfDistanceBetweenPoints(previousEvent, currentEvent);
         const {zoom} = this.panZoomService.panzoomModel;
+        const target: DfConnectorData = this.target();
 
-        this.target$.next({
-            x: this.target$.value.x + deltaX / zoom,
-            y: this.target$.value.y + deltaY / zoom,
+        this.target.set({
+            position: target.position,
+            point: {
+                x: target.point.x + deltaX / zoom,
+                y: target.point.y + deltaY / zoom,
+            },
         });
+    }
+
+    private getTargetPosition(
+        startPosition: DfConnectorPosition | null,
+    ): DfConnectorPosition | null {
+        switch (startPosition) {
+            case DfConnectorPosition.Bottom:
+                return DfConnectorPosition.Top;
+            case DfConnectorPosition.Left:
+                return DfConnectorPosition.Right;
+            case DfConnectorPosition.Right:
+                return DfConnectorPosition.Left;
+            case DfConnectorPosition.Top:
+                return DfConnectorPosition.Bottom;
+            default:
+                return null;
+        }
     }
 
     private onDragEnd(event: PointerEvent): void {
@@ -124,7 +156,13 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private resetConnectors(): void {
-        this.source$.next(INITIAL_COORDINATES);
-        this.target$.next(INITIAL_COORDINATES);
+        this.source.set({
+            point: INITIAL_COORDINATES,
+            position: DfConnectorPosition.Right,
+        });
+        this.target.set({
+            point: INITIAL_COORDINATES,
+            position: null,
+        });
     }
 }
