@@ -7,7 +7,7 @@
   \******************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```ts\n{\n  imports: [\n    //... (other necessary imports)\n    ReactiveFormsModule,\n    NgDrawFlowComponent,\n  ];\n  providers: [\n    //... (other necessary providers)\n    provideNgDrawFlowConfigs({\n      infoNode: InfoNodeComponent,\n      simpleNode: NodeWithoutConnectorsComponent,\n      formNode: FormNodeComponent,\n    }),\n  ];\n}\n```\n";
+module.exports = "```ts\n{\n  imports: [\n    //... (other necessary imports)\n    ReactiveFormsModule,\n    NgDrawFlowComponent,\n  ];\n  providers: [\n    //... (other necessary providers)\n    provideNgDrawFlowConfigs({\n      nodes: {\n        infoNode: InfoNodeComponent,\n        simpleNode: NodeWithoutConnectorsComponent,\n        formNode: FormNodeComponent,\n      },\n    }),\n  ];\n}\n```\n";
 
 /***/ })
 

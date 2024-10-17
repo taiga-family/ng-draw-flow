@@ -160,10 +160,10 @@ class EditorComponent {
   }
   toggleFullscreen() {
     this.fullscreen$.next(!this.fullscreen$.value);
-    this.editor.resetPosition();
+    this.editor?.resetPosition();
   }
   addNodeToDrawFlow() {
-    const id = `qwqe${this.counter}`;
+    const id = `new-node-id-${this.counter}`;
     this.data.nodes.set(id, {
       id,
       data: {
@@ -234,7 +234,7 @@ _EditorComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](12, "div", 7)(13, "button", 8);
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function EditorComponent_Template_button_click_13_listener() {
-        return ctx.editor.zoomOut();
+        return ctx.editor == null ? null : ctx.editor.zoomOut();
       });
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](14, " zoomOut ");
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
@@ -244,7 +244,7 @@ _EditorComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](18, "button", 8);
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("click", function EditorComponent_Template_button_click_18_listener() {
-        return ctx.editor.zoomIn();
+        return ctx.editor == null ? null : ctx.editor.zoomIn();
       });
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](19, " zomIn ");
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()()()();

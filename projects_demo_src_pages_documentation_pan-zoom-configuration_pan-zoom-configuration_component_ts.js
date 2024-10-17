@@ -69,7 +69,9 @@ _PanZoomConfigurationExample1Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
   selectors: [["app-pan-zoom-configuration-example-1"]],
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
-    pan: _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__.PanComponent
+    nodes: {
+      pan: _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__.PanComponent
+    }
   }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfPanZoomOptionsProvider)({
     topPosition: null,
     leftPosition: 0
@@ -139,7 +141,9 @@ _PanZoomConfigurationExample2Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
   selectors: [["app-pan-zoom-configuration-example-2"]],
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
-    pan: _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__.PanComponent
+    nodes: {
+      pan: _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__.PanComponent
+    }
   }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfPanZoomOptionsProvider)({
     topPosition: 0,
     leftPosition: null
@@ -209,7 +213,9 @@ _PanZoomConfigurationExample3Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
   selectors: [["app-pan-zoom-configuration-example-3"]],
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
-    pan: _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__.PanComponent
+    nodes: {
+      pan: _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__.PanComponent
+    }
   }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfPanZoomOptionsProvider)({
     topPosition: null,
     leftPosition: null

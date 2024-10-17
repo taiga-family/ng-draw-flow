@@ -7,7 +7,7 @@
   \************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```ts\nproviders: [\n  provideNgDrawFlowConfigs({\n    yourNode: YourNodeComponent,\n  }),\n];\n```\n";
+module.exports = "```ts\nproviders: [\n  provideNgDrawFlowConfigs({\n    nodes: {\n      yourNode: YourNodeComponent,\n    },\n  }),\n];\n```\n";
 
 /***/ })
 
