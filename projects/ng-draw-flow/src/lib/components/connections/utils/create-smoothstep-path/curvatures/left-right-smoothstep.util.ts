@@ -1,5 +1,4 @@
-import type {DfPathCoords} from '@ng-draw-flow/core';
-
+import type {DfPathCoords} from '../../../../../ng-draw-flow.interfaces';
 import {MIN_LINE_SIZE} from '../consts';
 import {
     adjustRadius,
