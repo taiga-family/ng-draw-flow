@@ -1,7 +1,6 @@
+import { TuiDocRoutePages } from "@taiga-ui/addon-doc";
 import {DemoPath} from '@demo/constants';
-import type {TuiDocPages} from '@taiga-ui/addon-doc';
-
-export const DEMO_PAGES: TuiDocPages = [
+export const DEMO_PAGES: TuiDocRoutePages = [
     {
         section: 'Documentation',
         title: 'Quickstart',

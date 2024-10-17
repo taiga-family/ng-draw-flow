@@ -2,8 +2,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {DfConnectionPoint, NgDrawFlowComponent} from '@ng-draw-flow/core';
-import type {TuiDocExample} from '@taiga-ui/addon-doc';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import { TuiRawLoaderContent, TuiAddonDoc } from '@taiga-ui/addon-doc';
 import {TuiLinkModule} from '@taiga-ui/core';
 
 import FirstExampleComponent from './examples/first-example/component';
@@ -15,7 +14,7 @@ import FirstExampleComponent from './examples/first-example/component';
         FirstExampleComponent,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        TuiAddonDocModule,
+        TuiAddonDoc,
         TuiLinkModule,
     ],
     templateUrl: './quickstart.component.html',
@@ -31,7 +30,7 @@ export default class QuickstartComponent {
         data2: import('./examples/data-2.md?raw'),
     };
 
-    public readonly customNodeExample: TuiDocExample = {
+    public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
         TypeScript: import('./examples/node.component.ts?raw'),
         Styles: import('./examples/node.styles.less?raw'),
         Template: import('./examples/node.template.html?raw'),

@@ -1,3 +1,4 @@
+import { TuiAddonDoc } from "@taiga-ui/addon-doc";
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
@@ -9,8 +10,6 @@ import {
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-import {TuiDocPageModule} from '@taiga-ui/addon-doc';
-
 import {InputNodeComponent, OutputNodeComponent} from '../../../app/modules/nodes';
 
 @Component({
@@ -21,7 +20,7 @@ import {InputNodeComponent, OutputNodeComponent} from '../../../app/modules/node
         CommonModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        TuiDocPageModule,
+        TuiAddonDoc,
     ],
     templateUrl: './connections.component.html',
     styleUrls: ['./connections.component.less'],
