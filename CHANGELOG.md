@@ -1,3 +1,20 @@
+### [0.4.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.3.0...v0.4.0) (2024-10-17)
+
+### 🚀 Features
+
+- added smoothStep connections
+  [(a3c4d68)](https://github.com/taiga-family/ng-draw-flow/commit/a3c4d68bcaec97a06f6b6a38bb599f338a44d68e)
+- refactoring after code review
+  [(63509ef)](https://github.com/taiga-family/ng-draw-flow/commit/63509efd12979a69b78be528c2cc4ab0cb1bc33e)
+- added position property for connectors
+  [(0768dea)](https://github.com/taiga-family/ng-draw-flow/commit/0768dea74f955bc5e7b80137cc9ffcedc3053e55)
+
+### 🐞 Bug Fixes
+
+- parths [(9371201)](https://github.com/taiga-family/ng-draw-flow/commit/937120125f34a01426fca420c03b6b3065aecb0d)
+- circular dependency error
+  [(13f40ad)](https://github.com/taiga-family/ng-draw-flow/commit/13f40ada5791c9c08393c105afabd10f6daf3b39)
+
 ### [0.3.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.2.0...v0.3.0) (2024-10-08)
 
 # Changelog
