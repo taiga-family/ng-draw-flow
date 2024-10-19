@@ -168,7 +168,7 @@ export class YourNodeComponent extends DrawFlowBaseNode {}
 ```
 
 ```less
-.node {
+:host {
   background: var(--tui-base-09);
   width: 10rem;
   box-shadow: var(--tui-shadow);
@@ -179,7 +179,7 @@ export class YourNodeComponent extends DrawFlowBaseNode {}
   color: var(--tui-base-01);
 
   &.df-selected {
-    border-color: var(--tui-background-accent-2);
+    border-color: var(--tui-text-action);
   }
 }
 

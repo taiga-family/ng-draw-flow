@@ -4,8 +4,8 @@ import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/c
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
-import {TuiButtonModule, TuiTextfieldControllerModule} from '@taiga-ui/core';
-import {TuiInputModule} from '@taiga-ui/kit';
+import {TuiButton} from '@taiga-ui/core';
+import {TuiInputModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
 
 interface NodeForm {
     field1: FormGroup<NodeFormGroup>;
@@ -25,7 +25,7 @@ interface NodeFormGroup {
         DfInputComponent,
         DfOutputComponent,
         ReactiveFormsModule,
-        TuiButtonModule,
+        TuiButton,
         TuiInputModule,
         TuiTextfieldControllerModule,
     ],

@@ -2,19 +2,19 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {NgDrawFlowComponent} from '@ng-draw-flow/core';
-import type {TuiDocExample} from '@taiga-ui/addon-doc';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 
 @Component({
     standalone: true,
     selector: 'app-creating-nodes',
-    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDocModule],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './creating-nodes.component.html',
     styleUrls: ['./creating-nodes.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CreatingNodesComponent {
-    public readonly customNodeExample: TuiDocExample = {
+    public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
         TypeScript: import('./examples/node.component.ts?raw'),
         Styles: import('./examples/node.styles.less?raw'),
         Template: import('./examples/node.template.html?raw'),

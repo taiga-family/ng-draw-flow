@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 
 import {
     PanZoomConfigurationExample1Component,
@@ -14,7 +14,7 @@ import {
         PanZoomConfigurationExample1Component,
         PanZoomConfigurationExample2Component,
         PanZoomConfigurationExample3Component,
-        TuiAddonDocModule,
+        TuiAddonDoc,
     ],
     templateUrl: './pan-zoom-configuration.component.html',
     styleUrls: ['./pan-zoom-configuration.component.less'],
