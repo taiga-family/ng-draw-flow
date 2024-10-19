@@ -7,8 +7,8 @@ import {
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
-import type {TuiDocExample} from '@taiga-ui/addon-doc';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {MarkdownModule} from 'ngx-markdown';
 
 @Component({
@@ -19,7 +19,7 @@ import {MarkdownModule} from 'ngx-markdown';
         MarkdownModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        TuiAddonDocModule,
+        TuiAddonDoc,
     ],
     templateUrl: './overview.template.html',
     styleUrls: ['./overview.style.less'],
@@ -33,7 +33,7 @@ import {MarkdownModule} from 'ngx-markdown';
     ],
 })
 export default class OverviewComponent {
-    public readonly customNodeExample: TuiDocExample = {
+    public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
         'app.module.ts': import('./examples/app.module.md?raw'),
         'app.component.ts': import('./examples/app.component.md?raw'),
         'simple-node.component.ts': import(

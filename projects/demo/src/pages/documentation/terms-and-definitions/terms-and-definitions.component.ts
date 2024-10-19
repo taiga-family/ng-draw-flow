@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
-import {TuiLinkModule} from '@taiga-ui/core';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiLink} from '@taiga-ui/core';
 
 import {
     PanZoomConfigurationExample1Component,
@@ -23,8 +23,8 @@ import NodesExampleComponent from './examplaes/nodes-example/nodes-example.compo
         PanZoomConfigurationExample2Component,
         PanZoomConfigurationExample3Component,
         RouterLink,
-        TuiAddonDocModule,
-        TuiLinkModule,
+        TuiAddonDoc,
+        TuiLink,
     ],
     templateUrl: './terms-and-definitions.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,

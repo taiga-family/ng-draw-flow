@@ -7,7 +7,7 @@ import {
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {MarkdownModule} from 'ngx-markdown';
 
 const ROWS_COUNT = 13;
@@ -21,7 +21,7 @@ const COLUMNS_COUNT = 13;
         MarkdownModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        TuiAddonDocModule,
+        TuiAddonDoc,
     ],
     templateUrl: './stress-test.component.html',
     styleUrls: ['./stress-test.component.less'],

@@ -9,7 +9,7 @@ import {
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-import {TuiDocPageModule} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 
 import {InputNodeComponent, OutputNodeComponent} from '../../../app/modules/nodes';
 
@@ -21,7 +21,7 @@ import {InputNodeComponent, OutputNodeComponent} from '../../../app/modules/node
         CommonModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        TuiDocPageModule,
+        TuiAddonDoc,
     ],
     templateUrl: './connections.component.html',
     styleUrls: ['./connections.component.less'],
