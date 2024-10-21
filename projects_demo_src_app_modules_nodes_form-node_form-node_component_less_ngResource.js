@@ -7,7 +7,7 @@
   \*******************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "@import '@taiga-ui/core/styles/taiga-ui-local';\n\n:host {\n    display: block;\n    background: var(--tui-base-01);\n    inline-size: 12.5rem;\n    min-block-size: 2.5rem;\n    border-radius: 0.25rem;\n    border: 0.125rem solid #000;\n    padding: 1.25rem;\n    box-sizing: border-box;\n}\n\n.field {\n    position: relative;\n    display: flex;\n    align-items: center;\n\n    tui-input {\n        inline-size: 100%;\n    }\n}\n\n.input,\n.output {\n    position: absolute;\n    z-index: 1;\n}\n\n.input {\n    left: -0.5rem;\n    top: 0.25rem;\n}\n\n.output-wrapper {\n    position: relative;\n}\n\n.output {\n    right: -1.8125rem;\n    top: 0.75rem;\n}\n";
+module.exports = "@import '@taiga-ui/core/styles/taiga-ui-local';\n\n:host {\n    display: block;\n    background: #fff;\n    inline-size: 12.5rem;\n    min-block-size: 2.5rem;\n    border-radius: 0.25rem;\n    color: #000;\n    border: 0.125rem solid #000;\n    padding: 1.25rem;\n    box-sizing: border-box;\n}\n\n.field {\n    position: relative;\n    display: flex;\n    align-items: center;\n\n    tui-input {\n        inline-size: 100%;\n    }\n}\n\n.input,\n.output {\n    position: absolute;\n    z-index: 1;\n}\n\n.input {\n    left: -0.5rem;\n    top: 0.25rem;\n}\n\n.output-wrapper {\n    position: relative;\n}\n\n.output {\n    right: -1.8125rem;\n    top: 0.75rem;\n}\n";
 
 /***/ })
 

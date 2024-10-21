@@ -7,7 +7,7 @@
   \*******************************************************************************************/
 /***/ ((module) => {
 
-module.exports = ":host {\n    display: block;\n    background: var(--tui-base-09);\n    inline-size: 30rem;\n    box-shadow: var(--tui-shadow);\n    border-radius: 0.5rem;\n    padding: 0.5rem;\n    border: 0.0625rem solid var(--tui-positive);\n    transition: border-color 0.2s ease-in-out;\n    color: var(--tui-base-01);\n}\n\n.tui-list__item {\n    color: var(--tui-base-01);\n}\n";
+module.exports = ":host {\n    display: block;\n    background: #fff;\n    inline-size: 30rem;\n    box-shadow: var(--tui-shadow-small);\n    border-radius: 0.5rem;\n    padding: 0.5rem;\n    border: 0.0625rem solid var(--tui-text-positive);\n    transition: border-color 0.2s ease-in-out;\n    color: #000;\n}\n\n.tui-list__item {\n    color: #000;\n}\n";
 
 /***/ })
 
