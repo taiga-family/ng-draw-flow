@@ -17,9 +17,9 @@ import {
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
-import type {TuiDocExample} from '@taiga-ui/addon-doc';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
-import {TuiButtonModule} from '@taiga-ui/core';
+import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiButton} from '@taiga-ui/core';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject} from 'rxjs';
 
@@ -32,8 +32,8 @@ import {BehaviorSubject} from 'rxjs';
         MarkdownModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        TuiAddonDocModule,
-        TuiButtonModule,
+        TuiAddonDoc,
+        TuiButton,
     ],
     templateUrl: './editor.component.html',
     styleUrls: ['./editor.component.less'],
@@ -49,7 +49,7 @@ export default class EditorComponent {
     @ViewChild(NgDrawFlowComponent)
     public editor?: NgDrawFlowComponent;
 
-    public readonly customNodeExample: TuiDocExample = {
+    public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
         Typescript: import('./examples/editor.component.md?raw'),
         Styles: import('./editor.component.less?raw'),
         Template: import('./examples/editor.template.md?raw'),

@@ -6,13 +6,13 @@ import {
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
-import type {TuiDocExample} from '@taiga-ui/addon-doc';
-import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
+import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 
 @Component({
     standalone: true,
     selector: 'simple-example',
-    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDocModule],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './simple-example.component.html',
     styleUrls: ['./simple-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,7 +23,7 @@ import {TuiAddonDocModule} from '@taiga-ui/addon-doc';
     ],
 })
 export default class SimpleExampleComponent {
-    public readonly gettingStartedExample: TuiDocExample = {
+    public readonly gettingStartedExample: Record<string, TuiRawLoaderContent> = {
         TypeScript: import('./examples/component.ts?raw'),
         Styles: import('./examples/styles.less?raw'),
         Template: import('./examples/template.html?raw'),
