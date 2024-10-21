@@ -35,7 +35,6 @@
   --tui-disabled-opacity: 0.56;
 }
 [tuiTheme='dark'] {
-  color-scheme: dark;
   --tui-background-base: #222;
   --tui-background-base-alt: #333;
   --tui-background-neutral-1: rgba(255, 255, 255, 0.08);
@@ -76,9 +75,6 @@
   --tui-text-positive-hover: #3aa981;
   --tui-text-negative: #ff8c67;
   --tui-text-negative-hover: #bb593a;
-}
-[tuiTheme='light'] {
-  color-scheme: light;
 }
 :root,
 [tuiTheme='light'] {
@@ -1785,7 +1781,7 @@ svg use {
   display: block;
   border-radius: var(--tui-radius-xl);
   background-color: var(--tui-background-base);
-  overflow-wrap: break-word;
+  word-wrap: break-word;
   text-decoration: none;
   color: var(--tui-text-primary);
   outline: none;
@@ -1973,7 +1969,7 @@ svg use {
 .tui-list__item {
   position: relative;
   padding-left: 1.5rem;
-  overflow-wrap: break-word;
+  word-wrap: break-word;
   margin-top: 0.75rem;
 }
 .tui-list__item:first-child {
@@ -3261,7 +3257,7 @@ svg use {
   font: var(--tui-font-text-m);
   padding: 1rem 1rem 0.875rem;
   vertical-align: top;
-  overflow-wrap: break-word;
+  word-wrap: break-word;
   block-size: 3.4375rem;
   color: var(--tui-text-primary);
   background: inherit;
