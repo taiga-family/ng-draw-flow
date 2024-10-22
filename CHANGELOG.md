@@ -1,3 +1,18 @@
+### [0.5.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.4.0...v0.5.0) (2024-10-22)
+
+### 🐞 Bug Fixes
+
+- fix rebase conflicts
+  [(02e853a)](https://github.com/taiga-family/ng-draw-flow/commit/02e853a4f38e9635af7ebfb06b5e73abe1a6236d)
+- update package-lock
+  [(13fae8d)](https://github.com/taiga-family/ng-draw-flow/commit/13fae8de3c784b5b7cd0adaf4085feb6d88593a9)
+- update package-lock
+  [(9818fce)](https://github.com/taiga-family/ng-draw-flow/commit/9818fce78c576e661f697ce60ba4b64da2263818)
+- update package-lock
+  [(bcd31b7)](https://github.com/taiga-family/ng-draw-flow/commit/bcd31b73c8fc1124e3ba87d50e5ad63e76c48aa4)
+- to make the lines not overlap each other, I added pointer-events: stroke
+  [(bba9ab5)](https://github.com/taiga-family/ng-draw-flow/commit/bba9ab54e193c5e6e66d9ab190c6a95f5e66a3c2)
+
 ### [0.4.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.3.0...v0.4.0) (2024-10-17)
 
 ### 🚀 Features
