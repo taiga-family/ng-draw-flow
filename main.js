@@ -3650,17 +3650,9 @@ _PanZoomComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7_
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DF_PAN_ZOOM_INITIAL_MODEL: () => (/* binding */ DF_PAN_ZOOM_INITIAL_MODEL),
 /* harmony export */   DF_PAN_ZOOM_INITIAL_SCALE: () => (/* binding */ DF_PAN_ZOOM_INITIAL_SCALE)
 /* harmony export */ });
 const DF_PAN_ZOOM_INITIAL_SCALE = 1;
-const DF_PAN_ZOOM_INITIAL_MODEL = {
-  x: 0,
-  y: 0,
-  offsetX: 0,
-  offsetY: 0,
-  zoom: 1
-};
 
 /***/ }),
 
@@ -3714,14 +3706,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomService: () => (/* binding */ PanZoomService)
 /* harmony export */ });
-/* harmony import */ var _pan_zoom_const__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pan-zoom.const */ 9104);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
 var _PanZoomService;
-
 
 class PanZoomService {
   constructor() {
-    this.panzoomModel = _pan_zoom_const__WEBPACK_IMPORTED_MODULE_0__.DF_PAN_ZOOM_INITIAL_MODEL;
+    this.panzoomModel = {
+      x: 0,
+      y: 0,
+      offsetX: 0,
+      offsetY: 0,
+      zoom: 1
+    };
     this.panzoomDisabled = false;
   }
 }
@@ -3729,7 +3725,7 @@ _PanZoomService = PanZoomService;
 _PanZoomService.ɵfac = function PanZoomService_Factory(t) {
   return new (t || _PanZoomService)();
 };
-_PanZoomService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({
+_PanZoomService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
   token: _PanZoomService,
   factory: _PanZoomService.ɵfac
 });
