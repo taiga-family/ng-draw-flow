@@ -19,6 +19,10 @@ export class SelectableElementDirective {
     protected onDocumentClick(targetElement: any): void {
         const clickedInside = this.el.nativeElement.contains(targetElement);
 
+        if (targetElement.dataset.notSelectable) {
+            return;
+        }
+
         this.setSelected(clickedInside);
     }
 
