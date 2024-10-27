@@ -148,6 +148,10 @@ export default class EditorComponent {
         console.warn(event, 'onConnectionDeleted');
     }
 
+    public onConnectionSelected(event: DfDataConnection): void {
+        console.warn(event, 'onConnectionSelected');
+    }
+
     public onNodeMoved(event: DfEvent<DfDataNode>): void {
         console.warn(event, 'onNodeMoved');
     }

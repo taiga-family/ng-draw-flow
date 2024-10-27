@@ -17,6 +17,7 @@
         <df-connection
             [connection]="connection"
             (connectionDeleted)="onConnectionDeleted(connection)"
+            (connectionSelected)="connectionSelected.emit(connection)"
         />
     </ng-container>
 
