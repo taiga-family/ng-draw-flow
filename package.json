@@ -123,7 +123,7 @@
         "@taiga-ui/syncer": "0.222.5",
         "@taiga-ui/tsconfig": "0.128.0",
         "@types/express": "5.0.0",
-        "@types/jest": "29.5.13",
+        "@types/jest": "29.5.14",
         "core-js": "3.38.1",
         "express": "4.21.1",
         "http-server": "14.1.1",
