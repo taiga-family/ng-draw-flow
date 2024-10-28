@@ -1,3 +1,17 @@
+### [0.6.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.5.0...v0.6.0) (2024-10-28)
+
+### 🚀 Features
+
+- added the connection-selected event
+  [(5475c0e)](https://github.com/taiga-family/ng-draw-flow/commit/5475c0e64660fe7a1a5ef299e203c9cac7433723)
+- retain selection while moving across the scene
+  [(959f360)](https://github.com/taiga-family/ng-draw-flow/commit/959f360a5a458463dca8efc4e32ddb40e5c3b382)
+
+### 🐞 Bug Fixes
+
+- fixed a bug that caused scale to be shared between ng-draw-flow instances
+  [(e00b9f7)](https://github.com/taiga-family/ng-draw-flow/commit/e00b9f77e404414f1d0fe623fb37ac211f88e80f)
+
 ### [0.5.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.4.0...v0.5.0) (2024-10-22)
 
 ### 🐞 Bug Fixes
