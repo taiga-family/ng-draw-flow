@@ -67,6 +67,9 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         true,
     );
 
+    @Output()
+    protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
+
     protected form: FormControl = this.fb.control({});
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;

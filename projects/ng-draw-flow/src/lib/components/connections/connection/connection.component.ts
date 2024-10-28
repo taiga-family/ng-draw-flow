@@ -45,7 +45,7 @@ export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject(DRAW_FLOW_OPTIONS);
-    private connectionSelected = false;
+    private selected = false;
 
     @Input()
     public connection!: DfDataConnection;
@@ -53,10 +53,13 @@ export class ConnectionComponent {
     @Output()
     protected readonly connectionDeleted = new EventEmitter<void>();
 
+    @Output()
+    protected readonly connectionSelected = new EventEmitter<void>();
+
     @HostListener('document:keydown.delete', ['$event'])
     @HostListener('document:keydown.backspace', ['$event'])
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (!this.connectionSelected) {
+        if (!this.selected) {
             return;
         }
 
@@ -112,7 +115,11 @@ export class ConnectionComponent {
         );
 
     protected onSelectedChanged(selected: boolean): void {
-        this.connectionSelected = selected;
+        this.selected = selected;
+
+        if (selected) {
+            this.connectionSelected.emit();
+        }
     }
 
     private getConnectionPoint(

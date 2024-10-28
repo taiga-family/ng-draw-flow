@@ -81,6 +81,9 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
     protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>();
 
     @Output()
+    protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
+
+    @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
 
     @Output()

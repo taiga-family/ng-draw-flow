@@ -1,4 +1,5 @@
 <div
+    data-not-selectable="true"
     class="scene"
     [style.height.px]="panSize"
     [style.width.px]="panSize"
@@ -16,6 +17,7 @@
         <df-connection
             [connection]="connection"
             (connectionDeleted)="onConnectionDeleted(connection)"
+            (connectionSelected)="connectionSelected.emit(connection)"
         />
     </ng-container>
 

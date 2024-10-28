@@ -8,6 +8,7 @@
             [formControl]="form"
             (connectionCreated)="connectionCreated.emit($event)"
             (connectionDeleted)="onConnectionDeleted($event)"
+            (connectionSelected)="connectionSelected.emit($event)"
             (nodeDeleted)="nodeDeleted.emit($event)"
             (nodeMoved)="nodeMoved.emit($event)"
             (nodeSelected)="nodeSelected.emit($event)"
