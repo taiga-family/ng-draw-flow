@@ -146,6 +146,9 @@ class EditorComponent {
   onConnectionDeleted(event) {
     console.warn(event, 'onConnectionDeleted');
   }
+  onConnectionSelected(event) {
+    console.warn(event, 'onConnectionSelected');
+  }
   onNodeMoved(event) {
     console.warn(event, 'onNodeMoved');
   }
@@ -194,7 +197,7 @@ _EditorComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__
   })]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵStandaloneFeature"]],
   decls: 20,
   vars: 13,
-  consts: [["header", "Editor"], [1, "tui-space_top-4"], [2, "padding", "0", 3, "content"], [1, "editor", 3, "ngClass"], [3, "formControl", "connectionCreated", "connectionDeleted", "nodeDeleted", "nodeMoved", "nodeSelected", "scale"], ["size", "s", "tuiButton", "", "type", "button", 1, "add", 3, "click"], ["size", "s", "tuiButton", "", "type", "button", 1, "fullscreen-btn", 3, "click"], [1, "scale-controls"], ["size", "s", "tuiButton", "", "type", "button", 3, "click"], [1, "scale-value"]],
+  consts: [["header", "Editor"], [1, "tui-space_top-4"], [2, "padding", "0", 3, "content"], [1, "editor", 3, "ngClass"], [3, "formControl", "connectionCreated", "connectionDeleted", "connectionSelected", "nodeDeleted", "nodeMoved", "nodeSelected", "scale"], ["size", "s", "tuiButton", "", "type", "button", 1, "add", 3, "click"], ["size", "s", "tuiButton", "", "type", "button", 1, "fullscreen-btn", 3, "click"], [1, "scale-controls"], ["size", "s", "tuiButton", "", "type", "button", 3, "click"], [1, "scale-value"]],
   template: function EditorComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "tui-doc-page", 0);
@@ -206,6 +209,8 @@ _EditorComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__
         return ctx.onConnectionCreated($event);
       })("connectionDeleted", function EditorComponent_Template_ng_draw_flow_connectionDeleted_6_listener($event) {
         return ctx.onConnectionDeleted($event);
+      })("connectionSelected", function EditorComponent_Template_ng_draw_flow_connectionSelected_6_listener($event) {
+        return ctx.onConnectionSelected($event);
       })("nodeDeleted", function EditorComponent_Template_ng_draw_flow_nodeDeleted_6_listener($event) {
         return ctx.onNodeDeleted($event);
       })("nodeMoved", function EditorComponent_Template_ng_draw_flow_nodeMoved_6_listener($event) {

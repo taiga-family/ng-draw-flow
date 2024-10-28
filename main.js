@@ -1258,8 +1258,9 @@ class ConnectionComponent {
     this.connectionsService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_connections_service__WEBPACK_IMPORTED_MODULE_5__.ConnectionsService);
     this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__.CoordinatesService);
     this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
-    this.connectionSelected = false;
+    this.selected = false;
     this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
+    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.path$ = this.coordinatesService.connectionPointsMapChange$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.debounceTime)(50), (0,rxjs__WEBPACK_IMPORTED_MODULE_10__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_11__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(() => {
       const sourcePoint = this.getConnectionPoint(this.connection?.source);
       const targetPoint = this.getConnectionPoint(this.connection?.target);
@@ -1287,7 +1288,7 @@ class ConnectionComponent {
     }));
   }
   handleKeyboardEvent(event) {
-    if (!this.connectionSelected) {
+    if (!this.selected) {
       return;
     }
     event.preventDefault();
@@ -1295,7 +1296,10 @@ class ConnectionComponent {
     this.connectionDeleted.emit();
   }
   onSelectedChanged(selected) {
-    this.connectionSelected = selected;
+    this.selected = selected;
+    if (selected) {
+      this.connectionSelected.emit();
+    }
   }
   getConnectionPoint(connector) {
     const {
@@ -1330,7 +1334,8 @@ _ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
     connection: "connection"
   },
   outputs: {
-    connectionDeleted: "connectionDeleted"
+    connectionDeleted: "connectionDeleted",
+    connectionSelected: "connectionSelected"
   },
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵStandaloneFeature"]],
@@ -3948,6 +3953,11 @@ function SceneComponent_ng_container_3_Template(rf, ctx) {
       const connection_r8 = restoredCtx.$implicit;
       const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵresetView"](ctx_r9.onConnectionDeleted(connection_r8));
+    })("connectionSelected", function SceneComponent_ng_container_3_Template_df_connection_connectionSelected_1_listener() {
+      const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵrestoreView"](_r10);
+      const connection_r8 = restoredCtx.$implicit;
+      const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵresetView"](ctx_r11.connectionSelected.emit(connection_r8));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementContainerEnd"]();
@@ -3960,12 +3970,12 @@ function SceneComponent_ng_container_3_Template(rf, ctx) {
 }
 function SceneComponent_df_draft_connection_4_Template(rf, ctx) {
   if (rf & 1) {
-    const _r12 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵgetCurrentView"]();
+    const _r13 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "df-draft-connection", 5);
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵlistener"]("connectionCreated", function SceneComponent_df_draft_connection_4_Template_df_draft_connection_connectionCreated_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵrestoreView"](_r12);
-      const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵresetView"](ctx_r11.onConnectionCreated($event));
+      _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵrestoreView"](_r13);
+      const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵresetView"](ctx_r12.onConnectionCreated($event));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementEnd"]();
   }
@@ -3982,6 +3992,7 @@ class SceneComponent {
     this.nodeDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_6__.EventEmitter();
     this.connectionCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_6__.EventEmitter();
     this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_6__.EventEmitter(true);
+    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_6__.EventEmitter();
     this.form = this.fb.control({});
     this.isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     this.panSize = (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.inject)(_pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_5__.DF_PAN_ZOOM_OPTIONS).panSize;
@@ -4067,7 +4078,8 @@ _SceneComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_6__[
     nodeMoved: "nodeMoved",
     nodeDeleted: "nodeDeleted",
     connectionCreated: "connectionCreated",
-    connectionDeleted: "connectionDeleted"
+    connectionDeleted: "connectionDeleted",
+    connectionSelected: "connectionSelected"
   },
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵProvidersFeature"]([{
@@ -4077,7 +4089,7 @@ _SceneComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_6__[
   }]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵStandaloneFeature"]],
   decls: 6,
   vars: 14,
-  consts: [[1, "scene"], [4, "ngFor", "ngForOf", "ngForTrackBy"], [3, "connectionCreated", 4, "ngIf"], [3, "node", "nodeDeleted", "nodeMoved", "nodeSelected"], [3, "connection", "connectionDeleted"], [3, "connectionCreated"]],
+  consts: [["data-not-selectable", "true", 1, "scene"], [4, "ngFor", "ngForOf", "ngForTrackBy"], [3, "connectionCreated", 4, "ngIf"], [3, "node", "nodeDeleted", "nodeMoved", "nodeSelected"], [3, "connection", "connectionDeleted", "connectionSelected"], [3, "connectionCreated"]],
   template: function SceneComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵelementStart"](0, "div", 0);
@@ -4371,6 +4383,9 @@ class SelectableElementDirective {
   }
   onDocumentClick(targetElement) {
     const clickedInside = this.el.nativeElement.contains(targetElement);
+    if (targetElement.dataset.notSelectable) {
+      return;
+    }
     this.setSelected(clickedInside);
   }
   setSelected(selected) {
@@ -4739,18 +4754,22 @@ function NgDrawFlowComponent_df_scene_2_Template(rf, ctx) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
       const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r3.onConnectionDeleted($event));
-    })("nodeDeleted", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeDeleted_0_listener($event) {
+    })("connectionSelected", function NgDrawFlowComponent_df_scene_2_Template_df_scene_connectionSelected_0_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
       const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r4.nodeDeleted.emit($event));
-    })("nodeMoved", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeMoved_0_listener($event) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r4.connectionSelected.emit($event));
+    })("nodeDeleted", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeDeleted_0_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
       const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r5.nodeMoved.emit($event));
-    })("nodeSelected", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeSelected_0_listener($event) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r5.nodeDeleted.emit($event));
+    })("nodeMoved", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeMoved_0_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
       const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r6.nodeSelected.emit($event));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r6.nodeMoved.emit($event));
+    })("nodeSelected", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeSelected_0_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
+      const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r7.nodeSelected.emit($event));
     });
     _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
   }
@@ -4767,6 +4786,7 @@ class NgDrawFlowComponent {
     this.scale = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.connectionCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
+    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.nodeSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.nodeMoved = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.nodeDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
@@ -4846,6 +4866,7 @@ _NgDrawFlowComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
     scale: "scale",
     connectionCreated: "connectionCreated",
     connectionDeleted: "connectionDeleted",
+    connectionSelected: "connectionSelected",
     nodeSelected: "nodeSelected",
     nodeMoved: "nodeMoved",
     nodeDeleted: "nodeDeleted"
@@ -4864,7 +4885,7 @@ _NgDrawFlowComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   }]), _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵStandaloneFeature"]],
   decls: 4,
   vars: 3,
-  consts: [[1, "drawflow", 3, "dfResizeObserver"], [3, "scale"], [3, "formControl", "connectionCreated", "connectionDeleted", "nodeDeleted", "nodeMoved", "nodeSelected", 4, "ngIf"], [3, "formControl", "connectionCreated", "connectionDeleted", "nodeDeleted", "nodeMoved", "nodeSelected"]],
+  consts: [[1, "drawflow", 3, "dfResizeObserver"], [3, "scale"], [3, "formControl", "connectionCreated", "connectionDeleted", "connectionSelected", "nodeDeleted", "nodeMoved", "nodeSelected", 4, "ngIf"], [3, "formControl", "connectionCreated", "connectionDeleted", "connectionSelected", "nodeDeleted", "nodeMoved", "nodeSelected"]],
   template: function NgDrawFlowComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 0);
