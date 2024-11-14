@@ -48,7 +48,7 @@ export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject(DRAW_FLOW_OPTIONS);
-    private selected = false;
+    protected selected = false;
 
     @Input()
     public connection!: DfDataConnection;
