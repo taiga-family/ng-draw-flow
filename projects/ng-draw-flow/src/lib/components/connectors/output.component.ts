@@ -1,11 +1,5 @@
 import type {OnDestroy} from '@angular/core';
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostListener,
-    inject,
-    Input,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 
 import type {DfDataConnectorConfig} from '../../ng-draw-flow.interfaces';
 import {DfConnectionPoint, DfConnectorPosition} from '../../ng-draw-flow.interfaces';
@@ -18,6 +12,9 @@ import {BaseConnector} from './base-connector';
     template: '',
     styleUrls: ['./connector.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(pointerdown.stop)': 'this.onDragStart($event)',
+    },
 })
 export class DfOutputComponent extends BaseConnector implements OnDestroy {
     protected override connectorType = DfConnectionPoint.Output;
@@ -29,7 +26,6 @@ export class DfOutputComponent extends BaseConnector implements OnDestroy {
     @Input()
     public override position = DfConnectorPosition.Right;
 
-    @HostListener('pointerdown.stop')
     protected onDragStart(_event: PointerEvent): void {
         const {nodeId, connectorId} = this.data;
 
