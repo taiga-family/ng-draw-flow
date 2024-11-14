@@ -1,8 +1,13 @@
 <svg class="connection">
     <path
         dfSelectableElement
-        class="main-path"
+        class="selectable-area"
         [attr.d]="path$ | async"
         (selectionChanged)="onSelectedChanged($event)"
+    />
+    <path
+        class="main-path"
+        [attr.d]="path$ | async"
+        [class.df-selected]="selected"
     />
 </svg>

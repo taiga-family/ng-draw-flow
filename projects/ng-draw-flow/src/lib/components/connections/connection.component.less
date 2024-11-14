@@ -10,7 +10,7 @@
         fill: none;
         stroke-width: var(--df-connection-stroke-width);
         stroke: var(--df-connection-color);
-        pointer-events: stroke;
+        pointer-events: none;
         transform: translateZ(0);
 
         &:hover {
@@ -20,6 +20,21 @@
 
         &.df-selected {
             stroke: var(--df-connection-color-active);
+        }
+    }
+
+    .selectable-area {
+        z-index: 0;
+        fill: none;
+        stroke-width: var(--df-connection-selectable-area-stroke-width);
+        stroke: transparent;
+        pointer-events: stroke;
+        cursor: pointer;
+        transform: translateZ(0);
+        transition: stroke 0.3s;
+
+        &:hover {
+            stroke: var(--df-connection-selectable-area-color);
         }
     }
 }
