@@ -1,13 +1,14 @@
-import {
-    Directive,
-    ElementRef,
-    EventEmitter,
-    HostListener,
-    inject,
-    Output,
-} from '@angular/core';
+import {Directive, ElementRef, EventEmitter, inject, Output} from '@angular/core';
 
-@Directive({standalone: true, selector: '[dfSelectableElement]'})
+@Directive({
+    standalone: true,
+    selector: '[dfSelectableElement]',
+    host: {
+        '(document:mousedown)': 'onMouseDown($event)',
+        '(document:mousemove)': 'onMouseMove($event)',
+        '(document:mouseup)': 'onMouseUp($event.target)',
+    },
+})
 export class SelectableElementDirective {
     private selected = false;
     private readonly el = inject(ElementRef);
@@ -19,7 +20,6 @@ export class SelectableElementDirective {
     @Output()
     protected readonly selectionChanged = new EventEmitter<boolean>();
 
-    @HostListener('document:mousedown', ['$event'])
     protected onMouseDown(event: MouseEvent): void {
         this.startX = event.clientX;
         this.startY = event.clientY;
@@ -34,20 +34,20 @@ export class SelectableElementDirective {
         }
     }
 
-    @HostListener('document:mousemove', ['$event'])
     protected onMouseMove(event: MouseEvent): void {
-        if (this.startX !== null && this.startY !== null) {
-            const dx = event.clientX - this.startX;
-            const dy = event.clientY - this.startY;
+        if (!this.startX || !this.startY) {
+            return;
+        }
 
-            // Check if the movement exceeds the dragThreshold threshold
-            if (Math.sqrt(dx * dx + dy * dy) > this.dragThreshold) {
-                this.isDragging = true;
-            }
+        const dx = event.clientX - this.startX;
+        const dy = event.clientY - this.startY;
+
+        // Check if the movement exceeds the dragThreshold threshold
+        if (Math.sqrt(dx * dx + dy * dy) > this.dragThreshold) {
+            this.isDragging = true;
         }
     }
 
-    @HostListener('document:mouseup', ['$event.target'])
     protected onMouseUp(targetElement: any): void {
         if (this.isDragging && targetElement.dataset.element === 'scene') {
             // If it was a drag and drop across the scene, we do nothing
