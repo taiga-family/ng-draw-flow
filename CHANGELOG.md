@@ -1,3 +1,21 @@
+### [0.7.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.6.0...v0.7.0) (2024-11-14)
+
+### 🚀 Features
+
+- refactoring after code review
+  [(8483f82)](https://github.com/taiga-family/ng-draw-flow/commit/8483f8263d1179e92e53b48af6926ac218d8553f)
+- added a clickable stroke for the connecting lines
+  [(d5b132a)](https://github.com/taiga-family/ng-draw-flow/commit/d5b132a3ae6b88c4d63f2133dda2d95422fe585f)
+- discarded the @HostListener decorator
+  [(3d47769)](https://github.com/taiga-family/ng-draw-flow/commit/3d477692926662148b2ec4f90b28963be620acb7)
+- refactoring after review
+  [(fe01dff)](https://github.com/taiga-family/ng-draw-flow/commit/fe01dffb87e4445e85dde4644483fdbb60078a87)
+
+### 🐞 Bug Fixes
+
+- corrected the selection of elements. Not deselecting elements when drag drop by scene
+  [(672089f)](https://github.com/taiga-family/ng-draw-flow/commit/672089fb9cf86f9ef1b2173b553c87465c800624)
+
 ### [0.6.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.5.0...v0.6.0) (2024-10-28)
 
 ### 🚀 Features
