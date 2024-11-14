@@ -5,7 +5,6 @@ import {
     Component,
     DestroyRef,
     EventEmitter,
-    HostListener,
     inject,
     Input,
     Output,
@@ -41,6 +40,10 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
     templateUrl: './node.component.html',
     styleUrls: ['./node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
+        '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
+    },
 })
 export class NodeComponent implements AfterViewInit {
     private readonly cdr = inject(ChangeDetectorRef);
@@ -80,8 +83,6 @@ export class NodeComponent implements AfterViewInit {
 
     protected cursor: 'grabbing' | 'initial' = 'initial';
 
-    @HostListener('document:keydown.delete', ['$event'])
-    @HostListener('document:keydown.backspace', ['$event'])
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.selected && !this.node.startNode) {
             event.preventDefault();

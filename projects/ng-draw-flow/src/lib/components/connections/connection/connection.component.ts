@@ -3,7 +3,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
-    HostListener,
     inject,
     Input,
     Output,
@@ -40,6 +39,10 @@ import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoot
     templateUrl: './connection.component.html',
     styleUrls: ['../connection.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
+        '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
+    },
 })
 export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
@@ -56,8 +59,6 @@ export class ConnectionComponent {
     @Output()
     protected readonly connectionSelected = new EventEmitter<void>();
 
-    @HostListener('document:keydown.delete', ['$event'])
-    @HostListener('document:keydown.backspace', ['$event'])
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (!this.selected) {
             return;
