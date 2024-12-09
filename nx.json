@@ -1,78 +1,88 @@
 {
-    "workspaceLayout": {
-        "libsDir": "projects",
-        "appsDir": "projects"
+  "workspaceLayout": {
+    "libsDir": "projects",
+    "appsDir": "projects"
+  },
+  "defaultProject": "demo",
+  "generators": {
+    "@nx/js:library": {
+      "buildable": true,
+      "publishable": true,
+      "strict": true,
+      "linter": "none",
+      "unitTestRunner": "jest",
+      "config": "project"
     },
-    "defaultProject": "demo",
-    "generators": {
-        "@nx/js:library": {
-            "buildable": true,
-            "publishable": true,
-            "strict": true,
-            "linter": "none",
-            "unitTestRunner": "jest",
-            "config": "project"
-        },
-        "@nx/angular:library": {
-            "linter": "none",
-            "unitTestRunner": "jest",
-            "buildable": true,
-            "publishable": true,
-            "compilationMode": "partial",
-            "strict": true,
-            "skipModule": true,
-            "standaloneConfig": true
-        },
-        "@nx/angular:application": {
-            "style": "less",
-            "linter": "none",
-            "unitTestRunner": "jest"
-        },
-        "@nx/angular:component": {
-            "style": "less"
+    "@nx/angular:library": {
+      "linter": "none",
+      "unitTestRunner": "jest",
+      "buildable": true,
+      "publishable": true,
+      "compilationMode": "partial",
+      "strict": true,
+      "skipModule": true,
+      "standaloneConfig": true
+    },
+    "@nx/angular:application": {
+      "style": "less",
+      "linter": "none",
+      "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "less"
+    }
+  },
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "sharedGlobals": [
+      "{workspaceRoot}/angular.json",
+      "{workspaceRoot}/nx.json",
+      "{workspaceRoot}/karma.*.js",
+      "{workspaceRoot}/tsconfig.*.json",
+      "{workspaceRoot}/tsconfig.json"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s"
+    ]
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": [
+        "production",
+        "^production"
+      ],
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "@nx/jest:jest": {
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ],
+      "cache": true,
+      "options": {
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
         }
-    },
-    "$schema": "./node_modules/nx/schemas/nx-schema.json",
-    "namedInputs": {
-        "default": ["{projectRoot}/**/*", "sharedGlobals"],
-        "sharedGlobals": [
-            "{workspaceRoot}/angular.json",
-            "{workspaceRoot}/nx.json",
-            "{workspaceRoot}/karma.*.js",
-            "{workspaceRoot}/tsconfig.*.json",
-            "{workspaceRoot}/tsconfig.json"
-        ],
-        "production": [
-            "default",
-            "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-            "!{projectRoot}/tsconfig.spec.json",
-            "!{projectRoot}/jest.config.[jt]s",
-            "!{projectRoot}/src/test-setup.[jt]s"
-        ]
-    },
-    "targetDefaults": {
-        "build": {
-            "inputs": ["production", "^production"],
-            "cache": true
-        },
-        "lint": {
-            "cache": true
-        },
-        "@nx/jest:jest": {
-            "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-            "cache": true,
-            "options": {
-                "passWithNoTests": true
-            },
-            "configurations": {
-                "ci": {
-                    "ci": true,
-                    "codeCoverage": true
-                }
-            }
-        }
-    },
-    "parallel": 3,
-    "useInferencePlugins": false,
-    "defaultBase": "origin/main"
+      }
+    }
+  },
+  "parallel": 3,
+  "useInferencePlugins": false,
+  "defaultBase": "origin/main"
 }
