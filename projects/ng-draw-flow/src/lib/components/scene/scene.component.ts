@@ -111,6 +111,8 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
             target: deletedNode,
             model: this.model,
         });
+
+        this.emitConnectionDeletedByNodeId(key);
         this.connectionsService.removeConnectionsByNodeId(key);
     }
 
@@ -159,6 +161,18 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
             .subscribe((connections: DfDataConnection[]) => {
                 this.model.connections = connections;
             });
+    }
+
+    private emitConnectionDeletedByNodeId(nodeId: string): void {
+        this.connectionsService.connections$.value
+            .filter(
+                (connection) =>
+                    connection.source.nodeId === nodeId ||
+                    connection.target.nodeId === nodeId,
+            )
+            ?.forEach((connection) =>
+                this.connectionDeleted.emit({target: connection, model: this.model}),
+            );
     }
 
     // @ts-ignore
