@@ -1,3 +1,10 @@
+### [0.8.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.7.0...v0.8.0) (2024-12-16)
+
+### 🚀 Features
+
+- added an event that is sent when connections are deleted due to a deleted node
+  [(d50d87d)](https://github.com/taiga-family/ng-draw-flow/commit/d50d87d83c278139ba2e175b1efb984e30e1c950)
+
 ### [0.7.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.6.0...v0.7.0) (2024-11-14)
 
 ### 🚀 Features
