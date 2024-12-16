@@ -4037,6 +4037,7 @@ class SceneComponent {
       target: deletedNode,
       model: this.model
     });
+    this.emitConnectionDeletedByNodeId(key);
     this.connectionsService.removeConnectionsByNodeId(key);
   }
   onNodeSelected(node) {
@@ -4070,6 +4071,12 @@ class SceneComponent {
     this.connectionsService.connections$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_8__.filter)(() => !!this.model), (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_9__.takeUntilDestroyed)(this.destroyRef)).subscribe(connections => {
       this.model.connections = connections;
     });
+  }
+  emitConnectionDeletedByNodeId(nodeId) {
+    this.connectionsService.connections$.value.filter(connection => connection.source.nodeId === nodeId || connection.target.nodeId === nodeId)?.forEach(connection => this.connectionDeleted.emit({
+      target: connection,
+      model: this.model
+    }));
   }
 }
 _SceneComponent = SceneComponent;
