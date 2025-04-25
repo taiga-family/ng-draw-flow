@@ -1,5 +1,5 @@
-import type {NgZone, OnDestroy} from '@angular/core';
-import {Injectable} from '@angular/core';
+import type {OnDestroy} from '@angular/core';
+import {inject, Injectable, NgZone} from '@angular/core';
 
 interface SelectableItem {
     element: HTMLElement;
@@ -8,16 +8,18 @@ interface SelectableItem {
 
 @Injectable()
 export class SelectionService implements OnDestroy {
+    private readonly ngZone = inject(NgZone);
     private readonly selectedElements = new Set<HTMLElement>();
     private readonly registeredElements = new Map<HTMLElement, SelectableItem>();
 
     private isDragging = false;
+    private clickedOnScene = false;
     private startX: number | null = null;
     private startY: number | null = null;
     private readonly dragThreshold = 5;
     private currentTarget: HTMLElement | null = null;
 
-    constructor(private readonly ngZone: NgZone) {
+    constructor() {
         // Use NgZone.runOutsideAngular to prevent change detection
         // from running on every mouse event
         this.ngZone.runOutsideAngular(() => {
@@ -144,25 +146,20 @@ export class SelectionService implements OnDestroy {
         this.isDragging = false;
         this.currentTarget = event.target as HTMLElement;
 
-        // Check if the target element is the scene
-        if (this.currentTarget.dataset.element === 'scene') {
-            // If clicked on the scene, clear selection
-            this.clearSelection();
-
-            return;
-        }
-
-        // Find the closest registered element
+        // Find the nearest registered element
         const targetElement = this.findRegisteredParent(this.currentTarget);
 
+        // If clicked on a registered element
         if (targetElement) {
             // If Ctrl or Shift key is pressed, add to selection
             const multiSelect = event.ctrlKey || event.shiftKey;
 
             this.selectElement(targetElement, !multiSelect);
-        } else {
-            // If click is not on a registered element, clear selection
-            this.clearSelection();
+        }
+        // If clicked on the scene and it's not the start of dragging
+        else if (this.currentTarget.dataset.element === 'scene') {
+            // Remember that the click was on the scene
+            this.clickedOnScene = true;
         }
     }
 
@@ -189,27 +186,32 @@ export class SelectionService implements OnDestroy {
     private onMouseUp(event: MouseEvent): void {
         const target = event.target as HTMLElement;
 
-        // If it was a drag and release on the scene, do nothing
-        if (this.isDragging && target.dataset.element === 'scene') {
+        // If it was dragging and releasing on the scene,
+        // just reset the state without changing the selection
+        if (this.isDragging) {
             this.reset();
 
             return;
         }
 
-        // If it wasn't a drag, process as a normal click
-        if (!this.isDragging) {
-            const targetElement = this.findRegisteredParent(target);
+        // If it was a click (not dragging)
+        const targetElement = this.findRegisteredParent(target);
 
-            if (targetElement) {
-                // If Ctrl or Shift key is pressed, toggle selection
-                if (event.ctrlKey || event.shiftKey) {
-                    if (this.isSelected(targetElement)) {
-                        this.deselectElement(targetElement);
-                    } else {
-                        this.selectElement(targetElement, false);
-                    }
+        // If clicked on a registered element
+        if (targetElement) {
+            // If Ctrl or Shift key is pressed, toggle selection
+            if (event.ctrlKey || event.shiftKey) {
+                if (this.isSelected(targetElement)) {
+                    this.deselectElement(targetElement);
+                } else {
+                    this.selectElement(targetElement, false);
                 }
             }
+        }
+        // If clicked on the scene (not while dragging)
+        else if (this.clickedOnScene && !this.isDragging) {
+            // Clear selection only when clicking on the scene, not when dragging
+            this.clearSelection();
         }
 
         this.reset();
@@ -240,5 +242,6 @@ export class SelectionService implements OnDestroy {
         this.startY = null;
         this.isDragging = false;
         this.currentTarget = null;
+        this.clickedOnScene = false; // Reset the scene click flag
     }
 }
