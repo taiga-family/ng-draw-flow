@@ -30,6 +30,7 @@ import type {
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
+import {SelectionService} from './services/selection.service';
 
 @Component({
     standalone: true,
@@ -50,6 +51,7 @@ import {CoordinatesService} from './services/coordinates.service';
         ConnectionsService,
         CoordinatesService,
         DraftConnectionService,
+        SelectionService,
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => NgDrawFlowComponent),
