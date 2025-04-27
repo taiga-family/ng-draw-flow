@@ -17,7 +17,7 @@ import {merge} from 'rxjs';
 import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {SelectableElementDirective} from '../../directives/selectable-element';
-import {connectorName} from '../../helpers';
+import {createConnectorHash} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
     DfDataInitialNode,
@@ -245,7 +245,7 @@ export class NodeComponent implements AfterViewInit {
             y: (connector.coordinates?.y ?? 0) + distance.deltaY,
         };
 
-        const connectorData = connectorName({
+        const connectorData = createConnectorHash({
             nodeId: connector.data.nodeId,
             connectorType,
             connectorId: connector.data.connectorId,
@@ -273,7 +273,7 @@ export class NodeComponent implements AfterViewInit {
 
         connector.coordinates = calculatedConnectorPosition;
 
-        const connectorData = connectorName({
+        const connectorData = createConnectorHash({
             nodeId,
             connectorType,
             connectorId: connector.nativeElement.dataset.connectorId,

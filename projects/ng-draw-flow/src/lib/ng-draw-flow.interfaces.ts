@@ -78,7 +78,7 @@ export interface DfDataConnectorConfig {
 }
 
 export interface DfConnectorData {
-    point: DfPoint;
+    coordinates: DfPoint;
     position: DfConnectorPosition | null;
 }
 

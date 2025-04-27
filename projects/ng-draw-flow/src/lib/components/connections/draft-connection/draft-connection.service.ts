@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 
 import {
-    connectorName,
+    createConnectorHash,
     dfDistanceBetweenPoints,
     INITIAL_COORDINATES,
 } from '../../../helpers';
@@ -39,12 +39,12 @@ export class DraftConnectionService implements OnDestroy {
     private sourceConnector!: DfDataConnector;
 
     public source: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
-        point: INITIAL_COORDINATES,
+        coordinates: INITIAL_COORDINATES,
         position: DfConnectorPosition.Right,
     });
 
     public target: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
-        point: INITIAL_COORDINATES,
+        coordinates: INITIAL_COORDINATES,
         position: DfConnectorPosition.Left,
     });
 
@@ -91,7 +91,7 @@ export class DraftConnectionService implements OnDestroy {
     private onDragStart(connector: DfDataConnector): void {
         this.sourceConnector = connector;
         this.isConnectionCreating$.next(true);
-        const sourceId = connectorName(connector);
+        const sourceId = createConnectorHash(connector);
         const sourcePoint: DfConnectorData | undefined =
             this.coordinatesService.getConnectionPoint(sourceId)?.value;
 
@@ -113,9 +113,9 @@ export class DraftConnectionService implements OnDestroy {
 
         this.target.set({
             position: target.position,
-            point: {
-                x: target.point.x + deltaX / zoom,
-                y: target.point.y + deltaY / zoom,
+            coordinates: {
+                x: target.coordinates.x + deltaX / zoom,
+                y: target.coordinates.y + deltaY / zoom,
             },
         });
     }
@@ -157,11 +157,11 @@ export class DraftConnectionService implements OnDestroy {
 
     private resetConnectors(): void {
         this.source.set({
-            point: INITIAL_COORDINATES,
+            coordinates: INITIAL_COORDINATES,
             position: DfConnectorPosition.Right,
         });
         this.target.set({
-            point: INITIAL_COORDINATES,
+            coordinates: INITIAL_COORDINATES,
             position: null,
         });
     }

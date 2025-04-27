@@ -19,7 +19,7 @@ import {
 } from 'rxjs';
 
 import {SelectableElementDirective} from '../../../directives/selectable-element';
-import {connectorName} from '../../../helpers';
+import {createConnectorHash} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {
     DfConnectorData,
@@ -105,7 +105,10 @@ export class ConnectionComponent {
                         );
                     case DfConnectionType.Bezier:
                     default: {
-                        const distance = calculateDistance(start.point, end.point);
+                        const distance = calculateDistance(
+                            start.coordinates,
+                            end.coordinates,
+                        );
                         const maxCurvature = this.options.connection.curvature;
                         const curvature = calculateCurvature(distance, maxCurvature);
 
@@ -129,7 +132,7 @@ export class ConnectionComponent {
         const {nodeId, connectorType, connectorId} = connector;
 
         return this.coordinatesService.getConnectionPoint(
-            connectorName({nodeId, connectorType, connectorId}),
+            createConnectorHash({nodeId, connectorType, connectorId}),
         );
     }
 }

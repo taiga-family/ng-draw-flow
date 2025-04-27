@@ -42,7 +42,10 @@ export class DraftConnectionComponent {
                 return createSmoothstepPath(sourcePoint, targetPoint, this.maxCurvature);
             case DfConnectionType.Bezier:
             default: {
-                const distance = calculateDistance(sourcePoint.point, targetPoint.point);
+                const distance = calculateDistance(
+                    sourcePoint.coordinates,
+                    targetPoint.coordinates,
+                );
                 const curvature = calculateCurvature(distance, this.maxCurvature);
 
                 return createBezierPath(sourcePoint, targetPoint, curvature);
