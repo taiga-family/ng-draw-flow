@@ -92,7 +92,7 @@ export class DraftConnectionService implements OnDestroy {
         this.sourceConnector = connector;
         this.isConnectionCreating$.next(true);
         const sourceId = createConnectorHash(connector);
-        const sourcePoint: DfConnectorData | undefined =
+        const sourcePoint: DfConnectorData | null =
             this.coordinatesService.getConnectionPoint(sourceId)?.value;
 
         if (!sourcePoint) {

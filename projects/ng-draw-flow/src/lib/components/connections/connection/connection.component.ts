@@ -10,11 +10,12 @@ import {
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
     animationFrameScheduler,
+    asyncScheduler,
     combineLatest,
-    debounceTime,
     distinctUntilChanged,
     map,
     observeOn,
+    of,
     switchMap,
 } from 'rxjs';
 
@@ -70,53 +71,55 @@ export class ConnectionComponent {
         this.connectionDeleted.emit();
     }
 
-    protected path$: Observable<string> =
-        this.coordinatesService.connectionPointsMapChange$.pipe(
-            debounceTime(50),
-            observeOn(animationFrameScheduler),
-            switchMap(() => {
-                const sourcePoint = this.getConnectionPoint(this.connection?.source);
-                const targetPoint = this.getConnectionPoint(this.connection?.target);
+    protected path$: Observable<string> = of(null).pipe(
+        observeOn(asyncScheduler),
+        switchMap(() =>
+            combineLatest([
+                this.getConnectionPoint(this.connection?.source),
+                this.getConnectionPoint(this.connection?.target),
+            ]),
+        ),
+        observeOn(animationFrameScheduler),
+        switchMap(([sourcePoint, targetPoint]) => {
+            if (!sourcePoint || !targetPoint) {
+                console.warn('One of the connection points not found');
 
-                if (!sourcePoint || !targetPoint) {
-                    console.warn('One of the connection points not found');
+                return of([]);
+            }
 
-                    return [];
+            return of([sourcePoint, targetPoint]);
+        }),
+        distinctUntilChanged(
+            ([prevSource, prevTarget], [currSource, currTarget]) =>
+                JSON.stringify(prevSource) === JSON.stringify(currSource) &&
+                JSON.stringify(prevTarget) === JSON.stringify(currTarget),
+        ),
+        map(([start, end]) => {
+            if (!start || !end) {
+                return '';
+            }
+
+            switch (this.options.connection.type) {
+                case DfConnectionType.SmoothStep:
+                    return createSmoothstepPath(
+                        start,
+                        end,
+                        this.options.connection.curvature,
+                    );
+                case DfConnectionType.Bezier:
+                default: {
+                    const distance = calculateDistance(
+                        start.coordinates,
+                        end.coordinates,
+                    );
+                    const maxCurvature = this.options.connection.curvature;
+                    const curvature = calculateCurvature(distance, maxCurvature);
+
+                    return createBezierPath(start, end, curvature);
                 }
-
-                return combineLatest([sourcePoint, targetPoint]).pipe(
-                    distinctUntilChanged(
-                        ([prevSource, prevTarget], [currSource, currTarget]) =>
-                            prevSource === currSource && prevTarget === currTarget,
-                    ),
-                );
-            }),
-            map(([start, end]) => {
-                if (!start || !end) {
-                    return '';
-                }
-
-                switch (this.options.connection.type) {
-                    case DfConnectionType.SmoothStep:
-                        return createSmoothstepPath(
-                            start,
-                            end,
-                            this.options.connection.curvature,
-                        );
-                    case DfConnectionType.Bezier:
-                    default: {
-                        const distance = calculateDistance(
-                            start.coordinates,
-                            end.coordinates,
-                        );
-                        const maxCurvature = this.options.connection.curvature;
-                        const curvature = calculateCurvature(distance, maxCurvature);
-
-                        return createBezierPath(start, end, curvature);
-                    }
-                }
-            }),
-        );
+            }
+        }),
+    );
 
     protected onSelectedChanged(selected: boolean): void {
         this.selected = selected;
@@ -128,11 +131,7 @@ export class ConnectionComponent {
 
     private getConnectionPoint(
         connector: DfDataConnector,
-    ): BehaviorSubject<DfConnectorData> | undefined {
-        const {nodeId, connectorType, connectorId} = connector;
-
-        return this.coordinatesService.getConnectionPoint(
-            createConnectorHash({nodeId, connectorType, connectorId}),
-        );
+    ): BehaviorSubject<DfConnectorData> | BehaviorSubject<null> {
+        return this.coordinatesService.getConnectionPoint(createConnectorHash(connector));
     }
 }

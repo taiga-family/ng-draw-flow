@@ -15,8 +15,8 @@ export class CoordinatesService {
 
     public getConnectionPoint(
         connectorHash: string,
-    ): BehaviorSubject<DfConnectorData> | undefined {
-        return this.connectionPointsMap[connectorHash];
+    ): BehaviorSubject<DfConnectorData> | BehaviorSubject<null> {
+        return this.connectionPointsMap[connectorHash] || new BehaviorSubject(null);
     }
 
     public addConnectionPoint(
