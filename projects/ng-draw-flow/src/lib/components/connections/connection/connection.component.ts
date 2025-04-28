@@ -37,7 +37,7 @@ import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoot
     standalone: true,
     selector: 'df-connection',
     imports: [AsyncPipe, SelectableElementDirective],
-    templateUrl: './connection.component.html',
+    templateUrl: './connection.component.svg',
     styleUrls: ['../connection.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
