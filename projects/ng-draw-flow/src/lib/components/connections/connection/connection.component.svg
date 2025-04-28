@@ -1,4 +1,4 @@
-<svg class="connection">
+<svg class="connection" [class]="shapeRendering$ | async">
     <path
         dfSelectableElement
         class="selectable-area"

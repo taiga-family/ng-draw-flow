@@ -9,13 +9,16 @@ import {
 } from '@angular/core';
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
-    animationFrameScheduler,
     asyncScheduler,
     combineLatest,
+    concat,
+    delay,
     distinctUntilChanged,
     map,
     observeOn,
     of,
+    skip,
+    startWith,
     switchMap,
 } from 'rxjs';
 
@@ -32,6 +35,8 @@ import {CoordinatesService} from '../../../services/coordinates.service';
 import {ConnectionsService} from '../connections.service';
 import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
 import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
+
+type ShapeRendering = 'auto' | 'optimizeSpeed';
 
 @Component({
     standalone: true,
@@ -79,7 +84,6 @@ export class ConnectionComponent {
                 this.getConnectionPoint(this.connection?.target),
             ]),
         ),
-        observeOn(animationFrameScheduler),
         switchMap(([sourcePoint, targetPoint]) => {
             if (!sourcePoint || !targetPoint) {
                 console.warn('One of the connection points not found');
@@ -119,6 +123,18 @@ export class ConnectionComponent {
                 }
             }
         }),
+    );
+
+    protected shapeRendering$: Observable<ShapeRendering> = this.path$.pipe(
+        skip(1),
+        switchMap(() =>
+            concat(
+                of<ShapeRendering>('optimizeSpeed'),
+                of<ShapeRendering>('auto').pipe(delay(400)),
+            ),
+        ),
+        startWith<ShapeRendering>('auto'),
+        distinctUntilChanged(),
     );
 
     protected onSelectedChanged(selected: boolean): void {

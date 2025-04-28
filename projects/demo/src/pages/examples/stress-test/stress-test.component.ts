@@ -1,4 +1,3 @@
-import {AsyncPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataConnection, DfDataModel, DfDataNode} from '@ng-draw-flow/core';
@@ -16,13 +15,7 @@ const COLUMNS_COUNT = 13;
 @Component({
     standalone: true,
     selector: 'stress-test',
-    imports: [
-        AsyncPipe,
-        MarkdownModule,
-        NgDrawFlowComponent,
-        ReactiveFormsModule,
-        TuiAddonDoc,
-    ],
+    imports: [MarkdownModule, NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './stress-test.component.html',
     styleUrls: ['./stress-test.component.less'],
     encapsulation: ViewEncapsulation.None,

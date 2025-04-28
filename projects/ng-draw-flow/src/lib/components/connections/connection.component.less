@@ -5,12 +5,17 @@
     pointer-events: none;
     aspect-ratio: 1 / 1;
 
+    &.optimizeSpeed {
+        .main-path {
+            transform: translateZ(0);
+        }
+    }
+
     .main-path {
         fill: none;
         stroke-width: var(--df-connection-stroke-width);
         stroke: var(--df-connection-color);
         pointer-events: none;
-        transform: translateZ(0);
 
         &.df-selected {
             stroke: var(--df-connection-color-active);
@@ -23,7 +28,6 @@
         stroke: transparent;
         pointer-events: stroke;
         cursor: pointer;
-        transform: translateZ(0);
         transition: stroke 0.3s;
 
         &:hover {
