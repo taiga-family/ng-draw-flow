@@ -1,3 +1,26 @@
+### [0.9.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.8.0...v0.9.0) (2025-04-29)
+
+### 🚀 Features
+
+- naming [(2cbba1b)](https://github.com/taiga-family/ng-draw-flow/commit/2cbba1beb5ba3901943fe0168ee36e6f686b84f8)
+
+### 🐞 Bug Fixes
+
+- element selection
+  [(0798fc0)](https://github.com/taiga-family/ng-draw-flow/commit/0798fc08895e49a4ea232cf7ef6a7c1021321a16)
+- recalculate connection paths only when their endpoints change
+  [(f6970f2)](https://github.com/taiga-family/ng-draw-flow/commit/f6970f21500e9886e4357bc5c4fca108abdb7bd4)
+- element selection
+  [(0b90b4a)](https://github.com/taiga-family/ng-draw-flow/commit/0b90b4a285fa229700b58d6cfa4222853699bc50)
+- add shape-rendering: optimizeSpeed
+  [(d1ae617)](https://github.com/taiga-family/ng-draw-flow/commit/d1ae6173b47ccd44487e0e4b5fb34d88d328b7a3)
+- reduce repaints by using context-aware transform methods
+  [(25dc915)](https://github.com/taiga-family/ng-draw-flow/commit/25dc915befb9398be3274f72700458d6eb7dfd89)
+- resolve connection duplication issue
+  [(0a8d0b7)](https://github.com/taiga-family/ng-draw-flow/commit/0a8d0b7eafb3b112d5f78762b56bc40190410124)
+- add shape-rendering: optimizeSpeed
+  [(ed9db26)](https://github.com/taiga-family/ng-draw-flow/commit/ed9db26c0d08f512ca4a8c2555e72e70e30feba1)
+
 ### [0.8.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.7.0...v0.8.0) (2024-12-16)
 
 ### 🚀 Features
