@@ -1223,15 +1223,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ConnectionComponent: () => (/* binding */ ConnectionComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/common */ 9191);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 3396);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 3901);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 9721);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 7757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 4672);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 1082);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 1640);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 9746);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 9473);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 6812);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 5171);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 6816);
 /* harmony import */ var _directives_selectable_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../directives/selectable-element */ 1408);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ 315);
 /* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../ng-draw-flow.configs */ 167);
@@ -1261,15 +1265,13 @@ class ConnectionComponent {
     this.selected = false;
     this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.path$ = this.coordinatesService.connectionPointsMapChange$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.debounceTime)(50), (0,rxjs__WEBPACK_IMPORTED_MODULE_10__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_11__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(() => {
-      const sourcePoint = this.getConnectionPoint(this.connection?.source);
-      const targetPoint = this.getConnectionPoint(this.connection?.target);
+    this.path$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)(null).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_10__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_11__.asyncScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.combineLatest)([this.getConnectionPoint(this.connection?.source), this.getConnectionPoint(this.connection?.target)])), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(([sourcePoint, targetPoint]) => {
       if (!sourcePoint || !targetPoint) {
         console.warn('One of the connection points not found');
-        return [];
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)([]);
       }
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.combineLatest)([sourcePoint, targetPoint]).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_14__.distinctUntilChanged)(([prevSource, prevTarget], [currSource, currTarget]) => prevSource === currSource && prevTarget === currTarget));
-    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.map)(([start, end]) => {
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)([sourcePoint, targetPoint]);
+    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.distinctUntilChanged)(([prevSource, prevTarget], [currSource, currTarget]) => JSON.stringify(prevSource) === JSON.stringify(currSource) && JSON.stringify(prevTarget) === JSON.stringify(currTarget)), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.map)(([start, end]) => {
       if (!start || !end) {
         return '';
       }
@@ -1286,6 +1288,7 @@ class ConnectionComponent {
           }
       }
     }));
+    this.optimization$ = this.path$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_16__.skip)(1), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.concat)((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)(true), (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)(false).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_18__.delay)(400)))), (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.startWith)(false), (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.distinctUntilChanged)());
   }
   handleKeyboardEvent(event) {
     if (!this.selected) {
@@ -1302,16 +1305,7 @@ class ConnectionComponent {
     }
   }
   getConnectionPoint(connector) {
-    const {
-      nodeId,
-      connectorType,
-      connectorId
-    } = connector;
-    return this.coordinatesService.getConnectionPoint((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.connectorName)({
-      nodeId,
-      connectorType,
-      connectorId
-    }));
+    return this.coordinatesService.getConnectionPoint((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.createConnectorHash)(connector));
   }
 }
 _ConnectionComponent = ConnectionComponent;
@@ -1339,32 +1333,35 @@ _ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   },
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵStandaloneFeature"]],
-  decls: 5,
-  vars: 8,
+  decls: 6,
+  vars: 12,
   consts: [[1, "connection"], ["dfSelectableElement", "", 1, "selectable-area", 3, "selectionChanged"], [1, "main-path"]],
   template: function ConnectionComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnamespaceSVG"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "svg", 0)(1, "path", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("selectionChanged", function ConnectionComponent_Template__svg_path_selectionChanged_1_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "svg", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](1, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](2, "path", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("selectionChanged", function ConnectionComponent_Template__svg_path_selectionChanged_2_listener($event) {
         return ctx.onSelectedChanged($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](2, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](3, "async");
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](3, "path", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](4, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](4, "path", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](5, "async");
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](2, 4, ctx.path$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵclassProp"]("optimize-speed", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](1, 6, ctx.optimization$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](3, 8, ctx.path$));
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵclassProp"]("df-selected", ctx.selected);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](4, 6, ctx.path$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](5, 10, ctx.path$));
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_16__.AsyncPipe, _directives_selectable_element__WEBPACK_IMPORTED_MODULE_0__.SelectableElementDirective],
-  styles: [".connection[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n  aspect-ratio: 1 / 1;\n}\n.connection[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-stroke-width);\n  stroke: var(--df-connection-color);\n  pointer-events: none;\n  transform: translateZ(0);\n}\n.connection[_ngcontent-%COMP%]   .main-path.df-selected[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-active);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-selectable-area-stroke-width);\n  stroke: transparent;\n  pointer-events: stroke;\n  cursor: pointer;\n  transform: translateZ(0);\n  transition: stroke 0.3s;\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover {\n  stroke: var(--df-connection-selectable-area-color);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover    + .main-path[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-hover);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLE1BQUE7RUFDQSxPQUFBO0VBQ0Esb0JBQUE7RUFDQSxtQkFBQTtBQUNKO0FBTkE7RUFRUSxVQUFBO0VBQ0EsK0NBQUE7RUFDQSxrQ0FBQTtFQUNBLG9CQUFBO0VBQ0Esd0JBQUE7QUFDUjtBQUNRO0VBQ0kseUNBQUE7QUFDWjtBQWhCQTtFQW9CUSxVQUFBO0VBQ0EsK0RBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLHdCQUFBO0VBQ0EsdUJBQUE7QUFEUjtBQUdRO0VBQ0ksa0RBQUE7QUFEWjtBQUdZO0VBQ0ksd0NBQUE7QUFEaEIiLCJmaWxlIjoiY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb25uZWN0aW9uIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgYXNwZWN0LXJhdGlvOiAxIC8gMTtcblxuICAgIC5tYWluLXBhdGgge1xuICAgICAgICBmaWxsOiBub25lO1xuICAgICAgICBzdHJva2Utd2lkdGg6IHZhcigtLWRmLWNvbm5lY3Rpb24tc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yKTtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWigwKTtcblxuICAgICAgICAmLmRmLXNlbGVjdGVkIHtcbiAgICAgICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvci1hY3RpdmUpO1xuICAgICAgICB9XG4gICAgfVxuXG4gICAgLnNlbGVjdGFibGUtYXJlYSB7XG4gICAgICAgIGZpbGw6IG5vbmU7XG4gICAgICAgIHN0cm9rZS13aWR0aDogdmFyKC0tZGYtY29ubmVjdGlvbi1zZWxlY3RhYmxlLWFyZWEtc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB0cmFuc3BhcmVudDtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IHN0cm9rZTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvY29ubmVjdGlvbnMvY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxvQkFBQTtFQUNBLG1CQUFBO0FBQ0o7QUFOQTtFQVFRLFVBQUE7RUFDQSwrQ0FBQTtFQUNBLGtDQUFBO0VBQ0Esb0JBQUE7RUFDQSx3QkFBQTtBQUNSO0FBQ1E7RUFDSSx5Q0FBQTtBQUNaO0FBaEJBO0VBb0JRLFVBQUE7RUFDQSwrREFBQTtFQUNBLG1CQUFBO0VBQ0Esc0JBQUE7RUFDQSxlQUFBO0VBQ0Esd0JBQUE7RUFDQSx1QkFBQTtBQURSO0FBR1E7RUFDSSxrREFBQTtBQURaO0FBR1k7RUFDSSx3Q0FBQTtBQURoQjs7QUFFQSx3eURBQXd5RCIsInNvdXJjZXNDb250ZW50IjpbIi5jb25uZWN0aW9uIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgYXNwZWN0LXJhdGlvOiAxIC8gMTtcblxuICAgIC5tYWluLXBhdGgge1xuICAgICAgICBmaWxsOiBub25lO1xuICAgICAgICBzdHJva2Utd2lkdGg6IHZhcigtLWRmLWNvbm5lY3Rpb24tc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yKTtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWigwKTtcblxuICAgICAgICAmLmRmLXNlbGVjdGVkIHtcbiAgICAgICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvci1hY3RpdmUpO1xuICAgICAgICB9XG4gICAgfVxuXG4gICAgLnNlbGVjdGFibGUtYXJlYSB7XG4gICAgICAgIGZpbGw6IG5vbmU7XG4gICAgICAgIHN0cm9rZS13aWR0aDogdmFyKC0tZGYtY29ubmVjdGlvbi1zZWxlY3RhYmxlLWFyZWEtc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB0cmFuc3BhcmVudDtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IHN0cm9rZTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_20__.AsyncPipe, _directives_selectable_element__WEBPACK_IMPORTED_MODULE_0__.SelectableElementDirective],
+  styles: [".connection[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n  aspect-ratio: 1 / 1;\n  shape-rendering: auto;\n}\n.connection.optimize-speed[_ngcontent-%COMP%] {\n  shape-rendering: optimizespeed;\n}\n.connection.optimize-speed[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  transform: translateZ(0);\n}\n.connection[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-stroke-width);\n  stroke: var(--df-connection-color);\n  pointer-events: none;\n}\n.connection[_ngcontent-%COMP%]   .main-path.df-selected[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-active);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-selectable-area-stroke-width);\n  stroke: transparent;\n  pointer-events: stroke;\n  cursor: pointer;\n  transition: stroke 0.3s;\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover {\n  stroke: var(--df-connection-selectable-area-color);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover    + .main-path[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-hover);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLE1BQUE7RUFDQSxPQUFBO0VBQ0Esb0JBQUE7RUFDQSxtQkFBQTtFQUNBLHFCQUFBO0FBQ0o7QUFDSTtFQUNJLDhCQUFBO0FBQ1I7QUFGSTtFQUlRLHdCQUFBO0FBQ1o7QUFiQTtFQWlCUSxVQUFBO0VBQ0EsK0NBQUE7RUFDQSxrQ0FBQTtFQUNBLG9CQUFBO0FBRFI7QUFHUTtFQUNJLHlDQUFBO0FBRFo7QUF0QkE7RUE0QlEsVUFBQTtFQUNBLCtEQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGVBQUE7RUFDQSx1QkFBQTtBQUhSO0FBS1E7RUFDSSxrREFBQTtBQUhaO0FBS1k7RUFDSSx3Q0FBQTtBQUhoQiIsImZpbGUiOiJjb25uZWN0aW9uLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvY29ubmVjdGlvbnMvY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxvQkFBQTtFQUNBLG1CQUFBO0VBQ0EscUJBQUE7QUFDSjtBQUNJO0VBQ0ksOEJBQUE7QUFDUjtBQUZJO0VBSVEsd0JBQUE7QUFDWjtBQWJBO0VBaUJRLFVBQUE7RUFDQSwrQ0FBQTtFQUNBLGtDQUFBO0VBQ0Esb0JBQUE7QUFEUjtBQUdRO0VBQ0kseUNBQUE7QUFEWjtBQXRCQTtFQTRCUSxVQUFBO0VBQ0EsK0RBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLHVCQUFBO0FBSFI7QUFLUTtFQUNJLGtEQUFBO0FBSFo7QUFLWTtFQUNJLHdDQUFBO0FBSGhCOztBQUVBLGcrREFBZytEIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 
@@ -1391,11 +1388,21 @@ class ConnectionsService {
     this.usedConnectors$ = new rxjs__WEBPACK_IMPORTED_MODULE_0__.BehaviorSubject([]);
   }
   addConnections(connections) {
-    connections.forEach(connection => {
-      const usedConnectors = [...this.usedConnectors$.value, connection.source.connectorId, connection.target.connectorId];
-      this.usedConnectors$.next(usedConnectors);
+    const newConnections = connections.filter(newConnection => !this.connections$.value.some(existingConnection => this.areConnectionsEqual(existingConnection, newConnection)));
+    if (newConnections.length === 0) {
+      return;
+    }
+    const updatedUsedConnectors = [...this.usedConnectors$.value];
+    newConnections.forEach(connection => {
+      if (!updatedUsedConnectors.includes(connection.source.connectorId)) {
+        updatedUsedConnectors.push(connection.source.connectorId);
+      }
+      if (!updatedUsedConnectors.includes(connection.target.connectorId)) {
+        updatedUsedConnectors.push(connection.target.connectorId);
+      }
     });
-    this.connections$.next([...this.connections$.value, ...connections]);
+    this.usedConnectors$.next(updatedUsedConnectors);
+    this.connections$.next([...this.connections$.value, ...newConnections]);
   }
   removeConnection(connectionToRemove) {
     const filteredConnections = this.connections$.value.filter(existingConnection => !this.areConnectionsEqual(existingConnection, connectionToRemove));
@@ -1517,7 +1524,7 @@ _DraftConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_M
       _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵattribute"]("d", ctx.path());
     }
   },
-  styles: [".connection[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n  aspect-ratio: 1 / 1;\n}\n.connection[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-stroke-width);\n  stroke: var(--df-connection-color);\n  pointer-events: none;\n  transform: translateZ(0);\n}\n.connection[_ngcontent-%COMP%]   .main-path.df-selected[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-active);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-selectable-area-stroke-width);\n  stroke: transparent;\n  pointer-events: stroke;\n  cursor: pointer;\n  transform: translateZ(0);\n  transition: stroke 0.3s;\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover {\n  stroke: var(--df-connection-selectable-area-color);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover    + .main-path[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-hover);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLE1BQUE7RUFDQSxPQUFBO0VBQ0Esb0JBQUE7RUFDQSxtQkFBQTtBQUNKO0FBTkE7RUFRUSxVQUFBO0VBQ0EsK0NBQUE7RUFDQSxrQ0FBQTtFQUNBLG9CQUFBO0VBQ0Esd0JBQUE7QUFDUjtBQUNRO0VBQ0kseUNBQUE7QUFDWjtBQWhCQTtFQW9CUSxVQUFBO0VBQ0EsK0RBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLHdCQUFBO0VBQ0EsdUJBQUE7QUFEUjtBQUdRO0VBQ0ksa0RBQUE7QUFEWjtBQUdZO0VBQ0ksd0NBQUE7QUFEaEIiLCJmaWxlIjoiY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb25uZWN0aW9uIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgYXNwZWN0LXJhdGlvOiAxIC8gMTtcblxuICAgIC5tYWluLXBhdGgge1xuICAgICAgICBmaWxsOiBub25lO1xuICAgICAgICBzdHJva2Utd2lkdGg6IHZhcigtLWRmLWNvbm5lY3Rpb24tc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yKTtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWigwKTtcblxuICAgICAgICAmLmRmLXNlbGVjdGVkIHtcbiAgICAgICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvci1hY3RpdmUpO1xuICAgICAgICB9XG4gICAgfVxuXG4gICAgLnNlbGVjdGFibGUtYXJlYSB7XG4gICAgICAgIGZpbGw6IG5vbmU7XG4gICAgICAgIHN0cm9rZS13aWR0aDogdmFyKC0tZGYtY29ubmVjdGlvbi1zZWxlY3RhYmxlLWFyZWEtc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB0cmFuc3BhcmVudDtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IHN0cm9rZTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvY29ubmVjdGlvbnMvY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxvQkFBQTtFQUNBLG1CQUFBO0FBQ0o7QUFOQTtFQVFRLFVBQUE7RUFDQSwrQ0FBQTtFQUNBLGtDQUFBO0VBQ0Esb0JBQUE7RUFDQSx3QkFBQTtBQUNSO0FBQ1E7RUFDSSx5Q0FBQTtBQUNaO0FBaEJBO0VBb0JRLFVBQUE7RUFDQSwrREFBQTtFQUNBLG1CQUFBO0VBQ0Esc0JBQUE7RUFDQSxlQUFBO0VBQ0Esd0JBQUE7RUFDQSx1QkFBQTtBQURSO0FBR1E7RUFDSSxrREFBQTtBQURaO0FBR1k7RUFDSSx3Q0FBQTtBQURoQjs7QUFFQSx3eURBQXd5RCIsInNvdXJjZXNDb250ZW50IjpbIi5jb25uZWN0aW9uIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgYXNwZWN0LXJhdGlvOiAxIC8gMTtcblxuICAgIC5tYWluLXBhdGgge1xuICAgICAgICBmaWxsOiBub25lO1xuICAgICAgICBzdHJva2Utd2lkdGg6IHZhcigtLWRmLWNvbm5lY3Rpb24tc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yKTtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IG5vbmU7XG4gICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWigwKTtcblxuICAgICAgICAmLmRmLXNlbGVjdGVkIHtcbiAgICAgICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvci1hY3RpdmUpO1xuICAgICAgICB9XG4gICAgfVxuXG4gICAgLnNlbGVjdGFibGUtYXJlYSB7XG4gICAgICAgIGZpbGw6IG5vbmU7XG4gICAgICAgIHN0cm9rZS13aWR0aDogdmFyKC0tZGYtY29ubmVjdGlvbi1zZWxlY3RhYmxlLWFyZWEtc3Ryb2tlLXdpZHRoKTtcbiAgICAgICAgc3Ryb2tlOiB0cmFuc3BhcmVudDtcbiAgICAgICAgcG9pbnRlci1ldmVudHM6IHN0cm9rZTtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
+  styles: [".connection[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n  aspect-ratio: 1 / 1;\n  shape-rendering: auto;\n}\n.connection.optimize-speed[_ngcontent-%COMP%] {\n  shape-rendering: optimizespeed;\n}\n.connection.optimize-speed[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  transform: translateZ(0);\n}\n.connection[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-stroke-width);\n  stroke: var(--df-connection-color);\n  pointer-events: none;\n}\n.connection[_ngcontent-%COMP%]   .main-path.df-selected[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-active);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-selectable-area-stroke-width);\n  stroke: transparent;\n  pointer-events: stroke;\n  cursor: pointer;\n  transition: stroke 0.3s;\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover {\n  stroke: var(--df-connection-selectable-area-color);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover    + .main-path[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-hover);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLE1BQUE7RUFDQSxPQUFBO0VBQ0Esb0JBQUE7RUFDQSxtQkFBQTtFQUNBLHFCQUFBO0FBQ0o7QUFDSTtFQUNJLDhCQUFBO0FBQ1I7QUFGSTtFQUlRLHdCQUFBO0FBQ1o7QUFiQTtFQWlCUSxVQUFBO0VBQ0EsK0NBQUE7RUFDQSxrQ0FBQTtFQUNBLG9CQUFBO0FBRFI7QUFHUTtFQUNJLHlDQUFBO0FBRFo7QUF0QkE7RUE0QlEsVUFBQTtFQUNBLCtEQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGVBQUE7RUFDQSx1QkFBQTtBQUhSO0FBS1E7RUFDSSxrREFBQTtBQUhaO0FBS1k7RUFDSSx3Q0FBQTtBQUhoQiIsImZpbGUiOiJjb25uZWN0aW9uLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvY29ubmVjdGlvbnMvY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxvQkFBQTtFQUNBLG1CQUFBO0VBQ0EscUJBQUE7QUFDSjtBQUNJO0VBQ0ksOEJBQUE7QUFDUjtBQUZJO0VBSVEsd0JBQUE7QUFDWjtBQWJBO0VBaUJRLFVBQUE7RUFDQSwrQ0FBQTtFQUNBLGtDQUFBO0VBQ0Esb0JBQUE7QUFEUjtBQUdRO0VBQ0kseUNBQUE7QUFEWjtBQXRCQTtFQTRCUSxVQUFBO0VBQ0EsK0RBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLHVCQUFBO0FBSFI7QUFLUTtFQUNJLGtEQUFBO0FBSFo7QUFLWTtFQUNJLHdDQUFBO0FBSGhCOztBQUVBLGcrREFBZytEIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 
@@ -1595,7 +1602,7 @@ class DraftConnectionService {
   onDragStart(connector) {
     this.sourceConnector = connector;
     this.isConnectionCreating$.next(true);
-    const sourceId = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.connectorName)(connector);
+    const sourceId = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.createConnectorHash)(connector);
     const sourcePoint = this.coordinatesService.getConnectionPoint(sourceId)?.value;
     if (!sourcePoint) {
       return;
@@ -3174,13 +3181,15 @@ class NodeComponent {
     this.value.position = this.calculatePosition(distance, zoom);
     const centeredPosition = this.getCenteredPosition();
     this.panZoomService.panzoomDisabled = true;
-    this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition);
+    this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition, true);
     this.recalculateConnectorsPosition(distance);
   }
   onDragEnd() {
     this.cursor = 'initial';
     this.panZoomService.panzoomDisabled = false;
     this.nodeMoved.emit(this.value);
+    const centeredPosition = this.getCenteredPosition();
+    this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition, false);
   }
   fillValue() {
     if (!('position' in this.node)) {
@@ -3226,7 +3235,7 @@ class NodeComponent {
       x: (connector.coordinates?.x ?? 0) + distance.deltaX,
       y: (connector.coordinates?.y ?? 0) + distance.deltaY
     };
-    const connectorData = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.connectorName)({
+    const connectorData = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.createConnectorHash)({
       nodeId: connector.data.nodeId,
       connectorType,
       connectorId: connector.data.connectorId
@@ -3237,7 +3246,7 @@ class NodeComponent {
   updateConnectorCoordinates(position, nodeId, connector, connectorType) {
     const calculatedConnectorPosition = this.calculateConnectorPosition(connector.nativeElement, position);
     connector.coordinates = calculatedConnectorPosition;
-    const connectorData = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.connectorName)({
+    const connectorData = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.createConnectorHash)({
       nodeId,
       connectorType,
       connectorId: connector.nativeElement.dataset.connectorId
@@ -3259,8 +3268,12 @@ class NodeComponent {
       y
     };
   }
-  applyPositionToStyle(element, position) {
-    element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
+  applyPositionToStyle(element, position, dynamic) {
+    if (dynamic) {
+      element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
+      return;
+    }
+    element.style.transform = `translate(${position.x}px, ${position.y}px)`;
   }
   getCenteredPosition() {
     const {
@@ -3336,7 +3349,7 @@ class NodeComponent {
   }
   setInitialPosition() {
     const centeredPosition = this.getCenteredPosition();
-    this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition);
+    this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition, false);
   }
 }
 _NodeComponent = NodeComponent;
@@ -4384,92 +4397,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SelectableElementDirective: () => (/* binding */ SelectableElementDirective)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _services_selection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/selection.service */ 9989);
 var _SelectableElementDirective;
+
 
 
 class SelectableElementDirective {
   constructor() {
     this.selected = false;
-    this.el = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_0__.ElementRef);
-    this.isDragging = false;
-    this.startX = null;
-    this.startY = null;
-    this.dragThreshold = 5; // Displacement threshold for drag detection
-    this.selectionChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_0__.EventEmitter();
+    this.el = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.ElementRef);
+    this.selectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_services_selection_service__WEBPACK_IMPORTED_MODULE_0__.SelectionService);
+    this.unregisterFn = null;
+    this.selectionChanged = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
   }
-  onMouseDown(event) {
-    this.startX = event.clientX;
-    this.startY = event.clientY;
-    const targetElement = event.target;
-    this.isDragging = false;
-    if (targetElement.dataset.element !== 'scene') {
-      const clickedInside = this.el.nativeElement.contains(targetElement);
-      this.setSelected(clickedInside);
+  ngOnInit() {
+    // Register the element in the service and save the unregistration function.
+    this.unregisterFn = this.selectionService.registerElement(this.el.nativeElement, selected => this.handleSelectionChange(selected));
+  }
+  ngOnDestroy() {
+    // Unregister when the directive is destroyed
+    if (this.unregisterFn) {
+      this.unregisterFn();
+      this.unregisterFn = null;
     }
   }
-  onMouseMove(event) {
-    if (!this.startX || !this.startY) {
-      return;
-    }
-    const dx = event.clientX - this.startX;
-    const dy = event.clientY - this.startY;
-    // Check if the movement exceeds the dragThreshold threshold
-    if (Math.sqrt(dx * dx + dy * dy) > this.dragThreshold) {
-      this.isDragging = true;
-    }
-  }
-  onMouseUp(targetElement) {
-    if (this.isDragging && targetElement.dataset.element === 'scene') {
-      // If it was a drag and drop across the scene, we do nothing
-      this.reset();
-      return;
-    }
-    const clickedInside = this.el.nativeElement.contains(targetElement);
-    this.setSelected(clickedInside);
-    this.reset();
-  }
-  setSelected(selected) {
+  handleSelectionChange(selected) {
     if (this.selected !== selected) {
       this.selected = selected;
-      this.selectionChanged.emit(this.selected);
+      this.selectionChanged.emit(selected);
       if (selected) {
-        this.selectNode();
+        this.el.nativeElement.classList.add('df-selected');
       } else {
-        this.deselectNode();
+        this.el.nativeElement.classList.remove('df-selected');
       }
     }
-  }
-  selectNode() {
-    this.el.nativeElement.classList.add('df-selected');
-  }
-  deselectNode() {
-    this.el.nativeElement.classList.remove('df-selected');
-  }
-  reset() {
-    this.startX = null;
-    this.startY = null;
-    this.isDragging = false;
   }
 }
 _SelectableElementDirective = SelectableElementDirective;
 _SelectableElementDirective.ɵfac = function SelectableElementDirective_Factory(t) {
   return new (t || _SelectableElementDirective)();
 };
-_SelectableElementDirective.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({
+_SelectableElementDirective.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineDirective"]({
   type: _SelectableElementDirective,
   selectors: [["", "dfSelectableElement", ""]],
-  hostBindings: function SelectableElementDirective_HostBindings(rf, ctx) {
-    if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("mousedown", function SelectableElementDirective_mousedown_HostBindingHandler($event) {
-        return ctx.onMouseDown($event);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresolveDocument"])("mousemove", function SelectableElementDirective_mousemove_HostBindingHandler($event) {
-        return ctx.onMouseMove($event);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresolveDocument"])("mouseup", function SelectableElementDirective_mouseup_HostBindingHandler($event) {
-        return ctx.onMouseUp($event.target);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵresolveDocument"]);
-    }
-  },
   outputs: {
     selectionChanged: "selectionChanged"
   },
@@ -4509,13 +4480,25 @@ function dfClamp(value, min, max) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   connectorName: () => (/* binding */ connectorName),
+/* harmony export */   createConnectorHash: () => (/* binding */ createConnectorHash),
 /* harmony export */   isConnectorType: () => (/* binding */ isConnectorType)
 /* harmony export */ });
 function isConnectorType(type) {
   return ['input', 'output'].includes(type);
 }
-function connectorName(connector) {
+/**
+ * Creates a unique string identifier for a connector.
+ *
+ * The function generates a string that uniquely identifies a connector
+ * based on its key properties: node identifier, connector type, and
+ * connector identifier. The resulting identifier is used
+ * as a key in various data structures (e.g., in connectionPointsMap)
+ * for tracking and updating connector positions.
+ *
+ * @param connector - Connector object containing nodeId, connectorType, and connectorId
+ * @returns String identifier in the format "nodeId:value,connectorType:value,connectorId:value"
+ */
+function createConnectorHash(connector) {
   return `nodeId:${connector.nodeId},connectorType:${connector.connectorType},connectorId:${connector.connectorId}`;
 }
 
@@ -4593,7 +4576,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DF_FALSE_HANDLER: () => (/* reexport safe */ _handlers__WEBPACK_IMPORTED_MODULE_4__.DF_FALSE_HANDLER),
 /* harmony export */   DF_TRUE_HANDLER: () => (/* reexport safe */ _handlers__WEBPACK_IMPORTED_MODULE_4__.DF_TRUE_HANDLER),
 /* harmony export */   INITIAL_COORDINATES: () => (/* reexport safe */ _initial_coordinates__WEBPACK_IMPORTED_MODULE_5__.INITIAL_COORDINATES),
-/* harmony export */   connectorName: () => (/* reexport safe */ _connector__WEBPACK_IMPORTED_MODULE_1__.connectorName),
+/* harmony export */   createConnectorHash: () => (/* reexport safe */ _connector__WEBPACK_IMPORTED_MODULE_1__.createConnectorHash),
 /* harmony export */   dfClamp: () => (/* reexport safe */ _clamp__WEBPACK_IMPORTED_MODULE_0__.dfClamp),
 /* harmony export */   dfDistanceBetweenPoints: () => (/* reexport safe */ _distance_between_points__WEBPACK_IMPORTED_MODULE_2__.dfDistanceBetweenPoints),
 /* harmony export */   dfDistanceBetweenTouches: () => (/* reexport safe */ _distance_between_touches__WEBPACK_IMPORTED_MODULE_3__.dfDistanceBetweenTouches),
@@ -4761,13 +4744,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   NgDrawFlowComponent: () => (/* binding */ NgDrawFlowComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/common */ 9191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 5536);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 1856);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 3396);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 5536);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 3396);
 /* harmony import */ var _components_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/connections/connections.service */ 9976);
 /* harmony import */ var _components_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/connections/draft-connection/draft-connection.service */ 7232);
 /* harmony import */ var _components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/pan-zoom/pan-zoom.component */ 4408);
@@ -4776,7 +4759,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _directives_resize_observer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./directives/resize-observer */ 3470);
 /* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ng-draw-flow.token */ 9497);
 /* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/coordinates.service */ 5092);
+/* harmony import */ var _services_selection_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/selection.service */ 9989);
 var _NgDrawFlowComponent;
+
 
 
 
@@ -4794,57 +4779,57 @@ var _NgDrawFlowComponent;
 
 function NgDrawFlowComponent_df_scene_2_Template(rf, ctx) {
   if (rf & 1) {
-    const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "df-scene", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("connectionCreated", function NgDrawFlowComponent_df_scene_2_Template_df_scene_connectionCreated_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
-      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r1.connectionCreated.emit($event));
+    const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "df-scene", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("connectionCreated", function NgDrawFlowComponent_df_scene_2_Template_df_scene_connectionCreated_0_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r2);
+      const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r1.connectionCreated.emit($event));
     })("connectionDeleted", function NgDrawFlowComponent_df_scene_2_Template_df_scene_connectionDeleted_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
-      const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r3.onConnectionDeleted($event));
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r2);
+      const ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r3.onConnectionDeleted($event));
     })("connectionSelected", function NgDrawFlowComponent_df_scene_2_Template_df_scene_connectionSelected_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
-      const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r4.connectionSelected.emit($event));
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r2);
+      const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r4.connectionSelected.emit($event));
     })("nodeDeleted", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeDeleted_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
-      const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r5.nodeDeleted.emit($event));
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r2);
+      const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r5.nodeDeleted.emit($event));
     })("nodeMoved", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeMoved_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
-      const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r6.nodeMoved.emit($event));
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r2);
+      const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r6.nodeMoved.emit($event));
     })("nodeSelected", function NgDrawFlowComponent_df_scene_2_Template_df_scene_nodeSelected_0_listener($event) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵrestoreView"](_r2);
-      const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresetView"](ctx_r7.nodeSelected.emit($event));
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵrestoreView"](_r2);
+      const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵresetView"](ctx_r7.nodeSelected.emit($event));
     });
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
   }
   if (rf & 2) {
-    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("formControl", ctx_r0.form);
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("formControl", ctx_r0.form);
   }
 }
 class NgDrawFlowComponent {
   constructor() {
     // This property is needed to not emit connectionDeleted events when destroying a NgDrawFlowComponent component
     this.isComponentDestroyed = false;
-    this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_8__.DestroyRef);
-    this.scale = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.connectionCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.nodeSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.nodeMoved = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.nodeDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormControl({
+    this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_9__.DestroyRef);
+    this.scale = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.connectionCreated = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.nodeSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.nodeMoved = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.nodeDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
+    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormControl({
       nodes: new Map(),
       connections: []
     });
-    this.rootReady$ = new rxjs__WEBPACK_IMPORTED_MODULE_10__.BehaviorSubject(false);
+    this.rootReady$ = new rxjs__WEBPACK_IMPORTED_MODULE_11__.BehaviorSubject(false);
     this.onChange = _ => {};
     // @ts-ignore
     this.onTouched = () => {};
@@ -4891,7 +4876,7 @@ class NgDrawFlowComponent {
     this.rootReady$.next(width && height);
   }
   watchFormChanges() {
-    this.form.valueChanges.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(Boolean), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.debounceTime)(10), (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_13__.takeUntilDestroyed)(this.destroyRef)).subscribe(value => {
+    this.form.valueChanges.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_12__.filter)(Boolean), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.debounceTime)(10), (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_14__.takeUntilDestroyed)(this.destroyRef)).subscribe(value => {
       this.onChange(value);
     });
   }
@@ -4900,16 +4885,16 @@ _NgDrawFlowComponent = NgDrawFlowComponent;
 _NgDrawFlowComponent.ɵfac = function NgDrawFlowComponent_Factory(t) {
   return new (t || _NgDrawFlowComponent)();
 };
-_NgDrawFlowComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineComponent"]({
+_NgDrawFlowComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineComponent"]({
   type: _NgDrawFlowComponent,
   selectors: [["ng-draw-flow"]],
   viewQuery: function NgDrawFlowComponent_Query(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵviewQuery"](_components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomComponent, 5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵviewQuery"](_components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomComponent, 5);
     }
     if (rf & 2) {
       let _t;
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵloadQuery"]()) && (ctx.panzoom = _t.first);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵloadQuery"]()) && (ctx.panzoom = _t.first);
     }
   },
   outputs: {
@@ -4922,40 +4907,40 @@ _NgDrawFlowComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
     nodeDeleted: "nodeDeleted"
   },
   standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵProvidersFeature"]([_components_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_3__.PanZoomService, _components_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__.ConnectionsService, _services_coordinates_service__WEBPACK_IMPORTED_MODULE_7__.CoordinatesService, _components_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__.DraftConnectionService, {
-    provide: _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NG_VALUE_ACCESSOR,
-    useExisting: (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.forwardRef)(() => _NgDrawFlowComponent),
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵProvidersFeature"]([_components_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_3__.PanZoomService, _components_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__.ConnectionsService, _services_coordinates_service__WEBPACK_IMPORTED_MODULE_7__.CoordinatesService, _components_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__.DraftConnectionService, _services_selection_service__WEBPACK_IMPORTED_MODULE_8__.SelectionService, {
+    provide: _angular_forms__WEBPACK_IMPORTED_MODULE_10__.NG_VALUE_ACCESSOR,
+    useExisting: (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.forwardRef)(() => _NgDrawFlowComponent),
     multi: true
   }, {
     provide: _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_6__.DRAW_FLOW_ROOT_ELEMENT,
     useFactory: ({
       nativeElement
     }) => nativeElement,
-    deps: [_angular_core__WEBPACK_IMPORTED_MODULE_8__.ElementRef]
-  }]), _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵStandaloneFeature"]],
+    deps: [_angular_core__WEBPACK_IMPORTED_MODULE_9__.ElementRef]
+  }]), _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵStandaloneFeature"]],
   decls: 4,
   vars: 3,
   consts: [[1, "drawflow", 3, "dfResizeObserver"], [3, "scale"], [3, "formControl", "connectionCreated", "connectionDeleted", "connectionSelected", "nodeDeleted", "nodeMoved", "nodeSelected", 4, "ngIf"], [3, "formControl", "connectionCreated", "connectionDeleted", "connectionSelected", "nodeDeleted", "nodeMoved", "nodeSelected"]],
   template: function NgDrawFlowComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "div", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("dfResizeObserver", function NgDrawFlowComponent_Template_div_dfResizeObserver_0_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "div", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("dfResizeObserver", function NgDrawFlowComponent_Template_div_dfResizeObserver_0_listener($event) {
         return ctx.onResize($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](1, "df-pan-zoom", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("scale", function NgDrawFlowComponent_Template_df_pan_zoom_scale_1_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](1, "df-pan-zoom", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("scale", function NgDrawFlowComponent_Template_df_pan_zoom_scale_1_listener($event) {
         return ctx.scale.emit($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵtemplate"](2, NgDrawFlowComponent_df_scene_2_Template, 1, 1, "df-scene", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](3, "async");
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtemplate"](2, NgDrawFlowComponent_df_scene_2_Template, 1, 1, "df-scene", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipe"](3, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](3, 1, ctx.rootReady$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵpipeBind1"](3, 1, ctx.rootReady$));
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_14__.AsyncPipe, _directives_resize_observer__WEBPACK_IMPORTED_MODULE_5__.DfResizeObserver, _angular_common__WEBPACK_IMPORTED_MODULE_14__.NgIf, _components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormControlDirective, _components_scene_scene_component__WEBPACK_IMPORTED_MODULE_4__.SceneComponent],
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_15__.AsyncPipe, _directives_resize_observer__WEBPACK_IMPORTED_MODULE_5__.DfResizeObserver, _angular_common__WEBPACK_IMPORTED_MODULE_15__.NgIf, _components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_10__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormControlDirective, _components_scene_scene_component__WEBPACK_IMPORTED_MODULE_4__.SceneComponent],
   styles: ["[_nghost-%COMP%] {\n  position: relative;\n  display: block;\n  block-size: 100%;\n  inline-size: 100%;\n  overflow: hidden;\n  --df-connection-color: #428bf9;\n  --df-connection-color-hover: #336fee;\n  --df-connection-color-active: #156ed4;\n  --df-connection-stroke-width: 2px;\n  --df-connection-selectable-area-color: rgba(66, 139, 249, 0.5);\n  --df-connection-selectable-area-stroke-width: 4px;\n  --df-connector-color: #156ed4;\n  --df-connector-color-hover: #428bf9;\n}\n.drawflow[_ngcontent-%COMP%] {\n  inline-size: 100%;\n  block-size: 100%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5nLWRyYXctZmxvdy5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUVBLDhCQUFBO0VBQ0Esb0NBQUE7RUFDQSxxQ0FBQTtFQUNBLGlDQUFBO0VBQ0EsOERBQUE7RUFDQSxpREFBQTtFQUNBLDZCQUFBO0VBQ0EsbUNBQUE7QUFBSjtBQUdBO0VBQ0ksaUJBQUE7RUFDQSxnQkFBQTtBQURKIiwiZmlsZSI6Im5nLWRyYXctZmxvdy5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYmxvY2stc2l6ZTogMTAwJTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuXG4gICAgLS1kZi1jb25uZWN0aW9uLWNvbG9yOiAjNDI4YmY5O1xuICAgIC0tZGYtY29ubmVjdGlvbi1jb2xvci1ob3ZlcjogIzMzNmZlZTtcbiAgICAtLWRmLWNvbm5lY3Rpb24tY29sb3ItYWN0aXZlOiAjMTU2ZWQ0O1xuICAgIC0tZGYtY29ubmVjdGlvbi1zdHJva2Utd2lkdGg6IDJweDtcbiAgICAtLWRmLWNvbm5lY3Rpb24tc2VsZWN0YWJsZS1hcmVhLWNvbG9yOiByZ2JhKCM0MjhiZjksIDAuNSk7XG4gICAgLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGg6IDRweDtcbiAgICAtLWRmLWNvbm5lY3Rvci1jb2xvcjogIzE1NmVkNDtcbiAgICAtLWRmLWNvbm5lY3Rvci1jb2xvci1ob3ZlcjogIzQyOGJmOTtcbn1cblxuLmRyYXdmbG93IHtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBibG9jay1zaXplOiAxMDAlO1xufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL25nLWRyYXctZmxvdy5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUVBLDhCQUFBO0VBQ0Esb0NBQUE7RUFDQSxxQ0FBQTtFQUNBLGlDQUFBO0VBQ0EsOERBQUE7RUFDQSxpREFBQTtFQUNBLDZCQUFBO0VBQ0EsbUNBQUE7QUFBSjtBQUdBO0VBQ0ksaUJBQUE7RUFDQSxnQkFBQTtBQURKOztBQUVBLHdzQ0FBd3NDIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBibG9jay1zaXplOiAxMDAlO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAtLWRmLWNvbm5lY3Rpb24tY29sb3I6ICM0MjhiZjk7XG4gICAgLS1kZi1jb25uZWN0aW9uLWNvbG9yLWhvdmVyOiAjMzM2ZmVlO1xuICAgIC0tZGYtY29ubmVjdGlvbi1jb2xvci1hY3RpdmU6ICMxNTZlZDQ7XG4gICAgLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aDogMnB4O1xuICAgIC0tZGYtY29ubmVjdGlvbi1zZWxlY3RhYmxlLWFyZWEtY29sb3I6IHJnYmEoIzQyOGJmOSwgMC41KTtcbiAgICAtLWRmLWNvbm5lY3Rpb24tc2VsZWN0YWJsZS1hcmVhLXN0cm9rZS13aWR0aDogNHB4O1xuICAgIC0tZGYtY29ubmVjdG9yLWNvbG9yOiAjMTU2ZWQ0O1xuICAgIC0tZGYtY29ubmVjdG9yLWNvbG9yLWhvdmVyOiAjNDI4YmY5O1xufVxuXG4uZHJhd2Zsb3cge1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJsb2NrLXNpemU6IDEwMCU7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
   changeDetection: 0
 });
@@ -5071,17 +5056,17 @@ class CoordinatesService {
     this.connectionPointsMap = {};
     this.connectionPointsMapChange$ = new rxjs__WEBPACK_IMPORTED_MODULE_0__.ReplaySubject(1);
   }
-  getConnectionPoint(name) {
-    return this.connectionPointsMap[name];
+  getConnectionPoint(connectorHash) {
+    return this.connectionPointsMap[connectorHash] || new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject(null);
   }
-  addConnectionPoint(name, point, position) {
-    if (this.connectionPointsMap[name]) {
-      this.connectionPointsMap[name].next({
+  addConnectionPoint(connectorHash, point, position) {
+    if (this.connectionPointsMap[connectorHash]) {
+      this.connectionPointsMap[connectorHash].next({
         point,
         position
       });
     } else {
-      this.connectionPointsMap[name] = new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject({
+      this.connectionPointsMap[connectorHash] = new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject({
         point,
         position
       });
@@ -5096,6 +5081,235 @@ _CoordinatesService.ɵfac = function CoordinatesService_Factory(t) {
 _CoordinatesService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
   token: _CoordinatesService,
   factory: _CoordinatesService.ɵfac
+});
+
+/***/ }),
+
+/***/ 9989:
+/*!*********************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/services/selection.service.ts ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   SelectionService: () => (/* binding */ SelectionService)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
+var _SelectionService;
+
+
+class SelectionService {
+  constructor() {
+    this.ngZone = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_0__.NgZone);
+    this.selectedElements = new Set();
+    this.registeredElements = new Map();
+    this.isDragging = false;
+    this.clickedOnScene = false;
+    this.startX = null;
+    this.startY = null;
+    this.dragThreshold = 5;
+    this.currentTarget = null;
+    // Use NgZone.runOutsideAngular to prevent change detection
+    // from running on every mouse event
+    this.ngZone.runOutsideAngular(() => {
+      document.addEventListener('mousedown', this.onMouseDown.bind(this));
+      document.addEventListener('mousemove', this.onMouseMove.bind(this));
+      document.addEventListener('mouseup', this.onMouseUp.bind(this));
+    });
+  }
+  ngOnDestroy() {
+    document.removeEventListener('mousedown', this.onMouseDown.bind(this));
+    document.removeEventListener('mousemove', this.onMouseMove.bind(this));
+    document.removeEventListener('mouseup', this.onMouseUp.bind(this));
+    this.registeredElements.clear();
+    this.selectedElements.clear();
+  }
+  /**
+   * Registers an element for selection tracking
+   * @param element HTML element to track
+   * @param callback Callback function triggered when selection changes
+   * @returns Function to unregister
+   */
+  registerElement(element, callback) {
+    this.registeredElements.set(element, {
+      element,
+      callback
+    });
+    // Return a function to unregister
+    return () => {
+      this.unregisterElement(element);
+    };
+  }
+  /**
+   * Unregisters an element
+   * @param element HTML element to unregister
+   */
+  unregisterElement(element) {
+    if (this.selectedElements.has(element)) {
+      this.selectedElements.delete(element);
+    }
+    this.registeredElements.delete(element);
+  }
+  /**
+   * Selects an element
+   * @param element HTML element to select
+   * @param exclusive If true, deselects all other elements
+   */
+  selectElement(element, exclusive = true) {
+    if (exclusive) {
+      this.clearSelection(element);
+    }
+    if (!this.selectedElements.has(element)) {
+      this.selectedElements.add(element);
+      const item = this.registeredElements.get(element);
+      if (item) {
+        // Run callback inside Angular zone for change detection
+        this.ngZone.run(() => {
+          item.callback(true);
+        });
+      }
+    }
+  }
+  /**
+   * Deselects an element
+   * @param element HTML element to deselect
+   */
+  deselectElement(element) {
+    if (this.selectedElements.has(element)) {
+      this.selectedElements.delete(element);
+      const item = this.registeredElements.get(element);
+      if (item) {
+        this.ngZone.run(() => {
+          item.callback(false);
+        });
+      }
+    }
+  }
+  /**
+   * Clears selection of all elements except the excluded one
+   * @param exceptElement Element to exclude from clearing
+   */
+  clearSelection(exceptElement) {
+    this.selectedElements.forEach(element => {
+      if (element !== exceptElement) {
+        this.deselectElement(element);
+      }
+    });
+  }
+  /**
+   * Checks if an element is selected
+   * @param element HTML element to check
+   * @returns true if the element is selected
+   */
+  isSelected(element) {
+    return this.selectedElements.has(element);
+  }
+  /**
+   * Gets all selected elements
+   * @returns Array of selected HTML elements
+   */
+  getSelectedElements() {
+    return Array.from(this.selectedElements);
+  }
+  /**
+   * Mouse down event handler
+   */
+  onMouseDown(event) {
+    this.startX = event.clientX;
+    this.startY = event.clientY;
+    this.isDragging = false;
+    this.currentTarget = event.target;
+    // Find the nearest registered element
+    const targetElement = this.findRegisteredParent(this.currentTarget);
+    // If clicked on a registered element
+    if (targetElement) {
+      // If Ctrl or Shift key is pressed, add to selection
+      const multiSelect = event.ctrlKey || event.shiftKey;
+      this.selectElement(targetElement, !multiSelect);
+    }
+    // If clicked on the scene and it's not the start of dragging
+    else if (this.currentTarget.dataset.element === 'scene') {
+      // Remember that the click was on the scene
+      this.clickedOnScene = true;
+    }
+  }
+  /**
+   * Mouse move event handler
+   */
+  onMouseMove(event) {
+    if (!this.startX || !this.startY) {
+      return;
+    }
+    const dx = event.clientX - this.startX;
+    const dy = event.clientY - this.startY;
+    // Check if the drag threshold has been exceeded
+    if (!this.isDragging && Math.sqrt(dx * dx + dy * dy) > this.dragThreshold) {
+      this.isDragging = true;
+    }
+  }
+  /**
+   * Mouse up event handler
+   */
+  onMouseUp(event) {
+    const target = event.target;
+    // If it was dragging and releasing on the scene,
+    // just reset the state without changing the selection
+    if (this.isDragging) {
+      this.reset();
+      return;
+    }
+    // If it was a click (not dragging)
+    const targetElement = this.findRegisteredParent(target);
+    // If clicked on a registered element
+    if (targetElement) {
+      // If Ctrl or Shift key is pressed, toggle selection
+      if (event.ctrlKey || event.shiftKey) {
+        if (this.isSelected(targetElement)) {
+          this.deselectElement(targetElement);
+        } else {
+          this.selectElement(targetElement, false);
+        }
+      }
+    }
+    // If clicked on the scene (not while dragging)
+    else if (this.clickedOnScene && !this.isDragging) {
+      // Clear selection only when clicking on the scene, not when dragging
+      this.clearSelection();
+    }
+    this.reset();
+  }
+  /**
+   * Finds the closest parent element that is registered in the service
+   */
+  findRegisteredParent(element) {
+    let current = element;
+    while (current) {
+      if (this.registeredElements.has(current)) {
+        return current;
+      }
+      current = current.parentElement;
+    }
+    return null;
+  }
+  /**
+   * Resets the drag state
+   */
+  reset() {
+    this.startX = null;
+    this.startY = null;
+    this.isDragging = false;
+    this.currentTarget = null;
+    this.clickedOnScene = false; // Reset the scene click flag
+  }
+}
+_SelectionService = SelectionService;
+_SelectionService.ɵfac = function SelectionService_Factory(t) {
+  return new (t || _SelectionService)();
+};
+_SelectionService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+  token: _SelectionService,
+  factory: _SelectionService.ɵfac
 });
 
 /***/ })
