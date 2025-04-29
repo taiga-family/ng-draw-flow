@@ -110,10 +110,7 @@ export class ConnectionComponent {
                     );
                 case DfConnectionType.Bezier:
                 default: {
-                    const distance = calculateDistance(
-                        start.coordinates,
-                        end.coordinates,
-                    );
+                    const distance = calculateDistance(start.point, end.point);
                     const maxCurvature = this.options.connection.curvature;
                     const curvature = calculateCurvature(distance, maxCurvature);
 

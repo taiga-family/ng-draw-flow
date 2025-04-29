@@ -39,12 +39,12 @@ export class DraftConnectionService implements OnDestroy {
     private sourceConnector!: DfDataConnector;
 
     public source: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
-        coordinates: INITIAL_COORDINATES,
+        point: INITIAL_COORDINATES,
         position: DfConnectorPosition.Right,
     });
 
     public target: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
-        coordinates: INITIAL_COORDINATES,
+        point: INITIAL_COORDINATES,
         position: DfConnectorPosition.Left,
     });
 
@@ -113,9 +113,9 @@ export class DraftConnectionService implements OnDestroy {
 
         this.target.set({
             position: target.position,
-            coordinates: {
-                x: target.coordinates.x + deltaX / zoom,
-                y: target.coordinates.y + deltaY / zoom,
+            point: {
+                x: target.point.x + deltaX / zoom,
+                y: target.point.y + deltaY / zoom,
             },
         });
     }
@@ -157,11 +157,11 @@ export class DraftConnectionService implements OnDestroy {
 
     private resetConnectors(): void {
         this.source.set({
-            coordinates: INITIAL_COORDINATES,
+            point: INITIAL_COORDINATES,
             position: DfConnectorPosition.Right,
         });
         this.target.set({
-            coordinates: INITIAL_COORDINATES,
+            point: INITIAL_COORDINATES,
             position: null,
         });
     }

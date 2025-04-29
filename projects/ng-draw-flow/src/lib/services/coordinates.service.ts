@@ -21,15 +21,15 @@ export class CoordinatesService {
 
     public addConnectionPoint(
         connectorHash: string,
-        coordinates: DfPoint,
+        point: DfPoint,
         position: DfConnectorPosition,
     ): void {
         if (this.connectionPointsMap[connectorHash]) {
-            this.connectionPointsMap[connectorHash].next({coordinates, position});
+            this.connectionPointsMap[connectorHash].next({point, position});
         } else {
             this.connectionPointsMap[connectorHash] =
                 new BehaviorSubject<DfConnectorData>({
-                    coordinates,
+                    point,
                     position,
                 });
         }

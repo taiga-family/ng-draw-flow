@@ -24,8 +24,8 @@ export function createSmoothstepPath(
     endConnector: DfConnectorData,
     radius: number,
 ): string {
-    const {x: startX, y: startY} = startConnector.coordinates;
-    const {x: endX, y: endY} = endConnector.coordinates;
+    const {x: startX, y: startY} = startConnector.point;
+    const {x: endX, y: endY} = endConnector.point;
     const startConnectorPosition = startConnector.position;
     const endConnectorPosition = endConnector.position;
 

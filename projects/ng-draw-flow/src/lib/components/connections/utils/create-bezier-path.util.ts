@@ -6,9 +6,9 @@ export function createBezierPath(
     endConnector: DfConnectorData,
     curvature: number,
 ): string {
-    const {x: startX, y: startY} = startConnector.coordinates;
+    const {x: startX, y: startY} = startConnector.point;
     const startConnectorPosition = startConnector.position;
-    const {x: endX, y: endY} = endConnector.coordinates;
+    const {x: endX, y: endY} = endConnector.point;
     const endConnectorPosition = endConnector.position;
 
     if (
