@@ -9,17 +9,31 @@ export class ConnectionsService {
     public readonly usedConnectors$ = new BehaviorSubject<string[]>([]);
 
     public addConnections(connections: DfDataConnection[]): void {
-        connections.forEach((connection) => {
-            const usedConnectors = [
-                ...this.usedConnectors$.value,
-                connection.source.connectorId,
-                connection.target.connectorId,
-            ];
+        const newConnections = connections.filter(
+            (newConnection) =>
+                !this.connections$.value.some((existingConnection) =>
+                    this.areConnectionsEqual(existingConnection, newConnection),
+                ),
+        );
 
-            this.usedConnectors$.next(usedConnectors);
+        if (newConnections.length === 0) {
+            return;
+        }
+
+        const updatedUsedConnectors = [...this.usedConnectors$.value];
+
+        newConnections.forEach((connection) => {
+            if (!updatedUsedConnectors.includes(connection.source.connectorId)) {
+                updatedUsedConnectors.push(connection.source.connectorId);
+            }
+
+            if (!updatedUsedConnectors.includes(connection.target.connectorId)) {
+                updatedUsedConnectors.push(connection.target.connectorId);
+            }
         });
 
-        this.connections$.next([...this.connections$.value, ...connections]);
+        this.usedConnectors$.next(updatedUsedConnectors);
+        this.connections$.next([...this.connections$.value, ...newConnections]);
     }
 
     public removeConnection(connectionToRemove: DfDataConnection): void {

@@ -17,7 +17,7 @@ import {merge} from 'rxjs';
 import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {SelectableElementDirective} from '../../directives/selectable-element';
-import {connectorName} from '../../helpers';
+import {createConnectorHash} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
     DfDataInitialNode,
@@ -153,7 +153,11 @@ export class NodeComponent implements AfterViewInit {
         const centeredPosition = this.getCenteredPosition();
 
         this.panZoomService.panzoomDisabled = true;
-        this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition);
+        this.applyPositionToStyle(
+            this.nodeElementRef.nativeElement,
+            centeredPosition,
+            true,
+        );
         this.recalculateConnectorsPosition(distance);
     }
 
@@ -161,6 +165,13 @@ export class NodeComponent implements AfterViewInit {
         this.cursor = 'initial';
         this.panZoomService.panzoomDisabled = false;
         this.nodeMoved.emit(this.value);
+        const centeredPosition = this.getCenteredPosition();
+
+        this.applyPositionToStyle(
+            this.nodeElementRef.nativeElement,
+            centeredPosition,
+            false,
+        );
     }
 
     private fillValue(): void {
@@ -245,7 +256,7 @@ export class NodeComponent implements AfterViewInit {
             y: (connector.coordinates?.y ?? 0) + distance.deltaY,
         };
 
-        const connectorData = connectorName({
+        const connectorData = createConnectorHash({
             nodeId: connector.data.nodeId,
             connectorType,
             connectorId: connector.data.connectorId,
@@ -273,7 +284,7 @@ export class NodeComponent implements AfterViewInit {
 
         connector.coordinates = calculatedConnectorPosition;
 
-        const connectorData = connectorName({
+        const connectorData = createConnectorHash({
             nodeId,
             connectorType,
             connectorId: connector.nativeElement.dataset.connectorId,
@@ -305,8 +316,18 @@ export class NodeComponent implements AfterViewInit {
         return {x, y};
     }
 
-    private applyPositionToStyle(element: HTMLElement, position: DfPoint): void {
-        element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
+    private applyPositionToStyle(
+        element: HTMLElement,
+        position: DfPoint,
+        dynamic: boolean,
+    ): void {
+        if (dynamic) {
+            element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
+
+            return;
+        }
+
+        element.style.transform = `translate(${position.x}px, ${position.y}px)`;
     }
 
     private getCenteredPosition(): DfPoint {
@@ -411,6 +432,10 @@ export class NodeComponent implements AfterViewInit {
     private setInitialPosition(): void {
         const centeredPosition = this.getCenteredPosition();
 
-        this.applyPositionToStyle(this.nodeElementRef.nativeElement, centeredPosition);
+        this.applyPositionToStyle(
+            this.nodeElementRef.nativeElement,
+            centeredPosition,
+            false,
+        );
     }
 }

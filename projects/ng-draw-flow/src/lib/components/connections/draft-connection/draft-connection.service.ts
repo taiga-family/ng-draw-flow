@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 
 import {
-    connectorName,
+    createConnectorHash,
     dfDistanceBetweenPoints,
     INITIAL_COORDINATES,
 } from '../../../helpers';
@@ -91,8 +91,8 @@ export class DraftConnectionService implements OnDestroy {
     private onDragStart(connector: DfDataConnector): void {
         this.sourceConnector = connector;
         this.isConnectionCreating$.next(true);
-        const sourceId = connectorName(connector);
-        const sourcePoint: DfConnectorData | undefined =
+        const sourceId = createConnectorHash(connector);
+        const sourcePoint: DfConnectorData | null =
             this.coordinatesService.getConnectionPoint(sourceId)?.value;
 
         if (!sourcePoint) {

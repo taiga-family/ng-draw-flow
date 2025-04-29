@@ -14,23 +14,24 @@ export class CoordinatesService {
     public connectionPointsMapChange$: ReplaySubject<void> = new ReplaySubject<void>(1);
 
     public getConnectionPoint(
-        name: string,
-    ): BehaviorSubject<DfConnectorData> | undefined {
-        return this.connectionPointsMap[name];
+        connectorHash: string,
+    ): BehaviorSubject<DfConnectorData> | BehaviorSubject<null> {
+        return this.connectionPointsMap[connectorHash] || new BehaviorSubject(null);
     }
 
     public addConnectionPoint(
-        name: string,
+        connectorHash: string,
         point: DfPoint,
         position: DfConnectorPosition,
     ): void {
-        if (this.connectionPointsMap[name]) {
-            this.connectionPointsMap[name].next({point, position});
+        if (this.connectionPointsMap[connectorHash]) {
+            this.connectionPointsMap[connectorHash].next({point, position});
         } else {
-            this.connectionPointsMap[name] = new BehaviorSubject<DfConnectorData>({
-                point,
-                position,
-            });
+            this.connectionPointsMap[connectorHash] =
+                new BehaviorSubject<DfConnectorData>({
+                    point,
+                    position,
+                });
         }
 
         this.connectionPointsMapChange$.next();
