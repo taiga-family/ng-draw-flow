@@ -4,8 +4,11 @@
     left: 0;
     pointer-events: none;
     aspect-ratio: 1 / 1;
+    shape-rendering: auto;
 
-    &.optimizeSpeed {
+    &.optimize-speed {
+        shape-rendering: optimizespeed;
+
         .main-path {
             transform: translateZ(0);
         }

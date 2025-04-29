@@ -1,4 +1,4 @@
-<svg class="connection" [class]="shapeRendering$ | async">
+<svg class="connection" [class.optimize-speed]="optimization$ | async">
     <path
         dfSelectableElement
         class="selectable-area"

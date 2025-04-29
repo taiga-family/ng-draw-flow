@@ -36,8 +36,6 @@ import {ConnectionsService} from '../connections.service';
 import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
 import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
 
-type ShapeRendering = 'auto' | 'optimizeSpeed';
-
 @Component({
     standalone: true,
     selector: 'df-connection',
@@ -125,15 +123,10 @@ export class ConnectionComponent {
         }),
     );
 
-    protected shapeRendering$: Observable<ShapeRendering> = this.path$.pipe(
+    protected optimization$: Observable<boolean> = this.path$.pipe(
         skip(1),
-        switchMap(() =>
-            concat(
-                of<ShapeRendering>('optimizeSpeed'),
-                of<ShapeRendering>('auto').pipe(delay(400)),
-            ),
-        ),
-        startWith<ShapeRendering>('auto'),
+        switchMap(() => concat(of(true), of(false).pipe(delay(400)))),
+        startWith(false),
         distinctUntilChanged(),
     );
 
