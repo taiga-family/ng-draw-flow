@@ -47,6 +47,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 })
 export class NodeComponent implements AfterViewInit {
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly drawFlowComponents = inject<DfOptions>(DRAW_FLOW_OPTIONS).nodes;
@@ -54,13 +55,11 @@ export class NodeComponent implements AfterViewInit {
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
 
-    private readonly isDynamicComponentCreated = false;
-    private nodeContentComponentRef!: ComponentRef<any>;
-    private readonly destroyRef = inject(DestroyRef);
+    private innerComponent!: DrawFlowBaseNode;
+    private nodeContentComponentRef!: ComponentRef<DrawFlowBaseNode>;
     private nodeWidth!: number;
     private nodeHeight!: number;
     private selected = false;
-    private innerComponent!: DrawFlowBaseNode;
     private value!: any;
 
     @ViewChild('nodeElement')
@@ -101,10 +100,6 @@ export class NodeComponent implements AfterViewInit {
     }
 
     protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {
-        if (this.isDynamicComponentCreated) {
-            return;
-        }
-
         const {id: nodeId, startNode, endNode, data} = node;
         const nodeType = data.type;
 
@@ -153,11 +148,7 @@ export class NodeComponent implements AfterViewInit {
         const centeredPosition = this.getCenteredPosition();
 
         this.panZoomService.panzoomDisabled = true;
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            true,
-        );
+        this.applyPositionToStyle(centeredPosition, true);
         this.recalculateConnectorsPosition(distance);
     }
 
@@ -167,11 +158,7 @@ export class NodeComponent implements AfterViewInit {
         this.nodeMoved.emit(this.value);
         const centeredPosition = this.getCenteredPosition();
 
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            false,
-        );
+        this.applyPositionToStyle(centeredPosition, false);
     }
 
     private fillValue(): void {
@@ -316,18 +303,10 @@ export class NodeComponent implements AfterViewInit {
         return {x, y};
     }
 
-    private applyPositionToStyle(
-        element: HTMLElement,
-        position: DfPoint,
-        dynamic: boolean,
-    ): void {
-        if (dynamic) {
-            element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
-
-            return;
-        }
-
-        element.style.transform = `translate(${position.x}px, ${position.y}px)`;
+    private applyPositionToStyle(position: DfPoint, dynamic: boolean): void {
+        this.nodeElementRef.nativeElement.style.transform = dynamic
+            ? `translate3D(${position.x}px, ${position.y}px, 0)`
+            : `translate(${position.x}px, ${position.y}px)`;
     }
 
     private getCenteredPosition(): DfPoint {
@@ -336,18 +315,21 @@ export class NodeComponent implements AfterViewInit {
             leftPosition: panZoomLeftPosition,
             topPosition: panZoomTopPosition,
         } = this.panZoomOptions;
+        const halfOfNodeWidth = this.nodeWidth / 2;
+        const halfOfNodeHeight = this.nodeHeight / 2;
+        const halfOfPanSize = panSize / 2;
 
         const centeredPosition = {
-            x: this.value.position.x + panSize / 2 - this.nodeWidth / 2,
-            y: this.value.position.y + panSize / 2 - this.nodeHeight / 2,
+            x: this.value.position.x + halfOfPanSize - halfOfNodeWidth,
+            y: this.value.position.y + halfOfPanSize - halfOfNodeHeight,
         };
 
         if (panZoomTopPosition || panZoomTopPosition === 0) {
-            centeredPosition.y += this.nodeHeight / 2;
+            centeredPosition.y += halfOfNodeHeight;
         }
 
         if (panZoomLeftPosition || panZoomLeftPosition === 0) {
-            centeredPosition.x += this.nodeWidth / 2;
+            centeredPosition.x += halfOfNodeWidth;
         }
 
         return centeredPosition;
@@ -387,15 +369,16 @@ export class NodeComponent implements AfterViewInit {
             leftPosition: panZoomLeftPosition,
             topPosition: panZoomTopPosition,
         } = this.panZoomOptions;
+        const halfOfPanSize = panSize / 2;
 
         // Get current pan position
-        const scaledPanPositionX = panSize / 2 + (panPositionX * -1) / zoom;
-        const scaledPanPositionY = panSize / 2 + (panPositionY * -1) / zoom;
+        const scaledPanPositionX = halfOfPanSize + (panPositionX * -1) / zoom;
+        const scaledPanPositionY = halfOfPanSize + (panPositionY * -1) / zoom;
 
         // Calculating the centre of the visible part of the viewport relative to the whole board
         const position = {
-            x: scaledPanPositionX - panSize / 2,
-            y: scaledPanPositionY - panSize / 2,
+            x: scaledPanPositionX - halfOfPanSize,
+            y: scaledPanPositionY - halfOfPanSize,
         };
 
         if (panZoomLeftPosition) {
@@ -432,10 +415,6 @@ export class NodeComponent implements AfterViewInit {
     private setInitialPosition(): void {
         const centeredPosition = this.getCenteredPosition();
 
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            false,
-        );
+        this.applyPositionToStyle(centeredPosition, false);
     }
 }
