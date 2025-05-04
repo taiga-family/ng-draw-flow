@@ -1,9 +1,14 @@
 import type {QueryList} from '@angular/core';
-import {Directive, HostBinding, Input, ViewChildren} from '@angular/core';
+import {Directive, EventEmitter, Input, Output, ViewChildren} from '@angular/core';
 
 import {DfInputComponent, DfOutputComponent} from './components/connectors';
 
-@Directive()
+@Directive({
+    standalone: true,
+    host: {
+        '[class.df-selected]': 'this.selected',
+    },
+})
 export abstract class DrawFlowBaseNode {
     @ViewChildren(DfInputComponent)
     public inputs!: QueryList<DfInputComponent>; // Needed for access from the outside
@@ -23,6 +28,8 @@ export abstract class DrawFlowBaseNode {
     @Input()
     public endNode? = false;
 
-    @HostBinding('class.df-selected')
+    @Output()
+    public readonly connectorsUpdated = new EventEmitter<void>();
+
     public selected = false;
 }
