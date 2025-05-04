@@ -12,7 +12,7 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {merge} from 'rxjs';
+import {auditTime, EMPTY, merge} from 'rxjs';
 
 import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
@@ -336,29 +336,15 @@ export class NodeComponent implements AfterViewInit {
     }
 
     private subscribeToConnectorsChanges(): void {
-        const connectorsUpdates$ = [];
+        const changes$ = merge(
+            this.innerComponent.connectorsUpdated ?? EMPTY,
+            this.innerComponent.inputs?.changes ?? EMPTY,
+            this.innerComponent.outputs?.changes ?? EMPTY,
+        );
 
-        if (this.nodeContentComponentRef.instance?.connectorsUpdated) {
-            connectorsUpdates$.push(
-                this.nodeContentComponentRef.instance.connectorsUpdated,
-            );
-        }
-
-        if (this.innerComponent.inputs?.changes) {
-            connectorsUpdates$.push(this.innerComponent.inputs.changes);
-        }
-
-        if (this.innerComponent.outputs?.changes) {
-            connectorsUpdates$.push(this.innerComponent.outputs.changes);
-        }
-
-        if (connectorsUpdates$.length > 0) {
-            merge(...connectorsUpdates$)
-                .pipe(takeUntilDestroyed(this.destroyRef))
-                .subscribe(() => {
-                    this.updateConnectorsCoordinates();
-                });
-        }
+        changes$
+            .pipe(auditTime(0), takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.updateConnectorsCoordinates());
     }
 
     private getCenterOfViewport(): DfPoint {
