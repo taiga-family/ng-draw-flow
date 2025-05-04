@@ -7,12 +7,13 @@ import {
     DestroyRef,
     EventEmitter,
     forwardRef,
+    HostBinding,
     inject,
     Output,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import type {ControlValueAccessor, FormControl} from '@angular/forms';
-import {FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
+import type {ControlValueAccessor} from '@angular/forms';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {filter} from 'rxjs';
 
 import type {
@@ -42,13 +43,16 @@ import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
             multi: true,
         },
     ],
+    host: {
+        'data-element': 'scene',
+    },
 })
 export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly connectionsService = inject(ConnectionsService);
     private readonly draftConnectionService = inject(DraftConnectionService);
-    private readonly fb = inject(FormBuilder);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
 
     @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
@@ -70,10 +74,13 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     @Output()
     protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
 
-    protected form: FormControl = this.fb.control({});
+    @HostBinding('style.height.px')
+    protected heightStyle = this.panSize;
+
+    @HostBinding('style.width.px')
+    protected widthStyle = this.panSize;
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
-    protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
     protected model!: DfDataModel;
 
     public ngOnInit(): void {
@@ -124,7 +131,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         return data.key;
     }
 
-    protected trackByConnectionsFn(_index: number, connection: DfDataConnection): any {
+    protected trackByConnectionsFn(_index: number, connection: DfDataConnection): string {
         return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
     }
 
@@ -137,7 +144,6 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
             return;
         }
 
-        this.form.setValue(value);
         this.model = value;
         this.connectionsService.addConnections(this.model.connections);
 

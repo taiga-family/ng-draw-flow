@@ -1,5 +1,12 @@
 import type {QueryList} from '@angular/core';
-import {Directive, HostBinding, Input, ViewChildren} from '@angular/core';
+import {
+    Directive,
+    EventEmitter,
+    HostBinding,
+    Input,
+    Output,
+    ViewChildren,
+} from '@angular/core';
 
 import {DfInputComponent, DfOutputComponent} from './components/connectors';
 
@@ -22,6 +29,9 @@ export abstract class DrawFlowBaseNode {
 
     @Input()
     public endNode? = false;
+
+    @Output()
+    public readonly connectorsUpdated = new EventEmitter<void>();
 
     @HostBinding('class.df-selected')
     public selected = false;

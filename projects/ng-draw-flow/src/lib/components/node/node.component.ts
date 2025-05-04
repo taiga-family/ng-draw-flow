@@ -1,10 +1,11 @@
-import type {AfterViewInit, ComponentRef, ElementRef} from '@angular/core';
+import type {AfterViewInit, ComponentRef} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     DestroyRef,
     EventEmitter,
+    HostBinding,
     inject,
     Input,
     Output,
@@ -12,7 +13,7 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {merge} from 'rxjs';
+import {merge, throttleTime} from 'rxjs';
 
 import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
@@ -37,15 +38,30 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
     standalone: true,
     selector: 'df-node',
     imports: [DragDropDirective, SelectableElementDirective],
-    templateUrl: './node.component.html',
+    template: '<ng-container #container />',
     styleUrls: ['./node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    hostDirectives: [
+        {
+            directive: DragDropDirective,
+            outputs: ['dfDragDrop'],
+        },
+        {
+            directive: SelectableElementDirective,
+            outputs: ['selectionChanged'],
+        },
+    ],
     host: {
-        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
-        '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
+        '(document:keydown.delete)': 'handleKeyboardEvent($event)',
+        '(document:keydown.backspace)': 'handleKeyboardEvent($event)',
+        '(selectionChanged)': 'onSelectedChanged($event)',
+        '(dfDragDrop)': 'onDrag($event)',
+        'data-draw-flow-node': '',
+        'style.transform': 'transformStyle',
     },
 })
 export class NodeComponent implements AfterViewInit {
+    private readonly destroyRef = inject(DestroyRef);
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
@@ -54,17 +70,18 @@ export class NodeComponent implements AfterViewInit {
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
 
-    private readonly isDynamicComponentCreated = false;
-    private nodeContentComponentRef!: ComponentRef<any>;
-    private readonly destroyRef = inject(DestroyRef);
+    private innerComponent!: DrawFlowBaseNode;
+    private nodeContentComponentRef!: ComponentRef<DrawFlowBaseNode>;
     private nodeWidth!: number;
     private nodeHeight!: number;
     private selected = false;
-    private innerComponent!: DrawFlowBaseNode;
     private value!: any;
 
-    @ViewChild('nodeElement')
-    private readonly nodeElementRef!: ElementRef<HTMLElement>;
+    @HostBinding('style.transform')
+    protected transformStyle = '';
+
+    @HostBinding('style.cursor')
+    protected cursor: 'grabbing' | 'initial' = 'initial';
 
     @ViewChild('container', {read: ViewContainerRef})
     private readonly containerRef!: ViewContainerRef;
@@ -80,8 +97,6 @@ export class NodeComponent implements AfterViewInit {
 
     @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
-
-    protected cursor: 'grabbing' | 'initial' = 'initial';
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.selected && !this.node.startNode) {
@@ -101,10 +116,6 @@ export class NodeComponent implements AfterViewInit {
     }
 
     protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {
-        if (this.isDynamicComponentCreated) {
-            return;
-        }
-
         const {id: nodeId, startNode, endNode, data} = node;
         const nodeType = data.type;
 
@@ -153,11 +164,7 @@ export class NodeComponent implements AfterViewInit {
         const centeredPosition = this.getCenteredPosition();
 
         this.panZoomService.panzoomDisabled = true;
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            true,
-        );
+        this.applyPositionToStyle(centeredPosition, true);
         this.recalculateConnectorsPosition(distance);
     }
 
@@ -167,11 +174,7 @@ export class NodeComponent implements AfterViewInit {
         this.nodeMoved.emit(this.value);
         const centeredPosition = this.getCenteredPosition();
 
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            false,
-        );
+        this.applyPositionToStyle(centeredPosition, false);
     }
 
     private fillValue(): void {
@@ -316,18 +319,14 @@ export class NodeComponent implements AfterViewInit {
         return {x, y};
     }
 
-    private applyPositionToStyle(
-        element: HTMLElement,
-        position: DfPoint,
-        dynamic: boolean,
-    ): void {
+    private applyPositionToStyle(position: DfPoint, dynamic: boolean): void {
         if (dynamic) {
-            element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
+            this.transformStyle = `translate3D(${position.x}px, ${position.y}px, 0)`;
 
             return;
         }
 
-        element.style.transform = `translate(${position.x}px, ${position.y}px)`;
+        this.transformStyle = `translate(${position.x}px, ${position.y}px)`;
     }
 
     private getCenteredPosition(): DfPoint {
@@ -372,7 +371,7 @@ export class NodeComponent implements AfterViewInit {
 
         if (connectorsUpdates$.length > 0) {
             merge(...connectorsUpdates$)
-                .pipe(takeUntilDestroyed(this.destroyRef))
+                .pipe(throttleTime(16), takeUntilDestroyed(this.destroyRef))
                 .subscribe(() => {
                     this.updateConnectorsCoordinates();
                 });
@@ -432,10 +431,6 @@ export class NodeComponent implements AfterViewInit {
     private setInitialPosition(): void {
         const centeredPosition = this.getCenteredPosition();
 
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            false,
-        );
+        this.applyPositionToStyle(centeredPosition, false);
     }
 }
