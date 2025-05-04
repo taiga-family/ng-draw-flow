@@ -11,8 +11,8 @@ import {
     Output,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import type {ControlValueAccessor, FormControl} from '@angular/forms';
-import {FormBuilder, NG_VALUE_ACCESSOR} from '@angular/forms';
+import type {ControlValueAccessor} from '@angular/forms';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
 import {filter} from 'rxjs';
 
 import type {
@@ -42,12 +42,16 @@ import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
             multi: true,
         },
     ],
+    host: {
+        'data-element': 'scene',
+        '[style.height.px]': 'this.panSize',
+        '[style.width.px]': 'this.panSize',
+    },
 })
 export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly connectionsService = inject(ConnectionsService);
     private readonly draftConnectionService = inject(DraftConnectionService);
-    private readonly fb = inject(FormBuilder);
     private readonly destroyRef = inject(DestroyRef);
 
     @Output()
@@ -69,8 +73,6 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
 
     @Output()
     protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
-
-    protected form: FormControl = this.fb.control({});
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
@@ -124,7 +126,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         return data.key;
     }
 
-    protected trackByConnectionsFn(_index: number, connection: DfDataConnection): any {
+    protected trackByConnectionsFn(_index: number, connection: DfDataConnection): string {
         return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
     }
 
@@ -137,7 +139,6 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
             return;
         }
 
-        this.form.setValue(value);
         this.model = value;
         this.connectionsService.addConnections(this.model.connections);
 
