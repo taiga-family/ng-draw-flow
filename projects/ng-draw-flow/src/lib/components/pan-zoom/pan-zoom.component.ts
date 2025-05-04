@@ -17,10 +17,7 @@ import {
     merge,
     startWith,
     Subject,
-    take,
     tap,
-    throttleTime,
-    timer,
 } from 'rxjs';
 
 import type {DfDragDrop} from '../../directives/drag-drop';
@@ -80,9 +77,8 @@ export class PanZoomComponent {
         ),
         fromEvent(this.el.nativeElement, 'touchmove', {
             passive: true,
-        }).pipe(throttleTime(16), map(DF_FALSE_HANDLER)),
+        }).pipe(map(DF_FALSE_HANDLER)),
         fromEvent(this.el.nativeElement, 'wheel', {passive: true}).pipe(
-            throttleTime(16),
             map(DF_FALSE_HANDLER),
         ),
     );
@@ -185,10 +181,10 @@ export class PanZoomComponent {
         const {x, y} = this.coordinates$.value;
 
         this.coordinates$.next(this.getGuardedCoordinates(x, y));
-
-        timer(this.zoomAnimationDuration)
-            .pipe(take(1))
-            .subscribe(() => this.manualZoomAnimation$.next(false));
+        setTimeout(
+            () => this.manualZoomAnimation$.next(false),
+            this.zoomAnimationDuration,
+        );
     }
 
     private processZoom(clientX: number, clientY: number, delta: number): void {

@@ -1,9 +1,8 @@
-:host {
+.draw-flow-node {
     position: absolute;
     top: 0;
     left: 0;
     z-index: 2;
-    display: block;
     touch-action: none;
 
     &.df-selected {
@@ -12,5 +11,11 @@
 
     &:hover {
         will-change: transform;
+    }
+
+    .drag-handle {
+        position: absolute;
+        inline-size: 100%;
+        block-size: 100%;
     }
 }

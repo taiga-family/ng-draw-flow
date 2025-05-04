@@ -7,7 +7,6 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import {deepEqual} from 'fast-equals';
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
     asyncScheduler,
@@ -64,7 +63,18 @@ export class ConnectionComponent {
     @Output()
     protected readonly connectionSelected = new EventEmitter<void>();
 
-    protected readonly path$: Observable<string> = of(null).pipe(
+    protected handleKeyboardEvent(event: KeyboardEvent): void {
+        if (!this.selected) {
+            return;
+        }
+
+        event.preventDefault();
+
+        this.connectionsService.removeConnection(this.connection);
+        this.connectionDeleted.emit();
+    }
+
+    protected path$: Observable<string> = of(null).pipe(
         observeOn(asyncScheduler),
         switchMap(() =>
             combineLatest([
@@ -81,7 +91,11 @@ export class ConnectionComponent {
 
             return of([sourcePoint, targetPoint]);
         }),
-        distinctUntilChanged(deepEqual),
+        distinctUntilChanged(
+            ([prevSource, prevTarget], [currSource, currTarget]) =>
+                JSON.stringify(prevSource) === JSON.stringify(currSource) &&
+                JSON.stringify(prevTarget) === JSON.stringify(currTarget),
+        ),
         map(([start, end]) => {
             if (!start || !end) {
                 return '';
@@ -106,23 +120,12 @@ export class ConnectionComponent {
         }),
     );
 
-    protected readonly optimization$: Observable<boolean> = this.path$.pipe(
+    protected optimization$: Observable<boolean> = this.path$.pipe(
         skip(1),
         switchMap(() => concat(of(true), of(false).pipe(delay(400)))),
         startWith(false),
         distinctUntilChanged(),
     );
-
-    protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (!this.selected) {
-            return;
-        }
-
-        event.preventDefault();
-
-        this.connectionsService.removeConnection(this.connection);
-        this.connectionDeleted.emit();
-    }
 
     protected onSelectedChanged(selected: boolean): void {
         this.selected = selected;
