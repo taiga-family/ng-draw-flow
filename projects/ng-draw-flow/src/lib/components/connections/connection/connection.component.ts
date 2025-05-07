@@ -1,4 +1,4 @@
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, NgIf} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -40,7 +40,7 @@ import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoot
 @Component({
     standalone: true,
     selector: 'df-connection',
-    imports: [AsyncPipe, SelectableElementDirective],
+    imports: [AsyncPipe, NgIf, SelectableElementDirective],
     templateUrl: './connection.component.svg',
     styleUrls: ['../connection.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,

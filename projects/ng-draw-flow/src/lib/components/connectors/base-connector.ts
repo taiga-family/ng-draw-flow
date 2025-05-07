@@ -1,4 +1,4 @@
-import {DestroyRef, Directive, ElementRef, HostBinding, inject} from '@angular/core';
+import {Directive, ElementRef, HostBinding, inject} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {filter} from 'rxjs';
 
@@ -13,7 +13,6 @@ import {ConnectionsService} from '../connections/connections.service';
 @Directive()
 export abstract class BaseConnector {
     protected abstract data: DfDataConnectorConfig;
-    protected readonly destroyRef = inject(DestroyRef);
     protected isDisabled = false;
     public coordinates?: DfPoint;
     public position?: DfConnectorPosition;
