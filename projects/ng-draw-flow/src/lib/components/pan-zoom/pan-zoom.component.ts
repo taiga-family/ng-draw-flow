@@ -1,4 +1,4 @@
-import {AsyncPipe, NgIf} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,22 +7,24 @@ import {
     inject,
     Output,
 } from '@angular/core';
-import {RESIZE_OPTION_BOX, ResizeObserverService} from '@ng-web-apis/resize-observer';
-import type {Observable} from 'rxjs';
-import {
+import {ResizeObserverService} from '@ng-web-apis/resize-observer';
+import type {
     BehaviorSubject,
     combineLatest,
     fromEvent,
     map,
     merge,
+    Observable,
     startWith,
     Subject,
+    take,
     tap,
+    throttleTime,
+    timer,
 } from 'rxjs';
 
 import type {DfDragDrop} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
-import {DfResizeObserver} from '../../directives/resize-observer';
 import {DF_FALSE_HANDLER, dfClamp, dfPx, INITIAL_COORDINATES} from '../../helpers';
 import type {DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
@@ -36,17 +38,11 @@ import type {DfZoom} from './zoom/zoom.interfaces';
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [AsyncPipe, DfResizeObserver, DragDropDirective, NgIf, ZoomDirective],
+    imports: [AsyncPipe, DragDropDirective, ZoomDirective],
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        ResizeObserverService,
-        {
-            provide: RESIZE_OPTION_BOX,
-            useValue: 'border-box',
-        },
-    ],
+    providers: [ResizeObserverService],
 })
 export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -75,10 +71,12 @@ export class PanZoomComponent {
         this.dragStage$.pipe(
             map((stage: DfDragDropStage) => stage !== DfDragDropStage.Move),
         ),
-        fromEvent(this.el.nativeElement, 'touchmove', {
-            passive: true,
-        }).pipe(map(DF_FALSE_HANDLER)),
+        fromEvent(this.el.nativeElement, 'touchmove', {passive: true}).pipe(
+            throttleTime(16, undefined, {leading: true, trailing: true}),
+            map(DF_FALSE_HANDLER),
+        ),
         fromEvent(this.el.nativeElement, 'wheel', {passive: true}).pipe(
+            throttleTime(16, undefined, {leading: true, trailing: true}),
             map(DF_FALSE_HANDLER),
         ),
     );
@@ -181,10 +179,10 @@ export class PanZoomComponent {
         const {x, y} = this.coordinates$.value;
 
         this.coordinates$.next(this.getGuardedCoordinates(x, y));
-        setTimeout(
-            () => this.manualZoomAnimation$.next(false),
-            this.zoomAnimationDuration,
-        );
+
+        timer(this.zoomAnimationDuration)
+            .pipe(take(1))
+            .subscribe(() => this.manualZoomAnimation$.next(false));
     }
 
     private processZoom(clientX: number, clientY: number, delta: number): void {

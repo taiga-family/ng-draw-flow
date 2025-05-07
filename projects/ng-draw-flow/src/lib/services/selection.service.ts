@@ -18,21 +18,24 @@ export class SelectionService implements OnDestroy {
     private startY: number | null = null;
     private readonly dragThreshold = 5;
     private currentTarget: HTMLElement | null = null;
+    private readonly boundMouseDown = this.onMouseDown.bind(this);
+    private readonly boundMouseMove = this.onMouseMove.bind(this);
+    private readonly boundMouseUp = this.onMouseUp.bind(this);
 
     constructor() {
         // Use NgZone.runOutsideAngular to prevent change detection
         // from running on every mouse event
         this.ngZone.runOutsideAngular(() => {
-            document.addEventListener('mousedown', this.onMouseDown.bind(this));
-            document.addEventListener('mousemove', this.onMouseMove.bind(this));
-            document.addEventListener('mouseup', this.onMouseUp.bind(this));
+            document.addEventListener('mousedown', this.boundMouseDown);
+            document.addEventListener('mousemove', this.boundMouseMove);
+            document.addEventListener('mouseup', this.boundMouseUp);
         });
     }
 
     public ngOnDestroy(): void {
-        document.removeEventListener('mousedown', this.onMouseDown.bind(this));
-        document.removeEventListener('mousemove', this.onMouseMove.bind(this));
-        document.removeEventListener('mouseup', this.onMouseUp.bind(this));
+        document.removeEventListener('mousedown', this.boundMouseDown);
+        document.removeEventListener('mousemove', this.boundMouseMove);
+        document.removeEventListener('mouseup', this.boundMouseUp);
 
         this.registeredElements.clear();
         this.selectedElements.clear();
