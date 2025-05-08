@@ -1,9 +1,11 @@
-import type {AfterViewInit, ComponentRef, ElementRef} from '@angular/core';
-import {
+import type {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ComponentRef,
     DestroyRef,
+    ElementRef,
     EventEmitter,
     inject,
     Input,

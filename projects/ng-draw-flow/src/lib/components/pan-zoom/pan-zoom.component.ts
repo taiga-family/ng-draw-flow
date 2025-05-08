@@ -8,13 +8,13 @@ import {
     Output,
 } from '@angular/core';
 import {ResizeObserverService} from '@ng-web-apis/resize-observer';
-import type {
+import type {Observable} from 'rxjs';
+import {
     BehaviorSubject,
     combineLatest,
     fromEvent,
     map,
     merge,
-    Observable,
     startWith,
     Subject,
     take,
@@ -42,7 +42,6 @@ import type {DfZoom} from './zoom/zoom.interfaces';
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ResizeObserverService],
 })
 export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
