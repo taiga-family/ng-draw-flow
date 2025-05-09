@@ -17,7 +17,7 @@ import {auditTime, EMPTY, merge} from 'rxjs';
 import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {SelectableElementDirective} from '../../directives/selectable-element';
-import {createConnectorHash} from '../../helpers';
+import {createConnectorHash, INITIAL_COORDINATES} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
     DfDataInitialNode,
@@ -51,6 +51,8 @@ export class NodeComponent implements AfterViewInit {
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly drawFlowComponents = inject<DfOptions>(DRAW_FLOW_OPTIONS).nodes;
+    private readonly nodeDragThreshold =
+        inject<DfOptions>(DRAW_FLOW_OPTIONS).options.nodeDragThreshold;
 
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
@@ -61,6 +63,7 @@ export class NodeComponent implements AfterViewInit {
     private nodeHeight!: number;
     private selected = false;
     private value!: any;
+    private accumulatedDelta: DfPoint = INITIAL_COORDINATES;
 
     @ViewChild('nodeElement')
     private readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -144,21 +147,46 @@ export class NodeComponent implements AfterViewInit {
 
         this.cursor = 'grabbing';
 
-        this.value.position = this.calculatePosition(distance, zoom);
-        const centeredPosition = this.getCenteredPosition();
+        // Accumulate offset
+        this.accumulatedDelta.x += distance.deltaX / zoom;
+        this.accumulatedDelta.y += distance.deltaY / zoom;
+
+        const applyX = Math.abs(this.accumulatedDelta.x) >= this.nodeDragThreshold;
+        const applyY = Math.abs(this.accumulatedDelta.y) >= this.nodeDragThreshold;
+
+        if (applyX || applyY) {
+            // Apply accumulated offset
+            this.value.position.x += applyX ? this.accumulatedDelta.x : 0;
+            this.value.position.y += applyY ? this.accumulatedDelta.y : 0;
+
+            const centeredPosition = this.getCenteredPosition();
+
+            this.applyPositionToStyle(centeredPosition, true);
+            this.recalculateConnectorsPosition({
+                deltaX: applyX ? this.accumulatedDelta.x * zoom : 0,
+                deltaY: applyY ? this.accumulatedDelta.y * zoom : 0,
+            });
+
+            // Reset only used directions
+            if (applyX) {
+                this.accumulatedDelta.x = 0;
+            }
+
+            if (applyY) {
+                this.accumulatedDelta.y = 0;
+            }
+        }
 
         this.panZoomService.panzoomDisabled = true;
-        this.applyPositionToStyle(centeredPosition, true);
-        this.recalculateConnectorsPosition(distance);
     }
 
     private onDragEnd(): void {
         this.cursor = 'initial';
         this.panZoomService.panzoomDisabled = false;
         this.nodeMoved.emit(this.value);
-        const centeredPosition = this.getCenteredPosition();
+        this.applyPositionToStyle(this.getCenteredPosition(), false);
 
-        this.applyPositionToStyle(centeredPosition, false);
+        this.accumulatedDelta = INITIAL_COORDINATES;
     }
 
     private fillValue(): void {
@@ -382,20 +410,6 @@ export class NodeComponent implements AfterViewInit {
         }
 
         return position;
-    }
-
-    private calculatePosition(
-        distance: DfDragDropDistance,
-        zoom: number,
-    ): DfPoint | null {
-        if (!('position' in this.value)) {
-            return null;
-        }
-
-        return {
-            x: this.value.position.x + distance.deltaX / zoom,
-            y: this.value.position.y + distance.deltaY / zoom,
-        };
     }
 
     private setInitialPosition(): void {
