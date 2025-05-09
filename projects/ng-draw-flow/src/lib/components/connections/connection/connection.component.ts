@@ -10,6 +10,7 @@ import {
 import {deepEqual} from 'fast-equals';
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
+    animationFrameScheduler,
     asyncScheduler,
     combineLatest,
     concat,
@@ -82,6 +83,7 @@ export class ConnectionComponent {
             return of([sourcePoint, targetPoint]);
         }),
         distinctUntilChanged(deepEqual),
+        observeOn(animationFrameScheduler),
         map(([start, end]) => {
             if (!start || !end) {
                 return '';
