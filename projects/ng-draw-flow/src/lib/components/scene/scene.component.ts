@@ -161,6 +161,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
             )
             .subscribe((connections: DfDataConnection[]) => {
                 this.model.connections = connections;
+                this.cdr.markForCheck();
             });
     }
 
