@@ -24,6 +24,16 @@ export const appRoutes: Routes = [
         },
     },
     {
+        path: DemoPath.ConfigurationAndPublicApi,
+        loadComponent: async () =>
+            import(
+                '../pages/documentation/configuration-and-public-api/configuration-and-public-api.component'
+            ),
+        data: {
+            title: 'Configuration & Public API',
+        },
+    },
+    {
         path: DemoPath.PanZoom,
         loadComponent: async () =>
             import(
