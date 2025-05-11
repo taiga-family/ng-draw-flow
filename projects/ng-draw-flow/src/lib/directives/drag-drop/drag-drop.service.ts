@@ -1,16 +1,15 @@
-import {DestroyRef, ElementRef, inject, Injectable} from '@angular/core';
+import {ElementRef, inject, Injectable} from '@angular/core';
 import {
     animationFrameScheduler,
     fromEvent,
     map,
     Observable,
+    observeOn,
     pairwise,
     repeat,
-    Subject,
     switchMap,
     takeUntil,
     tap,
-    throttleTime,
 } from 'rxjs';
 
 import {
@@ -24,11 +23,7 @@ import type {DfDragDrop} from './drag-drop.interface';
 @Injectable()
 export class DragDropService extends Observable<DfDragDrop> {
     constructor() {
-        const nativeElement = inject(ElementRef).nativeElement;
-        const destroyRef = inject(DestroyRef);
-        const destroy$ = new Subject<void>();
-
-        destroyRef.onDestroy(() => destroy$.next());
+        const nativeElement = inject(ElementRef<Element>).nativeElement;
 
         super((subscriber) => {
             const pointerDown$ = fromEvent<PointerEvent>(
@@ -41,38 +36,49 @@ export class DragDropService extends Observable<DfDragDrop> {
             ).pipe(dfPreventDefault());
             const pointerUp$ = fromEvent<PointerEvent>(nativeElement, 'pointerup');
 
-            const sub = pointerDown$
+            pointerDown$
                 .pipe(
-                    tap((e) => nativeElement.setPointerCapture(e.pointerId)),
+                    tap((event: PointerEvent) =>
+                        (
+                            (event.target as HTMLElement) || nativeElement
+                        ).setPointerCapture(event.pointerId),
+                    ),
                     switchMap(() => pointerMove$),
-                    throttleTime(16, animationFrameScheduler, {
-                        leading: true,
-                        trailing: true,
-                    }),
+                    observeOn(animationFrameScheduler),
                     pairwise(),
-                    map(([start, end]) => ({
-                        sourceElement: nativeElement,
-                        distance: dfDistanceBetweenPoints(start, end),
-                        stage: DfDragDropStage.Move,
-                    })),
+                    map(([first, second]) => {
+                        const {deltaX, deltaY} = dfDistanceBetweenPoints(first, second);
+
+                        return {
+                            sourceElement: nativeElement,
+                            distance: {
+                                deltaX,
+                                deltaY,
+                            },
+                            stage: DfDragDropStage.Move,
+                        };
+                    }),
+                    // eslint-disable-next-line rxjs/no-unsafe-takeuntil
                     takeUntil(
                         pointerUp$.pipe(
-                            tap((e) => {
-                                nativeElement.releasePointerCapture(e.pointerId);
+                            tap((event: PointerEvent) => {
+                                (
+                                    (event.target as HTMLElement) || nativeElement
+                                ).releasePointerCapture(event.pointerId);
                                 subscriber.next({
                                     sourceElement: nativeElement,
-                                    distance: {deltaX: 0, deltaY: 0},
+                                    distance: {
+                                        deltaX: 0,
+                                        deltaY: 0,
+                                    },
                                     stage: DfDragDropStage.End,
                                 });
                             }),
                         ),
                     ),
                     repeat(),
-                    takeUntil(destroy$),
                 )
                 .subscribe(subscriber);
-
-            return () => sub.unsubscribe();
         });
     }
 }
