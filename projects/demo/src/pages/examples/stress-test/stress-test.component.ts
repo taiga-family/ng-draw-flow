@@ -9,8 +9,8 @@ import {
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {MarkdownModule} from 'ngx-markdown';
 
-const ROWS_COUNT = 13;
-const COLUMNS_COUNT = 13;
+const ROWS_COUNT = 23;
+const COLUMNS_COUNT = 23;
 
 @Component({
     standalone: true,

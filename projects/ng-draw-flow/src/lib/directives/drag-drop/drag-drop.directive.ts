@@ -1,13 +1,9 @@
-import {Directive, inject} from '@angular/core';
+import {Directive, inject, Output} from '@angular/core';
 
 import {DragDropService} from './drag-drop.service';
 
-@Directive({
-    standalone: true,
-    selector: '[dfDragDrop]',
-    outputs: ['dfDragDrop'],
-    providers: [DragDropService],
-})
+@Directive({standalone: true, selector: '[dfDragDrop]', providers: [DragDropService]})
 export class DragDropDirective {
-    protected readonly dfDragDrop = inject(DragDropService);
+    @Output()
+    public readonly dfDragDrop = inject(DragDropService);
 }

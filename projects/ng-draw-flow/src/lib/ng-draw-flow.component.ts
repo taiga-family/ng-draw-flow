@@ -69,6 +69,7 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
     private isComponentDestroyed = false;
 
     private readonly destroyRef = inject(DestroyRef);
+    private readonly connectionsService = inject(ConnectionsService);
 
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
@@ -135,6 +136,10 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
 
     public resetPosition(): void {
         this.panzoom.resetPanzoom();
+    }
+
+    public removeConnection(connection: DfDataConnection): void {
+        this.connectionsService.removeConnection(connection);
     }
 
     protected onConnectionDeleted(connection: DfEvent<DfDataConnection>): void {

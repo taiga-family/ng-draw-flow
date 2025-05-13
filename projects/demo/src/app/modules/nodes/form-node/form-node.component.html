@@ -8,7 +8,10 @@
     {{ model.text }}
 </div>
 
-<form [formGroup]="form">
+<form
+    tuiTheme="light"
+    [formGroup]="form"
+>
     <div
         *ngFor="let fieldName of fieldNames; let i = index"
         [formGroupName]="fieldName"

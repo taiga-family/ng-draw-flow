@@ -1,6 +1,7 @@
 export const DemoPath = {
     Quickstart: 'documentation/quickstart',
     TermsAndDefinitions: 'documentation/terms-and-definitions',
+    ConfigurationAndPublicApi: 'documentation/configuration-and-public-api',
     PanZoom: 'documentation/pan-zoom-configuration',
     Nodes: 'documentation/creating-nodes',
     Connectors: 'documentation/connectors',

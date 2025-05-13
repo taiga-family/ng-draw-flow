@@ -11,6 +11,9 @@ export const DRAW_FLOW_DEFAULT_OPTIONS: DfOptions = {
         curvature: 50,
     },
     nodes: {},
+    options: {
+        nodeDragThreshold: 1,
+    },
 };
 
 export const DRAW_FLOW_OPTIONS = new InjectionToken('[DRAW_FLOW_OPTIONS]: Options', {

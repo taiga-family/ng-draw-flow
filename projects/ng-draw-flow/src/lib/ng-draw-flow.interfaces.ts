@@ -24,6 +24,9 @@ export interface DfConnectionOptions {
 export interface DfOptions {
     connection: DfConnectionOptions;
     nodes: DfComponents;
+    options: {
+        nodeDragThreshold: number;
+    };
 }
 
 export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;
