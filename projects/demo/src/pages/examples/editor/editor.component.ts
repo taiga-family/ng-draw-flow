@@ -25,6 +25,8 @@ import {TuiButton} from '@taiga-ui/core';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject} from 'rxjs';
 
+import {dfIsolatedNodesValidator} from '../../../../../ng-draw-flow/src/lib/validators/isolated-nodes/isolated-nodes.validator';
+
 @Component({
     standalone: true,
     selector: 'editor',
@@ -136,7 +138,10 @@ export default class EditorComponent implements OnInit {
     public currentScale$: BehaviorSubject<number> = new BehaviorSubject<number>(100);
     public fullscreen$ = new BehaviorSubject<boolean>(false);
     public counter = 0;
-    public form = new FormControl<DfDataModel>(this.data, [dfCycleDetectionValidator()]);
+    public form = new FormControl<DfDataModel>(this.data, [
+        dfCycleDetectionValidator(),
+        dfIsolatedNodesValidator(),
+    ]);
 
     public ngOnInit(): void {
         this.form.statusChanges.subscribe((v) => {
