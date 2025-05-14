@@ -1,4 +1,10 @@
-import type {AfterViewInit, ComponentRef, ElementRef} from '@angular/core';
+import type {
+    AfterViewInit,
+    ComponentRef,
+    ElementRef,
+    OnChanges,
+    SimpleChanges,
+} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -14,9 +20,12 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {merge} from 'rxjs';
 
-import type {DfDragDrop, DfDragDropDistance} from '../../directives/drag-drop';
-import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
-import {SelectableElementDirective} from '../../directives/selectable-element';
+import type {DfDragDrop, DfDragDropDistance} from '../../directives';
+import {
+    DfDragDropStage,
+    DragDropDirective,
+    SelectableElementDirective,
+} from '../../directives';
 import {createConnectorHash} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
@@ -45,7 +54,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
         '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
     },
 })
-export class NodeComponent implements AfterViewInit {
+export class NodeComponent implements AfterViewInit, OnChanges {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
@@ -72,6 +81,9 @@ export class NodeComponent implements AfterViewInit {
     @Input()
     public node!: DfDataInitialNode | DfDataNode;
 
+    @Input()
+    public invalid = false;
+
     @Output()
     protected readonly nodeMoved = new EventEmitter<DfDataNode>();
 
@@ -91,6 +103,12 @@ export class NodeComponent implements AfterViewInit {
         }
     }
 
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes.invalid && this.innerComponent) {
+            this.innerComponent.invalid = changes.invalid.currentValue;
+        }
+    }
+
     public ngAfterViewInit(): void {
         this.createNodeContentComponent(this.node);
         this.subscribeToConnectorsChanges();
@@ -98,6 +116,11 @@ export class NodeComponent implements AfterViewInit {
         this.fillValue();
         this.setInitialPosition();
         this.updateConnectorsCoordinates();
+
+        if (this.invalid) {
+            this.innerComponent.invalid = true;
+            this.cdr.markForCheck();
+        }
     }
 
     protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {

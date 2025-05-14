@@ -21,7 +21,7 @@ import {DraftConnectionService} from './components/connections/draft-connection/
 import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
-import {DfResizeObserver} from './directives/resize-observer';
+import {DfResizeObserver, ErrorsDirective} from './directives';
 import type {
     DfDataConnection,
     DfDataModel,
@@ -30,6 +30,7 @@ import type {
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
+import {InvalidNodesService} from './services/invalid-nodes.service';
 import {SelectionService} from './services/selection.service';
 
 @Component({
@@ -51,6 +52,7 @@ import {SelectionService} from './services/selection.service';
         ConnectionsService,
         CoordinatesService,
         DraftConnectionService,
+        InvalidNodesService,
         SelectionService,
         {
             provide: NG_VALUE_ACCESSOR,
@@ -63,6 +65,7 @@ import {SelectionService} from './services/selection.service';
             deps: [ElementRef],
         },
     ],
+    hostDirectives: [ErrorsDirective],
 })
 export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDestroy {
     // This property is needed to not emit connectionDeleted events when destroying a NgDrawFlowComponent component
