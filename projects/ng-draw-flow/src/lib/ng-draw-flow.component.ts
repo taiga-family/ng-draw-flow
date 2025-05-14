@@ -137,10 +137,26 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
         this.panzoom.resetPanzoom();
     }
 
-    protected onConnectionDeleted(connection: DfEvent<DfDataConnection>): void {
+    protected onConnectionCreated(event: DfEvent<DfDataConnection>): void {
+        this.connectionCreated.emit(event);
+        this.form.setValue(event.model);
+    }
+
+    protected onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
         if (!this.isComponentDestroyed) {
-            this.connectionDeleted.emit(connection);
+            this.form.setValue(event.model);
+            this.connectionDeleted.emit(event);
         }
+    }
+
+    protected onNodeDeleted(event: DfEvent<DfDataNode>): void {
+        this.nodeDeleted.emit(event);
+        this.form.setValue(event.model);
+    }
+
+    protected onNodeMoved(event: DfEvent<DfDataNode>): void {
+        this.nodeMoved.emit(event);
+        this.form.setValue(event.model);
     }
 
     protected onResize(event: any): void {

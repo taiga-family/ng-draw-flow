@@ -6,11 +6,11 @@
         <df-scene
             *ngIf="rootReady$ | async"
             [formControl]="form"
-            (connectionCreated)="connectionCreated.emit($event)"
+            (connectionCreated)="onConnectionCreated($event)"
             (connectionDeleted)="onConnectionDeleted($event)"
             (connectionSelected)="connectionSelected.emit($event)"
-            (nodeDeleted)="nodeDeleted.emit($event)"
-            (nodeMoved)="nodeMoved.emit($event)"
+            (nodeDeleted)="onNodeDeleted($event)"
+            (nodeMoved)="onNodeMoved($event)"
             (nodeSelected)="nodeSelected.emit($event)"
         />
     </df-pan-zoom>

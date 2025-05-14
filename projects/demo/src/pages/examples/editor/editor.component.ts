@@ -1,4 +1,5 @@
 import {AsyncPipe, CommonModule} from '@angular/common';
+import type {OnInit} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -14,6 +15,7 @@ import type {
 } from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
+    dfCycleDetectionValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
@@ -45,7 +47,7 @@ import {BehaviorSubject} from 'rxjs';
         }),
     ],
 })
-export default class EditorComponent {
+export default class EditorComponent implements OnInit {
     @ViewChild(NgDrawFlowComponent)
     public editor?: NgDrawFlowComponent;
 
@@ -134,7 +136,17 @@ export default class EditorComponent {
     public currentScale$: BehaviorSubject<number> = new BehaviorSubject<number>(100);
     public fullscreen$ = new BehaviorSubject<boolean>(false);
     public counter = 0;
-    public form = new FormControl<DfDataModel>(this.data);
+    public form = new FormControl<DfDataModel>(this.data, [dfCycleDetectionValidator()]);
+
+    public ngOnInit(): void {
+        this.form.statusChanges.subscribe((v) => {
+            console.warn(v, 'onStatusChange');
+        });
+
+        this.form.valueChanges.subscribe((v) => {
+            console.warn(v, 'onValueChange');
+        });
+    }
 
     public onScaleChange(zoomLevel: number): void {
         this.currentScale$.next(zoomLevel);

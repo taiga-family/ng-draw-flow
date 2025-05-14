@@ -5,3 +5,4 @@ export * from './lib/ng-draw-flow.configs';
 export * from './lib/ng-draw-flow.interfaces';
 export * from './lib/ng-draw-flow.token';
 export * from './lib/ng-draw-flow-node.base';
+export * from './lib/validators';
