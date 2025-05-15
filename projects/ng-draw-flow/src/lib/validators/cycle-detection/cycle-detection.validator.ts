@@ -5,6 +5,14 @@ import {buildAdjacencyMap, findCycleNodes, generateConnectionsHash} from './help
 
 /**
  * Validator for checking cycles in a graph
+ *
+ * ### Validation error shape
+ * ```ts
+ * {
+ *   hasCycle: true,
+ *   cycleNodes: DfId[] // array of nodeIds that form a cycle
+ * }
+ * ```
  * @returns ValidatorFn that returns an error if a cycle is detected in the graph
  */
 export function dfCycleDetectionValidator(): ValidatorFn {

@@ -16,6 +16,7 @@ import type {
 import {
     DfConnectionPoint,
     dfCycleDetectionValidator,
+    dfIsolatedNodesValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
@@ -24,8 +25,6 @@ import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {TuiButton} from '@taiga-ui/core';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject} from 'rxjs';
-
-import {dfIsolatedNodesValidator} from '../../../../../ng-draw-flow/src/lib/validators/isolated-nodes/isolated-nodes.validator';
 
 @Component({
     standalone: true,

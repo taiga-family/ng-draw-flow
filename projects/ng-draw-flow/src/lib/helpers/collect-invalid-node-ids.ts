@@ -19,5 +19,5 @@ export function collectInvalidNodeIds(errors: ValidationErrors | null): Set<stri
         })
         .reduce<string[]>((acc, arr) => acc.concat(arr), []);
 
-    return new Set(allIds); // uniq
+    return new Set(allIds);
 }

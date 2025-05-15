@@ -5,6 +5,7 @@ export const DemoPath = {
     Nodes: 'documentation/creating-nodes',
     Connectors: 'documentation/connectors',
     Connections: 'documentation/connections',
+    Validation: 'documentation/validation',
     SimpleExample: 'examples/simple-example',
     Overview: 'examples/overview',
     Editor: 'examples/editor',

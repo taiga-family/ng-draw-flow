@@ -7,7 +7,7 @@ import type {DfDataConnection, DfDataModel, DfId} from '@ng-draw-flow/core';
  * ### Validation error shape
  * ```ts
  * {
- *   hasIsolatedNodes: true,
+ *   hasIsolatedNodes: boolean;
  *   isolatedNodes: DfId[] // array of nodeIds without connections
  * }
  * ```
@@ -44,7 +44,7 @@ export function dfIsolatedNodesValidator(): ValidatorFn {
             return {
                 hasIsolatedNodes: true,
                 isolatedNodes,
-            } as ValidationErrors;
+            };
         }
 
         // All nodes have at least one connection

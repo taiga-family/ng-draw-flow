@@ -72,11 +72,4 @@ export abstract class DrawFlowBaseNode {
      */
     @HostBinding('class.df-invalid')
     public invalid = false;
-
-    /**
-     * Validates the node's internal state.
-     * Can be overridden by derived classes to implement custom validation logic.
-     * The global validator will iterate through all nodes and call this method.
-     */
-    public checkValidity(): void {}
 }
