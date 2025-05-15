@@ -22,7 +22,7 @@ import {
     switchMap,
 } from 'rxjs';
 
-import {SelectableElementDirective} from '../../../directives/selectable-element';
+import {SelectableElementDirective} from '../../../directives';
 import {createConnectorHash} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {

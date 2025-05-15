@@ -21,6 +21,7 @@ import type {
     DfDataNode,
     DfEvent,
 } from '../../ng-draw-flow.interfaces';
+import {InvalidNodesService} from '../../services/invalid-nodes.service';
 import {ConnectionComponent} from '../connections/connection/connection.component';
 import {ConnectionsService} from '../connections/connections.service';
 import {DraftConnectionComponent} from '../connections/draft-connection/draft-connection.component';
@@ -49,6 +50,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly fb = inject(FormBuilder);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly invalidNodesService = inject(InvalidNodesService);
 
     @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
@@ -75,6 +77,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
     protected model!: DfDataModel;
+    protected invalidNodes$ = this.invalidNodesService.invalidIds$;
 
     public ngOnInit(): void {
         this.initializeConnectionsSubscription();
