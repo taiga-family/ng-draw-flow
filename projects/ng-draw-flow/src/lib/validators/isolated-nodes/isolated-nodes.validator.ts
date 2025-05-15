@@ -1,5 +1,6 @@
 import type {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
-import type {DfDataConnection, DfDataModel, DfId} from '@ng-draw-flow/core';
+
+import type {DfDataConnection, DfDataModel, DfId} from '../../ng-draw-flow.interfaces';
 
 /**
  * Validator that checks for *isolated* (disconnected) nodes — nodes that do **not** appear in any connection.
