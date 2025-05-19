@@ -135,7 +135,15 @@ class EditorComponent {
     this.currentScale$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject(100);
     this.fullscreen$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__.BehaviorSubject(false);
     this.counter = 0;
-    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);
+    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data, [(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfCycleDetectionValidator)(), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfIsolatedNodesValidator)()]);
+  }
+  ngOnInit() {
+    this.form.statusChanges.subscribe(v => {
+      console.warn(v, 'onStatusChange');
+    });
+    this.form.valueChanges.subscribe(v => {
+      console.warn(v, 'onValueChange');
+    });
   }
   onScaleChange(zoomLevel) {
     this.currentScale$.next(zoomLevel);

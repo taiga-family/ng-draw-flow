@@ -23,15 +23,20 @@ var _StressTestComponent;
 
 
 
-const ROWS_COUNT = 13;
-const COLUMNS_COUNT = 13;
+const ROWS_COUNT = 23;
+const COLUMNS_COUNT = 23;
 class StressTestComponent {
   constructor() {
     this.data = {
       nodes: this.createNodesMap(ROWS_COUNT, COLUMNS_COUNT),
       connections: this.createConnectionsArray(ROWS_COUNT, COLUMNS_COUNT)
     };
-    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__.FormControl(this.data);
+    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__.FormControl(this.data, [(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfCycleDetectionValidator)()]);
+  }
+  ngOnInit() {
+    this.form.statusChanges.subscribe(s => {
+      console.warn(s, this.form, 'form status');
+    });
   }
   createNodesMap(rows, columns) {
     const nodesMap = new Map();
