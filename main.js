@@ -4360,6 +4360,7 @@ class ErrorsDirective {
   constructor() {
     this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_2__.DestroyRef);
     this.ngControl = (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.inject)(_angular_forms__WEBPACK_IMPORTED_MODULE_3__.NgControl);
+    this.$invalidNodes = (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.inject)(_validators_invalid_nodes_token__WEBPACK_IMPORTED_MODULE_1__.INVALID_NODES);
   }
   ngOnInit() {
     if (!this.ngControl?.control) {
@@ -4377,7 +4378,7 @@ class ErrorsDirective {
       }
       return true;
     }), (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_7__.takeUntilDestroyed)(this.destroyRef)).subscribe(idsSet => {
-      (0,_angular_core__WEBPACK_IMPORTED_MODULE_2__.inject)(_validators_invalid_nodes_token__WEBPACK_IMPORTED_MODULE_1__.INVALID_NODES).set(Array.from(idsSet));
+      this.$invalidNodes.set(Array.from(idsSet));
     });
   }
 }
