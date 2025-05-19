@@ -1,3 +1,10 @@
+### [0.10.1](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.0...v0.10.1) (2025-05-19)
+
+### 🐞 Bug Fixes
+
+- inject INVALID_NODES on injection context
+  [(989b36d)](https://github.com/taiga-family/ng-draw-flow/commit/989b36d4cf4885be08988805c8a470c01d3029ad)
+
 ### [0.10.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.9.0...v0.10.0) (2025-05-19)
 
 ### 🚀 Features
