@@ -1,3 +1,31 @@
+### [0.10.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.9.0...v0.10.0) (2025-05-19)
+
+### 🚀 Features
+
+- create cycle-detection validator
+  [(798a772)](https://github.com/taiga-family/ng-draw-flow/commit/798a772ec4783bfb97cf71e157de1b168f2394ec)
+- add validation documentation
+  [(39c2cb9)](https://github.com/taiga-family/ng-draw-flow/commit/39c2cb98cba292986f48db4ad98051a81581e193)
+- implement visual feedback for invalid nodes
+  [(d5b84e2)](https://github.com/taiga-family/ng-draw-flow/commit/d5b84e2a088043c0f5b7fbc0713af0b5a1c687a8)
+- implement visual feedback for invalid nodes
+  [(b568a20)](https://github.com/taiga-family/ng-draw-flow/commit/b568a20dda84953cf10797b0bbf7f1a662fce876)
+- refactor invalid state handling and remove commented-out code
+  [(81e6906)](https://github.com/taiga-family/ng-draw-flow/commit/81e6906cc0b80d26a9c2a77579a9f17115bca3c9)
+- create isolated-nodes validator
+  [(0922add)](https://github.com/taiga-family/ng-draw-flow/commit/0922addd9c7b6804795aaf5c49c5472465fdeeb0)
+- replace InvalidNodesService with INVALID_NODES token
+  [(e775a44)](https://github.com/taiga-family/ng-draw-flow/commit/e775a44a882e98eca3a1c814cc30592d47c66944)
+- implement visual feedback for invalid nodes
+  [(64a2119)](https://github.com/taiga-family/ng-draw-flow/commit/64a2119cdcc946061e3cba7907cd0cab898aeb98)
+- export errors directive
+  [(193cc23)](https://github.com/taiga-family/ng-draw-flow/commit/193cc23971997a1ade21fde72c7a30adb8cb3a90)
+
+### 🐞 Bug Fixes
+
+- correct import paths and update directive export
+  [(2103465)](https://github.com/taiga-family/ng-draw-flow/commit/2103465762d73731ccad297231ab2248f1bd6a23)
+
 ### [0.9.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.8.0...v0.9.0) (2025-04-29)
 
 ### 🚀 Features
