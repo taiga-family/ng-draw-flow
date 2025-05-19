@@ -9,6 +9,7 @@ import {DfInputComponent, DfOutputComponent} from './components/connectors';
  */
 @Directive()
 export abstract class DrawFlowBaseNode {
+    private invalidState = false;
     /**
      * Collection of input connectors for this node.
      * Accessible from outside to monitor changes in the number of inputs.
@@ -71,5 +72,11 @@ export abstract class DrawFlowBaseNode {
      * @default false
      */
     @HostBinding('class.df-invalid')
-    public invalid = false;
+    public get invalid(): boolean {
+        return this.invalidState;
+    }
+
+    public set invalid(value: boolean) {
+        this.invalidState = value;
+    }
 }

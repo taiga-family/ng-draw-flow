@@ -1,12 +1,10 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Injectable, signal} from '@angular/core';
 
 @Injectable()
 export class InvalidNodesService {
-    private readonly invalidIdsStore$ = new BehaviorSubject<Set<string>>(new Set());
-    public readonly invalidIds$ = this.invalidIdsStore$.asObservable();
+    public readonly $invalidIds = signal<Set<string>>(new Set());
 
     public setInvalidId(ids: string[]): void {
-        this.invalidIdsStore$.next(new Set(ids));
+        this.$invalidIds.set(new Set(ids));
     }
 }

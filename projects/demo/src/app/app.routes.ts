@@ -49,14 +49,6 @@ export const appRoutes: Routes = [
             title: 'Connectors',
         },
     },
-    // {
-    //     path: DemoPath.Connections,
-    //     loadComponent: async () =>
-    //         import('../pages/documentation/connections/connections.component'),
-    //     data: {
-    //         title: 'Connections',
-    //     },
-    // },
     {
         path: DemoPath.Validation,
         loadComponent: async () =>

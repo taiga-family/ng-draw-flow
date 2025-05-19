@@ -27,11 +27,6 @@ export const DEMO_PAGES: TuiDocRoutePages = [
         title: 'Connectors',
         route: DemoPath.Connectors,
     },
-    // {
-    //     section: 'Documentation',
-    //     title: 'Connections',
-    //     route: DemoPath.Connections,
-    // },
     {
         section: 'Documentation',
         title: 'Validation',

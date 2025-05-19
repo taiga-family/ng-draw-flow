@@ -14,7 +14,7 @@
     '(keydown.backspace.stop)': '0',
   },
 })
-export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit {
+export class FormNodeComponent extends DrawFlowBaseNode {
   public form = new FormGroup<NodeForm>({
     field1: new FormGroup<NodeFormGroup>({
       connectorId: new FormControl<string>('node-5-output-1'),
@@ -26,26 +26,9 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
     }),
   });
 
-  private readonly destroyRef = inject(DestroyRef);
-
-  public ngAfterViewInit(): void {
-    merge(
-      ...Object.values(this.form.controls).map((control) =>
-        control.controls.fieldValue.statusChanges.pipe(distinctUntilChanged()),
-      ),
-    )
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-        this.checkFormValidity();
-      });
-  }
-
-  private checkFormValidity(): void {
-    this.invalid = Object.values(this.form.controls).some((fieldGroup) => {
-      const group = fieldGroup as FormGroup<NodeFormGroup>;
-      const fieldValue = group.controls.fieldValue;
-
-      return fieldValue.dirty && fieldValue.invalid;
+  public override get invalid(): boolean {
+    return Object.values(this.form.controls).some((fieldGroup: FormGroup<NodeFormGroup>): boolean => {
+      return fieldGroup.controls.fieldValue.dirty && fieldGroup.controls.fieldValue.invalid;
     });
   }
 }

@@ -6,7 +6,6 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
 import {TuiButton} from '@taiga-ui/core';
 import {TuiInputModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
-import {distinctUntilChanged, merge} from 'rxjs';
 
 interface NodeForm {
     field1: FormGroup<NodeFormGroup>;
@@ -50,6 +49,14 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
         }),
     });
 
+    public override get invalid(): boolean {
+        return Object.values(this.form.controls).some(
+            (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
+                fieldGroup.controls.fieldValue.dirty &&
+                fieldGroup.controls.fieldValue.invalid,
+        );
+    }
+
     private readonly destroyRef = inject(DestroyRef);
 
     public get fieldNames(): string[] {
@@ -72,16 +79,6 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
             .subscribe((value) => {
                 this.model.value = value;
             });
-
-        merge(
-            ...Object.values(this.form.controls).map((control) =>
-                control.controls.fieldValue.statusChanges.pipe(distinctUntilChanged()),
-            ),
-        )
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => {
-                this.checkFormValidity();
-            });
     }
 
     public add(): void {
@@ -94,14 +91,5 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
 
         // @ts-ignore
         this.form.addControl(newFieldKey, newField);
-    }
-
-    private checkFormValidity(): void {
-        this.invalid = Object.values(this.form.controls).some((fieldGroup) => {
-            const group = fieldGroup as FormGroup<NodeFormGroup>;
-            const fieldValue = group.controls.fieldValue;
-
-            return fieldValue.dirty && fieldValue.invalid;
-        });
     }
 }

@@ -77,7 +77,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
     protected model!: DfDataModel;
-    protected invalidNodes$ = this.invalidNodesService.invalidIds$;
+    protected $invalidNodes = this.invalidNodesService.$invalidIds;
 
     public ngOnInit(): void {
         this.initializeConnectionsSubscription();
