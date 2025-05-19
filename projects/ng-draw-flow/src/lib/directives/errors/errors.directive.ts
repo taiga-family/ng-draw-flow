@@ -5,13 +5,12 @@ import {NgControl} from '@angular/forms';
 import {distinctUntilChanged, map, merge} from 'rxjs';
 
 import {collectInvalidNodeIds} from '../../helpers/collect-invalid-node-ids';
-import {InvalidNodesService} from '../../services/invalid-nodes.service';
+import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 
 @Directive({standalone: true, selector: '[dfErrors]'})
 export class ErrorsDirective implements OnInit {
     private readonly destroyRef = inject(DestroyRef);
     private readonly ngControl = inject(NgControl);
-    private readonly invalidNodesService = inject(InvalidNodesService);
 
     public ngOnInit(): void {
         if (!this.ngControl?.control) {
@@ -38,8 +37,8 @@ export class ErrorsDirective implements OnInit {
                 }),
                 takeUntilDestroyed(this.destroyRef),
             )
-            .subscribe((idsSet) => {
-                this.invalidNodesService.setInvalidId(Array.from(idsSet));
+            .subscribe((idsSet: Set<string>) => {
+                inject(INVALID_NODES).set(Array.from(idsSet));
             });
     }
 }

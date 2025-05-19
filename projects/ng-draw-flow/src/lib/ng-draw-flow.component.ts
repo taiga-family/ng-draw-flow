@@ -30,7 +30,6 @@ import type {
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
-import {InvalidNodesService} from './services/invalid-nodes.service';
 import {SelectionService} from './services/selection.service';
 
 @Component({
@@ -52,7 +51,6 @@ import {SelectionService} from './services/selection.service';
         ConnectionsService,
         CoordinatesService,
         DraftConnectionService,
-        InvalidNodesService,
         SelectionService,
         {
             provide: NG_VALUE_ACCESSOR,
