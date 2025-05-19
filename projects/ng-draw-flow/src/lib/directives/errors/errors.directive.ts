@@ -11,6 +11,7 @@ import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 export class ErrorsDirective implements OnInit {
     private readonly destroyRef = inject(DestroyRef);
     private readonly ngControl = inject(NgControl);
+    private readonly $invalidNodes = inject(INVALID_NODES);
 
     public ngOnInit(): void {
         if (!this.ngControl?.control) {
@@ -38,7 +39,7 @@ export class ErrorsDirective implements OnInit {
                 takeUntilDestroyed(this.destroyRef),
             )
             .subscribe((idsSet: Set<string>) => {
-                inject(INVALID_NODES).set(Array.from(idsSet));
+                this.$invalidNodes.set(Array.from(idsSet));
             });
     }
 }
