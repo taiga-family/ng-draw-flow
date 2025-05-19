@@ -1,16 +1,18 @@
+import type {OnInit} from '@angular/core';
 import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataConnection, DfDataModel, DfDataNode} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
+    dfCycleDetectionValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {MarkdownModule} from 'ngx-markdown';
 
-const ROWS_COUNT = 13;
-const COLUMNS_COUNT = 13;
+const ROWS_COUNT = 23;
+const COLUMNS_COUNT = 23;
 
 @Component({
     standalone: true,
@@ -27,13 +29,19 @@ const COLUMNS_COUNT = 13;
         }),
     ],
 })
-export default class StressTestComponent {
+export default class StressTestComponent implements OnInit {
     public data: DfDataModel = {
         nodes: this.createNodesMap(ROWS_COUNT, COLUMNS_COUNT),
         connections: this.createConnectionsArray(ROWS_COUNT, COLUMNS_COUNT),
     };
 
-    public form = new FormControl(this.data);
+    public form = new FormControl(this.data, [dfCycleDetectionValidator()]);
+
+    public ngOnInit(): void {
+        this.form.statusChanges.subscribe((s) => {
+            console.warn(s, this.form, 'form status');
+        });
+    }
 
     public createNodesMap(rows: number, columns: number): Map<string, DfDataNode> {
         const nodesMap = new Map();

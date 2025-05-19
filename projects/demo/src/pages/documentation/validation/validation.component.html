@@ -1,0 +1,95 @@
+<tui-doc-page header="Validation">
+    <p>
+        ng-draw-flow provides a flexible graph validation system at two levels: at the individual node level and at the
+        entire graph level. This allows you to create complex validation rules for your diagrams and visually display
+        errors.
+    </p>
+
+    <h2>Node-level Validation</h2>
+
+    <p>
+        Each node in ng-draw-flow can have its own validation logic. For this purpose, the base class
+        <code>DrawFlowBaseNode</code>
+        has an
+        <code>invalid</code>
+        flag, which when set to
+        <code>true</code>
+        automatically adds the CSS class
+        <code>.df-invalid</code>
+        to the node.
+    </p>
+
+    <h3>How to Use</h3>
+
+    <p>
+        You can independently manage the validity state of a node within your component. This is especially useful when
+        a node contains a form or other input elements that require validation.
+    </p>
+
+    <tui-doc-code
+        filename="Example: Node with Form and Validation"
+        [code]="validationExamples.LocalValidation"
+    />
+
+    <h2>Graph-level Validation</h2>
+
+    <p>
+        ng-draw-flow also provides the ability to validate the entire graph as a whole. For this purpose, ready-made
+        validators are available that can be applied to the FormControl associated with the ng-draw-flow component.
+    </p>
+
+    <h3>Built-in Validators</h3>
+
+    <b>
+        1.
+        <code>dfCycleDetectionValidator</code>
+    </b>
+
+    <p>
+        Checks the graph for cycles (cyclicity). A cycle occurs when there is a path that starts and ends at the same
+        node.
+    </p>
+
+    <tui-doc-code
+        filename="dfCycleDetectionValidator error"
+        class="tui-space_bottom-4"
+        [code]="validationExamples.CycleDetectionValidatorError"
+    />
+
+    <b>
+        2.
+        <code>dfIsolatedNodesValidator</code>
+    </b>
+
+    <p>Checks the graph for isolated nodes - nodes that have neither incoming nor outgoing connections.</p>
+
+    <tui-doc-code
+        filename="dfIsolatedNodesValidator error"
+        [code]="validationExamples.IsolatedNodesValidatorError"
+    />
+
+    <h2>Creating Custom Validators</h2>
+
+    <p>
+        You can create your own validators for the graph by implementing a function that conforms to the
+        <code>ValidatorFn</code>
+        interface from Angular.
+    </p>
+
+    <tui-notification
+        appearance="warning"
+        size="m"
+    >
+        Important: If your validator should highlight problematic nodes, it must return an array with the IDs of these
+        nodes.
+    </tui-notification>
+
+    <a
+        routerLink="/examples/editor"
+        style="display: block"
+        tuiLink
+        class="tui-space_top-4"
+    >
+        Example
+    </a>
+</tui-doc-page>

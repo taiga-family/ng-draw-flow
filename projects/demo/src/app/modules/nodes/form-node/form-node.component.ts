@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import type {AfterViewInit} from '@angular/core';
 import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
 import {TuiButton} from '@taiga-ui/core';
 import {TuiInputModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
@@ -38,17 +38,24 @@ interface NodeFormGroup {
     },
 })
 export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit {
-    public currentIndex = 1;
     public form = new FormGroup<NodeForm>({
         field1: new FormGroup<NodeFormGroup>({
             connectorId: new FormControl<string>('node-5-output-1'),
-            fieldValue: new FormControl<string>(''),
+            fieldValue: new FormControl<string>('', [Validators.required]),
         }),
         field2: new FormGroup<NodeFormGroup>({
             connectorId: new FormControl<string>('node-5-output-2'),
-            fieldValue: new FormControl<string>(''),
+            fieldValue: new FormControl<string>('', [Validators.required]),
         }),
     });
+
+    public override get invalid(): boolean {
+        return Object.values(this.form.controls).some(
+            (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
+                fieldGroup.controls.fieldValue.dirty &&
+                fieldGroup.controls.fieldValue.invalid,
+        );
+    }
 
     private readonly destroyRef = inject(DestroyRef);
 

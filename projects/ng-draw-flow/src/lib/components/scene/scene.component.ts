@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import type {OnInit} from '@angular/core';
+import type {OnInit, Signal} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -21,6 +21,7 @@ import type {
     DfDataNode,
     DfEvent,
 } from '../../ng-draw-flow.interfaces';
+import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 import {ConnectionComponent} from '../connections/connection/connection.component';
 import {ConnectionsService} from '../connections/connections.service';
 import {DraftConnectionComponent} from '../connections/draft-connection/draft-connection.component';
@@ -75,6 +76,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
     protected model!: DfDataModel;
+    protected $invalidNodes: Signal<string[]> = inject(INVALID_NODES);
 
     public ngOnInit(): void {
         this.initializeConnectionsSubscription();
