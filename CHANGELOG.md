@@ -1,3 +1,10 @@
+### [0.10.3](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.2...v0.10.3) (2025-05-20)
+
+### 🐞 Bug Fixes
+
+- mark for check when invalid changes to ensure view update
+  [(8420b0d)](https://github.com/taiga-family/ng-draw-flow/commit/8420b0dfb3f2865073fdae4a5e1f8039227c6ad0)
+
 ### [0.10.2](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.1...v0.10.2) (2025-05-20)
 
 ### 🐞 Bug Fixes
