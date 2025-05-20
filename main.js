@@ -3145,6 +3145,7 @@ class NodeComponent {
   ngOnChanges(changes) {
     if (changes.invalid && this.innerComponent) {
       this.innerComponent.invalid = changes.invalid.currentValue;
+      this.cdr.markForCheck();
     }
   }
   ngAfterViewInit() {
