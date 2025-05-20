@@ -586,8 +586,12 @@ class FormNodeComponent extends _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.
     });
     this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.DestroyRef);
   }
+  set invalid(value) {
+    super.invalid = value;
+  }
   get invalid() {
-    return Object.values(this.form.controls).some(fieldGroup => fieldGroup.controls.fieldValue.dirty && fieldGroup.controls.fieldValue.invalid);
+    const formInvalid = Object.values(this.form.controls).some(fieldGroup => fieldGroup.controls.fieldValue.touched && fieldGroup.controls.fieldValue.invalid);
+    return super.invalid || formInvalid;
   }
   get fieldNames() {
     return Object.keys(this.form.controls);
@@ -633,6 +637,9 @@ _FormNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1
         return 0;
       });
     }
+  },
+  inputs: {
+    invalid: "invalid"
   },
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵInheritDefinitionFeature"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵStandaloneFeature"]],
@@ -1054,7 +1061,7 @@ _SimpleNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵInheritDefinitionFeature"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵStandaloneFeature"]],
   decls: 4,
-  vars: 3,
+  vars: 4,
   consts: [["class", "input", 3, "connectorData", 4, "ngIf"], [1, "tui-text_body-xs"], ["class", "output", 3, "connectorData", 4, "ngIf"], [1, "input", 3, "connectorData"], [1, "output", 3, "connectorData"]],
   template: function SimpleNodeComponent_Template(rf, ctx) {
     if (rf & 1) {
@@ -1067,7 +1074,7 @@ _SimpleNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
     if (rf & 2) {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.startNode);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx.model.text);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate2"]("", ctx.model.text, " ", ctx.invalid, "");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.endNode);
     }
@@ -4887,11 +4894,11 @@ class DrawFlowBaseNode {
    * Applied as 'df-invalid' CSS class when true.
    * @default false
    */
-  get invalid() {
-    return this.invalidState;
-  }
   set invalid(value) {
     this.invalidState = value;
+  }
+  get invalid() {
+    return this.invalidState;
   }
 }
 _DrawFlowBaseNode = DrawFlowBaseNode;
@@ -4914,15 +4921,18 @@ _DrawFlowBaseNode.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1_
   hostVars: 4,
   hostBindings: function DrawFlowBaseNode_HostBindings(rf, ctx) {
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("df-selected", ctx.selected)("df-invalid", ctx.invalid);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵclassProp"]("df-invalid", ctx.invalid)("df-selected", ctx.selected);
     }
   },
   inputs: {
     nodeId: "nodeId",
     model: "model",
     startNode: "startNode",
-    endNode: "endNode"
-  }
+    endNode: "endNode",
+    selected: "selected",
+    invalid: "invalid"
+  },
+  standalone: true
 });
 
 /***/ }),
