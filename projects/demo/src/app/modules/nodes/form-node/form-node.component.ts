@@ -1,6 +1,12 @@
 import {CommonModule} from '@angular/common';
 import type {AfterViewInit} from '@angular/core';
-import {ChangeDetectionStrategy, Component, DestroyRef, inject} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    inject,
+    Input,
+} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
@@ -49,12 +55,19 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
         }),
     });
 
+    @Input()
+    public override set invalid(value: boolean) {
+        super.invalid = value;
+    }
+
     public override get invalid(): boolean {
-        return Object.values(this.form.controls).some(
+        const formInvalid = Object.values(this.form.controls).some(
             (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
-                fieldGroup.controls.fieldValue.dirty &&
+                fieldGroup.controls.fieldValue.touched &&
                 fieldGroup.controls.fieldValue.invalid,
         );
+
+        return super.invalid || formInvalid;
     }
 
     private readonly destroyRef = inject(DestroyRef);
