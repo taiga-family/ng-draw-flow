@@ -1,5 +1,5 @@
 import type {QueryList} from '@angular/core';
-import {Directive, HostBinding, Input, ViewChildren} from '@angular/core';
+import {Directive, Input, ViewChildren} from '@angular/core';
 
 import {DfInputComponent, DfOutputComponent} from './components/connectors';
 
@@ -7,7 +7,13 @@ import {DfInputComponent, DfOutputComponent} from './components/connectors';
  * Base abstract class for DrawFlow nodes.
  * Provides common functionality and structure for all node types in the flow diagram.
  */
-@Directive()
+@Directive({
+    standalone: true,
+    host: {
+        '[class.df-invalid]': 'this.invalid',
+        '[class.df-selected]': 'this.selected',
+    },
+})
 export abstract class DrawFlowBaseNode {
     private invalidState = false;
     /**
@@ -61,7 +67,7 @@ export abstract class DrawFlowBaseNode {
      * Applied as 'df-selected' CSS class when true.
      * @default false
      */
-    @HostBinding('class.df-selected')
+    @Input()
     public selected = false;
 
     /**
@@ -71,12 +77,12 @@ export abstract class DrawFlowBaseNode {
      * Applied as 'df-invalid' CSS class when true.
      * @default false
      */
-    @HostBinding('class.df-invalid')
-    public get invalid(): boolean {
-        return this.invalidState;
-    }
-
+    @Input()
     public set invalid(value: boolean) {
         this.invalidState = value;
+    }
+
+    public get invalid(): boolean {
+        return this.invalidState;
     }
 }

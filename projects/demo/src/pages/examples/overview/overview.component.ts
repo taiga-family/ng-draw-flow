@@ -1,9 +1,10 @@
-import {AsyncPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
+    dfCycleDetectionValidator,
+    dfIsolatedNodesValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
@@ -14,13 +15,7 @@ import {MarkdownModule} from 'ngx-markdown';
 @Component({
     standalone: true,
     selector: 'changelog',
-    imports: [
-        AsyncPipe,
-        MarkdownModule,
-        NgDrawFlowComponent,
-        ReactiveFormsModule,
-        TuiAddonDoc,
-    ],
+    imports: [MarkdownModule, NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './overview.template.html',
     styleUrls: ['./overview.style.less'],
     encapsulation: ViewEncapsulation.None,
@@ -179,5 +174,8 @@ export default class OverviewComponent {
         ],
     };
 
-    public form = new FormControl(this.data);
+    public form = new FormControl(this.data, [
+        dfCycleDetectionValidator(),
+        dfIsolatedNodesValidator(),
+    ]);
 }
