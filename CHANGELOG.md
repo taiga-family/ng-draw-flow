@@ -1,3 +1,10 @@
+### [0.10.2](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.1...v0.10.2) (2025-05-20)
+
+### 🐞 Bug Fixes
+
+- update DrawFlowBaseNode to use @Input for selected and invalid properties
+  [(7ea7e04)](https://github.com/taiga-family/ng-draw-flow/commit/7ea7e04815eedcb17d27ba4bfde963315d96628a)
+
 ### [0.10.1](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.0...v0.10.1) (2025-05-19)
 
 ### 🐞 Bug Fixes
