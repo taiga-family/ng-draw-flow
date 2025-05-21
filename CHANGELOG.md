@@ -1,3 +1,12 @@
+### [0.11.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.3...v0.11.0) (2025-05-21)
+
+### 🚀 Features
+
+- deleting connection if the connector was removed
+  [(0a7cbaf)](https://github.com/taiga-family/ng-draw-flow/commit/0a7cbaff6e6e499b2402d2a3a7e2f9056171e4aa)
+- removed automatic deletion of connections when connector is destroyed
+  [(6573f94)](https://github.com/taiga-family/ng-draw-flow/commit/6573f94483cd492f96e9560721e0ba3f77dd1cec)
+
 ### [0.10.3](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.2...v0.10.3) (2025-05-20)
 
 ### 🐞 Bug Fixes
