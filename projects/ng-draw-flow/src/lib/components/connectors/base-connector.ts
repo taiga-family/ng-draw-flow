@@ -59,4 +59,8 @@ export abstract class BaseConnector {
 
         this.nativeElement.classList.toggle('df-disabled', this.isDisabled);
     }
+
+    public destroy(): void {
+        this.connectionsService.removeConnectionsByConnectorId(this.data.connectorId);
+    }
 }
