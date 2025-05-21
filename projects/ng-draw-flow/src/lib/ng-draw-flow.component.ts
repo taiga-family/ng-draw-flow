@@ -1,5 +1,5 @@
 import {AsyncPipe, NgIf} from '@angular/common';
-import type {OnDestroy, OnInit} from '@angular/core';
+import type {OnInit} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -65,10 +65,7 @@ import {SelectionService} from './services/selection.service';
     ],
     hostDirectives: [ErrorsDirective],
 })
-export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDestroy {
-    // This property is needed to not emit connectionDeleted events when destroying a NgDrawFlowComponent component
-    private isComponentDestroyed = false;
-
+export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     private readonly destroyRef = inject(DestroyRef);
 
     @ViewChild(PanZoomComponent)
@@ -106,10 +103,6 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
         this.watchFormChanges();
     }
 
-    public ngOnDestroy(): void {
-        this.isComponentDestroyed = true;
-    }
-
     public writeValue(value: DfDataModel): void {
         if (!value) {
             return;
@@ -144,10 +137,8 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit, OnDest
     }
 
     protected onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
-        if (!this.isComponentDestroyed) {
-            this.form.setValue(event.model);
-            this.connectionDeleted.emit(event);
-        }
+        this.connectionDeleted.emit(event);
+        this.form.setValue(event.model);
     }
 
     protected onNodeDeleted(event: DfEvent<DfDataNode>): void {

@@ -1,4 +1,3 @@
-import type {OnDestroy} from '@angular/core';
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 import type {DfDataConnectorConfig} from '../../ng-draw-flow.interfaces';
@@ -12,7 +11,7 @@ import {BaseConnector} from './base-connector';
     styleUrls: ['./connector.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DfInputComponent extends BaseConnector implements OnDestroy {
+export class DfInputComponent extends BaseConnector {
     protected override connectorType = DfConnectionPoint.Input;
 
     @Input('connectorData')
@@ -20,8 +19,4 @@ export class DfInputComponent extends BaseConnector implements OnDestroy {
 
     @Input()
     public override position = DfConnectorPosition.Left;
-
-    public ngOnDestroy(): void {
-        this.connectionsService.removeConnectionsByConnectorId(this.data.connectorId);
-    }
 }
