@@ -64,9 +64,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected readonly connectionCreated = new EventEmitter<DfEvent<DfDataConnection>>();
 
     @Output()
-    protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>(
-        true,
-    );
+    protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>();
 
     @Output()
     protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
@@ -95,6 +93,11 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
             target: connection,
             model: this.model,
         });
+    }
+
+    protected onConnectorDeleted(connectorId: string): void {
+        this.connectionsService.removeConnectionsByConnectorId(connectorId);
+        this.cdr.detectChanges();
     }
 
     protected onNodeMoved(name: string, data: DfDataNode): void {

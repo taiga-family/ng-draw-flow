@@ -3,6 +3,7 @@ import type {
     ComponentRef,
     ElementRef,
     OnChanges,
+    QueryList,
     SimpleChanges,
 } from '@angular/core';
 import {
@@ -18,7 +19,8 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {merge} from 'rxjs';
+import type {Observable} from 'rxjs';
+import {merge, tap} from 'rxjs';
 
 import type {DfDragDrop, DfDragDropDistance} from '../../directives';
 import {
@@ -71,6 +73,8 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private selected = false;
     private innerComponent!: DrawFlowBaseNode;
     private value!: any;
+    private previousInputs: DfInputComponent[] = [];
+    private previousOutputs: DfOutputComponent[] = [];
 
     @ViewChild('nodeElement')
     private readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -93,6 +97,9 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
 
+    @Output()
+    protected readonly connectorDeleted = new EventEmitter<string>();
+
     protected cursor: 'grabbing' | 'initial' = 'initial';
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
@@ -106,7 +113,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.invalid && this.innerComponent) {
             this.innerComponent.invalid = changes.invalid.currentValue;
-            this.cdr.markForCheck();
+            this.cdr.detectChanges();
         }
     }
 
@@ -378,28 +385,19 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     }
 
     private subscribeToConnectorsChanges(): void {
-        const connectorsUpdates$ = [];
-
-        if (this.nodeContentComponentRef.instance?.connectorsUpdated) {
-            connectorsUpdates$.push(
-                this.nodeContentComponentRef.instance.connectorsUpdated,
-            );
+        if (!this.innerComponent) {
+            return;
         }
 
-        if (this.innerComponent.inputs?.changes) {
-            connectorsUpdates$.push(this.innerComponent.inputs.changes);
-        }
+        this.previousOutputs = this.innerComponent?.outputs?.toArray() || [];
+        this.previousInputs = this.innerComponent?.inputs?.toArray() || [];
 
-        if (this.innerComponent.outputs?.changes) {
-            connectorsUpdates$.push(this.innerComponent.outputs.changes);
-        }
+        const connectorsUpdates$ = this.collectConnectorUpdateSources();
 
         if (connectorsUpdates$.length > 0) {
             merge(...connectorsUpdates$)
                 .pipe(takeUntilDestroyed(this.destroyRef))
-                .subscribe(() => {
-                    this.updateConnectorsCoordinates();
-                });
+                .subscribe(() => this.updateConnectorsCoordinates());
         }
     }
 
@@ -461,5 +459,93 @@ export class NodeComponent implements AfterViewInit, OnChanges {
             centeredPosition,
             false,
         );
+    }
+
+    /**
+     * Collects all sources of connector updates
+     */
+    private collectConnectorUpdateSources(): Array<Observable<any>> {
+        const sources: Array<Observable<any>> = [];
+
+        this.addContentComponentUpdates(sources);
+        this.addInputsUpdates(sources);
+        this.addOutputsUpdates(sources);
+
+        return sources;
+    }
+
+    /**
+     * Adds updates from the node content component
+     */
+    private addContentComponentUpdates(sources: Array<Observable<any>>): void {
+        if (this.nodeContentComponentRef?.instance?.connectorsUpdated) {
+            sources.push(this.nodeContentComponentRef.instance.connectorsUpdated);
+        }
+    }
+
+    /**
+     * Adds updates from inputs
+     */
+    private addInputsUpdates(sources: Array<Observable<any>>): void {
+        if (this.innerComponent?.inputs?.changes) {
+            sources.push(
+                this.innerComponent.inputs.changes.pipe(
+                    tap((currentInputs: QueryList<DfInputComponent>) => {
+                        this.handleRemovedInputs(currentInputs);
+                    }),
+                ),
+            );
+        }
+    }
+
+    /**
+     * Adds updates from outputs with handling for removed items
+     */
+    private addOutputsUpdates(sources: Array<Observable<any>>): void {
+        if (this.innerComponent?.outputs?.changes) {
+            sources.push(
+                this.innerComponent.outputs.changes.pipe(
+                    tap((currentOutputs: QueryList<DfOutputComponent>) => {
+                        this.handleRemovedOutputs(currentOutputs);
+                    }),
+                ),
+            );
+        }
+    }
+
+    /**
+     * Processes removed inputs
+     */
+    private handleRemovedInputs(currentInputs: QueryList<DfInputComponent>): void {
+        const currentArray = currentInputs.toArray();
+        const removedOutputs = this.previousInputs.filter(
+            (prev) => !currentArray.some((curr) => curr === prev),
+        );
+
+        if (removedOutputs.length > 0) {
+            removedOutputs.forEach((output: DfInputComponent) => {
+                this.connectorDeleted.emit(output.data.connectorId);
+            });
+        }
+
+        this.previousInputs = currentArray;
+    }
+
+    /**
+     * Processes removed outputs
+     */
+    private handleRemovedOutputs(currentOutputs: QueryList<DfOutputComponent>): void {
+        const currentArray = currentOutputs.toArray();
+        const removedOutputs = this.previousOutputs.filter(
+            (prev) => !currentArray.some((curr) => curr === prev),
+        );
+
+        if (removedOutputs.length > 0) {
+            removedOutputs.forEach((output: DfOutputComponent) => {
+                this.connectorDeleted.emit(output.data.connectorId);
+            });
+        }
+
+        this.previousOutputs = currentArray;
     }
 }

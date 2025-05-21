@@ -8,6 +8,7 @@
         <df-node
             [invalid]="$invalidNodes().includes(node.key)"
             [node]="node.value"
+            (connectorDeleted)="onConnectorDeleted($event)"
             (nodeDeleted)="onNodeDeleted(node.key)"
             (nodeMoved)="onNodeMoved(node.key, $event)"
             (nodeSelected)="onNodeSelected($event)"
