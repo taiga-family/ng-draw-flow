@@ -7,7 +7,7 @@ import {
     inject,
     Output,
 } from '@angular/core';
-import {RESIZE_OPTION_BOX, ResizeObserverService} from '@ng-web-apis/resize-observer';
+import {ResizeObserverService} from '@ng-web-apis/resize-observer';
 import type {Observable} from 'rxjs';
 import {
     animationFrameScheduler,
@@ -44,13 +44,6 @@ import type {DfZoom} from './zoom/zoom.interfaces';
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        ResizeObserverService,
-        {
-            provide: RESIZE_OPTION_BOX,
-            useValue: 'border-box',
-        },
-    ],
 })
 export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);

@@ -8,6 +8,7 @@ import {
     scan,
     switchMap,
     takeUntil,
+    throttleTime,
 } from 'rxjs';
 
 import {dfDistanceBetweenTouches, dfPreventDefault} from '../../../helpers';
@@ -18,8 +19,9 @@ import type {DfZoom} from './zoom.interfaces';
 export class ZoomService extends Observable<DfZoom> {
     constructor() {
         const nativeElement: HTMLElement = inject(ElementRef).nativeElement;
-        const wheelSensitivity = inject(DF_PAN_ZOOM_OPTIONS)?.zoomWheelSensitivity;
-        const touchSensitivity = inject(DF_PAN_ZOOM_OPTIONS)?.touchSensitivity;
+        const options = inject(DF_PAN_ZOOM_OPTIONS);
+        const wheelSensitivity = options?.zoomWheelSensitivity;
+        const touchSensitivity = options?.touchSensitivity;
 
         super((subscriber) => {
             merge(
@@ -30,6 +32,7 @@ export class ZoomService extends Observable<DfZoom> {
                             passive: true,
                         }).pipe(
                             dfPreventDefault(),
+                            throttleTime(16),
                             scan(
                                 (prev, event) => {
                                     const distance = dfDistanceBetweenTouches(event);
@@ -48,14 +51,12 @@ export class ZoomService extends Observable<DfZoom> {
                                 },
                             ),
                             map(({event, delta}) => {
-                                const clientX =
-                                    (event.touches[0].clientX +
-                                        event.touches[1].clientX) /
-                                    2;
-                                const clientY =
-                                    (event.touches[0].clientY +
-                                        event.touches[1].clientY) /
-                                    2;
+                                const [touch1, touch2] = [
+                                    event.touches[0],
+                                    event.touches[1],
+                                ];
+                                const clientX = (touch1.clientX + touch2.clientX) / 2;
+                                const clientY = (touch1.clientY + touch2.clientY) / 2;
 
                                 return {clientX, clientY, delta, event};
                             }),
