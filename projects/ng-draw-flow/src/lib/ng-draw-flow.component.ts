@@ -67,6 +67,7 @@ import {SelectionService} from './services/selection.service';
 })
 export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     private readonly destroyRef = inject(DestroyRef);
+    private readonly connectionsService = inject(ConnectionsService);
 
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
@@ -134,6 +135,10 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     protected onConnectionCreated(event: DfEvent<DfDataConnection>): void {
         this.connectionCreated.emit(event);
         this.form.setValue(event.model);
+    }
+
+    public removeConnection(connection: DfDataConnection): void {
+        this.connectionsService.removeConnection(connection);
     }
 
     protected onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
