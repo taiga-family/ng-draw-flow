@@ -1,4 +1,4 @@
-import {AsyncPipe, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 import type {OnInit} from '@angular/core';
 import {
     ChangeDetectionStrategy,
@@ -9,12 +9,13 @@ import {
     forwardRef,
     inject,
     Output,
+    signal,
     ViewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import type {ControlValueAccessor} from '@angular/forms';
 import {FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
-import {BehaviorSubject, debounceTime, filter} from 'rxjs';
+import {debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
@@ -32,11 +33,22 @@ import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
 import {SelectionService} from './services/selection.service';
 
+/**
+ * Root component of **ng-draw-flow** – a lightweight graph editor
+ * capable of rendering and manipulating hundreds of nodes and edges.
+ *
+ * * Acts as a form-field (`ControlValueAccessor`) whose value is the
+ *   entire diagram (`DfDataModel`).
+ * * Wraps the low-level services (`PanZoomService`, `ConnectionsService`
+ *   …) and re-emits high-level events so host applications can stay
+ *   framework-agnostic.
+ * * Exposes a minimal public API (`zoomIn`, `zoomOut`, `resetPosition`,
+ *   `removeConnection`) for programmatic control.
+ */
 @Component({
     standalone: true,
     selector: 'ng-draw-flow',
     imports: [
-        AsyncPipe,
         DfResizeObserver,
         NgIf,
         PanZoomComponent,
@@ -63,7 +75,16 @@ import {SelectionService} from './services/selection.service';
             deps: [ElementRef],
         },
     ],
-    hostDirectives: [ErrorsDirective],
+    hostDirectives: [
+        ErrorsDirective,
+        {
+            directive: DfResizeObserver,
+            outputs: ['dfResizeObserver'],
+        },
+    ],
+    host: {
+        '(dfResizeObserver)': 'this.onResize($event)',
+    },
 })
 export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     private readonly destroyRef = inject(DestroyRef);
@@ -72,24 +93,31 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
 
+    /** Emits the *current* zoom factor each time it changes. */
     @Output()
     protected readonly scale = new EventEmitter<number>();
 
+    /** Fired after a new edge is successfully created. */
     @Output()
     protected readonly connectionCreated = new EventEmitter<DfEvent<DfDataConnection>>();
 
+    /** Fired after an edge is removed—via UI or `removeConnection()`. */
     @Output()
     protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>();
 
+    /** Fired when an edge receives focus in the scene. */
     @Output()
     protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
 
+    /** Fired when a node receives focus in the scene. */
     @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
 
+    /** Fired whenever the user drags a node to a new position. */
     @Output()
     protected readonly nodeMoved = new EventEmitter<DfEvent<DfDataNode>>();
 
+    /** Fired when a node is removed from the graph. */
     @Output()
     protected readonly nodeDeleted = new EventEmitter<DfEvent<DfDataNode>>();
 
@@ -98,7 +126,7 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         connections: [],
     });
 
-    protected readonly rootReady$ = new BehaviorSubject<boolean>(false);
+    protected readonly $rootReady = signal<boolean>(false);
 
     public ngOnInit(): void {
         this.watchFormChanges();
@@ -120,25 +148,29 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         this.onTouched = fn;
     }
 
+    /** Zooms one step *in* towards the centre of the scene. */
     public zoomIn(): void {
         this.panzoom.zoomIn();
     }
 
+    /** Zooms one step *out* from the centre of the scene. */
     public zoomOut(): void {
         this.panzoom.zoomOut();
     }
 
+    /** Resets both zoom factor and pan offset to their defaults. */
     public resetPosition(): void {
         this.panzoom.resetPanzoom();
+    }
+
+    /** Method that removes an existing edge. */
+    public removeConnection(connection: DfDataConnection): void {
+        this.connectionsService.removeConnection(connection);
     }
 
     protected onConnectionCreated(event: DfEvent<DfDataConnection>): void {
         this.connectionCreated.emit(event);
         this.form.setValue(event.model);
-    }
-
-    public removeConnection(connection: DfDataConnection): void {
-        this.connectionsService.removeConnection(connection);
     }
 
     protected onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
@@ -159,7 +191,7 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     protected onResize(event: any): void {
         const {width, height} = event[0].contentRect;
 
-        this.rootReady$.next(width && height);
+        this.$rootReady.set(width && height);
     }
 
     private watchFormChanges(): void {
