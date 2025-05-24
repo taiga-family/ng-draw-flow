@@ -17,6 +17,7 @@ import {
     map,
     observeOn,
     of,
+    shareReplay,
     skip,
     startWith,
     switchMap,
@@ -118,6 +119,7 @@ export class ConnectionComponent {
                 }
             }
         }),
+        shareReplay({bufferSize: 1, refCount: true}),
     );
 
     protected optimization$: Observable<boolean> = this.path$.pipe(
