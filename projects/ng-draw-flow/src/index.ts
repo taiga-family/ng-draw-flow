@@ -1,6 +1,7 @@
 export * from './lib/components/connectors';
 export * from './lib/components/pan-zoom/pan-zoom.options';
 export * from './lib/directives/errors/errors.directive';
+export * from './lib/directives/resize-observer';
 export * from './lib/ng-draw-flow.component';
 export * from './lib/ng-draw-flow.configs';
 export * from './lib/ng-draw-flow.interfaces';
