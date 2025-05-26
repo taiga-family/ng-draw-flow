@@ -115,7 +115,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.invalid && this.innerComponent) {
             this.innerComponent.invalid = changes.invalid.currentValue;
-            this.cdr.detectChanges();
+            this.innerComponent.markForCheck();
         }
     }
 
@@ -129,7 +129,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
 
         if (this.invalid) {
             this.innerComponent.invalid = true;
-            this.cdr.markForCheck();
+            this.innerComponent.markForCheck();
         }
     }
 

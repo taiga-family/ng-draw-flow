@@ -2,7 +2,8 @@ import type {OnInit} from '@angular/core';
 import {DestroyRef, Directive, inject} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {NgControl} from '@angular/forms';
-import {distinctUntilChanged, map, merge} from 'rxjs';
+import {deepEqual} from 'fast-equals';
+import {combineLatest, distinctUntilChanged, map, startWith} from 'rxjs';
 
 import {collectInvalidNodeIds} from '../../helpers/collect-invalid-node-ids';
 import {INVALID_NODES} from '../../validators/invalid-nodes.token';
@@ -20,22 +21,13 @@ export class ErrorsDirective implements OnInit {
 
         const control = this.ngControl.control;
 
-        merge(control.statusChanges, control.valueChanges)
+        combineLatest([
+            control.statusChanges.pipe(startWith(control.status)),
+            control.valueChanges.pipe(startWith(control.value)),
+        ])
             .pipe(
                 map(() => collectInvalidNodeIds(control.errors)),
-                distinctUntilChanged((a, b) => {
-                    if (a.size !== b.size) {
-                        return false;
-                    }
-
-                    for (const id of a) {
-                        if (!b.has(id)) {
-                            return false;
-                        }
-                    }
-
-                    return true;
-                }),
+                distinctUntilChanged(deepEqual),
                 takeUntilDestroyed(this.destroyRef),
             )
             .subscribe((idsSet: Set<string>) => {
