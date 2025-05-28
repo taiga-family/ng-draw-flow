@@ -1,3 +1,35 @@
+### [0.12.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.11.0...v0.12.0) (2025-05-28)
+
+### 🚀 Features
+
+- ng-draw-flow.component
+  [(a81479f)](https://github.com/taiga-family/ng-draw-flow/commit/a81479f4068bead5ccde4ee354f9cfd49353fc87)
+- scene.component
+  [(f5fc1e6)](https://github.com/taiga-family/ng-draw-flow/commit/f5fc1e693b4f983e73e4899ea5e84eea1ef66ff7)
+- update dfSelectableElement output and event binding
+  [(0cf8e82)](https://github.com/taiga-family/ng-draw-flow/commit/0cf8e829dc7a5758ad5fda0de87d217a9fbcd27c)
+- add public removeConnection API for programmatic connection removal
+  [(b75850a)](https://github.com/taiga-family/ng-draw-flow/commit/b75850a0c099e570cd3e50f41a69ccd46e98b361)
+
+### 🐞 Bug Fixes
+
+- drag-drop. centralise move/up listeners
+  [(90b076e)](https://github.com/taiga-family/ng-draw-flow/commit/90b076ea3065859da48dc9afdc2bc7107eed24b7)
+- move nodes only after exceeding nodeDragThreshold
+  [(e9ed078)](https://github.com/taiga-family/ng-draw-flow/commit/e9ed078db7e1f135c5925d68bb91de0397adaa06)
+- switch to deepEqual + animationFrameScheduler for smoother updates
+  [(7d300ba)](https://github.com/taiga-family/ng-draw-flow/commit/7d300babb3cd14a621651989ad473aff5fea584b)
+- optimize error handling and change detection in directives
+  [(231060d)](https://github.com/taiga-family/ng-draw-flow/commit/231060d6a4c8322632ec9862e6419f40659a6b26)
+- panzoom [(4d7f118)](https://github.com/taiga-family/ng-draw-flow/commit/4d7f118e15d628360f2a717ccfc8ef7ffd6ac14a)
+- panzoom. improve zoom event performance
+  [(d83aae2)](https://github.com/taiga-family/ng-draw-flow/commit/d83aae2ee1cffa2c3dde9126f8d0ef00f9641215)
+- avoid rebinding listeners on each event
+  [(e999aec)](https://github.com/taiga-family/ng-draw-flow/commit/e999aec25595fcee87abf06ad3791066bcc6bee2)
+- add shareReplay to path$ to prevent redundant recalculations
+  [(41b810c)](https://github.com/taiga-family/ng-draw-flow/commit/41b810c3dcb870b822194797a98ac61b77564b5e)
+- imports [(ab9b697)](https://github.com/taiga-family/ng-draw-flow/commit/ab9b69759552b93096d7473ae31919241581d08b)
+
 ### [0.11.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.10.3...v0.11.0) (2025-05-21)
 
 ### 🚀 Features
