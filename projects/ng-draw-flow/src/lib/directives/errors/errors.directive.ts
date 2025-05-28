@@ -2,9 +2,9 @@ import type {OnInit} from '@angular/core';
 import {DestroyRef, Directive, inject} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {NgControl} from '@angular/forms';
-import {deepEqual} from 'fast-equals';
 import {combineLatest, distinctUntilChanged, map, startWith} from 'rxjs';
 
+import {deepEqual} from '../../helpers';
 import {collectInvalidNodeIds} from '../../helpers/collect-invalid-node-ids';
 import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 

@@ -7,7 +7,6 @@ import {
     Input,
     Output,
 } from '@angular/core';
-import {deepEqual} from 'fast-equals';
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
     animationFrameScheduler,
@@ -26,7 +25,7 @@ import {
 } from 'rxjs';
 
 import {SelectableElementDirective} from '../../../directives';
-import {createConnectorHash} from '../../../helpers';
+import {createConnectorHash, deepEqual} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {
     DfConnectorData,
