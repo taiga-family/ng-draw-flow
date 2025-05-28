@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
+    animationFrameScheduler,
     asyncScheduler,
     combineLatest,
     concat,
@@ -17,13 +18,14 @@ import {
     map,
     observeOn,
     of,
+    shareReplay,
     skip,
     startWith,
     switchMap,
 } from 'rxjs';
 
 import {SelectableElementDirective} from '../../../directives';
-import {createConnectorHash} from '../../../helpers';
+import {createConnectorHash, deepEqual} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {
     DfConnectorData,
@@ -63,18 +65,7 @@ export class ConnectionComponent {
     @Output()
     protected readonly connectionSelected = new EventEmitter<void>();
 
-    protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (!this.selected) {
-            return;
-        }
-
-        event.preventDefault();
-
-        this.connectionsService.removeConnection(this.connection);
-        this.connectionDeleted.emit();
-    }
-
-    protected path$: Observable<string> = of(null).pipe(
+    protected readonly path$: Observable<string> = of(null).pipe(
         observeOn(asyncScheduler),
         switchMap(() =>
             combineLatest([
@@ -91,11 +82,8 @@ export class ConnectionComponent {
 
             return of([sourcePoint, targetPoint]);
         }),
-        distinctUntilChanged(
-            ([prevSource, prevTarget], [currSource, currTarget]) =>
-                JSON.stringify(prevSource) === JSON.stringify(currSource) &&
-                JSON.stringify(prevTarget) === JSON.stringify(currTarget),
-        ),
+        distinctUntilChanged(deepEqual),
+        observeOn(animationFrameScheduler),
         map(([start, end]) => {
             if (!start || !end) {
                 return '';
@@ -118,14 +106,26 @@ export class ConnectionComponent {
                 }
             }
         }),
+        shareReplay({bufferSize: 1, refCount: true}),
     );
 
-    protected optimization$: Observable<boolean> = this.path$.pipe(
+    protected readonly optimization$: Observable<boolean> = this.path$.pipe(
         skip(1),
         switchMap(() => concat(of(true), of(false).pipe(delay(400)))),
         startWith(false),
         distinctUntilChanged(),
     );
+
+    protected handleKeyboardEvent(event: KeyboardEvent): void {
+        if (!this.selected) {
+            return;
+        }
+
+        event.preventDefault();
+
+        this.connectionsService.removeConnection(this.connection);
+        this.connectionDeleted.emit();
+    }
 
     protected onSelectedChanged(selected: boolean): void {
         this.selected = selected;

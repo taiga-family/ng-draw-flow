@@ -7,9 +7,10 @@ import {
     inject,
     Output,
 } from '@angular/core';
-import {RESIZE_OPTION_BOX, ResizeObserverService} from '@ng-web-apis/resize-observer';
+import {ResizeObserverService} from '@ng-web-apis/resize-observer';
 import type {Observable} from 'rxjs';
 import {
+    animationFrameScheduler,
     BehaviorSubject,
     combineLatest,
     fromEvent,
@@ -17,7 +18,10 @@ import {
     merge,
     startWith,
     Subject,
+    take,
     tap,
+    throttleTime,
+    timer,
 } from 'rxjs';
 
 import type {DfDragDrop} from '../../directives/drag-drop';
@@ -40,13 +44,6 @@ import type {DfZoom} from './zoom/zoom.interfaces';
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        ResizeObserverService,
-        {
-            provide: RESIZE_OPTION_BOX,
-            useValue: 'border-box',
-        },
-    ],
 })
 export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -75,10 +72,12 @@ export class PanZoomComponent {
         this.dragStage$.pipe(
             map((stage: DfDragDropStage) => stage !== DfDragDropStage.Move),
         ),
-        fromEvent(this.el.nativeElement, 'touchmove', {
-            passive: true,
-        }).pipe(map(DF_FALSE_HANDLER)),
+        fromEvent(this.el.nativeElement, 'touchmove', {passive: true}).pipe(
+            throttleTime(16, animationFrameScheduler, {leading: true, trailing: true}),
+            map(DF_FALSE_HANDLER),
+        ),
         fromEvent(this.el.nativeElement, 'wheel', {passive: true}).pipe(
+            throttleTime(16, animationFrameScheduler, {leading: true, trailing: true}),
             map(DF_FALSE_HANDLER),
         ),
     );
@@ -181,10 +180,9 @@ export class PanZoomComponent {
         const {x, y} = this.coordinates$.value;
 
         this.coordinates$.next(this.getGuardedCoordinates(x, y));
-        setTimeout(
-            () => this.manualZoomAnimation$.next(false),
-            this.zoomAnimationDuration,
-        );
+        timer(this.zoomAnimationDuration)
+            .pipe(take(1))
+            .subscribe(() => this.manualZoomAnimation$.next(false));
     }
 
     private processZoom(clientX: number, clientY: number, delta: number): void {

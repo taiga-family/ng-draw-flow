@@ -1,5 +1,13 @@
 import type {QueryList} from '@angular/core';
-import {Directive, Input, ViewChildren} from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    EventEmitter,
+    inject,
+    Input,
+    Output,
+    ViewChildren,
+} from '@angular/core';
 
 import {DfInputComponent, DfOutputComponent} from './components/connectors';
 
@@ -16,6 +24,7 @@ import {DfInputComponent, DfOutputComponent} from './components/connectors';
 })
 export abstract class DrawFlowBaseNode {
     private invalidState = false;
+    private readonly cdr = inject(ChangeDetectorRef);
     /**
      * Collection of input connectors for this node.
      * Accessible from outside to monitor changes in the number of inputs.
@@ -84,5 +93,12 @@ export abstract class DrawFlowBaseNode {
 
     public get invalid(): boolean {
         return this.invalidState;
+    }
+
+    @Output()
+    public readonly connectorsUpdated = new EventEmitter<void>();
+
+    public markForCheck(): void {
+        this.cdr.markForCheck();
     }
 }

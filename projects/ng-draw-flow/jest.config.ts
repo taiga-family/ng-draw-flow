@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
     displayName: 'ng-draw-flow',
     preset: '../../jest.preset.js',
@@ -6,14 +5,9 @@ export default {
     globals: {},
     coverageDirectory: '../../coverage/projects/ng-draw-flow',
     transform: {
-        '^.+\\.(ts|js|html)$': [
-            'jest-preset-angular',
-            {
-                tsconfig: '<rootDir>/tsconfig.spec.json',
-                stringifyContentPathRegex: '\\.(html|svg)$',
-            },
-        ],
+        '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
     },
+    transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
     snapshotSerializers: [
         'jest-preset-angular/build/serializers/no-ng-attributes',
         'jest-preset-angular/build/serializers/ng-snapshot',

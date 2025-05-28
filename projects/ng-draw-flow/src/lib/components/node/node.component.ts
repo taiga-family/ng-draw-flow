@@ -28,7 +28,7 @@ import {
     DragDropDirective,
     SelectableElementDirective,
 } from '../../directives';
-import {createConnectorHash} from '../../helpers';
+import {createConnectorHash, INITIAL_COORDINATES} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
     DfDataInitialNode,
@@ -58,21 +58,23 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 })
 export class NodeComponent implements AfterViewInit, OnChanges {
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly drawFlowComponents = inject<DfOptions>(DRAW_FLOW_OPTIONS).nodes;
+    private readonly nodeDragThreshold =
+        inject<DfOptions>(DRAW_FLOW_OPTIONS).options.nodeDragThreshold;
 
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
 
-    private readonly isDynamicComponentCreated = false;
-    private nodeContentComponentRef!: ComponentRef<any>;
-    private readonly destroyRef = inject(DestroyRef);
+    private innerComponent!: DrawFlowBaseNode;
+    private nodeContentComponentRef!: ComponentRef<DrawFlowBaseNode>;
     private nodeWidth!: number;
     private nodeHeight!: number;
     private selected = false;
-    private innerComponent!: DrawFlowBaseNode;
-    private value!: any;
+    private value!: DfDataNode;
+    private accumulatedDelta: DfPoint = INITIAL_COORDINATES;
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
 
@@ -113,7 +115,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.invalid && this.innerComponent) {
             this.innerComponent.invalid = changes.invalid.currentValue;
-            this.cdr.detectChanges();
+            this.innerComponent.markForCheck();
         }
     }
 
@@ -127,15 +129,11 @@ export class NodeComponent implements AfterViewInit, OnChanges {
 
         if (this.invalid) {
             this.innerComponent.invalid = true;
-            this.cdr.markForCheck();
+            this.innerComponent.markForCheck();
         }
     }
 
     protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {
-        if (this.isDynamicComponentCreated) {
-            return;
-        }
-
         const {id: nodeId, startNode, endNode, data} = node;
         const nodeType = data.type;
 
@@ -180,29 +178,46 @@ export class NodeComponent implements AfterViewInit, OnChanges {
 
         this.cursor = 'grabbing';
 
-        this.value.position = this.calculatePosition(distance, zoom);
-        const centeredPosition = this.getCenteredPosition();
+        // Accumulate offset
+        this.accumulatedDelta.x += distance.deltaX / zoom;
+        this.accumulatedDelta.y += distance.deltaY / zoom;
+
+        const applyX = Math.abs(this.accumulatedDelta.x) >= this.nodeDragThreshold;
+        const applyY = Math.abs(this.accumulatedDelta.y) >= this.nodeDragThreshold;
+
+        if (applyX || applyY) {
+            // Apply accumulated offset
+            this.value.position.x += applyX ? this.accumulatedDelta.x : 0;
+            this.value.position.y += applyY ? this.accumulatedDelta.y : 0;
+
+            const centeredPosition = this.getCenteredPosition();
+
+            this.applyPositionToStyle(centeredPosition, true);
+            this.recalculateConnectorsPosition({
+                deltaX: applyX ? this.accumulatedDelta.x * zoom : 0,
+                deltaY: applyY ? this.accumulatedDelta.y * zoom : 0,
+            });
+
+            // Reset only used directions
+            if (applyX) {
+                this.accumulatedDelta.x = 0;
+            }
+
+            if (applyY) {
+                this.accumulatedDelta.y = 0;
+            }
+        }
 
         this.panZoomService.panzoomDisabled = true;
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            true,
-        );
-        this.recalculateConnectorsPosition(distance);
     }
 
     private onDragEnd(): void {
         this.cursor = 'initial';
         this.panZoomService.panzoomDisabled = false;
         this.nodeMoved.emit(this.value);
-        const centeredPosition = this.getCenteredPosition();
+        this.applyPositionToStyle(this.getCenteredPosition(), false);
 
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            false,
-        );
+        this.accumulatedDelta = INITIAL_COORDINATES;
     }
 
     private fillValue(): void {
@@ -226,27 +241,23 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private updateConnectorsCoordinates(): void {
         const centeredCoordinates = this.getCenteredPosition();
 
-        this.nodeContentComponentRef.instance.inputs?.forEach(
-            (input: DfInputComponent) => {
-                this.updateConnectorCoordinates(
-                    centeredCoordinates,
-                    this.value.id,
-                    input,
-                    DfConnectionPoint.Input,
-                );
-            },
-        );
+        this.innerComponent.inputs?.forEach((input: DfInputComponent) => {
+            this.updateConnectorCoordinates(
+                centeredCoordinates,
+                this.value.id,
+                input,
+                DfConnectionPoint.Input,
+            );
+        });
 
-        this.nodeContentComponentRef.instance.outputs?.forEach(
-            (output: DfOutputComponent) => {
-                this.updateConnectorCoordinates(
-                    centeredCoordinates,
-                    this.value.id,
-                    output,
-                    DfConnectionPoint.Output,
-                );
-            },
-        );
+        this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
+            this.updateConnectorCoordinates(
+                centeredCoordinates,
+                this.value.id,
+                output,
+                DfConnectionPoint.Output,
+            );
+        });
     }
 
     private recalculateConnectorsPosition(distance: DfDragDropDistance): void {
@@ -256,25 +267,21 @@ export class NodeComponent implements AfterViewInit, OnChanges {
             deltaY: distance.deltaY / zoom,
         };
 
-        this.nodeContentComponentRef.instance.inputs?.forEach(
-            (input: DfInputComponent) => {
-                this.recalculateConnectorPositionFromLast(
-                    currentMoveDistance,
-                    input,
-                    DfConnectionPoint.Input,
-                );
-            },
-        );
+        this.innerComponent.inputs?.forEach((input: DfInputComponent) => {
+            this.recalculateConnectorPositionFromLast(
+                currentMoveDistance,
+                input,
+                DfConnectionPoint.Input,
+            );
+        });
 
-        this.nodeContentComponentRef.instance.outputs?.forEach(
-            (output: DfOutputComponent) => {
-                this.recalculateConnectorPositionFromLast(
-                    currentMoveDistance,
-                    output,
-                    DfConnectionPoint.Output,
-                );
-            },
-        );
+        this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
+            this.recalculateConnectorPositionFromLast(
+                currentMoveDistance,
+                output,
+                DfConnectionPoint.Output,
+            );
+        });
     }
 
     private recalculateConnectorPositionFromLast(
@@ -347,18 +354,10 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         return {x, y};
     }
 
-    private applyPositionToStyle(
-        element: HTMLElement,
-        position: DfPoint,
-        dynamic: boolean,
-    ): void {
-        if (dynamic) {
-            element.style.transform = `translate3D(${position.x}px, ${position.y}px, 0)`;
-
-            return;
-        }
-
-        element.style.transform = `translate(${position.x}px, ${position.y}px)`;
+    private applyPositionToStyle(position: DfPoint, dynamic: boolean): void {
+        this.nodeElementRef.nativeElement.style.transform = dynamic
+            ? `translate3D(${position.x}px, ${position.y}px, 0)`
+            : `translate(${position.x}px, ${position.y}px)`;
     }
 
     private getCenteredPosition(): DfPoint {
@@ -367,18 +366,21 @@ export class NodeComponent implements AfterViewInit, OnChanges {
             leftPosition: panZoomLeftPosition,
             topPosition: panZoomTopPosition,
         } = this.panZoomOptions;
+        const halfOfNodeWidth = this.nodeWidth / 2;
+        const halfOfNodeHeight = this.nodeHeight / 2;
+        const halfOfPanSize = panSize / 2;
 
         const centeredPosition = {
-            x: this.value.position.x + panSize / 2 - this.nodeWidth / 2,
-            y: this.value.position.y + panSize / 2 - this.nodeHeight / 2,
+            x: this.value.position.x + halfOfPanSize - halfOfNodeWidth,
+            y: this.value.position.y + halfOfPanSize - halfOfNodeHeight,
         };
 
         if (panZoomTopPosition || panZoomTopPosition === 0) {
-            centeredPosition.y += this.nodeHeight / 2;
+            centeredPosition.y += halfOfNodeHeight;
         }
 
         if (panZoomLeftPosition || panZoomLeftPosition === 0) {
-            centeredPosition.x += this.nodeWidth / 2;
+            centeredPosition.x += halfOfNodeWidth;
         }
 
         return centeredPosition;
@@ -409,15 +411,16 @@ export class NodeComponent implements AfterViewInit, OnChanges {
             leftPosition: panZoomLeftPosition,
             topPosition: panZoomTopPosition,
         } = this.panZoomOptions;
+        const halfOfPanSize = panSize / 2;
 
         // Get current pan position
-        const scaledPanPositionX = panSize / 2 + (panPositionX * -1) / zoom;
-        const scaledPanPositionY = panSize / 2 + (panPositionY * -1) / zoom;
+        const scaledPanPositionX = halfOfPanSize + (panPositionX * -1) / zoom;
+        const scaledPanPositionY = halfOfPanSize + (panPositionY * -1) / zoom;
 
         // Calculating the centre of the visible part of the viewport relative to the whole board
         const position = {
-            x: scaledPanPositionX - panSize / 2,
-            y: scaledPanPositionY - panSize / 2,
+            x: scaledPanPositionX - halfOfPanSize,
+            y: scaledPanPositionY - halfOfPanSize,
         };
 
         if (panZoomLeftPosition) {
@@ -437,35 +440,17 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         return position;
     }
 
-    private calculatePosition(
-        distance: DfDragDropDistance,
-        zoom: number,
-    ): DfPoint | null {
-        if (!('position' in this.value)) {
-            return null;
-        }
-
-        return {
-            x: this.value.position.x + distance.deltaX / zoom,
-            y: this.value.position.y + distance.deltaY / zoom,
-        };
-    }
-
     private setInitialPosition(): void {
         const centeredPosition = this.getCenteredPosition();
 
-        this.applyPositionToStyle(
-            this.nodeElementRef.nativeElement,
-            centeredPosition,
-            false,
-        );
+        this.applyPositionToStyle(centeredPosition, false);
     }
 
     /**
      * Collects all sources of connector updates
      */
-    private collectConnectorUpdateSources(): Array<Observable<any>> {
-        const sources: Array<Observable<any>> = [];
+    private collectConnectorUpdateSources(): Array<Observable<void>> {
+        const sources: Array<Observable<void>> = [];
 
         this.addContentComponentUpdates(sources);
         this.addInputsUpdates(sources);
@@ -477,9 +462,9 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     /**
      * Adds updates from the node content component
      */
-    private addContentComponentUpdates(sources: Array<Observable<any>>): void {
-        if (this.nodeContentComponentRef?.instance?.connectorsUpdated) {
-            sources.push(this.nodeContentComponentRef.instance.connectorsUpdated);
+    private addContentComponentUpdates(sources: Array<Observable<void>>): void {
+        if (this.innerComponent?.connectorsUpdated) {
+            sources.push(this.innerComponent.connectorsUpdated);
         }
     }
 

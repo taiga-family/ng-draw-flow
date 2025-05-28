@@ -25,7 +25,7 @@
     "scripts": {
         "prepare": "husky",
         "start": "nx serve demo",
-        "test": "nx test",
+        "test": "nx test ng-draw-flow",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "prettier": "prettier --write !package-lock.json . --ignore-path .gitignore",
@@ -132,6 +132,7 @@
         "jest-environment-jsdom": "29.7.0",
         "jest-preset-angular": "14.5.5",
         "lint-staged": "15.5.2",
+        "ng-mocks": "14.13.5",
         "ng-packagr": "16.2.3",
         "ngx-highlightjs": "10.0.0",
         "ngx-markdown": "16.0.0",

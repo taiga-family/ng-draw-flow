@@ -13,7 +13,7 @@ export class SelectableElementDirective implements OnInit, OnDestroy {
     private readonly selectionService = inject(SelectionService);
     private unregisterFn: (() => void) | null = null;
 
-    @Output()
+    @Output('dfSelectableElement')
     protected readonly selectionChanged = new EventEmitter<boolean>();
 
     public ngOnInit(): void {
@@ -36,12 +36,6 @@ export class SelectableElementDirective implements OnInit, OnDestroy {
         if (this.selected !== selected) {
             this.selected = selected;
             this.selectionChanged.emit(selected);
-
-            if (selected) {
-                this.el.nativeElement.classList.add('df-selected');
-            } else {
-                this.el.nativeElement.classList.remove('df-selected');
-            }
         }
     }
 }
