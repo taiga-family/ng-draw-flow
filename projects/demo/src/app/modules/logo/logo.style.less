@@ -1,6 +1,7 @@
-:host {
+.container {
     display: flex;
     align-items: center;
+    inline-size: 100%;
 
     :host-context(tui-root._mobile) {
         font-size: 0;
@@ -28,4 +29,14 @@
     :host-context(tui-root._mobile) & {
         display: none;
     }
+}
+
+.github-link {
+    // pushing the github button to the right
+    position: absolute;
+    top: 50%;
+    right: 2rem; // width of Dark-Mode-Button
+    display: flex;
+    margin-right: 2rem;
+    transform: translateY(-50%);
 }
