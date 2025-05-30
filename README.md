@@ -1,6 +1,15 @@
-# NgDrawFlow
+<div align="center">
+
+# <img src="projects/demo/src/assets/icons/logo.svg" alt="ng-draw-flow logo" width="36px"> NgDrawFlow
 
 [![npm version](https://img.shields.io/npm/v/@ng-draw-flow/core.svg)](https://npmjs.com/package/@ng-draw-flow/core)
+[![All packages CI](https://github.com/taiga-family/taiga-ui/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/taiga-family/ng-draw-flow/actions/workflows/build.yml)
+[![Deploy](https://github.com/taiga-family/ng-draw-flow/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/taiga-family/ng-draw-flow/actions/workflows/deploy.yml)
+[![Renovate](https://img.shields.io/badge/renovate-configured-green?logo=renovatebot)](https://docs.renovatebot.com/)
+[![Code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+</div>
 
 NgDrawFlow is a library for creating interfaces based on displaying data as nodes. A node is a div container into which
 you can place any Angular component. The library takes care of all the state management of the node on the canvas.
