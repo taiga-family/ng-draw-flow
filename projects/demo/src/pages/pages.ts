@@ -13,27 +13,27 @@ export const DEMO_PAGES: TuiDocRoutePages = [
         route: DemoPath.TermsAndDefinitions,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Configuration & Public API',
         route: DemoPath.ConfigurationAndPublicApi,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'PanZoom Configuration',
         route: DemoPath.PanZoom,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Creating Nodes',
         route: DemoPath.Nodes,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Connectors',
         route: DemoPath.Connectors,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Validation',
         route: DemoPath.Validation,
     },
