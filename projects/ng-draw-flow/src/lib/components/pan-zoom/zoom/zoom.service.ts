@@ -52,8 +52,8 @@ export class ZoomService extends Observable<DfZoom> {
                             ),
                             map(({event, delta}) => {
                                 const [touch1, touch2] = [
-                                    (event.touches[0] ?? {clientX: 0, clientY: 0}),
-                                    (event.touches[1] ?? {clientX: 0, clientY: 0}),
+                                    event.touches[0] ?? {clientX: 0, clientY: 0},
+                                    event.touches[1] ?? {clientX: 0, clientY: 0},
                                 ];
                                 const clientX = (touch1.clientX + touch2.clientX) / 2;
                                 const clientY = (touch1.clientY + touch2.clientY) / 2;
