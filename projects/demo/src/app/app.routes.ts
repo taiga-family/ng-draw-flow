@@ -8,7 +8,7 @@ export const appRoutes: Routes = [
     {
         path: DemoPath.Quickstart,
         loadComponent: async () =>
-            import('../pages/documentation/quickstart/quickstart.component'),
+            import('../pages/getting-started/quickstart/quickstart.component'),
         data: {
             title: 'Quickstart',
         },
