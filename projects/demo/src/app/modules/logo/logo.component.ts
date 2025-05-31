@@ -12,7 +12,8 @@ import {RouterLink} from '@angular/router';
 import {TuiButton, TuiIcon, TuiLink} from '@taiga-ui/core';
 import {TuiBadgedContent} from '@taiga-ui/kit';
 import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
-import {githubApi} from 'projects/demo/src/environments/github.api';
+
+import {GITHUB_API} from '../../constants';
 
 @Component({
     standalone: true,
@@ -29,7 +30,7 @@ export class LogoComponent implements OnInit {
 
     public ngOnInit(): void {
         this.http
-            .get<Record<string, any>>(githubApi)
+            .get<Record<string, any>>(GITHUB_API)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((response) =>
                 this.stars.set(
