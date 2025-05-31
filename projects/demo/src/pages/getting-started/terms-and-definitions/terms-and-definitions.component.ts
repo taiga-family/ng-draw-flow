@@ -7,10 +7,10 @@ import {
     PanZoomConfigurationExample1Component,
     PanZoomConfigurationExample2Component,
     PanZoomConfigurationExample3Component,
-} from '../pan-zoom-configuration/examples';
-import ConnectionsExampleComponent from './examplaes/connections-example/connections-example.component';
-import ConnectorsExampleComponent from './examplaes/connectors-example/connectors-example.component';
-import NodesExampleComponent from './examplaes/nodes-example/nodes-example.component';
+} from '../../documentation/pan-zoom-configuration/examples';
+import ConnectionsExampleComponent from './examples/connections-example/connections-example.component';
+import ConnectorsExampleComponent from './examples/connectors-example/connectors-example.component';
+import NodesExampleComponent from './examples/nodes-example/nodes-example.component';
 
 @Component({
     standalone: true,
