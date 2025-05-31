@@ -20,14 +20,36 @@
         class="by"
     />
 
-    <a
-        href="https://github.com/taiga-family/ng-draw-flow"
-        tuiLink
-        class="github-link"
-    >
-        <img
-            alt="github logo"
-            src="assets/icons/github.svg"
-        />
-    </a>
+    <div class="github-link">
+        <tui-badged-content class="app-link">
+            <tui-icon
+                icon="@tui.star"
+                size="s"
+                tuiSlot="bottom"
+                [style.color]="'orange'"
+                [style.font-size.rem]="1"
+            />
+
+            <a
+                href="https://github.com/taiga-family/ng-draw-flow"
+                rel="noreferrer"
+                target="_blank"
+                title="NgDrawFlow source code on GitHub"
+            >
+                <button
+                    appearance="outline-grayscale"
+                    size="s"
+                    tuiButton
+                    type="button"
+                    class="app-link"
+                >
+                    <tui-icon
+                        icon="@tui.github"
+                        [style.height.rem]="1"
+                    />
+                    {{ stars() }}
+                </button>
+            </a>
+        </tui-badged-content>
+    </div>
 </div>
