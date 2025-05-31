@@ -11,8 +11,8 @@
         "sourceMap": true,
         "checkJs": false,
         "paths": {
-            "@ng-draw-flow/core": ["projects/ng-draw-flow/src/index.ts"],
-            "@demo/constants": ["projects/demo/src/app/constants/index.ts"]
+            "@demo/constants": ["projects/demo/src/app/constants/index.ts"],
+            "@ng-draw-flow/core": ["projects/ng-draw-flow/src/index.ts"]
         }
     }
 }
