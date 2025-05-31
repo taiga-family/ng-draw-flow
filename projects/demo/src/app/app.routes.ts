@@ -4,7 +4,14 @@ import {RouterModule} from '@angular/router';
 import {DemoPath} from '@demo/constants';
 
 export const appRoutes: Routes = [
-    // Quickstart
+    {
+        path: DemoPath.Installation,
+        loadComponent: async () =>
+            import('../pages/getting-started/installation/installation.component'),
+        data: {
+            title: 'Installation',
+        },
+    },
     {
         path: DemoPath.Quickstart,
         loadComponent: async () =>

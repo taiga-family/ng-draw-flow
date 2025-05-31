@@ -1,10 +1,12 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {NgDrawFlowComponent} from '@ng-draw-flow/core';
 import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
-import {TuiLink} from '@taiga-ui/core';
+import {TuiLink, TuiNotification, TuiTitle} from '@taiga-ui/core';
+import {FooterLoveComponent} from 'projects/demo/src/app/modules/docs-ui/footer-love/footer-love.component';
 
 import FirstExampleComponent from './examples/first-example/component';
 
@@ -13,10 +15,14 @@ import FirstExampleComponent from './examples/first-example/component';
     selector: 'quickstart-doc-page',
     imports: [
         FirstExampleComponent,
+        FooterLoveComponent,
         NgDrawFlowComponent,
         ReactiveFormsModule,
+        RouterLink,
         TuiAddonDoc,
         TuiLink,
+        TuiNotification,
+        TuiTitle,
     ],
     templateUrl: './quickstart.component.html',
     styleUrls: ['./quickstart.component.less'],

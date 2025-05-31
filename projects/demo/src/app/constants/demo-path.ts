@@ -1,4 +1,5 @@
 export const DemoPath = {
+    Installation: 'getting-started/installation',
     Quickstart: 'getting-started/quickstart',
     TermsAndDefinitions: 'getting-started/terms-and-definitions',
     ConfigurationAndPublicApi: 'features/configuration-and-public-api',

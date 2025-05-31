@@ -1,0 +1,104 @@
+<tui-doc-page header="Getting started">
+    <section>
+        <img
+            alt="ng-draw-flow logo"
+            src="assets/icons/logo.svg"
+            class="logo"
+        />
+
+        <p>If you're looking to get a Diagram Library up and running swiftly, you're in the right spot!</p>
+
+        <tui-notification
+            size="m"
+            class="fit-content"
+        >
+            Try it online or setup NgDrawFlow locally with only 3 steps! Choose what fits you!
+        </tui-notification>
+    </section>
+
+    <section>
+        <h2>Play online</h2>
+        <p>
+            You can try NgDrawFlow without setting anything up locally by checking out the starter projects we have on
+            <a
+                href="https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts"
+                target="_blank"
+                tuiLink
+            >
+                CodeSandbox
+            </a>
+        </p>
+    </section>
+
+    <section>
+        <h2>Local development</h2>
+
+        <h3>Prerequisites</h3>
+        <p>To get started locally you should have a few things:</p>
+
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <a
+                    href="https://nodejs.org/"
+                    tuiLink
+                >
+                    Node.js
+                </a>
+                installed.
+            </li>
+            <li class="tui-list__item">
+                <a
+                    href="https://angular.dev/installation"
+                    tuiLink
+                >
+                    Angular
+                </a>
+                installed.
+            </li>
+        </ul>
+
+        <p>
+            A working knowledge of
+            <a
+                href="https://angular.dev/"
+                tuiLink
+            >
+                Angular
+            </a>
+            is helpful. You don't need to be an expert, but you should be comfortable with the basics.
+        </p>
+
+        <h3>1. A new Project</h3>
+        <p>First, spin up a new Angular project</p>
+        <tui-doc-code code="ng new my-app" />
+
+        <h3>2. Add NgDrawFlow</h3>
+        <p>NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.</p>
+        <tui-doc-code code="npm i @ng-draw-flow/core --save" />
+
+        <h3>3. Run it!</h3>
+        <p>Lastly, spin up the dev server and we're good to go!</p>
+        <tui-doc-code code="ng serve" />
+
+        <tui-notification
+            appearance="success"
+            size="m"
+            class="fit-content mt-3 mb-3"
+        >
+            <span tuiTitle>
+                Next: Design your first diagram
+                <span tuiSubtitle>
+                    That's it. Build your first diagram in minutes with our
+                    <a
+                        tuiLink
+                        [routerLink]="['/getting-started/quickstart']"
+                    >
+                        quick start guide
+                    </a>
+                </span>
+            </span>
+        </tui-notification>
+
+        <app-footer-love />
+    </section>
+</tui-doc-page>
