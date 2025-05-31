@@ -8,7 +8,7 @@ export const DEMO_PAGES: TuiDocRoutePages = [
         route: DemoPath.Quickstart,
     },
     {
-        section: 'Documentation',
+        section: 'Getting Started',
         title: 'Terms and Definitions',
         route: DemoPath.TermsAndDefinitions,
     },
