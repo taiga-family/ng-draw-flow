@@ -33,7 +33,7 @@ tui-doc-navigation {
 }
 
 .w-full {
-    width: 100%;
+    inline-size: 100%;
 }
 
 .text-center {
@@ -41,5 +41,5 @@ tui-doc-navigation {
 }
 
 .red {
-    color: #ff0000;
+    color: #b8474e;
 }
