@@ -444,6 +444,20 @@ const DemoPath = {
 
 /***/ }),
 
+/***/ 9785:
+/*!*******************************************************!*\
+  !*** ./projects/demo/src/app/constants/github-api.ts ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   GITHUB_API: () => (/* binding */ GITHUB_API)
+/* harmony export */ });
+const GITHUB_API = 'https://api.github.com/repos/taiga-family/ng-draw-flow';
+
+/***/ }),
+
 /***/ 6899:
 /*!**************************************************!*\
   !*** ./projects/demo/src/app/constants/index.ts ***!
@@ -452,9 +466,12 @@ const DemoPath = {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DemoPath: () => (/* reexport safe */ _demo_path__WEBPACK_IMPORTED_MODULE_0__.DemoPath)
+/* harmony export */   DemoPath: () => (/* reexport safe */ _demo_path__WEBPACK_IMPORTED_MODULE_0__.DemoPath),
+/* harmony export */   GITHUB_API: () => (/* reexport safe */ _github_api__WEBPACK_IMPORTED_MODULE_1__.GITHUB_API)
 /* harmony export */ });
 /* harmony import */ var _demo_path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo-path */ 5858);
+/* harmony import */ var _github_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./github-api */ 9785);
+
 
 
 /***/ }),
@@ -470,42 +487,80 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   LOGO_CONTENT: () => (/* binding */ LOGO_CONTENT),
 /* harmony export */   LogoComponent: () => (/* binding */ LogoComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ 1099);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
-/* harmony import */ var _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/polymorpheus */ 6636);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 7008);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 1099);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 1498);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/core */ 8613);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
+/* harmony import */ var _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @taiga-ui/polymorpheus */ 6636);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constants */ 6899);
+/* harmony import */ var _taiga_ui_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/kit */ 2665);
 var _LogoComponent;
 
 
 
 
-class LogoComponent {}
+
+
+
+
+
+class LogoComponent {
+  constructor() {
+    this.stars = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.signal)('');
+    this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.DestroyRef);
+    this.http = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient);
+  }
+  ngOnInit() {
+    this.http.get(_constants__WEBPACK_IMPORTED_MODULE_0__.GITHUB_API).pipe((0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__.takeUntilDestroyed)(this.destroyRef)).subscribe(response => this.stars.set(Intl.NumberFormat('en', {
+      notation: 'compact'
+    }).format(response['stargazers_count'])));
+  }
+}
 _LogoComponent = LogoComponent;
 _LogoComponent.ɵfac = function LogoComponent_Factory(t) {
   return new (t || _LogoComponent)();
 };
-_LogoComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+_LogoComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
   type: _LogoComponent,
   selectors: [["logo"]],
   standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵStandaloneFeature"]],
-  decls: 5,
-  vars: 0,
-  consts: [["routerLink", "/", "tuiLink", "", 1, "logo-link"], [1, "logo-name"], ["alt", "ng-draw-flow logo", "src", "assets/icons/logo.svg", 1, "logo"], ["alt", "by t-bank", "src", "assets/icons/by.svg", 1, "by"]],
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵStandaloneFeature"]],
+  decls: 14,
+  vars: 7,
+  consts: [[1, "container"], ["routerLink", "/", "tuiLink", "", 1, "logo-link"], [1, "logo-name"], ["alt", "ng-draw-flow logo", "src", "assets/icons/logo.svg", 1, "logo"], ["alt", "by t-bank", "src", "assets/icons/by.svg", 1, "by"], [1, "link-group-container", "link-group-items"], [1, "app-link"], ["icon", "@tui.star", "size", "s", "tuiSlot", "bottom"], ["href", "https://github.com/taiga-family/ng-draw-flow", "rel", "noreferrer", "target", "_blank", "title", "NgDrawFlow source code on GitHub"], ["appearance", "outline-grayscale", "size", "s", "tuiButton", "", "type", "button", 1, "app-link"], ["icon", "@tui.github"], ["appearance", "icon", "href", "https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts", "iconStart", "assets/icons/codesandbox.svg", "rel", "noreferrer", "target", "_blank", "title", "Test it in CodeSandbox", "tuiLink", "", 1, "app-link"]],
   template: function LogoComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "a", 0)(1, "span", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "img", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " NgDrawFlow ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "img", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "a", 1)(2, "span", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "img", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, " NgDrawFlow ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "img", 4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "div", 5)(7, "tui-badged-content", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](8, "tui-icon", 7);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "a", 8)(10, "button", 9);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](11, "tui-icon", 10);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](13, "a", 11);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+    }
+    if (rf & 2) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](8);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵstyleProp"]("color", "orange")("font-size", 1, "rem");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵstyleProp"]("height", 1, "rem");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" ", ctx.stars(), " ");
     }
   },
-  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterLink, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__.TuiLink],
-  styles: ["[_nghost-%COMP%] {\n  display: flex;\n  align-items: center;\n}\n[_nghost-%COMP%]   tui-root._mobile[_nghost-%COMP%], tui-root._mobile   [_nghost-%COMP%] {\n  font-size: 0;\n}\n.logo-link[_ngcontent-%COMP%] {\n  display: flex;\n}\n.logo-name[_ngcontent-%COMP%] {\n  display: flex;\n  color: var(--tui-text-primary);\n}\n.logo[_ngcontent-%COMP%] {\n  margin-right: 0.625rem;\n  inline-size: 2rem;\n  block-size: 2rem;\n}\n.by[_ngcontent-%COMP%] {\n  margin-left: 0.875rem;\n}\ntui-root._mobile[_nghost-%COMP%]   .by[_ngcontent-%COMP%], tui-root._mobile   [_nghost-%COMP%]   .by[_ngcontent-%COMP%] {\n  display: none;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ28uc3R5bGUubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtBQUNKO0FBSEE7RUFLUSxZQUFBO0FBQ1I7QUFHQTtFQUNJLGFBQUE7QUFESjtBQUlBO0VBQ0ksYUFBQTtFQUNBLDhCQUFBO0FBRko7QUFLQTtFQUNJLHNCQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtBQUhKO0FBTUE7RUFDSSxxQkFBQTtBQUpKO0FBTUk7RUFDSSxhQUFBO0FBSlIiLCJmaWxlIjoibG9nby5zdHlsZS5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcblxuICAgIDpob3N0LWNvbnRleHQodHVpLXJvb3QuX21vYmlsZSkge1xuICAgICAgICBmb250LXNpemU6IDA7XG4gICAgfVxufVxuXG4ubG9nby1saW5rIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xufVxuXG4ubG9nby1uYW1lIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGNvbG9yOiB2YXIoLS10dWktdGV4dC1wcmltYXJ5KTtcbn1cblxuLmxvZ28ge1xuICAgIG1hcmdpbi1yaWdodDogMC42MjVyZW07XG4gICAgaW5saW5lLXNpemU6IDJyZW07XG4gICAgYmxvY2stc2l6ZTogMnJlbTtcbn1cblxuLmJ5IHtcbiAgICBtYXJnaW4tbGVmdDogMC44NzVyZW07XG5cbiAgICA6aG9zdC1jb250ZXh0KHR1aS1yb290Ll9tb2JpbGUpICYge1xuICAgICAgICBkaXNwbGF5OiBub25lO1xuICAgIH1cbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL2FwcC9tb2R1bGVzL2xvZ28vbG9nby5zdHlsZS5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtFQUNBLG1CQUFBO0FBQ0o7QUFIQTtFQUtRLFlBQUE7QUFDUjtBQUdBO0VBQ0ksYUFBQTtBQURKO0FBSUE7RUFDSSxhQUFBO0VBQ0EsOEJBQUE7QUFGSjtBQUtBO0VBQ0ksc0JBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0FBSEo7QUFNQTtFQUNJLHFCQUFBO0FBSko7QUFNSTtFQUNJLGFBQUE7QUFKUjs7QUFFQSw0aENBQTRoQyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG5cbiAgICA6aG9zdC1jb250ZXh0KHR1aS1yb290Ll9tb2JpbGUpIHtcbiAgICAgICAgZm9udC1zaXplOiAwO1xuICAgIH1cbn1cblxuLmxvZ28tbGluayB7XG4gICAgZGlzcGxheTogZmxleDtcbn1cblxuLmxvZ28tbmFtZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBjb2xvcjogdmFyKC0tdHVpLXRleHQtcHJpbWFyeSk7XG59XG5cbi5sb2dvIHtcbiAgICBtYXJnaW4tcmlnaHQ6IDAuNjI1cmVtO1xuICAgIGlubGluZS1zaXplOiAycmVtO1xuICAgIGJsb2NrLXNpemU6IDJyZW07XG59XG5cbi5ieSB7XG4gICAgbWFyZ2luLWxlZnQ6IDAuODc1cmVtO1xuXG4gICAgOmhvc3QtY29udGV4dCh0dWktcm9vdC5fbW9iaWxlKSAmIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
+  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterLink, _taiga_ui_kit__WEBPACK_IMPORTED_MODULE_5__.TuiBadgedContentDirective, _taiga_ui_kit__WEBPACK_IMPORTED_MODULE_5__.TuiBadgedContentComponent, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__.TuiButton, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__.TuiIcon, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_8__.TuiLink],
+  styles: [".container[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  inline-size: 100%;\n}\n.container   tui-root._mobile[_nghost-%COMP%], tui-root._mobile   [_nghost-%COMP%] {\n  font-size: 0;\n}\n.logo-link[_ngcontent-%COMP%] {\n  display: flex;\n}\n.logo-name[_ngcontent-%COMP%] {\n  display: flex;\n  color: var(--tui-text-primary);\n}\n.logo[_ngcontent-%COMP%] {\n  margin-right: 0.625rem;\n  inline-size: 2rem;\n  block-size: 2rem;\n}\n.by[_ngcontent-%COMP%] {\n  margin-left: 0.875rem;\n}\ntui-root._mobile[_nghost-%COMP%]   .by[_ngcontent-%COMP%], tui-root._mobile   [_nghost-%COMP%]   .by[_ngcontent-%COMP%] {\n  display: none;\n}\n.link-group-container[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 50%;\n  right: 2rem;\n  display: flex;\n  margin-right: 2.2rem;\n  transform: translateY(-50%);\n}\n.link-group-items[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  gap: 1.25rem;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxvZ28uc3R5bGUubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0FBQ0o7QUFKQTtFQU1RLFlBQUE7QUFDUjtBQUdBO0VBQ0ksYUFBQTtBQURKO0FBSUE7RUFDSSxhQUFBO0VBQ0EsOEJBQUE7QUFGSjtBQUtBO0VBQ0ksc0JBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0FBSEo7QUFNQTtFQUNJLHFCQUFBO0FBSko7QUFNSTtFQUNJLGFBQUE7QUFKUjtBQVFBO0VBRUksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsV0FBQTtFQUNBLGFBQUE7RUFDQSxvQkFBQTtFQUNBLDJCQUFBO0FBUEo7QUFVQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFlBQUE7QUFSSiIsImZpbGUiOiJsb2dvLnN0eWxlLmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG5cbiAgICA6aG9zdC1jb250ZXh0KHR1aS1yb290Ll9tb2JpbGUpIHtcbiAgICAgICAgZm9udC1zaXplOiAwO1xuICAgIH1cbn1cblxuLmxvZ28tbGluayB7XG4gICAgZGlzcGxheTogZmxleDtcbn1cblxuLmxvZ28tbmFtZSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBjb2xvcjogdmFyKC0tdHVpLXRleHQtcHJpbWFyeSk7XG59XG5cbi5sb2dvIHtcbiAgICBtYXJnaW4tcmlnaHQ6IDAuNjI1cmVtO1xuICAgIGlubGluZS1zaXplOiAycmVtO1xuICAgIGJsb2NrLXNpemU6IDJyZW07XG59XG5cbi5ieSB7XG4gICAgbWFyZ2luLWxlZnQ6IDAuODc1cmVtO1xuXG4gICAgOmhvc3QtY29udGV4dCh0dWktcm9vdC5fbW9iaWxlKSAmIHtcbiAgICAgICAgZGlzcGxheTogbm9uZTtcbiAgICB9XG59XG5cbi5saW5rLWdyb3VwLWNvbnRhaW5lciB7XG4gICAgLy8gcHVzaGluZyB0aGUgYnV0dG9uIGdyb3VwIHRvIHRoZSByaWdodFxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDUwJTtcbiAgICByaWdodDogMnJlbTsgLy8gd2lkdGggb2YgRGFyay1Nb2RlLUJ1dHRvblxuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgbWFyZ2luLXJpZ2h0OiAyLjJyZW07IC8vIHdpZHRoIG9mIERhcmstTW9kZS1CdXR0b24gKyBtYXJnaW5cbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7XG59XG5cbi5saW5rLWdyb3VwLWl0ZW1zIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgZ2FwOiAxLjI1cmVtO1xufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL2FwcC9tb2R1bGVzL2xvZ28vbG9nby5zdHlsZS5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksYUFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7QUFDSjtBQUpBO0VBTVEsWUFBQTtBQUNSO0FBR0E7RUFDSSxhQUFBO0FBREo7QUFJQTtFQUNJLGFBQUE7RUFDQSw4QkFBQTtBQUZKO0FBS0E7RUFDSSxzQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7QUFISjtBQU1BO0VBQ0kscUJBQUE7QUFKSjtBQU1JO0VBQ0ksYUFBQTtBQUpSO0FBUUE7RUFFSSxrQkFBQTtFQUNBLFFBQUE7RUFDQSxXQUFBO0VBQ0EsYUFBQTtFQUNBLG9CQUFBO0VBQ0EsMkJBQUE7QUFQSjtBQVVBO0VBQ0ksYUFBQTtFQUNBLG1CQUFBO0VBQ0EsWUFBQTtBQVJKOztBQUVBLHd0REFBd3REIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuXG4gICAgOmhvc3QtY29udGV4dCh0dWktcm9vdC5fbW9iaWxlKSB7XG4gICAgICAgIGZvbnQtc2l6ZTogMDtcbiAgICB9XG59XG5cbi5sb2dvLWxpbmsge1xuICAgIGRpc3BsYXk6IGZsZXg7XG59XG5cbi5sb2dvLW5hbWUge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgY29sb3I6IHZhcigtLXR1aS10ZXh0LXByaW1hcnkpO1xufVxuXG4ubG9nbyB7XG4gICAgbWFyZ2luLXJpZ2h0OiAwLjYyNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMnJlbTtcbiAgICBibG9jay1zaXplOiAycmVtO1xufVxuXG4uYnkge1xuICAgIG1hcmdpbi1sZWZ0OiAwLjg3NXJlbTtcblxuICAgIDpob3N0LWNvbnRleHQodHVpLXJvb3QuX21vYmlsZSkgJiB7XG4gICAgICAgIGRpc3BsYXk6IG5vbmU7XG4gICAgfVxufVxuXG4ubGluay1ncm91cC1jb250YWluZXIge1xuICAgIC8vIHB1c2hpbmcgdGhlIGJ1dHRvbiBncm91cCB0byB0aGUgcmlnaHRcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiA1MCU7XG4gICAgcmlnaHQ6IDJyZW07IC8vIHdpZHRoIG9mIERhcmstTW9kZS1CdXR0b25cbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIG1hcmdpbi1yaWdodDogMi4ycmVtOyAvLyB3aWR0aCBvZiBEYXJrLU1vZGUtQnV0dG9uICsgbWFyZ2luXG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpO1xufVxuXG4ubGluay1ncm91cC1pdGVtcyB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGdhcDogMS4yNXJlbTtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */"],
   changeDetection: 0
 });
-const LOGO_CONTENT = new _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_3__.PolymorpheusComponent(LogoComponent);
+const LOGO_CONTENT = new _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_9__.PolymorpheusComponent(LogoComponent);
 
 /***/ }),
 
