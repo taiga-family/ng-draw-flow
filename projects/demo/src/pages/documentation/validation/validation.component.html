@@ -26,10 +26,12 @@
         a node contains a form or other input elements that require validation.
     </p>
 
-    <tui-doc-code
-        filename="Example: Node with Form and Validation"
-        [code]="validationExamples.LocalValidation"
-    />
+    <ng-container *ngIf="validationExamples.LocalValidation as localValidation">
+        <tui-doc-code
+            filename="Example: Node with Form and Validation"
+            [code]="localValidation"
+        />
+    </ng-container>
 
     <h2>Graph-level Validation</h2>
 
@@ -50,11 +52,13 @@
         node.
     </p>
 
-    <tui-doc-code
-        filename="dfCycleDetectionValidator error"
-        class="tui-space_bottom-4"
-        [code]="validationExamples.CycleDetectionValidatorError"
-    />
+    <ng-container *ngIf="validationExamples.CycleDetectionValidatorError as cycleDetectionValidatorError">
+        <tui-doc-code
+            filename="dfCycleDetectionValidator error"
+            class="tui-space_bottom-4"
+            [code]="cycleDetectionValidatorError"
+        />
+    </ng-container>
 
     <b>
         2.
@@ -63,10 +67,12 @@
 
     <p>Checks the graph for isolated nodes - nodes that have neither incoming nor outgoing connections.</p>
 
-    <tui-doc-code
-        filename="dfIsolatedNodesValidator error"
-        [code]="validationExamples.IsolatedNodesValidatorError"
-    />
+    <ng-container *ngIf="validationExamples.IsolatedNodesValidatorError as isolatedNodesValidatorError">
+        <tui-doc-code
+            filename="dfIsolatedNodesValidator error"
+            [code]="isolatedNodesValidatorError"
+        />
+    </ng-container>
 
     <h2>Creating Custom Validators</h2>
 
