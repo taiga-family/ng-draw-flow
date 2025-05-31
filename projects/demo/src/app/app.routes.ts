@@ -27,7 +27,7 @@ export const appRoutes: Routes = [
         path: DemoPath.ConfigurationAndPublicApi,
         loadComponent: async () =>
             import(
-                '../pages/documentation/configuration-and-public-api/configuration-and-public-api.component'
+                '../pages/features/configuration-and-public-api/configuration-and-public-api.component'
             ),
         data: {
             title: 'Configuration & Public API',
@@ -37,7 +37,7 @@ export const appRoutes: Routes = [
         path: DemoPath.PanZoom,
         loadComponent: async () =>
             import(
-                '../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'
+                '../pages/features/pan-zoom-configuration/pan-zoom-configuration.component'
             ),
         data: {
             title: 'PanZoom Configuration',
@@ -46,7 +46,7 @@ export const appRoutes: Routes = [
     {
         path: DemoPath.Nodes,
         loadComponent: async () =>
-            import('../pages/documentation/creating-nodes/creating-nodes.component'),
+            import('../pages/features/creating-nodes/creating-nodes.component'),
         data: {
             title: 'Creating Nodes',
         },
@@ -54,7 +54,7 @@ export const appRoutes: Routes = [
     {
         path: DemoPath.Connectors,
         loadComponent: async () =>
-            import('../pages/documentation/connectors/connectors.component'),
+            import('../pages/features/connectors/connectors.component'),
         data: {
             title: 'Connectors',
         },
@@ -62,7 +62,7 @@ export const appRoutes: Routes = [
     {
         path: DemoPath.Validation,
         loadComponent: async () =>
-            import('../pages/documentation/validation/validation.component'),
+            import('../pages/features/validation/validation.component'),
         data: {
             title: 'Validation',
         },

@@ -7,7 +7,7 @@ import {
     PanZoomConfigurationExample1Component,
     PanZoomConfigurationExample2Component,
     PanZoomConfigurationExample3Component,
-} from '../../documentation/pan-zoom-configuration/examples';
+} from '../../features/pan-zoom-configuration/examples';
 import ConnectionsExampleComponent from './examples/connections-example/connections-example.component';
 import ConnectorsExampleComponent from './examples/connectors-example/connectors-example.component';
 import NodesExampleComponent from './examples/nodes-example/nodes-example.component';
