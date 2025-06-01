@@ -1,74 +1,177 @@
 <tui-doc-page header="Terms and Definitions">
-    <p>
-        In this part of the docs we are explaining some basic NgDrawFlow terms and definition. Three things you’ll be
-        using a lot in NgDrawFlow are nodes, connections, and connectors.
-    </p>
+    <tui-notification>
+        This guide explains the core concepts of NgDrawFlow. Three things you’ll be using a lot in NgDrawFlow are nodes,
+        connections, and connectors.
+    </tui-notification>
+
     <section>
-        <h2>Nodes</h2>
+        <h2 class="mt-10">Nodes</h2>
 
+        <h3>Concept</h3>
         <app-nodes-example />
-
         <p>
-            Node in NgDrawFlow is an Angular component. This means it can display anything you desire. Each node has X
-            and Y coordinates that refer to the point at the center of the node, relative to the workspace. To create a
-            node, you need to extend from
+            A node is used to display data. A node in NgDrawFlow is an Angular component. This means it can display
+            anything you desire. Each node has
+            <code>X</code>
+            and
+            <code>Y</code>
+            coordinates that refer to the point at the center of the node, relative to the workspace. To create a node,
+            you need to extend your Angular component from our
             <code>DrawFlowBaseNode</code>
-            .
+            component.
         </p>
 
+        <h3>Actions</h3>
+        <p>Users can interact with your node. Currently, we support</p>
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>Deleting</code>
+                - To delete a node, select it and press
+                <code>Delete</code>
+                or
+                <code>Backspace</code>
+            </li>
+            <li class="tui-list__item">
+                <code>Dragging</code>
+                - To drag a node, click and hold the node, then move it to the desired location.
+            </li>
+        </ul>
+
+        <h3>Customization</h3>
         <p>
-            To delete a node, select it and press
-            <code>Delete</code>
-            or
-            <code>Backspace</code>
+            You can customize your nodes as you wish.Everything what is possible in an Angular component, is possible in
+            our node. Some things you can do are:
         </p>
-
-        <p>Some of the things you might do with a custom node are:</p>
 
         <ul class="tui-list tui-list_small">
             <li class="tui-list__item">Render form elements</li>
             <li class="tui-list__item">Visualize data</li>
             <li class="tui-list__item">Support multiple connectors</li>
+            <li class="tui-list__item">
+                Add custom styles & design different nodes for different purposes in your flow
+            </li>
         </ul>
+
+        <h3>Requirements</h3>
+        <p>
+            Nodes require a unique name and id (for example
+            <code>node-1-input-1</code>
+            ).
+        </p>
+        More information can be found in the
+        <a
+            routerLink="/documentation/creating-nodes"
+            tuiLink
+        >
+            nodes documentation
+        </a>
+        .
     </section>
+
     <section>
-        <h2>Connectors</h2>
+        <h2 class="mt-10">Connectors</h2>
+        <h3>Concept</h3>
 
         <app-connectors-example />
 
         <p>
-            A Connector is used to link nodes together. By default they are displayed as blue circles but the colour can
-            be changed using css variables. When creating a custom node, you may use as many connector handles as you
-            need. The main requirement is that each connector has a unique name starting with its nodeId (example:
+            A Connector is used to link nodes together. Connectors are divided into two types: input connectors and
+            output connectors.
+        </p>
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>input connectors</code>
+                – Receive connections from the output connectors of other nodes.
+            </li>
+            <li class="tui-list__item">
+                <code>output connectors</code>
+                – Serve as starting points for connections to the input connectors of other nodes.
+            </li>
+        </ul>
+
+        <h3>Actions</h3>
+        <p>Users can interact with connectors. Currently, we support</p>
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>Connecting via Dragging</code>
+                - To connect an input with an output connector, click and hold the output connector, then move it to the
+                desired input connector.
+            </li>
+            <li class="tui-list__item">
+                <code>Deleting</code>
+                - To delete a connector, select it and press
+                <code>Delete</code>
+                or
+                <code>Backspace</code>
+                .
+            </li>
+        </ul>
+
+        <h3>Customization</h3>
+        <p>
+            By default connectors are displayed as blue circles but the appearancean be changed using css variables.
+            Some styling you may use are
+        </p>
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">Change the color</li>
+            <li class="tui-list__item">Change the size of the connector</li>
+            <li class="tui-list__item">Change the shape of the connector</li>
+        </ul>
+        <p>When creating a custom node, you may use as many connector handles as you need.</p>
+
+        <h3>Requirements</h3>
+        <p>
+            Connectors require a unique name starting with its nodeId (for example
             <code>node-1-input-1</code>
-            ). More information can be found in
+            ). More information can be found in the
             <a
                 routerLink="/documentation/connectors"
                 tuiLink
             >
-                the connector documentation
+                connector documentation
             </a>
             .
         </p>
-        <p>Connectors are divided into two types: input connectors and output connectors.</p>
-        <p>
-            To connect two nodes, simply drag an output connector from one node to an input connector of another node.
-        </p>
     </section>
+
     <section>
-        <h2>Connections</h2>
+        <h2 class="mt-10">Connections</h2>
+        <h3>Concept</h3>
 
         <app-connections-example />
 
         <p>
-            A Connection links two nodes together. It is represented by a Bezier curve. An edge is an SVG path, allowing
-            its line thickness and color to be adjusted through CSS variables.
+            A Connection links two nodes together. It is represented by a
+            <a
+                href="https://en.wikipedia.org/wiki/B%C3%A9zier_curve"
+                target="_blank"
+                tuiLink
+            >
+                Bezier
+            </a>
+            curve (a fancy parametric curve). Technically, the connection is an SVG path, allowing its line thickness
+            and color to be adjusted through CSS variables.
         </p>
+
+        <h3>Actions</h3>
+        <p>Users can interact with connections. Currently, we support</p>
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>Deleting</code>
+                - To delete a connection, select it and press
+                <code>Delete</code>
+                or
+                <code>Backspace</code>
+                .
+            </li>
+        </ul>
+
+        <h3>Requirements</h3>
         <p>
-            To delete a connection, select it and press the
-            <code>Delete</code>
-            or
-            <code>Backspace key</code>
+            Connections require an
+            <code>input connector</code>
+            and an
+            <code>output connector</code>
             .
         </p>
     </section>
