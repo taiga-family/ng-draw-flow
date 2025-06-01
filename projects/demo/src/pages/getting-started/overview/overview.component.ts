@@ -195,8 +195,10 @@ export default class OverviewComponent implements OnInit {
         this.data.nodes.set(id, {
             id,
             data: {
-                type: 'simpleNode',
-                title: `created node ${this.counter + 1}`,
+                type: 'overviewNode',
+                title: 'A new node!',
+                subTitle:
+                    'Connect me to the graph and learn how to configure me in the docs.',
             },
         });
         this.form.setValue(this.data);

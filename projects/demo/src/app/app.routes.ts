@@ -116,7 +116,7 @@ export const appRoutes: Routes = [
     },
     {
         path: '**',
-        redirectTo: DemoPath.Quickstart,
+        redirectTo: DemoPath.Overview,
     },
 ];
 
