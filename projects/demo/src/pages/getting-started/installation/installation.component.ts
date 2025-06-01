@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {TuiDocCode, TuiDocPage} from '@taiga-ui/addon-doc';
-import {TuiNotification, TuiTitle} from '@taiga-ui/core';
+import {TuiLink, TuiNotification, TuiTitle} from '@taiga-ui/core';
 import {FooterLoveComponent} from 'projects/demo/src/app/modules/docs-ui/footer-love/footer-love.component';
 
 @Component({
@@ -14,6 +14,7 @@ import {FooterLoveComponent} from 'projects/demo/src/app/modules/docs-ui/footer-
         RouterLink,
         TuiDocCode,
         TuiDocPage,
+        TuiLink,
         TuiNotification,
         TuiTitle,
     ],
