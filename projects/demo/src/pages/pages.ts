@@ -4,8 +4,13 @@ import type {TuiDocRoutePages} from '@taiga-ui/addon-doc';
 export const DEMO_PAGES: TuiDocRoutePages = [
     {
         section: 'Getting Started',
-        title: 'Installation',
-        route: DemoPath.Installation,
+        title: 'Overview',
+        route: DemoPath.Overview,
+    },
+    {
+        section: 'Getting Started',
+        title: 'Install',
+        route: DemoPath.Install,
     },
     {
         section: 'Getting Started',
@@ -50,7 +55,7 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     {
         section: 'Examples',
         title: 'Feature Overview',
-        route: DemoPath.Overview,
+        route: DemoPath.ExamplesOverview,
     },
     {
         section: 'Examples',

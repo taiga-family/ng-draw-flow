@@ -1,0 +1,16 @@
+<df-input
+    *ngIf="!startNode"
+    class="input"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+/>
+
+<div>
+    <h2 class="mb-0">{{ model.title }}</h2>
+    <p class="mt-0 gray">{{ model.subTitle }}</p>
+</div>
+
+<df-output
+    *ngIf="!endNode"
+    class="output"
+    [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+/>

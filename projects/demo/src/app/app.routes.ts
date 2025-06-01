@@ -5,11 +5,19 @@ import {DemoPath} from '@demo/constants';
 
 export const appRoutes: Routes = [
     {
-        path: DemoPath.Installation,
+        path: DemoPath.Overview,
+        loadComponent: async () =>
+            import('../pages/getting-started/overview/overview.component'),
+        data: {
+            title: 'Overview',
+        },
+    },
+    {
+        path: DemoPath.Install,
         loadComponent: async () =>
             import('../pages/getting-started/installation/installation.component'),
         data: {
-            title: 'Installation',
+            title: 'Install',
         },
     },
     {
@@ -84,7 +92,7 @@ export const appRoutes: Routes = [
         },
     },
     {
-        path: DemoPath.Overview,
+        path: DemoPath.ExamplesOverview,
         loadComponent: async () =>
             import('../pages/examples/overview/overview.component'),
         data: {

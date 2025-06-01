@@ -4,10 +4,10 @@ import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-fl
 
 @Component({
     standalone: true,
-    selector: 'app-simple-node',
+    selector: 'app-overview-node',
     imports: [DfInputComponent, DfOutputComponent, NgIf],
-    templateUrl: './simple-node.component.html',
-    styleUrls: ['./simple-node.component.less'],
+    templateUrl: './overview-node.component.html',
+    styleUrls: ['./overview-node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SimpleNodeComponent extends DrawFlowBaseNode {}
+export class OverviewNodeComponent extends DrawFlowBaseNode {}
