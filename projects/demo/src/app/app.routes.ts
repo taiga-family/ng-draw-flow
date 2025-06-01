@@ -29,13 +29,13 @@ export const appRoutes: Routes = [
         },
     },
     {
-        path: DemoPath.TermsAndDefinitions,
+        path: DemoPath.CoreConcepts,
         loadComponent: async () =>
             import(
-                '../pages/getting-started/terms-and-definitions/terms-and-definitions.component'
+                '../pages/getting-started/core-concepts/terms-and-definitions.component'
             ),
         data: {
-            title: 'Terms and Definitions',
+            title: 'Core concepts',
         },
     },
     {

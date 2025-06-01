@@ -2,7 +2,7 @@ export const DemoPath = {
     Overview: 'getting-started/overview',
     Install: 'getting-started/install',
     Quickstart: 'getting-started/quickstart',
-    TermsAndDefinitions: 'getting-started/terms-and-definitions',
+    CoreConcepts: 'getting-started/core-concepts',
     ConfigurationAndPublicApi: 'features/configuration-and-public-api',
     PanZoom: 'features/pan-zoom-configuration',
     Nodes: 'features/creating-nodes',
