@@ -16,12 +16,12 @@ import {
     FormNodeComponent,
     InfoNodeComponent,
     InputNodeComponent,
+    LogoNodeComponent,
     MiniNodeComponent,
     OutputNodeComponent,
     OverviewNodeComponent,
     SimpleNodeComponent,
 } from './modules/nodes';
-import {LogoNodeComponent} from './modules/nodes/logo-node/logo-node.component';
 
 export const APP_PROVIDERS: Provider[] = [
     {
