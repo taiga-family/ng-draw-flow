@@ -1,5 +1,22 @@
 <tui-doc-page header="Getting started">
     <section>
+        <tui-notification>
+            In this guide will walk you through the process of creating your first flow using ng-draw-flow.
+        </tui-notification>
+
+        <h2>Prerequisites</h2>
+        <p>
+            Before you begin, ensure that you have set up NgDrawFlow and a new Angular project as described in
+            <a
+                routerLink="/getting-started/install"
+                tuiLink
+            >
+                the installation guide
+            </a>
+            .
+        </p>
+    </section>
+    <section>
         <h2>Import Dependencies and Register Node Components</h2>
 
         <p>
@@ -134,5 +151,27 @@
                 <ng-draw-flow [formControl]="nodeForm" />
             </div>
         </tui-doc-example>
+
+        <tui-notification
+            appearance="success"
+            size="m"
+            class="fit-content mt-3 mb-3"
+        >
+            <span tuiTitle>
+                Next: Core concepts
+                <span tuiSubtitle>
+                    Make yourself familiar with NgDrawFlow's most important building blocks in our
+                    <a
+                        tuiLink
+                        [routerLink]="['/getting-started/core-concepts']"
+                    >
+                        core concepts guide
+                    </a>
+                    .
+                </span>
+            </span>
+        </tui-notification>
     </section>
+
+    <app-footer-love />
 </tui-doc-page>
