@@ -6,8 +6,7 @@ import {
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-
-import {SimpleNodeComponent} from '../../../../../app/modules/nodes';
+import {ExampleNodeComponent} from 'projects/demo/src/app/modules/nodes/example-node/example-node.component';
 
 @Component({
     standalone: true,
@@ -19,7 +18,7 @@ import {SimpleNodeComponent} from '../../../../../app/modules/nodes';
     providers: [
         provideNgDrawFlowConfigs({
             nodes: {
-                simpleNode: SimpleNodeComponent,
+                exampleNode: ExampleNodeComponent,
             },
         }),
     ],
@@ -29,14 +28,14 @@ export default class ConnectionsExampleComponent {
         nodes: new Map()
             .set('node-1', {
                 id: 'node-1',
-                data: {type: 'simpleNode'},
-                position: {x: -150, y: -50},
+                data: {type: 'exampleNode', text: 'Connect me!'},
+                position: {x: -130, y: -50},
                 startNode: true,
             })
             .set('node-2', {
                 id: 'node-2',
-                data: {type: 'simpleNode'},
-                position: {x: 150, y: 50},
+                data: {type: 'exampleNode', text: 'Delete my connection!'},
+                position: {x: 130, y: 50},
                 endNode: true,
             }),
         connections: [
