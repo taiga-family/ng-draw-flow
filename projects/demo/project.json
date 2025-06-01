@@ -84,8 +84,8 @@
                     "echo 'Read more: https://angular.io/guide/deployment#deploy-to-github-pages'",
                     "echo ------",
                     "nx build demo -c production,github",
-                    "cp dist/demo/browser/index.html dist/demo/browser/404.html",
-                    "nx run demo:prerender -c github"
+                    "nx run demo:prerender -c github",
+                    "cp dist/demo/browser/index.html dist/demo/browser/404.html"
                 ]
             }
         },
