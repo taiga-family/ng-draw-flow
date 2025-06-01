@@ -44,7 +44,7 @@ export default class OverviewComponent implements OnInit {
                     title: 'Beautiful.',
                     subTitle: 'Out of the box.',
                 },
-                position: {x: -100, y: 0},
+                position: {x: -200, y: -150},
                 startNode: true,
             })
             .set('node-2', {
@@ -54,7 +54,7 @@ export default class OverviewComponent implements OnInit {
                     title: 'Easy to Use.',
                     subTitle: 'But powerful & performant.',
                 },
-                position: {x: -200, y: 100},
+                position: {x: -300, y: -50},
                 startNode: true,
             })
             .set('node-3', {
@@ -64,7 +64,7 @@ export default class OverviewComponent implements OnInit {
                     title: 'Configureable.',
                     subTitle: 'As you wish.',
                 },
-                position: {x: -200, y: 200},
+                position: {x: -300, y: 50},
                 startNode: true,
             })
             .set('node-4', {
@@ -74,7 +74,7 @@ export default class OverviewComponent implements OnInit {
                     title: 'Editable.',
                     subTitle: 'Ready to build editors.',
                 },
-                position: {x: -100, y: 300},
+                position: {x: -200, y: 150},
                 startNode: true,
             })
             .set('node-10', {
@@ -84,7 +84,7 @@ export default class OverviewComponent implements OnInit {
                     title: 'NgDrawFlow.',
                     subTitle: 'With Love from Taiga.',
                 },
-                position: {x: 350, y: 150},
+                position: {x: 250, y: 0},
             }),
         connections: [
             {
