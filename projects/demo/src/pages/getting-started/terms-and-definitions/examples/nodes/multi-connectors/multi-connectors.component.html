@@ -1,0 +1,23 @@
+<df-input
+    class="connector connector_left"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+    [position]="connectorPosition.Left"
+/>
+
+<df-input
+    class="connector connector_top"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-2', single: false}"
+    [position]="connectorPosition.Top"
+/>
+
+<p class="tui-text_body-xs text">Multiple input and output connectors</p>
+
+<df-output
+    class="connector connector_right"
+    [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+/>
+
+<df-output
+    class="connector connector_bottom"
+    [connectorData]="{nodeId, connectorId: nodeId + '-output-2', single: false}"
+/>

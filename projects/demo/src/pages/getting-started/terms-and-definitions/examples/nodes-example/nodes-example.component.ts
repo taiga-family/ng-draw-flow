@@ -24,7 +24,7 @@ export default class NodesExampleComponent {
     protected data: DfDataModel = {
         nodes: new Map().set('node-1', {
             id: 'node-1',
-            data: {type: 'node', text: 'This is a node'},
+            data: {type: 'node', text: 'This is a node. Delete me.'},
             position: {x: 0, y: 0},
         }),
         connections: [],

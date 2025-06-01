@@ -4,6 +4,7 @@ import type {DfDataModel} from '@ng-draw-flow/core';
 import {NgDrawFlowComponent, provideNgDrawFlowConfigs} from '@ng-draw-flow/core';
 
 import {ConnectorsComponent} from '../nodes/connectors/connectors.component';
+import {MultiConnectorsComponent} from '../nodes/multi-connectors/multi-connectors.component';
 
 @Component({
     standalone: true,
@@ -16,18 +17,27 @@ import {ConnectorsComponent} from '../nodes/connectors/connectors.component';
         provideNgDrawFlowConfigs({
             nodes: {
                 connectors: ConnectorsComponent,
+                multipleConnectors: MultiConnectorsComponent,
             },
         }),
     ],
 })
 export default class ConnectorsExampleComponent {
     protected data: DfDataModel = {
-        nodes: new Map().set('node-1', {
-            id: 'node-1',
-            data: {type: 'connectors'},
-            position: {x: 0, y: 0},
-            startNode: true,
-        }),
+        nodes: new Map()
+            .set('node-1', {
+                id: 'node-1',
+                data: {type: 'connectors'},
+                position: {x: 0, y: -50},
+                startNode: true,
+            })
+            .set('node-2', {
+                id: 'node-2',
+                data: {type: 'multipleConnectors'},
+                position: {x: 0, y: 50},
+                startNode: true,
+            }),
+
         connections: [],
     };
 
