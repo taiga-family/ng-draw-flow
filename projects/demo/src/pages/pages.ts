@@ -19,8 +19,8 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Getting Started',
-        title: 'Terms and Definitions',
-        route: DemoPath.TermsAndDefinitions,
+        title: 'Core Concepts',
+        route: DemoPath.CoreConcepts,
     },
     {
         section: 'Features',
