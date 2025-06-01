@@ -1,0 +1,54 @@
+:host {
+    display: block;
+    inline-size: 1rem;
+    block-size: 1rem;
+    background: transparent;
+    border-radius: 50%;
+    cursor: crosshair;
+    box-sizing: border-box;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        inline-size: 0.5rem;
+        block-size: 0.5rem;
+    }
+
+    &::before {
+        z-index: 1;
+        background: var(--df-connector-color);
+        transform: translate(-50%, -50%);
+    }
+
+    &::after {
+        z-index: 0;
+        inline-size: 1rem;
+        block-size: 1rem;
+        background: var(--df-connector-color-hover);
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    &:hover::after {
+        animation: dfPulse 1.5s infinite;
+    }
+
+    &.df-disabled {
+        pointer-events: none;
+    }
+}
+
+@keyframes dfPulse {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}

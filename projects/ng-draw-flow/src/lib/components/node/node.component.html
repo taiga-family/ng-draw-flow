@@ -1,0 +1,12 @@
+<div
+    #nodeElement
+    data-draw-flow-node
+    class="draw-flow-node"
+    [style.cursor]="cursor"
+    (dfDragDrop)="onDrag($event)"
+    (dfSelectableElement)="onSelectedChanged($event)"
+>
+    <div class="node-content">
+        <ng-container #container />
+    </div>
+</div>

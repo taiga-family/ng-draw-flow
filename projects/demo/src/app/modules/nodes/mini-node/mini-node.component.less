@@ -1,0 +1,38 @@
+@import '@taiga-ui/core/styles/taiga-ui-local';
+
+:host {
+    display: flex;
+    background: #fff;
+    inline-size: 3.125rem;
+    block-size: 3.125rem;
+    padding: 0.5rem;
+    border: 0.0625rem solid #000;
+    transition: border-color 0.2s ease-in-out;
+    color: #000;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+
+    &.df-invalid {
+        border-color: var(--tui-text-negative);
+    }
+}
+
+.input,
+.output {
+    position: absolute;
+}
+
+.input {
+    left: -0.5rem;
+    top: 0.5rem;
+}
+
+.output-wrapper {
+    position: relative;
+}
+
+.output {
+    right: -0.5rem;
+    bottom: 0.5rem;
+}

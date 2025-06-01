@@ -1,0 +1,13 @@
+<df-input
+    *ngIf="!startNode"
+    class="input"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+/>
+
+<p class="tui-text_body-xs">{{ model.text }} {{ invalid }}</p>
+
+<df-output
+    *ngIf="!endNode"
+    class="output"
+    [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+/>

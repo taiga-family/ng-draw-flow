@@ -1,0 +1,52 @@
+{
+    "name": "ng-draw-flow",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": "projects/ng-draw-flow/src",
+    "prefix": "df",
+    "tags": ["draw flow", "ng", "angular", "graph", "editor", "flow", "draw", "diagram", "chart"],
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/ng-draw-flow"],
+            "options": {
+                "project": "projects/ng-draw-flow/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "projects/ng-draw-flow/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "tsconfig.build.json"
+                }
+            },
+            "defaultConfiguration": "production",
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "params": "forward",
+                    "dependencies": true
+                }
+            ]
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/projects/ng-draw-flow"],
+            "options": {
+                "jestConfig": "projects/ng-draw-flow/jest.config.ts"
+            }
+        },
+        "publish": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "npm publish ./dist/{projectName} --ignore-scripts"
+            },
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "params": "ignore"
+                }
+            ]
+        }
+    }
+}

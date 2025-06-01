@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+
+    :host-context(tui-root._mobile) {
+        font-size: 0;
+    }
+}
+
+.logo-link {
+    display: flex;
+}
+
+.logo-name {
+    display: flex;
+    color: var(--tui-text-primary);
+}
+
+.logo {
+    margin-right: 0.625rem;
+    inline-size: 2rem;
+    block-size: 2rem;
+}
+
+.by {
+    margin-left: 0.875rem;
+
+    :host-context(tui-root._mobile) & {
+        display: none;
+    }
+}
+
+.link-group-container {
+    // pushing the button group to the right
+    position: absolute;
+    top: 50%;
+    right: 2rem; // width of Dark-Mode-Button
+    display: flex;
+    margin-right: 2.2rem; // width of Dark-Mode-Button + margin
+    transform: translateY(-50%);
+}
+
+.link-group-items {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}

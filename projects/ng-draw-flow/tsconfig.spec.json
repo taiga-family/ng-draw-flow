@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./out-tsc/spec",
+        "module": "esnext",
+        "types": ["jest", "node"]
+    },
+    "exclude": ["**/schematics/**/*"],
+    "include": ["**/*.spec.ts", "**/*.d.ts"]
+}
