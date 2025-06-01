@@ -1,0 +1,93 @@
+<div class="page-container">
+    <div class="text-center mt-10 mb-10">
+        <h1 class="mb-4">Build your flows with ease.</h1>
+        <div class="flex justify-center items-center gap-4">
+            <button
+                routerLink="/getting-started/install"
+                size="m"
+                tuiButton
+                type="button"
+            >
+                Install
+            </button>
+            <a
+                href="https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts"
+                target="_blank"
+                tuiLink
+                type="button"
+            >
+                <button
+                    appearance="outline"
+                    size="m"
+                    tuiButton
+                    type="button"
+                >
+                    Code online
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="editor">
+        <div
+            class="editor"
+            [ngClass]="{fullscreen: fullscreen$ | async}"
+        >
+            <ng-draw-flow
+                [formControl]="form"
+                (connectionCreated)="onConnectionCreated($event)"
+                (connectionDeleted)="onConnectionDeleted($event)"
+                (connectionSelected)="onConnectionSelected($event)"
+                (nodeDeleted)="onNodeDeleted($event)"
+                (nodeMoved)="onNodeMoved($event)"
+                (nodeSelected)="onNodeSelected($event)"
+                (scale)="onScaleChange($event)"
+            />
+
+            <button
+                size="s"
+                tuiButton
+                type="button"
+                class="add"
+                (click)="addNodeToDrawFlow()"
+            >
+                Add node
+            </button>
+
+            <button
+                size="s"
+                tuiButton
+                type="button"
+                class="fullscreen-btn"
+                (click)="toggleFullscreen()"
+            >
+                {{ (fullscreen$ | async) ? 'Exit from fullscreen' : 'Fullscreen' }}
+            </button>
+
+            <div class="scale-controls">
+                <button
+                    size="s"
+                    tuiButton
+                    type="button"
+                    (click)="editor?.zoomOut()"
+                >
+                    zoomOut
+                </button>
+
+                <div class="scale-value">{{ currentScale$ | async }}%</div>
+
+                <button
+                    size="s"
+                    tuiButton
+                    type="button"
+                    (click)="editor?.zoomIn()"
+                >
+                    zomIn
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="pb-3">
+        <app-footer-love />
+    </div>
+</div>

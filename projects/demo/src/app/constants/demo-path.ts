@@ -1,5 +1,6 @@
 export const DemoPath = {
-    Installation: 'getting-started/installation',
+    Overview: 'getting-started/overview',
+    Install: 'getting-started/install',
     Quickstart: 'getting-started/quickstart',
     TermsAndDefinitions: 'getting-started/terms-and-definitions',
     ConfigurationAndPublicApi: 'features/configuration-and-public-api',
@@ -9,7 +10,7 @@ export const DemoPath = {
     Connections: 'features/connections',
     Validation: 'features/validation',
     SimpleExample: 'examples/simple-example',
-    Overview: 'examples/overview',
+    ExamplesOverview: 'examples/overview',
     Editor: 'examples/editor',
     StressTest: 'examples/stress-test',
     CustomNodes: 'examples/nodes-example/custom-nodes-example',
