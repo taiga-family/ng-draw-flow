@@ -19,10 +19,8 @@ import {
     FormNodeComponent,
     InfoNodeComponent,
     InputNodeComponent,
-    LogoNodeComponent,
     MiniNodeComponent,
     OutputNodeComponent,
-    OverviewNodeComponent,
     SimpleNodeComponent,
 } from './modules/nodes';
 
@@ -76,8 +74,6 @@ export const APP_PROVIDERS: Provider[] = [
             outputNode: OutputNodeComponent,
             miniNode: MiniNodeComponent,
             formNode: FormNodeComponent,
-            overviewNode: OverviewNodeComponent,
-            logoNode: LogoNodeComponent,
             firstNode: FirstNode,
             enhancedNode: EnhancedNode,
             firstNodeConnected: FirstNodeConnectedComponent,
