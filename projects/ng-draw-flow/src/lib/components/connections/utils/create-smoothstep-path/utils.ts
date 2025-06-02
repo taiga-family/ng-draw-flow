@@ -18,6 +18,7 @@ export function createEndPoint(x: number, y: number): string {
     return createLine(x, y);
 }
 
+/* eslint-disable @typescript-eslint/max-params */
 export function createHorizontalLineWithCurve(
     x: number,
     y: number,
@@ -54,6 +55,7 @@ export function createVerticalLineToLeftWithCurve(
 
     return `${lineToCurvature} Q ${x} ${y}, ${x - radius} ${y}`;
 }
+/* eslint-enable @typescript-eslint/max-params */
 
 export function createLine(x: number, y: number): string {
     return `L ${x} ${y}`;

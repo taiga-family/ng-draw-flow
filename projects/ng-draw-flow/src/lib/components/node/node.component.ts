@@ -139,7 +139,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
 
         this.containerRef.clear();
         this.nodeContentComponentRef = this.containerRef.createComponent(
-            this.drawFlowComponents[nodeType],
+            this.drawFlowComponents[nodeType]!,
         );
 
         this.innerComponent = this.nodeContentComponentRef.instance;
@@ -309,6 +309,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         );
     }
 
+    /* eslint-disable @typescript-eslint/max-params */
     private updateConnectorCoordinates(
         position: DfPoint,
         nodeId: string,
@@ -334,6 +335,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
             connector.position,
         );
     }
+    /* eslint-enable @typescript-eslint/max-params */
 
     private calculateConnectorPosition(
         element: HTMLElement,

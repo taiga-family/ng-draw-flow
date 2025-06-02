@@ -79,21 +79,21 @@ function checkNodeForCycle(
     nodeStates: Map<DfId, number>,
 ): DfId[] {
     // Use a stack for iterative DFS and a path array to track the current path
-    const stack: Array<{id: DfId; processed: boolean}> = [
-        {id: startNodeId, processed: false},
+    const stack: Array<{nodeId: DfId; processed: boolean}> = [
+        {nodeId: startNodeId, processed: false},
     ];
     const path: DfId[] = [];
 
     while (stack.length > 0) {
-        const {id, processed} = stack[stack.length - 1];
+        const {nodeId, processed} = stack[stack.length - 1]!;
 
         if (processed) {
             // Node is fully processed
-            nodeStates.set(id, 2);
+            nodeStates.set(nodeId, 2);
             stack.pop();
 
             // Remove the node from the current path when backtracking
-            if (path.length > 0 && path[path.length - 1] === id) {
+            if (path.length > 0 && path[path.length - 1] === nodeId) {
                 path.pop();
             }
 
@@ -101,12 +101,18 @@ function checkNodeForCycle(
         }
 
         // Mark the node as being in the current path
-        nodeStates.set(id, 1);
-        stack[stack.length - 1].processed = true;
-        path.push(id);
+        nodeStates.set(nodeId, 1);
+        stack[stack.length - 1]!.processed = true;
+        path.push(nodeId);
 
         // Process neighbors
-        const cycleFound = processNeighbors(id, adjacencyMap, nodeStates, path, stack);
+        const cycleFound = processNeighbors({
+            nodeId,
+            adjacencyMap,
+            nodeStates,
+            path,
+            stack,
+        });
 
         if (cycleFound.length > 0) {
             return cycleFound;
@@ -116,22 +122,32 @@ function checkNodeForCycle(
     return []; // No cycle found from this starting node
 }
 
+interface ProcessNeighborsContext {
+    /** Current node ID */
+    nodeId: DfId;
+    /** Map of adjacency relationships between nodes */
+    adjacencyMap: Map<DfId, Set<DfId>>;
+    /** Map of node states (0 = unvisited, 1 = visiting, 2 = visited) */
+    nodeStates: Map<DfId, number>;
+    /** Current path */
+    path: DfId[];
+    /** DFS stack */
+    stack: Array<{nodeId: DfId; processed: boolean}>;
+}
+
 /**
- * Process all neighbors of a node
- * @param nodeId Current node ID
- * @param adjacencyMap Adjacency map
- * @param nodeStates Map of node states
- * @param path Current path
- * @param stack DFS stack
- * @returns Array of node IDs that form a cycle, or empty array if no cycle is found
+ * Processes all neighbors of a given node during DFS.
+ *
+ * @param context Object containing traversal context, adjacency map and state tracking.
+ * @returns Array of node IDs forming a cycle, or empty array if no cycle is found.
  */
-function processNeighbors(
-    nodeId: DfId,
-    adjacencyMap: Map<DfId, Set<DfId>>,
-    nodeStates: Map<DfId, number>,
-    path: DfId[],
-    stack: Array<{id: DfId; processed: boolean}>,
-): DfId[] {
+function processNeighbors({
+    nodeId,
+    adjacencyMap,
+    nodeStates,
+    path,
+    stack,
+}: ProcessNeighborsContext): DfId[] {
     const neighbors = adjacencyMap.get(nodeId) || new Set<DfId>();
 
     for (const neighbor of neighbors) {
@@ -146,7 +162,7 @@ function processNeighbors(
 
         if (neighborState === 0) {
             // Add unvisited node to the stack
-            stack.push({id: neighbor, processed: false});
+            stack.push({nodeId: neighbor, processed: false});
         }
     }
 
