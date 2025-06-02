@@ -1,5 +1,5 @@
 import {CommonModule} from '@angular/common';
-import type {OnInit} from '@angular/core';
+import type {AfterViewInit, OnDestroy, OnInit} from '@angular/core';
 import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {
@@ -16,6 +16,7 @@ import {
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import {TuiButton} from '@taiga-ui/core';
+import type {Subscription} from 'rxjs';
 import {BehaviorSubject} from 'rxjs';
 
 import {LogoNodeComponent} from './logo-node/logo-node.component';
@@ -44,7 +45,7 @@ import {TitleNodeComponent} from './title-node/title-node.component';
         }),
     ],
 })
-export default class OverviewComponent implements OnInit {
+export default class OverviewComponent implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild(NgDrawFlowComponent)
     public editor?: NgDrawFlowComponent;
 
@@ -216,5 +217,44 @@ export default class OverviewComponent implements OnInit {
         });
         this.form.setValue(this.data);
         this.counter++;
+    }
+
+    private zoomSubscription?: Subscription;
+
+    public ngAfterViewInit(): void {
+        if (this.editor) {
+            // Base zoom level is 1.0 for a standard laptop width (around 1366px)
+            /* working solution, uncomment to test
+            const standardWidth = 1366;
+            const currentWidth = window.innerWidth;
+            const zoomFactor = Math.max(0.3, Math.min(1.5, currentWidth / standardWidth));
+            this.editor.setPanZoom(zoomFactor);
+            this.currentScale$.next(zoomFactor * 100);
+            */
+
+            /* working solution, uncomment to test
+           const zoomFactor = this.editor.setZoomBasedOnScreenWidth(1366);
+            this.currentScale$.next(zoomFactor * 100);
+           */
+
+            /* working solution, uncomment to test
+            const zoomFactor = this.editor.setZoomBasedOnScreenHeight(1366);
+            this.currentScale$.next(zoomFactor * 100);
+            */
+
+            // Subscribe to the window resize events and update currentScale
+            this.zoomSubscription = this.editor
+                .zoomBasedOnWindowResize(1366, 800, false)
+                .subscribe((zoomFactor) => {
+                    // Update the scale subject for UI
+                    this.currentScale$.next(zoomFactor * 100);
+                });
+        }
+    }
+
+    public ngOnDestroy(): void {
+        if (this.zoomSubscription) {
+            this.zoomSubscription.unsubscribe();
+        }
     }
 }

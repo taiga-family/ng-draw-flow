@@ -51,7 +51,7 @@
                     zoomOut
                 </button>
 
-                <div class="scale-value">{{ currentScale$ | async }}%</div>
+                <div class="scale-value">{{ currentScale$ | async | number: '1.0-0' }}%</div>
 
                 <button
                     size="s"

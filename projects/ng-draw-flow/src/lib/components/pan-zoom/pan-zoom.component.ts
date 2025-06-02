@@ -160,6 +160,28 @@ export class PanZoomComponent {
         this.coordinates$.next(INITIAL_COORDINATES);
     }
 
+    public setPanZoom(zoom: number, coordinates?: DfPoint): void {
+        const {minZoom, maxZoom} = this.panZoomOptions;
+        const validZoom = dfClamp(zoom, minZoom, maxZoom);
+
+        // Handle coordinates if provided
+        if (coordinates) {
+            // We need to set coordinates first in this case
+            this.manualZoomAnimation$.next(true);
+            this.coordinates$.next(
+                this.getGuardedCoordinates(coordinates.x, coordinates.y),
+            );
+            this.zoom$.next(validZoom);
+
+            timer(this.zoomAnimationDuration)
+                .pipe(take(1))
+                .subscribe(() => this.manualZoomAnimation$.next(false));
+        } else {
+            // Use setZoom for the standard case
+            this.setZoom(validZoom);
+        }
+    }
+
     public zoomIn(): void {
         const {zoomStep, maxZoom} = this.panZoomOptions;
         const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
@@ -236,5 +258,90 @@ export class PanZoomComponent {
         const offsetY = this.zoom$.value * panSize;
 
         return {offsetX, offsetY};
+    }
+
+    /**
+     * Sets zoom level based on screen width comparison to a standard width
+     * @param standardWidth The reference width to compare against (e.g. 1366 for standard laptop)
+     * @param minScale Optional minimum scale factor (defaults to panZoomOptions.minZoom)
+     * @param maxScale Optional maximum scale factor (defaults to panZoomOptions.maxZoom)
+     * @returns The calculated and applied zoom factor after clamping to min/max values
+     */
+    public setZoomBasedOnScreenWidth(
+        standardWidth: number,
+        minScale?: number,
+        maxScale?: number,
+    ): number {
+        const currentWidth = window.innerWidth;
+        const {minZoom, maxZoom} = this.panZoomOptions;
+
+        // Calculate zoom factor based on width ratio
+        const zoomFactor = currentWidth / standardWidth;
+
+        // Clamp to provided or default min/max values
+        const clampedZoom = dfClamp(zoomFactor, minScale ?? minZoom, maxScale ?? maxZoom);
+
+        // Set the zoom level
+        this.setPanZoom(clampedZoom);
+
+        return clampedZoom;
+    }
+
+    /**
+     * Sets zoom level based on screen height comparison to a standard height
+     * @param standardHeight The reference height to compare against (e.g. 768 for standard laptop)
+     * @param minScale Optional minimum scale factor (defaults to panZoomOptions.minZoom)
+     * @param maxScale Optional maximum scale factor (defaults to panZoomOptions.maxZoom)
+     * @returns The calculated and applied zoom factor after clamping to min/max values
+     */
+    public setZoomBasedOnScreenHeight(
+        standardHeight: number,
+        minScale?: number,
+        maxScale?: number,
+    ): number {
+        const currentHeight = window.innerHeight;
+        const {minZoom, maxZoom} = this.panZoomOptions;
+
+        // Calculate zoom factor based on height ratio
+        const zoomFactor = currentHeight / standardHeight;
+
+        // Clamp to provided or default min/max values
+        const clampedZoom = dfClamp(zoomFactor, minScale ?? minZoom, maxScale ?? maxZoom);
+
+        // Set the zoom level
+        this.setPanZoom(clampedZoom);
+
+        return clampedZoom;
+    }
+
+    /**
+     * Sets up a window resize listener that automatically adjusts zoom level
+     * based on window dimensions compared to provided standard dimensions.
+     * @param standardWidth Reference width (defaults to 1366px)
+     * @param standardHeight Reference height (defaults to 768px)
+     * @param useHeight Whether to prioritize height-based scaling (defaults to false)
+     * @returns Observable that emits the current zoom factor after each adjustment
+     */
+    public zoomBasedOnWindowResize(
+        standardWidth = 1366,
+        standardHeight = 768,
+        useHeight = false,
+    ): Observable<number> {
+        // Calculate initial zoom and get its value
+        const initialZoom = useHeight
+            ? this.setZoomBasedOnScreenHeight(standardHeight)
+            : this.setZoomBasedOnScreenWidth(standardWidth);
+
+        // Create and return an observable that emits zoom levels
+        return fromEvent(window, 'resize').pipe(
+            throttleTime(200, undefined, {leading: true, trailing: true}),
+            map(() =>
+                // Calculate and apply the new zoom factor
+                useHeight
+                    ? this.setZoomBasedOnScreenHeight(standardHeight)
+                    : this.setZoomBasedOnScreenWidth(standardWidth),
+            ),
+            startWith(initialZoom), // Start with the initial zoom value
+        );
     }
 }
