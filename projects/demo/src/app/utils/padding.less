@@ -1,0 +1,44 @@
+// Padding Utilities using mixins
+@padding-size: 16;
+
+// Padding Bottom Utilities
+.generate-padding-bottom(@i: 0) when (@i =< @padding-size) {
+    .generate-padding-bottom(@i + 1);
+
+    .u-pb-@{i} {
+        padding-bottom: 4px * @i;
+    }
+}
+
+// Padding Top Utilities
+.generate-padding-top(@i: 0) when (@i =< @padding-size) {
+    .generate-padding-top(@i + 1);
+
+    .u-pt-@{i} {
+        padding-top: 4px * @i;
+    }
+}
+
+// Padding Left Utilities
+.generate-padding-left(@i: 0) when (@i =< @padding-size) {
+    .generate-padding-left(@i + 1);
+
+    .u-pl-@{i} {
+        padding-left: 4px * @i;
+    }
+}
+
+// Padding Right Utilities
+.generate-padding-right(@i: 0) when (@i =< @padding-size) {
+    .generate-padding-right(@i + 1);
+
+    .u-pr-@{i} {
+        padding-right: 4px * @i;
+    }
+}
+
+// Generate padding utilities
+.generate-padding-bottom();
+.generate-padding-top();
+.generate-padding-left();
+.generate-padding-right();

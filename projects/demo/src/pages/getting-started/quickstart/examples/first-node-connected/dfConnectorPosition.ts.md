@@ -1,0 +1,3 @@
+```ts
+protected connectorPosition = DfConnectorPosition;
+```

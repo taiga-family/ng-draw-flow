@@ -1,0 +1,17 @@
+/* 
+* Gap utilities for flex and grid containers
+*/
+@gap-size: 16;
+@gap-unit: 4px;
+
+// Generate gap utilities using a mixin
+.generate-gap(@i: 0) when (@i =< @gap-size) {
+    .generate-gap(@i + 1);
+
+    .u-gap-@{i} {
+        gap: @gap-unit * @i;
+    }
+}
+
+// Generate all gap classes
+.generate-gap();

@@ -1,0 +1,22 @@
+/* 
+* Width utilities
+*/
+// Full width utility
+.u-w-full {
+    inline-size: 100%;
+}
+
+@width-size: 16;
+@width-unit: 4px;
+
+// Generate width utilities using a mixin
+.generate-width(@i: 0) when (@i =< @width-size) {
+    .generate-width(@i + 1);
+
+    .u-w-@{i} {
+        inline-size: @width-unit * @i;
+    }
+}
+
+// Generate all width classes
+.generate-width();

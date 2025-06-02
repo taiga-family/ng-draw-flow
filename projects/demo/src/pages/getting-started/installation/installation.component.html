@@ -8,7 +8,7 @@
 
         <p>If you're looking to get a Diagram Library up and running swiftly, you're in the right spot!</p>
 
-        <tui-notification class="fit-content mb-8 mt-1">
+        <tui-notification class="u-block tui-space_bottom-8 tui-space_top-1">
             Try it online on
             <a
                 href="https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts"
@@ -60,7 +60,18 @@
         </p>
 
         <h3>1. A new Project</h3>
-        <p>First, spin up a new Angular project</p>
+        <p>
+            First, spin up a new Angular project. If you would like to use
+            <a
+                href="https://taiga-ui.dev/"
+                tuiLink
+            >
+                Taiga themes
+            </a>
+            ,
+            <code>less</code>
+            stylesheets are recommended.
+        </p>
         <tui-doc-code code="ng new my-app" />
 
         <h3>2. Add NgDrawFlow</h3>
@@ -74,7 +85,7 @@
         <tui-notification
             appearance="success"
             size="m"
-            class="fit-content mt-3 mb-3"
+            class="tui-space_top-3 tui-space_bottom-3"
         >
             <span tuiTitle>
                 Next: Design your first diagram
