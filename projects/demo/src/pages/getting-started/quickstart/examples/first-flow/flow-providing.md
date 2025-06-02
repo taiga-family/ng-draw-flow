@@ -2,7 +2,7 @@
 providers: [
   provideNgDrawFlowConfigs({
     nodes: {
-      yourNode: YourNodeComponent,
+      firstNode: FirstNodeComponent,
     },
   }),
 ];

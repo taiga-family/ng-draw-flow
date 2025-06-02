@@ -1,16 +1,15 @@
 <df-input
     *ngIf="!startNode"
-    class="input"
+    class="connector connector_left"
     [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+    [position]="connectorPosition.Left"
 />
 
-<div>
-    <h2 class="tui-space_bottom-0">{{ model.title }}</h2>
-    <p class="tui-space_top-0 gray">{{ model.subTitle }}</p>
-</div>
+<p class="tui-text_body-xs text">{{ model['text'] }}</p>
 
 <df-output
     *ngIf="!endNode"
-    class="output"
+    class="connector connector_right"
     [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+    [position]="connectorPosition.Right"
 />

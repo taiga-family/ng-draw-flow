@@ -4,7 +4,13 @@
             In this guide will walk you through the process of creating your first flow using ng-draw-flow.
         </tui-notification>
 
-        <h2>Prerequisites</h2>
+        <h2>What we will build</h2>
+        <p>At the end of this guide, you will have a fully functional flow built with ng-draw-flow as shown below</p>
+        <div class="final-demo">
+            <ng-draw-flow [formControl]="finalFlowForm" />
+        </div>
+
+        <h3>Prerequisites</h3>
         <p>
             Before you begin, ensure that you have set up NgDrawFlow and a new Angular project as described in
             <a
@@ -16,146 +22,393 @@
             .
         </p>
     </section>
-    <section>
-        <h2>Import Dependencies and Register Node Components</h2>
-
-        <p>
-            To get started with the ng-draw-flow library, begin by setting up your module with the necessary imports and
-            component registrations.
-        </p>
-        <p>
-            Add the
-            <code>NgDrawFlowComponent</code>
-            and
-            <code>ReactiveFormsModule</code>
-            to your module's imports array:
-        </p>
-
-        <tui-doc-code
-            filename="app.module.ts"
-            [code]="gettingStarted.imports"
-        />
-
-        <p>
-            Then, within the providers section, register the components that you want to be available for use as nodes
-            within the graph editor:
-        </p>
-
-        <tui-doc-code
-            filename="app.module.ts"
-            [code]="gettingStarted.providing"
-        />
-
-        <p>
-            Make sure to replace
-            <code>yourNode</code>
-            with your specific component identifier for the node within the editor, and
-            <code>YourNodeComponent</code>
-            with the actual component class you intend to use.
-        </p>
-    </section>
 
     <section>
-        <h2>Set Up Data Model and Control for Graph Structure</h2>
-
-        <p>
-            In the component where you intend to construct your graph, you need to create a data structure that defines
-            the nodes and connections.
-        </p>
-
-        <tui-doc-code
-            filename="app.connectors.component.ts"
-            [code]="gettingStarted.data1"
-        />
-
-        <p>
-            Next, link this data structure to your ng-draw-flow component using a
-            <code>FormControl</code>
-            . This will allow for reactive updates and interactions within your graph editor:
-        </p>
+        <h2 class="tui-space_top-10">Create a node</h2>
+        <h3>Generate a component</h3>
+        In NgDrawFlow, nodes are just Angular components that extend the
+        <code>NgDrawFlowBaseNode</code>
+        . So, lets start by creating an angular component.
 
         <tui-doc-code
-            filename="app.component.html"
-            [code]="gettingStarted.template"
+            code="ng g c first-node"
+            class="tui-space_top-3"
         />
 
+        <h3>Extend the base node class</h3>
         <p>
-            This setup ensures that your ng-draw-flow component is fully integrated with the Angular forms system,
-            enabling seamless data flow and state management for your graph.
-        </p>
-    </section>
-
-    <section>
-        <h2>Populate Example DfDataModel</h2>
-
-        <p>
-            To illustrate how to set up the
-            <code>DfDataModel</code>
-            with actual data, the following example lays out a scenario with a collection of nodes and their
-            connections:
-        </p>
-
-        <tui-doc-code
-            filename="app.connectors.component.ts"
-            [code]="gettingStarted.data2"
-        />
-
-        <p>
-            Each
-            <code>node</code>
-            mainly consists of an
-            <code>id</code>
-            , a
-            <code>position</code>
-            , and a
-            <code>data</code>
-            field. Inside the
-            <code>data</code>
-            field, you need to specify the node type that was previously registered and all the data you want to provide
-            to the node.
-        </p>
-        <p>
-            The
-            <code>connections</code>
-            array contains objects that describe the start and end points of each connection. The
-            <code>source</code>
-            and
-            <code>target</code>
-            holds information about which node and specific connector are used for each connection.
-        </p>
-    </section>
-
-    <section class="tui-space_top-4">
-        <first-example />
-    </section>
-
-    <section>
-        <h2>Creating Nodes</h2>
-        <p>
-            In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
-            node, you should develop a component that extends from the
+            Next, you need to extend the generated
+            <code>FirstNodeComponent</code>
+            from the
             <code>NgDrawFlowBaseNode</code>
-            class. This component will incorporate directives such as
-            <code>DrawFlowInputDirective</code>
-            and
-            <code>DrawFlowOutputDirective</code>
-            .
+            class in your newly created component. This will allow your component to function as a node within the
+            ng-draw-flow editor.
         </p>
-        <p>Here is a basic blueprint for a simple node component:</p>
+
+        <h3>Optional: Template styling</h3>
+        <p>
+            You can update styles and template as you wish. But lets keep it simple for now as you can see in the
+            summary below.
+        </p>
+
+        <h3>Summary</h3>
 
         <tui-doc-example
             style="padding: 0"
-            [content]="customNodeExample"
+            [content]="firstNodeExample"
+        >
+            <tui-notification>
+                <span tuiTitle>
+                    Check the code in the tabs
+                    <span tuiSubtitle>No preview yet. You need to work through the next section first. .</span>
+                </span>
+            </tui-notification>
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2 class="tui-space_top-10">Build the flow</h2>
+        <h3>Import required modules</h3>
+        <p>
+            To display a flow, start by importing the
+            <code>NgDrawFlowModule</code>
+            and
+            <code>ReactiveFormsModule</code>
+            in your component responsible for rendering the flow. In this guide, we use the
+            <code>AppModule</code>
+            for simplicity, but recommend to create a dedicated component for your flow.
+        </p>
+
+        <tui-doc-code
+            filename="app.ts"
+            [code]="firstFlowSteps.flowImports"
+        />
+        <h3>Set Up Providers</h3>
+        <p>
+            Register the provider
+            <code>FirstNodeComponent</code>
+            in the providers array of the component responsible for rendering the flow.
+
+            <tui-doc-code
+                filename="app.ts"
+                [code]="firstFlowSteps.flowProviding"
+            />
+        </p>
+
+        <p>Repeat this process if the flow should use other node types but keep it simple for now. Let's proceed!</p>
+
+        <h3>Set Up the Data Model of the flow</h3>
+        <p>
+            NgDrawFlow offers a fully customizeable data model but it requires the fullfilment of the
+            <code>DfDataModel</code>
+            interface. This interface requires a
+            <code>nodes</code>
+            map and a
+            <code>connections</code>
+            array.
+        </p>
+
+        <tui-doc-code
+            filename="app.ts"
+            [code]="firstFlowSteps.flowModel"
+        />
+
+        <h3>Connect the Data Model</h3>
+        <p>
+            Connect the Data Model to the Control & Flow View. To do so, you need to bind the data model to the
+            <code>&lt;ng-draw-flow&gt;</code>
+            component in your template using a
+            <code>FormControl</code>
+            .
+        </p>
+
+        <tui-doc-code
+            filename="app.ts"
+            [code]="firstFlowSteps.flowForm"
+        />
+
+        <tui-doc-code
+            filename="app.html"
+            [code]="firstFlowSteps.flowTemplate"
+        />
+
+        <p>
+            The
+            <code>&lt;ng-draw-flow&gt;</code>
+            is now fully integrated with the Angular form system. This will allow reactive updates and interactions
+            within your graph editor, enabling seamless data flow and state management for your graph.
+        </p>
+    </section>
+
+    <section>
+        <h2 class="tui-space_top-10">Populate the Data Model</h2>
+        <h3>Adding a Node</h3>
+
+        <p>
+            Now that your flow is set up, you need to populate the data model with actual nodes and connections. Let's
+            start simple and add one node to the data model in
+            <code>app.ts</code>
+            . Each node requires at least the following three properties:
+        </p>
+
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>id: string</code>
+                - The unique identifier for the node.
+            </li>
+            <li class="tui-list__item">
+                <code>data: &#123; type: string; [key: string]: any &#125;</code>
+                - The data associated with the node, including its type and any additional properties you want to
+                include.
+            </li>
+            <li class="tui-list__item">
+                <code>position: &#123; x: number; y: number &#125;</code>
+                - The position of the node in the flow canvas.
+            </li>
+        </ul>
+
+        <tui-doc-code
+            filename="app.ts"
+            [code]="firstFlowSteps.flowModelSimple"
+        />
+
+        <p>
+            Add some
+            <code>height</code>
+            to the
+            <code>&lt;ng-draw-flow&gt;</code>
+            element to make the flow canvas visible.
+        </p>
+
+        <tui-doc-code
+            filename="app.css"
+            [code]="firstFlowSteps.flowCss"
+        />
+
+        <p>
+            As you can see, the node is completly unstyled but initialized correctly (try to drag it!). This resembles
+            our API first approach. However, the nodes can be styled using CSS and we will do that in the next section.
+        </p>
+
+        <tui-doc-example
+            style="padding: 0"
+            [content]="firstFlowExample"
         >
             <div class="node-demo">
-                <ng-draw-flow [formControl]="nodeForm" />
+                <ng-draw-flow [formControl]="firstFlowForm" />
+            </div>
+        </tui-doc-example>
+    </section>
+    <section>
+        <h3>Display custom data in nodes</h3>
+        <p>
+            Before styling it, let's enhance our nodes by displaying dynamic data from our
+            <code>DfDataModel</code>
+            state.
+        </p>
+
+        <tui-doc-code
+            filename="app.ts"
+            [code]="enhancedSteps.enhancedModelTs"
+        />
+
+        Now, the only thing left to do is to update the template of the node component to display the dynamic data.
+
+        <tui-doc-code
+            filename="first-node.html"
+            [code]="enhancedSteps.enhancedNodeHtml"
+        />
+
+        <tui-doc-example
+            style="padding: 0"
+            [content]="firstNodeEnhancedExample"
+        >
+            <div class="node-demo">
+                <ng-draw-flow [formControl]="firstFlowEnhancedForm" />
             </div>
         </tui-doc-example>
 
         <tui-notification
+            appearance="warning"
+            class="tui-space_top-3 tui-space_bottom-3"
+        >
+            <span tuiTitle>
+                Note: Accessing dynamic model properties.
+                <span tuiSubtitle>
+                    <p>
+                        If you use the
+                        <code>.propertyName</code>
+                        notation to access dynamic model properties with strict templates enabled in typescript, you may
+                        receive the following error:
+                    </p>
+                    <code>Property 'text' comes from an index signature, so it must be accessed with ['text'].</code>
+                    <p>
+                        Therefore, we recommend using the
+                        <code>['propertyName']</code>
+                        notation to access dynamic properties in your templates (for example
+                        <code>model['text']</code>
+                        instead of
+                        <code>model.text</code>
+                        ).
+                    </p>
+                </span>
+            </span>
+        </tui-notification>
+
+        <h2 class="tui-space_top-10">Connectors</h2>
+        <h3>Add connectors</h3>
+
+        <p>
+            To connect our nodes with other nodes, we need to add connectors to the node. Connectors require to be
+            specified as either input or output connectors and unique connector id.
+        </p>
+
+        <p>
+            Second, you need to specify a position on the node (left, right, top, bottom) and based on your chosen
+            position, you have to add css accordingly. The CSS is needed to position the connectors within the node, and
+            the position property is essential for correctly rendering the direction of the line. For example, there
+            might be cases where a line exits from the left side but connects at the top of another element. By knowing
+            the positions, NgDrawFlowcan correctly calculate the path of the SVG line.
+        </p>
+        <p>
+            To illustrate this, we will add one input and output connector and style our node with the taiga-ui theme.
+        </p>
+
+        <tui-doc-code code="ng add taiga-ui" />
+
+        <p>
+            Add the
+            <code>dfConnectorPosition</code>
+            property to
+            <code>first-node.ts</code>
+            .
+        </p>
+
+        <tui-doc-code
+            filename="first-node.ts"
+            [code]="connectorSteps.dfConnectorPosition"
+        />
+
+        <p>
+            You add an input connector by adding the
+            <code>&lt;df-input&gt;</code>
+            element and an output connector by adding the
+            <code>&lt;df-output&gt;</code>
+            element to the node's template.
+        </p>
+
+        <tui-doc-code
+            filename="first-node.html"
+            [code]="connectorSteps.dfInput"
+        />
+
+        <p>
+            The
+            <code>!startNode</code>
+            and
+            <code>!endNode</code>
+            properties are optional. A start node does not display input parameters while an end node does not display
+            output parameters.
+        </p>
+        <tui-doc-code
+            filename="first-node.html"
+            [code]="connectorSteps.dfOutput"
+        />
+        <p>As explained, styling is mandatory and we use the Taiga-UI theme here. Copy the following code:</p>
+
+        <tui-doc-code
+            filename="first-node.css"
+            [code]="connectorSteps.conectorCSS"
+        />
+
+        <h3>Add styles</h3>
+
+        <p>
+            There are no changes requireed in our
+            <code>AppComponent</code>
+            and the result should look like this:
+        </p>
+
+        <tui-doc-example
+            style="padding: 0"
+            [content]="firstNodeConnectedExample"
+        >
+            <div class="node-demo">
+                <ng-draw-flow [formControl]="firstFlowConnectorsForm" />
+            </div>
+        </tui-doc-example>
+
+        <tui-notification class="tui-space_top-3 tui-space_bottom-3">
+            <span tuiTitle>
+                Note: Connector styles
+                <span tuiSubtitle>
+                    You can use css to give different appearances to the connectors (for example to distinguish input
+                    and output connectors).
+                </span>
+            </span>
+        </tui-notification>
+    </section>
+    <section>
+        <h2 class="tui-space_top-10">More Connections & Nodes</h2>
+
+        <p>
+            Now that we have a node with connectors and flow in place, we can add more nodes and connections to our
+            flow. To do so, we need to update the
+            <code>DfDataModel</code>
+            with more nodes and connections. A connection requires the following properties:
+        </p>
+
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>source</code>
+                - The source node and connector.
+            </li>
+            <li class="tui-list__item">
+                <code>target</code>
+                - The target node and connector.
+            </li>
+        </ul>
+
+        <p>Sources and targets have the following data structure</p>
+
+        <ul class="tui-list tui-list_small">
+            <li class="tui-list__item">
+                <code>nodeId: string</code>
+                - The unique identifier of the node.
+            </li>
+            <li class="tui-list__item">
+                <code>connectorType: DfConnectionPoint.Output | Input</code>
+                - The type of the connector (input or output).
+            </li>
+            <li class="tui-list__item">
+                <code>connectorId: string</code>
+                - The unique identifier of the connector.
+            </li>
+        </ul>
+
+        <p>
+            As a last step in this guide, we add two child nodes and one child-child node to our flow (as well as the
+            required connectors). Replace our
+            <code>DfDataModel</code>
+            with:
+        </p>
+
+        <tui-doc-code
+            filename="app.connectors.ts"
+            [code]="finalFlowSteps.finalFlowModel"
+        />
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Final Result</h3>
+        <div class="final-demo">
+            <ng-draw-flow [formControl]="finalFlowForm" />
+        </div>
+
+        <tui-notification
             appearance="success"
             size="m"
-            class="fit-content mt-3 mb-3"
+            class="tui-space_top-3 tui-space_bottom-3"
         >
             <span tuiTitle>
                 Next: Core concepts
