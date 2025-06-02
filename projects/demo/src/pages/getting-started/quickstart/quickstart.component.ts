@@ -6,13 +6,11 @@ import {DfConnectionPoint, NgDrawFlowComponent} from '@ng-draw-flow/core';
 import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {TuiLink, TuiNotification, TuiTitle} from '@taiga-ui/core';
-import {FooterLoveComponent} from 'projects/demo/src/app/modules/docs-ui/footer-love/footer-love.component';
 
 @Component({
     standalone: true,
     selector: 'quickstart-doc-page',
     imports: [
-        FooterLoveComponent,
         NgDrawFlowComponent,
         ReactiveFormsModule,
         RouterLink,
