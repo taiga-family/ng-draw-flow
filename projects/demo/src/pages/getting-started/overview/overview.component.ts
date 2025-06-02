@@ -13,7 +13,6 @@ import {
     DfConnectionPoint,
     dfCycleDetectionValidator,
     dfIsolatedNodesValidator,
-    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
@@ -43,10 +42,6 @@ import {OverviewNodeComponent} from './overview-node/overview-node.component';
                 overviewNode: OverviewNodeComponent,
                 logoNode: LogoNodeComponent,
             },
-        }),
-        dfPanZoomOptionsProvider({
-            topPosition: null,
-            leftPosition: null,
         }),
     ],
 })

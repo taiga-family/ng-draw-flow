@@ -2,10 +2,18 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import type {DfDataModel} from '@ng-draw-flow/core';
-import {DfConnectionPoint, NgDrawFlowComponent} from '@ng-draw-flow/core';
+import {
+    DfConnectionPoint,
+    NgDrawFlowComponent,
+    provideNgDrawFlowConfigs,
+} from '@ng-draw-flow/core';
 import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {TuiLink, TuiNotification, TuiTitle} from '@taiga-ui/core';
+
+import {FirstNode} from './examples/first-node/first-node';
+import {FirstNodeConnectedComponent} from './examples/first-node-connected/first-node-connected.component';
+import {EnhancedNode} from './examples/first-node-enhanced/enhanced-node';
 
 @Component({
     standalone: true,
@@ -22,6 +30,15 @@ import {TuiLink, TuiNotification, TuiTitle} from '@taiga-ui/core';
     templateUrl: './quickstart.component.html',
     styleUrls: ['./quickstart.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        provideNgDrawFlowConfigs({
+            nodes: {
+                firstNode: FirstNode,
+                enhancedNode: EnhancedNode,
+                firstNodeConnected: FirstNodeConnectedComponent,
+            },
+        }),
+    ],
 })
 export default class QuickstartComponent {
     /*
