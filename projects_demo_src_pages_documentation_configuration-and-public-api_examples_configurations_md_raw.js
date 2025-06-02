@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_configuration-and-public-api_examples_configurations_md_raw"],{
 
-/***/ 1483:
+/***/ 21483:
 /*!***********************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/configuration-and-public-api/examples/configurations.md?raw ***!
   \***********************************************************************************************************/

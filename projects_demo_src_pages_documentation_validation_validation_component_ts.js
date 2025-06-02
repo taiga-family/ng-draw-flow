@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_validation_validation_component_ts"],{
 
-/***/ 7149:
+/***/ 97149:
 /*!**********************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/validation/validation.component.ts ***!
   \**********************************************************************************/
@@ -11,13 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 9191);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 1099);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 795);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 39191);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 41099);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/core */ 71534);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 90795);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
 var _ValidationComponent;
 
 
@@ -64,9 +64,9 @@ function ValidationComponent_ng_container_43_Template(rf, ctx) {
 class ValidationComponent {
   constructor() {
     this.validationExamples = {
-      LocalValidation: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_local-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/local-1.md?raw */ 3467, 17)),
-      CycleDetectionValidatorError: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_cycle-detection-validator-error_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/cycle-detection-validator-error.md?raw */ 3270, 17)),
-      IsolatedNodesValidatorError: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_isolated-nodes-validator-error_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/isolated-nodes-validator-error.md?raw */ 3433, 17))
+      LocalValidation: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_local-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/local-1.md?raw */ 83467, 17)),
+      CycleDetectionValidatorError: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_cycle-detection-validator-error_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/cycle-detection-validator-error.md?raw */ 43270, 17)),
+      IsolatedNodesValidatorError: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_isolated-nodes-validator-error_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/isolated-nodes-validator-error.md?raw */ 43433, 17))
     };
     this.nodeData = {
       nodes: new Map().set('node-1', {
