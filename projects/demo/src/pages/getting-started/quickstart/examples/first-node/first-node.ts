@@ -6,7 +6,6 @@ import {DrawFlowBaseNode} from '@ng-draw-flow/core';
     selector: 'app-first-node',
     imports: [],
     templateUrl: './first-node.html',
-    styleUrls: ['./first-node.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FirstNode extends DrawFlowBaseNode {}
