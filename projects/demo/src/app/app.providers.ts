@@ -10,9 +10,6 @@ import {
 } from '@taiga-ui/addon-doc';
 import {HIGHLIGHT_OPTIONS} from 'ngx-highlightjs';
 
-import {FirstNode} from '../pages/getting-started/quickstart/examples/first-node/first-node';
-import {FirstNodeConnectedComponent} from '../pages/getting-started/quickstart/examples/first-node-connected/first-node-connected.component';
-import {EnhancedNode} from '../pages/getting-started/quickstart/examples/first-node-enhanced/enhanced-node';
 import {DEMO_PAGES} from '../pages/pages';
 import {LOGO_CONTENT} from './modules/logo/logo.component';
 import {
@@ -74,9 +71,6 @@ export const APP_PROVIDERS: Provider[] = [
             outputNode: OutputNodeComponent,
             miniNode: MiniNodeComponent,
             formNode: FormNodeComponent,
-            firstNode: FirstNode,
-            enhancedNode: EnhancedNode,
-            firstNodeConnected: FirstNodeConnectedComponent,
         },
     }),
 ];
