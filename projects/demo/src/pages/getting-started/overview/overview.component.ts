@@ -12,7 +12,6 @@ import {
 } from '@ng-draw-flow/core';
 import {TuiButton, TuiLink} from '@taiga-ui/core';
 import type {DfDataModel} from 'dist/ng-draw-flow';
-import {FooterLoveComponent} from 'projects/demo/src/app/modules/docs-ui/footer-love/footer-love.component';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -20,7 +19,6 @@ import {BehaviorSubject} from 'rxjs';
     selector: 'app-overview',
     imports: [
         CommonModule,
-        FooterLoveComponent,
         NgDrawFlowComponent,
         ReactiveFormsModule,
         RouterLink,
