@@ -41,8 +41,8 @@ export default class OverviewComponent implements OnInit {
                 id: 'node-1',
                 data: {
                     type: 'overviewNode',
-                    title: 'Beautiful.',
-                    subTitle: 'Out of the box.',
+                    title: 'API first.',
+                    subTitle: 'Configureable as you wish.',
                 },
                 position: {x: -200, y: -150},
                 startNode: true,
@@ -61,8 +61,8 @@ export default class OverviewComponent implements OnInit {
                 id: 'node-3',
                 data: {
                     type: 'overviewNode',
-                    title: 'Configureable.',
-                    subTitle: 'As you wish.',
+                    title: 'Beautiful.',
+                    subTitle: 'Bring your theme or Taiga UI.',
                 },
                 position: {x: -300, y: 50},
                 startNode: true,
@@ -82,7 +82,7 @@ export default class OverviewComponent implements OnInit {
                 data: {
                     type: 'logoNode',
                     title: 'NgDrawFlow.',
-                    subTitle: 'With Love from Taiga.',
+                    subTitle: 'Taiga',
                 },
                 position: {x: 250, y: 0},
             }),
