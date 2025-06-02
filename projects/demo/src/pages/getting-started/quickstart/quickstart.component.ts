@@ -41,7 +41,6 @@ export default class QuickstartComponent {
     public readonly firstNodeExample: Record<string, TuiRawLoaderContent> = {
         TypeScript: import('./examples/first-node/first-node.ts?raw'),
         HTML: import('./examples/first-node/first-node.html?raw'),
-        CSS: import('./examples/first-node/first-node.css?raw'),
     };
 
     public readonly firstFlowExample: Record<string, TuiRawLoaderContent> = {
