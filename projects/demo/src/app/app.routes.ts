@@ -31,9 +31,7 @@ export const appRoutes: Routes = [
     {
         path: DemoPath.CoreConcepts,
         loadComponent: async () =>
-            import(
-                '../pages/getting-started/core-concepts/terms-and-definitions.component'
-            ),
+            import('../pages/getting-started/core-concepts/core-concepts.component'),
         data: {
             title: 'Core concepts',
         },

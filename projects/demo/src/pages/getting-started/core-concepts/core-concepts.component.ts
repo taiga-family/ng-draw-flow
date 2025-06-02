@@ -19,7 +19,7 @@ import NodesExampleComponent from './examples/nodes-example/nodes-example.compon
         TuiLink,
         TuiNotification,
     ],
-    templateUrl: './terms-and-definitions.component.html',
+    templateUrl: './core-concepts.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class TermsAndDefinitionsComponent {}
+export default class CoreConceptsComponent {}
