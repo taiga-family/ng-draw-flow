@@ -1,5 +1,5 @@
 ```css
-.u-text-center {
+.u-ta-center {
   text-align: center;
 }
 ```
