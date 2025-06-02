@@ -3,16 +3,25 @@ import type {OnInit} from '@angular/core';
 import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
-import type {DfDataConnection, DfDataNode, DfEvent} from '@ng-draw-flow/core';
+import type {
+    DfDataConnection,
+    DfDataModel,
+    DfDataNode,
+    DfEvent,
+} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
     dfCycleDetectionValidator,
     dfIsolatedNodesValidator,
+    dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
+    provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import {TuiButton, TuiLink} from '@taiga-ui/core';
-import type {DfDataModel} from 'dist/ng-draw-flow';
 import {BehaviorSubject} from 'rxjs';
+
+import {LogoNodeComponent} from './logo-node/logo-node.component';
+import {OverviewNodeComponent} from './overview-node/overview-node.component';
 
 @Component({
     standalone: true,
@@ -28,6 +37,18 @@ import {BehaviorSubject} from 'rxjs';
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        provideNgDrawFlowConfigs({
+            nodes: {
+                overviewNode: OverviewNodeComponent,
+                logoNode: LogoNodeComponent,
+            },
+        }),
+        dfPanZoomOptionsProvider({
+            topPosition: null,
+            leftPosition: null,
+        }),
+    ],
 })
 export default class OverviewComponent implements OnInit {
     @ViewChild(NgDrawFlowComponent)
