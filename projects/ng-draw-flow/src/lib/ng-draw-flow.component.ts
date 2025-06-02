@@ -153,10 +153,6 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         this.panzoom.zoomIn();
     }
 
-    public setZoom(): void {
-        this.panzoom.resetPanzoom();
-    }
-
     /** Zooms one step *out* from the centre of the scene. */
     public zoomOut(): void {
         this.panzoom.zoomOut();
