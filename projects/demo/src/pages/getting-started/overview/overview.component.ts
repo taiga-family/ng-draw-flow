@@ -2,7 +2,6 @@ import {CommonModule} from '@angular/common';
 import type {OnInit} from '@angular/core';
 import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
 import type {
     DfDataConnection,
     DfDataModel,
@@ -16,11 +15,12 @@ import {
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-import {TuiButton, TuiLink} from '@taiga-ui/core';
+import {TuiButton} from '@taiga-ui/core';
 import {BehaviorSubject} from 'rxjs';
 
 import {LogoNodeComponent} from './logo-node/logo-node.component';
 import {OverviewNodeComponent} from './overview-node/overview-node.component';
+import {TitleNodeComponent} from './title-node/title-node.component';
 
 @Component({
     standalone: true,
@@ -29,9 +29,8 @@ import {OverviewNodeComponent} from './overview-node/overview-node.component';
         CommonModule,
         NgDrawFlowComponent,
         ReactiveFormsModule,
-        RouterLink,
+        TitleNodeComponent,
         TuiButton,
-        TuiLink,
     ],
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.less'],
