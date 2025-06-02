@@ -6,7 +6,8 @@ import {
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-import {ExampleNodeComponent} from 'projects/demo/src/app/modules/nodes/example-node/example-node.component';
+
+import {ExampleNodeComponent} from '../../../../../app/modules/nodes';
 
 @Component({
     standalone: true,
