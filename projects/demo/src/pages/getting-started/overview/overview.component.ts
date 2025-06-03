@@ -20,18 +20,11 @@ import {BehaviorSubject} from 'rxjs';
 
 import {LogoNodeComponent} from './logo-node/logo-node.component';
 import {OverviewNodeComponent} from './overview-node/overview-node.component';
-import {TitleNodeComponent} from './title-node/title-node.component';
 
 @Component({
     standalone: true,
     selector: 'app-overview',
-    imports: [
-        CommonModule,
-        NgDrawFlowComponent,
-        ReactiveFormsModule,
-        TitleNodeComponent,
-        TuiButton,
-    ],
+    imports: [CommonModule, NgDrawFlowComponent, ReactiveFormsModule, TuiButton],
     templateUrl: './overview.component.html',
     styleUrls: ['./overview.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -210,8 +203,6 @@ export default class OverviewComponent implements OnInit {
             data: {
                 type: 'overviewNode',
                 title: 'A new node!',
-                subTitle:
-                    'Connect me to the graph and learn how to configure me in the docs.',
             },
         });
         this.form.setValue(this.data);

@@ -1,4 +1,4 @@
-<tui-doc-page header="Install">
+<tui-doc-page header="Installation">
     <section>
         <img
             alt="ng-draw-flow logo"
@@ -22,9 +22,7 @@
     </section>
 
     <section>
-        <h2>Local development</h2>
-
-        <h3>Prerequisites</h3>
+        <h2 class="tui-space_top-10">Prerequisites</h2>
         <p>To get started locally you should have a few things:</p>
 
         <ul class="tui-list tui-list_small">
@@ -59,7 +57,7 @@
             is helpful. You don't need to be an expert, but you should be comfortable with the basics.
         </p>
 
-        <h3>1. A new Project</h3>
+        <h2 class="tui-space_top-10">1. A new Project</h2>
         <p>
             First, spin up a new Angular project. If you would like to use
             <a
@@ -74,29 +72,25 @@
         </p>
         <tui-doc-code code="ng new my-app" />
 
-        <h3>2. Add NgDrawFlow</h3>
+        <h2 class="tui-space_top-10">2. Add NgDrawFlow</h2>
         <p>NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.</p>
         <tui-doc-code code="npm i @ng-draw-flow/core --save" />
 
-        <h3>3. Run it!</h3>
+        <h2 class="tui-space_top-10">3. Run it!</h2>
         <p>Lastly, spin up the dev server and we're good to go!</p>
         <tui-doc-code code="ng serve" />
 
         <tui-notification
             appearance="success"
             size="m"
-            class="tui-space_top-3 tui-space_bottom-3"
+            class="next-page tui-space_top-10 tui-space_bottom-3"
+            [routerLink]="['/getting-started/quickstart']"
         >
             <span tuiTitle>
                 Next: Design your first diagram
                 <span tuiSubtitle>
                     That's it. Build your first diagram in minutes with our
-                    <a
-                        tuiLink
-                        [routerLink]="['/getting-started/quickstart']"
-                    >
-                        quick start guide
-                    </a>
+                    <a tuiLink>quick start guide</a>
                     .
                 </span>
             </span>

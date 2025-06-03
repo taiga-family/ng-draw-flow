@@ -5,19 +5,11 @@ import {DemoPath} from '@demo/constants';
 
 export const appRoutes: Routes = [
     {
-        path: DemoPath.Overview,
-        loadComponent: async () =>
-            import('../pages/getting-started/overview/overview.component'),
-        data: {
-            title: 'Overview',
-        },
-    },
-    {
-        path: DemoPath.Install,
+        path: DemoPath.Installation,
         loadComponent: async () =>
             import('../pages/getting-started/installation/installation.component'),
         data: {
-            title: 'Install',
+            title: 'Installation',
         },
     },
     {
@@ -34,6 +26,14 @@ export const appRoutes: Routes = [
             import('../pages/getting-started/core-concepts/core-concepts.component'),
         data: {
             title: 'Core concepts',
+        },
+    },
+    {
+        path: DemoPath.Overview,
+        loadComponent: async () =>
+            import('../pages/getting-started/overview/overview.component'),
+        data: {
+            title: 'Overview',
         },
     },
     {
@@ -114,7 +114,7 @@ export const appRoutes: Routes = [
     },
     {
         path: '**',
-        redirectTo: DemoPath.Overview,
+        redirectTo: DemoPath.Installation,
     },
 ];
 

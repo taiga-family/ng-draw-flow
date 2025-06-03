@@ -1,6 +1,6 @@
 export const DemoPath = {
     Overview: 'getting-started/overview',
-    Install: 'getting-started/install',
+    Installation: 'getting-started/installation',
     Quickstart: 'getting-started/quickstart',
     CoreConcepts: 'getting-started/core-concepts',
     ConfigurationAndPublicApi: 'features/configuration-and-public-api',

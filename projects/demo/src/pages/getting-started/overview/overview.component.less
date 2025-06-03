@@ -13,41 +13,6 @@
         inline-size: 100%;
         block-size: 100%;
         background-color: #fff;
-
-        .title {
-            position: fixed;
-            top: 5rem; /* Set a fixed distance from the top in fullscreen mode */
-            left: 50%;
-            transform: translateX(-50%);
-        }
-    }
-}
-
-.title {
-    position: absolute;
-    top: 1.25rem;
-    left: 50%;
-    z-index: 10; /* Increased z-index to ensure it appears above everything in fullscreen mode */
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.1); /* Reduced from 0.2 to 0.1 for more transparency */
-    -webkit-backdrop-filter: blur(0.5rem);
-    backdrop-filter: blur(0.5rem); /* For Safari support */
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Reduced from 0.3 to 0.2 */
-    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
-    color: #000;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-        border-color: rgba(255, 255, 255, 0.4); /* Reduced from 0.5 to 0.4 */
-        box-shadow: 0 0.5rem 0.75rem rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        line-height: 1.4; /* Increase line height for better spacing between wrapped lines */
-        word-spacing: 0.1em; /* Add a bit more space between words */
-        letter-spacing: 0.02em; /* Slightly increase letter spacing for better readability */
     }
 }
 
