@@ -31,7 +31,7 @@
         . So, lets start by creating an angular component.
 
         <tui-doc-code
-            code="ng g c first-node"
+            code="ng generate component first-node"
             class="tui-space_top-3"
         />
 
@@ -219,41 +219,11 @@
             [code]="enhancedSteps.enhancedNodeHtml"
         />
 
-        <tui-doc-example
-            style="padding: 0"
-            [content]="firstNodeEnhancedExample"
-        >
-            <div class="node-demo">
+        <tui-doc-example style="padding: 0">
+            <div class="node-demo tui-space_top-4">
                 <ng-draw-flow [formControl]="firstFlowEnhancedForm" />
             </div>
         </tui-doc-example>
-
-        <tui-notification
-            appearance="warning"
-            class="tui-space_top-3 tui-space_bottom-3"
-        >
-            <span tuiTitle>
-                Note: Accessing dynamic model properties.
-                <span tuiSubtitle>
-                    <p>
-                        If you use the
-                        <code>.propertyName</code>
-                        notation to access dynamic model properties with strict templates enabled in typescript, you may
-                        receive the following error:
-                    </p>
-                    <code>Property 'text' comes from an index signature, so it must be accessed with ['text'].</code>
-                    <p>
-                        Therefore, we recommend using the
-                        <code>['propertyName']</code>
-                        notation to access dynamic properties in your templates (for example
-                        <code>model['text']</code>
-                        instead of
-                        <code>model.text</code>
-                        ).
-                    </p>
-                </span>
-            </span>
-        </tui-notification>
 
         <h2 class="tui-space_top-10">Connectors</h2>
         <h3>Add connectors</h3>
@@ -270,11 +240,7 @@
             might be cases where a line exits from the left side but connects at the top of another element. By knowing
             the positions, NgDrawFlowcan correctly calculate the path of the SVG line.
         </p>
-        <p>
-            To illustrate this, we will add one input and output connector and style our node with the taiga-ui theme.
-        </p>
-
-        <tui-doc-code code="ng add taiga-ui" />
+        <p>To illustrate this, we will add one input and output connector.</p>
 
         <p>
             Add the
@@ -304,30 +270,26 @@
 
         <p>
             The
-            <code>!startNode</code>
+            <code>startNode</code>
             and
-            <code>!endNode</code>
-            properties are optional. A start node does not display input parameters while an end node does not display
-            output parameters.
+            <code>endNode</code>
+            properties are optional. In our example, setting
+            <code>startNode</code>
+            ensures that the node does not display any input connectors.
         </p>
+
         <tui-doc-code
             filename="first-node.html"
             [code]="connectorSteps.dfOutput"
         />
-        <p>As explained, styling is mandatory and we use the Taiga-UI theme here. Copy the following code:</p>
+        <p>For the example, we’ll be using the Taiga UI theme for styling. Copy the following code:</p>
 
         <tui-doc-code
             filename="first-node.css"
             [code]="connectorSteps.conectorCSS"
         />
 
-        <h3>Add styles</h3>
-
-        <p>
-            There are no changes requireed in our
-            <code>AppComponent</code>
-            and the result should look like this:
-        </p>
+        <p>The result should look like this:</p>
 
         <tui-doc-example
             style="padding: 0"
@@ -408,18 +370,14 @@
         <tui-notification
             appearance="success"
             size="m"
-            class="tui-space_top-3 tui-space_bottom-3"
+            class="next-page tui-space_top-3 tui-space_bottom-3"
+            [routerLink]="['/getting-started/core-concepts']"
         >
             <span tuiTitle>
                 Next: Core concepts
                 <span tuiSubtitle>
                     Make yourself familiar with NgDrawFlow's most important building blocks in our
-                    <a
-                        tuiLink
-                        [routerLink]="['/getting-started/core-concepts']"
-                    >
-                        core concepts guide
-                    </a>
+                    <a tuiLink>core concepts guide</a>
                     .
                 </span>
             </span>

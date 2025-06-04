@@ -1,5 +1,0 @@
-```css
-.u-ta-center {
-  text-align: center;
-}
-```

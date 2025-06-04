@@ -18,10 +18,8 @@ import {
     InputNodeComponent,
     MiniNodeComponent,
     OutputNodeComponent,
-    OverviewNodeComponent,
     SimpleNodeComponent,
 } from './modules/nodes';
-import {LogoNodeComponent} from './modules/nodes/logo-node/logo-node.component';
 
 export const APP_PROVIDERS: Provider[] = [
     {
@@ -73,8 +71,6 @@ export const APP_PROVIDERS: Provider[] = [
             outputNode: OutputNodeComponent,
             miniNode: MiniNodeComponent,
             formNode: FormNodeComponent,
-            overviewNode: OverviewNodeComponent,
-            logoNode: LogoNodeComponent,
         },
     }),
 ];

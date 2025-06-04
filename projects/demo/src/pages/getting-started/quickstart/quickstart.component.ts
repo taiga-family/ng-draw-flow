@@ -44,7 +44,6 @@ export default class QuickstartComponent {
     /*
      * Example for the first node and flow
      */
-
     public firstFlowSteps = {
         flowImports: import('./examples/first-flow/imports.md?raw'),
         flowProviding: import('./examples/first-flow/flow-providing.md?raw'),
@@ -58,6 +57,7 @@ export default class QuickstartComponent {
     public readonly firstNodeExample: Record<string, TuiRawLoaderContent> = {
         TypeScript: import('./examples/first-node/first-node.ts?raw'),
         HTML: import('./examples/first-node/first-node.html?raw'),
+        CSS: import('./examples/first-node/first-node.css?raw'),
     };
 
     public readonly firstFlowExample: Record<string, TuiRawLoaderContent> = {
@@ -87,12 +87,6 @@ export default class QuickstartComponent {
             './examples/first-flow-enhanced/flowModelEnhanced.md?raw'
         ),
         enhancedNodeHtml: import('./examples/first-node-enhanced/enhanced-node.html?raw'),
-    };
-
-    public readonly firstNodeEnhancedExample: Record<string, TuiRawLoaderContent> = {
-        TypeScript: import('./examples/first-node-enhanced/enhanced-node.ts?raw'),
-        HTML: import('./examples/first-node-enhanced/enhanced-node.html?raw'),
-        CSS: import('./examples/first-node-enhanced/enhanced-node.css?raw'),
     };
 
     protected firstFlowEnhanced: DfDataModel = {
@@ -164,7 +158,7 @@ export default class QuickstartComponent {
                     type: 'firstNodeConnected',
                     text: 'Start Node',
                 },
-                position: {x: -150, y: 0},
+                position: {x: -250, y: 0},
                 startNode: true,
             })
             .set('node-2', {
@@ -173,7 +167,7 @@ export default class QuickstartComponent {
                     type: 'firstNodeConnected',
                     text: 'Child Node 1',
                 },
-                position: {x: 100, y: 50},
+                position: {x: 0, y: -50},
             })
             .set('node-3', {
                 id: 'node-3',
@@ -181,7 +175,7 @@ export default class QuickstartComponent {
                     type: 'firstNodeConnected',
                     text: 'Child Node 2',
                 },
-                position: {x: 100, y: -50},
+                position: {x: 0, y: 50},
             })
             .set('node-4', {
                 id: 'node-4',
@@ -189,7 +183,7 @@ export default class QuickstartComponent {
                     type: 'firstNodeConnected',
                     text: 'End Node',
                 },
-                position: {x: 350, y: 0},
+                position: {x: 250, y: 0},
                 endNode: true,
             }),
         connections: [
