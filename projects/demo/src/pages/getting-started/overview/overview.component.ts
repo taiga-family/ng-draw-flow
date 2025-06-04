@@ -88,7 +88,7 @@ export default class OverviewComponent implements OnInit {
                 data: {
                     type: 'logoNode',
                     title: 'NgDrawFlow.',
-                    subTitle: 'Taiga',
+                    subTitle: 'Taiga Family',
                 },
                 position: {x: 250, y: 0},
             }),

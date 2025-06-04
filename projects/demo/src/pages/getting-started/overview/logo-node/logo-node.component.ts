@@ -4,7 +4,7 @@ import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-fl
 
 @Component({
     standalone: true,
-    selector: 'app-overview-node',
+    selector: 'app-logo-node',
     imports: [DfInputComponent, DfOutputComponent, NgIf],
     templateUrl: './logo-node.component.html',
     styleUrls: ['./logo-node.component.less'],
