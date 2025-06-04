@@ -1,0 +1,25 @@
+import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiLink, TuiNotification} from '@taiga-ui/core';
+
+import ConnectionsExampleComponent from './examples/connections-example/connections-example.component';
+import ConnectorsExampleComponent from './examples/connectors-example/connectors-example.component';
+import NodesExampleComponent from './examples/nodes-example/nodes-example.component';
+
+@Component({
+    standalone: true,
+    selector: 'core-concepts',
+    imports: [
+        ConnectionsExampleComponent,
+        ConnectorsExampleComponent,
+        NodesExampleComponent,
+        RouterLink,
+        TuiAddonDoc,
+        TuiLink,
+        TuiNotification,
+    ],
+    templateUrl: './core-concepts.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export default class CoreConceptsComponent {}

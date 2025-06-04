@@ -3,37 +3,47 @@ import type {TuiDocRoutePages} from '@taiga-ui/addon-doc';
 
 export const DEMO_PAGES: TuiDocRoutePages = [
     {
-        section: 'Documentation',
+        section: 'Getting Started',
+        title: 'Installation',
+        route: DemoPath.Installation,
+    },
+    {
+        section: 'Getting Started',
         title: 'Quickstart',
         route: DemoPath.Quickstart,
     },
     {
-        section: 'Documentation',
-        title: 'Terms and Definitions',
-        route: DemoPath.TermsAndDefinitions,
+        section: 'Getting Started',
+        title: 'Core Concepts',
+        route: DemoPath.CoreConcepts,
     },
     {
-        section: 'Documentation',
+        section: 'Getting Started',
+        title: 'Overview',
+        route: DemoPath.Overview,
+    },
+    {
+        section: 'Features',
         title: 'Configuration & Public API',
         route: DemoPath.ConfigurationAndPublicApi,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'PanZoom Configuration',
         route: DemoPath.PanZoom,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Creating Nodes',
         route: DemoPath.Nodes,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Connectors',
         route: DemoPath.Connectors,
     },
     {
-        section: 'Documentation',
+        section: 'Features',
         title: 'Validation',
         route: DemoPath.Validation,
     },
@@ -45,7 +55,7 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     {
         section: 'Examples',
         title: 'Feature Overview',
-        route: DemoPath.Overview,
+        route: DemoPath.ExamplesOverview,
     },
     {
         section: 'Examples',

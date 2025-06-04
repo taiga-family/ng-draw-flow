@@ -1,0 +1,7 @@
+.node {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 0 1rem;
+    color: black;
+}

@@ -1,0 +1,62 @@
+.editor {
+    position: relative;
+    block-size: calc(100vh - 4rem);
+    inline-size: 100%;
+    margin: 0 auto;
+    background: #fff;
+
+    &.fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        inline-size: 100%;
+        block-size: 100%;
+        background-color: #fff;
+    }
+}
+
+.edit-controls {
+    position: absolute;
+    left: 1.25rem; /* Changed from right to left */
+    bottom: 1.25rem; /* Changed from top to bottom */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start; /* Changed from flex-end to flex-start for left alignment */
+
+    button {
+        inline-size: fit-content; /* Fixed width for all buttons in edit-controls */
+    }
+}
+
+.scale-controls {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    flex-direction: column; /* Change to vertical layout */
+    gap: 0.5rem; /* Add gap between elements */
+    align-items: flex-end; /* Right-align the buttons */
+}
+
+.scale-value {
+    inline-size: 3.125rem;
+    text-align: center; /* Center text for better appearance */
+    color: #000;
+
+    /* Glass effect styling */
+    padding: 1px;
+    background-color: rgba(255, 255, 255, 0.1); /* Reduced from 0.2 to 0.1 for more transparency */
+    -webkit-backdrop-filter: blur(0.5rem);
+    backdrop-filter: blur(0.5rem);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Reduced from 0.3 to 0.2 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.4); /* Reduced from 0.5 to 0.4 */
+        box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+    }
+}

@@ -1,0 +1,15 @@
+<df-input
+    *ngIf="!startNode"
+    class="connector connector_left"
+    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+    [position]="connectorPosition.Left"
+/>
+
+<p class="tui-text_body-xs text">{{ model['text'] }}</p>
+
+<df-output
+    *ngIf="!endNode"
+    class="connector connector_right"
+    [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+    [position]="connectorPosition.Right"
+/>
