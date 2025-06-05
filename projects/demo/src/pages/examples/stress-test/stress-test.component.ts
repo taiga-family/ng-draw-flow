@@ -44,14 +44,14 @@ export default class StressTestComponent implements OnInit {
         });
     }
 
-    public createNodesMap(rows: number, columns: number): Map<string, DfDataNode> {
-        const nodesMap = new Map();
+    public createNodesMap(rows: number, columns: number): DfDataNode[] {
+        const nodes = [];
 
         for (let i = 1; i <= rows; i++) {
             for (let j = 1; j <= columns; j++) {
                 const nodeId = `node-${(i - 1) * columns + j}`;
 
-                nodesMap.set(nodeId, {
+                nodes.push({
                     id: nodeId,
                     data: {type: 'miniNode', index: (i - 1) * columns + j},
                     position: {x: (j - 1) * 70, y: (i - 1) * 70},
@@ -59,7 +59,7 @@ export default class StressTestComponent implements OnInit {
             }
         }
 
-        return nodesMap;
+        return nodes;
     }
 
     public createConnectionsArray(rows: number, columns: number): DfDataConnection[] {

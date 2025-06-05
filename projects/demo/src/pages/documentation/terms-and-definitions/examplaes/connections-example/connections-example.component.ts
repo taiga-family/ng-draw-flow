@@ -26,19 +26,20 @@ import {SimpleNodeComponent} from '../../../../../app/modules/nodes';
 })
 export default class ConnectionsExampleComponent {
     protected data: DfDataModel = {
-        nodes: new Map()
-            .set('node-1', {
+        nodes: [
+            {
                 id: 'node-1',
                 data: {type: 'simpleNode'},
                 position: {x: -150, y: -50},
                 startNode: true,
-            })
-            .set('node-2', {
+            },
+            {
                 id: 'node-2',
                 data: {type: 'simpleNode'},
                 position: {x: 150, y: 50},
                 endNode: true,
-            }),
+            },
+        ],
         connections: [
             {
                 source: {

@@ -22,11 +22,13 @@ import {NodeComponent} from '../nodes/node/node.component';
 })
 export default class NodesExampleComponent {
     protected data: DfDataModel = {
-        nodes: new Map().set('node-1', {
-            id: 'node-1',
-            data: {type: 'node', text: 'This is a node'},
-            position: {x: 0, y: 0},
-        }),
+        nodes: [
+            {
+                id: 'node-1',
+                data: {type: 'node', text: 'This is a node'},
+                position: {x: 0, y: 0},
+            },
+        ],
         connections: [],
     };
 

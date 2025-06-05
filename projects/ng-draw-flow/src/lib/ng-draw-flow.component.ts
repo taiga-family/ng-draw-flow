@@ -122,7 +122,7 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     protected readonly nodeDeleted = new EventEmitter<DfEvent<DfDataNode>>();
 
     protected readonly form = new FormControl<DfDataModel>({
-        nodes: new Map(),
+        nodes: [],
         connections: [],
     });
 

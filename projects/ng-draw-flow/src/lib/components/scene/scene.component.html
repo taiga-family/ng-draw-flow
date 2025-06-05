@@ -1,10 +1,10 @@
-<ng-container *ngFor="let node of model?.nodes | keyvalue: originalOrder; trackBy: trackByNodeFn">
+<ng-container *ngFor="let node of model?.nodes; trackBy: trackByNodeId">
     <df-node
-        [invalid]="$invalidNodes().includes(node.key)"
-        [node]="node.value"
+        [invalid]="$invalidNodes().includes(node.id)"
+        [node]="node"
         (connectorDeleted)="onConnectorDeleted($event)"
-        (nodeDeleted)="onNodeDeleted(node.key)"
-        (nodeMoved)="onNodeMoved(node.key, $event)"
+        (nodeDeleted)="onNodeDeleted(node.id)"
+        (nodeMoved)="onNodeMoved($event)"
         (nodeSelected)="onNodeSelected($event)"
     />
 </ng-container>
