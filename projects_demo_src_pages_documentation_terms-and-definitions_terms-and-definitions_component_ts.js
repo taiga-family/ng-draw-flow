@@ -24,7 +24,7 @@ var _ConnectionsExampleComponent;
 class ConnectionsExampleComponent {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'simpleNode'
@@ -34,7 +34,7 @@ class ConnectionsExampleComponent {
           y: -50
         },
         startNode: true
-      }).set('node-2', {
+      }, {
         id: 'node-2',
         data: {
           type: 'simpleNode'
@@ -44,7 +44,7 @@ class ConnectionsExampleComponent {
           y: 50
         },
         endNode: true
-      }),
+      }],
       connections: [{
         source: {
           nodeId: 'node-1',
@@ -116,7 +116,7 @@ var _ConnectorsExampleComponent;
 class ConnectorsExampleComponent {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'connectors'
@@ -126,7 +126,7 @@ class ConnectorsExampleComponent {
           y: 0
         },
         startNode: true
-      }),
+      }],
       connections: []
     };
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);
@@ -187,7 +187,7 @@ var _NodesExampleComponent;
 class NodesExampleComponent {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'node',
@@ -197,7 +197,7 @@ class NodesExampleComponent {
           x: 0,
           y: 0
         }
-      }),
+      }],
       connections: []
     };
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);

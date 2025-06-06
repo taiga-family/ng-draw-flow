@@ -45,7 +45,7 @@ var _PanZoomConfigurationExample1Component;
 class PanZoomConfigurationExample1Component {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'pan'
@@ -54,7 +54,7 @@ class PanZoomConfigurationExample1Component {
           x: 0,
           y: 0
         }
-      }),
+      }],
       connections: []
     };
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);
@@ -118,7 +118,7 @@ var _PanZoomConfigurationExample2Component;
 class PanZoomConfigurationExample2Component {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'pan'
@@ -127,7 +127,7 @@ class PanZoomConfigurationExample2Component {
           x: 0,
           y: 0
         }
-      }),
+      }],
       connections: []
     };
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);
@@ -191,7 +191,7 @@ var _PanZoomConfigurationExample3Component;
 class PanZoomConfigurationExample3Component {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'pan'
@@ -200,7 +200,7 @@ class PanZoomConfigurationExample3Component {
           x: 0,
           y: 0
         }
-      }),
+      }],
       connections: []
     };
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);

@@ -69,7 +69,7 @@ class ValidationComponent {
       IsolatedNodesValidatorError: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_examples_isolated-nodes-validator-error_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/isolated-nodes-validator-error.md?raw */ 43433, 17))
     };
     this.nodeData = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'simpleNode',
@@ -79,7 +79,7 @@ class ValidationComponent {
           x: 0,
           y: 0
         }
-      }),
+      }],
       connections: []
     };
     this.nodeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__.FormControl(this.nodeData);

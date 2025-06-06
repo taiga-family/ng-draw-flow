@@ -39,7 +39,7 @@ class OverviewComponent {
       'form-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_form-node_form-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/form-node/form-node.component.less?raw */ 90470, 17))
     };
     this.data = {
-      nodes: new Map().set('info-node', {
+      nodes: [{
         id: 'info-node',
         data: {
           type: 'infoNode',
@@ -49,7 +49,7 @@ class OverviewComponent {
           x: 0,
           y: 0
         }
-      }).set('node-1', {
+      }, {
         id: 'node-1',
         data: {
           type: 'simpleNode',
@@ -60,7 +60,7 @@ class OverviewComponent {
           y: 280
         },
         startNode: true
-      }).set('node-2', {
+      }, {
         id: 'node-2',
         data: {
           type: 'simpleNode',
@@ -70,7 +70,7 @@ class OverviewComponent {
           x: 250,
           y: 200
         }
-      }).set('node-3', {
+      }, {
         id: 'node-3',
         data: {
           type: 'simpleNode',
@@ -80,7 +80,7 @@ class OverviewComponent {
           x: 250,
           y: 350
         }
-      }).set('node-4', {
+      }, {
         id: 'node-4',
         data: {
           type: 'simpleNode',
@@ -91,7 +91,7 @@ class OverviewComponent {
           y: 280
         },
         endNode: true
-      }).set('node-5', {
+      }, {
         id: 'node-5',
         data: {
           type: 'formNode',
@@ -102,7 +102,7 @@ class OverviewComponent {
           x: 200,
           y: 500
         }
-      }),
+      }],
       connections: [{
         source: {
           nodeId: 'node-1',

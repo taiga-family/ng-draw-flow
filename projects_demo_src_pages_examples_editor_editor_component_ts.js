@@ -43,7 +43,7 @@ class EditorComponent {
       Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_editor_examples_editor_template_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/editor.template.md?raw */ 53696, 17))
     };
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'simpleNode',
@@ -54,7 +54,7 @@ class EditorComponent {
           y: 0
         },
         startNode: true
-      }).set('node-2', {
+      }, {
         id: 'node-2',
         data: {
           type: 'simpleNode',
@@ -64,7 +64,7 @@ class EditorComponent {
           x: 250,
           y: 50
         }
-      }).set('node-3', {
+      }, {
         id: 'node-3',
         data: {
           type: 'simpleNode',
@@ -74,7 +74,7 @@ class EditorComponent {
           x: 250,
           y: -50
         }
-      }).set('node-4', {
+      }, {
         id: 'node-4',
         data: {
           type: 'simpleNode',
@@ -85,7 +85,7 @@ class EditorComponent {
           y: 0
         },
         endNode: true
-      }),
+      }],
       connections: [{
         source: {
           nodeId: 'node-1',
@@ -172,7 +172,7 @@ class EditorComponent {
   }
   addNodeToDrawFlow() {
     const id = `new-node-id-${this.counter}`;
-    this.data.nodes.set(id, {
+    this.data.nodes.push({
       id,
       data: {
         type: 'simpleNode',

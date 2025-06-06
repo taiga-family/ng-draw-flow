@@ -1139,7 +1139,7 @@ _SimpleNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵInheritDefinitionFeature"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵStandaloneFeature"]],
   decls: 4,
-  vars: 4,
+  vars: 3,
   consts: [["class", "input", 3, "connectorData", 4, "ngIf"], [1, "tui-text_body-xs"], ["class", "output", 3, "connectorData", 4, "ngIf"], [1, "input", 3, "connectorData"], [1, "output", 3, "connectorData"]],
   template: function SimpleNodeComponent_Template(rf, ctx) {
     if (rf & 1) {
@@ -1152,7 +1152,7 @@ _SimpleNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
     if (rf & 2) {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.startNode);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate2"]("", ctx.model.text, " ", ctx.invalid, "");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx.model.text);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", !ctx.endNode);
     }
@@ -4164,12 +4164,11 @@ function SceneComponent_ng_container_0_Template(rf, ctx) {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r5);
       const node_r3 = restoredCtx.$implicit;
       const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresetView"](ctx_r6.onNodeDeleted(node_r3.key));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresetView"](ctx_r6.onNodeDeleted(node_r3.id));
     })("nodeMoved", function SceneComponent_ng_container_0_Template_df_node_nodeMoved_1_listener($event) {
-      const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r5);
-      const node_r3 = restoredCtx.$implicit;
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r5);
       const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
-      return _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresetView"](ctx_r7.onNodeMoved(node_r3.key, $event));
+      return _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresetView"](ctx_r7.onNodeMoved($event));
     })("nodeSelected", function SceneComponent_ng_container_0_Template_df_node_nodeSelected_1_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r5);
       const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
@@ -4182,20 +4181,20 @@ function SceneComponent_ng_container_0_Template(rf, ctx) {
     const node_r3 = ctx.$implicit;
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("invalid", ctx_r0.$invalidNodes().includes(node_r3.key))("node", node_r3.value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("invalid", ctx_r0.$invalidNodes().includes(node_r3.id))("node", node_r3);
   }
 }
-function SceneComponent_ng_container_2_Template(rf, ctx) {
+function SceneComponent_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
     const _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](1, "df-connection", 3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("connectionDeleted", function SceneComponent_ng_container_2_Template_df_connection_connectionDeleted_1_listener() {
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("connectionDeleted", function SceneComponent_ng_container_1_Template_df_connection_connectionDeleted_1_listener() {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r11);
       const connection_r9 = restoredCtx.$implicit;
       const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresetView"](ctx_r10.onConnectionDeleted(connection_r9));
-    })("connectionSelected", function SceneComponent_ng_container_2_Template_df_connection_connectionSelected_1_listener() {
+    })("connectionSelected", function SceneComponent_ng_container_1_Template_df_connection_connectionSelected_1_listener() {
       const restoredCtx = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r11);
       const connection_r9 = restoredCtx.$implicit;
       const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
@@ -4210,11 +4209,11 @@ function SceneComponent_ng_container_2_Template(rf, ctx) {
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("connection", connection_r9);
   }
 }
-function SceneComponent_df_draft_connection_3_Template(rf, ctx) {
+function SceneComponent_df_draft_connection_2_Template(rf, ctx) {
   if (rf & 1) {
     const _r14 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "df-draft-connection", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("connectionCreated", function SceneComponent_df_draft_connection_3_Template_df_draft_connection_connectionCreated_0_listener($event) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("connectionCreated", function SceneComponent_df_draft_connection_2_Template_df_draft_connection_connectionCreated_0_listener($event) {
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵrestoreView"](_r14);
       const ctx_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnextContext"]();
       return _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresetView"](ctx_r13.onConnectionCreated($event));
@@ -4262,28 +4261,34 @@ class SceneComponent {
     this.connectionsService.removeConnectionsByConnectorId(connectorId);
     this.cdr.detectChanges();
   }
-  onNodeMoved(name, data) {
-    this.model.nodes.set(name, data);
+  onNodeMoved(updated) {
+    this.model = {
+      ...this.model,
+      nodes: this.model.nodes.map(n => n.id === updated.id ? updated : n)
+    };
     this.nodeMoved.emit({
-      target: data,
+      target: updated,
       model: this.model
     });
   }
-  onNodeDeleted(key) {
-    const deletedNode = this.model.nodes.get(key);
-    this.model.nodes.delete(key);
+  onNodeDeleted(id) {
+    const deleted = this.model.nodes.find(n => n.id === id);
+    this.model = {
+      ...this.model,
+      nodes: this.model.nodes.filter(n => n.id !== id)
+    };
     this.nodeDeleted.emit({
-      target: deletedNode,
+      target: deleted,
       model: this.model
     });
-    this.emitConnectionDeletedByNodeId(key);
-    this.connectionsService.removeConnectionsByNodeId(key);
+    this.emitConnectionDeletedByNodeId(id);
+    this.connectionsService.removeConnectionsByNodeId(id);
   }
   onNodeSelected(node) {
     this.nodeSelected.emit(node);
   }
-  trackByNodeFn(_, data) {
-    return data.key;
+  trackByNodeId(_, node) {
+    return node.id;
   }
   trackByConnectionsFn(_index, connection) {
     return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
@@ -4346,26 +4351,25 @@ _SceneComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__[
     useExisting: (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.forwardRef)(() => _SceneComponent),
     multi: true
   }]), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵStandaloneFeature"]],
-  decls: 5,
-  vars: 10,
+  decls: 4,
+  vars: 7,
   consts: [[4, "ngFor", "ngForOf", "ngForTrackBy"], [3, "connectionCreated", 4, "ngIf"], [3, "invalid", "node", "connectorDeleted", "nodeDeleted", "nodeMoved", "nodeSelected"], [3, "connection", "connectionDeleted", "connectionSelected"], [3, "connectionCreated"]],
   template: function SceneComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](0, SceneComponent_ng_container_0_Template, 2, 2, "ng-container", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](1, "keyvalue");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](2, SceneComponent_ng_container_2_Template, 2, 1, "ng-container", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](3, SceneComponent_df_draft_connection_3_Template, 1, 0, "df-draft-connection", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](4, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](1, SceneComponent_ng_container_1_Template, 2, 1, "ng-container", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtemplate"](2, SceneComponent_df_draft_connection_2_Template, 1, 0, "df-draft-connection", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](3, "async");
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngForOf", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind2"](1, 5, ctx.model == null ? null : ctx.model.nodes, ctx.originalOrder))("ngForTrackBy", ctx.trackByNodeFn);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngForOf", ctx.model == null ? null : ctx.model.nodes)("ngForTrackBy", ctx.trackByNodeId);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngForOf", ctx.model == null ? null : ctx.model.connections)("ngForTrackBy", ctx.trackByConnectionsFn);
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](4, 8, ctx.isConnectionCreating$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("ngIf", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](3, 5, ctx.isConnectionCreating$));
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_11__.CommonModule, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_11__.AsyncPipe, _angular_common__WEBPACK_IMPORTED_MODULE_11__.KeyValuePipe, _connections_connection_connection_component__WEBPACK_IMPORTED_MODULE_1__.ConnectionComponent, _connections_draft_connection_draft_connection_component__WEBPACK_IMPORTED_MODULE_3__.DraftConnectionComponent, _node_node_component__WEBPACK_IMPORTED_MODULE_5__.NodeComponent],
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_11__.CommonModule, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgForOf, _angular_common__WEBPACK_IMPORTED_MODULE_11__.NgIf, _angular_common__WEBPACK_IMPORTED_MODULE_11__.AsyncPipe, _connections_connection_connection_component__WEBPACK_IMPORTED_MODULE_1__.ConnectionComponent, _connections_draft_connection_draft_connection_component__WEBPACK_IMPORTED_MODULE_3__.DraftConnectionComponent, _node_node_component__WEBPACK_IMPORTED_MODULE_5__.NodeComponent],
   styles: ["[_nghost-%COMP%] {\n  display: block;\n  inline-size: 100%;\n  block-size: 100%;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNjZW5lLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksY0FBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7QUFDSiIsImZpbGUiOiJzY2VuZS5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBibG9jay1zaXplOiAxMDAlO1xufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvc2NlbmUvc2NlbmUuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxjQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtBQUNKOztBQUVBLDRYQUE0WCIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBibG9jay1zaXplOiAxMDAlO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
@@ -5396,7 +5400,7 @@ class NgDrawFlowComponent {
     /** Fired when a node is removed from the graph. */
     this.nodeDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_10__.EventEmitter();
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormControl({
-      nodes: new Map(),
+      nodes: [],
       connections: []
     });
     this.$rootReady = (0,_angular_core__WEBPACK_IMPORTED_MODULE_10__.signal)(false);
@@ -6198,7 +6202,7 @@ __webpack_require__.r(__webpack_exports__);
 function dfIsolatedNodesValidator() {
   return control => {
     const model = control.value;
-    if (!model?.nodes?.size) {
+    if (!model?.nodes?.length) {
       return null; // nothing to validate
     }
     // Collect all node ids that participate in at least one connection
@@ -6211,9 +6215,9 @@ function dfIsolatedNodesValidator() {
     }
     // Every node absent in connectedIds is isolated
     const isolatedNodes = [];
-    Array.from(model.nodes.keys()).forEach(nodeId => {
-      if (!connectedIds.has(nodeId)) {
-        isolatedNodes.push(nodeId);
+    model.nodes.forEach(node => {
+      if (!connectedIds.has(node.id)) {
+        isolatedNodes.push(node.id);
       }
     });
     if (isolatedNodes.length) {

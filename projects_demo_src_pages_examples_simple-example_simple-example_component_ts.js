@@ -29,7 +29,7 @@ class SimpleExampleComponent {
       Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_examples_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.html?raw */ 26003, 17))
     };
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'simpleNode',
@@ -40,7 +40,7 @@ class SimpleExampleComponent {
           y: 0
         },
         startNode: true
-      }).set('node-2', {
+      }, {
         id: 'node-2',
         data: {
           type: 'simpleNode',
@@ -50,7 +50,7 @@ class SimpleExampleComponent {
           x: 350,
           y: -50
         }
-      }).set('node-3', {
+      }, {
         id: 'node-3',
         data: {
           type: 'simpleNode',
@@ -60,7 +60,7 @@ class SimpleExampleComponent {
           x: 350,
           y: 50
         }
-      }),
+      }],
       connections: [{
         source: {
           nodeId: 'node-1',

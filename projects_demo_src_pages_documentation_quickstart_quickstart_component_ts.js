@@ -22,7 +22,7 @@ var _FirstExampleComponent;
 class FirstExampleComponent {
   constructor() {
     this.data = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'simpleNode',
@@ -33,7 +33,7 @@ class FirstExampleComponent {
           y: 0
         },
         startNode: true
-      }).set('node-2', {
+      }, {
         id: 'node-2',
         data: {
           type: 'simpleNode',
@@ -43,7 +43,7 @@ class FirstExampleComponent {
           x: 250,
           y: 50
         }
-      }).set('node-3', {
+      }, {
         id: 'node-3',
         data: {
           type: 'simpleNode',
@@ -53,7 +53,7 @@ class FirstExampleComponent {
           x: 250,
           y: -50
         }
-      }).set('node-4', {
+      }, {
         id: 'node-4',
         data: {
           type: 'simpleNode',
@@ -64,7 +64,7 @@ class FirstExampleComponent {
           y: 0
         },
         endNode: true
-      }),
+      }],
       connections: [{
         source: {
           nodeId: 'node-1',
@@ -186,7 +186,7 @@ class QuickstartComponent {
       Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.template.html?raw */ 30724, 17))
     };
     this.nodeData = {
-      nodes: new Map().set('node-1', {
+      nodes: [{
         id: 'node-1',
         data: {
           type: 'simpleNode',
@@ -196,7 +196,7 @@ class QuickstartComponent {
           x: 0,
           y: 0
         }
-      }),
+      }],
       connections: []
     };
     this.nodeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.nodeData);
