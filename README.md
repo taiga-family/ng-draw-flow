@@ -86,7 +86,7 @@ and connections.
 
 ```ts
 data: DfDataModel = {
-  nodes: new Map(),
+  nodes: [],
   connections: [],
 };
 form = new FormControl(this.data);
@@ -113,21 +113,22 @@ collection of nodes and their connections:
 
 ```ts
 data: DfDataModel = {
-  nodes: new Map()
-    .set('node-1', {
+  nodes: [
+    {
       id: 'node-1',
       data: {type: 'yourNode', text: 'This base node'},
       position: {x: 0, y: 0},
       startNode: true,
-    })
-    .set('node-2', {id: 'node-2', data: {type: 'yourNode', text: 'This child node 1'}, position: {x: 250, y: 50}})
-    .set('node-3', {id: 'node-3', data: {type: 'yourNode', text: 'This child node 2'}, position: {x: 250, y: -50}})
-    .set('node-4', {
+    },
+    {id: 'node-2', data: {type: 'yourNode', text: 'This child node 1'}, position: {x: 250, y: 50}},
+    {id: 'node-3', data: {type: 'yourNode', text: 'This child node 2'}, position: {x: 250, y: -50}},
+    {
       id: 'node-4',
       data: {type: 'yourNode', text: 'This child node 3'},
       position: {x: 500, y: 0},
       endNode: true,
-    }),
+    },
+  ],
   connections: [
     {
       source: {nodeId: 'node-1', connectorType: DfConnectionPoint.Output, connectorId: 'node-1-output-1'},
