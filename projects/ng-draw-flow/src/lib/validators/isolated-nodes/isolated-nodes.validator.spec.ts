@@ -1,15 +1,17 @@
 import {FormControl} from '@angular/forms';
 
+import {INITIAL_COORDINATES} from '../../consts';
+import type {DfDataModel} from '../../ng-draw-flow.interfaces';
 import {DfConnectionPoint} from '../../ng-draw-flow.interfaces';
 import {dfIsolatedNodesValidator} from './isolated-nodes.validator';
 
 describe('dfIsolatedNodesValidator', () => {
     it('detects isolated nodes', () => {
-        const model = {
-            nodes: new Map([
-                ['a', {}],
-                ['b', {}],
-            ]),
+        const model: DfDataModel = {
+            nodes: [
+                {id: 'a', position: INITIAL_COORDINATES, data: {type: ''}},
+                {id: 'b', position: INITIAL_COORDINATES, data: {type: ''}},
+            ],
             connections: [
                 {
                     source: {
@@ -24,7 +26,7 @@ describe('dfIsolatedNodesValidator', () => {
                     },
                 },
             ],
-        } as any;
+        };
         const control = new FormControl(model);
         const validator = dfIsolatedNodesValidator();
 
@@ -32,10 +34,13 @@ describe('dfIsolatedNodesValidator', () => {
     });
 
     it('returns error when node is isolated', () => {
-        const model = {
-            nodes: [{id: 'a'}, {id: 'b'}],
+        const model: DfDataModel = {
+            nodes: [
+                {id: 'a', position: INITIAL_COORDINATES, data: {type: ''}},
+                {id: 'b', position: INITIAL_COORDINATES, data: {type: ''}},
+            ],
             connections: [],
-        } as any;
+        };
         const control = new FormControl(model);
         const validator = dfIsolatedNodesValidator();
         const result = validator(control);
