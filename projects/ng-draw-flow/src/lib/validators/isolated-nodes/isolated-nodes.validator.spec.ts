@@ -33,10 +33,7 @@ describe('dfIsolatedNodesValidator', () => {
 
     it('returns error when node is isolated', () => {
         const model = {
-            nodes: new Map([
-                ['a', {}],
-                ['b', {}],
-            ]),
+            nodes: [{id: 'a'}, {id: 'b'}],
             connections: [],
         } as any;
         const control = new FormControl(model);

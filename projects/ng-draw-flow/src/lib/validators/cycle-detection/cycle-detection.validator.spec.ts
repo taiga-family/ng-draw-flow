@@ -6,7 +6,7 @@ import {dfCycleDetectionValidator} from './cycle-detection.validator';
 describe('dfCycleDetectionValidator', () => {
     it('detects cycle', () => {
         const control = new FormControl({
-            nodes: new Map(),
+            nodes: [],
             connections: [
                 {
                     source: {
@@ -43,7 +43,7 @@ describe('dfCycleDetectionValidator', () => {
 
     it('returns null for acyclic graph', () => {
         const control = new FormControl({
-            nodes: new Map(),
+            nodes: [],
             connections: [
                 {
                     source: {
@@ -67,13 +67,13 @@ describe('dfCycleDetectionValidator', () => {
 
     it('caches result for same connections', () => {
         const control = new FormControl({
-            nodes: new Map(),
+            nodes: [],
             connections: [],
         });
         const validator = dfCycleDetectionValidator();
         const first = validator(control);
 
-        control.setValue({nodes: new Map(), connections: []});
+        control.setValue({nodes: [], connections: []});
         const second = validator(control);
 
         expect(first).toBe(second);
