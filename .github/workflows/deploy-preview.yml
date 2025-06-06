@@ -1,0 +1,28 @@
+name: Deploy / preview
+
+on: pull_request
+
+jobs:
+  build_and_preview:
+    name: Firebase
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: taiga-family/ci/actions/setup/variables@v1.127.0
+      - uses: taiga-family/ci/actions/setup/node@v1.127.0
+      - run: npm run build
+
+      - name: Debug output
+        run: tree dist/demo/browser -P '*.html'
+      - name: Deploy preview
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        if: env.IS_OWNER_MODE == 'true'
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_NG_DRAW_FLOW }}
+          projectId: ng-draw-flow
+          expires: 1d
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
