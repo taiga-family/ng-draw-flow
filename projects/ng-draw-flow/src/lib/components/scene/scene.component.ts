@@ -17,6 +17,7 @@ import {filter} from 'rxjs';
 
 import type {
     DfDataConnection,
+    DfDataInitialNode,
     DfDataModel,
     DfDataNode,
     DfEvent,
@@ -102,33 +103,37 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         this.cdr.detectChanges();
     }
 
-    protected onNodeMoved(name: string, data: DfDataNode): void {
-        this.model.nodes.set(name, data);
+    protected onNodeMoved(updated: DfDataNode): void {
+        this.model = {
+            ...this.model,
+            nodes: this.model.nodes.map((n) => (n.id === updated.id ? updated : n)),
+        };
         this.nodeMoved.emit({
-            target: data,
+            target: updated,
             model: this.model,
         });
     }
 
-    protected onNodeDeleted(key: string): void {
-        const deletedNode = this.model.nodes.get(key) as DfDataNode;
+    protected onNodeDeleted(id: string): void {
+        const deleted: DfDataNode = this.model.nodes.find(
+            (n) => n.id === id,
+        ) as DfDataNode;
 
-        this.model.nodes.delete(key);
-        this.nodeDeleted.emit({
-            target: deletedNode,
-            model: this.model,
-        });
-
-        this.emitConnectionDeletedByNodeId(key);
-        this.connectionsService.removeConnectionsByNodeId(key);
+        this.model = {
+            ...this.model,
+            nodes: this.model.nodes.filter((n) => n.id !== id),
+        };
+        this.nodeDeleted.emit({target: deleted, model: this.model});
+        this.emitConnectionDeletedByNodeId(id);
+        this.connectionsService.removeConnectionsByNodeId(id);
     }
 
     protected onNodeSelected(node: DfDataNode): void {
         this.nodeSelected.emit(node);
     }
 
-    protected trackByNodeFn(_: number, data: {key: string}): string {
-        return data.key;
+    protected trackByNodeId(_: number, node: DfDataInitialNode | DfDataNode): string {
+        return node.id;
     }
 
     protected trackByConnectionsFn(_index: number, connection: DfDataConnection): string {

@@ -42,7 +42,7 @@ export interface DfDelta {
 }
 
 export interface DfDataModel {
-    nodes: Map<string, DfDataInitialNode | DfDataNode>;
+    nodes: Array<DfDataInitialNode | DfDataNode>;
     connections: DfDataConnection[];
 }
 

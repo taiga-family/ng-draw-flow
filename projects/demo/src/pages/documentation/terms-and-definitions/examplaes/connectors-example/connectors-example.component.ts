@@ -22,12 +22,14 @@ import {ConnectorsComponent} from '../nodes/connectors/connectors.component';
 })
 export default class ConnectorsExampleComponent {
     protected data: DfDataModel = {
-        nodes: new Map().set('node-1', {
-            id: 'node-1',
-            data: {type: 'connectors'},
-            position: {x: 0, y: 0},
-            startNode: true,
-        }),
+        nodes: [
+            {
+                id: 'node-1',
+                data: {type: 'connectors'},
+                position: {x: 0, y: 0},
+                startNode: true,
+            },
+        ],
         connections: [],
     };
 

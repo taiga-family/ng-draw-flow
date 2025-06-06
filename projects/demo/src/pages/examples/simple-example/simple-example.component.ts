@@ -30,23 +30,24 @@ export default class SimpleExampleComponent {
     };
 
     public data: DfDataModel = {
-        nodes: new Map()
-            .set('node-1', {
+        nodes: [
+            {
                 id: 'node-1',
                 data: {type: 'simpleNode', text: 'This base node'},
                 position: {x: 50, y: 0},
                 startNode: true,
-            })
-            .set('node-2', {
+            },
+            {
                 id: 'node-2',
                 data: {type: 'simpleNode', text: 'This child node 1'},
                 position: {x: 350, y: -50},
-            })
-            .set('node-3', {
+            },
+            {
                 id: 'node-3',
                 data: {type: 'simpleNode', text: 'This child node 2'},
                 position: {x: 350, y: 50},
-            }),
+            },
+        ],
         connections: [
             {
                 source: {

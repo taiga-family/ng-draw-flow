@@ -25,11 +25,13 @@ export default class CreatingNodesComponent {
     };
 
     protected nodeData: DfDataModel = {
-        nodes: new Map().set('node-1', {
-            id: 'node-1',
-            data: {type: 'simpleNode', text: 'Node example'},
-            position: {x: 0, y: 0},
-        }),
+        nodes: [
+            {
+                id: 'node-1',
+                data: {type: 'simpleNode', text: 'Node example'},
+                position: {x: 0, y: 0},
+            },
+        ],
         connections: [],
     };
 
