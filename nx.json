@@ -70,6 +70,10 @@
                     "codeCoverage": true
                 }
             }
+        },
+        "component-test": {
+            "cache": true,
+            "inputs": ["default", "^production"]
         }
     },
     "parallel": 3,
