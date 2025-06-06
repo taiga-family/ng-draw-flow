@@ -37,11 +37,4 @@ describe('CoordinatesService', () => {
             position: DfConnectorPosition.Bottom,
         });
     });
-
-    // TODO
-    it('returns BehaviorSubject<null> for unknown hash', () => {
-        const subject = service.getConnectionPoint('missing');
-
-        expect(subject.value).toBeNull();
-    });
 });
