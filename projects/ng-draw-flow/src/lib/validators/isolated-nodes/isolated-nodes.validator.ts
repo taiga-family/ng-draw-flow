@@ -24,12 +24,10 @@ export function dfIsolatedNodesValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const model: DfDataModel = control.value;
 
-        // 1. Нечего проверять?
         if (!model?.nodes?.length) {
             return null;
         }
 
-        // 2. Собираем id всех узлов, участвующих в связях
         const connectedIds = new Set<DfId>();
 
         model.connections?.forEach((c: DfDataConnection) => {
@@ -37,7 +35,6 @@ export function dfIsolatedNodesValidator(): ValidatorFn {
             connectedIds.add(c.target.nodeId);
         });
 
-        // 3. Определяем изолированные узлы
         const isolatedNodes: DfId[] = model.nodes
             .filter((node: DfDataInitialNode | DfDataNode) => !connectedIds.has(node.id))
             .map((node) => node.id);
