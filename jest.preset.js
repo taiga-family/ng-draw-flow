@@ -3,10 +3,14 @@ const {resolve} = require('path');
 
 module.exports = {
     ...nxPreset,
-    globals: {
-        'ts-jest': {
-            tsconfig: resolve(__dirname, 'tsconfig.spec.json'),
-            stringifyContentPathRegex: '\\.(html|svg)$',
-        },
+    transform: {
+        ...nxPreset.transform,
+        '^.+\\.(ts|js|html)$': [
+            'ts-jest',
+            {
+                tsconfig: resolve(__dirname, 'tsconfig.spec.json'),
+                stringifyContentPathRegex: '\\.(html|svg)$',
+            },
+        ],
     },
 };

@@ -24,10 +24,11 @@ import {
     timer,
 } from 'rxjs';
 
+import {DF_FALSE_HANDLER, INITIAL_COORDINATES} from '../../consts';
 import type {DfDragDrop} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
 import {DfResizeObserver} from '../../directives/resize-observer';
-import {DF_FALSE_HANDLER, dfClamp, dfPx, INITIAL_COORDINATES} from '../../helpers';
+import {dfClamp, dfPx} from '../../helpers';
 import type {DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {DF_PAN_ZOOM_INITIAL_SCALE} from './pan-zoom.const';

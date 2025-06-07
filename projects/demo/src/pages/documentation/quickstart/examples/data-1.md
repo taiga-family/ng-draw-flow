@@ -1,6 +1,6 @@
 ```ts
 data: DfDataModel = {
-  nodes: new Map(),
+  nodes: [],
   connections: [],
 };
 form = new FormControl(this.data);
