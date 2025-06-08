@@ -12,12 +12,12 @@ interface ComputePointsParams {
     target: DfPoint;
     targetPos: DfConnectorPosition;
     offset?: number;
-    centreOverride?: Partial<DfPoint>;
+    centerOverride?: Partial<DfPoint>;
 }
 
 /**
  * Returns all points that form the polyline **before** the bezier smoothing is
- * applied. Additionally returns the centre of the longest straight segment –
+ * applied. Additionally returns the center of the longest straight segment –
  * handy for label placement.
  */
 export function computeWaypoints(
@@ -32,7 +32,7 @@ export function computeWaypoints(
         target,
         targetPos,
         offset = MIN_SEGMENT_LENGTH,
-        centreOverride = {},
+        centerOverride = {},
     } = pointsParams;
 
     /**
@@ -64,11 +64,11 @@ export function computeWaypoints(
     const axisSign = firstStep[primaryAxis]; //  +1 or -1
 
     /**
-     * Fallback geometric centre used for label placement
+     * Fallback geometric center used for label placement
      */
     const [fallbackCX, fallbackCY] = getSmoothStepEdgeCenter({source, target});
-    let labelCentreX = centreOverride.x ?? fallbackCX;
-    let labelCentreY = centreOverride.y ?? fallbackCY;
+    let labelCenterX = centerOverride.x ?? fallbackCX;
+    let labelCenterY = centerOverride.y ?? fallbackCY;
 
     /**
      * Build the elbow(s) — the intermediate waypoints
@@ -79,12 +79,12 @@ export function computeWaypoints(
     // Case A ─ Opposite sides
     if (sourceOpposesTarget) {
         const verticalSplit: DfPoint[] = [
-            {x: labelCentreX, y: sourceGap.y},
-            {x: labelCentreX, y: targetGap.y},
+            {x: labelCenterX, y: sourceGap.y},
+            {x: labelCenterX, y: targetGap.y},
         ];
         const horizontalSplit: DfPoint[] = [
-            {x: sourceGap.x, y: labelCentreY},
-            {x: targetGap.x, y: labelCentreY},
+            {x: sourceGap.x, y: labelCenterY},
+            {x: targetGap.x, y: labelCenterY},
         ];
 
         const keepDirection = sourceDir[primaryAxis] === axisSign;
@@ -125,7 +125,7 @@ export function computeWaypoints(
             }
         }
 
-        /** Re-compute label centre so it sits on the longest straight leg */
+        /** Re-compute label center so it sits on the longest straight leg */
         const longestX = Math.max(
             Math.abs(sourceGap.x - elbows[0]!.x),
             Math.abs(targetGap.x - elbows[0]!.x),
@@ -136,27 +136,27 @@ export function computeWaypoints(
         );
 
         if (longestX >= longestY) {
-            labelCentreX = (sourceGap.x + targetGap.x) / 2;
-            labelCentreY = elbows[0]!.y;
+            labelCenterX = (sourceGap.x + targetGap.x) / 2;
+            labelCenterY = elbows[0]!.y;
         } else {
-            labelCentreX = elbows[0]!.x;
-            labelCentreY = (sourceGap.y + targetGap.y) / 2;
+            labelCenterX = elbows[0]!.x;
+            labelCenterY = (sourceGap.y + targetGap.y) / 2;
         }
     }
 
     /**
-     * Assemble the full polyline: connector-centre ➜ gap ➜ elbows
+     * Assemble the full polyline: connector-center ➜ gap ➜ elbows
      */
     const polyline: DfPoint[] = [
-        source, // 0. start at connector centre
+        source, // 0. start at connector center
         sourceGap, // 1. leave the node
         ...elbows, // 2. one or two elbows
         targetGap, // 3. enter the target node
-        target, // 4. finish at connector centre
+        target, // 4. finish at connector center
     ];
 
     /**
-     * Return: [polyline points, labelCentreX, labelCentreY]
+     * Return: [polyline points, labelCenterX, labelCenterY]
      */
-    return [polyline, labelCentreX, labelCentreY];
+    return [polyline, labelCenterX, labelCenterY];
 }

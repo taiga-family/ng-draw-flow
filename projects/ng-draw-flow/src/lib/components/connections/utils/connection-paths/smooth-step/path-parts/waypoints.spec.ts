@@ -11,7 +11,7 @@ const asConnector = (p: DfPoint, pos: DfConnectorPosition): DfConnectorData => (
 
 describe('computeWaypoints', () => {
     /** Case A ─ Opposite sides (Right ➜ Left) */
-    it('builds two vertical-split elbows and correct centre (Right→Left)', () => {
+    it('builds two vertical-split elbows and correct center (Right→Left)', () => {
         const source = asConnector(point(0, 0), DfConnectorPosition.Right);
         const target = asConnector(point(100, 50), DfConnectorPosition.Left);
 
@@ -30,7 +30,7 @@ describe('computeWaypoints', () => {
         expect(poly[1]).toEqual({x: 0 + MIN_SEGMENT_LENGTH, y: 0});
         expect(poly.at(-2)).toEqual({x: 100 - MIN_SEGMENT_LENGTH, y: 50});
 
-        // 3) Two elbows share the same X (vertical split through centre)
+        // 3) Two elbows share the same X (vertical split through center)
         const elbow1 = poly[2]!;
         const elbow2 = poly[3]!;
 
@@ -39,13 +39,13 @@ describe('computeWaypoints', () => {
         expect(elbow1.y).toBe(0);
         expect(elbow2.y).toBe(50);
 
-        // 4) Centre = midpoint on X between nodes, Y = halfway vertically
+        // 4) Center = midpoint on X between nodes, Y = halfway vertically
         expect(cx).toBe(50);
         expect(cy).toBe(25);
     });
 
     /** Case B ─ Same / mixed (Right ➜ Right) */
-    it('builds one elbow and centre on the longest vertical leg (Right→Right)', () => {
+    it('builds one elbow and center on the longest vertical leg (Right→Right)', () => {
         const source = asConnector(point(0, 0), DfConnectorPosition.Right);
         const target = asConnector(point(0, 100), DfConnectorPosition.Right);
 
@@ -64,7 +64,7 @@ describe('computeWaypoints', () => {
 
         expect(elbow).toEqual({x: 0 + MIN_SEGMENT_LENGTH, y: 100});
 
-        // Centre must lie on the longest vertical segment
+        // Center must lie on the longest vertical segment
         expect(cx).toBe(elbow.x);
         expect(cy).toBeCloseTo((0 + 100) / 2);
     });
@@ -88,8 +88,8 @@ describe('computeWaypoints', () => {
         expect(poly.at(-2)).toEqual({x: 0, y: 80 - custom});
     });
 
-    /** centreOverride should remain untouched (Case A scenario) */
-    it('keeps provided centreOverride when given', () => {
+    /** centerOverride should remain untouched (Case A scenario) */
+    it('keeps provided centerOverride when given', () => {
         const source = asConnector(point(0, 0), DfConnectorPosition.Right);
         const target = asConnector(point(100, 0), DfConnectorPosition.Left);
 
@@ -100,7 +100,7 @@ describe('computeWaypoints', () => {
             sourcePos: source.position!,
             target: target.point,
             targetPos: target.position!,
-            centreOverride: override,
+            centerOverride: override,
         });
 
         expect(cx).toBe(override.x);
