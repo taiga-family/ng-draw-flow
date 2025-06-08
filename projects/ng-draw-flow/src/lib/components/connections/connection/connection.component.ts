@@ -35,8 +35,7 @@ import type {
 import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {ConnectionsService} from '../connections.service';
-import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
-import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
+import {createBezierPath, createSmoothStepPath} from '../utils';
 
 @Component({
     standalone: true,
@@ -91,7 +90,7 @@ export class ConnectionComponent {
 
             switch (this.options.connection.type) {
                 case DfConnectionType.SmoothStep:
-                    return createSmoothstepPath(
+                    return createSmoothStepPath(
                         start,
                         end,
                         this.options.connection.curvature,

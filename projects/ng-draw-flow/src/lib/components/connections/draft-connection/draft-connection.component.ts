@@ -11,8 +11,7 @@ import {
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {DfConnectorData, DfOptions} from '../../../ng-draw-flow.interfaces';
 import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
-import {calculateCurvature, calculateDistance, createBezierPath} from '../utils';
-import {createSmoothstepPath} from '../utils/create-smoothstep-path/create-smoothstep-path.util';
+import {createBezierPath, createSmoothStepPath} from '../utils';
 import {DraftConnectionService} from './draft-connection.service';
 
 @Component({
@@ -25,7 +24,6 @@ import {DraftConnectionService} from './draft-connection.service';
 export class DraftConnectionComponent {
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly options: DfOptions = inject(DRAW_FLOW_OPTIONS);
-    private readonly maxCurvature = this.options.connection.curvature;
 
     @ViewChild('connectionPath')
     protected connectionPath!: ElementRef;
@@ -36,10 +34,11 @@ export class DraftConnectionComponent {
     protected path: Signal<string> = computed(() => {
         const sourcePoint: DfConnectorData = this.draftConnectionService.source();
         const targetPoint: DfConnectorData = this.draftConnectionService.target();
+        const curvature = this.options.connection.curvature;
 
         switch (this.options.connection.type) {
             case DfConnectionType.SmoothStep:
-                return createSmoothstepPath(sourcePoint, targetPoint, this.maxCurvature);
+                return createSmoothStepPath(sourcePoint, targetPoint, curvature);
             case DfConnectionType.Bezier:
             default: {
                 const distance = calculateDistance(sourcePoint.point, targetPoint.point);
