@@ -2,8 +2,8 @@ import type {
     DfConnectorPosition,
     DfPoint,
 } from '../../../../../../ng-draw-flow.interfaces';
-import {getEdgeCentre} from '../helpers/edge-centre';
 import {getPrimaryDirection} from '../helpers/get-primary-direction';
+import {getSmoothStepEdgeCenter} from '../helpers/smooth-step-edge-center';
 import {CONNECTOR_DIRECTIONS, MIN_SEGMENT_LENGTH} from '../smooth-step.consts';
 
 interface ComputePointsParams {
@@ -66,7 +66,7 @@ export function computeWaypoints(
     /**
      * Fallback geometric centre used for label placement
      */
-    const [fallbackCX, fallbackCY] = getEdgeCentre({source, target});
+    const [fallbackCX, fallbackCY] = getSmoothStepEdgeCenter({source, target});
     let labelCentreX = centreOverride.x ?? fallbackCX;
     let labelCentreY = centreOverride.y ?? fallbackCY;
 
