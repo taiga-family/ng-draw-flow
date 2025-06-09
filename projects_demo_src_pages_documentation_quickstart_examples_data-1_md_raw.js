@@ -7,7 +7,7 @@
   \*********************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```ts\ndata: DfDataModel = {\n  nodes: new Map(),\n  connections: [],\n};\nform = new FormControl(this.data);\n```\n";
+module.exports = "```ts\ndata: DfDataModel = {\n  nodes: [],\n  connections: [],\n};\nform = new FormControl(this.data);\n```\n";
 
 /***/ })
 
