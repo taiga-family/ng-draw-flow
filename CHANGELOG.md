@@ -1,3 +1,20 @@
+### [0.13.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.12.0...v0.13.0) (2025-06-09)
+
+### 🚀 Features
+
+- replace Map with Array for nodes to optimize change-detection & rendering
+  [(c427088)](https://github.com/taiga-family/ng-draw-flow/commit/c4270883f2fb94ba00142d48e21da996c1d599bd)
+
+### 🐞 Bug Fixes
+
+- resolve TS errors
+  [(356f22c)](https://github.com/taiga-family/ng-draw-flow/commit/356f22cc457d9bde2e37a2ff023e88dbc058b781)
+- resolve TS errors
+  [(793fc2b)](https://github.com/taiga-family/ng-draw-flow/commit/793fc2b09409c56eb87fc1d6a189951e79572e7b)
+- test [(7eed867)](https://github.com/taiga-family/ng-draw-flow/commit/7eed867babf66ad63cdb3339769cf07b6f4aeaef)
+- lint [(baae48f)](https://github.com/taiga-family/ng-draw-flow/commit/baae48f2c90732707b9892612fe06a7583d35718)
+- lint [(ea2ace5)](https://github.com/taiga-family/ng-draw-flow/commit/ea2ace54ec916c0885e0114e1d7981eeb19886aa)
+
 ### [0.12.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.11.0...v0.12.0) (2025-05-28)
 
 ### 🚀 Features
