@@ -103,7 +103,7 @@ export class PanZoomComponent {
 
     protected readonly panZoomContainerTransform$: Observable<string> =
         this.resizeObserver$.pipe(
-            map((entries: readonly ResizeObserverEntry[]) => entries[0]!.contentRect),
+            map((entries: readonly ResizeObserverEntry[]) => entries[0].contentRect),
             map((rootSize: DOMRectReadOnly) => {
                 let translate = '';
                 const {

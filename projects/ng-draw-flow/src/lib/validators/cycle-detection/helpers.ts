@@ -85,7 +85,7 @@ function checkNodeForCycle(
     const path: DfId[] = [];
 
     while (stack.length > 0) {
-        const {nodeId, processed} = stack[stack.length - 1]!;
+        const {nodeId, processed} = stack[stack.length - 1];
 
         if (processed) {
             // Node is fully processed
@@ -102,7 +102,7 @@ function checkNodeForCycle(
 
         // Mark the node as being in the current path
         nodeStates.set(nodeId, 1);
-        stack[stack.length - 1]!.processed = true;
+        stack[stack.length - 1].processed = true;
         path.push(nodeId);
 
         // Process neighbors

@@ -140,7 +140,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
 
         this.containerRef.clear();
         this.nodeContentComponentRef = this.containerRef.createComponent(
-            this.drawFlowComponents[nodeType]!,
+            this.drawFlowComponents[nodeType],
         );
 
         this.innerComponent = this.nodeContentComponentRef.instance;
