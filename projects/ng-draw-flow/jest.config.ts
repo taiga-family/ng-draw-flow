@@ -5,7 +5,7 @@ export default {
     globals: {},
     coverageDirectory: '../../coverage/projects/ng-draw-flow',
     transform: {
-        '^.+.(ts|mjs|js|html)$': 'jest-preset-angular',
+        '^.+.(ts|mjs|js|html|svg)$': 'jest-preset-angular',
     },
     transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
     snapshotSerializers: [

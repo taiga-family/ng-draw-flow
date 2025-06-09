@@ -47,17 +47,18 @@ import {InputNodeComponent, OutputNodeComponent} from '../../../app/modules/node
 })
 export default class ConnectionsComponent {
     public data: DfDataModel = {
-        nodes: new Map()
-            .set('node-1', {
+        nodes: [
+            {
                 id: 'node-1',
                 data: {type: 'outputNode', text: 'This base node'},
                 position: {x: 0, y: 0},
-            })
-            .set('node-2', {
+            },
+            {
                 id: 'node-2',
                 data: {type: 'inputNode', text: 'This child node 1'},
                 position: {x: 90, y: -150},
-            }),
+            },
+        ],
         connections: [
             {
                 source: {
