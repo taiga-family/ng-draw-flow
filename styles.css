@@ -1,7 +1,8 @@
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].rules[0].oneOf[0].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[8].rules[1].use[0]!./node_modules/@taiga-ui/core/styles/taiga-ui-theme.less?ngGlobalStyle ***!
   \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-:root {
+:root,
+:host {
   --tui-font-heading: 'Manrope', -apple-system, 'BlinkMacSystemFont', system-ui, 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
   --tui-font-text: 'Manrope', -apple-system, 'BlinkMacSystemFont', system-ui, 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
   --tui-font-offset: 0rem;
@@ -83,6 +84,7 @@
     color-scheme: light;
   }
   :root,
+  :host,
   [tuiTheme='light'] {
     --tui-background-base: #fff;
     --tui-background-base-alt: #f6f6f6;
@@ -166,6 +168,7 @@
 }
 @media print {
   :root,
+  :host,
   [tuiTheme] {
     color-scheme: light;
     --tui-background-base: #fff;
