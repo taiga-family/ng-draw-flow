@@ -20,6 +20,10 @@ export class D3ZoomDirective {
             return;
         }
 
+        if (event.target && 'setPointerCapture' in event.target) {
+            (event.target as Element).setPointerCapture(event.pointerId);
+        }
+
         let startX = event.clientX;
         let startY = event.clientY;
         const el = this.element.nativeElement;
@@ -30,9 +34,13 @@ export class D3ZoomDirective {
             startY = e.clientY;
         };
 
-        const up = (): void => {
+        const up = (e: PointerEvent): void => {
             el.removeEventListener('pointermove', move);
             el.removeEventListener('pointerup', up);
+
+            if (e.target && 'releasePointerCapture' in e.target) {
+                (e.target as Element).releasePointerCapture(e.pointerId);
+            }
         };
 
         el.addEventListener('pointermove', move);
