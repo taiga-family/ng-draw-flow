@@ -52,21 +52,11 @@ export class D3ZoomDirective {
         event.preventDefault();
 
         const rect = this.element.nativeElement.getBoundingClientRect();
-        const t = this.zoom.transform();
         const offsetX = event.clientX - rect.left;
         const offsetY = event.clientY - rect.top;
 
-        const isInside =
-            offsetX >= 0 &&
-            offsetX <= rect.width &&
-            offsetY >= 0 &&
-            offsetY <= rect.height;
-
-        const cxSource = isInside ? offsetX : rect.width / 2;
-        const cySource = isInside ? offsetY : rect.height / 2;
-
-        const cx = (cxSource - t.position.x) / t.scale;
-        const cy = (cySource - t.position.y) / t.scale;
+        const cx = offsetX >= 0 && offsetX <= rect.width ? offsetX : rect.width / 2;
+        const cy = offsetY >= 0 && offsetY <= rect.height ? offsetY : rect.height / 2;
 
         const scale = 1 - event.deltaY * 0.001;
 
