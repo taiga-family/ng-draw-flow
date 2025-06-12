@@ -1,4 +1,5 @@
 export * from './lib/components/connectors';
+export * from './lib/components/pan-zoom/d3';
 export * from './lib/components/pan-zoom/pan-zoom.options';
 export * from './lib/directives/errors/errors.directive';
 export * from './lib/directives/resize-observer';

@@ -1,0 +1,25 @@
+<tui-doc-page header="D3 Zoom demo">
+    <tui-doc-example
+        style="height: 500px"
+        [content]="{}"
+    >
+        <div
+            dfD3Zoom
+            class="viewport"
+        >
+            <div
+                class="box"
+                [style.transform]="
+                    'translate(' +
+                    zoom.transform().position.x +
+                    'px,' +
+                    zoom.transform().position.y +
+                    'px) scale(' +
+                    zoom.transform().scale +
+                    ')'
+                "
+            ></div>
+        </div>
+        <pre class="state">{{ zoom.transform() | json }}</pre>
+    </tui-doc-example>
+</tui-doc-page>
