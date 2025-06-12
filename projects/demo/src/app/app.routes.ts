@@ -100,6 +100,14 @@ export const appRoutes: Routes = [
         },
     },
     {
+        path: DemoPath.D3Zoom,
+        loadComponent: async () =>
+            import('../pages/examples/d3-zoom/d3-zoom-example.component'),
+        data: {
+            title: 'D3 Zoom demo',
+        },
+    },
+    {
         path: '**',
         redirectTo: DemoPath.Quickstart,
     },
