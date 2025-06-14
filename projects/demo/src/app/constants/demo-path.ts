@@ -11,6 +11,5 @@ export const DemoPath = {
     Overview: 'examples/overview',
     Editor: 'examples/editor',
     StressTest: 'examples/stress-test',
-    D3Zoom: 'examples/d3-zoom',
     CustomNodes: 'examples/nodes-example/custom-nodes-example',
 } as const;

@@ -57,9 +57,4 @@ export const DEMO_PAGES: TuiDocRoutePages = [
         title: 'Stress Test',
         route: DemoPath.StressTest,
     },
-    {
-        section: 'Examples',
-        title: 'D3 Zoom demo',
-        route: DemoPath.D3Zoom,
-    },
 ];

@@ -1,4 +1,4 @@
-import {AsyncPipe, NgIf} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -27,7 +27,6 @@ import {
 import {DF_FALSE_HANDLER, INITIAL_COORDINATES} from '../../consts';
 import type {DfDragDrop} from '../../directives/drag-drop';
 import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
-import {DfResizeObserver} from '../../directives/resize-observer';
 import {dfClamp, dfPx} from '../../helpers';
 import type {DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
@@ -41,7 +40,7 @@ import type {DfZoom} from './zoom/zoom.interfaces';
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [AsyncPipe, DfResizeObserver, DragDropDirective, NgIf, ZoomDirective],
+    imports: [AsyncPipe, DragDropDirective, ZoomDirective],
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +53,7 @@ export class PanZoomComponent {
         inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
     private readonly resizeObserver$ = inject(ResizeObserverService);
+
     private readonly zoom$ = new BehaviorSubject<number>(DF_PAN_ZOOM_INITIAL_SCALE);
     private readonly coordinates$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
     private readonly manualZoomAnimation$ = new Subject<boolean>();
@@ -73,7 +73,7 @@ export class PanZoomComponent {
         this.dragStage$.pipe(
             map((stage: DfDragDropStage) => stage !== DfDragDropStage.Move),
         ),
-        fromEvent(this.el.nativeElement, 'touchmove', {passive: true}).pipe(
+        fromEvent(this.el.nativeElement, 'pointermove', {passive: true}).pipe(
             throttleTime(16, animationFrameScheduler, {leading: true, trailing: true}),
             map(DF_FALSE_HANDLER),
         ),
@@ -83,13 +83,47 @@ export class PanZoomComponent {
         ),
     );
 
+    private readonly alignmentOffset$: Observable<DfPoint> = this.resizeObserver$.pipe(
+        map((entries: readonly ResizeObserverEntry[]) => entries[0]!.contentRect),
+        tap(() => this.resetPosition()),
+        map((rootSize: DOMRectReadOnly) => {
+            const {leftPosition: panZoomLeftPosition, topPosition: panZoomTopPosition} =
+                this.panZoomOptions;
+
+            let x = 0;
+            let y = 0;
+
+            if (panZoomLeftPosition || panZoomLeftPosition === 0) {
+                const offset = (rootSize.width / 2) * -1 + panZoomLeftPosition;
+
+                this.panZoomService.panzoomModel.offsetX = offset * -1;
+
+                x = offset;
+            } else {
+                this.panZoomService.panzoomModel.offsetX = 0;
+            }
+
+            if (panZoomTopPosition || panZoomTopPosition === 0) {
+                const offset = (rootSize.height / 2) * -1 + panZoomTopPosition;
+
+                this.panZoomService.panzoomModel.offsetY = offset * -1;
+
+                y = offset;
+            } else {
+                this.panZoomService.panzoomModel.offsetY = 0;
+            }
+
+            return {x, y};
+        }),
+        startWith(INITIAL_COORDINATES),
+    );
+
     protected readonly wrapperTransform$ = combineLatest([
         this.coordinates$.pipe(
             tap(({x, y}: DfPoint) => {
                 this.panZoomService.panzoomModel.x = x;
                 this.panZoomService.panzoomModel.y = y;
             }),
-            map(({x, y}: DfPoint) => `${dfPx(x)}, ${dfPx(y)}`),
         ),
         this.zoom$.pipe(
             tap((zoom: number) => {
@@ -97,43 +131,13 @@ export class PanZoomComponent {
                 this.panZoomService.panzoomModel.zoom = zoom;
             }),
         ),
+        this.alignmentOffset$,
     ]).pipe(
-        map(([translate, zoom]) => `translate(${translate}) scale(${zoom}) rotate(0deg)`),
+        map(
+            ([{x, y}, zoom, {x: offsetX, y: offsetY}]) =>
+                `translate(${dfPx(x + offsetX)}, ${dfPx(y + offsetY)}) scale(${zoom}) rotate(0deg)`,
+        ),
     );
-
-    protected readonly panZoomContainerTransform$: Observable<string> =
-        this.resizeObserver$.pipe(
-            map((entries: readonly ResizeObserverEntry[]) => entries[0]!.contentRect),
-            map((rootSize: DOMRectReadOnly) => {
-                let translate = '';
-                const {
-                    leftPosition: panZoomLeftPosition,
-                    topPosition: panZoomTopPosition,
-                } = this.panZoomOptions;
-
-                if (panZoomLeftPosition || panZoomLeftPosition === 0) {
-                    const offset = (rootSize.width / 2) * -1 + panZoomLeftPosition;
-
-                    this.panZoomService.panzoomModel.offsetX = offset * -1;
-
-                    translate = `translateX(${offset}px)`;
-                } else {
-                    this.panZoomService.panzoomModel.offsetX = 0;
-                }
-
-                if (panZoomTopPosition || panZoomTopPosition === 0) {
-                    const offset = (rootSize.height / 2) * -1 + panZoomTopPosition;
-
-                    this.panZoomService.panzoomModel.offsetY = offset * -1;
-
-                    translate = `${translate}translateY(${offset}px)`;
-                } else {
-                    this.panZoomService.panzoomModel.offsetY = 0;
-                }
-
-                return translate;
-            }),
-        );
 
     protected onPan({distance, stage}: DfDragDrop): void {
         if (this.panZoomService.panzoomDisabled) {
@@ -141,11 +145,25 @@ export class PanZoomComponent {
         }
 
         this.dragStage$.next(stage);
-
         this.coordinates$.next(
             this.getGuardedCoordinates(
                 this.coordinates$.value.x + distance.deltaX,
                 this.coordinates$.value.y + distance.deltaY,
+            ),
+        );
+    }
+
+    protected onWheel(event: WheelEvent): void {
+        event.preventDefault();
+
+        if (event.ctrlKey) {
+            return;
+        }
+
+        this.coordinates$.next(
+            this.getGuardedCoordinates(
+                this.coordinates$.value.x - event.deltaX,
+                this.coordinates$.value.y - event.deltaY,
             ),
         );
     }
@@ -158,6 +176,10 @@ export class PanZoomComponent {
 
     public resetPanzoom(): void {
         this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
+        this.coordinates$.next(INITIAL_COORDINATES);
+    }
+
+    public resetPosition(): void {
         this.coordinates$.next(INITIAL_COORDINATES);
     }
 
@@ -178,9 +200,6 @@ export class PanZoomComponent {
     private setZoom(zoom: number): void {
         this.manualZoomAnimation$.next(true);
         this.zoom$.next(zoom);
-        const {x, y} = this.coordinates$.value;
-
-        this.coordinates$.next(this.getGuardedCoordinates(x, y));
         timer(this.zoomAnimationDuration)
             .pipe(take(1))
             .subscribe(() => this.manualZoomAnimation$.next(false));
@@ -209,15 +228,6 @@ export class PanZoomComponent {
         );
     }
 
-    private getGuardedCoordinates(x: number, y: number): DfPoint {
-        const {offsetX, offsetY} = this.offsets();
-
-        return {
-            x: dfClamp(x, -offsetX, offsetX),
-            y: dfClamp(y, -offsetY, offsetY),
-        };
-    }
-
     private getScaleCenter(
         {clientX, clientY}: {clientX: number; clientY: number},
         {x, y}: DfPoint,
@@ -228,6 +238,15 @@ export class PanZoomComponent {
         return {
             x: (clientX - x - offsetWidth / 2) / scale,
             y: (clientY - y - offsetHeight / 2) / scale,
+        };
+    }
+
+    private getGuardedCoordinates(x: number, y: number): DfPoint {
+        const {offsetX, offsetY} = this.offsets();
+
+        return {
+            x: dfClamp(x, -offsetX, offsetX),
+            y: dfClamp(y, -offsetY, offsetY),
         };
     }
 

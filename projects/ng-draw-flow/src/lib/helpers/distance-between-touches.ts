@@ -1,6 +1,9 @@
-export function dfDistanceBetweenTouches({touches}: TouchEvent): number {
+export function dfDistanceBetweenTouches(
+    firstEvent: PointerEvent,
+    secondEvent: PointerEvent,
+): number {
     return Math.hypot(
-        (touches[0]?.clientX ?? 0) - (touches[1]?.clientX ?? 0),
-        (touches[0]?.clientY ?? 0) - (touches[1]?.clientY ?? 0),
+        firstEvent.clientX - secondEvent.clientX,
+        firstEvent.clientY - secondEvent.clientY,
     );
 }

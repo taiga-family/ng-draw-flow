@@ -5,11 +5,7 @@
     [style.transition-duration]="(transitioned$ | async) ? zoomAnimationDuration + 'ms' : '0s'"
     (dfDragDrop)="onPan($event)"
     (dfZoom)="onZoom($event)"
+    (wheel)="onWheel($event)"
 >
-    <div
-        class="panzoom__container"
-        [style.transform]="panZoomContainerTransform$ | async"
-    >
-        <ng-content />
-    </div>
+    <ng-content />
 </div>

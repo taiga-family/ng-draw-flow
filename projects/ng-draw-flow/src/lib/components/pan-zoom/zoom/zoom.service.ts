@@ -1,15 +1,5 @@
 import {ElementRef, inject, Injectable} from '@angular/core';
-import {
-    filter,
-    fromEvent,
-    map,
-    merge,
-    Observable,
-    scan,
-    switchMap,
-    takeUntil,
-    throttleTime,
-} from 'rxjs';
+import {filter, fromEvent, map, merge, Observable, throttleTime} from 'rxjs';
 
 import {dfDistanceBetweenTouches, dfPreventDefault} from '../../../helpers';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom.options';
@@ -24,47 +14,14 @@ export class ZoomService extends Observable<DfZoom> {
         const touchSensitivity = options?.touchSensitivity;
 
         super((subscriber) => {
-            merge(
-                fromEvent<TouchEvent>(nativeElement, 'touchstart', {passive: true}).pipe(
-                    filter(({touches}) => touches.length > 1),
-                    switchMap((startEvent) =>
-                        fromEvent<TouchEvent>(nativeElement, 'touchmove', {
-                            passive: true,
-                        }).pipe(
-                            dfPreventDefault(),
-                            throttleTime(16),
-                            scan(
-                                (prev, event) => {
-                                    const distance = dfDistanceBetweenTouches(event);
+            const activePointers = new Map<number, PointerEvent>();
+            let previousDistance = 0;
 
-                                    return {
-                                        event,
-                                        distance,
-                                        delta:
-                                            (distance - prev.distance) * touchSensitivity,
-                                    };
-                                },
-                                {
-                                    event: startEvent,
-                                    distance: dfDistanceBetweenTouches(startEvent),
-                                    delta: 0,
-                                },
-                            ),
-                            map(({event, delta}) => {
-                                const [touch1, touch2] = [
-                                    event.touches[0] ?? {clientX: 0, clientY: 0},
-                                    event.touches[1] ?? {clientX: 0, clientY: 0},
-                                ];
-                                const clientX = (touch1.clientX + touch2.clientX) / 2;
-                                const clientY = (touch1.clientY + touch2.clientY) / 2;
-
-                                return {clientX, clientY, delta, event};
-                            }),
-                            takeUntil(fromEvent(nativeElement, 'touchend')),
-                        ),
-                    ),
-                ),
-                fromEvent<WheelEvent>(nativeElement, 'wheel', {passive: false}).pipe(
+            const wheelSub = fromEvent<WheelEvent>(nativeElement, 'wheel', {
+                passive: false,
+            })
+                .pipe(
+                    filter((event) => event.ctrlKey),
                     dfPreventDefault(),
                     map((wheel) => ({
                         clientX: wheel.clientX,
@@ -72,8 +29,59 @@ export class ZoomService extends Observable<DfZoom> {
                         delta: -wheel.deltaY * wheelSensitivity,
                         event: wheel,
                     })),
-                ),
-            ).subscribe(subscriber);
+                )
+                .subscribe(subscriber);
+
+            const pointerMove$ = fromEvent<PointerEvent>(nativeElement, 'pointermove', {
+                passive: true,
+            }).pipe(filter((e) => e.pointerType === 'touch'));
+
+            const pointerDown$ = fromEvent<PointerEvent>(nativeElement, 'pointerdown', {
+                passive: true,
+            }).pipe(filter((e) => e.pointerType === 'touch'));
+
+            const pointerEnd$ = merge(
+                fromEvent<PointerEvent>(nativeElement, 'pointerup'),
+                fromEvent<PointerEvent>(nativeElement, 'pointercancel'),
+            ).pipe(filter((e) => e.pointerType === 'touch'));
+
+            const moveSub = merge(pointerDown$, pointerMove$, pointerEnd$)
+                .pipe(throttleTime(16))
+                .subscribe((event) => {
+                    if (event.type === 'pointerup' || event.type === 'pointercancel') {
+                        activePointers.delete(event.pointerId);
+                    } else {
+                        activePointers.set(event.pointerId, event);
+                    }
+
+                    if (activePointers.size < 2 || event.type !== 'pointermove') {
+                        previousDistance = 0;
+
+                        return;
+                    }
+
+                    const [a, b] = Array.from(activePointers.values());
+                    const distance = dfDistanceBetweenTouches(a!, b!);
+
+                    if (!previousDistance) {
+                        previousDistance = distance;
+
+                        return;
+                    }
+
+                    const delta = (distance - previousDistance) * touchSensitivity;
+
+                    previousDistance = distance;
+                    const clientX = (a!.clientX + b!.clientX) / 2;
+                    const clientY = (a!.clientY + b!.clientY) / 2;
+
+                    subscriber.next({clientX, clientY, delta, event});
+                });
+
+            return () => {
+                wheelSub.unsubscribe();
+                moveSub.unsubscribe();
+            };
         });
     }
 }
