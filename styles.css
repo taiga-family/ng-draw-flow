@@ -258,12 +258,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='accent']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='accent']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-2-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='accent']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='accent']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-2-hover);
   }
 }
@@ -276,10 +276,10 @@
     background: var(--tui-background-accent-2-hover);
   }
 }
-[tuiAppearance][data-appearance='accent']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='accent']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-2-pressed);
 }
-[tuiAppearance][data-appearance='accent']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='accent']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-2-pressed);
 }
 [tuiAppearance][data-appearance='accent'][data-state='active'] {
@@ -298,12 +298,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='link']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='link']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-action-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='link']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='link']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-action-hover);
   }
 }
@@ -316,10 +316,10 @@
     color: var(--tui-text-action-hover);
   }
 }
-[tuiAppearance][data-appearance='link']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='link']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-action-hover);
 }
-[tuiAppearance][data-appearance='link']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='link']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-action-hover);
 }
 [tuiAppearance][data-appearance='link'][data-state='active'] {
@@ -337,12 +337,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='action']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='action']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-action-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='action']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='action']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-action-hover);
   }
 }
@@ -355,10 +355,10 @@
     color: var(--tui-text-action-hover);
   }
 }
-[tuiAppearance][data-appearance='action']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='action']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-action-hover);
 }
-[tuiAppearance][data-appearance='action']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='action']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-action-hover);
 }
 [tuiAppearance][data-appearance='action'][data-state='active'] {
@@ -376,12 +376,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='action-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='action-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-negative-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='action-destructive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='action-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-negative-hover);
   }
 }
@@ -394,10 +394,10 @@
     color: var(--tui-text-negative-hover);
   }
 }
-[tuiAppearance][data-appearance='action-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='action-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-negative-hover);
 }
-[tuiAppearance][data-appearance='action-destructive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='action-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-negative-hover);
 }
 [tuiAppearance][data-appearance='action-destructive'][data-state='active'] {
@@ -415,12 +415,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='action-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='action-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-primary);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='action-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='action-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-primary);
   }
 }
@@ -433,10 +433,10 @@
     color: var(--tui-text-primary);
   }
 }
-[tuiAppearance][data-appearance='action-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='action-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-primary);
 }
-[tuiAppearance][data-appearance='action-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='action-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-primary);
 }
 [tuiAppearance][data-appearance='action-grayscale'][data-state='active'] {
@@ -455,16 +455,16 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='flat']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='flat-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='flat-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='flat']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='flat-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='flat-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-neutral-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='flat']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='flat-destructive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='flat-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='flat']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='flat-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='flat-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-neutral-1-hover);
   }
 }
@@ -483,14 +483,14 @@
     background: var(--tui-background-neutral-1-hover);
   }
 }
-[tuiAppearance][data-appearance='flat']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='flat-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='flat-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='flat']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='flat-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='flat-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-neutral-1-pressed);
 }
-[tuiAppearance][data-appearance='flat']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='flat-destructive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='flat-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='flat']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='flat-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='flat-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-neutral-1-pressed);
 }
 [tuiAppearance][data-appearance='flat'][data-state='active'],
@@ -523,12 +523,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     box-shadow: 0 0.875rem 2.625rem rgba(0, 0, 0, 0.14);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     box-shadow: 0 0.875rem 2.625rem rgba(0, 0, 0, 0.14);
   }
 }
@@ -541,11 +541,11 @@
     box-shadow: 0 0.875rem 2.625rem rgba(0, 0, 0, 0.14);
   }
 }
-[tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-base-alt);
   box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
 }
-[tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-base-alt);
   box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.1);
 }
@@ -569,12 +569,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: rgba(0, 0, 0, 0.48);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: rgba(0, 0, 0, 0.48);
   }
 }
@@ -587,10 +587,10 @@
     background: rgba(0, 0, 0, 0.48);
   }
 }
-[tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: rgba(0, 0, 0, 0.6);
 }
-[tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: rgba(0, 0, 0, 0.6);
 }
 [tuiAppearance][data-appearance='glass'][data-state='active'] {
@@ -608,14 +608,14 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiTheme='dark'][tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiTheme='dark'][tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: rgba(255, 255, 255, 0.4);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiTheme='dark'][tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiTheme='dark'][tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: rgba(255, 255, 255, 0.4);
   }
 }
@@ -631,12 +631,12 @@
     background: rgba(255, 255, 255, 0.4);
   }
 }
-[tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiTheme='dark'][tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiTheme='dark'][tuiAppearance][data-appearance='glass']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: rgba(255, 255, 255, 0.5);
 }
-[tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiTheme='dark'][tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiTheme='dark'] [tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiTheme='dark'][tuiAppearance][data-appearance='glass']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: rgba(255, 255, 255, 0.5);
 }
 [tuiTheme='dark'] [tuiAppearance][data-appearance='glass'][data-state='active'],
@@ -660,12 +660,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='opposite']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='opposite']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-opposite-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='opposite']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='opposite']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-opposite-hover);
   }
 }
@@ -678,10 +678,10 @@
     background: var(--tui-background-accent-opposite-hover);
   }
 }
-[tuiAppearance][data-appearance='opposite']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='opposite']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-opposite-pressed);
 }
-[tuiAppearance][data-appearance='opposite']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='opposite']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-opposite-pressed);
 }
 [tuiAppearance][data-appearance='opposite'][data-state='active'] {
@@ -716,26 +716,26 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='outline']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='outline']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bs: var(--tui-background-accent-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='outline']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='outline']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bs: var(--tui-background-accent-1-hover);
   }
 }
@@ -769,24 +769,24 @@
     --t-bs: var(--tui-background-accent-1-hover);
   }
 }
-[tuiAppearance][data-appearance='outline']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='outline']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bs: var(--tui-background-accent-1-pressed);
 }
-[tuiAppearance][data-appearance='outline']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='outline']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='whiteblock']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='whiteblock'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bs: var(--tui-background-accent-1-pressed);
 }
 [tuiAppearance][data-appearance='outline']:checked:not([data-mode])[data-state='active'],
@@ -846,20 +846,20 @@
   box-shadow: inset 0 0 0 2px var(--tui-status-negative);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='outline']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='outline']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-neutral-1);
     cursor: pointer;
     --t-bs: var(--tui-border-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='outline']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-destructive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='outline']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-neutral-1);
     cursor: pointer;
     --t-bs: var(--tui-border-hover);
@@ -887,17 +887,17 @@
     --t-bs: var(--tui-border-hover);
   }
 }
-[tuiAppearance][data-appearance='outline']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='outline']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-neutral-1);
   --t-bs: var(--tui-border-hover);
 }
-[tuiAppearance][data-appearance='outline']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-destructive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='outline']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-neutral-1);
   --t-bs: var(--tui-border-hover);
 }
@@ -952,26 +952,26 @@
   color: var(--tui-text-tertiary);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after,
-  [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after,
-  [tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after,
-  [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after {
+  [tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after,
+  [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after,
+  [tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after,
+  [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after {
     color: var(--tui-text-secondary);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):before,
-  [tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after,
-  [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after,
-  [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after,
-  [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):after {
+  [tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):before,
+  [tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after,
+  [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after,
+  [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after,
+  [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):after {
     color: var(--tui-text-secondary);
   }
 }
@@ -1005,24 +1005,24 @@
     color: var(--tui-text-secondary);
   }
 }
-[tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after,
-[tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after,
-[tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after,
-[tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after {
+[tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='icon']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after,
+[tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after,
+[tuiAppearance][data-appearance='floating']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after,
+[tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after {
   color: var(--tui-text-primary);
 }
-[tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):before,
-[tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after,
-[tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after,
-[tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after,
-[tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):after {
+[tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):before,
+[tuiAppearance][data-appearance='icon']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after,
+[tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after,
+[tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after,
+[tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):after {
   color: var(--tui-text-primary);
 }
 [tuiAppearance][data-appearance='icon'][data-state='active']:before,
@@ -1073,12 +1073,12 @@
   background: var(--tui-status-negative);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='primary']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='primary']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-background-accent-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='primary']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='primary']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-background-accent-1-hover);
   }
 }
@@ -1091,10 +1091,10 @@
     --t-bg: var(--tui-background-accent-1-hover);
   }
 }
-[tuiAppearance][data-appearance='primary']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='primary']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-background-accent-1-pressed);
 }
-[tuiAppearance][data-appearance='primary']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='primary']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-background-accent-1-pressed);
 }
 [tuiAppearance][data-appearance='primary'][data-state='active'] {
@@ -1112,12 +1112,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='primary-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='primary-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     filter: saturate(1) brightness(1.3);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='primary-destructive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='primary-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     filter: saturate(1) brightness(1.3);
   }
 }
@@ -1130,10 +1130,10 @@
     filter: saturate(1) brightness(1.3);
   }
 }
-[tuiAppearance][data-appearance='primary-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='primary-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   filter: saturate(0.8) brightness(1);
 }
-[tuiAppearance][data-appearance='primary-destructive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='primary-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   filter: saturate(0.8) brightness(1);
 }
 [tuiAppearance][data-appearance='primary-destructive'][data-state='active'] {
@@ -1152,12 +1152,12 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='primary-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='primary-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-opposite-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='primary-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='primary-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-opposite-hover);
   }
 }
@@ -1170,10 +1170,10 @@
     background: var(--tui-background-accent-opposite-hover);
   }
 }
-[tuiAppearance][data-appearance='primary-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='primary-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-opposite-pressed);
 }
-[tuiAppearance][data-appearance='primary-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='primary-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-opposite-pressed);
 }
 [tuiAppearance][data-appearance='primary-grayscale'][data-state='active'] {
@@ -1194,18 +1194,18 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-neutral-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-neutral-1-hover);
   }
 }
@@ -1227,16 +1227,16 @@
     background: var(--tui-background-neutral-1-hover);
   }
 }
-[tuiAppearance][data-appearance='secondary']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-neutral-1-pressed);
 }
-[tuiAppearance][data-appearance='secondary']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-neutral-1-pressed);
 }
 [tuiAppearance][data-appearance='secondary'][data-state='active'],
@@ -1277,34 +1277,34 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-background-accent-1-hover);
   }
 }
@@ -1350,32 +1350,32 @@
     background: var(--tui-background-accent-1-hover);
   }
 }
-[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-1-pressed);
 }
-[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-background-accent-1-pressed);
 }
 [tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-state='active'],
@@ -1460,59 +1460,59 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-status-negative);
     color: #fff;
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-status-negative);
     color: #fff;
   }
@@ -1597,57 +1597,57 @@
     color: #fff;
   }
 }
-[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-status-negative);
   color: #fff;
 }
-[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-status-negative);
   color: #fff;
 }
@@ -1767,27 +1767,27 @@
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-negative-hover);
     background: var(--tui-status-negative-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-negative-hover);
     background: var(--tui-status-negative-pale-hover);
   }
@@ -1824,25 +1824,25 @@
     background: var(--tui-status-negative-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
-[tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='secondary']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
@@ -1936,14 +1936,14 @@ input[type='radio'][data-appearance='secondary'] {
   color: var(--tui-status-negative);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='error']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='negative']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='error']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='negative']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-negative-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='error']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='negative']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='error']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='negative']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-negative-pale-hover);
   }
 }
@@ -1959,12 +1959,12 @@ input[type='radio'][data-appearance='secondary'] {
     --t-bg: var(--tui-status-negative-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='error']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='negative']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='error']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='negative']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-negative-pale-hover);
 }
-[tuiAppearance][data-appearance='error']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='negative']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='error']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='negative']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-negative-pale-hover);
 }
 [tuiAppearance][data-appearance='error'][data-state='active'],
@@ -1998,14 +1998,14 @@ input[type='radio'][data-appearance='secondary'] {
   color: var(--tui-status-positive);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='success']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='positive']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='success']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='positive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-positive-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='success']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='positive']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='success']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='positive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-positive-pale-hover);
   }
 }
@@ -2021,12 +2021,12 @@ input[type='radio'][data-appearance='secondary'] {
     --t-bg: var(--tui-status-positive-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='success']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='positive']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='success']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='positive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-positive-pale-hover);
 }
-[tuiAppearance][data-appearance='success']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='positive']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='success']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='positive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-positive-pale-hover);
 }
 [tuiAppearance][data-appearance='success'][data-state='active'],
@@ -2057,12 +2057,12 @@ input[type='radio'][data-appearance='secondary'] {
   color: var(--tui-status-warning);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='warning']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='warning']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-warning-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='warning']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='warning']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-warning-pale-hover);
   }
 }
@@ -2075,10 +2075,10 @@ input[type='radio'][data-appearance='secondary'] {
     --t-bg: var(--tui-status-warning-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='warning']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='warning']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-warning-pale-hover);
 }
-[tuiAppearance][data-appearance='warning']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='warning']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-warning-pale-hover);
 }
 [tuiAppearance][data-appearance='warning'][data-state='active'] {
@@ -2103,12 +2103,12 @@ input[type='radio'][data-appearance='secondary'] {
   color: var(--tui-status-info);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='info']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='info']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-info-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='info']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='info']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-status-info-pale-hover);
   }
 }
@@ -2121,10 +2121,10 @@ input[type='radio'][data-appearance='secondary'] {
     --t-bg: var(--tui-status-info-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='info']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='info']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-info-pale-hover);
 }
-[tuiAppearance][data-appearance='info']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='info']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-status-info-pale-hover);
 }
 [tuiAppearance][data-appearance='info'][data-state='active'] {
@@ -2149,12 +2149,12 @@ input[type='radio'][data-appearance='secondary'] {
   color: var(--tui-status-neutral);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='neutral']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='neutral']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-background-neutral-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='neutral']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='neutral']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-bg: var(--tui-background-neutral-1-hover);
   }
 }
@@ -2167,10 +2167,10 @@ input[type='radio'][data-appearance='secondary'] {
     --t-bg: var(--tui-background-neutral-1-hover);
   }
 }
-[tuiAppearance][data-appearance='neutral']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='neutral']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-background-neutral-1-pressed);
 }
-[tuiAppearance][data-appearance='neutral']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='neutral']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   --t-bg: var(--tui-background-neutral-1-pressed);
 }
 [tuiAppearance][data-appearance='neutral'][data-state='active'] {
@@ -2210,12 +2210,12 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   color: var(--tui-text-primary);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
     background-color: var(--tui-background-neutral-1);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
     background-color: var(--tui-background-neutral-1);
   }
 }
@@ -2257,14 +2257,14 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   background-color: var(--tui-status-negative-pale);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
     background-color: var(--tui-status-negative-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
     background-color: var(--tui-status-negative-pale-hover);
   }
 }
@@ -2610,20 +2610,20 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
   color: var(--tui-text-tertiary);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.16);
   }
-  [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):before,
-  [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):after {
+  [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):before,
+  [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):after {
     color: var(--tui-text-secondary);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     --t-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.16);
   }
-  [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):before,
-  [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):after {
+  [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):before,
+  [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]):not([tuiWrapper]):after {
     color: var(--tui-text-secondary);
   }
 }
@@ -2646,12 +2646,12 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
     color: var(--tui-text-secondary);
   }
 }
-[tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):before,
-[tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):after {
+[tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):before,
+[tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):after {
   color: var(--tui-text-primary);
 }
-[tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):before,
-[tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):after {
+[tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):before,
+[tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]):not([tuiWrapper]):after {
   color: var(--tui-text-primary);
 }
 [tuiAppearance][data-appearance='textfield'][data-state='active']:not([tuiWrapper]):before,
@@ -2691,7 +2691,8 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
   box-shadow: none;
 }
 [tuiAppearance][data-appearance='textfield'][data-mode~='invalid'][data-mode~='invalid'],
-[tuiAppearance][data-appearance='textfield']:invalid:not([data-mode]) {
+[tuiAppearance][data-appearance='textfield']:invalid:not([data-mode]),
+[tuiAppearance][data-appearance='textfield'].tui-invalid:not([data-mode]) {
   outline-color: var(--tui-status-negative);
 }
 [tuiAppearance][data-appearance='textfield'][data-mode~='readonly'],
@@ -2715,14 +2716,14 @@ input[tuiAppearance][data-appearance='textfield']:read-only:not([data-mode]) {
   /* @deprecated TODO remove in v5 */
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiTheme='dark'] [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiTheme='dark'][tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiTheme='dark'] [tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiTheme='dark'][tuiAppearance][data-appearance='textfield']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background-color: var(--tui-background-neutral-1-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiTheme='dark'] [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiTheme='dark'][tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiTheme='dark'] [tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiTheme='dark'][tuiAppearance][data-appearance='textfield']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background-color: var(--tui-background-neutral-1-hover);
   }
 }
@@ -3265,7 +3266,7 @@ svg use {
   top: 0.625rem;
 }
 .tui-list_small > .tui-list__item::before {
-  top: 0.325rem;
+  top: 0.375rem;
 }
 .tui-list_extra-small > .tui-list__item {
   margin-top: 0.5rem;
