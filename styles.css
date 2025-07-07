@@ -2202,7 +2202,7 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   background: transparent;
   border: none;
   outline: none;
-  border-bottom: calc(var(--t-row-height) - var(--t-height)) solid transparent;
+  border-block-end: calc(var(--t-row-height) - var(--t-height)) solid transparent;
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
 }
@@ -2865,8 +2865,8 @@ svg use {
 }
 /* stylelint-disable order/order */
 .tui-container {
-  margin-right: auto;
-  margin-left: auto;
+  margin-inline-end: auto;
+  margin-inline-start: auto;
 }
 @media screen and (min-width: 80em) {
   .tui-container.tui-container_adaptive {
@@ -2935,35 +2935,35 @@ svg use {
 }
 .tui-form__header {
   font: var(--tui-font-heading-5);
-  margin-top: 2rem;
-  margin-bottom: 1.25rem;
+  margin-block-start: 2rem;
+  margin-block-end: 1.25rem;
 }
 @media screen and (max-width: 47.9625em) {
   .tui-form__header {
     font: var(--tui-font-text-l);
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-block-end: 1rem;
   }
 }
-.tui-form__header_margin-top_none {
-  margin-top: 0;
+.tui-form__header_margin-block-start_none {
+  margin-block-start: 0;
 }
-.tui-form__header_margin-bottom_none {
-  margin-bottom: 0;
+.tui-form__header_margin-block-end_none {
+  margin-block-end: 0;
 }
-.tui-form__header_margin-bottom_small {
-  margin-bottom: 1rem;
+.tui-form__header_margin-block-end_small {
+  margin-block-end: 1rem;
 }
 @media screen and (max-width: 47.9625em) {
-  .tui-form__header_margin-bottom_small {
-    margin-bottom: 0.75rem;
+  .tui-form__header_margin-block-end_small {
+    margin-block-end: 0.75rem;
   }
 }
 .tui-form__row {
-  margin-top: 1.25rem;
+  margin-block-start: 1.25rem;
 }
 .tui-form__row:first-child {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 .tui-form__row_multi-fields {
   display: flex;
@@ -2987,47 +2987,47 @@ svg use {
 }
 @media screen and (max-width: 47.9625em) {
   .tui-form__row {
-    margin-top: 1rem;
+    margin-block-start: 1rem;
   }
 }
 .tui-form__multi-field {
   flex: 1 1 0;
   min-inline-size: 0;
-  margin-left: 1.25rem;
+  margin-inline-start: 1.25rem;
 }
 .tui-form__multi-field:first-child {
-  margin-left: 0;
+  margin-inline-start: 0;
 }
 @media screen and (max-width: 47.9625em) {
   .tui-form__multi-field {
     flex-basis: 100%;
-    margin-top: 1rem;
-    margin-left: 0;
+    margin-block-start: 1rem;
+    margin-inline-start: 0;
   }
   .tui-form__multi-field:first-child {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 }
 .tui-form__field-note {
   font: var(--tui-font-text-s);
-  margin-top: 0.25rem;
+  margin-block-start: 0.25rem;
   color: var(--tui-text-secondary);
 }
 .tui-form__field-checkbox {
-  margin-top: 0.5rem;
+  margin-block-start: 0.5rem;
 }
 .tui-form__checkbox {
   flex: 1 1 calc(50% - 0.625rem);
 }
 .tui-form__checkbox:nth-child(even) {
-  margin-left: 1.25rem;
+  margin-inline-start: 1.25rem;
 }
 .tui-form__checkbox:nth-child(n + 3) {
-  margin-top: 1rem;
+  margin-block-start: 1rem;
 }
 .tui-form__buttons {
   display: flex;
-  margin-top: 2rem;
+  margin-block-start: 2rem;
 }
 .tui-form__buttons_align_end {
   justify-content: flex-end;
@@ -3038,19 +3038,19 @@ svg use {
 @media screen and (max-width: 47.9625em) {
   .tui-form__buttons {
     flex-direction: column;
-    margin-top: 1.5rem;
+    margin-block-start: 1.5rem;
   }
 }
 .tui-form__button {
-  margin-left: 0.75rem;
+  margin-inline-start: 0.75rem;
 }
 .tui-form__button:first-child {
-  margin-left: 0;
+  margin-inline-start: 0;
 }
 @media screen and (max-width: 47.9625em) {
   .tui-form__button {
-    margin-top: 0.5rem;
-    margin-left: 0;
+    margin-block-start: 0.5rem;
+    margin-inline-start: 0;
   }
 }
 .tui-island {
@@ -3157,13 +3157,13 @@ svg use {
   color: var(--tui-text-secondary);
 }
 .tui-island__paragraph_link.tui-island__paragraph {
-  margin-top: 1rem;
+  margin-block-start: 1rem;
 }
 .tui-island_size_l .tui-island__paragraph_link.tui-island__paragraph {
   margin: 1rem 0 0;
 }
 .tui-island__paragraph_button.tui-island__paragraph {
-  margin-top: 1.25rem;
+  margin-block-start: 1.25rem;
 }
 .tui-island_size_l .tui-island__paragraph_button.tui-island__paragraph {
   margin: 1.25rem 0 0;
@@ -3176,24 +3176,24 @@ svg use {
   margin: 0 0 0 1rem;
 }
 .tui-island_size_l .tui-island__figure {
-  margin-left: 2.25rem;
+  margin-inline-start: 2.25rem;
 }
 .tui-island_text-align_center .tui-island__figure {
   margin: 0 0 0.75rem;
 }
 .tui-island__carousel-controls {
   display: flex;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  padding-block-end: 1rem;
+  margin-block-end: 1rem;
   border-block-end: 1px solid var(--tui-border-normal);
   white-space: nowrap;
 }
 .tui-island__carousel-pages {
-  margin-left: auto;
+  margin-inline-start: auto;
   color: var(--tui-text-secondary);
 }
 .tui-island__carousel-button {
-  margin-right: 0.5rem;
+  margin-inline-end: 0.5rem;
 }
 .tui-island .tui-island__footer-button {
   display: block;
@@ -3208,11 +3208,11 @@ svg use {
   margin: 1.25rem calc(-1.25rem + 1px) calc(-1.25rem + 1px);
 }
 .tui-island__marker:first-child:not(:only-child) {
-  margin-right: 1.25rem;
+  margin-inline-end: 1.25rem;
 }
 .tui-island__marker:not(:first-child),
 .tui-island__marker:only-child {
-  margin-left: 1.25rem;
+  margin-inline-start: 1.25rem;
 }
 .tui-list {
   font: var(--tui-font-text-m);
@@ -3234,23 +3234,23 @@ svg use {
   color: var(--tui-text-secondary);
 }
 .tui-list_large .tui-list_nested {
-  margin-left: 0.75rem;
+  margin-inline-start: 0.75rem;
 }
 .tui-list_small .tui-list_nested {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 .tui-list_ordered {
   counter-reset: counter;
 }
 .tui-list__item {
   position: relative;
-  padding-left: 1.5rem;
+  padding-inline-start: 1.5rem;
   overflow-wrap: break-word;
-  margin-top: 0.75rem;
+  margin-block-start: 0.75rem;
 }
 .tui-list__item:first-child {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 .tui-list__item::before {
   content: '';
@@ -3269,10 +3269,10 @@ svg use {
   top: 0.375rem;
 }
 .tui-list_extra-small > .tui-list__item {
-  margin-top: 0.5rem;
+  margin-block-start: 0.5rem;
 }
 .tui-list_linear .tui-list__item {
-  padding-left: 1.75rem;
+  padding-inline-start: 1.75rem;
 }
 .tui-list_linear .tui-list__item::before {
   content: '\2014';
@@ -3283,7 +3283,7 @@ svg use {
   background-color: transparent;
 }
 .tui-list_ordered .tui-list__item {
-  padding-left: 1.25rem;
+  padding-inline-start: 1.25rem;
 }
 .tui-list_ordered .tui-list__item::before {
   content: counter(counter) '.';
@@ -3296,7 +3296,7 @@ svg use {
   background-color: transparent;
 }
 .tui-list_triangle > .tui-list__item {
-  padding-left: 1.75rem;
+  padding-inline-start: 1.75rem;
 }
 .tui-list_triangle > .tui-list__item::before {
   content: '\25E4';
@@ -3321,11 +3321,11 @@ svg use {
   color: var(--tui-text-secondary);
 }
 .tui-list_small .tui-list__description {
-  margin-top: 0.25rem;
+  margin-block-start: 0.25rem;
 }
 .tui-list_large .tui-list__description {
   line-height: 1.75rem;
-  margin-top: 0.75rem;
+  margin-block-start: 0.75rem;
 }
 @media not screen and (max-width: 47.9625em) {
   .tui-mobile-only {
@@ -3358,180 +3358,180 @@ svg use {
 }
 @media screen and (min-width: 80em) {
   .tui-row_adaptive.tui-row {
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
+    margin-inline-start: -1.5rem;
+    margin-inline-end: -1.5rem;
   }
 }
 @media screen and (max-width: 79.9625em) {
   .tui-row_adaptive.tui-row {
-    margin-left: -1.25rem;
-    margin-right: -1.25rem;
+    margin-inline-start: -1.25rem;
+    margin-inline-end: -1.25rem;
   }
 }
 @media screen and (max-width: 47.9625em) {
   .tui-row_adaptive.tui-row {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
+    margin-inline-start: -0.5rem;
+    margin-inline-end: -0.5rem;
   }
 }
 .tui-row_temporary.tui-row {
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
+  margin-inline-start: -1.25rem;
+  margin-inline-end: -1.25rem;
 }
 @media screen and (min-width: 80em) {
   .tui-row {
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
+    margin-inline-start: -1.5rem;
+    margin-inline-end: -1.5rem;
   }
 }
 @media screen and (max-width: 79.9625em) {
   .tui-row {
-    margin-left: -1.25rem;
-    margin-right: -1.25rem;
+    margin-inline-start: -1.25rem;
+    margin-inline-end: -1.25rem;
   }
 }
 .tui-col_1 {
   inline-size: 8.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_2 {
   inline-size: 16.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_3 {
   inline-size: 25%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_4 {
   inline-size: 33.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_5 {
   inline-size: 41.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_6 {
   inline-size: 50%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_7 {
   inline-size: 58.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_8 {
   inline-size: 66.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_9 {
   inline-size: 75%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_10 {
   inline-size: 83.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_11 {
   inline-size: 91.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_12 {
   inline-size: 100%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-1 {
   inline-size: 8.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-2 {
   inline-size: 16.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-3 {
   inline-size: 25%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-4 {
   inline-size: 33.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-5 {
   inline-size: 41.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-6 {
   inline-size: 50%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-7 {
   inline-size: 58.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-8 {
   inline-size: 66.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-9 {
   inline-size: 75%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-10 {
   inline-size: 83.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-11 {
   inline-size: 91.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_md-12 {
   inline-size: 100%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-col_stretch {
@@ -3540,519 +3540,519 @@ svg use {
 @media screen and (min-width: 80em) {
   .tui-row_adaptive .tui-col_lg-1 {
     inline-size: 8.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-2 {
     inline-size: 16.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-3 {
     inline-size: 25%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-4 {
     inline-size: 33.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-5 {
     inline-size: 41.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-6 {
     inline-size: 50%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-7 {
     inline-size: 58.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-8 {
     inline-size: 66.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-9 {
     inline-size: 75%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-10 {
     inline-size: 83.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-11 {
     inline-size: 91.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_lg-12 {
     inline-size: 100%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
 }
 @media screen and (max-width: 79.9625em) {
   .tui-row_adaptive .tui-col_md-1 {
     inline-size: 8.33333333%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-2 {
     inline-size: 16.66666667%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-3 {
     inline-size: 25%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-4 {
     inline-size: 33.33333333%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-5 {
     inline-size: 41.66666667%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-6 {
     inline-size: 50%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-7 {
     inline-size: 58.33333333%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-8 {
     inline-size: 66.66666667%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-9 {
     inline-size: 75%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-10 {
     inline-size: 83.33333333%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-11 {
     inline-size: 91.66666667%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_md-12 {
     inline-size: 100%;
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
     box-sizing: border-box;
   }
 }
 @media screen and (max-width: 47.9625em) {
   .tui-row_adaptive .tui-col_xs-1 {
     inline-size: 8.33333333%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-2 {
     inline-size: 16.66666667%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-3 {
     inline-size: 25%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-4 {
     inline-size: 33.33333333%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-5 {
     inline-size: 41.66666667%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-6 {
     inline-size: 50%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-7 {
     inline-size: 58.33333333%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-8 {
     inline-size: 66.66666667%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-9 {
     inline-size: 75%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-10 {
     inline-size: 83.33333333%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-11 {
     inline-size: 91.66666667%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
   .tui-row_adaptive .tui-col_xs-12 {
     inline-size: 100%;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 0.5rem;
     box-sizing: border-box;
   }
 }
 .tui-row_temporary .tui-col_1 {
   inline-size: 8.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_2 {
   inline-size: 16.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_3 {
   inline-size: 25%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_4 {
   inline-size: 33.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_5 {
   inline-size: 41.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_6 {
   inline-size: 50%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_7 {
   inline-size: 58.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_8 {
   inline-size: 66.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_9 {
   inline-size: 75%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_10 {
   inline-size: 83.33333333%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_11 {
   inline-size: 91.66666667%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 .tui-row_temporary .tui-col_12 {
   inline-size: 100%;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-inline-start: 1.25rem;
+  padding-inline-end: 1.25rem;
   box-sizing: border-box;
 }
 @media screen and (min-width: 80em) {
   .tui-col_1 {
     inline-size: 8.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_2 {
     inline-size: 16.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_3 {
     inline-size: 25%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_4 {
     inline-size: 33.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_5 {
     inline-size: 41.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_6 {
     inline-size: 50%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_7 {
     inline-size: 58.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_8 {
     inline-size: 66.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_9 {
     inline-size: 75%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_10 {
     inline-size: 83.33333333%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_11 {
     inline-size: 91.66666667%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
   .tui-col_12 {
     inline-size: 100%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-inline-start: 1.5rem;
+    padding-inline-end: 1.5rem;
     box-sizing: border-box;
   }
 }
 .tui-col-offset_1 {
-  margin-left: 8.33333333%;
+  margin-inline-start: 8.33333333%;
 }
 .tui-col-offset_2 {
-  margin-left: 16.66666667%;
+  margin-inline-start: 16.66666667%;
 }
 .tui-col-offset_3 {
-  margin-left: 25%;
+  margin-inline-start: 25%;
 }
 .tui-col-offset_4 {
-  margin-left: 33.33333333%;
+  margin-inline-start: 33.33333333%;
 }
 .tui-col-offset_5 {
-  margin-left: 41.66666667%;
+  margin-inline-start: 41.66666667%;
 }
 .tui-col-offset_6 {
-  margin-left: 50%;
+  margin-inline-start: 50%;
 }
 .tui-col-offset_7 {
-  margin-left: 58.33333333%;
+  margin-inline-start: 58.33333333%;
 }
 .tui-col-offset_8 {
-  margin-left: 66.66666667%;
+  margin-inline-start: 66.66666667%;
 }
 .tui-col-offset_9 {
-  margin-left: 75%;
+  margin-inline-start: 75%;
 }
 .tui-col-offset_10 {
-  margin-left: 83.33333333%;
+  margin-inline-start: 83.33333333%;
 }
 .tui-col-offset_11 {
-  margin-left: 91.66666667%;
+  margin-inline-start: 91.66666667%;
 }
 .tui-col-offset_12 {
-  margin-left: 100%;
+  margin-inline-start: 100%;
 }
 @media (min-width: 22.5em) and (max-width: 47.9625em) {
   .tui-col-offset_xs-1 {
-    margin-left: 8.33333333%;
+    margin-inline-start: 8.33333333%;
   }
   .tui-col-offset_xs-2 {
-    margin-left: 16.66666667%;
+    margin-inline-start: 16.66666667%;
   }
   .tui-col-offset_xs-3 {
-    margin-left: 25%;
+    margin-inline-start: 25%;
   }
   .tui-col-offset_xs-4 {
-    margin-left: 33.33333333%;
+    margin-inline-start: 33.33333333%;
   }
   .tui-col-offset_xs-5 {
-    margin-left: 41.66666667%;
+    margin-inline-start: 41.66666667%;
   }
   .tui-col-offset_xs-6 {
-    margin-left: 50%;
+    margin-inline-start: 50%;
   }
   .tui-col-offset_xs-7 {
-    margin-left: 58.33333333%;
+    margin-inline-start: 58.33333333%;
   }
   .tui-col-offset_xs-8 {
-    margin-left: 66.66666667%;
+    margin-inline-start: 66.66666667%;
   }
   .tui-col-offset_xs-9 {
-    margin-left: 75%;
+    margin-inline-start: 75%;
   }
   .tui-col-offset_xs-10 {
-    margin-left: 83.33333333%;
+    margin-inline-start: 83.33333333%;
   }
   .tui-col-offset_xs-11 {
-    margin-left: 91.66666667%;
+    margin-inline-start: 91.66666667%;
   }
   .tui-col-offset_xs-12 {
-    margin-left: 100%;
+    margin-inline-start: 100%;
   }
 }
 @media screen and (max-width: 79.9625em) {
   .tui-col-offset_md-1 {
-    margin-left: 8.33333333%;
+    margin-inline-start: 8.33333333%;
   }
   .tui-col-offset_md-2 {
-    margin-left: 16.66666667%;
+    margin-inline-start: 16.66666667%;
   }
   .tui-col-offset_md-3 {
-    margin-left: 25%;
+    margin-inline-start: 25%;
   }
   .tui-col-offset_md-4 {
-    margin-left: 33.33333333%;
+    margin-inline-start: 33.33333333%;
   }
   .tui-col-offset_md-5 {
-    margin-left: 41.66666667%;
+    margin-inline-start: 41.66666667%;
   }
   .tui-col-offset_md-6 {
-    margin-left: 50%;
+    margin-inline-start: 50%;
   }
   .tui-col-offset_md-7 {
-    margin-left: 58.33333333%;
+    margin-inline-start: 58.33333333%;
   }
   .tui-col-offset_md-8 {
-    margin-left: 66.66666667%;
+    margin-inline-start: 66.66666667%;
   }
   .tui-col-offset_md-9 {
-    margin-left: 75%;
+    margin-inline-start: 75%;
   }
   .tui-col-offset_md-10 {
-    margin-left: 83.33333333%;
+    margin-inline-start: 83.33333333%;
   }
   .tui-col-offset_md-11 {
-    margin-left: 91.66666667%;
+    margin-inline-start: 91.66666667%;
   }
   .tui-col-offset_md-12 {
-    margin-left: 100%;
+    margin-inline-start: 100%;
   }
 }
 @media screen and (min-width: 80em) {
   .tui-col-offset_lg-1 {
-    margin-left: 8.33333333%;
+    margin-inline-start: 8.33333333%;
   }
   .tui-col-offset_lg-2 {
-    margin-left: 16.66666667%;
+    margin-inline-start: 16.66666667%;
   }
   .tui-col-offset_lg-3 {
-    margin-left: 25%;
+    margin-inline-start: 25%;
   }
   .tui-col-offset_lg-4 {
-    margin-left: 33.33333333%;
+    margin-inline-start: 33.33333333%;
   }
   .tui-col-offset_lg-5 {
-    margin-left: 41.66666667%;
+    margin-inline-start: 41.66666667%;
   }
   .tui-col-offset_lg-6 {
-    margin-left: 50%;
+    margin-inline-start: 50%;
   }
   .tui-col-offset_lg-7 {
-    margin-left: 58.33333333%;
+    margin-inline-start: 58.33333333%;
   }
   .tui-col-offset_lg-8 {
-    margin-left: 66.66666667%;
+    margin-inline-start: 66.66666667%;
   }
   .tui-col-offset_lg-9 {
-    margin-left: 75%;
+    margin-inline-start: 75%;
   }
   .tui-col-offset_lg-10 {
-    margin-left: 83.33333333%;
+    margin-inline-start: 83.33333333%;
   }
   .tui-col-offset_lg-11 {
-    margin-left: 91.66666667%;
+    margin-inline-start: 91.66666667%;
   }
   .tui-col-offset_lg-12 {
-    margin-left: 100%;
+    margin-inline-start: 100%;
   }
 }
 .tui-skeleton {
@@ -4148,348 +4148,348 @@ svg use {
   margin: 0rem;
 }
 .tui-space_top-16.tui-space_top-16 {
-  margin-top: 4rem;
+  margin-block-start: 4rem;
 }
 .tui-space_top-15.tui-space_top-15 {
-  margin-top: 3.75rem;
+  margin-block-start: 3.75rem;
 }
 .tui-space_top-14.tui-space_top-14 {
-  margin-top: 3.5rem;
+  margin-block-start: 3.5rem;
 }
 .tui-space_top-13.tui-space_top-13 {
-  margin-top: 3.25rem;
+  margin-block-start: 3.25rem;
 }
 .tui-space_top-12.tui-space_top-12 {
-  margin-top: 3rem;
+  margin-block-start: 3rem;
 }
 .tui-space_top-11.tui-space_top-11 {
-  margin-top: 2.75rem;
+  margin-block-start: 2.75rem;
 }
 .tui-space_top-10.tui-space_top-10 {
-  margin-top: 2.5rem;
+  margin-block-start: 2.5rem;
 }
 .tui-space_top-9.tui-space_top-9 {
-  margin-top: 2.25rem;
+  margin-block-start: 2.25rem;
 }
 .tui-space_top-8.tui-space_top-8 {
-  margin-top: 2rem;
+  margin-block-start: 2rem;
 }
 .tui-space_top-7.tui-space_top-7 {
-  margin-top: 1.75rem;
+  margin-block-start: 1.75rem;
 }
 .tui-space_top-6.tui-space_top-6 {
-  margin-top: 1.5rem;
+  margin-block-start: 1.5rem;
 }
 .tui-space_top-5.tui-space_top-5 {
-  margin-top: 1.25rem;
+  margin-block-start: 1.25rem;
 }
 .tui-space_top-4.tui-space_top-4 {
-  margin-top: 1rem;
+  margin-block-start: 1rem;
 }
 .tui-space_top-3.tui-space_top-3 {
-  margin-top: 0.75rem;
+  margin-block-start: 0.75rem;
 }
 .tui-space_top-2.tui-space_top-2 {
-  margin-top: 0.5rem;
+  margin-block-start: 0.5rem;
 }
 .tui-space_top-1.tui-space_top-1 {
-  margin-top: 0.25rem;
+  margin-block-start: 0.25rem;
 }
 .tui-space_top-0.tui-space_top-0 {
-  margin-top: 0rem;
+  margin-block-start: 0rem;
 }
 .tui-space_bottom-16.tui-space_bottom-16 {
-  margin-bottom: 4rem;
+  margin-block-end: 4rem;
 }
 .tui-space_bottom-15.tui-space_bottom-15 {
-  margin-bottom: 3.75rem;
+  margin-block-end: 3.75rem;
 }
 .tui-space_bottom-14.tui-space_bottom-14 {
-  margin-bottom: 3.5rem;
+  margin-block-end: 3.5rem;
 }
 .tui-space_bottom-13.tui-space_bottom-13 {
-  margin-bottom: 3.25rem;
+  margin-block-end: 3.25rem;
 }
 .tui-space_bottom-12.tui-space_bottom-12 {
-  margin-bottom: 3rem;
+  margin-block-end: 3rem;
 }
 .tui-space_bottom-11.tui-space_bottom-11 {
-  margin-bottom: 2.75rem;
+  margin-block-end: 2.75rem;
 }
 .tui-space_bottom-10.tui-space_bottom-10 {
-  margin-bottom: 2.5rem;
+  margin-block-end: 2.5rem;
 }
 .tui-space_bottom-9.tui-space_bottom-9 {
-  margin-bottom: 2.25rem;
+  margin-block-end: 2.25rem;
 }
 .tui-space_bottom-8.tui-space_bottom-8 {
-  margin-bottom: 2rem;
+  margin-block-end: 2rem;
 }
 .tui-space_bottom-7.tui-space_bottom-7 {
-  margin-bottom: 1.75rem;
+  margin-block-end: 1.75rem;
 }
 .tui-space_bottom-6.tui-space_bottom-6 {
-  margin-bottom: 1.5rem;
+  margin-block-end: 1.5rem;
 }
 .tui-space_bottom-5.tui-space_bottom-5 {
-  margin-bottom: 1.25rem;
+  margin-block-end: 1.25rem;
 }
 .tui-space_bottom-4.tui-space_bottom-4 {
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
 }
 .tui-space_bottom-3.tui-space_bottom-3 {
-  margin-bottom: 0.75rem;
+  margin-block-end: 0.75rem;
 }
 .tui-space_bottom-2.tui-space_bottom-2 {
-  margin-bottom: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 .tui-space_bottom-1.tui-space_bottom-1 {
-  margin-bottom: 0.25rem;
+  margin-block-end: 0.25rem;
 }
 .tui-space_bottom-0.tui-space_bottom-0 {
-  margin-bottom: 0rem;
+  margin-block-end: 0rem;
 }
 .tui-space_vertical-16.tui-space_vertical-16 {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-block-start: 4rem;
+  margin-block-end: 4rem;
 }
 .tui-space_vertical-15.tui-space_vertical-15 {
-  margin-top: 3.75rem;
-  margin-bottom: 3.75rem;
+  margin-block-start: 3.75rem;
+  margin-block-end: 3.75rem;
 }
 .tui-space_vertical-14.tui-space_vertical-14 {
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
+  margin-block-start: 3.5rem;
+  margin-block-end: 3.5rem;
 }
 .tui-space_vertical-13.tui-space_vertical-13 {
-  margin-top: 3.25rem;
-  margin-bottom: 3.25rem;
+  margin-block-start: 3.25rem;
+  margin-block-end: 3.25rem;
 }
 .tui-space_vertical-12.tui-space_vertical-12 {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-block-start: 3rem;
+  margin-block-end: 3rem;
 }
 .tui-space_vertical-11.tui-space_vertical-11 {
-  margin-top: 2.75rem;
-  margin-bottom: 2.75rem;
+  margin-block-start: 2.75rem;
+  margin-block-end: 2.75rem;
 }
 .tui-space_vertical-10.tui-space_vertical-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  margin-block-start: 2.5rem;
+  margin-block-end: 2.5rem;
 }
 .tui-space_vertical-9.tui-space_vertical-9 {
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
+  margin-block-start: 2.25rem;
+  margin-block-end: 2.25rem;
 }
 .tui-space_vertical-8.tui-space_vertical-8 {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-block-start: 2rem;
+  margin-block-end: 2rem;
 }
 .tui-space_vertical-7.tui-space_vertical-7 {
-  margin-top: 1.75rem;
-  margin-bottom: 1.75rem;
+  margin-block-start: 1.75rem;
+  margin-block-end: 1.75rem;
 }
 .tui-space_vertical-6.tui-space_vertical-6 {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-block-start: 1.5rem;
+  margin-block-end: 1.5rem;
 }
 .tui-space_vertical-5.tui-space_vertical-5 {
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
+  margin-block-start: 1.25rem;
+  margin-block-end: 1.25rem;
 }
 .tui-space_vertical-4.tui-space_vertical-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
 }
 .tui-space_vertical-3.tui-space_vertical-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-block-start: 0.75rem;
+  margin-block-end: 0.75rem;
 }
 .tui-space_vertical-2.tui-space_vertical-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 .tui-space_vertical-1.tui-space_vertical-1 {
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
+  margin-block-start: 0.25rem;
+  margin-block-end: 0.25rem;
 }
 .tui-space_vertical-0.tui-space_vertical-0 {
-  margin-top: 0rem;
-  margin-bottom: 0rem;
+  margin-block-start: 0rem;
+  margin-block-end: 0rem;
 }
 .tui-space_left-16.tui-space_left-16 {
-  margin-left: 4rem;
+  margin-inline-start: 4rem;
 }
 .tui-space_left-15.tui-space_left-15 {
-  margin-left: 3.75rem;
+  margin-inline-start: 3.75rem;
 }
 .tui-space_left-14.tui-space_left-14 {
-  margin-left: 3.5rem;
+  margin-inline-start: 3.5rem;
 }
 .tui-space_left-13.tui-space_left-13 {
-  margin-left: 3.25rem;
+  margin-inline-start: 3.25rem;
 }
 .tui-space_left-12.tui-space_left-12 {
-  margin-left: 3rem;
+  margin-inline-start: 3rem;
 }
 .tui-space_left-11.tui-space_left-11 {
-  margin-left: 2.75rem;
+  margin-inline-start: 2.75rem;
 }
 .tui-space_left-10.tui-space_left-10 {
-  margin-left: 2.5rem;
+  margin-inline-start: 2.5rem;
 }
 .tui-space_left-9.tui-space_left-9 {
-  margin-left: 2.25rem;
+  margin-inline-start: 2.25rem;
 }
 .tui-space_left-8.tui-space_left-8 {
-  margin-left: 2rem;
+  margin-inline-start: 2rem;
 }
 .tui-space_left-7.tui-space_left-7 {
-  margin-left: 1.75rem;
+  margin-inline-start: 1.75rem;
 }
 .tui-space_left-6.tui-space_left-6 {
-  margin-left: 1.5rem;
+  margin-inline-start: 1.5rem;
 }
 .tui-space_left-5.tui-space_left-5 {
-  margin-left: 1.25rem;
+  margin-inline-start: 1.25rem;
 }
 .tui-space_left-4.tui-space_left-4 {
-  margin-left: 1rem;
+  margin-inline-start: 1rem;
 }
 .tui-space_left-3.tui-space_left-3 {
-  margin-left: 0.75rem;
+  margin-inline-start: 0.75rem;
 }
 .tui-space_left-2.tui-space_left-2 {
-  margin-left: 0.5rem;
+  margin-inline-start: 0.5rem;
 }
 .tui-space_left-1.tui-space_left-1 {
-  margin-left: 0.25rem;
+  margin-inline-start: 0.25rem;
 }
 .tui-space_left-0.tui-space_left-0 {
-  margin-left: 0rem;
+  margin-inline-start: 0rem;
 }
 .tui-space_right-16.tui-space_right-16 {
-  margin-right: 4rem;
+  margin-inline-end: 4rem;
 }
 .tui-space_right-15.tui-space_right-15 {
-  margin-right: 3.75rem;
+  margin-inline-end: 3.75rem;
 }
 .tui-space_right-14.tui-space_right-14 {
-  margin-right: 3.5rem;
+  margin-inline-end: 3.5rem;
 }
 .tui-space_right-13.tui-space_right-13 {
-  margin-right: 3.25rem;
+  margin-inline-end: 3.25rem;
 }
 .tui-space_right-12.tui-space_right-12 {
-  margin-right: 3rem;
+  margin-inline-end: 3rem;
 }
 .tui-space_right-11.tui-space_right-11 {
-  margin-right: 2.75rem;
+  margin-inline-end: 2.75rem;
 }
 .tui-space_right-10.tui-space_right-10 {
-  margin-right: 2.5rem;
+  margin-inline-end: 2.5rem;
 }
 .tui-space_right-9.tui-space_right-9 {
-  margin-right: 2.25rem;
+  margin-inline-end: 2.25rem;
 }
 .tui-space_right-8.tui-space_right-8 {
-  margin-right: 2rem;
+  margin-inline-end: 2rem;
 }
 .tui-space_right-7.tui-space_right-7 {
-  margin-right: 1.75rem;
+  margin-inline-end: 1.75rem;
 }
 .tui-space_right-6.tui-space_right-6 {
-  margin-right: 1.5rem;
+  margin-inline-end: 1.5rem;
 }
 .tui-space_right-5.tui-space_right-5 {
-  margin-right: 1.25rem;
+  margin-inline-end: 1.25rem;
 }
 .tui-space_right-4.tui-space_right-4 {
-  margin-right: 1rem;
+  margin-inline-end: 1rem;
 }
 .tui-space_right-3.tui-space_right-3 {
-  margin-right: 0.75rem;
+  margin-inline-end: 0.75rem;
 }
 .tui-space_right-2.tui-space_right-2 {
-  margin-right: 0.5rem;
+  margin-inline-end: 0.5rem;
 }
 .tui-space_right-1.tui-space_right-1 {
-  margin-right: 0.25rem;
+  margin-inline-end: 0.25rem;
 }
 .tui-space_right-0.tui-space_right-0 {
-  margin-right: 0rem;
+  margin-inline-end: 0rem;
 }
 .tui-space_horizontal-16.tui-space_horizontal-16 {
-  margin-right: 4rem;
-  margin-left: 4rem;
+  margin-inline-end: 4rem;
+  margin-inline-start: 4rem;
 }
 .tui-space_horizontal-15.tui-space_horizontal-15 {
-  margin-right: 3.75rem;
-  margin-left: 3.75rem;
+  margin-inline-end: 3.75rem;
+  margin-inline-start: 3.75rem;
 }
 .tui-space_horizontal-14.tui-space_horizontal-14 {
-  margin-right: 3.5rem;
-  margin-left: 3.5rem;
+  margin-inline-end: 3.5rem;
+  margin-inline-start: 3.5rem;
 }
 .tui-space_horizontal-13.tui-space_horizontal-13 {
-  margin-right: 3.25rem;
-  margin-left: 3.25rem;
+  margin-inline-end: 3.25rem;
+  margin-inline-start: 3.25rem;
 }
 .tui-space_horizontal-12.tui-space_horizontal-12 {
-  margin-right: 3rem;
-  margin-left: 3rem;
+  margin-inline-end: 3rem;
+  margin-inline-start: 3rem;
 }
 .tui-space_horizontal-11.tui-space_horizontal-11 {
-  margin-right: 2.75rem;
-  margin-left: 2.75rem;
+  margin-inline-end: 2.75rem;
+  margin-inline-start: 2.75rem;
 }
 .tui-space_horizontal-10.tui-space_horizontal-10 {
-  margin-right: 2.5rem;
-  margin-left: 2.5rem;
+  margin-inline-end: 2.5rem;
+  margin-inline-start: 2.5rem;
 }
 .tui-space_horizontal-9.tui-space_horizontal-9 {
-  margin-right: 2.25rem;
-  margin-left: 2.25rem;
+  margin-inline-end: 2.25rem;
+  margin-inline-start: 2.25rem;
 }
 .tui-space_horizontal-8.tui-space_horizontal-8 {
-  margin-right: 2rem;
-  margin-left: 2rem;
+  margin-inline-end: 2rem;
+  margin-inline-start: 2rem;
 }
 .tui-space_horizontal-7.tui-space_horizontal-7 {
-  margin-right: 1.75rem;
-  margin-left: 1.75rem;
+  margin-inline-end: 1.75rem;
+  margin-inline-start: 1.75rem;
 }
 .tui-space_horizontal-6.tui-space_horizontal-6 {
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
+  margin-inline-end: 1.5rem;
+  margin-inline-start: 1.5rem;
 }
 .tui-space_horizontal-5.tui-space_horizontal-5 {
-  margin-right: 1.25rem;
-  margin-left: 1.25rem;
+  margin-inline-end: 1.25rem;
+  margin-inline-start: 1.25rem;
 }
 .tui-space_horizontal-4.tui-space_horizontal-4 {
-  margin-right: 1rem;
-  margin-left: 1rem;
+  margin-inline-end: 1rem;
+  margin-inline-start: 1rem;
 }
 .tui-space_horizontal-3.tui-space_horizontal-3 {
-  margin-right: 0.75rem;
-  margin-left: 0.75rem;
+  margin-inline-end: 0.75rem;
+  margin-inline-start: 0.75rem;
 }
 .tui-space_horizontal-2.tui-space_horizontal-2 {
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
+  margin-inline-end: 0.5rem;
+  margin-inline-start: 0.5rem;
 }
 .tui-space_horizontal-1.tui-space_horizontal-1 {
-  margin-right: 0.25rem;
-  margin-left: 0.25rem;
+  margin-inline-end: 0.25rem;
+  margin-inline-start: 0.25rem;
 }
 .tui-space_horizontal-0.tui-space_horizontal-0 {
-  margin-right: 0rem;
-  margin-left: 0rem;
+  margin-inline-end: 0rem;
+  margin-inline-start: 0rem;
 }
 .tui-space_auto {
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 }
 .tui-table {
   inline-size: 100%;
@@ -4581,7 +4581,7 @@ svg use {
 .tui-table__td_first,
 .tui-table__th_first {
   position: relative;
-  padding-left: 0;
+  padding-inline-start: 0;
   overflow: visible;
 }
 .tui-table__td_first::before,
@@ -4591,7 +4591,7 @@ svg use {
 .tui-table__td_last,
 .tui-table__th_last {
   position: relative;
-  padding-right: 0;
+  padding-inline-end: 0;
   overflow: visible;
 }
 .tui-table__td_last::before,
@@ -4650,7 +4650,7 @@ svg use {
   top: 50%;
   transform: translate(0, -50%);
   left: 100%;
-  margin-left: 0.125rem;
+  margin-inline-start: 0.125rem;
   inline-size: 1rem;
   block-size: 1rem;
   flex-shrink: 0;
