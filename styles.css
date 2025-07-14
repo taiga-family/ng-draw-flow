@@ -2241,8 +2241,9 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   outline-offset: -0.125rem;
   outline: 0.125rem solid var(--tui-border-focus);
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid,
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'] {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode]),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode]) {
   background-origin: border-box;
   background-position: top right;
   background-repeat: no-repeat;
@@ -2252,64 +2253,78 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[data-focus='false'],
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-focus='false'] {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[data-focus='false'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-focus='false'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[data-focus='false'] {
   background-color: var(--tui-status-negative-pale);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
     background-color: var(--tui-status-negative-pale-hover);
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state])[data-focus='false'] {
     background-color: var(--tui-status-negative-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[data-state='hover'][data-focus='false'],
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-state='hover'][data-focus='false'] {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[data-state='hover'][data-focus='false'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-state='hover'][data-focus='false'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[data-state='hover'][data-focus='false'] {
   background-color: var(--tui-status-negative-pale-hover);
 }
 @media (hover: hover) and (pointer: fine) {
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[tuiWrapper]:hover:not(._no-hover)[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover)[data-focus='false'],
   [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover)[data-focus='false'],
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[tuiWrapper][data-state='hover'][data-focus='false'],
-  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper][data-state='hover'][data-focus='false'] {
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover)[data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper][data-state='hover'][data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper][data-state='hover'][data-focus='false'],
+  [tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'][data-focus='false'] {
     background-color: var(--tui-status-negative-pale-hover);
   }
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:disabled:not([data-state]),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode]):disabled:not([data-state]),
 [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:disabled:not([data-state]),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[data-state='disabled'],
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-state='disabled'] {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode]):disabled:not([data-state]),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[data-state='disabled'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-state='disabled'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[data-state='disabled'] {
   background: transparent;
   outline: none;
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[tuiWrapper]:disabled:not([data-state]),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]:disabled:not([data-state]),
 [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]:disabled:not([data-state]),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[tuiWrapper][data-state='disabled'],
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper][data-state='disabled'] {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]:disabled:not([data-state]),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper][data-state='disabled'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper][data-state='disabled'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper][data-state='disabled'] {
   background: transparent;
   outline: none;
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:focus-visible:not([data-focus='false']),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:focus-visible:not([data-focus='false']) {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode]):focus-visible:not([data-focus='false']),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid']:focus-visible:not([data-focus='false']),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode]):focus-visible:not([data-focus='false']) {
   background-color: transparent;
   outline-offset: -0.0625rem;
   outline: 0.0625rem solid var(--tui-status-negative);
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[data-focus='true'],
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-focus='true'] {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[data-focus='true'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][data-focus='true'],
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[data-focus='true'] {
   background-color: transparent;
   outline-offset: -0.0625rem;
   outline: 0.0625rem solid var(--tui-status-negative);
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[tuiWrapper]:not(._focused):has(:focus-visible),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]:not(._focused):has(:focus-visible),
 [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid[tuiWrapper]._focused,
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]._focused {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]:not(._focused):has(:focus-visible),
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]._focused,
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]._focused,
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]._focused {
   background-color: transparent;
   outline-offset: -0.0625rem;
   outline: 0.0625rem solid var(--tui-status-negative);
