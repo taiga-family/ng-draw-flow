@@ -850,7 +850,6 @@
   [tuiAppearance][data-appearance='outline-destructive']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='outline-grayscale']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='whiteblock']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
-    background: var(--tui-background-neutral-1);
     cursor: pointer;
     --t-bs: var(--tui-border-hover);
   }
@@ -860,7 +859,6 @@
   [tuiAppearance][data-appearance='outline-destructive']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='outline-grayscale']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='whiteblock']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
-    background: var(--tui-background-neutral-1);
     cursor: pointer;
     --t-bs: var(--tui-border-hover);
   }
@@ -869,7 +867,6 @@
 [tuiAppearance][data-appearance='outline-destructive'][data-state='hover'],
 [tuiAppearance][data-appearance='outline-grayscale'][data-state='hover'],
 [tuiAppearance][data-appearance='whiteblock'][data-state='hover'] {
-  background: var(--tui-background-neutral-1);
   cursor: pointer;
   --t-bs: var(--tui-border-hover);
 }
@@ -882,7 +879,6 @@
   [tuiAppearance][data-appearance='outline-destructive'][tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='outline-grayscale'][tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='whiteblock'][tuiWrapper][data-state='hover'] {
-    background: var(--tui-background-neutral-1);
     cursor: pointer;
     --t-bs: var(--tui-border-hover);
   }
