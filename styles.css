@@ -832,7 +832,11 @@
 [tuiAppearance][data-appearance='outline'][data-mode~='invalid'],
 [tuiAppearance][data-appearance='outline-destructive'][data-mode~='invalid'],
 [tuiAppearance][data-appearance='outline-grayscale'][data-mode~='invalid'],
-[tuiAppearance][data-appearance='whiteblock'][data-mode~='invalid'] {
+[tuiAppearance][data-appearance='whiteblock'][data-mode~='invalid'],
+[tuiAppearance][data-appearance='outline'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='outline-destructive'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='outline-grayscale'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='whiteblock'].tui-invalid:not([data-mode]) {
   box-shadow: inset 0 0 0 1px var(--tui-status-negative-pale-hover);
 }
 [tuiAppearance][data-appearance='outline']:checked:invalid:not([data-mode]),
@@ -842,7 +846,11 @@
 [tuiAppearance][data-appearance='outline'][data-mode~='checked'][data-mode~='invalid'],
 [tuiAppearance][data-appearance='outline-destructive'][data-mode~='checked'][data-mode~='invalid'],
 [tuiAppearance][data-appearance='outline-grayscale'][data-mode~='checked'][data-mode~='invalid'],
-[tuiAppearance][data-appearance='whiteblock'][data-mode~='checked'][data-mode~='invalid'] {
+[tuiAppearance][data-appearance='whiteblock'][data-mode~='checked'][data-mode~='invalid'],
+[tuiAppearance][data-appearance='outline']:checked.tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='outline-destructive']:checked.tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='outline-grayscale']:checked.tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='whiteblock']:checked.tui-invalid:not([data-mode]) {
   box-shadow: inset 0 0 0 2px var(--tui-status-negative);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -1065,7 +1073,8 @@
   /* @deprecated TODO remove in v5 */
 }
 [tuiAppearance][data-appearance='primary']:invalid:not([data-mode]),
-[tuiAppearance][data-appearance='primary'][data-mode~='invalid'] {
+[tuiAppearance][data-appearance='primary'][data-mode~='invalid'],
+[tuiAppearance][data-appearance='primary'].tui-invalid:not([data-mode]) {
   background: var(--tui-status-negative);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -1449,7 +1458,19 @@
 [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'],
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'],
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'],
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'] {
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'],
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]) {
   background: var(--tui-status-negative);
   color: #fff;
   /* @deprecated TODO remove in v5 */
@@ -1479,7 +1500,19 @@
   [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-status-negative);
     color: #fff;
   }
@@ -1508,7 +1541,19 @@
   [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     background: var(--tui-status-negative);
     color: #fff;
   }
@@ -1536,7 +1581,19 @@
 [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='hover'],
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='hover'],
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='hover'],
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='hover'] {
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='hover'],
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='hover'] {
   background: var(--tui-status-negative);
   color: #fff;
 }
@@ -1565,6 +1622,18 @@
   [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover),
   [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover),
   [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
   [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='hover'],
@@ -1588,7 +1657,19 @@
   [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='hover'],
-  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='hover'] {
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'] {
     background: var(--tui-status-negative);
     color: #fff;
   }
@@ -1616,7 +1697,19 @@
 [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-status-negative);
   color: #fff;
 }
@@ -1643,7 +1736,19 @@
 [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   background: var(--tui-status-negative);
   color: #fff;
 }
@@ -1670,7 +1775,19 @@
 [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='active'],
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='active'],
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='active'],
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='active'] {
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][data-state='active'],
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[data-state='active'] {
   background: var(--tui-status-negative);
   color: #fff;
 }
@@ -1698,6 +1815,18 @@
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper]:active:not(._no-active),
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper]:active:not(._no-active),
 [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
 [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='active'],
@@ -1722,6 +1851,18 @@
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]):invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
@@ -1745,7 +1886,19 @@
 [tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
-[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active']:hover {
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode])[data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-grayscale']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='destructive']:checked:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='destructive'][data-mode~='checked'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-grayscale'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='destructive'][type='checkbox']:indeterminate:not([data-mode]).tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover {
   background: var(--tui-status-negative);
   color: #fff;
 }
@@ -1756,7 +1909,11 @@
 [tuiAppearance][data-appearance='secondary'][data-mode~='invalid'],
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'],
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'],
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'] {
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'],
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode]),
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode]) {
   color: var(--tui-text-negative);
   background: var(--tui-status-negative-pale);
   /* @deprecated TODO remove in v5 */
@@ -1770,7 +1927,11 @@
   [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-negative-hover);
     background: var(--tui-status-negative-pale-hover);
   }
@@ -1783,7 +1944,11 @@
   [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
   [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
-  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
+  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]),
+  [tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):hover:not(:disabled):not([data-state]) {
     color: var(--tui-text-negative-hover);
     background: var(--tui-status-negative-pale-hover);
   }
@@ -1795,7 +1960,11 @@
 [tuiAppearance][data-appearance='secondary'][data-mode~='invalid'][data-state='hover'],
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][data-state='hover'],
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][data-state='hover'],
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][data-state='hover'] {
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][data-state='hover'],
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[data-state='hover'],
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[data-state='hover'] {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
@@ -1808,6 +1977,10 @@
   [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover),
   [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover),
   [tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
+  [tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[tuiWrapper]:hover:not(._no-hover),
   [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode])[tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode])[tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode])[tuiWrapper][data-state='hover'],
@@ -1815,7 +1988,11 @@
   [tuiAppearance][data-appearance='secondary'][data-mode~='invalid'][tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][tuiWrapper][data-state='hover'],
   [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][tuiWrapper][data-state='hover'],
-  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper][data-state='hover'] {
+  [tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'],
+  [tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[tuiWrapper][data-state='hover'] {
     color: var(--tui-text-negative-hover);
     background: var(--tui-status-negative-pale-hover);
   }
@@ -1827,7 +2004,11 @@
 [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode]):matches(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
@@ -1838,7 +2019,11 @@
 [tuiAppearance][data-appearance='secondary'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]),
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode]):is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not(:disabled):not([data-state]) {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
@@ -1849,7 +2034,11 @@
 [tuiAppearance][data-appearance='secondary'][data-mode~='invalid'][data-state='active'],
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][data-state='active'],
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][data-state='active'],
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][data-state='active'] {
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][data-state='active'],
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[data-state='active'],
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[data-state='active'] {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
@@ -1861,6 +2050,10 @@
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][tuiWrapper]:active:not(._no-active),
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][tuiWrapper]:active:not(._no-active),
 [tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[tuiWrapper]:active:not(._no-active),
 [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode])[tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode])[tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode])[tuiWrapper][data-state='active'],
@@ -1869,6 +2062,10 @@
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active'],
 [tuiAppearance][data-appearance='secondary']:invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-destructive']:invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-grayscale']:invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
@@ -1876,7 +2073,11 @@
 [tuiAppearance][data-appearance='secondary'][data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-destructive'][data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
 [tuiAppearance][data-appearance='secondary-grayscale'][data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
-[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper][data-state='active']:hover {
+[tuiAppearance][data-appearance='destructive'][data-mode~='invalid'][tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-destructive'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='secondary-grayscale'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover,
+[tuiAppearance][data-appearance='destructive'].tui-invalid:not([data-mode])[tuiWrapper][data-state='active']:hover {
   color: var(--tui-text-negative-hover);
   background: var(--tui-status-negative-pale-hover);
 }
