@@ -44,17 +44,24 @@
             </li>
             <li class="tui-list__item">
                 <code>curvature</code>
-                - corner radius (in pixels):
                 <ul>
                     <li>
-                        For
-                        <code>Bezier</code>
-                        : Affects the curvature of the connection line
+                        <p>
+                            For
+                            <code>Bezier</code>
+                            : A dimensionless coefficient that controls how strongly the connection bends
+                        </p>
+
+                        <p class="tui-text_body-s">
+                            <strong>Since v0.14.0:</strong>
+                            The value is relative to the distance between connectors. In earlier versions it was a fixed
+                            pixel offset for control points.
+                        </p>
                     </li>
                     <li>
                         For
                         <code>SmoothStep</code>
-                        : Determines the corner rounding radius
+                        : Determines the corner rounding radius in pixels
                     </li>
                 </ul>
             </li>
