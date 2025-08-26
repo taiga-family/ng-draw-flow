@@ -41,10 +41,9 @@ export class DraftConnectionComponent {
                 return createSmoothStepPath(sourcePoint, targetPoint, curvature);
             case DfConnectionType.Bezier:
             default: {
-                const distance = calculateDistance(sourcePoint.point, targetPoint.point);
-                const curvature = calculateCurvature(distance, this.maxCurvature);
+                const [path] = createBezierPath(sourcePoint, targetPoint, curvature);
 
-                return createBezierPath(sourcePoint, targetPoint, curvature);
+                return path;
             }
         }
     });

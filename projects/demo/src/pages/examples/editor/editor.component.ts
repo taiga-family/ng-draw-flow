@@ -15,16 +15,20 @@ import type {
 } from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
+    DfConnectionType,
     dfCycleDetectionValidator,
     dfIsolatedNodesValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
+    provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
 import {TuiButton} from '@taiga-ui/core';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject} from 'rxjs';
+
+import {SimpleNodeComponent} from '../../../app/modules/nodes';
 
 @Component({
     standalone: true,
@@ -45,6 +49,16 @@ import {BehaviorSubject} from 'rxjs';
     providers: [
         dfPanZoomOptionsProvider({
             leftPosition: 50,
+        }),
+        provideNgDrawFlowConfigs({
+            connection: {
+                type: DfConnectionType.SmoothStep,
+                arrowhead: 'none',
+                curvature: 10,
+            },
+            nodes: {
+                simpleNode: SimpleNodeComponent,
+            },
         }),
     ],
 })
