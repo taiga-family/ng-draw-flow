@@ -148,12 +148,12 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         this.onTouched = fn;
     }
 
-    /** Zooms one step *in* towards the centre of the scene. */
+    /** Zooms one step *in* towards the center of the scene. */
     public zoomIn(): void {
         this.panzoom.zoomIn();
     }
 
-    /** Zooms one step *out* from the centre of the scene. */
+    /** Zooms one step *out* from the center of the scene. */
     public zoomOut(): void {
         this.panzoom.zoomOut();
     }
