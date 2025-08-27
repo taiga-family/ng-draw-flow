@@ -1,3 +1,5 @@
+### [0.14.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.13.0...v0.14.0) (2025-08-27)
+
 ### [0.13.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.12.0...v0.13.0) (2025-06-09)
 
 ### 🚀 Features
