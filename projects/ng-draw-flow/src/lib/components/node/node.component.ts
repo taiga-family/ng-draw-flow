@@ -22,13 +22,14 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import type {Observable} from 'rxjs';
 import {merge, tap} from 'rxjs';
 
+import {INITIAL_COORDINATES} from '../../consts';
 import type {DfDragDrop, DfDragDropDistance} from '../../directives';
 import {
     DfDragDropStage,
     DragDropDirective,
     SelectableElementDirective,
 } from '../../directives';
-import {createConnectorHash, INITIAL_COORDINATES} from '../../helpers';
+import {createConnectorHash} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import type {
     DfDataInitialNode,

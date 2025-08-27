@@ -16,11 +16,8 @@ import {
     tap,
 } from 'rxjs';
 
-import {
-    createConnectorHash,
-    dfDistanceBetweenPoints,
-    INITIAL_COORDINATES,
-} from '../../../helpers';
+import {INITIAL_COORDINATES} from '../../../consts';
+import {createConnectorHash, dfDistanceBetweenPoints} from '../../../helpers';
 import type {
     DfConnectorData,
     DfDataConnection,

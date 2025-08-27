@@ -25,36 +25,20 @@ export function dfIsolatedNodesValidator(): ValidatorFn {
         const model: DfDataModel = control.value;
 
         if (!model?.nodes?.length) {
-            return null; // nothing to validate
+            return null;
         }
 
-        // Collect all node ids that participate in at least one connection
         const connectedIds = new Set<DfId>();
 
-        if (model.connections?.length) {
-            model.connections.forEach((connection: DfDataConnection) => {
-                connectedIds.add(connection.source.nodeId);
-                connectedIds.add(connection.target.nodeId);
-            });
-        }
-
-        // Every node absent in connectedIds is isolated
-        const isolatedNodes: DfId[] = [];
-
-        model.nodes.forEach((node: DfDataInitialNode | DfDataNode) => {
-            if (!connectedIds.has(node.id)) {
-                isolatedNodes.push(node.id);
-            }
+        model.connections?.forEach((c: DfDataConnection) => {
+            connectedIds.add(c.source.nodeId);
+            connectedIds.add(c.target.nodeId);
         });
 
-        if (isolatedNodes.length) {
-            return {
-                hasIsolatedNodes: true,
-                isolatedNodes,
-            };
-        }
+        const isolatedNodes: DfId[] = model.nodes
+            .filter((node: DfDataInitialNode | DfDataNode) => !connectedIds.has(node.id))
+            .map((node) => node.id);
 
-        // All nodes have at least one connection
-        return null;
+        return isolatedNodes.length ? {hasIsolatedNodes: true, isolatedNodes} : null;
     };
 }

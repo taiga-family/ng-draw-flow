@@ -154,10 +154,7 @@ export class SelectionService implements OnDestroy {
 
         // If clicked on a registered element
         if (targetElement) {
-            // If Ctrl or Shift key is pressed, add to selection
-            const multiSelect = event.ctrlKey || event.shiftKey;
-
-            this.selectElement(targetElement, !multiSelect);
+            this.selectElement(targetElement);
         }
         // If clicked on the scene and it's not the start of dragging
         else if (this.currentTarget.dataset.element === 'scene') {
@@ -186,9 +183,7 @@ export class SelectionService implements OnDestroy {
     /**
      * Mouse up event handler
      */
-    private onMouseUp(event: MouseEvent): void {
-        const target = event.target as HTMLElement;
-
+    private onMouseUp(_event: MouseEvent): void {
         // If it was dragging and releasing on the scene,
         // just reset the state without changing the selection
         if (this.isDragging) {
@@ -197,22 +192,8 @@ export class SelectionService implements OnDestroy {
             return;
         }
 
-        // If it was a click (not dragging)
-        const targetElement = this.findRegisteredParent(target);
-
-        // If clicked on a registered element
-        if (targetElement) {
-            // If Ctrl or Shift key is pressed, toggle selection
-            if (event.ctrlKey || event.shiftKey) {
-                if (this.isSelected(targetElement)) {
-                    this.deselectElement(targetElement);
-                } else {
-                    this.selectElement(targetElement, false);
-                }
-            }
-        }
         // If clicked on the scene (not while dragging)
-        else if (this.clickedOnScene && !this.isDragging) {
+        if (this.clickedOnScene && !this.isDragging) {
             // Clear selection only when clicking on the scene, not when dragging
             this.clearSelection();
         }

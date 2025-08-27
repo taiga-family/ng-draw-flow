@@ -18,29 +18,30 @@ export default class EditorComponent {
   public editor!: NgDrawFlowComponent;
 
   public data: DfDataModel = {
-    nodes: new Map()
-      .set('node-1', {
+    nodes: [
+      {
         id: 'node-1',
         data: {type: 'simpleNode', text: 'This base node'},
         position: {x: 0, y: 0},
         startNode: true,
-      })
-      .set('node-2', {
+      },
+      {
         id: 'node-2',
         data: {type: 'simpleNode', text: 'This child node 1'},
         position: {x: 250, y: 50},
-      })
-      .set('node-3', {
+      },
+      {
         id: 'node-3',
         data: {type: 'simpleNode', text: 'This child node 2'},
         position: {x: 250, y: -50},
-      })
-      .set('node-4', {
+      },
+      {
         id: 'node-4',
         data: {type: 'simpleNode', text: 'This child node 3'},
         position: {x: 500, y: 0},
         endNode: true,
-      }),
+      },
+    ],
     connections: [
       {
         source: {
