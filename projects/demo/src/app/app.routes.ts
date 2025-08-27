@@ -60,6 +60,14 @@ export const appRoutes: Routes = [
         },
     },
     {
+        path: DemoPath.Connections,
+        loadComponent: async () =>
+            import('../pages/documentation/connections/connections.component'),
+        data: {
+            title: 'Connection Lines',
+        },
+    },
+    {
         path: DemoPath.Validation,
         loadComponent: async () =>
             import('../pages/documentation/validation/validation.component'),

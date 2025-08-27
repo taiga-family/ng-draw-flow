@@ -8,7 +8,7 @@ export const DRAW_FLOW_DEFAULT_OPTIONS: DfOptions = {
     connection: {
         arrowhead: 'none',
         type: DfConnectionType.Bezier,
-        curvature: 50,
+        curvature: 0.25,
     },
     nodes: {},
     options: {

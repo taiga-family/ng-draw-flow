@@ -420,7 +420,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         const scaledPanPositionX = halfOfPanSize + (panPositionX * -1) / zoom;
         const scaledPanPositionY = halfOfPanSize + (panPositionY * -1) / zoom;
 
-        // Calculating the centre of the visible part of the viewport relative to the whole board
+        // Calculating the center of the visible part of the viewport relative to the whole board
         const position = {
             x: scaledPanPositionX - halfOfPanSize,
             y: scaledPanPositionY - halfOfPanSize,

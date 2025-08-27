@@ -1,5 +1,58 @@
-<tui-doc-page header="Connections">
-    <div class="editor tui-space_top-4">
-        <ng-draw-flow [formControl]="form" />
-    </div>
+<tui-doc-page header="Connection Lines">
+    <section>
+        <h2>Overview</h2>
+        <p>
+            Connection lines define how nodes are visually linked in NgDrawFlow. The library provides two styles:
+            <code>Bezier</code>
+            and
+            <code>SmoothStep</code>
+            . Select the style via the
+            <code>connection.type</code>
+            option.
+        </p>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>SmoothStep</h3>
+        <p>
+            SmoothStep edges use horizontal and vertical segments joined by rounded bends, making them suitable for
+            orthogonal layouts.
+        </p>
+
+        <ul class="tui-list tui-list_extra-small">
+            <li class="tui-list__item">
+                <code>curvature</code>
+                : radius of each bend in pixels.
+            </li>
+        </ul>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Example</h3>
+        <div class="editor tui-space_top-4">
+            <smooth-step-example />
+        </div>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Bezier</h3>
+        <p>
+            Bezier edges are cubic Bézier curves calculated from connector directions, creating smooth flowing lines
+            between nodes.
+        </p>
+        <ul class="tui-list tui-list_extra-small">
+            <li class="tui-list__item">
+                <code>curvature</code>
+                : dimensionless coefficient that controls how strongly the curve bends when connectors face away from
+                each other.
+            </li>
+        </ul>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Example</h3>
+        <div class="editor tui-space_top-4">
+            <bezier-example />
+        </div>
+    </section>
 </tui-doc-page>

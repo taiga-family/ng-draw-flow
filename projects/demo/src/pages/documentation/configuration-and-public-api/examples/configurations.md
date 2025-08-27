@@ -8,7 +8,7 @@ providers: [
     },
     connection: {
       type: DfConnectionType.Bezier,
-      curvature: 50,
+      curvature: 1,
     },
     options: {
       nodeDragThreshold: 1,
