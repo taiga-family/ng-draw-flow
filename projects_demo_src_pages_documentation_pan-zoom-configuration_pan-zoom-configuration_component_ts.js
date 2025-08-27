@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_pan-zoom-configuration_pan-zoom-configuration_component_ts"],{
 
-/***/ 30608:
+/***/ 8227:
 /*!****************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/index.ts ***!
   \****************************************************************************************/
@@ -13,16 +13,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   PanZoomConfigurationExample2Component: () => (/* reexport safe */ _pan_zoom_configuration_example_2_component__WEBPACK_IMPORTED_MODULE_1__.PanZoomConfigurationExample2Component),
 /* harmony export */   PanZoomConfigurationExample3Component: () => (/* reexport safe */ _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__.PanZoomConfigurationExample3Component)
 /* harmony export */ });
-/* harmony import */ var _pan_zoom_configuration_example_1_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pan-zoom-configuration-example-1/component */ 76909);
+/* harmony import */ var _pan_zoom_configuration_example_1_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./pan-zoom-configuration-example-1/component */ 6909);
 /* harmony import */ var _pan_zoom_configuration_example_2_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pan-zoom-configuration-example-2/component */ 3116);
-/* harmony import */ var _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pan-zoom-configuration-example-3/component */ 10499);
+/* harmony import */ var _pan_zoom_configuration_example_3_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pan-zoom-configuration-example-3/component */ 499);
 
 
 
 
 /***/ }),
 
-/***/ 76909:
+/***/ 6909:
 /*!*****************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/pan-zoom-configuration-example-1/component.ts ***!
   \*****************************************************************************************************************************/
@@ -32,10 +32,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomConfigurationExample1Component: () => (/* binding */ PanZoomConfigurationExample1Component)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 43714);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 3714);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
 var _PanZoomConfigurationExample1Component;
 
 
@@ -105,10 +105,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomConfigurationExample2Component: () => (/* binding */ PanZoomConfigurationExample2Component)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 43714);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 3714);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
 var _PanZoomConfigurationExample2Component;
 
 
@@ -168,7 +168,7 @@ _PanZoomConfigurationExample2Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
 
 /***/ }),
 
-/***/ 10499:
+/***/ 499:
 /*!*****************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/examples/pan-zoom-configuration-example-3/component.ts ***!
   \*****************************************************************************************************************************/
@@ -178,10 +178,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomConfigurationExample3Component: () => (/* binding */ PanZoomConfigurationExample3Component)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 43714);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _nodes_pan_pan_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../nodes/pan/pan.component */ 3714);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
 var _PanZoomConfigurationExample3Component;
 
 
@@ -241,7 +241,7 @@ _PanZoomConfigurationExample3Component.ɵcmp = /*@__PURE__*/_angular_core__WEBPA
 
 /***/ }),
 
-/***/ 43714:
+/***/ 3714:
 /*!*************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/nodes/pan/pan.component.ts ***!
   \*************************************************************************************************/
@@ -251,8 +251,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanComponent: () => (/* binding */ PanComponent)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _PanComponent;
 
 
@@ -279,7 +279,7 @@ _PanComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["�
 
 /***/ }),
 
-/***/ 72251:
+/***/ 2251:
 /*!**********************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component.ts ***!
   \**********************************************************************************************************/
@@ -289,9 +289,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _examples__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examples */ 30608);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
+/* harmony import */ var _examples__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examples */ 8227);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
 var _PanZoomConfigurationComponent;
 
 
@@ -299,9 +299,9 @@ var _PanZoomConfigurationComponent;
 class PanZoomConfigurationComponent {
   constructor() {
     this.gettingStarted = {
-      data0: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_examples_data-0_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-0.md?raw */ 84042, 17)),
-      data1: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_examples_data-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-1.md?raw */ 37589, 17)),
-      data2: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_examples_data-2_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-2.md?raw */ 30216, 17))
+      data0: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_examples_data-0_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-0.md?raw */ 4042, 17)),
+      data1: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_examples_data-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-1.md?raw */ 7589, 17)),
+      data2: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_examples_data-2_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-2.md?raw */ 216, 17))
     };
   }
 }

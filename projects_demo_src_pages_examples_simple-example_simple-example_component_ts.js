@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_examples_simple-example_simple-example_component_ts"],{
 
-/***/ 34706:
+/***/ 4706:
 /*!*************************************************************************************!*\
   !*** ./projects/demo/src/pages/examples/simple-example/simple-example.component.ts ***!
   \*************************************************************************************/
@@ -11,10 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
 var _SimpleExampleComponent;
 
 
@@ -24,9 +24,9 @@ var _SimpleExampleComponent;
 class SimpleExampleComponent {
   constructor() {
     this.gettingStartedExample = {
-      TypeScript: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_examples_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/component.ts?raw */ 69568, 17)),
+      TypeScript: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_examples_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/component.ts?raw */ 9568, 17)),
       Styles: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_examples_styles_less_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/styles.less?raw */ 5815, 17)),
-      Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_examples_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.html?raw */ 26003, 17))
+      Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_examples_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.html?raw */ 6003, 17))
     };
     this.data = {
       nodes: [{

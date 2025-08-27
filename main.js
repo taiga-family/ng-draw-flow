@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["main"],{
 
-/***/ 54952:
+/***/ 4952:
 /*!*****************************************************!*\
   !*** ./projects/demo/src/app/app.browser.module.ts ***!
   \*****************************************************/
@@ -11,21 +11,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AppBrowserModule: () => (/* binding */ AppBrowserModule)
 /* harmony export */ });
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 77008);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ 7008);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ 4199);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ 91244);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/core */ 44246);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @taiga-ui/core */ 84494);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @taiga-ui/core */ 35972);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @taiga-ui/core */ 71534);
-/* harmony import */ var _taiga_ui_event_plugins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/event-plugins */ 53676);
-/* harmony import */ var ngx_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-markdown */ 15592);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 14699);
-/* harmony import */ var _app_providers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.providers */ 93734);
-/* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.routes */ 22516);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
-/* harmony import */ var _taiga_ui_addon_doc_directives__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @taiga-ui/addon-doc/directives */ 78203);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser/animations */ 1244);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/core */ 4246);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @taiga-ui/core */ 4494);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @taiga-ui/core */ 5972);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
+/* harmony import */ var _taiga_ui_event_plugins__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/event-plugins */ 3676);
+/* harmony import */ var ngx_markdown__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-markdown */ 5592);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component */ 4699);
+/* harmony import */ var _app_providers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.providers */ 3734);
+/* harmony import */ var _app_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.routes */ 2516);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
+/* harmony import */ var _taiga_ui_addon_doc_directives__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @taiga-ui/addon-doc/directives */ 8203);
 var _AppBrowserModule;
 
 
@@ -70,7 +70,7 @@ _AppBrowserModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3_
 
 /***/ }),
 
-/***/ 14699:
+/***/ 4699:
 /*!************************************************!*\
   !*** ./projects/demo/src/app/app.component.ts ***!
   \************************************************/
@@ -80,10 +80,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AppComponent: () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ 41099);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/core */ 44246);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ 1099);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/core */ 4246);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
 var _AppComponent;
 
 
@@ -115,7 +115,7 @@ _AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["�
 
 /***/ }),
 
-/***/ 93734:
+/***/ 3734:
 /*!************************************************!*\
   !*** ./projects/demo/src/app/app.providers.ts ***!
   \************************************************/
@@ -125,15 +125,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   APP_PROVIDERS: () => (/* binding */ APP_PROVIDERS)
 /* harmony export */ });
-/* harmony import */ var _home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 56207);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _taiga_ui_addon_doc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/addon-doc */ 54171);
-/* harmony import */ var ngx_highlightjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-highlightjs */ 45240);
-/* harmony import */ var _pages_pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/pages */ 18986);
-/* harmony import */ var _modules_logo_logo_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/logo/logo.component */ 89289);
-/* harmony import */ var _modules_nodes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/nodes */ 85989);
+/* harmony import */ var _home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 6207);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _taiga_ui_addon_doc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/addon-doc */ 4171);
+/* harmony import */ var ngx_highlightjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-highlightjs */ 5240);
+/* harmony import */ var _pages_pages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/pages */ 8986);
+/* harmony import */ var _modules_logo_logo_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/logo/logo.component */ 9289);
+/* harmony import */ var _modules_nodes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/nodes */ 5989);
 
 
 
@@ -165,7 +165,7 @@ const APP_PROVIDERS = [{
     return {
       coreLibraryLoader: function () {
         var _ref = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-          return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_core_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/core */ 85122));
+          return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_core_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/core */ 5122));
         });
         return function coreLibraryLoader() {
           return _ref.apply(this, arguments);
@@ -175,7 +175,7 @@ const APP_PROVIDERS = [{
         var _ref2 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
           return (
             // SSR ReferenceError: window is not defined
-            isBrowser ? __webpack_require__.e(/*! import() */ "node_modules_ngx-highlightjs_fesm2022_ngx-highlightjs-line-numbers_mjs").then(__webpack_require__.bind(__webpack_require__, /*! ngx-highlightjs/line-numbers */ 12726)) : Promise.resolve()
+            isBrowser ? __webpack_require__.e(/*! import() */ "node_modules_ngx-highlightjs_fesm2022_ngx-highlightjs-line-numbers_mjs").then(__webpack_require__.bind(__webpack_require__, /*! ngx-highlightjs/line-numbers */ 2726)) : Promise.resolve()
           );
         });
         return function lineNumbersLoader() {
@@ -185,7 +185,7 @@ const APP_PROVIDERS = [{
       languages: {
         typescript: function () {
           var _ref3 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-            return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_languages_typescript_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/languages/typescript */ 45758));
+            return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_languages_typescript_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/languages/typescript */ 5758));
           });
           return function typescript() {
             return _ref3.apply(this, arguments);
@@ -193,7 +193,7 @@ const APP_PROVIDERS = [{
         }(),
         less: function () {
           var _ref4 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-            return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_languages_less_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/languages/less */ 55228));
+            return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_languages_less_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/languages/less */ 5228));
           });
           return function less() {
             return _ref4.apply(this, arguments);
@@ -201,7 +201,7 @@ const APP_PROVIDERS = [{
         }(),
         xml: function () {
           var _ref5 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-            return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_languages_xml_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/languages/xml */ 69944));
+            return __webpack_require__.e(/*! import() */ "node_modules_highlight_js_es_languages_xml_js").then(__webpack_require__.bind(__webpack_require__, /*! highlight.js/lib/languages/xml */ 9944));
           });
           return function xml() {
             return _ref5.apply(this, arguments);
@@ -223,7 +223,7 @@ const APP_PROVIDERS = [{
 
 /***/ }),
 
-/***/ 22516:
+/***/ 2516:
 /*!*********************************************!*\
   !*** ./projects/demo/src/app/app.routes.ts ***!
   \*********************************************/
@@ -234,10 +234,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   AppRoutingModule: () => (/* binding */ AppRoutingModule),
 /* harmony export */   appRoutes: () => (/* binding */ appRoutes)
 /* harmony export */ });
-/* harmony import */ var _home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 56207);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 41099);
-/* harmony import */ var _demo_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @demo/constants */ 26899);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 6207);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 1099);
+/* harmony import */ var _demo_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @demo/constants */ 6899);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 6623);
 
 var _AppRoutingModule;
 
@@ -250,7 +250,7 @@ const appRoutes = [
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Quickstart,
   loadComponent: function () {
     var _ref = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_quickstart_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/quickstart/quickstart.component */ 76849));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_quickstart_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/quickstart/quickstart.component */ 6849));
     });
     return function loadComponent() {
       return _ref.apply(this, arguments);
@@ -263,7 +263,7 @@ const appRoutes = [
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.TermsAndDefinitions,
   loadComponent: function () {
     var _ref2 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_terms-and-definitions_terms-and-definitions_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/terms-and-definitions/terms-and-definitions.component */ 70509));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_terms-and-definitions_terms-and-definitions_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/terms-and-definitions/terms-and-definitions.component */ 509));
     });
     return function loadComponent() {
       return _ref2.apply(this, arguments);
@@ -276,7 +276,7 @@ const appRoutes = [
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.ConfigurationAndPublicApi,
   loadComponent: function () {
     var _ref3 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_configuration-and-public-api_configuration-and-public-a-bfcf86").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/configuration-and-public-api/configuration-and-public-api.component */ 28605));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_configuration-and-public-api_configuration-and-public-a-bfcf86").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/configuration-and-public-api/configuration-and-public-api.component */ 8605));
     });
     return function loadComponent() {
       return _ref3.apply(this, arguments);
@@ -289,7 +289,7 @@ const appRoutes = [
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.PanZoom,
   loadComponent: function () {
     var _ref4 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_pan-zoom-configuration_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component */ 72251));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_pan-zoom-configuration_pan-zoom-configuration_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component */ 2251));
     });
     return function loadComponent() {
       return _ref4.apply(this, arguments);
@@ -302,7 +302,7 @@ const appRoutes = [
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Nodes,
   loadComponent: function () {
     var _ref5 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_creating-nodes_creating-nodes_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/creating-nodes/creating-nodes.component */ 63997));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_creating-nodes_creating-nodes_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/creating-nodes/creating-nodes.component */ 3997));
     });
     return function loadComponent() {
       return _ref5.apply(this, arguments);
@@ -315,7 +315,7 @@ const appRoutes = [
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Connectors,
   loadComponent: function () {
     var _ref6 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_connectors_connectors_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/connectors/connectors.component */ 24823));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_connectors_connectors_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/connectors/connectors.component */ 4823));
     });
     return function loadComponent() {
       return _ref6.apply(this, arguments);
@@ -325,13 +325,26 @@ const appRoutes = [
     title: 'Connectors'
   }
 }, {
-  path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Validation,
+  path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Connections,
   loadComponent: function () {
     var _ref7 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_validation_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/validation/validation.component */ 97149));
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_connections_connections_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/connections/connections.component */ 9445));
     });
     return function loadComponent() {
       return _ref7.apply(this, arguments);
+    };
+  }(),
+  data: {
+    title: 'Connection Lines'
+  }
+}, {
+  path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Validation,
+  loadComponent: function () {
+    var _ref8 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_validation_validation_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/documentation/validation/validation.component */ 7149));
+    });
+    return function loadComponent() {
+      return _ref8.apply(this, arguments);
     };
   }(),
   data: {
@@ -342,11 +355,11 @@ const appRoutes = [
 {
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.SimpleExample,
   loadComponent: function () {
-    var _ref8 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_simple-example_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/simple-example/simple-example.component */ 34706));
+    var _ref9 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_simple-example_simple-example_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/simple-example/simple-example.component */ 4706));
     });
     return function loadComponent() {
-      return _ref8.apply(this, arguments);
+      return _ref9.apply(this, arguments);
     };
   }(),
   data: {
@@ -355,11 +368,11 @@ const appRoutes = [
 }, {
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Overview,
   loadComponent: function () {
-    var _ref9 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_overview_overview_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/overview/overview.component */ 21882));
+    var _ref0 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_overview_overview_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/overview/overview.component */ 1882));
     });
     return function loadComponent() {
-      return _ref9.apply(this, arguments);
+      return _ref0.apply(this, arguments);
     };
   }(),
   data: {
@@ -368,11 +381,11 @@ const appRoutes = [
 }, {
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.Editor,
   loadComponent: function () {
-    var _ref0 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+    var _ref1 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
       return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_editor_editor_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/editor/editor.component */ 8810));
     });
     return function loadComponent() {
-      return _ref0.apply(this, arguments);
+      return _ref1.apply(this, arguments);
     };
   }(),
   data: {
@@ -381,11 +394,11 @@ const appRoutes = [
 }, {
   path: _demo_constants__WEBPACK_IMPORTED_MODULE_1__.DemoPath.StressTest,
   loadComponent: function () {
-    var _ref1 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_stress-test_stress-test_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/stress-test/stress-test.component */ 48922));
+    var _ref10 = (0,_home_runner_work_ng_draw_flow_ng_draw_flow_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
+      return __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_stress-test_stress-test_component_ts").then(__webpack_require__.bind(__webpack_require__, /*! ../pages/examples/stress-test/stress-test.component */ 8922));
     });
     return function loadComponent() {
-      return _ref1.apply(this, arguments);
+      return _ref10.apply(this, arguments);
     };
   }(),
   data: {
@@ -419,7 +432,7 @@ _AppRoutingModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2_
 
 /***/ }),
 
-/***/ 15858:
+/***/ 5858:
 /*!******************************************************!*\
   !*** ./projects/demo/src/app/constants/demo-path.ts ***!
   \******************************************************/
@@ -447,7 +460,7 @@ const DemoPath = {
 
 /***/ }),
 
-/***/ 19785:
+/***/ 9785:
 /*!*******************************************************!*\
   !*** ./projects/demo/src/app/constants/github-api.ts ***!
   \*******************************************************/
@@ -461,7 +474,7 @@ const GITHUB_API = 'https://api.github.com/repos/taiga-family/ng-draw-flow';
 
 /***/ }),
 
-/***/ 26899:
+/***/ 6899:
 /*!**************************************************!*\
   !*** ./projects/demo/src/app/constants/index.ts ***!
   \**************************************************/
@@ -472,14 +485,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DemoPath: () => (/* reexport safe */ _demo_path__WEBPACK_IMPORTED_MODULE_0__.DemoPath),
 /* harmony export */   GITHUB_API: () => (/* reexport safe */ _github_api__WEBPACK_IMPORTED_MODULE_1__.GITHUB_API)
 /* harmony export */ });
-/* harmony import */ var _demo_path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo-path */ 15858);
-/* harmony import */ var _github_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./github-api */ 19785);
+/* harmony import */ var _demo_path__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./demo-path */ 5858);
+/* harmony import */ var _github_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./github-api */ 9785);
 
 
 
 /***/ }),
 
-/***/ 89289:
+/***/ 9289:
 /*!**************************************************************!*\
   !*** ./projects/demo/src/app/modules/logo/logo.component.ts ***!
   \**************************************************************/
@@ -490,16 +503,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   LOGO_CONTENT: () => (/* binding */ LOGO_CONTENT),
 /* harmony export */   LogoComponent: () => (/* binding */ LogoComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 77008);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 41099);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 11498);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/core */ 28613);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @taiga-ui/core */ 71534);
-/* harmony import */ var _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @taiga-ui/polymorpheus */ 96636);
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constants */ 26899);
-/* harmony import */ var _taiga_ui_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/kit */ 12665);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ 7008);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 1099);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 1498);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/core */ 8613);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
+/* harmony import */ var _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @taiga-ui/polymorpheus */ 6636);
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../constants */ 6899);
+/* harmony import */ var _taiga_ui_kit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/kit */ 2665);
 var _LogoComponent;
 
 
@@ -568,7 +581,7 @@ const LOGO_CONTENT = new _taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_9__.Pol
 
 /***/ }),
 
-/***/ 75979:
+/***/ 5979:
 /*!***********************************************************************!*\
   !*** ../../../app/modules/nodes/form-node/form-node.component.ts?raw ***!
   \***********************************************************************/
@@ -578,14 +591,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   FormNodeComponent: () => (/* binding */ FormNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/core */ 11498);
-/* harmony import */ var _taiga_ui_legacy__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/legacy */ 77674);
-/* harmony import */ var _taiga_ui_legacy__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/legacy */ 39076);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/core */ 1498);
+/* harmony import */ var _taiga_ui_legacy__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/legacy */ 7674);
+/* harmony import */ var _taiga_ui_legacy__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/legacy */ 9076);
 var _FormNodeComponent;
 
 
@@ -753,7 +766,7 @@ _FormNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1
 
 /***/ }),
 
-/***/ 85989:
+/***/ 5989:
 /*!******************************************************!*\
   !*** ./projects/demo/src/app/modules/nodes/index.ts ***!
   \******************************************************/
@@ -768,12 +781,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   OutputNodeComponent: () => (/* reexport safe */ _output_node_output_node_component__WEBPACK_IMPORTED_MODULE_4__.OutputNodeComponent),
 /* harmony export */   SimpleNodeComponent: () => (/* reexport safe */ _simple_node_simple_node_component__WEBPACK_IMPORTED_MODULE_5__.SimpleNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _form_node_form_node_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form-node/form-node.component */ 75979);
-/* harmony import */ var _info_node_info_node_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info-node/info-node.component */ 98367);
-/* harmony import */ var _input_node_input_node_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./input-node/input-node.component */ 58839);
-/* harmony import */ var _mini_node_mini_node_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mini-node/mini-node.component */ 59951);
-/* harmony import */ var _output_node_output_node_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./output-node/output-node.component */ 15607);
-/* harmony import */ var _simple_node_simple_node_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./simple-node/simple-node.component */ 73539);
+/* harmony import */ var _form_node_form_node_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form-node/form-node.component */ 5979);
+/* harmony import */ var _info_node_info_node_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./info-node/info-node.component */ 8367);
+/* harmony import */ var _input_node_input_node_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./input-node/input-node.component */ 8839);
+/* harmony import */ var _mini_node_mini_node_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mini-node/mini-node.component */ 9951);
+/* harmony import */ var _output_node_output_node_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./output-node/output-node.component */ 5607);
+/* harmony import */ var _simple_node_simple_node_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./simple-node/simple-node.component */ 3539);
 
 
 
@@ -783,7 +796,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 98367:
+/***/ 8367:
 /*!***********************************************************************!*\
   !*** ../../../app/modules/nodes/info-node/info-node.component.ts?raw ***!
   \***********************************************************************/
@@ -793,9 +806,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   InfoNodeComponent: () => (/* binding */ InfoNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _InfoNodeComponent;
 
 
@@ -851,7 +864,7 @@ _InfoNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1
 
 /***/ }),
 
-/***/ 58839:
+/***/ 8839:
 /*!********************************************************************************!*\
   !*** ./projects/demo/src/app/modules/nodes/input-node/input-node.component.ts ***!
   \********************************************************************************/
@@ -861,8 +874,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   InputNodeComponent: () => (/* binding */ InputNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _InputNodeComponent;
 
 
@@ -922,7 +935,7 @@ _InputNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_
 
 /***/ }),
 
-/***/ 59951:
+/***/ 9951:
 /*!******************************************************************************!*\
   !*** ./projects/demo/src/app/modules/nodes/mini-node/mini-node.component.ts ***!
   \******************************************************************************/
@@ -932,9 +945,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   MiniNodeComponent: () => (/* binding */ MiniNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _MiniNodeComponent;
 
 
@@ -1012,7 +1025,7 @@ _MiniNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1
 
 /***/ }),
 
-/***/ 15607:
+/***/ 5607:
 /*!**********************************************************************************!*\
   !*** ./projects/demo/src/app/modules/nodes/output-node/output-node.component.ts ***!
   \**********************************************************************************/
@@ -1022,8 +1035,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   OutputNodeComponent: () => (/* binding */ OutputNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _OutputNodeComponent;
 
 
@@ -1083,7 +1096,7 @@ _OutputNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 73539:
+/***/ 3539:
 /*!***************************************************************************!*\
   !*** ../../../app/modules/nodes/simple-node/simple-node.component.ts?raw ***!
   \***************************************************************************/
@@ -1093,9 +1106,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SimpleNodeComponent: () => (/* binding */ SimpleNodeComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _SimpleNodeComponent;
 
 
@@ -1165,7 +1178,7 @@ _SimpleNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 89550:
+/***/ 9550:
 /*!*******************************************!*\
   !*** ./projects/demo/src/main.browser.ts ***!
   \*******************************************/
@@ -1173,8 +1186,8 @@ _SimpleNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ 4199);
-/* harmony import */ var _polyfills__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./polyfills */ 41541);
-/* harmony import */ var _app_app_browser_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/app.browser.module */ 54952);
+/* harmony import */ var _polyfills__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./polyfills */ 1541);
+/* harmony import */ var _app_app_browser_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app/app.browser.module */ 4952);
 
 
 
@@ -1191,7 +1204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /***/ }),
 
-/***/ 18986:
+/***/ 8986:
 /*!******************************************!*\
   !*** ./projects/demo/src/pages/pages.ts ***!
   \******************************************/
@@ -1201,7 +1214,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DEMO_PAGES: () => (/* binding */ DEMO_PAGES)
 /* harmony export */ });
-/* harmony import */ var _demo_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @demo/constants */ 26899);
+/* harmony import */ var _demo_constants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @demo/constants */ 6899);
 
 const DEMO_PAGES = [{
   section: 'Documentation',
@@ -1229,6 +1242,10 @@ const DEMO_PAGES = [{
   route: _demo_constants__WEBPACK_IMPORTED_MODULE_0__.DemoPath.Connectors
 }, {
   section: 'Documentation',
+  title: 'Connection Lines',
+  route: _demo_constants__WEBPACK_IMPORTED_MODULE_0__.DemoPath.Connections
+}, {
+  section: 'Documentation',
   title: 'Validation',
   route: _demo_constants__WEBPACK_IMPORTED_MODULE_0__.DemoPath.Validation
 }, {
@@ -1251,20 +1268,20 @@ const DEMO_PAGES = [{
 
 /***/ }),
 
-/***/ 41541:
+/***/ 1541:
 /*!****************************************!*\
   !*** ./projects/demo/src/polyfills.ts ***!
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zone.js */ 27203);
+/* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zone.js */ 7203);
 /* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(zone_js__WEBPACK_IMPORTED_MODULE_0__);
 
 
 /***/ }),
 
-/***/ 85577:
+/***/ 5577:
 /*!********************************************!*\
   !*** ./projects/ng-draw-flow/src/index.ts ***!
   \********************************************/
@@ -1291,16 +1308,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   dfPanZoomOptionsProvider: () => (/* reexport safe */ _lib_components_pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_1__.dfPanZoomOptionsProvider),
 /* harmony export */   provideNgDrawFlowConfigs: () => (/* reexport safe */ _lib_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_5__.provideNgDrawFlowConfigs)
 /* harmony export */ });
-/* harmony import */ var _lib_components_connectors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/components/connectors */ 58783);
-/* harmony import */ var _lib_components_pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/components/pan-zoom/pan-zoom.options */ 25741);
-/* harmony import */ var _lib_directives_errors_errors_directive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/directives/errors/errors.directive */ 87116);
-/* harmony import */ var _lib_directives_resize_observer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/directives/resize-observer */ 63470);
-/* harmony import */ var _lib_ng_draw_flow_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/ng-draw-flow.component */ 46607);
-/* harmony import */ var _lib_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/ng-draw-flow.configs */ 90167);
+/* harmony import */ var _lib_components_connectors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lib/components/connectors */ 8783);
+/* harmony import */ var _lib_components_pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lib/components/pan-zoom/pan-zoom.options */ 5741);
+/* harmony import */ var _lib_directives_errors_errors_directive__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/directives/errors/errors.directive */ 7116);
+/* harmony import */ var _lib_directives_resize_observer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/directives/resize-observer */ 3470);
+/* harmony import */ var _lib_ng_draw_flow_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./lib/ng-draw-flow.component */ 6607);
+/* harmony import */ var _lib_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./lib/ng-draw-flow.configs */ 167);
 /* harmony import */ var _lib_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./lib/ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _lib_ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/ng-draw-flow.token */ 59497);
-/* harmony import */ var _lib_ng_draw_flow_node_base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/ng-draw-flow-node.base */ 29440);
-/* harmony import */ var _lib_validators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lib/validators */ 75657);
+/* harmony import */ var _lib_ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./lib/ng-draw-flow.token */ 9497);
+/* harmony import */ var _lib_ng_draw_flow_node_base__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./lib/ng-draw-flow-node.base */ 9440);
+/* harmony import */ var _lib_validators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./lib/validators */ 5657);
 
 
 
@@ -1314,7 +1331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 53700:
+/***/ 3700:
 /*!*************************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/connection/connection.component.ts ***!
   \*************************************************************************************************/
@@ -1324,31 +1341,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ConnectionComponent: () => (/* binding */ ConnectionComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 13901);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 39721);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 64672);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 21082);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 11640);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 79746);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 97757);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 95840);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 99473);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 36812);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs */ 65171);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs */ 56816);
-/* harmony import */ var _directives__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../directives */ 52256);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ 50315);
-/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../ng-draw-flow.configs */ 90167);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 3901);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 9721);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 4672);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 1082);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 1640);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 9746);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 7757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 5840);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 9473);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 6812);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 5171);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs */ 6816);
+/* harmony import */ var _directives__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../directives */ 2256);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ 315);
+/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../ng-draw-flow.configs */ 167);
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/coordinates.service */ 65092);
-/* harmony import */ var _connections_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections.service */ 39976);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils */ 77846);
-/* harmony import */ var _utils_create_smoothstep_path_create_smoothstep_path_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../utils/create-smoothstep-path/create-smoothstep-path.util */ 83539);
+/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/coordinates.service */ 5092);
+/* harmony import */ var _connections_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../connections.service */ 9976);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils */ 7846);
 var _ConnectionComponent;
-
 
 
 
@@ -1362,39 +1377,38 @@ var _ConnectionComponent;
 
 class ConnectionComponent {
   constructor() {
-    this.connectionsService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_connections_service__WEBPACK_IMPORTED_MODULE_5__.ConnectionsService);
-    this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__.CoordinatesService);
-    this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
+    this.connectionsService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_connections_service__WEBPACK_IMPORTED_MODULE_5__.ConnectionsService);
+    this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__.CoordinatesService);
+    this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
     this.selected = false;
-    this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
-    this.path$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)(null).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_10__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_11__.asyncScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.combineLatest)([this.getConnectionPoint(this.connection?.source), this.getConnectionPoint(this.connection?.target)])), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(([sourcePoint, targetPoint]) => {
+    this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
+    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
+    this.path$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(null).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_10__.asyncScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.combineLatest)([this.getConnectionPoint(this.connection?.source), this.getConnectionPoint(this.connection?.target)])), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(([sourcePoint, targetPoint]) => {
       if (!sourcePoint || !targetPoint) {
         console.warn('One of the connection points not found');
-        return (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)([]);
+        return (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)([]);
       }
-      return (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)([sourcePoint, targetPoint]);
-    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.distinctUntilChanged)(_helpers__WEBPACK_IMPORTED_MODULE_1__.deepEqual), (0,rxjs__WEBPACK_IMPORTED_MODULE_10__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_15__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_16__.map)(([start, end]) => {
+      return (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)([sourcePoint, targetPoint]);
+    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.distinctUntilChanged)(_helpers__WEBPACK_IMPORTED_MODULE_1__.deepEqual), (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_14__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.map)(([start, end]) => {
       if (!start || !end) {
         return '';
       }
       switch (this.options.connection.type) {
         case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectionType.SmoothStep:
-          return (0,_utils_create_smoothstep_path_create_smoothstep_path_util__WEBPACK_IMPORTED_MODULE_7__.createSmoothstepPath)(start, end, this.options.connection.curvature);
+          return (0,_utils__WEBPACK_IMPORTED_MODULE_6__.createSmoothStepPath)(start, end, this.options.connection.curvature);
         case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectionType.Bezier:
         default:
           {
-            const distance = (0,_utils__WEBPACK_IMPORTED_MODULE_6__.calculateDistance)(start.point, end.point);
-            const maxCurvature = this.options.connection.curvature;
-            const curvature = (0,_utils__WEBPACK_IMPORTED_MODULE_6__.calculateCurvature)(distance, maxCurvature);
-            return (0,_utils__WEBPACK_IMPORTED_MODULE_6__.createBezierPath)(start, end, curvature);
+            const curvature = this.options.connection.curvature;
+            const [path] = (0,_utils__WEBPACK_IMPORTED_MODULE_6__.createBezierPath)(start, end, curvature);
+            return path;
           }
       }
-    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.shareReplay)({
+    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_16__.shareReplay)({
       bufferSize: 1,
       refCount: true
     }));
-    this.optimization$ = this.path$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_18__.skip)(1), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.concat)((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)(true), (0,rxjs__WEBPACK_IMPORTED_MODULE_9__.of)(false).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_20__.delay)(400)))), (0,rxjs__WEBPACK_IMPORTED_MODULE_21__.startWith)(false), (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.distinctUntilChanged)());
+    this.optimization$ = this.path$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_17__.skip)(1), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.concat)((0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(true), (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(false).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_19__.delay)(400)))), (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.startWith)(false), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.distinctUntilChanged)());
   }
   handleKeyboardEvent(event) {
     if (!this.selected) {
@@ -1418,16 +1432,16 @@ _ConnectionComponent = ConnectionComponent;
 _ConnectionComponent.ɵfac = function ConnectionComponent_Factory(t) {
   return new (t || _ConnectionComponent)();
 };
-_ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵdefineComponent"]({
+_ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineComponent"]({
   type: _ConnectionComponent,
   selectors: [["df-connection"]],
   hostBindings: function ConnectionComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("keydown.delete", function ConnectionComponent_keydown_delete_HostBindingHandler($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("keydown.delete", function ConnectionComponent_keydown_delete_HostBindingHandler($event) {
         return ctx.handleKeyboardEvent($event);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresolveDocument"])("keydown.backspace", function ConnectionComponent_keydown_backspace_HostBindingHandler($event) {
+      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresolveDocument"])("keydown.backspace", function ConnectionComponent_keydown_backspace_HostBindingHandler($event) {
         return ctx.handleKeyboardEvent($event);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresolveDocument"]);
+      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵresolveDocument"]);
     }
   },
   inputs: {
@@ -1438,35 +1452,35 @@ _ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
     connectionSelected: "connectionSelected"
   },
   standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵStandaloneFeature"]],
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵStandaloneFeature"]],
   decls: 6,
   vars: 12,
   consts: [[1, "connection"], [1, "selectable-area", 3, "dfSelectableElement"], [1, "main-path"]],
   template: function ConnectionComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵnamespaceSVG"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](0, "svg", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](1, "async");
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementStart"](2, "path", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("dfSelectableElement", function ConnectionComponent_Template__svg_path_dfSelectableElement_2_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnamespaceSVG"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "svg", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](1, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](2, "path", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("dfSelectableElement", function ConnectionComponent_Template__svg_path_dfSelectableElement_2_listener($event) {
         return ctx.onSelectedChanged($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](3, "async");
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelement"](4, "path", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipe"](5, "async");
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](3, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](4, "path", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](5, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵclassProp"]("optimize-speed", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](1, 6, ctx.optimization$));
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](3, 8, ctx.path$));
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵclassProp"]("df-selected", ctx.selected);
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](5, 10, ctx.path$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵclassProp"]("optimize-speed", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](1, 6, ctx.optimization$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](3, 8, ctx.path$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵclassProp"]("df-selected", ctx.selected);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](5, 10, ctx.path$));
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_22__.AsyncPipe, _directives__WEBPACK_IMPORTED_MODULE_0__.SelectableElementDirective],
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_21__.AsyncPipe, _directives__WEBPACK_IMPORTED_MODULE_0__.SelectableElementDirective],
   styles: [".connection[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n  aspect-ratio: 1 / 1;\n  shape-rendering: auto;\n}\n.connection.optimize-speed[_ngcontent-%COMP%] {\n  shape-rendering: optimizespeed;\n}\n.connection.optimize-speed[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  transform: translateZ(0);\n}\n.connection[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-stroke-width);\n  stroke: var(--df-connection-color);\n  pointer-events: none;\n}\n.connection[_ngcontent-%COMP%]   .main-path.df-selected[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-active);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-selectable-area-stroke-width);\n  stroke: transparent;\n  pointer-events: stroke;\n  cursor: pointer;\n  transition: stroke 0.3s;\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover {\n  stroke: var(--df-connection-selectable-area-color);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover    + .main-path[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-hover);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLE1BQUE7RUFDQSxPQUFBO0VBQ0Esb0JBQUE7RUFDQSxtQkFBQTtFQUNBLHFCQUFBO0FBQ0o7QUFDSTtFQUNJLDhCQUFBO0FBQ1I7QUFGSTtFQUlRLHdCQUFBO0FBQ1o7QUFiQTtFQWlCUSxVQUFBO0VBQ0EsK0NBQUE7RUFDQSxrQ0FBQTtFQUNBLG9CQUFBO0FBRFI7QUFHUTtFQUNJLHlDQUFBO0FBRFo7QUF0QkE7RUE0QlEsVUFBQTtFQUNBLCtEQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGVBQUE7RUFDQSx1QkFBQTtBQUhSO0FBS1E7RUFDSSxrREFBQTtBQUhaO0FBS1k7RUFDSSx3Q0FBQTtBQUhoQiIsImZpbGUiOiJjb25uZWN0aW9uLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvY29ubmVjdGlvbnMvY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxvQkFBQTtFQUNBLG1CQUFBO0VBQ0EscUJBQUE7QUFDSjtBQUNJO0VBQ0ksOEJBQUE7QUFDUjtBQUZJO0VBSVEsd0JBQUE7QUFDWjtBQWJBO0VBaUJRLFVBQUE7RUFDQSwrQ0FBQTtFQUNBLGtDQUFBO0VBQ0Esb0JBQUE7QUFEUjtBQUdRO0VBQ0kseUNBQUE7QUFEWjtBQXRCQTtFQTRCUSxVQUFBO0VBQ0EsK0RBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLHVCQUFBO0FBSFI7QUFLUTtFQUNJLGtEQUFBO0FBSFo7QUFLWTtFQUNJLHdDQUFBO0FBSGhCOztBQUVBLGcrREFBZytEIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
@@ -1474,7 +1488,7 @@ _ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 39976:
+/***/ 9976:
 /*!*************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/connections.service.ts ***!
   \*************************************************************************************/
@@ -1484,8 +1498,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ConnectionsService: () => (/* binding */ ConnectionsService)
 /* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 95536);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 5536);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 var _ConnectionsService;
 
 
@@ -1548,7 +1562,7 @@ _ConnectionsService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 71848:
+/***/ 1848:
 /*!*************************************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/draft-connection/draft-connection.component.ts ***!
   \*************************************************************************************************************/
@@ -1558,14 +1572,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DraftConnectionComponent: () => (/* binding */ DraftConnectionComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../ng-draw-flow.configs */ 90167);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../ng-draw-flow.configs */ 167);
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ 77846);
-/* harmony import */ var _utils_create_smoothstep_path_create_smoothstep_path_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/create-smoothstep-path/create-smoothstep-path.util */ 83539);
-/* harmony import */ var _draft_connection_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./draft-connection.service */ 27232);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils */ 7846);
+/* harmony import */ var _draft_connection_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./draft-connection.service */ 7232);
 var _DraftConnectionComponent;
-
 
 
 
@@ -1575,22 +1587,21 @@ var _DraftConnectionComponent;
 const _c0 = ["connectionPath"];
 class DraftConnectionComponent {
   constructor() {
-    this.draftConnectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.inject)(_draft_connection_service__WEBPACK_IMPORTED_MODULE_4__.DraftConnectionService);
-    this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__.DRAW_FLOW_OPTIONS);
-    this.maxCurvature = this.options.connection.curvature;
+    this.draftConnectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.inject)(_draft_connection_service__WEBPACK_IMPORTED_MODULE_3__.DraftConnectionService);
+    this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__.DRAW_FLOW_OPTIONS);
     this.connectionCreated = this.draftConnectionService.connectionCreated$;
-    this.path = (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.computed)(() => {
+    this.path = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.computed)(() => {
       const sourcePoint = this.draftConnectionService.source();
       const targetPoint = this.draftConnectionService.target();
+      const curvature = this.options.connection.curvature;
       switch (this.options.connection.type) {
         case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionType.SmoothStep:
-          return (0,_utils_create_smoothstep_path_create_smoothstep_path_util__WEBPACK_IMPORTED_MODULE_3__.createSmoothstepPath)(sourcePoint, targetPoint, this.maxCurvature);
+          return (0,_utils__WEBPACK_IMPORTED_MODULE_2__.createSmoothStepPath)(sourcePoint, targetPoint, curvature);
         case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionType.Bezier:
         default:
           {
-            const distance = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.calculateDistance)(sourcePoint.point, targetPoint.point);
-            const curvature = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.calculateCurvature)(distance, this.maxCurvature);
-            return (0,_utils__WEBPACK_IMPORTED_MODULE_2__.createBezierPath)(sourcePoint, targetPoint, curvature);
+            const [path] = (0,_utils__WEBPACK_IMPORTED_MODULE_2__.createBezierPath)(sourcePoint, targetPoint, curvature);
+            return path;
           }
       }
     });
@@ -1600,36 +1611,36 @@ _DraftConnectionComponent = DraftConnectionComponent;
 _DraftConnectionComponent.ɵfac = function DraftConnectionComponent_Factory(t) {
   return new (t || _DraftConnectionComponent)();
 };
-_DraftConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
+_DraftConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
   type: _DraftConnectionComponent,
   selectors: [["df-draft-connection"]],
   viewQuery: function DraftConnectionComponent_Query(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵviewQuery"](_c0, 5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵviewQuery"](_c0, 5);
     }
     if (rf & 2) {
       let _t;
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵloadQuery"]()) && (ctx.connectionPath = _t.first);
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵloadQuery"]()) && (ctx.connectionPath = _t.first);
     }
   },
   outputs: {
     connectionCreated: "connectionCreated"
   },
   standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵStandaloneFeature"]],
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵStandaloneFeature"]],
   decls: 3,
   vars: 1,
   consts: [[1, "connection", "draft-connection"], [1, "main-path"], ["connectionPath", ""]],
   template: function DraftConnectionComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵnamespaceSVG"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "svg", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](1, "path", 1, 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵnamespaceSVG"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "svg", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](1, "path", 1, 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵattribute"]("d", ctx.path());
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵattribute"]("d", ctx.path());
     }
   },
   styles: [".connection[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  pointer-events: none;\n  aspect-ratio: 1 / 1;\n  shape-rendering: auto;\n}\n.connection.optimize-speed[_ngcontent-%COMP%] {\n  shape-rendering: optimizespeed;\n}\n.connection.optimize-speed[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  transform: translateZ(0);\n}\n.connection[_ngcontent-%COMP%]   .main-path[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-stroke-width);\n  stroke: var(--df-connection-color);\n  pointer-events: none;\n}\n.connection[_ngcontent-%COMP%]   .main-path.df-selected[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-active);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%] {\n  fill: none;\n  stroke-width: var(--df-connection-selectable-area-stroke-width);\n  stroke: transparent;\n  pointer-events: stroke;\n  cursor: pointer;\n  transition: stroke 0.3s;\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover {\n  stroke: var(--df-connection-selectable-area-color);\n}\n.connection[_ngcontent-%COMP%]   .selectable-area[_ngcontent-%COMP%]:hover    + .main-path[_ngcontent-%COMP%] {\n  stroke: var(--df-connection-color-hover);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb24uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLE1BQUE7RUFDQSxPQUFBO0VBQ0Esb0JBQUE7RUFDQSxtQkFBQTtFQUNBLHFCQUFBO0FBQ0o7QUFDSTtFQUNJLDhCQUFBO0FBQ1I7QUFGSTtFQUlRLHdCQUFBO0FBQ1o7QUFiQTtFQWlCUSxVQUFBO0VBQ0EsK0NBQUE7RUFDQSxrQ0FBQTtFQUNBLG9CQUFBO0FBRFI7QUFHUTtFQUNJLHlDQUFBO0FBRFo7QUF0QkE7RUE0QlEsVUFBQTtFQUNBLCtEQUFBO0VBQ0EsbUJBQUE7RUFDQSxzQkFBQTtFQUNBLGVBQUE7RUFDQSx1QkFBQTtBQUhSO0FBS1E7RUFDSSxrREFBQTtBQUhaO0FBS1k7RUFDSSx3Q0FBQTtBQUhoQiIsImZpbGUiOiJjb25uZWN0aW9uLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvY29ubmVjdGlvbnMvY29ubmVjdGlvbi5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsTUFBQTtFQUNBLE9BQUE7RUFDQSxvQkFBQTtFQUNBLG1CQUFBO0VBQ0EscUJBQUE7QUFDSjtBQUNJO0VBQ0ksOEJBQUE7QUFDUjtBQUZJO0VBSVEsd0JBQUE7QUFDWjtBQWJBO0VBaUJRLFVBQUE7RUFDQSwrQ0FBQTtFQUNBLGtDQUFBO0VBQ0Esb0JBQUE7QUFEUjtBQUdRO0VBQ0kseUNBQUE7QUFEWjtBQXRCQTtFQTRCUSxVQUFBO0VBQ0EsK0RBQUE7RUFDQSxtQkFBQTtFQUNBLHNCQUFBO0VBQ0EsZUFBQTtFQUNBLHVCQUFBO0FBSFI7QUFLUTtFQUNJLGtEQUFBO0FBSFo7QUFLWTtFQUNJLHdDQUFBO0FBSGhCOztBQUVBLGcrREFBZytEIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbm5lY3Rpb24ge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBhc3BlY3QtcmF0aW86IDEgLyAxO1xuICAgIHNoYXBlLXJlbmRlcmluZzogYXV0bztcblxuICAgICYub3B0aW1pemUtc3BlZWQge1xuICAgICAgICBzaGFwZS1yZW5kZXJpbmc6IG9wdGltaXplc3BlZWQ7XG5cbiAgICAgICAgLm1haW4tcGF0aCB7XG4gICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVooMCk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAubWFpbi1wYXRoIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXN0cm9rZS13aWR0aCk7XG4gICAgICAgIHN0cm9rZTogdmFyKC0tZGYtY29ubmVjdGlvbi1jb2xvcik7XG4gICAgICAgIHBvaW50ZXItZXZlbnRzOiBub25lO1xuXG4gICAgICAgICYuZGYtc2VsZWN0ZWQge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLWNvbG9yLWFjdGl2ZSk7XG4gICAgICAgIH1cbiAgICB9XG5cbiAgICAuc2VsZWN0YWJsZS1hcmVhIHtcbiAgICAgICAgZmlsbDogbm9uZTtcbiAgICAgICAgc3Ryb2tlLXdpZHRoOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1zdHJva2Utd2lkdGgpO1xuICAgICAgICBzdHJva2U6IHRyYW5zcGFyZW50O1xuICAgICAgICBwb2ludGVyLWV2ZW50czogc3Ryb2tlO1xuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgICAgIHRyYW5zaXRpb246IHN0cm9rZSAwLjNzO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgICAgc3Ryb2tlOiB2YXIoLS1kZi1jb25uZWN0aW9uLXNlbGVjdGFibGUtYXJlYS1jb2xvcik7XG5cbiAgICAgICAgICAgICYgKyAubWFpbi1wYXRoIHtcbiAgICAgICAgICAgICAgICBzdHJva2U6IHZhcigtLWRmLWNvbm5lY3Rpb24tY29sb3ItaG92ZXIpO1xuICAgICAgICAgICAgfVxuICAgICAgICB9XG4gICAgfVxufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
@@ -1639,7 +1650,7 @@ _DraftConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_M
 
 /***/ }),
 
-/***/ 27232:
+/***/ 7232:
 /*!***********************************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/draft-connection/draft-connection.service.ts ***!
   \***********************************************************************************************************/
@@ -1649,26 +1660,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DraftConnectionService: () => (/* binding */ DraftConnectionService)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 63150);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 95536);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 61969);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 21082);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 47066);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 61856);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 39721);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 97757);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 23246);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 65213);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 42393);
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../consts */ 82110);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ 50315);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 3150);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 5536);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 1969);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 1082);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 7066);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 9721);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 7757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 3246);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 5213);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 2393);
+/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../consts */ 2110);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ 315);
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/coordinates.service */ 65092);
-/* harmony import */ var _pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pan-zoom/pan-zoom.service */ 96592);
-/* harmony import */ var _utils_get_coonector_dataset_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/get-coonector-dataset.util */ 30134);
+/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/coordinates.service */ 5092);
+/* harmony import */ var _pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pan-zoom/pan-zoom.service */ 6592);
+/* harmony import */ var _utils_get_coonector_dataset_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/get-coonector-dataset.util */ 134);
 var _DraftConnectionService;
 
 
@@ -1790,24 +1801,7 @@ _DraftConnectionService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MO
 
 /***/ }),
 
-/***/ 80554:
-/*!************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/calculate-curvature.util.ts ***!
-  \************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   calculateCurvature: () => (/* binding */ calculateCurvature)
-/* harmony export */ });
-function calculateCurvature(distance, maxCurvature) {
-  const maxDistanceForCurvature = 150;
-  return Math.min(distance, maxDistanceForCurvature) / maxDistanceForCurvature * maxCurvature;
-}
-
-/***/ }),
-
-/***/ 89176:
+/***/ 9176:
 /*!***********************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/calculate-distance.util.ts ***!
   \***********************************************************************************************/
@@ -1817,1105 +1811,536 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calculateDistance: () => (/* binding */ calculateDistance)
 /* harmony export */ });
-function calculateDistance(sourcePoint, targetPoint) {
-  return Math.sqrt((targetPoint.x - sourcePoint.x) ** 2 + (targetPoint.y - sourcePoint.y) ** 2);
-}
+const calculateDistance = (source, target) => Math.hypot(target.x - source.x, target.y - source.y);
 
 /***/ }),
 
-/***/ 34880:
-/*!***********************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-bezier-path.util.ts ***!
-  \***********************************************************************************************/
+/***/ 9253:
+/*!******************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/bezier/bezier.ts ***!
+  \******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createBezierPath: () => (/* binding */ createBezierPath)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../ng-draw-flow.interfaces */ 1954);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ 4890);
 
-function createBezierPath(startConnector, endConnector, curvature) {
-  const {
-    x: startX,
-    y: startY
-  } = startConnector.point;
-  const startConnectorPosition = startConnector.position;
-  const {
-    x: endX,
-    y: endY
-  } = endConnector.point;
-  const endConnectorPosition = endConnector.position;
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right && endConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top) {
-    const startConnectorPointX = startX + curvature / 2;
-    const startConnectorPointY = startY;
-    const endConnectorPointX = endX;
-    const endConnectorPointY = endY + (endY - startY) / 7;
-    return `M ${startX} ${startY} C ${startConnectorPointX} ${startConnectorPointY}, ${endConnectorPointX} ${endConnectorPointY}, ${endX} ${endY}`;
-  }
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom && endConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left) {
-    const startConnectorPointX = startX;
-    const startConnectorPointY = startY + curvature / 2;
-    const endConnectorPointX = endX - (endX - startX) / 7;
-    return `M ${startX} ${startY} C ${startConnectorPointX} ${startConnectorPointY}, ${endConnectorPointX} ${endY}, ${endX} ${endY}`;
-  }
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom && endConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top) {
-    return `M ${startX} ${startY} C ${startX} ${startY + curvature}, ${endX} ${endY - curvature} ${endX} ${endY}`;
-  }
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right && endConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left) {
-    return `M ${startX} ${startY} C ${startX + curvature} ${startY}, ${endX - curvature} ${endY}, ${endX} ${endY}`;
-  }
-  return '';
+function createBezierPath(startConnector, endConnector, curvature = 0.25) {
+  const sourceControlPoint = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.getControlWithCurvature)(startConnector, endConnector.point, curvature);
+  const targetControlPoint = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.getControlWithCurvature)(endConnector, startConnector.point, curvature);
+  const [labelX, labelY, offsetX, offsetY] = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.getBezierEdgeCenter)({
+    source: startConnector.point,
+    target: endConnector.point,
+    sourceControlPoint,
+    targetControlPoint
+  });
+  return [`M${startConnector.point.x},${startConnector.point.y} C${sourceControlPoint.x},${sourceControlPoint.y} ${targetControlPoint.x},${targetControlPoint.y} ${endConnector.point.x},${endConnector.point.y}`, labelX, labelY, offsetX, offsetY];
 }
 
 /***/ }),
 
-/***/ 46764:
-/*!*****************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/consts.ts ***!
-  \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   MIN_LINE_SIZE: () => (/* binding */ MIN_LINE_SIZE)
-/* harmony export */ });
-const MIN_LINE_SIZE = 20;
-
-/***/ }),
-
-/***/ 83539:
+/***/ 6595:
 /*!**************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/create-smoothstep-path.util.ts ***!
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/bezier/helpers/bezier-edge-center.ts ***!
   \**************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createSmoothstepPath: () => (/* binding */ createSmoothstepPath)
+/* harmony export */   getBezierEdgeCenter: () => (/* binding */ getBezierEdgeCenter)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _curvatures__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./curvatures */ 34609);
-
-
-function createSmoothstepPath(startConnector, endConnector, radius) {
-  const {
-    x: startX,
-    y: startY
-  } = startConnector.point;
-  const {
-    x: endX,
-    y: endY
-  } = endConnector.point;
-  const startConnectorPosition = startConnector.position;
-  const endConnectorPosition = endConnector.position;
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right) {
-    switch (endConnectorPosition) {
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createRightBottomCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createRightRightCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createRightTopCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left:
-      default:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createRightLeftCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-    }
-  }
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left) {
-    switch (endConnectorPosition) {
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createLeftBottomCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createLeftLeftCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createLeftTopCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right:
-      default:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createLeftRightCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-    }
-  }
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom) {
-    switch (endConnectorPosition) {
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createBottomBottomCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createBottomLeftCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createBottomRightCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top:
-      default:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createBottomTopCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-    }
-  }
-  if (startConnectorPosition === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top) {
-    switch (endConnectorPosition) {
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createTopLeftCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createTopRightCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createTopTopCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom:
-      default:
-        return (0,_curvatures__WEBPACK_IMPORTED_MODULE_1__.createTopBottomCurve)({
-          startX,
-          startY,
-          endX,
-          endY,
-          radius
-        });
-    }
-  }
-  return '';
+function getBezierEdgeCenter({
+  source,
+  target,
+  sourceControlPoint,
+  targetControlPoint
+}) {
+  const centerX = source.x * 0.125 + sourceControlPoint.x * 0.375 + targetControlPoint.y * 0.375 + target.x * 0.125;
+  const centerY = source.y * 0.125 + sourceControlPoint.y * 0.375 + targetControlPoint.y * 0.375 + target.y * 0.125;
+  const offsetX = Math.abs(centerX - source.x);
+  const offsetY = Math.abs(centerY - source.y);
+  return [centerX, centerY, offsetX, offsetY];
 }
 
 /***/ }),
 
-/***/ 76251:
-/*!***************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/bottom-bottom-smoothstep.util.ts ***!
-  \***************************************************************************************************************************************/
+/***/ 3015:
+/*!**********************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/bezier/helpers/control-offset.ts ***!
+  \**********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createBottomBottomCurve: () => (/* binding */ createBottomBottomCurve)
+/* harmony export */   calculateControlOffset: () => (/* binding */ calculateControlOffset)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createBottomBottomCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  const horizontalDifference = startX - endX;
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-  if (isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), isEndPointOnRightSide ? (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide) : (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
+function calculateControlOffset(distance, curvature) {
+  if (distance >= 0) {
+    return 0.5 * distance;
   }
-  return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), isEndPointOnRightSide ? (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide) : (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
+  return curvature * 25 * Math.sqrt(-distance);
 }
 
 /***/ }),
 
-/***/ 73349:
-/*!*************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/bottom-left-smoothstep.util.ts ***!
-  \*************************************************************************************************************************************/
+/***/ 3476:
+/*!******************************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/bezier/helpers/control-with-curvature.ts ***!
+  \******************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createBottomLeftCurve: () => (/* binding */ createBottomLeftCurve)
+/* harmony export */   getControlWithCurvature: () => (/* binding */ getControlWithCurvature)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
+/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../ng-draw-flow.interfaces */ 1954);
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../point */ 7292);
+/* harmony import */ var _control_offset__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./control-offset */ 3015);
 
 
-function createBottomLeftCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnLeftSide = startX > endX;
-  const isEndPointOnUpSide = startY > endY;
-  const halfY = (startY + endY) / 2;
-  if (isEndPointOnLeftSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnLeftSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
+
+function getControlWithCurvature(sourceConnector, target, curvature) {
+  switch (sourceConnector.position) {
+    case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom:
+      return (0,_point__WEBPACK_IMPORTED_MODULE_1__.point)(sourceConnector.point.x, sourceConnector.point.y + (0,_control_offset__WEBPACK_IMPORTED_MODULE_2__.calculateControlOffset)(target.y - sourceConnector.point.y, curvature));
+    case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left:
+      return (0,_point__WEBPACK_IMPORTED_MODULE_1__.point)(sourceConnector.point.x - (0,_control_offset__WEBPACK_IMPORTED_MODULE_2__.calculateControlOffset)(sourceConnector.point.x - target.x, curvature), sourceConnector.point.y);
+    case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right:
+      return (0,_point__WEBPACK_IMPORTED_MODULE_1__.point)(sourceConnector.point.x + (0,_control_offset__WEBPACK_IMPORTED_MODULE_2__.calculateControlOffset)(target.x - sourceConnector.point.x, curvature), sourceConnector.point.y);
+    case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top:
+      return (0,_point__WEBPACK_IMPORTED_MODULE_1__.point)(sourceConnector.point.x, sourceConnector.point.y - (0,_control_offset__WEBPACK_IMPORTED_MODULE_2__.calculateControlOffset)(sourceConnector.point.y - target.y, curvature));
   }
-  if (!isEndPointOnLeftSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnLeftSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnLeftSide && !isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnLeftSide && !isEndPointOnUpSide) {
-    if (endY <= startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE + radius * 2) {
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE * 1.5, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE * 1.5, radius, !isEndPointOnLeftSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY + Math.min(_consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY), radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + Math.min(_consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY), radius, !isEndPointOnLeftSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 36754:
-/*!**************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/bottom-right-smoothstep.util.ts ***!
-  \**************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createBottomRightCurve: () => (/* binding */ createBottomRightCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createBottomRightCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  if (isEndPointOnRightSide && !isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    if (endX >= startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE) {
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-  }
-  if (!isEndPointOnRightSide && !isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    let secondCurvatureRadius = radius;
-    if (endX + radius <= startX - radius) {
-      secondCurvatureRadius = Math.min(radius, Math.abs((endX + radius - (startX - radius)) / 4));
-    }
-    if (endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE > startX) {
-      secondCurvatureRadius = Math.min(radius, Math.abs((endX + radius - (startX - radius)) / 4));
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 91223:
-/*!************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/bottom-top-smoothstep.util.ts ***!
-  \************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createBottomTopCurve: () => (/* binding */ createBottomTopCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createBottomTopCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const halfY = (startY + endY) / 2;
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  if (!isEndPointOnUpSide) {
-    const horizontalDifference = startX - endX;
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), isEndPointOnRightSide ? (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, halfY, radius, isEndPointOnUpSide) : (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, halfY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, halfY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    if (endX >= startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE) {
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-  }
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    let secondCurvatureRadius = radius;
-    if (endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE > startX) {
-      secondCurvatureRadius = Math.min(radius, Math.abs((endX + radius - (startX - radius)) / 4));
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-    if (endX + radius <= startX - radius) {
-      secondCurvatureRadius = Math.min(radius, Math.abs((endX + radius - (startX - radius)) / 4));
-    }
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 34609:
-/*!***************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/index.ts ***!
-  \***************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createBottomBottomCurve: () => (/* reexport safe */ _bottom_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_4__.createBottomBottomCurve),
-/* harmony export */   createBottomLeftCurve: () => (/* reexport safe */ _bottom_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_5__.createBottomLeftCurve),
-/* harmony export */   createBottomRightCurve: () => (/* reexport safe */ _bottom_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_6__.createBottomRightCurve),
-/* harmony export */   createBottomTopCurve: () => (/* reexport safe */ _bottom_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_7__.createBottomTopCurve),
-/* harmony export */   createLeftBottomCurve: () => (/* reexport safe */ _left_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_12__.createLeftBottomCurve),
-/* harmony export */   createLeftLeftCurve: () => (/* reexport safe */ _left_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_13__.createLeftLeftCurve),
-/* harmony export */   createLeftRightCurve: () => (/* reexport safe */ _left_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_14__.createLeftRightCurve),
-/* harmony export */   createLeftTopCurve: () => (/* reexport safe */ _left_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_15__.createLeftTopCurve),
-/* harmony export */   createRightBottomCurve: () => (/* reexport safe */ _right_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_0__.createRightBottomCurve),
-/* harmony export */   createRightLeftCurve: () => (/* reexport safe */ _right_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_1__.createRightLeftCurve),
-/* harmony export */   createRightRightCurve: () => (/* reexport safe */ _right_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_2__.createRightRightCurve),
-/* harmony export */   createRightTopCurve: () => (/* reexport safe */ _right_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_3__.createRightTopCurve),
-/* harmony export */   createTopBottomCurve: () => (/* reexport safe */ _top_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_8__.createTopBottomCurve),
-/* harmony export */   createTopLeftCurve: () => (/* reexport safe */ _top_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_9__.createTopLeftCurve),
-/* harmony export */   createTopRightCurve: () => (/* reexport safe */ _top_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_10__.createTopRightCurve),
-/* harmony export */   createTopTopCurve: () => (/* reexport safe */ _top_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_11__.createTopTopCurve)
-/* harmony export */ });
-/* harmony import */ var _right_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./right-bottom-smoothstep.util */ 10160);
-/* harmony import */ var _right_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./right-left-smoothstep.util */ 4890);
-/* harmony import */ var _right_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./right-right-smoothstep.util */ 18679);
-/* harmony import */ var _right_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./right-top-smoothstep.util */ 86630);
-/* harmony import */ var _bottom_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./bottom-bottom-smoothstep.util */ 76251);
-/* harmony import */ var _bottom_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./bottom-left-smoothstep.util */ 73349);
-/* harmony import */ var _bottom_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./bottom-right-smoothstep.util */ 36754);
-/* harmony import */ var _bottom_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./bottom-top-smoothstep.util */ 91223);
-/* harmony import */ var _top_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./top-bottom-smoothstep.util */ 31219);
-/* harmony import */ var _top_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./top-left-smoothstep.util */ 22749);
-/* harmony import */ var _top_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./top-right-smoothstep.util */ 24554);
-/* harmony import */ var _top_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./top-top-smoothstep.util */ 45663);
-/* harmony import */ var _left_bottom_smoothstep_util__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./left-bottom-smoothstep.util */ 33597);
-/* harmony import */ var _left_left_smoothstep_util__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./left-left-smoothstep.util */ 83967);
-/* harmony import */ var _left_right_smoothstep_util__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./left-right-smoothstep.util */ 77964);
-/* harmony import */ var _left_top_smoothstep_util__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./left-top-smoothstep.util */ 31477);
-// Right
-
-
-
-
-// Bottom
-
-
-
-
-// Top
-
-
-
-
-// Left
-
-
-
-
-
-/***/ }),
-
-/***/ 33597:
-/*!*************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/left-bottom-smoothstep.util.ts ***!
-  \*************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createLeftBottomCurve: () => (/* binding */ createLeftBottomCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createLeftBottomCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE < endX;
-  const isEndPointOnUpSide = startY > endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius;
-  const horizontalDifference = startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - endX;
-  const verticalDifference = startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - endY;
-  const halfY = (startY + endY) / 2;
-  let secondRadius = radius;
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    secondRadius = Math.min((0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius));
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, secondRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, halfY, secondRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && !isEndPointOnUpSide) {
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && !isEndPointOnUpSide) {
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-    secondRadius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, secondRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 83967:
-/*!***********************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/left-left-smoothstep.util.ts ***!
-  \***********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createLeftLeftCurve: () => (/* binding */ createLeftLeftCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createLeftLeftCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const verticalDifference = startY - endY;
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  if (startX === endX && endY === startY) {
-    return '';
-  }
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-  if (endX <= startX) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-}
-
-/***/ }),
-
-/***/ 77964:
-/*!************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/left-right-smoothstep.util.ts ***!
-  \************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createLeftRightCurve: () => (/* binding */ createLeftRightCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createLeftRightCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const verticalDifference = startY - endY;
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-  const halfX = (startX + endX) / 2;
-  const halfY = (startY + endY) / 2;
-  const isEndPointOnLeftSide = startX > endX;
-  const isEndPointOnRightSide = startX < endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE;
-  const isEndPointOnUpSide = startY > endY;
-  if (endX === startX) {
-    return '';
-  }
-  if (isEndPointOnRightSide && isEndPointOnLeftSide && startY < endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE && startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE > endY) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(halfX, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(halfX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(halfX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(halfX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-}
-
-/***/ }),
-
-/***/ 31477:
-/*!**********************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/left-top-smoothstep.util.ts ***!
-  \**********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createLeftTopCurve: () => (/* binding */ createLeftTopCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createLeftTopCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  const horizontalDifference = startX - endX;
-  const halfX = (startX + endX) / 2;
-  const halfY = (startY + endY) / 2;
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(halfX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(halfX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && !isEndPointOnUpSide) {
-    if (endX <= startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE) {
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-    const firstLineEndX = startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE;
-    if (startY + radius * 2 >= endY - radius * 2) {
-      radius = (endY - startY) / 4;
-    }
-    const secondCurveRadius = Math.min(radius, firstLineEndX - endX);
-    const secondLineEndX = endX + secondCurveRadius / 2;
-    const horizontalLineToEndX = `L ${secondLineEndX} ${halfY}`;
-    const thirdCurve = `Q ${secondLineEndX - secondCurveRadius / 2} ${halfY} ${endX} ${halfY + secondCurveRadius / 2}`;
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, secondCurveRadius, isEndPointOnUpSide), horizontalLineToEndX, thirdCurve, (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && !isEndPointOnUpSide) {
-    if (startY + radius * 2 >= endY - radius * 2) {
-      radius = (endY - startY) / 4;
-    }
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, halfY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 10160:
-/*!**************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/right-bottom-smoothstep.util.ts ***!
-  \**************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createRightBottomCurve: () => (/* binding */ createRightBottomCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createRightBottomCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE < endX;
-  const isEndPointOnUpSide = startY > endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius;
-  const horizontalDifference = startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - endX;
-  const verticalDifference = startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - endY;
-  const halfY = (startY + endY) / 2;
-  let secondRadius = radius;
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    secondRadius = Math.min((0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius));
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, secondRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, halfY, secondRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && !isEndPointOnUpSide) {
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && !isEndPointOnUpSide) {
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-    secondRadius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, secondRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
 }
 
 /***/ }),
 
 /***/ 4890:
-/*!************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/right-left-smoothstep.util.ts ***!
-  \************************************************************************************************************************************/
+/*!*************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/bezier/helpers/index.ts ***!
+  \*************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createRightLeftCurve: () => (/* binding */ createRightLeftCurve)
+/* harmony export */   calculateControlOffset: () => (/* reexport safe */ _control_offset__WEBPACK_IMPORTED_MODULE_1__.calculateControlOffset),
+/* harmony export */   getBezierEdgeCenter: () => (/* reexport safe */ _bezier_edge_center__WEBPACK_IMPORTED_MODULE_0__.getBezierEdgeCenter),
+/* harmony export */   getControlWithCurvature: () => (/* reexport safe */ _control_with_curvature__WEBPACK_IMPORTED_MODULE_2__.getControlWithCurvature)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
+/* harmony import */ var _bezier_edge_center__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bezier-edge-center */ 6595);
+/* harmony import */ var _control_offset__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./control-offset */ 3015);
+/* harmony import */ var _control_with_curvature__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./control-with-curvature */ 3476);
 
 
-function createRightLeftCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const verticalDifference = startY - endY;
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-  const halfX = (startX + endX) / 2;
-  const halfY = (startY + endY) / 2;
-  const isEndPointOnLeftSide = startX > endX;
-  const isEndPointOnRightSide = startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE <= endX;
-  const isEndPointOnUpSide = startY > endY;
-  if (!isEndPointOnRightSide && !isEndPointOnLeftSide && startY < endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE && startY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE > endY) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(halfX, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(halfX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(halfX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(halfX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-}
+
 
 /***/ }),
 
-/***/ 18679:
-/*!*************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/right-right-smoothstep.util.ts ***!
-  \*************************************************************************************************************************************/
+/***/ 8548:
+/*!*****************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/bezier/index.ts ***!
+  \*****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createRightRightCurve: () => (/* binding */ createRightRightCurve)
+/* harmony export */   createBezierPath: () => (/* reexport safe */ _bezier__WEBPACK_IMPORTED_MODULE_0__.createBezierPath)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
+/* harmony import */ var _bezier__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bezier */ 9253);
 
-
-function createRightRightCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const verticalDifference = startY - endY;
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  if (startX === endX && endY === startY) {
-    return '';
-  }
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-  if (endX >= startX) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE - radius, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-}
 
 /***/ }),
 
-/***/ 86630:
-/*!***********************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/right-top-smoothstep.util.ts ***!
-  \***********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createRightTopCurve: () => (/* binding */ createRightTopCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createRightTopCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  const horizontalDifference = startX - endX;
-  const halfX = (startX + endX) / 2;
-  const halfY = (startY + endY) / 2;
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(halfX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(halfX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && !isEndPointOnUpSide) {
-    if (endX >= startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE) {
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-    const firstLineEndX = startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE;
-    if (startY + radius * 2 >= endY - radius * 2) {
-      radius = (endY - startY) / 4;
-    }
-    const secondCurveRadius = Math.min(radius, firstLineEndX - endX);
-    const secondLineEndX = endX + secondCurveRadius / 2;
-    const horizontalLineToEndX = `L ${secondLineEndX} ${halfY}`;
-    const thirdCurve = `Q ${secondLineEndX - secondCurveRadius / 2} ${halfY} ${endX} ${halfY + secondCurveRadius / 2}`;
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, secondCurveRadius, isEndPointOnUpSide), horizontalLineToEndX, thirdCurve, (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && !isEndPointOnUpSide) {
-    if (startY + radius * 2 >= endY - radius * 2) {
-      radius = (endY - startY) / 4;
-    }
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, halfY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, halfY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY, radius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 31219:
-/*!************************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/top-bottom-smoothstep.util.ts ***!
-  \************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createTopBottomCurve: () => (/* binding */ createTopBottomCurve)
-/* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
-
-
-function createTopBottomCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const halfY = (startY + endY) / 2;
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  if (startY === endY) {
-    return '';
-  }
-  if (isEndPointOnUpSide) {
-    const horizontalDifference = startX - endX;
-    radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), isEndPointOnRightSide ? (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, halfY, radius, isEndPointOnUpSide) : (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, halfY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, halfY, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && !isEndPointOnUpSide) {
-    let secondCurvatureRadius = radius;
-    if (endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE > startX) {
-      secondCurvatureRadius = Math.min(radius, Math.abs((endX + radius - (startX - radius)) / 4));
-      return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-    }
-    if (endX + radius <= startX - radius) {
-      secondCurvatureRadius = Math.min(radius, Math.abs((endX + radius - (startX - radius)) / 4));
-    }
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondCurvatureRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && !isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
-
-/***/ }),
-
-/***/ 22749:
+/***/ 1371:
 /*!**********************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/top-left-smoothstep.util.ts ***!
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/helpers/get-primary-direction.ts ***!
   \**********************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createTopLeftCurve: () => (/* binding */ createTopLeftCurve)
+/* harmony export */   getPrimaryDirection: () => (/* binding */ getPrimaryDirection)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
+/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../ng-draw-flow.interfaces */ 1954);
 
+/**
+ * Returns a unit vector (±1 on one axis, 0 on the other)
+ * representing the first axial step of the edge immediately
+ * after it leaves the source connector.
+ *
+ * ─ If the connector is **Left** or **Right**, movement is along **X**.
+ * ─ Otherwise (Top / Bottom), movement is along **Y**.
+ *
+ * @param source      coordinates of the source connector
+ * @param sourcePos   side of the source node (Left | Right | Top | Bottom)
+ * @param target      coordinates of the target connector (used for direction)
+ */
+function getPrimaryDirection(source, sourcePos, target) {
+  // Horizontal connectors → move along X
+  if (sourcePos === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left || sourcePos === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right) {
+    return source.x < target.x ? {
+      x: 1,
+      y: 0
+    } : {
+      x: -1,
+      y: 0
+    };
+  }
+  // Vertical connectors → move along Y
+  return source.y < target.y ? {
+    x: 0,
+    y: 1
+  } : {
+    x: 0,
+    y: -1
+  };
+}
 
-function createTopLeftCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
+/***/ }),
+
+/***/ 335:
+/*!************************************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/helpers/smooth-step-edge-center.ts ***!
+  \************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getSmoothStepEdgeCenter: () => (/* binding */ getSmoothStepEdgeCenter)
+/* harmony export */ });
+/**
+ * Computes the geometric center between two endpoints **and**
+ * returns the half-length (offset) on each axis.
+ *
+ * Tuple structure:
+ *   [centerX, centerY, offsetX, offsetY]
+ *
+ * These values are later used for label placement and
+ * “long-edge” detection in the renderer.
+ */
+function getSmoothStepEdgeCenter({
+  source,
+  target
 }) {
-  const isEndPointOnRightSide = startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE + radius < endX;
-  const isEndPointOnUpSide = startY > endY;
-  const verticalDifference = startY - endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE;
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    const secondRadius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnUpSide && !isEndPointOnRightSide) {
-    const secondRadius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(Math.min(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE), startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondRadius, false, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(Math.min(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE), endY, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnUpSide && isEndPointOnRightSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, false, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
+  // Half of the absolute distance on each axis (always positive)
+  const offsetX = Math.abs(source.x - target.x) / 2;
+  const offsetY = Math.abs(source.y - target.y) / 2;
+  // Add the offset to the smaller coordinate on each axis
+  const centerX = target.x < source.x ? target.x + offsetX : source.x + offsetX;
+  const centerY = target.y < source.y ? target.y + offsetY : source.y + offsetY;
+  return [centerX, centerY, offsetX, offsetY];
 }
 
 /***/ }),
 
-/***/ 24554:
-/*!***********************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/top-right-smoothstep.util.ts ***!
-  \***********************************************************************************************************************************/
+/***/ 602:
+/*!**********************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/index.ts ***!
+  \**********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createTopRightCurve: () => (/* binding */ createTopRightCurve)
+/* harmony export */   createSmoothStepPath: () => (/* reexport safe */ _smooth_step__WEBPACK_IMPORTED_MODULE_0__.createSmoothStepPath)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
+/* harmony import */ var _smooth_step__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./smooth-step */ 9453);
 
-
-function createTopRightCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE + radius < endX;
-  const isEndPointOnUpSide = startY > endY;
-  const verticalDifference = startY - endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE;
-  if (isEndPointOnRightSide && isEndPointOnUpSide) {
-    const secondRadius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnUpSide && isEndPointOnRightSide) {
-    const secondRadius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(verticalDifference, radius);
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, secondRadius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(endX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, secondRadius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnUpSide && !isEndPointOnRightSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, true, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX + _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  if (!isEndPointOnRightSide && isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, endY, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
-  }
-  return '';
-}
 
 /***/ }),
 
-/***/ 45663:
-/*!*********************************************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/curvatures/top-top-smoothstep.util.ts ***!
-  \*********************************************************************************************************************************/
+/***/ 6508:
+/*!********************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/path-parts/bend.ts ***!
+  \********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createTopTopCurve: () => (/* binding */ createTopTopCurve)
+/* harmony export */   bend: () => (/* binding */ bend)
 /* harmony export */ });
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../consts */ 46764);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils */ 57063);
+/* harmony import */ var _calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../calculate-distance.util */ 9176);
 
-
-function createTopTopCurve({
-  startX,
-  startY,
-  endX,
-  endY,
-  radius
-}) {
-  const isEndPointOnRightSide = startX < endX;
-  const isEndPointOnUpSide = startY > endY;
-  const horizontalDifference = startX - endX;
-  radius = (0,_utils__WEBPACK_IMPORTED_MODULE_1__.adjustRadius)(horizontalDifference, radius);
-  if (startY === endY) {
-    return '';
+/**
+ * Builds an SVG path segment describing a rounded bend that smoothly joins
+ * the straight legs coming **into** and **out of** the waypoint **cornerPoint**.
+ *
+ * @param startPoint  point before the bend
+ * @param cornerPoint the actual “corner” point
+ * @param endPoint    point after the bend
+ * @param maxRadius   upper bound for the smoothing radius
+ */
+// eslint-disable-next-line @typescript-eslint/max-params
+function bend(startPoint, cornerPoint, endPoint, maxRadius) {
+  // Choose the largest radius that “fits” both legs and does not exceed maxRadius
+  const bendRadius = Math.min((0,_calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__.calculateDistance)(startPoint, cornerPoint) / 2, (0,_calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__.calculateDistance)(cornerPoint, endPoint) / 2, maxRadius);
+  // If all three points lie on the same straight line, no rounding is needed
+  const isColinear = startPoint.x === cornerPoint.x && cornerPoint.x === endPoint.x || startPoint.y === cornerPoint.y && cornerPoint.y === endPoint.y;
+  if (isColinear) {
+    return `L${cornerPoint.x} ${cornerPoint.y}`; // simple straight-line segment
   }
-  if (isEndPointOnUpSide) {
-    return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), isEndPointOnRightSide ? (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide) : (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, endY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
+  // Determine whether we are entering the corner horizontally */
+  const enteringHorizontally = startPoint.y === cornerPoint.y;
+  // horizontal → vertical turn
+  if (enteringHorizontally) {
+    const xDir = startPoint.x < endPoint.x ? -1 : 1; // step “back” along X
+    const yDir = startPoint.y < endPoint.y ? 1 : -1; // and “forward” along Y
+    return `L ${cornerPoint.x + bendRadius * xDir},${cornerPoint.y}` +
+    // straight segment
+    `Q ${cornerPoint.x},${cornerPoint.y} ${cornerPoint.x},${cornerPoint.y + bendRadius * yDir}` // quarter-circle
+    ;
   }
-  return [(0,_utils__WEBPACK_IMPORTED_MODULE_1__.createStartPoint)(startX, startY), isEndPointOnRightSide ? (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToRightWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide) : (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createVerticalLineToLeftWithCurve)(startX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, !isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createHorizontalLineWithCurve)(endX, startY - _consts__WEBPACK_IMPORTED_MODULE_0__.MIN_LINE_SIZE, radius, isEndPointOnRightSide, isEndPointOnUpSide), (0,_utils__WEBPACK_IMPORTED_MODULE_1__.createEndPoint)(endX, endY)].join(' ');
+  // vertical → horizontal turn
+  const xDir = startPoint.x < endPoint.x ? 1 : -1; // “forward” along X
+  const yDir = startPoint.y < endPoint.y ? -1 : 1; // step “back” along Y
+  return `L ${cornerPoint.x},${cornerPoint.y + bendRadius * yDir}` +
+  // straight segment
+  `Q ${cornerPoint.x},${cornerPoint.y} ${cornerPoint.x + bendRadius * xDir},${cornerPoint.y}` // quarter-circle
+  ;
 }
 
 /***/ }),
 
-/***/ 37842:
-/*!****************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/index.ts ***!
-  \****************************************************************************************************/
+/***/ 9387:
+/*!*************************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/path-parts/waypoints.ts ***!
+  \*************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createSmoothstepPath: () => (/* reexport safe */ _create_smoothstep_path_util__WEBPACK_IMPORTED_MODULE_0__.createSmoothstepPath)
+/* harmony export */   computeWaypoints: () => (/* binding */ computeWaypoints)
 /* harmony export */ });
-/* harmony import */ var _create_smoothstep_path_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./create-smoothstep-path.util */ 83539);
+/* harmony import */ var _helpers_get_primary_direction__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/get-primary-direction */ 1371);
+/* harmony import */ var _helpers_smooth_step_edge_center__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/smooth-step-edge-center */ 335);
+/* harmony import */ var _smooth_step_consts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../smooth-step.consts */ 5939);
 
+
+
+/**
+ * Returns all points that form the polyline **before** the bezier smoothing is
+ * applied. Additionally returns the center of the longest straight segment –
+ * handy for label placement.
+ */
+function computeWaypoints(pointsParams) {
+  /**
+   * Unpack input, apply fall-backs
+   */
+  const {
+    source,
+    sourcePos,
+    target,
+    targetPos,
+    offset = _smooth_step_consts__WEBPACK_IMPORTED_MODULE_2__.MIN_SEGMENT_LENGTH,
+    centerOverride = {}
+  } = pointsParams;
+  /**
+   * Compute the unit directions for each connector
+   */
+  const sourceDir = _smooth_step_consts__WEBPACK_IMPORTED_MODULE_2__.CONNECTOR_DIRECTIONS[sourcePos];
+  const targetDir = _smooth_step_consts__WEBPACK_IMPORTED_MODULE_2__.CONNECTOR_DIRECTIONS[targetPos];
+  /**
+   * Create “gap points” that leave a small offset straight out
+   * of each connector so the edge never starts/ends inside a node
+   */
+  const sourceGap = {
+    x: source.x + sourceDir.x * offset,
+    y: source.y + sourceDir.y * offset
+  };
+  const targetGap = {
+    x: target.x + targetDir.x * offset,
+    y: target.y + targetDir.y * offset
+  };
+  /**
+   * Decide whether the first long segment should run horizontally
+   * or vertically.  This is the “primary axis” chosen so that we
+   * head *towards* the target rather than backwards.
+   */
+  const firstStep = (0,_helpers_get_primary_direction__WEBPACK_IMPORTED_MODULE_0__.getPrimaryDirection)(sourceGap, sourcePos, targetGap);
+  const primaryAxis = firstStep.x !== 0 ? 'x' : 'y';
+  const axisSign = firstStep[primaryAxis]; //  +1 or -1
+  /**
+   * Fallback geometric center used for label placement
+   */
+  const [fallbackCX, fallbackCY] = (0,_helpers_smooth_step_edge_center__WEBPACK_IMPORTED_MODULE_1__.getSmoothStepEdgeCenter)({
+    source,
+    target
+  });
+  let labelCenterX = centerOverride.x ?? fallbackCX;
+  let labelCenterY = centerOverride.y ?? fallbackCY;
+  /**
+   * Build the elbow(s) — the intermediate waypoints
+   */
+  let elbows = [];
+  const sourceOpposesTarget = sourceDir[primaryAxis] * targetDir[primaryAxis] === -1; // true for Left→Right, Top→Bottom
+  // Case A ─ Opposite sides
+  if (sourceOpposesTarget) {
+    const verticalSplit = [{
+      x: labelCenterX,
+      y: sourceGap.y
+    }, {
+      x: labelCenterX,
+      y: targetGap.y
+    }];
+    const horizontalSplit = [{
+      x: sourceGap.x,
+      y: labelCenterY
+    }, {
+      x: targetGap.x,
+      y: labelCenterY
+    }];
+    const keepDirection = sourceDir[primaryAxis] === axisSign;
+    if (primaryAxis === 'x') {
+      elbows = keepDirection ? verticalSplit : horizontalSplit;
+    } else {
+      elbows = keepDirection ? horizontalSplit : verticalSplit;
+    }
+  }
+  // Case B ─ Same / mixed
+  else {
+    const sourceToTarget = [{
+      x: sourceGap.x,
+      y: targetGap.y
+    }];
+    const targetToSource = [{
+      x: targetGap.x,
+      y: sourceGap.y
+    }];
+    if (primaryAxis === 'x') {
+      elbows = sourceDir.x === axisSign ? targetToSource : sourceToTarget;
+    } else {
+      elbows = sourceDir.y === axisSign ? sourceToTarget : targetToSource;
+    }
+    /** Detect & flip elbow to avoid overlap with the nodes */
+    if (sourcePos !== targetPos) {
+      const crossAxis = primaryAxis === 'x' ? 'y' : 'x';
+      const sameCardinal = sourceDir[primaryAxis] === targetDir[crossAxis];
+      const mustFlip = sourceDir[primaryAxis] === 1 && (!sameCardinal && sourceGap[crossAxis] > targetGap[crossAxis] || sameCardinal && sourceGap[crossAxis] <= targetGap[crossAxis]) || sourceDir[primaryAxis] === -1 && (!sameCardinal && sourceGap[crossAxis] < targetGap[crossAxis] || sameCardinal && sourceGap[crossAxis] >= targetGap[crossAxis]);
+      if (mustFlip) {
+        elbows = primaryAxis === 'x' ? sourceToTarget : targetToSource;
+      }
+    }
+    /** Re-compute label center so it sits on the longest straight leg */
+    const longestX = Math.max(Math.abs(sourceGap.x - elbows[0].x), Math.abs(targetGap.x - elbows[0].x));
+    const longestY = Math.max(Math.abs(sourceGap.y - elbows[0].y), Math.abs(targetGap.y - elbows[0].y));
+    if (longestX >= longestY) {
+      labelCenterX = (sourceGap.x + targetGap.x) / 2;
+      labelCenterY = elbows[0].y;
+    } else {
+      labelCenterX = elbows[0].x;
+      labelCenterY = (sourceGap.y + targetGap.y) / 2;
+    }
+  }
+  /**
+   * Assemble the full polyline: connector-center ➜ gap ➜ elbows
+   */
+  const polyline = [source, sourceGap, ...elbows, targetGap, target // 4. finish at connector center
+  ];
+  /**
+   * Return: [polyline points, labelCenterX, labelCenterY]
+   */
+  return [polyline, labelCenterX, labelCenterY];
+}
 
 /***/ }),
 
-/***/ 57063:
-/*!****************************************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/create-smoothstep-path/utils.ts ***!
-  \****************************************************************************************************/
+/***/ 5939:
+/*!***********************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/smooth-step.consts.ts ***!
+  \***********************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   adjustRadius: () => (/* binding */ adjustRadius),
-/* harmony export */   createEndPoint: () => (/* binding */ createEndPoint),
-/* harmony export */   createHorizontalLineWithCurve: () => (/* binding */ createHorizontalLineWithCurve),
-/* harmony export */   createLine: () => (/* binding */ createLine),
-/* harmony export */   createStartPoint: () => (/* binding */ createStartPoint),
-/* harmony export */   createVerticalLineToLeftWithCurve: () => (/* binding */ createVerticalLineToLeftWithCurve),
-/* harmony export */   createVerticalLineToRightWithCurve: () => (/* binding */ createVerticalLineToRightWithCurve)
+/* harmony export */   CONNECTOR_DIRECTIONS: () => (/* binding */ CONNECTOR_DIRECTIONS),
+/* harmony export */   MIN_SEGMENT_LENGTH: () => (/* binding */ MIN_SEGMENT_LENGTH)
 /* harmony export */ });
-function adjustRadius(difference, radius) {
-  if (Math.abs(difference) <= radius * 4) {
-    return Math.abs(difference) / 4;
+/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../ng-draw-flow.interfaces */ 1954);
+
+/**
+ * Minimum length (in px) of the first straight segment that leaves a connector.
+ */
+const MIN_SEGMENT_LENGTH = 20;
+/**
+ * Unit vectors that describe where a connection should leave a connector
+ * depending on its declared position.
+ */
+const CONNECTOR_DIRECTIONS = {
+  [_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Left]: {
+    x: -1,
+    y: 0
+  },
+  [_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right]: {
+    x: 1,
+    y: 0
+  },
+  [_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top]: {
+    x: 0,
+    y: -1
+  },
+  [_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom]: {
+    x: 0,
+    y: 1
   }
-  if (Math.abs(difference) <= radius * 2) {
-    return Math.abs(difference) / 2;
-  }
-  return radius;
-}
-function createStartPoint(x, y) {
-  return `M ${x} ${y}`;
-}
-function createEndPoint(x, y) {
-  return createLine(x, y);
-}
-/* eslint-disable @typescript-eslint/max-params */
-function createHorizontalLineWithCurve(x, y, radius, isEndPointOnRightSide, isEndPointOnUpSide) {
-  const lineToCurvature = createLine(isEndPointOnRightSide ? x - radius : x + radius, y);
-  return `${lineToCurvature} Q ${x} ${y}, ${x} ${isEndPointOnUpSide ? y - radius : y + radius}`;
-}
-function createVerticalLineToRightWithCurve(x, y, radius, isEndPointOnUpSide = false) {
-  const lineToCurvature = createLine(x, isEndPointOnUpSide ? y + radius : y - radius);
-  return `${lineToCurvature} Q ${x} ${y}, ${x + radius} ${y}`;
-}
-function createVerticalLineToLeftWithCurve(x, y, radius, isEndPointOnUpSide = false) {
-  const lineToCurvature = createLine(x, isEndPointOnUpSide ? y + radius : y - radius);
-  return `${lineToCurvature} Q ${x} ${y}, ${x - radius} ${y}`;
-}
-/* eslint-enable @typescript-eslint/max-params */
-function createLine(x, y) {
-  return `L ${x} ${y}`;
+};
+
+/***/ }),
+
+/***/ 9453:
+/*!****************************************************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/connection-paths/smooth-step/smooth-step.ts ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createSmoothStepPath: () => (/* binding */ createSmoothStepPath)
+/* harmony export */ });
+/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../ng-draw-flow.interfaces */ 1954);
+/* harmony import */ var _path_parts_bend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./path-parts/bend */ 6508);
+/* harmony import */ var _path_parts_waypoints__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./path-parts/waypoints */ 9387);
+
+
+
+/**
+ * Draws a smooth-step SVG path between two connectors.
+ *
+ * @param startConnector   Data for the start connector.
+ * @param endConnector     Data for the end connector.
+ * @param radius           Radius of each bend (in pixels).
+ * @returns                A string suitable for the `d` attribute of an SVG `<path>`.
+ */
+function createSmoothStepPath(startConnector, endConnector, radius = 5) {
+  // Default to Bottom/Top when the position is null (e.g. while a draft edge is dragged).
+  const sourcePos = startConnector.position ?? _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Bottom;
+  const targetPos = endConnector.position ?? _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Top;
+  const [polyline] = (0,_path_parts_waypoints__WEBPACK_IMPORTED_MODULE_2__.computeWaypoints)({
+    source: startConnector.point,
+    sourcePos,
+    target: endConnector.point,
+    targetPos
+  });
+  /** Convert the polyline to an SVG path (M, L, Q commands). */
+  const path = polyline.reduce(
+  // eslint-disable-next-line @typescript-eslint/max-params
+  (computedPath, point, pathStepIndex, arr) => {
+    /* a) First point — use `M` (move-to). */
+    if (pathStepIndex === 0) {
+      return `M${point.x} ${point.y}`;
+    }
+    /* b) Last point — straight segment `L`. */
+    if (pathStepIndex === arr.length - 1) {
+      return `${computedPath}L${point.x} ${point.y}`;
+    }
+    /* c) Intermediate waypoint — insert a rounded bend (`L` + `Q`). */
+    return `${computedPath}${(0,_path_parts_bend__WEBPACK_IMPORTED_MODULE_1__.bend)(arr[pathStepIndex - 1], point, arr[pathStepIndex + 1], radius)}`;
+  }, '');
+  return path; // ready-made `d` attribute for <path>
 }
 
 /***/ }),
 
-/***/ 30134:
+/***/ 134:
 /*!**************************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/get-coonector-dataset.util.ts ***!
   \**************************************************************************************************/
@@ -2925,7 +2350,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getConnectorDataset: () => (/* binding */ getConnectorDataset)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers */ 50315);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers */ 315);
 
 function getConnectorDataset(element) {
   const {
@@ -2945,7 +2370,7 @@ function getConnectorDataset(element) {
 
 /***/ }),
 
-/***/ 77846:
+/***/ 7846:
 /*!*****************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/index.ts ***!
   \*****************************************************************************/
@@ -2953,15 +2378,15 @@ function getConnectorDataset(element) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   calculateCurvature: () => (/* reexport safe */ _calculate_curvature_util__WEBPACK_IMPORTED_MODULE_0__.calculateCurvature),
-/* harmony export */   calculateDistance: () => (/* reexport safe */ _calculate_distance_util__WEBPACK_IMPORTED_MODULE_1__.calculateDistance),
-/* harmony export */   createBezierPath: () => (/* reexport safe */ _create_bezier_path_util__WEBPACK_IMPORTED_MODULE_2__.createBezierPath),
-/* harmony export */   createSmoothstepPath: () => (/* reexport safe */ _create_smoothstep_path__WEBPACK_IMPORTED_MODULE_3__.createSmoothstepPath)
+/* harmony export */   calculateDistance: () => (/* reexport safe */ _calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__.calculateDistance),
+/* harmony export */   createBezierPath: () => (/* reexport safe */ _connection_paths_bezier__WEBPACK_IMPORTED_MODULE_1__.createBezierPath),
+/* harmony export */   createSmoothStepPath: () => (/* reexport safe */ _connection_paths_smooth_step__WEBPACK_IMPORTED_MODULE_2__.createSmoothStepPath),
+/* harmony export */   point: () => (/* reexport safe */ _point__WEBPACK_IMPORTED_MODULE_3__.point)
 /* harmony export */ });
-/* harmony import */ var _calculate_curvature_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calculate-curvature.util */ 80554);
-/* harmony import */ var _calculate_distance_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./calculate-distance.util */ 89176);
-/* harmony import */ var _create_bezier_path_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create-bezier-path.util */ 34880);
-/* harmony import */ var _create_smoothstep_path__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create-smoothstep-path */ 37842);
+/* harmony import */ var _calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calculate-distance.util */ 9176);
+/* harmony import */ var _connection_paths_bezier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./connection-paths/bezier */ 8548);
+/* harmony import */ var _connection_paths_smooth_step__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./connection-paths/smooth-step */ 602);
+/* harmony import */ var _point__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./point */ 7292);
 
 
 
@@ -2969,7 +2394,24 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 11008:
+/***/ 7292:
+/*!*****************************************************************************!*\
+  !*** ./projects/ng-draw-flow/src/lib/components/connections/utils/point.ts ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   point: () => (/* binding */ point)
+/* harmony export */ });
+const point = (x, y) => ({
+  x,
+  y
+});
+
+/***/ }),
+
+/***/ 1008:
 /*!*******************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connectors/base-connector.ts ***!
   \*******************************************************************************/
@@ -2979,10 +2421,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   BaseConnector: () => (/* binding */ BaseConnector)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 61856);
-/* harmony import */ var _connections_connections_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../connections/connections.service */ 39976);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var _connections_connections_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../connections/connections.service */ 9976);
 var _BaseConnector;
 
 
@@ -3038,7 +2480,7 @@ _BaseConnector.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["
 
 /***/ }),
 
-/***/ 58783:
+/***/ 8783:
 /*!**********************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connectors/index.ts ***!
   \**********************************************************************/
@@ -3049,14 +2491,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DfInputComponent: () => (/* reexport safe */ _input_component__WEBPACK_IMPORTED_MODULE_0__.DfInputComponent),
 /* harmony export */   DfOutputComponent: () => (/* reexport safe */ _output_component__WEBPACK_IMPORTED_MODULE_1__.DfOutputComponent)
 /* harmony export */ });
-/* harmony import */ var _input_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./input.component */ 40750);
-/* harmony import */ var _output_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./output.component */ 33451);
+/* harmony import */ var _input_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./input.component */ 750);
+/* harmony import */ var _output_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./output.component */ 3451);
 
 
 
 /***/ }),
 
-/***/ 40750:
+/***/ 750:
 /*!********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connectors/input.component.ts ***!
   \********************************************************************************/
@@ -3067,8 +2509,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DfInputComponent: () => (/* binding */ DfInputComponent)
 /* harmony export */ });
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _base_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base-connector */ 11008);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _base_connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./base-connector */ 1008);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 6623);
 var _DfInputComponent;
 
 
@@ -3106,7 +2548,7 @@ _DfInputComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2_
 
 /***/ }),
 
-/***/ 33451:
+/***/ 3451:
 /*!*********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/connectors/output.component.ts ***!
   \*********************************************************************************/
@@ -3116,10 +2558,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DfOutputComponent: () => (/* binding */ DfOutputComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.service */ 27232);
-/* harmony import */ var _base_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-connector */ 11008);
+/* harmony import */ var _connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.service */ 7232);
+/* harmony import */ var _base_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-connector */ 1008);
 var _DfOutputComponent;
 
 
@@ -3182,7 +2624,7 @@ _DfOutputComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3
 
 /***/ }),
 
-/***/ 76458:
+/***/ 6458:
 /*!*************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/node/node.component.ts ***!
   \*************************************************************************/
@@ -3192,19 +2634,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   NodeComponent: () => (/* binding */ NodeComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 870);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 61969);
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../consts */ 82110);
-/* harmony import */ var _directives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../directives */ 52256);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers */ 50315);
-/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ng-draw-flow.configs */ 90167);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 1969);
+/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../consts */ 2110);
+/* harmony import */ var _directives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../directives */ 2256);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers */ 315);
+/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ng-draw-flow.configs */ 167);
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ng-draw-flow.token */ 59497);
-/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/coordinates.service */ 65092);
-/* harmony import */ var _pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pan-zoom/pan-zoom.options */ 25741);
-/* harmony import */ var _pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pan-zoom/pan-zoom.service */ 96592);
+/* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ng-draw-flow.token */ 9497);
+/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/coordinates.service */ 5092);
+/* harmony import */ var _pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../pan-zoom/pan-zoom.options */ 5741);
+/* harmony import */ var _pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../pan-zoom/pan-zoom.service */ 6592);
 var _NodeComponent;
 
 
@@ -3467,7 +2909,7 @@ class NodeComponent {
     // Get current pan position
     const scaledPanPositionX = halfOfPanSize + panPositionX * -1 / zoom;
     const scaledPanPositionY = halfOfPanSize + panPositionY * -1 / zoom;
-    // Calculating the centre of the visible part of the viewport relative to the whole board
+    // Calculating the center of the visible part of the viewport relative to the whole board
     const position = {
       x: scaledPanPositionX - halfOfPanSize,
       y: scaledPanPositionY - halfOfPanSize
@@ -3615,7 +3057,7 @@ _NodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["
 
 /***/ }),
 
-/***/ 24408:
+/***/ 4408:
 /*!*********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/pan-zoom.component.ts ***!
   \*********************************************************************************/
@@ -3625,29 +3067,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomComponent: () => (/* binding */ PanZoomComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _ng_web_apis_resize_observer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-web-apis/resize-observer */ 65238);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 95536);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 63150);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 56816);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_web_apis_resize_observer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-web-apis/resize-observer */ 5238);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 5536);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 3150);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 6816);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 870);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 47066);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 83919);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 97757);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 11640);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 61969);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 7066);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 3919);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 7757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 1640);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 1969);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs */ 5219);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs */ 75117);
-/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../consts */ 82110);
-/* harmony import */ var _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../directives/drag-drop */ 84967);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers */ 50315);
-/* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ng-draw-flow.token */ 59497);
-/* harmony import */ var _pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pan-zoom.const */ 69104);
-/* harmony import */ var _pan_zoom_options__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pan-zoom.options */ 25741);
-/* harmony import */ var _pan_zoom_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pan-zoom.service */ 96592);
-/* harmony import */ var _zoom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./zoom */ 18720);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs */ 5117);
+/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../consts */ 2110);
+/* harmony import */ var _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../directives/drag-drop */ 4967);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers */ 315);
+/* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ng-draw-flow.token */ 9497);
+/* harmony import */ var _pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pan-zoom.const */ 9104);
+/* harmony import */ var _pan_zoom_options__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pan-zoom.options */ 5741);
+/* harmony import */ var _pan_zoom_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pan-zoom.service */ 6592);
+/* harmony import */ var _zoom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./zoom */ 8720);
 var _PanZoomComponent;
 
 
@@ -3876,7 +3318,7 @@ _PanZoomComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8_
 
 /***/ }),
 
-/***/ 69104:
+/***/ 9104:
 /*!*****************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/pan-zoom.const.ts ***!
   \*****************************************************************************/
@@ -3890,7 +3332,7 @@ const DF_PAN_ZOOM_INITIAL_SCALE = 1;
 
 /***/ }),
 
-/***/ 25741:
+/***/ 5741:
 /*!*******************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/pan-zoom.options.ts ***!
   \*******************************************************************************/
@@ -3902,7 +3344,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DF_PAN_ZOOM_OPTIONS: () => (/* binding */ DF_PAN_ZOOM_OPTIONS),
 /* harmony export */   dfPanZoomOptionsProvider: () => (/* binding */ dfPanZoomOptionsProvider)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
 
 const DF_PAN_ZOOM_DEFAULT_OPTIONS = {
   panSize: 20000,
@@ -3930,7 +3372,7 @@ function dfPanZoomOptionsProvider(options) {
 
 /***/ }),
 
-/***/ 96592:
+/***/ 6592:
 /*!*******************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/pan-zoom.service.ts ***!
   \*******************************************************************************/
@@ -3940,7 +3382,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomService: () => (/* binding */ PanZoomService)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
 var _PanZoomService;
 
 class PanZoomService {
@@ -3967,7 +3409,7 @@ _PanZoomService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__
 
 /***/ }),
 
-/***/ 18720:
+/***/ 8720:
 /*!*************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/zoom/index.ts ***!
   \*************************************************************************/
@@ -3977,12 +3419,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ZoomDirective: () => (/* reexport safe */ _zoom_directive__WEBPACK_IMPORTED_MODULE_0__.ZoomDirective)
 /* harmony export */ });
-/* harmony import */ var _zoom_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./zoom.directive */ 30370);
+/* harmony import */ var _zoom_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./zoom.directive */ 370);
 
 
 /***/ }),
 
-/***/ 30370:
+/***/ 370:
 /*!**********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/zoom/zoom.directive.ts ***!
   \**********************************************************************************/
@@ -3992,8 +3434,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ZoomDirective: () => (/* binding */ ZoomDirective)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _zoom_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./zoom.service */ 65588);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _zoom_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./zoom.service */ 5588);
 var _ZoomDirective;
 
 
@@ -4026,7 +3468,7 @@ _ZoomDirective.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["
 
 /***/ }),
 
-/***/ 65588:
+/***/ 5588:
 /*!********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/pan-zoom/zoom/zoom.service.ts ***!
   \********************************************************************************/
@@ -4036,18 +3478,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ZoomService: () => (/* binding */ ZoomService)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 64517);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 4517);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 870);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 47066);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 61856);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 21082);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 83919);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 29155);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 65213);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers */ 50315);
-/* harmony import */ var _pan_zoom_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pan-zoom.options */ 25741);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 7066);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 1082);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 3919);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 9155);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 5213);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helpers */ 315);
+/* harmony import */ var _pan_zoom_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pan-zoom.options */ 5741);
 var _ZoomService;
 
 
@@ -4120,7 +3562,7 @@ _ZoomService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["�
 
 /***/ }),
 
-/***/ 17788:
+/***/ 5407:
 /*!***************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/components/scene/scene.component.ts ***!
   \***************************************************************************/
@@ -4130,18 +3572,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SceneComponent: () => (/* binding */ SceneComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 61856);
-/* harmony import */ var _validators_invalid_nodes_token__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../validators/invalid-nodes.token */ 91565);
-/* harmony import */ var _connections_connection_connection_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../connections/connection/connection.component */ 53700);
-/* harmony import */ var _connections_connections_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/connections.service */ 39976);
-/* harmony import */ var _connections_draft_connection_draft_connection_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.component */ 71848);
-/* harmony import */ var _connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.service */ 27232);
-/* harmony import */ var _node_node_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../node/node.component */ 76458);
-/* harmony import */ var _pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pan-zoom/pan-zoom.options */ 25741);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var _validators_invalid_nodes_token__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../validators/invalid-nodes.token */ 1565);
+/* harmony import */ var _connections_connection_connection_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../connections/connection/connection.component */ 3700);
+/* harmony import */ var _connections_connections_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/connections.service */ 9976);
+/* harmony import */ var _connections_draft_connection_draft_connection_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.component */ 1848);
+/* harmony import */ var _connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.service */ 7232);
+/* harmony import */ var _node_node_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../node/node.component */ 6458);
+/* harmony import */ var _pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../pan-zoom/pan-zoom.options */ 5741);
 var _SceneComponent;
 
 
@@ -4383,7 +3825,7 @@ _SceneComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__[
 
 /***/ }),
 
-/***/ 81725:
+/***/ 1725:
 /*!**********************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/consts/handlers.ts ***!
   \**********************************************************/
@@ -4405,7 +3847,7 @@ const DF_TRUE_HANDLER = () => true;
 
 /***/ }),
 
-/***/ 82110:
+/***/ 2110:
 /*!*******************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/consts/index.ts ***!
   \*******************************************************/
@@ -4417,14 +3859,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DF_TRUE_HANDLER: () => (/* reexport safe */ _handlers__WEBPACK_IMPORTED_MODULE_0__.DF_TRUE_HANDLER),
 /* harmony export */   INITIAL_COORDINATES: () => (/* reexport safe */ _initial_coordinates__WEBPACK_IMPORTED_MODULE_1__.INITIAL_COORDINATES)
 /* harmony export */ });
-/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handlers */ 81725);
-/* harmony import */ var _initial_coordinates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./initial-coordinates */ 98072);
+/* harmony import */ var _handlers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./handlers */ 1725);
+/* harmony import */ var _initial_coordinates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./initial-coordinates */ 8072);
 
 
 
 /***/ }),
 
-/***/ 98072:
+/***/ 8072:
 /*!*********************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/consts/initial-coordinates.ts ***!
   \*********************************************************************/
@@ -4441,7 +3883,7 @@ const INITIAL_COORDINATES = {
 
 /***/ }),
 
-/***/ 88760:
+/***/ 8760:
 /*!***********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/drag-drop.directive.ts ***!
   \***********************************************************************************/
@@ -4451,8 +3893,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DragDropDirective: () => (/* binding */ DragDropDirective)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _drag_drop_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.service */ 72830);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _drag_drop_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.service */ 449);
 var _DragDropDirective;
 
 
@@ -4479,7 +3921,7 @@ _DragDropDirective.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1
 
 /***/ }),
 
-/***/ 16984:
+/***/ 6984:
 /*!******************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/drag-drop.enum.ts ***!
   \******************************************************************************/
@@ -4498,7 +3940,7 @@ var DfDragDropStage;
 
 /***/ }),
 
-/***/ 17598:
+/***/ 5217:
 /*!***********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/drag-drop.interface.ts ***!
   \***********************************************************************************/
@@ -4509,7 +3951,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 72830:
+/***/ 449:
 /*!*********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/drag-drop.service.ts ***!
   \*********************************************************************************/
@@ -4519,20 +3961,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DragDropService: () => (/* binding */ DragDropService)
 /* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 47066);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 95603);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 21082);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 61856);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 75117);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 95840);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 83919);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 97757);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 65213);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 7066);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 5603);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ 1082);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 5117);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 5840);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 3919);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 7757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 5213);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 870);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 42393);
-/* harmony import */ var _drag_drop_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.enum */ 16984);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 2393);
+/* harmony import */ var _drag_drop_enum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.enum */ 6984);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/core */ 6623);
 var _DragDropService;
 
 
@@ -4617,7 +4059,7 @@ _DragDropService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_13
 
 /***/ }),
 
-/***/ 84967:
+/***/ 4967:
 /*!*********************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/index.ts ***!
   \*********************************************************************/
@@ -4629,10 +4071,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DragDropDirective: () => (/* reexport safe */ _drag_drop_directive__WEBPACK_IMPORTED_MODULE_0__.DragDropDirective),
 /* harmony export */   DragDropService: () => (/* reexport safe */ _drag_drop_service__WEBPACK_IMPORTED_MODULE_3__.DragDropService)
 /* harmony export */ });
-/* harmony import */ var _drag_drop_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.directive */ 88760);
-/* harmony import */ var _drag_drop_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./drag-drop.enum */ 16984);
-/* harmony import */ var _drag_drop_interface__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./drag-drop.interface */ 17598);
-/* harmony import */ var _drag_drop_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./drag-drop.service */ 72830);
+/* harmony import */ var _drag_drop_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.directive */ 8760);
+/* harmony import */ var _drag_drop_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./drag-drop.enum */ 6984);
+/* harmony import */ var _drag_drop_interface__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./drag-drop.interface */ 5217);
+/* harmony import */ var _drag_drop_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./drag-drop.service */ 449);
 
 
 
@@ -4640,7 +4082,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 87116:
+/***/ 7116:
 /*!*****************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/errors/errors.directive.ts ***!
   \*****************************************************************************/
@@ -4650,16 +4092,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ErrorsDirective: () => (/* binding */ ErrorsDirective)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 11640);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 56816);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 79746);
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers */ 50315);
-/* harmony import */ var _helpers_collect_invalid_node_ids__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/collect-invalid-node-ids */ 31415);
-/* harmony import */ var _validators_invalid_nodes_token__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../validators/invalid-nodes.token */ 91565);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ 1640);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs */ 6816);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 9746);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers */ 315);
+/* harmony import */ var _helpers_collect_invalid_node_ids__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers/collect-invalid-node-ids */ 1415);
+/* harmony import */ var _validators_invalid_nodes_token__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../validators/invalid-nodes.token */ 1565);
 var _ErrorsDirective;
 
 
@@ -4698,7 +4140,7 @@ _ErrorsDirective.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__
 
 /***/ }),
 
-/***/ 63602:
+/***/ 3602:
 /*!******************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/errors/index.ts ***!
   \******************************************************************/
@@ -4708,12 +4150,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ErrorsDirective: () => (/* reexport safe */ _errors_directive__WEBPACK_IMPORTED_MODULE_0__.ErrorsDirective)
 /* harmony export */ });
-/* harmony import */ var _errors_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./errors.directive */ 87116);
+/* harmony import */ var _errors_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./errors.directive */ 7116);
 
 
 /***/ }),
 
-/***/ 52256:
+/***/ 2256:
 /*!***********************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/index.ts ***!
   \***********************************************************/
@@ -4728,10 +4170,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ErrorsDirective: () => (/* reexport safe */ _errors__WEBPACK_IMPORTED_MODULE_1__.ErrorsDirective),
 /* harmony export */   SelectableElementDirective: () => (/* reexport safe */ _selectable_element__WEBPACK_IMPORTED_MODULE_3__.SelectableElementDirective)
 /* harmony export */ });
-/* harmony import */ var _drag_drop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop */ 84967);
-/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors */ 63602);
-/* harmony import */ var _resize_observer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resize-observer */ 63470);
-/* harmony import */ var _selectable_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectable-element */ 41408);
+/* harmony import */ var _drag_drop__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop */ 4967);
+/* harmony import */ var _errors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./errors */ 3602);
+/* harmony import */ var _resize_observer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resize-observer */ 3470);
+/* harmony import */ var _selectable_element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./selectable-element */ 1408);
 
 
 
@@ -4739,7 +4181,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 63470:
+/***/ 3470:
 /*!***************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/resize-observer/index.ts ***!
   \***************************************************************************/
@@ -4749,12 +4191,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DfResizeObserver: () => (/* reexport safe */ _resize_observer_directive__WEBPACK_IMPORTED_MODULE_0__.DfResizeObserver)
 /* harmony export */ });
-/* harmony import */ var _resize_observer_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./resize-observer.directive */ 62768);
+/* harmony import */ var _resize_observer_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./resize-observer.directive */ 2768);
 
 
 /***/ }),
 
-/***/ 62768:
+/***/ 2768:
 /*!***********************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/resize-observer/resize-observer.directive.ts ***!
   \***********************************************************************************************/
@@ -4764,8 +4206,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DfResizeObserver: () => (/* binding */ DfResizeObserver)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _ng_web_apis_resize_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-web-apis/resize-observer */ 65238);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_web_apis_resize_observer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-web-apis/resize-observer */ 5238);
 var _DfResizeObserver;
 
 
@@ -4803,7 +4245,7 @@ _DfResizeObserver.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0_
 
 /***/ }),
 
-/***/ 41408:
+/***/ 1408:
 /*!******************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/selectable-element/index.ts ***!
   \******************************************************************************/
@@ -4813,12 +4255,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SelectableElementDirective: () => (/* reexport safe */ _selectable_element_directive__WEBPACK_IMPORTED_MODULE_0__.SelectableElementDirective)
 /* harmony export */ });
-/* harmony import */ var _selectable_element_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./selectable-element.directive */ 25732);
+/* harmony import */ var _selectable_element_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./selectable-element.directive */ 5732);
 
 
 /***/ }),
 
-/***/ 25732:
+/***/ 5732:
 /*!*****************************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/selectable-element/selectable-element.directive.ts ***!
   \*****************************************************************************************************/
@@ -4828,8 +4270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SelectableElementDirective: () => (/* binding */ SelectableElementDirective)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _services_selection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/selection.service */ 79989);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _services_selection_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/selection.service */ 9989);
 var _SelectableElementDirective;
 
 
@@ -4876,7 +4318,7 @@ _SelectableElementDirective.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
 
 /***/ }),
 
-/***/ 66572:
+/***/ 6572:
 /*!********************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/clamp.ts ***!
   \********************************************************/
@@ -4899,7 +4341,7 @@ function dfClamp(value, min, max) {
 
 /***/ }),
 
-/***/ 31415:
+/***/ 1415:
 /*!***************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/collect-invalid-node-ids.ts ***!
   \***************************************************************************/
@@ -4927,7 +4369,7 @@ function collectInvalidNodeIds(errors) {
 
 /***/ }),
 
-/***/ 45048:
+/***/ 5048:
 /*!************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/connector.ts ***!
   \************************************************************/
@@ -4959,7 +4401,7 @@ function createConnectorHash(connector) {
 
 /***/ }),
 
-/***/ 72248:
+/***/ 2248:
 /*!*************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/deep-equal.ts ***!
   \*************************************************************/
@@ -5068,7 +4510,7 @@ function deepEqual(a, b, visited = new Map()) {
 
 /***/ }),
 
-/***/ 86061:
+/***/ 6061:
 /*!**************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/distance-between-points.ts ***!
   \**************************************************************************/
@@ -5089,7 +4531,7 @@ function dfDistanceBetweenPoints(firstEvent, secondEvent) {
 
 /***/ }),
 
-/***/ 36199:
+/***/ 6199:
 /*!***************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/distance-between-touches.ts ***!
   \***************************************************************************/
@@ -5107,7 +4549,7 @@ function dfDistanceBetweenTouches({
 
 /***/ }),
 
-/***/ 63666:
+/***/ 3666:
 /*!*********************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/events.ts ***!
   \*********************************************************/
@@ -5118,7 +4560,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   dfPreventDefault: () => (/* binding */ dfPreventDefault),
 /* harmony export */   dfStopPropagation: () => (/* binding */ dfStopPropagation)
 /* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 61969);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 1969);
 
 function dfPreventDefault() {
   return (0,rxjs__WEBPACK_IMPORTED_MODULE_0__.tap)(event => event.preventDefault());
@@ -5129,7 +4571,7 @@ function dfStopPropagation() {
 
 /***/ }),
 
-/***/ 50315:
+/***/ 315:
 /*!********************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/index.ts ***!
   \********************************************************/
@@ -5147,13 +4589,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   dfStopPropagation: () => (/* reexport safe */ _events__WEBPACK_IMPORTED_MODULE_5__.dfStopPropagation),
 /* harmony export */   isConnectorType: () => (/* reexport safe */ _connector__WEBPACK_IMPORTED_MODULE_1__.isConnectorType)
 /* harmony export */ });
-/* harmony import */ var _clamp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clamp */ 66572);
-/* harmony import */ var _connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./connector */ 45048);
-/* harmony import */ var _deep_equal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./deep-equal */ 72248);
-/* harmony import */ var _distance_between_points__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./distance-between-points */ 86061);
-/* harmony import */ var _distance_between_touches__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./distance-between-touches */ 36199);
-/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./events */ 63666);
-/* harmony import */ var _px__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./px */ 63407);
+/* harmony import */ var _clamp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./clamp */ 6572);
+/* harmony import */ var _connector__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./connector */ 5048);
+/* harmony import */ var _deep_equal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./deep-equal */ 2248);
+/* harmony import */ var _distance_between_points__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./distance-between-points */ 6061);
+/* harmony import */ var _distance_between_touches__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./distance-between-touches */ 6199);
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./events */ 3666);
+/* harmony import */ var _px__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./px */ 3407);
 
 
 
@@ -5164,7 +4606,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 63407:
+/***/ 3407:
 /*!*****************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/helpers/px.ts ***!
   \*****************************************************/
@@ -5183,7 +4625,7 @@ function dfPx(value) {
 
 /***/ }),
 
-/***/ 29440:
+/***/ 9440:
 /*!*****************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/ng-draw-flow-node.base.ts ***!
   \*****************************************************************/
@@ -5193,8 +4635,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DrawFlowBaseNode: () => (/* binding */ DrawFlowBaseNode)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _components_connectors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/connectors */ 58783);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _components_connectors__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/connectors */ 8783);
 var _DrawFlowBaseNode;
 
 
@@ -5291,7 +4733,7 @@ _DrawFlowBaseNode.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1_
 
 /***/ }),
 
-/***/ 46607:
+/***/ 6607:
 /*!*****************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/ng-draw-flow.component.ts ***!
   \*****************************************************************/
@@ -5301,22 +4743,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   NgDrawFlowComponent: () => (/* binding */ NgDrawFlowComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 61856);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 43396);
-/* harmony import */ var _components_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/connections/connections.service */ 39976);
-/* harmony import */ var _components_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/connections/draft-connection/draft-connection.service */ 27232);
-/* harmony import */ var _components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/pan-zoom/pan-zoom.component */ 24408);
-/* harmony import */ var _components_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pan-zoom/pan-zoom.service */ 96592);
-/* harmony import */ var _components_scene_scene_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/scene/scene.component */ 17788);
-/* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ng-draw-flow.token */ 59497);
-/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/coordinates.service */ 65092);
-/* harmony import */ var _services_selection_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/selection.service */ 79989);
-/* harmony import */ var _directives_errors_errors_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./directives/errors/errors.directive */ 87116);
-/* harmony import */ var _directives_resize_observer_resize_observer_directive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./directives/resize-observer/resize-observer.directive */ 62768);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 8065);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ 8015);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 3396);
+/* harmony import */ var _components_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/connections/connections.service */ 9976);
+/* harmony import */ var _components_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/connections/draft-connection/draft-connection.service */ 7232);
+/* harmony import */ var _components_pan_zoom_pan_zoom_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/pan-zoom/pan-zoom.component */ 4408);
+/* harmony import */ var _components_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pan-zoom/pan-zoom.service */ 6592);
+/* harmony import */ var _components_scene_scene_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/scene/scene.component */ 5407);
+/* harmony import */ var _ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ng-draw-flow.token */ 9497);
+/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/coordinates.service */ 5092);
+/* harmony import */ var _services_selection_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/selection.service */ 9989);
+/* harmony import */ var _directives_errors_errors_directive__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./directives/errors/errors.directive */ 7116);
+/* harmony import */ var _directives_resize_observer_resize_observer_directive__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./directives/resize-observer/resize-observer.directive */ 2768);
 var _NgDrawFlowComponent;
 
 
@@ -5427,11 +4869,11 @@ class NgDrawFlowComponent {
   registerOnTouched(fn) {
     this.onTouched = fn;
   }
-  /** Zooms one step *in* towards the centre of the scene. */
+  /** Zooms one step *in* towards the center of the scene. */
   zoomIn() {
     this.panzoom.zoomIn();
   }
-  /** Zooms one step *out* from the centre of the scene. */
+  /** Zooms one step *out* from the center of the scene. */
   zoomOut() {
     this.panzoom.zoomOut();
   }
@@ -5544,7 +4986,7 @@ _NgDrawFlowComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 90167:
+/***/ 167:
 /*!***************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/ng-draw-flow.configs.ts ***!
   \***************************************************************/
@@ -5556,7 +4998,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DRAW_FLOW_OPTIONS: () => (/* binding */ DRAW_FLOW_OPTIONS),
 /* harmony export */   provideNgDrawFlowConfigs: () => (/* binding */ provideNgDrawFlowConfigs)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
 /* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ng-draw-flow.interfaces */ 1954);
 
 
@@ -5564,7 +5006,7 @@ const DRAW_FLOW_DEFAULT_OPTIONS = {
   connection: {
     arrowhead: 'none',
     type: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.Bezier,
-    curvature: 50
+    curvature: 0.25
   },
   nodes: {},
   options: {
@@ -5619,7 +5061,7 @@ var DfConnectionPoint;
 
 /***/ }),
 
-/***/ 59497:
+/***/ 9497:
 /*!*************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/ng-draw-flow.token.ts ***!
   \*************************************************************/
@@ -5629,13 +5071,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DRAW_FLOW_ROOT_ELEMENT: () => (/* binding */ DRAW_FLOW_ROOT_ELEMENT)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
 
 const DRAW_FLOW_ROOT_ELEMENT = new _angular_core__WEBPACK_IMPORTED_MODULE_0__.InjectionToken('DRAW_FLOW_ROOT_ELEMENT');
 
 /***/ }),
 
-/***/ 65092:
+/***/ 5092:
 /*!***********************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/services/coordinates.service.ts ***!
   \***********************************************************************/
@@ -5645,9 +5087,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CoordinatesService: () => (/* binding */ CoordinatesService)
 /* harmony export */ });
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 61151);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 95536);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs */ 1151);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 5536);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 6623);
 var _CoordinatesService;
 
 
@@ -5686,7 +5128,7 @@ _CoordinatesService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 79989:
+/***/ 9989:
 /*!*********************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/services/selection.service.ts ***!
   \*********************************************************************/
@@ -5696,7 +5138,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SelectionService: () => (/* binding */ SelectionService)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
 var _SelectionService;
 
 
@@ -5903,7 +5345,7 @@ _SelectionService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0
 
 /***/ }),
 
-/***/ 50802:
+/***/ 802:
 /*!***********************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/validators/cycle-detection/cycle-detection.validator.ts ***!
   \***********************************************************************************************/
@@ -5913,7 +5355,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   dfCycleDetectionValidator: () => (/* binding */ dfCycleDetectionValidator)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ 60815);
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ 815);
 
 /**
  * Validator for checking cycles in a graph
@@ -5967,7 +5409,7 @@ function dfCycleDetectionValidator() {
 
 /***/ }),
 
-/***/ 60815:
+/***/ 815:
 /*!*****************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/validators/cycle-detection/helpers.ts ***!
   \*****************************************************************************/
@@ -6127,7 +5569,7 @@ function generateConnectionsHash(connections) {
 
 /***/ }),
 
-/***/ 75657:
+/***/ 5657:
 /*!***********************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/validators/index.ts ***!
   \***********************************************************/
@@ -6138,14 +5580,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   dfCycleDetectionValidator: () => (/* reexport safe */ _cycle_detection_cycle_detection_validator__WEBPACK_IMPORTED_MODULE_0__.dfCycleDetectionValidator),
 /* harmony export */   dfIsolatedNodesValidator: () => (/* reexport safe */ _isolated_nodes_isolated_nodes_validator__WEBPACK_IMPORTED_MODULE_1__.dfIsolatedNodesValidator)
 /* harmony export */ });
-/* harmony import */ var _cycle_detection_cycle_detection_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cycle-detection/cycle-detection.validator */ 50802);
-/* harmony import */ var _isolated_nodes_isolated_nodes_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isolated-nodes/isolated-nodes.validator */ 37826);
+/* harmony import */ var _cycle_detection_cycle_detection_validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./cycle-detection/cycle-detection.validator */ 802);
+/* harmony import */ var _isolated_nodes_isolated_nodes_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./isolated-nodes/isolated-nodes.validator */ 7826);
 
 
 
 /***/ }),
 
-/***/ 91565:
+/***/ 1565:
 /*!*************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/validators/invalid-nodes.token.ts ***!
   \*************************************************************************/
@@ -6155,7 +5597,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   INVALID_NODES: () => (/* binding */ INVALID_NODES)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 6623);
 
 const INVALID_NODES = new _angular_core__WEBPACK_IMPORTED_MODULE_0__.InjectionToken('[INVALID_NODES]: Invalid nodes signal', {
   factory: () => (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)([])
@@ -6163,7 +5605,7 @@ const INVALID_NODES = new _angular_core__WEBPACK_IMPORTED_MODULE_0__.InjectionTo
 
 /***/ }),
 
-/***/ 37826:
+/***/ 7826:
 /*!*********************************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/validators/isolated-nodes/isolated-nodes.validator.ts ***!
   \*********************************************************************************************/
@@ -6209,7 +5651,7 @@ function dfIsolatedNodesValidator() {
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(89550)));
+/******/ __webpack_require__.O(0, ["vendor"], () => (__webpack_exec__(9550)));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
