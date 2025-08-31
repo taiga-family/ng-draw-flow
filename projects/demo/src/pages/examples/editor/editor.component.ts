@@ -14,6 +14,7 @@ import type {
     DfEvent,
 } from '@ng-draw-flow/core';
 import {
+    DfArrowhead,
     DfConnectionPoint,
     DfConnectionType,
     dfCycleDetectionValidator,
@@ -53,7 +54,7 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
         provideNgDrawFlowConfigs({
             connection: {
                 type: DfConnectionType.SmoothStep,
-                arrowhead: 'none',
+                arrowhead: {type: DfArrowhead.Arrow},
                 curvature: 10,
             },
             nodes: {
