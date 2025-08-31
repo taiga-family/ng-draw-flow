@@ -140,10 +140,6 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
     }
 
-    protected originalOrder(): number {
-        return 0;
-    }
-
     public writeValue(value: DfDataModel): void {
         if (!value) {
             return;

@@ -17,6 +17,7 @@ import type {ControlValueAccessor} from '@angular/forms';
 import {FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
 import {debounceTime, filter} from 'rxjs';
 
+import {BackgroundComponent} from './components/background/background.component';
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
 import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
@@ -49,6 +50,7 @@ import {SelectionService} from './services/selection.service';
     standalone: true,
     selector: 'ng-draw-flow',
     imports: [
+        BackgroundComponent,
         DfResizeObserver,
         NgIf,
         PanZoomComponent,
