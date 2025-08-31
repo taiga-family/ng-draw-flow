@@ -93,18 +93,58 @@
         <hr />
 
         <h3>options:</h3>
-        <code>nodeDragThreshold</code>
-        (default: 1):
-        <p>Defines the minimum distance (in pixels) required to initiate node dragging:</p>
-        <ul class="tui-space_bottom-4">
-            <li>
-                Value
-                <code>1</code>
-                prevents accidental drag events during clicks
+        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
+            <li class="tui-list__item">
+                <code>nodeDragThreshold</code>
+                (default: 1)
+                <p>Defines the minimum distance (in pixels) required to initiate node dragging:</p>
+                <ul>
+                    <li>
+                        Value
+                        <code>1</code>
+                        prevents accidental drag events during clicks
+                    </li>
+                    <li>
+                        <code>0</code>
+                        Dragging starts immediately (may interfere with interactions)
+                    </li>
+                </ul>
             </li>
-            <li>
-                <code>0</code>
-                Dragging starts immediately (may interfere with interactions)
+            <li class="tui-list__item">
+                <code>nodesDraggable</code>
+                (default: true)
+                <p>
+                    Disables node dragging when set to
+                    <code>false</code>
+                    .
+                </p>
+            </li>
+            <li class="tui-list__item">
+                <code>nodesDeletable</code>
+                (default: true)
+                <p>
+                    Prevents deleting nodes via keyboard when
+                    <code>false</code>
+                    .
+                </p>
+            </li>
+            <li class="tui-list__item">
+                <code>connectionsCreatable</code>
+                (default: true)
+                <p>
+                    Disallows creating new connections when set to
+                    <code>false</code>
+                    .
+                </p>
+            </li>
+            <li class="tui-list__item">
+                <code>connectionsDeletable</code>
+                (default: true)
+                <p>
+                    Prevents connection deletion when set to
+                    <code>false</code>
+                    .
+                </p>
             </li>
         </ul>
         <hr />
