@@ -5,7 +5,6 @@ import type {DrawFlowBaseNode} from './ng-draw-flow-node.base';
 export enum DfConnectionType {
     Bezier = 'bezier',
     SmoothStep = 'smoothStep',
-    Step = 'step',
 }
 
 export enum DfConnectorPosition {
@@ -15,18 +14,54 @@ export enum DfConnectorPosition {
     Left = 'left',
 }
 
+export enum DfArrowhead {
+    Arrow = 'arrow',
+    ArrowClosed = 'arrowClosed',
+    None = 'none',
+}
+
+export interface DfArrowheadOptions {
+    type: DfArrowhead;
+    width: number;
+    height: number;
+}
+
+export interface DfArrowheadOptionsInput {
+    type?: DfArrowhead;
+    width?: number;
+    height?: number;
+}
+
 export interface DfConnectionOptions {
     type: DfConnectionType;
-    arrowhead: 'none' | 'triangle';
+    arrowhead: DfArrowheadOptions;
     curvature: number;
+}
+
+export interface DfConnectionOptionsInput {
+    type: DfConnectionType;
+    arrowhead: DfArrowheadOptionsInput;
+    curvature: number;
+}
+
+export interface DfWorkspaceOptions {
+    nodeDragThreshold: number;
+    nodesDraggable: boolean;
+    nodesDeletable: boolean;
+    connectionsDeletable: boolean;
+    connectionsCreatable: boolean;
 }
 
 export interface DfOptions {
     connection: DfConnectionOptions;
     nodes: DfComponents;
-    options: {
-        nodeDragThreshold: number;
-    };
+    options: DfWorkspaceOptions;
+}
+
+export interface DfOptionsInput {
+    connection?: Partial<DfConnectionOptionsInput>;
+    nodes?: DfComponents;
+    options?: Partial<DfWorkspaceOptions>;
 }
 
 export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;

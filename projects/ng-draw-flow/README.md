@@ -51,7 +51,7 @@ imports: [
 ```
 
 Then, within the providers section, register the components that you want to be available for use as nodes within the
-graph editor:
+graph editor and optionally configure connection arrowheads:
 
 `app.module.ts`
 
@@ -61,9 +61,15 @@ providers: [
     nodes: {
       yourNode: YourNodeComponent,
     },
+    connection: {
+      arrowhead: {type: DfArrowhead.Arrow},
+    },
   }),
 ];
 ```
+
+The `connection.arrowhead` option accepts a `DfArrowhead` value (`Arrow`, `ArrowClosed`, or `None`) and optional `width`
+and `height` settings.
 
 ## Set Up Data Model and Control for Graph Structure
 
