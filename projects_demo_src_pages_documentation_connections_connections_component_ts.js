@@ -110,7 +110,9 @@ _BezierExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MOD
   }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
     connection: {
       type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.Bezier,
-      arrowhead: 'triangle',
+      arrowhead: {
+        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfArrowhead.ArrowClosed
+      },
       curvature: 0.25
     },
     nodes: {
@@ -166,7 +168,7 @@ _ConnectionsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODUL
   selectors: [["connections"]],
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵStandaloneFeature"]],
-  decls: 45,
+  decls: 75,
   vars: 0,
   consts: [["header", "Connection Lines"], [1, "tui-space_top-4"], [1, "tui-list", "tui-list_extra-small"], [1, "tui-list__item"], [1, "editor", "tui-space_top-4"]],
   template: function ConnectionsComponent_Template(rf, ctx) {
@@ -190,38 +192,75 @@ _ConnectionsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODUL
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](14, " option. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](15, "section", 1)(16, "h3");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](17, "SmoothStep");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](17, "Arrowheads");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](18, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](19, " SmoothStep edges use horizontal and vertical segments joined by rounded bends, making them suitable for orthogonal layouts. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](19, " Customize connection arrowheads using the ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](21, "connection.arrowhead");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](20, "ul", 2)(21, "li", 3)(22, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](23, "curvature");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](22, " option. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](24, " : radius of each bend in pixels. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](23, "ul", 2)(24, "li", 3)(25, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](26, "type");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](27, " : arrowhead style ( ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](28, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](29, "DfArrowhead.None");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](30, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](31, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](32, "DfArrowhead.Arrow");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](33, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](34, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](35, "DfArrowhead.ArrowClosed");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](36, " ) ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](37, "li", 3)(38, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](39, "width");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](40, " : width in pixels ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](41, "li", 3)(42, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](43, "height");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](44, " : height in pixels ");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](25, "section", 1)(26, "h3");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](27, "Example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](45, "section", 1)(46, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](47, "SmoothStep");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](28, "div", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](29, "smooth-step-example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](48, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](49, " SmoothStep edges use horizontal and vertical segments joined by rounded bends, making them suitable for orthogonal layouts. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](50, "ul", 2)(51, "li", 3)(52, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](53, "curvature");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](54, " : radius of each bend in pixels. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](55, "section", 1)(56, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](57, "Example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](58, "div", 4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](59, "smooth-step-example");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](30, "section", 1)(31, "h3");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](32, "Bezier");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](60, "section", 1)(61, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](62, "Bezier");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](33, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](34, " Bezier edges are cubic B\u00E9zier curves calculated from connector directions, creating smooth flowing lines between nodes. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](63, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](64, " Bezier edges are cubic B\u00E9zier curves calculated from connector directions, creating smooth flowing lines between nodes. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](35, "ul", 2)(36, "li", 3)(37, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](38, "curvature");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](65, "ul", 2)(66, "li", 3)(67, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](68, "curvature");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](39, " : dimensionless coefficient that controls how strongly the curve bends when connectors face away from each other. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](69, " : dimensionless coefficient that controls how strongly the curve bends when connectors face away from each other. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](40, "section", 1)(41, "h3");
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](42, "Example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](70, "section", 1)(71, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](72, "Example");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](43, "div", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](44, "bezier-example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](73, "div", 4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](74, "bezier-example");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]()()();
     }
   },
@@ -342,7 +381,9 @@ _SmoothStepExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
   }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
     connection: {
       type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.SmoothStep,
-      arrowhead: 'triangle',
+      arrowhead: {
+        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfArrowhead.ArrowClosed
+      },
       curvature: 10
     },
     nodes: {

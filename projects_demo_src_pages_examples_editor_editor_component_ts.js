@@ -207,7 +207,9 @@ _EditorComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__
   }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
     connection: {
       type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.SmoothStep,
-      arrowhead: 'none',
+      arrowhead: {
+        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfArrowhead.Arrow
+      },
       curvature: 10
     },
     nodes: {

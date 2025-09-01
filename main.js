@@ -1294,6 +1294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DRAW_FLOW_DEFAULT_OPTIONS: () => (/* reexport safe */ _lib_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_5__.DRAW_FLOW_DEFAULT_OPTIONS),
 /* harmony export */   DRAW_FLOW_OPTIONS: () => (/* reexport safe */ _lib_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_5__.DRAW_FLOW_OPTIONS),
 /* harmony export */   DRAW_FLOW_ROOT_ELEMENT: () => (/* reexport safe */ _lib_ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_7__.DRAW_FLOW_ROOT_ELEMENT),
+/* harmony export */   DfArrowhead: () => (/* reexport safe */ _lib_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_6__.DfArrowhead),
 /* harmony export */   DfConnectionPoint: () => (/* reexport safe */ _lib_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_6__.DfConnectionPoint),
 /* harmony export */   DfConnectionType: () => (/* reexport safe */ _lib_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_6__.DfConnectionType),
 /* harmony export */   DfConnectorPosition: () => (/* reexport safe */ _lib_ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_6__.DfConnectorPosition),
@@ -1381,6 +1382,15 @@ class ConnectionComponent {
     this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__.CoordinatesService);
     this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
     this.selected = false;
+    this.arrowhead = this.options.connection.arrowhead;
+    this.markerEnd = this.arrowhead.type === 'none' ? null : `url(#df-arrowhead-${this.arrowhead.type})`;
+    this.arrowWidth = this.arrowhead.width;
+    this.arrowHeight = this.arrowhead.height;
+    this.arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
+    this.arrowMarkerHeight = this.arrowHeight * 2;
+    this.arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
+    this.arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
+    this.arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
     this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
     this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
     this.path$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(null).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_10__.asyncScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.combineLatest)([this.getConnectionPoint(this.connection?.source), this.getConnectionPoint(this.connection?.target)])), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(([sourcePoint, targetPoint]) => {
@@ -1453,31 +1463,45 @@ _ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   },
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵStandaloneFeature"]],
-  decls: 6,
-  vars: 12,
-  consts: [[1, "connection"], [1, "selectable-area", 3, "dfSelectableElement"], [1, "main-path"]],
+  decls: 11,
+  vars: 21,
+  consts: [[1, "connection"], ["id", "df-arrowhead-arrowClosed", "refX", "0", "refY", "0", "orient", "auto-start-reverse", "markerUnits", "strokeWidth"], ["stroke-linecap", "round", "stroke-linejoin", "round", "fill", "context-stroke", "stroke", "context-stroke"], ["id", "df-arrowhead-arrow", "refX", "0", "refY", "0", "orient", "auto-start-reverse", "markerUnits", "strokeWidth"], ["stroke-linecap", "round", "stroke-linejoin", "round", "fill", "none", "stroke", "context-stroke"], [1, "selectable-area", 3, "dfSelectableElement"], [1, "main-path"]],
   template: function ConnectionComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵnamespaceSVG"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "svg", 0);
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](1, "async");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](2, "path", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("dfSelectableElement", function ConnectionComponent_Template__svg_path_dfSelectableElement_2_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](2, "defs")(3, "marker", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](4, "polyline", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](5, "marker", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](6, "polyline", 4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](7, "path", 5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("dfSelectableElement", function ConnectionComponent_Template__svg_path_dfSelectableElement_7_listener($event) {
         return ctx.onSelectedChanged($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](3, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](8, "async");
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](4, "path", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](5, "async");
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](9, "path", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipe"](10, "async");
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵclassProp"]("optimize-speed", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](1, 6, ctx.optimization$));
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](3, 8, ctx.path$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵclassProp"]("optimize-speed", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](1, 15, ctx.optimization$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("viewBox", ctx.arrowViewBox)("markerWidth", ctx.arrowMarkerWidth)("markerHeight", ctx.arrowMarkerHeight);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("points", ctx.arrowClosedPoints);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("viewBox", ctx.arrowViewBox)("markerWidth", ctx.arrowMarkerWidth)("markerHeight", ctx.arrowMarkerHeight);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("points", ctx.arrowPoints);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](8, 17, ctx.path$));
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵclassProp"]("df-selected", ctx.selected);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](5, 10, ctx.path$));
+      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵattribute"]("d", _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵpipeBind1"](10, 19, ctx.path$))("marker-end", ctx.markerEnd);
     }
   },
   dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_21__.AsyncPipe, _directives__WEBPACK_IMPORTED_MODULE_0__.SelectableElementDirective],
@@ -3741,9 +3765,6 @@ class SceneComponent {
   trackByConnectionsFn(_index, connection) {
     return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
   }
-  originalOrder() {
-    return 0;
-  }
   writeValue(value) {
     if (!value) {
       return;
@@ -5004,24 +5025,46 @@ __webpack_require__.r(__webpack_exports__);
 
 const DRAW_FLOW_DEFAULT_OPTIONS = {
   connection: {
-    arrowhead: 'none',
+    arrowhead: {
+      type: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfArrowhead.None,
+      width: 8,
+      height: 4
+    },
     type: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.Bezier,
     curvature: 0.25
   },
   nodes: {},
   options: {
-    nodeDragThreshold: 1
+    nodeDragThreshold: 1,
+    nodesDraggable: true,
+    nodesDeletable: true,
+    connectionsDeletable: true,
+    connectionsCreatable: true
   }
 };
 const DRAW_FLOW_OPTIONS = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.InjectionToken('[DRAW_FLOW_OPTIONS]: Options', {
   factory: () => DRAW_FLOW_DEFAULT_OPTIONS
 });
-function provideNgDrawFlowConfigs(options) {
+function provideNgDrawFlowConfigs(options = {}) {
   return {
     provide: DRAW_FLOW_OPTIONS,
     useFactory: () => ({
-      ...DRAW_FLOW_DEFAULT_OPTIONS,
-      ...options
+      connection: {
+        ...DRAW_FLOW_DEFAULT_OPTIONS.connection,
+        ...options.connection,
+        arrowhead: {
+          ...DRAW_FLOW_DEFAULT_OPTIONS.connection.arrowhead,
+          ...options.connection?.arrowhead
+        }
+      },
+      nodes: {
+        ...DRAW_FLOW_DEFAULT_OPTIONS.nodes,
+        ...options.nodes
+      },
+      options: {
+        ...DRAW_FLOW_DEFAULT_OPTIONS.options,
+        ...options.options
+      }
     })
   };
 }
@@ -5036,6 +5079,7 @@ function provideNgDrawFlowConfigs(options) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   DfArrowhead: () => (/* binding */ DfArrowhead),
 /* harmony export */   DfConnectionPoint: () => (/* binding */ DfConnectionPoint),
 /* harmony export */   DfConnectionType: () => (/* binding */ DfConnectionType),
 /* harmony export */   DfConnectorPosition: () => (/* binding */ DfConnectorPosition)
@@ -5044,7 +5088,6 @@ var DfConnectionType;
 (function (DfConnectionType) {
   DfConnectionType["Bezier"] = "bezier";
   DfConnectionType["SmoothStep"] = "smoothStep";
-  DfConnectionType["Step"] = "step";
 })(DfConnectionType || (DfConnectionType = {}));
 var DfConnectorPosition;
 (function (DfConnectorPosition) {
@@ -5053,6 +5096,12 @@ var DfConnectorPosition;
   DfConnectorPosition["Bottom"] = "bottom";
   DfConnectorPosition["Left"] = "left";
 })(DfConnectorPosition || (DfConnectorPosition = {}));
+var DfArrowhead;
+(function (DfArrowhead) {
+  DfArrowhead["Arrow"] = "arrow";
+  DfArrowhead["ArrowClosed"] = "arrowClosed";
+  DfArrowhead["None"] = "none";
+})(DfArrowhead || (DfArrowhead = {}));
 var DfConnectionPoint;
 (function (DfConnectionPoint) {
   DfConnectionPoint["Input"] = "input";

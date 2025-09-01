@@ -7,7 +7,7 @@
   \***********************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```ts\nproviders: [\n  provideNgDrawFlowConfigs({\n    nodes: {\n      yourNode1: YourNodeComponent1,\n      yourNode2: YourNodeComponent2,\n      yourNode3: YourNodeComponent3,\n    },\n    connection: {\n      type: DfConnectionType.Bezier,\n      curvature: 1,\n    },\n    options: {\n      nodeDragThreshold: 1,\n    },\n  }),\n];\n```\n";
+module.exports = "```ts\nproviders: [\n  provideNgDrawFlowConfigs({\n    nodes: {\n      yourNode1: YourNodeComponent1,\n      yourNode2: YourNodeComponent2,\n      yourNode3: YourNodeComponent3,\n    },\n    connection: {\n      type: DfConnectionType.Bezier,\n      curvature: 1,\n      arrowhead: {type: DfArrowhead.ArrowClosed, width: 12, height: 8},\n    },\n    options: {\n      nodeDragThreshold: 1,\n    },\n  }),\n];\n```\n";
 
 /***/ })
 
