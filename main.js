@@ -1383,6 +1383,7 @@ class ConnectionComponent {
     this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
     this.selected = false;
     this.arrowhead = this.options.connection.arrowhead;
+    this.deletable = this.options.options.connectionsDeletable;
     this.markerEnd = this.arrowhead.type === 'none' ? null : `url(#df-arrowhead-${this.arrowhead.type})`;
     this.arrowWidth = this.arrowhead.width;
     this.arrowHeight = this.arrowhead.height;
@@ -1421,7 +1422,7 @@ class ConnectionComponent {
     this.optimization$ = this.path$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_17__.skip)(1), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.concat)((0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(true), (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(false).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_19__.delay)(400)))), (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.startWith)(false), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.distinctUntilChanged)());
   }
   handleKeyboardEvent(event) {
-    if (!this.selected) {
+    if (!this.selected || !this.deletable) {
       return;
     }
     event.preventDefault();
@@ -1684,27 +1685,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DraftConnectionService: () => (/* binding */ DraftConnectionService)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/common */ 9191);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs */ 3150);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 5536);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 1969);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 1082);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 7066);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 1856);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 9721);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 7757);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 3246);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 4406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 5213);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 2393);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common */ 9191);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs */ 3150);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ 5536);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 1856);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 1969);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 1082);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 7066);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 9721);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 7757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 3246);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 4406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 5213);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs */ 2393);
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../consts */ 2110);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../helpers */ 315);
-/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../services/coordinates.service */ 5092);
-/* harmony import */ var _pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../pan-zoom/pan-zoom.service */ 6592);
-/* harmony import */ var _utils_get_coonector_dataset_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/get-coonector-dataset.util */ 134);
+/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../ng-draw-flow.configs */ 167);
+/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../ng-draw-flow.interfaces */ 1954);
+/* harmony import */ var _services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/coordinates.service */ 5092);
+/* harmony import */ var _pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../pan-zoom/pan-zoom.service */ 6592);
+/* harmony import */ var _utils_get_coonector_dataset_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../utils/get-coonector-dataset.util */ 134);
 var _DraftConnectionService;
+
 
 
 
@@ -1717,20 +1720,21 @@ var _DraftConnectionService;
 
 class DraftConnectionService {
   constructor() {
-    this.panZoomService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.inject)(_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_4__.PanZoomService);
-    this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_3__.CoordinatesService);
-    this.destroy$ = new rxjs__WEBPACK_IMPORTED_MODULE_7__.Subject();
-    this.source = (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.signal)({
+    this.panZoomService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_5__.PanZoomService);
+    this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__.CoordinatesService);
+    this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
+    this.destroy$ = new rxjs__WEBPACK_IMPORTED_MODULE_8__.Subject();
+    this.source = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.signal)({
       point: _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES,
-      position: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Right
+      position: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Right
     });
-    this.target = (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.signal)({
+    this.target = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.signal)({
       point: _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES,
-      position: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Left
+      position: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Left
     });
-    this.isConnectionCreating$ = new rxjs__WEBPACK_IMPORTED_MODULE_8__.BehaviorSubject(false);
-    this.connectionCreated$ = new rxjs__WEBPACK_IMPORTED_MODULE_7__.Subject();
-    this.connection$ = new rxjs__WEBPACK_IMPORTED_MODULE_7__.Subject();
+    this.isConnectionCreating$ = new rxjs__WEBPACK_IMPORTED_MODULE_9__.BehaviorSubject(false);
+    this.connectionCreated$ = new rxjs__WEBPACK_IMPORTED_MODULE_8__.Subject();
+    this.connection$ = new rxjs__WEBPACK_IMPORTED_MODULE_8__.Subject();
     this.connectionSubscription();
   }
   ngOnDestroy() {
@@ -1738,14 +1742,17 @@ class DraftConnectionService {
     this.destroy$.complete();
   }
   connectionSubscription() {
-    const document = (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.inject)(_angular_common__WEBPACK_IMPORTED_MODULE_9__.DOCUMENT);
-    this.connection$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_10__.tap)(connectorData => this.onDragStart(connectorData)), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.fromEvent)(document, 'pointermove')), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_15__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_16__.pairwise)(), (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.map)(([previousEvent, currentEvent]) => this.onDragMove(previousEvent, currentEvent)),
+    const document = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_angular_common__WEBPACK_IMPORTED_MODULE_10__.DOCUMENT);
+    this.connection$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.options.options.connectionsCreatable), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.tap)(connectorData => this.onDragStart(connectorData)), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.fromEvent)(document, 'pointermove')), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_16__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.pairwise)(), (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.map)(([previousEvent, currentEvent]) => this.onDragMove(previousEvent, currentEvent)),
     // eslint-disable-next-line rxjs/no-unsafe-takeuntil
-    (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.takeUntil)((0,rxjs__WEBPACK_IMPORTED_MODULE_12__.fromEvent)(document, 'pointerup').pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_13__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_10__.tap)(event => this.onDragEnd(event)))),
+    (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.takeUntil)((0,rxjs__WEBPACK_IMPORTED_MODULE_14__.fromEvent)(document, 'pointerup').pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.tap)(event => this.onDragEnd(event)))),
     // eslint-disable-next-line rxjs/no-unsafe-takeuntil
-    (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.takeUntil)(this.destroy$), (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.repeat)()).subscribe();
+    (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.takeUntil)(this.destroy$), (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.repeat)()).subscribe();
   }
   onDragStart(connector) {
+    if (!this.options.options.connectionsCreatable) {
+      return;
+    }
     this.sourceConnector = connector;
     this.isConnectionCreating$.next(true);
     const sourceId = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.createConnectorHash)(connector);
@@ -1778,22 +1785,22 @@ class DraftConnectionService {
   }
   getTargetPosition(startPosition) {
     switch (startPosition) {
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Bottom:
-        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Top;
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Left:
-        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Right;
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Right:
-        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Left;
-      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Top:
-        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Bottom;
+      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Bottom:
+        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Top;
+      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Left:
+        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Right;
+      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Right:
+        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Left;
+      case _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Top:
+        return _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Bottom;
       default:
         return null;
     }
   }
   onDragEnd(event) {
     const target = event.target;
-    const targetConnector = target ? (0,_utils_get_coonector_dataset_util__WEBPACK_IMPORTED_MODULE_5__.getConnectorDataset)(target) : null;
-    if (targetConnector && targetConnector.connectorType === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectionPoint.Input) {
+    const targetConnector = target ? (0,_utils_get_coonector_dataset_util__WEBPACK_IMPORTED_MODULE_6__.getConnectorDataset)(target) : null;
+    if (targetConnector && targetConnector.connectorType === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectionPoint.Input) {
       this.connectionCreated$.next({
         source: this.sourceConnector,
         target: targetConnector
@@ -1805,7 +1812,7 @@ class DraftConnectionService {
   resetConnectors() {
     this.source.set({
       point: _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES,
-      position: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_2__.DfConnectorPosition.Right
+      position: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfConnectorPosition.Right
     });
     this.target.set({
       point: _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES,
@@ -1817,7 +1824,7 @@ _DraftConnectionService = DraftConnectionService;
 _DraftConnectionService.ɵfac = function DraftConnectionService_Factory(t) {
   return new (t || _DraftConnectionService)();
 };
-_DraftConnectionService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjectable"]({
+_DraftConnectionService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjectable"]({
   token: _DraftConnectionService,
   factory: _DraftConnectionService.ɵfac
 });
@@ -2582,35 +2589,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DfOutputComponent: () => (/* binding */ DfOutputComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ng-draw-flow.interfaces */ 1954);
-/* harmony import */ var _connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.service */ 7232);
-/* harmony import */ var _base_connector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-connector */ 1008);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ng-draw-flow.configs */ 167);
+/* harmony import */ var _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ng-draw-flow.interfaces */ 1954);
+/* harmony import */ var _connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../connections/draft-connection/draft-connection.service */ 7232);
+/* harmony import */ var _base_connector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./base-connector */ 1008);
 var _DfOutputComponent;
 
 
 
 
 
-class DfOutputComponent extends _base_connector__WEBPACK_IMPORTED_MODULE_2__.BaseConnector {
+
+class DfOutputComponent extends _base_connector__WEBPACK_IMPORTED_MODULE_3__.BaseConnector {
   constructor() {
     super(...arguments);
-    this.connectorType = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output;
-    this.draftConnectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.inject)(_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_1__.DraftConnectionService);
-    this.position = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectorPosition.Right;
+    this.connectorType = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output;
+    this.draftConnectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.inject)(_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_2__.DraftConnectionService);
+    this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__.DRAW_FLOW_OPTIONS);
+    this.position = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectorPosition.Right;
   }
   onDragStart(_event) {
     const {
       nodeId,
       connectorId
     } = this.data;
-    if (!nodeId || !connectorId || this.isDisabled) {
+    if (!nodeId || !connectorId || this.isDisabled || !this.options.options.connectionsCreatable) {
       return;
     }
     this.draftConnectionService.connection$.next({
       nodeId,
       connectorId,
-      connectorType: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+      connectorType: _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
       position: this.position
     });
   }
@@ -2619,15 +2629,15 @@ _DfOutputComponent = DfOutputComponent;
 _DfOutputComponent.ɵfac = /*@__PURE__*/function () {
   let ɵDfOutputComponent_BaseFactory;
   return function DfOutputComponent_Factory(t) {
-    return (ɵDfOutputComponent_BaseFactory || (ɵDfOutputComponent_BaseFactory = _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵgetInheritedFactory"](_DfOutputComponent)))(t || _DfOutputComponent);
+    return (ɵDfOutputComponent_BaseFactory || (ɵDfOutputComponent_BaseFactory = _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵgetInheritedFactory"](_DfOutputComponent)))(t || _DfOutputComponent);
   };
 }();
-_DfOutputComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
+_DfOutputComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
   type: _DfOutputComponent,
   selectors: [["df-output"]],
   hostBindings: function DfOutputComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("pointerdown.stop", function DfOutputComponent_pointerdown_stop_HostBindingHandler($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("pointerdown.stop", function DfOutputComponent_pointerdown_stop_HostBindingHandler($event) {
         return ctx.onDragStart($event);
       });
     }
@@ -2637,7 +2647,7 @@ _DfOutputComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3
     position: "position"
   },
   standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵInheritDefinitionFeature"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵStandaloneFeature"]],
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵInheritDefinitionFeature"], _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵStandaloneFeature"]],
   decls: 0,
   vars: 0,
   template: function DfOutputComponent_Template(rf, ctx) {},
@@ -2693,8 +2703,11 @@ class NodeComponent {
     this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_9__.DestroyRef);
     this.panZoomService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_pan_zoom_pan_zoom_service__WEBPACK_IMPORTED_MODULE_8__.PanZoomService);
     this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_6__.CoordinatesService);
-    this.drawFlowComponents = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_3__.DRAW_FLOW_OPTIONS).nodes;
-    this.nodeDragThreshold = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_3__.DRAW_FLOW_OPTIONS).options.nodeDragThreshold;
+    this.drawFlowOptions = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_3__.DRAW_FLOW_OPTIONS);
+    this.drawFlowComponents = this.drawFlowOptions.nodes;
+    this.nodeDragThreshold = this.drawFlowOptions.options.nodeDragThreshold;
+    this.draggable = this.drawFlowOptions.options.nodesDraggable;
+    this.deletable = this.drawFlowOptions.options.nodesDeletable;
     this.drawFlowElement = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_ng_draw_flow_token__WEBPACK_IMPORTED_MODULE_5__.DRAW_FLOW_ROOT_ELEMENT);
     this.panZoomOptions = (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.inject)(_pan_zoom_pan_zoom_options__WEBPACK_IMPORTED_MODULE_7__.DF_PAN_ZOOM_OPTIONS);
     this.selected = false;
@@ -2709,7 +2722,7 @@ class NodeComponent {
     this.cursor = 'initial';
   }
   handleKeyboardEvent(event) {
-    if (this.selected && !this.node.startNode) {
+    if (this.selected && this.deletable && !this.node.startNode) {
       event.preventDefault();
       this.nodeDeleted.emit();
     }
@@ -2757,7 +2770,7 @@ class NodeComponent {
     }
   }
   onDrag(event) {
-    if (this.node.startNode) {
+    if (this.node.startNode || !this.draggable) {
       return;
     }
     if (event.stage === _directives__WEBPACK_IMPORTED_MODULE_1__.DfDragDropStage.Move) {

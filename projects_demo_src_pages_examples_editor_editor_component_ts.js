@@ -214,6 +214,12 @@ _EditorComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__
     },
     nodes: {
       simpleNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__.SimpleNodeComponent
+    },
+    options: {
+      nodesDraggable: true,
+      nodesDeletable: true,
+      connectionsDeletable: true,
+      connectionsCreatable: true
     }
   })]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵStandaloneFeature"]],
   decls: 20,
