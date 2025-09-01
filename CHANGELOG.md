@@ -1,3 +1,12 @@
+### [0.15.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.14.0...v0.15.0) (2025-09-01)
+
+### 🚀 Features
+
+- enable configurable arrowheads for connections
+  [(25aaca8)](https://github.com/taiga-family/ng-draw-flow/commit/25aaca829a7731f98bd73889bd3eb887c63f2067)
+- add workspace readonly configuration flags
+  [(284de37)](https://github.com/taiga-family/ng-draw-flow/commit/284de37521ec785caedae750820ef36a0cdbfdaa)
+
 ### [0.14.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.13.0...v0.14.0) (2025-08-27)
 
 ### [0.13.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.12.0...v0.13.0) (2025-06-09)
