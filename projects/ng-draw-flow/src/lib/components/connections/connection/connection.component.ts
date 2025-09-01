@@ -28,6 +28,7 @@ import {SelectableElementDirective} from '../../../directives';
 import {createConnectorHash, deepEqual} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {
+    DfArrowheadOptions,
     DfConnectorData,
     DfDataConnection,
     DfDataConnector,
@@ -54,6 +55,22 @@ export class ConnectionComponent {
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject(DRAW_FLOW_OPTIONS);
     protected selected = false;
+    private readonly arrowhead: DfArrowheadOptions = this.options.connection.arrowhead;
+
+    protected readonly markerEnd =
+        this.arrowhead.type === 'none'
+            ? null
+            : `url(#df-arrowhead-${this.arrowhead.type})`;
+
+    private readonly arrowWidth = this.arrowhead.width;
+    private readonly arrowHeight = this.arrowhead.height;
+
+    protected readonly arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
+    protected readonly arrowMarkerHeight = this.arrowHeight * 2;
+
+    protected readonly arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
+    protected readonly arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
+    protected readonly arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
 
     @Input()
     public connection!: DfDataConnection;

@@ -9,6 +9,7 @@ providers: [
     connection: {
       type: DfConnectionType.Bezier,
       curvature: 1,
+      arrowhead: {type: DfArrowhead.ArrowClosed, width: 12, height: 8},
     },
     options: {
       nodeDragThreshold: 1,
