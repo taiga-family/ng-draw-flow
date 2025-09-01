@@ -3,6 +3,7 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import type {DfDataModel} from '@ng-draw-flow/core';
 import {
+    DfArrowhead,
     DfConnectionPoint,
     DfConnectionType,
     dfPanZoomOptionsProvider,
@@ -33,7 +34,7 @@ import {InputNodeComponent, OutputNodeComponent} from '../../../../app/modules/n
         provideNgDrawFlowConfigs({
             connection: {
                 type: DfConnectionType.SmoothStep,
-                arrowhead: 'triangle',
+                arrowhead: {type: DfArrowhead.ArrowClosed},
                 curvature: 10,
             },
             nodes: {

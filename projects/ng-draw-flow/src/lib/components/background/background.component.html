@@ -1,0 +1,29 @@
+<ng-container *ngIf="options.backgroundPattern">
+    <svg
+        height="100%"
+        width="100%"
+        class="df-background"
+    >
+        <defs>
+            <pattern
+                patternUnits="userSpaceOnUse"
+                [attr.height]="gap"
+                [attr.id]="patternId"
+                [attr.width]="gap"
+            >
+                <circle
+                    [attr.cx]="gap / 2"
+                    [attr.cy]="gap / 2"
+                    [attr.fill-opacity]="fillOpacity"
+                    [attr.fill]="fillColor"
+                    [attr.r]="pointSize"
+                />
+            </pattern>
+        </defs>
+        <rect
+            height="100%"
+            width="100%"
+            [attr.fill]="'url(#' + patternId + ')'"
+        />
+    </svg>
+</ng-container>

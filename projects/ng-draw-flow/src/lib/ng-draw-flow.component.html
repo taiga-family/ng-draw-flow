@@ -1,4 +1,6 @@
 <df-pan-zoom (scale)="scale.emit($event)">
+    <df-background />
+
     <df-scene
         *ngIf="$rootReady()"
         [formControl]="form"

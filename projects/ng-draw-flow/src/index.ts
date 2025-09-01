@@ -1,3 +1,4 @@
+export * from './lib/components/background';
 export * from './lib/components/connectors';
 export * from './lib/components/pan-zoom/pan-zoom.options';
 export * from './lib/directives/errors/errors.directive';
