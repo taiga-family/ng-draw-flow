@@ -18,10 +18,12 @@ import {
 
 import {INITIAL_COORDINATES} from '../../../consts';
 import {createConnectorHash, dfDistanceBetweenPoints} from '../../../helpers';
+import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import type {
     DfConnectorData,
     DfDataConnection,
     DfDataConnector,
+    DfOptions,
 } from '../../../ng-draw-flow.interfaces';
 import {DfConnectionPoint, DfConnectorPosition} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
@@ -32,6 +34,7 @@ import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
 export class DraftConnectionService implements OnDestroy {
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
+    private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
     protected readonly destroy$ = new Subject<void>();
     private sourceConnector!: DfDataConnector;
 
@@ -63,6 +66,7 @@ export class DraftConnectionService implements OnDestroy {
 
         this.connection$
             .pipe(
+                filter(() => this.options.options.connectionsCreatable),
                 tap((connectorData: DfDataConnector) => this.onDragStart(connectorData)),
                 switchMap(() => fromEvent<PointerEvent>(document, 'pointermove')),
                 filter(() => this.isConnectionCreating$.value),
@@ -86,6 +90,10 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private onDragStart(connector: DfDataConnector): void {
+        if (!this.options.options.connectionsCreatable) {
+            return;
+        }
+
         this.sourceConnector = connector;
         this.isConnectionCreating$.next(true);
         const sourceId = createConnectorHash(connector);

@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 
-import type {DfDataConnectorConfig} from '../../ng-draw-flow.interfaces';
+import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
+import type {DfDataConnectorConfig, DfOptions} from '../../ng-draw-flow.interfaces';
 import {DfConnectionPoint, DfConnectorPosition} from '../../ng-draw-flow.interfaces';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {BaseConnector} from './base-connector';
@@ -18,6 +19,7 @@ import {BaseConnector} from './base-connector';
 export class DfOutputComponent extends BaseConnector {
     protected override connectorType = DfConnectionPoint.Output;
     private readonly draftConnectionService = inject(DraftConnectionService);
+    private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
 
     @Input('connectorData')
     public data!: DfDataConnectorConfig;
@@ -28,7 +30,12 @@ export class DfOutputComponent extends BaseConnector {
     protected onDragStart(_event: PointerEvent): void {
         const {nodeId, connectorId} = this.data;
 
-        if (!nodeId || !connectorId || this.isDisabled) {
+        if (
+            !nodeId ||
+            !connectorId ||
+            this.isDisabled ||
+            !this.options.options.connectionsCreatable
+        ) {
             return;
         }
 

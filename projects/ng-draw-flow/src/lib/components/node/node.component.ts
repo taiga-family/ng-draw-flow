@@ -62,9 +62,11 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
-    private readonly drawFlowComponents = inject<DfOptions>(DRAW_FLOW_OPTIONS).nodes;
-    private readonly nodeDragThreshold =
-        inject<DfOptions>(DRAW_FLOW_OPTIONS).options.nodeDragThreshold;
+    private readonly drawFlowOptions = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private readonly drawFlowComponents = this.drawFlowOptions.nodes;
+    private readonly nodeDragThreshold = this.drawFlowOptions.options.nodeDragThreshold;
+    private readonly draggable = this.drawFlowOptions.options.nodesDraggable;
+    private readonly deletable = this.drawFlowOptions.options.nodesDeletable;
 
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
@@ -106,7 +108,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     protected cursor: 'grabbing' | 'initial' = 'initial';
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.selected && !this.node.startNode) {
+        if (this.selected && this.deletable && !this.node.startNode) {
             event.preventDefault();
 
             this.nodeDeleted.emit();
@@ -163,7 +165,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     }
 
     protected onDrag(event: DfDragDrop): void {
-        if (this.node.startNode) {
+        if (this.node.startNode || !this.draggable) {
             return;
         }
 

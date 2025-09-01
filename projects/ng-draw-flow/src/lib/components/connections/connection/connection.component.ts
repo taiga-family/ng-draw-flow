@@ -32,6 +32,7 @@ import type {
     DfConnectorData,
     DfDataConnection,
     DfDataConnector,
+    DfOptions,
 } from '../../../ng-draw-flow.interfaces';
 import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
@@ -53,9 +54,10 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
 export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
-    private readonly options = inject(DRAW_FLOW_OPTIONS);
+    private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
     protected selected = false;
     private readonly arrowhead: DfArrowheadOptions = this.options.connection.arrowhead;
+    public deletable = this.options.options.connectionsDeletable;
 
     protected readonly markerEnd =
         this.arrowhead.type === 'none'
@@ -132,7 +134,7 @@ export class ConnectionComponent {
     );
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (!this.selected) {
+        if (!this.selected || !this.deletable) {
             return;
         }
 
