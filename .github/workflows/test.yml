@@ -37,7 +37,7 @@ jobs:
       - name: Display structure of coverage files
         run: tree -L 2 ./coverage -P 'lcov.info'
 
-      - uses: codecov/codecov-action@v5.5.0
+      - uses: codecov/codecov-action@v5.5.1
         with:
           directory: ./coverage/projects/ng-draw-flow/
           flags: summary,ng-draw-flow
