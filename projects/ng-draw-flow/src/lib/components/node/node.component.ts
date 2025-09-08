@@ -113,10 +113,11 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     }
 
     public ngAfterViewInit(): void {
-        this.fillValue();
         this.createNodeContentComponent(this.node);
-        this.subscribeToConnectorsChanges();
         this.saveInnerNodeSize();
+        this.fillValue();
+        this.applyOutputsConnectionLabel();
+        this.subscribeToConnectorsChanges();
         this.setInitialPosition();
         this.updateConnectorsCoordinates();
 
@@ -151,8 +152,6 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         this.innerComponent.model = data;
 
         this.cdr.detectChanges();
-
-        this.applyOutputsConnectionLabel();
     }
 
     protected onSelectedChanged(selected: boolean): void {
