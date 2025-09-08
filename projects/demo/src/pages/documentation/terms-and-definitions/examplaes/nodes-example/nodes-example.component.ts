@@ -1,7 +1,10 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import type {DfDataModel} from '@ng-draw-flow/core';
-import {NgDrawFlowComponent, provideNgDrawFlowConfigs} from '@ng-draw-flow/core';
+import {
+    type DfDataModel,
+    NgDrawFlowComponent,
+    provideNgDrawFlowConfigs,
+} from '@ng-draw-flow/core';
 
 import {NodeComponent} from '../nodes/node/node.component';
 

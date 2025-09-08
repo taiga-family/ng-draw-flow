@@ -1,30 +1,27 @@
 import {AsyncPipe, CommonModule} from '@angular/common';
-import type {OnInit} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     Component,
+    type OnInit,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import type {
-    DfDataConnection,
-    DfDataModel,
-    DfDataNode,
-    DfEvent,
-} from '@ng-draw-flow/core';
 import {
     DfArrowhead,
     DfConnectionPoint,
     DfConnectionType,
     dfCycleDetectionValidator,
+    type DfDataConnection,
+    type DfDataModel,
+    type DfDataNode,
+    type DfEvent,
     dfIsolatedNodesValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiButton} from '@taiga-ui/core';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject} from 'rxjs';

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
-import type {DfDataConnection} from '../../ng-draw-flow.interfaces';
+import {type DfDataConnection} from '../../ng-draw-flow.interfaces';
 
 @Injectable()
 export class ConnectionsService {

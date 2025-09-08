@@ -1,5 +1,4 @@
 import {NgIf} from '@angular/common';
-import type {OnInit} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -8,13 +7,18 @@ import {
     EventEmitter,
     forwardRef,
     inject,
+    type OnInit,
     Output,
     signal,
     ViewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import type {ControlValueAccessor} from '@angular/forms';
-import {FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule} from '@angular/forms';
+import {
+    type ControlValueAccessor,
+    FormControl,
+    NG_VALUE_ACCESSOR,
+    ReactiveFormsModule,
+} from '@angular/forms';
 import {debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
@@ -23,11 +27,11 @@ import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
 import {DfResizeObserver, ErrorsDirective} from './directives';
-import type {
-    DfDataConnection,
-    DfDataModel,
-    DfDataNode,
-    DfEvent,
+import {
+    type DfDataConnection,
+    type DfDataModel,
+    type DfDataNode,
+    type DfEvent,
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';

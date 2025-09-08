@@ -1,4 +1,4 @@
-import type {DfConnectorData} from '../../../../../ng-draw-flow.interfaces';
+import {type DfConnectorData} from '../../../../../ng-draw-flow.interfaces';
 import {getBezierEdgeCenter, getControlWithCurvature} from './helpers';
 
 export function createBezierPath(

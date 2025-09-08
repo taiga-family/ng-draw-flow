@@ -1,11 +1,15 @@
-import type {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {
+    type AbstractControl,
+    type ValidationErrors,
+    type ValidatorFn,
+} from '@angular/forms';
 
-import type {
-    DfDataConnection,
-    DfDataInitialNode,
-    DfDataModel,
-    DfDataNode,
-    DfId,
+import {
+    type DfDataConnection,
+    type DfDataInitialNode,
+    type DfDataModel,
+    type DfDataNode,
+    type DfId,
 } from '../../ng-draw-flow.interfaces';
 
 /**

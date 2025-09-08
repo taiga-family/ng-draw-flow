@@ -1,7 +1,7 @@
 import {Directive, ElementRef, inject} from '@angular/core';
-import type {Observable} from 'rxjs';
+import {type Observable} from 'rxjs';
 
-import type {DfDragDrop} from './drag-drop.interface';
+import {type DfDragDrop} from './drag-drop.interface';
 import {DragDropService} from './drag-drop.service';
 
 @Directive({

@@ -1,5 +1,7 @@
-import type {DfPoint} from '../../../../../../ng-draw-flow.interfaces';
-import {DfConnectorPosition} from '../../../../../../ng-draw-flow.interfaces';
+import {
+    DfConnectorPosition,
+    type DfPoint,
+} from '../../../../../../ng-draw-flow.interfaces';
 
 /**
  * Returns a unit vector (±1 on one axis, 0 on the other)

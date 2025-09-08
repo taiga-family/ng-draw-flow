@@ -1,4 +1,4 @@
-import type {Configuration} from 'webpack';
+import {type Configuration} from 'webpack';
 import {merge} from 'webpack-merge';
 
 /**

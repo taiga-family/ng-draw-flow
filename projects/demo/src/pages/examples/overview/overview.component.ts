@@ -1,15 +1,14 @@
 import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import type {DfDataModel} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
     dfCycleDetectionValidator,
+    type DfDataModel,
     dfIsolatedNodesValidator,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';
-import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {MarkdownModule} from 'ngx-markdown';
 
 @Component({

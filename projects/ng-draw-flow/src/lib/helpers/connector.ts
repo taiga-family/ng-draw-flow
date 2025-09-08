@@ -1,4 +1,4 @@
-import type {DfConnectionPoint, DfDataConnector} from '../ng-draw-flow.interfaces';
+import {type DfConnectionPoint, type DfDataConnector} from '../ng-draw-flow.interfaces';
 
 export function isConnectorType(type: string): type is DfConnectionPoint {
     return ['input', 'output'].includes(type);

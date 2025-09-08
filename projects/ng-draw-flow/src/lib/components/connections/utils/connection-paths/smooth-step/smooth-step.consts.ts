@@ -1,5 +1,4 @@
-import type {DfPoint} from '../../../../../ng-draw-flow.interfaces';
-import {DfConnectorPosition} from '../../../../../ng-draw-flow.interfaces';
+import {DfConnectorPosition, type DfPoint} from '../../../../../ng-draw-flow.interfaces';
 
 /**
  * Minimum length (in px) of the first straight segment that leaves a connector.

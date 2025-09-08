@@ -1,5 +1,4 @@
-import type {OnDestroy} from '@angular/core';
-import {inject, Injectable, NgZone} from '@angular/core';
+import {inject, Injectable, NgZone, type OnDestroy} from '@angular/core';
 
 interface SelectableItem {
     element: HTMLElement;

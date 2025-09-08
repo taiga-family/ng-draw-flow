@@ -1,16 +1,20 @@
-import type {ElementRef, Signal} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     Component,
     computed,
+    type ElementRef,
     inject,
     Output,
+    type Signal,
     ViewChild,
 } from '@angular/core';
 
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import type {DfConnectorData, DfOptions} from '../../../ng-draw-flow.interfaces';
-import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
+import {
+    DfConnectionType,
+    type DfConnectorData,
+    type DfOptions,
+} from '../../../ng-draw-flow.interfaces';
 import {createBezierPath, createSmoothStepPath} from '../utils';
 import {DraftConnectionService} from './draft-connection.service';
 

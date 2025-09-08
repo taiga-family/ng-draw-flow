@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, ReplaySubject} from 'rxjs';
 
-import type {
-    DfConnectorData,
-    DfConnectorPosition,
-    DfPoint,
+import {
+    type DfConnectorData,
+    type DfConnectorPosition,
+    type DfPoint,
 } from '../ng-draw-flow.interfaces';
 
 @Injectable()

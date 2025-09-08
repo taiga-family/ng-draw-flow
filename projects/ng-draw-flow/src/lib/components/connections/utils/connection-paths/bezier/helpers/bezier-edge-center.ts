@@ -1,4 +1,4 @@
-import type {DfPoint} from '../../../../../../ng-draw-flow.interfaces';
+import {type DfPoint} from '../../../../../../ng-draw-flow.interfaces';
 
 export function getBezierEdgeCenter({
     source,

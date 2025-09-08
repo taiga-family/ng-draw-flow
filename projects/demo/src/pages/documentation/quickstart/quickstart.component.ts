@@ -1,9 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import type {DfDataModel} from '@ng-draw-flow/core';
-import {NgDrawFlowComponent} from '@ng-draw-flow/core';
-import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {type DfDataModel, NgDrawFlowComponent} from '@ng-draw-flow/core';
+import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiLink} from '@taiga-ui/core';
 
 import FirstExampleComponent from './examples/first-example/component';
@@ -37,7 +35,7 @@ export default class QuickstartComponent {
         Template: import('./examples/node.template.html?raw'),
     };
 
-    protected nodeData: DfDataModel = {
+    public nodeData: DfDataModel = {
         nodes: [
             {
                 id: 'node-1',

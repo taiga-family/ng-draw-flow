@@ -1,7 +1,10 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
-import type {DfDataConnectorConfig} from '../../ng-draw-flow.interfaces';
-import {DfConnectionPoint, DfConnectorPosition} from '../../ng-draw-flow.interfaces';
+import {
+    DfConnectionPoint,
+    DfConnectorPosition,
+    type DfDataConnectorConfig,
+} from '../../ng-draw-flow.interfaces';
 import {BaseConnector} from './base-connector';
 
 @Component({

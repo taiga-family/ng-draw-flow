@@ -1,4 +1,4 @@
-import type {ValidationErrors} from '@angular/forms';
+import {type ValidationErrors} from '@angular/forms';
 
 export function collectInvalidNodeIds(errors: ValidationErrors | null): Set<string> {
     if (!errors) {

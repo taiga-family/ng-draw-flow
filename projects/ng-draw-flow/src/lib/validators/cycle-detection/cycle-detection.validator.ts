@@ -1,6 +1,10 @@
-import type {AbstractControl, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {
+    type AbstractControl,
+    type ValidationErrors,
+    type ValidatorFn,
+} from '@angular/forms';
 
-import type {DfDataModel} from '../../ng-draw-flow.interfaces';
+import {type DfDataModel} from '../../ng-draw-flow.interfaces';
 import {buildAdjacencyMap, findCycleNodes, generateConnectionsHash} from './helpers';
 
 /**

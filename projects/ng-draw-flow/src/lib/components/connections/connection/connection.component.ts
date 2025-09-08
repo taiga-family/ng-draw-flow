@@ -8,15 +8,16 @@ import {
     Output,
 } from '@angular/core';
 import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
-import type {BehaviorSubject, Observable} from 'rxjs';
 import {
     animationFrameScheduler,
     asyncScheduler,
+    type BehaviorSubject,
     combineLatest,
     concat,
     delay,
     distinctUntilChanged,
     map,
+    type Observable,
     observeOn,
     of,
     shareReplay,
@@ -28,14 +29,15 @@ import {
 import {SelectableElementDirective} from '../../../directives';
 import {createConnectorHash, deepEqual} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import type {
-    DfArrowheadOptions,
-    DfConnectorData,
-    DfDataConnection,
-    DfDataConnector,
-    DfOptions,
+import {
+    DfArrowhead,
+    type DfArrowheadOptions,
+    DfConnectionType,
+    type DfConnectorData,
+    type DfDataConnection,
+    type DfDataConnector,
+    type DfOptions,
 } from '../../../ng-draw-flow.interfaces';
-import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {ConnectionsService} from '../connections.service';
 import {createBezierPath, createSmoothStepPath} from '../utils';
@@ -56,34 +58,9 @@ export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
-    protected selected = false;
     private readonly arrowhead: DfArrowheadOptions = this.options.connection.arrowhead;
-    public deletable = this.options.options.connectionsDeletable;
-
-    protected readonly markerEnd =
-        this.arrowhead.type === 'none'
-            ? null
-            : `url(#df-arrowhead-${this.arrowhead.type})`;
-
     private readonly arrowWidth = this.arrowhead.width;
     private readonly arrowHeight = this.arrowhead.height;
-
-    protected readonly arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
-    protected readonly arrowMarkerHeight = this.arrowHeight * 2;
-
-    protected readonly arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
-    protected readonly arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
-    protected readonly arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
-
-    @Input()
-    public connection!: DfDataConnection;
-
-    @Output()
-    protected readonly connectionDeleted = new EventEmitter<void>();
-
-    @Output()
-    protected readonly connectionSelected = new EventEmitter<void>();
-
     private readonly pathWithLabel$: Observable<{
         path: string;
         labelX: number;
@@ -138,6 +115,17 @@ export class ConnectionComponent {
         shareReplay({bufferSize: 1, refCount: true}),
     );
 
+    protected selected = false;
+    protected readonly arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
+    protected readonly arrowMarkerHeight = this.arrowHeight * 2;
+    protected readonly arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
+    protected readonly arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
+    protected readonly arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
+    protected readonly markerEnd =
+        this.arrowhead.type === DfArrowhead.None
+            ? null
+            : `url(#df-arrowhead-${this.arrowhead.type})`;
+
     protected readonly path$: Observable<string> = this.pathWithLabel$.pipe(
         map(({path}) => path),
     );
@@ -151,6 +139,17 @@ export class ConnectionComponent {
         startWith(false),
         distinctUntilChanged(),
     );
+
+    @Input()
+    public connection!: DfDataConnection;
+
+    @Output()
+    public readonly connectionDeleted = new EventEmitter<void>();
+
+    @Output()
+    public readonly connectionSelected = new EventEmitter<void>();
+
+    public deletable = this.options.options.connectionsDeletable;
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (!this.selected || !this.deletable) {

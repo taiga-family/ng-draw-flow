@@ -1,12 +1,13 @@
 import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
 
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
-import type {
-    DfConnectionLabel,
-    DfDataConnectorConfig,
-    DfOptions,
+import {
+    type DfConnectionLabel,
+    DfConnectionPoint,
+    DfConnectorPosition,
+    type DfDataConnectorConfig,
+    type DfOptions,
 } from '../../ng-draw-flow.interfaces';
-import {DfConnectionPoint, DfConnectorPosition} from '../../ng-draw-flow.interfaces';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {BaseConnector} from './base-connector';
 
@@ -21,9 +22,9 @@ import {BaseConnector} from './base-connector';
     },
 })
 export class DfOutputComponent extends BaseConnector {
-    protected override connectorType = DfConnectionPoint.Output;
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    protected override connectorType = DfConnectionPoint.Output;
 
     @Input('connectorData')
     public data!: DfDataConnectorConfig;

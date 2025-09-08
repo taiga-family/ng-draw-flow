@@ -1,10 +1,10 @@
 import {HttpClient} from '@angular/common/http';
-import type {OnInit} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
     inject,
+    type OnInit,
     signal,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -24,9 +24,9 @@ import {GITHUB_API} from '../../constants';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoComponent implements OnInit {
-    protected readonly stars = signal('');
     private readonly destroyRef = inject(DestroyRef);
     private readonly http = inject(HttpClient);
+    protected readonly stars = signal('');
 
     public ngOnInit(): void {
         this.http

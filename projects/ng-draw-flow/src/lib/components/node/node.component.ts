@@ -1,47 +1,45 @@
-import type {
-    AfterViewInit,
-    ComponentRef,
-    ElementRef,
-    OnChanges,
-    QueryList,
-    SimpleChanges,
-} from '@angular/core';
 import {
+    type AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    type ComponentRef,
     DestroyRef,
+    type ElementRef,
     EventEmitter,
     inject,
     Input,
+    type OnChanges,
     Output,
+    type QueryList,
+    type SimpleChanges,
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import type {Observable} from 'rxjs';
-import {merge, tap} from 'rxjs';
+import {merge, type Observable, tap} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
-import type {DfDragDrop, DfDragDropDistance} from '../../directives';
 import {
+    type DfDragDrop,
+    type DfDragDropDistance,
     DfDragDropStage,
     DragDropDirective,
     SelectableElementDirective,
 } from '../../directives';
 import {createConnectorHash} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
-import type {
-    DfDataInitialNode,
-    DfDataNode,
-    DfOptions,
-    DfPoint,
+import {
+    DfConnectionPoint,
+    type DfDataInitialNode,
+    type DfDataNode,
+    type DfOptions,
+    type DfPoint,
 } from '../../ng-draw-flow.interfaces';
-import {DfConnectionPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
-import type {DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
+import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
-import type {DfInputComponent, DfOutputComponent} from '../connectors';
+import {type DfInputComponent, type DfOutputComponent} from '../connectors';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 
@@ -82,10 +80,10 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private previousOutputs: DfOutputComponent[] = [];
 
     @ViewChild('nodeElement')
-    private readonly nodeElementRef!: ElementRef<HTMLElement>;
+    public readonly nodeElementRef!: ElementRef<HTMLElement>;
 
     @ViewChild('container', {read: ViewContainerRef})
-    private readonly containerRef!: ViewContainerRef;
+    public readonly containerRef!: ViewContainerRef;
 
     @Input()
     public node!: DfDataInitialNode | DfDataNode;
@@ -94,26 +92,18 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     public invalid = false;
 
     @Output()
-    protected readonly nodeMoved = new EventEmitter<DfDataNode>();
+    public readonly nodeMoved = new EventEmitter<DfDataNode>();
 
     @Output()
-    protected readonly nodeDeleted = new EventEmitter<void>();
+    public readonly nodeDeleted = new EventEmitter<void>();
 
     @Output()
-    protected readonly nodeSelected = new EventEmitter<DfDataNode>();
+    public readonly nodeSelected = new EventEmitter<DfDataNode>();
 
     @Output()
-    protected readonly connectorDeleted = new EventEmitter<string>();
+    public readonly connectorDeleted = new EventEmitter<string>();
 
-    protected cursor: 'grabbing' | 'initial' = 'initial';
-
-    protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.selected && this.deletable && !this.node.startNode) {
-            event.preventDefault();
-
-            this.nodeDeleted.emit();
-        }
-    }
+    public cursor: 'grabbing' | 'initial' = 'initial';
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.invalid && this.innerComponent) {
@@ -133,6 +123,14 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         if (this.invalid) {
             this.innerComponent.invalid = true;
             this.innerComponent.markForCheck();
+        }
+    }
+
+    protected handleKeyboardEvent(event: KeyboardEvent): void {
+        if (this.selected && this.deletable && !this.node.startNode) {
+            event.preventDefault();
+
+            this.nodeDeleted.emit();
         }
     }
 
@@ -314,7 +312,6 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         );
     }
 
-    /* eslint-disable @typescript-eslint/max-params */
     private updateConnectorCoordinates(
         position: DfPoint,
         nodeId: string,
@@ -340,7 +337,6 @@ export class NodeComponent implements AfterViewInit, OnChanges {
             connector.position,
         );
     }
-    /* eslint-enable @typescript-eslint/max-params */
 
     private calculateConnectorPosition(
         element: HTMLElement,

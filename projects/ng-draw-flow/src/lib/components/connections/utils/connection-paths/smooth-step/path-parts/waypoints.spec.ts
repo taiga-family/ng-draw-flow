@@ -1,5 +1,8 @@
-import type {DfConnectorData, DfPoint} from '../../../../../../ng-draw-flow.interfaces';
-import {DfConnectorPosition} from '../../../../../../ng-draw-flow.interfaces';
+import {
+    type DfConnectorData,
+    DfConnectorPosition,
+    type DfPoint,
+} from '../../../../../../ng-draw-flow.interfaces';
 import {point} from '../../../point';
 import {MIN_SEGMENT_LENGTH} from '../smooth-step.consts';
 import {computeWaypoints} from './waypoints';

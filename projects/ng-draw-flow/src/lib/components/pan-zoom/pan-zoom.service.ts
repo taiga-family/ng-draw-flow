@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import type {DfPanzoomModel} from './pan-zoom.interfaces';
+import {type DfPanzoomModel} from './pan-zoom.interfaces';
 
 @Injectable()
 export class PanZoomService {

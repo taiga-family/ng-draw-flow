@@ -1,5 +1,12 @@
-import type {OnDestroy, OnInit} from '@angular/core';
-import {Directive, ElementRef, EventEmitter, inject, Output} from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    EventEmitter,
+    inject,
+    type OnDestroy,
+    type OnInit,
+    Output,
+} from '@angular/core';
 
 import {SelectionService} from '../../services/selection.service';
 
