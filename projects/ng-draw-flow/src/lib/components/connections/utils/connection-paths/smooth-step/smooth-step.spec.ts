@@ -58,7 +58,7 @@ describe('createSmoothStepPath', () => {
         const d = createSmoothStepPath(source, target);
 
         // M … Qstub L …
-        expect(d).toBe('M0 0QstubL50 100');
+        expect(d).toEqual(['M0 0QstubL50 100', 0, 0]);
         expect(bend).toHaveBeenCalledTimes(1);
     });
 
