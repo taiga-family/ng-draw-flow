@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_examples_editor_editor_component_less_ngResource"],{
 
-/***/ 9555:
+/***/ 19555:
 /*!**********************************************************************************!*\
   !*** ./projects/demo/src/pages/examples/editor/editor.component.less?ngResource ***!
   \**********************************************************************************/

@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_examples_overview_overview_component_ts"],{
 
-/***/ 1882:
+/***/ 21882:
 /*!*************************************************************************!*\
   !*** ./projects/demo/src/pages/examples/overview/overview.component.ts ***!
   \*************************************************************************/
@@ -11,11 +11,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var ngx_markdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-markdown */ 5592);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var ngx_markdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-markdown */ 15592);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
 var _OverviewComponent;
 
 
@@ -29,14 +29,14 @@ class OverviewComponent {
       'app.module.ts': __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_overview_examples_app_module_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/app.module.md?raw */ 6796, 17)),
       'app.component.ts': __webpack_require__.e(/*! import() */ "projects_demo_src_pages_examples_overview_examples_app_component_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/app.component.md?raw */ 407, 17)),
       'simple-node.component.ts': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_simple-node_simple-node_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/simple-node/simple-node.component.ts?raw */ 8550, 17)),
-      'simple-node.component.html': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_simple-node_simple-node_component_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/simple-node/simple-node.component.html?raw */ 5914, 17)),
-      'simple-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_simple-node_simple-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/simple-node/simple-node.component.less?raw */ 7422, 17)),
-      'info-node.component.ts': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_info-node_info-node_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/info-node/info-node.component.ts?raw */ 1370, 17)),
-      'info-node.component.html': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_info-node_info-node_component_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/info-node/info-node.component.html?raw */ 5150, 17)),
-      'info-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_info-node_info-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/info-node/info-node.component.less?raw */ 4106, 17)),
+      'simple-node.component.html': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_simple-node_simple-node_component_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/simple-node/simple-node.component.html?raw */ 65914, 17)),
+      'simple-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_simple-node_simple-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/simple-node/simple-node.component.less?raw */ 57422, 17)),
+      'info-node.component.ts': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_info-node_info-node_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/info-node/info-node.component.ts?raw */ 11370, 17)),
+      'info-node.component.html': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_info-node_info-node_component_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/info-node/info-node.component.html?raw */ 15150, 17)),
+      'info-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_info-node_info-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/info-node/info-node.component.less?raw */ 54106, 17)),
       'form-node.component.ts': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_form-node_form-node_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/form-node/form-node.component.ts?raw */ 814, 17)),
       'form-node.component.html': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_form-node_form-node_component_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/form-node/form-node.component.html?raw */ 3890, 17)),
-      'form-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_form-node_form-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/form-node/form-node.component.less?raw */ 470, 17))
+      'form-node.component.less': __webpack_require__.e(/*! import() */ "projects_demo_src_app_modules_nodes_form-node_form-node_component_less_ngResource").then(__webpack_require__.t.bind(__webpack_require__, /*! ../../../app/modules/nodes/form-node/form-node.component.less?raw */ 90470, 17))
     };
     this.data = {
       nodes: [{

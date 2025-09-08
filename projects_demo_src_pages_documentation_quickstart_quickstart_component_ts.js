@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_quickstart_quickstart_component_ts"],{
 
-/***/ 4856:
+/***/ 74856:
 /*!**********************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/quickstart/examples/first-example/component.ts ***!
   \**********************************************************************************************/
@@ -11,9 +11,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 96623);
 var _FirstExampleComponent;
 
 
@@ -147,7 +147,7 @@ _FirstExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 6849:
+/***/ 76849:
 /*!**********************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/quickstart/quickstart.component.ts ***!
   \**********************************************************************************/
@@ -157,12 +157,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
-/* harmony import */ var _examples_first_example_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./examples/first-example/component */ 4856);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/core */ 71534);
+/* harmony import */ var _examples_first_example_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./examples/first-example/component */ 74856);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
 var _QuickstartComponent;
 
 
@@ -174,16 +174,16 @@ var _QuickstartComponent;
 class QuickstartComponent {
   constructor() {
     this.gettingStarted = {
-      imports: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_imports_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/imports.md?raw */ 4698, 17)),
-      providing: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_providing_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/providing.md?raw */ 8638, 17)),
-      data1: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_data-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-1.md?raw */ 3562, 17)),
-      template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_template_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.md?raw */ 7290, 17)),
-      data2: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_data-2_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-2.md?raw */ 739, 17))
+      imports: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_imports_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/imports.md?raw */ 74698, 17)),
+      providing: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_providing_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/providing.md?raw */ 48638, 17)),
+      data1: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_data-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-1.md?raw */ 73562, 17)),
+      template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_template_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.md?raw */ 37290, 17)),
+      data2: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_data-2_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-2.md?raw */ 90739, 17))
     };
     this.customNodeExample = {
       TypeScript: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.component.ts?raw */ 8341, 17)),
-      Styles: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_styles_less_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.styles.less?raw */ 7952, 17)),
-      Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.template.html?raw */ 724, 17))
+      Styles: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_styles_less_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.styles.less?raw */ 57952, 17)),
+      Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.template.html?raw */ 30724, 17))
     };
     this.nodeData = {
       nodes: [{

@@ -1,7 +1,7 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_terms-and-definitions_terms-and-definitions_component_ts"],{
 
-/***/ 8927:
+/***/ 88927:
 /*!************************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/terms-and-definitions/examplaes/connections-example/connections-example.component.ts ***!
   \************************************************************************************************************************************/
@@ -11,10 +11,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../app/modules/nodes */ 5989);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../app/modules/nodes */ 85989);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
 var _ConnectionsExampleComponent;
 
 
@@ -93,7 +93,7 @@ _ConnectionsExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTE
 
 /***/ }),
 
-/***/ 2363:
+/***/ 22363:
 /*!**********************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/terms-and-definitions/examplaes/connectors-example/connectors-example.component.ts ***!
   \**********************************************************************************************************************************/
@@ -103,10 +103,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _nodes_connectors_connectors_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nodes/connectors/connectors.component */ 955);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _nodes_connectors_connectors_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nodes/connectors/connectors.component */ 50955);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
 var _ConnectorsExampleComponent;
 
 
@@ -164,7 +164,7 @@ _ConnectorsExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
 
 /***/ }),
 
-/***/ 4619:
+/***/ 84619:
 /*!************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/terms-and-definitions/examplaes/nodes-example/nodes-example.component.ts ***!
   \************************************************************************************************************************/
@@ -174,10 +174,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 8015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _nodes_node_node_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nodes/node/node.component */ 7323);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _nodes_node_node_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../nodes/node/node.component */ 67323);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
 var _NodesExampleComponent;
 
 
@@ -235,7 +235,7 @@ _NodesExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODU
 
 /***/ }),
 
-/***/ 955:
+/***/ 50955:
 /*!************************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/terms-and-definitions/examplaes/nodes/connectors/connectors.component.ts ***!
   \************************************************************************************************************************/
@@ -245,8 +245,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ConnectorsComponent: () => (/* binding */ ConnectorsComponent)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
 var _ConnectorsComponent;
 
 
@@ -295,7 +295,7 @@ _ConnectorsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
 
 /***/ }),
 
-/***/ 7323:
+/***/ 67323:
 /*!************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/terms-and-definitions/examplaes/nodes/node/node.component.ts ***!
   \************************************************************************************************************/
@@ -305,8 +305,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   NodeComponent: () => (/* binding */ NodeComponent)
 /* harmony export */ });
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 5577);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 6623);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 96623);
 var _NodeComponent;
 
 
@@ -344,7 +344,7 @@ _NodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["
 
 /***/ }),
 
-/***/ 509:
+/***/ 70509:
 /*!********************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/terms-and-definitions/terms-and-definitions.component.ts ***!
   \********************************************************************************************************/
@@ -354,13 +354,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 1099);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 1534);
-/* harmony import */ var _examplaes_connections_example_connections_example_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examplaes/connections-example/connections-example.component */ 8927);
-/* harmony import */ var _examplaes_connectors_example_connectors_example_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./examplaes/connectors-example/connectors-example.component */ 2363);
-/* harmony import */ var _examplaes_nodes_example_nodes_example_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./examplaes/nodes-example/nodes-example.component */ 4619);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 6623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 4841);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 41099);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/core */ 71534);
+/* harmony import */ var _examplaes_connections_example_connections_example_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./examplaes/connections-example/connections-example.component */ 88927);
+/* harmony import */ var _examplaes_connectors_example_connectors_example_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./examplaes/connectors-example/connectors-example.component */ 22363);
+/* harmony import */ var _examplaes_nodes_example_nodes_example_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./examplaes/nodes-example/nodes-example.component */ 84619);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
 var _TermsAndDefinitionsComponent;
 
 
