@@ -1,4 +1,5 @@
-import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {WA_NAVIGATOR} from '@ng-web-apis/common';
 import {TuiIcon} from '@taiga-ui/core';
 import {injectContext} from '@taiga-ui/polymorpheus';
 
@@ -22,13 +23,14 @@ import {injectContext} from '@taiga-ui/polymorpheus';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyComponent {
+    private readonly navigator = inject(WA_NAVIGATOR);
     protected readonly context = injectContext<{$implicit: string}>();
     public link = this.context.$implicit;
 
     protected copied = signal(false);
 
     protected copy(): void {
-        navigator.clipboard.writeText(this.link).then(() => {
+        this.navigator.clipboard.writeText(this.link).then(() => {
             this.copied.set(true);
             setTimeout(() => this.copied.set(false), 3000);
         });
