@@ -9,18 +9,18 @@ import {computeWaypoints} from './path-parts/waypoints';
  * @param startConnector   Data for the start connector.
  * @param endConnector     Data for the end connector.
  * @param radius           Radius of each bend (in pixels).
- * @returns                A string suitable for the `d` attribute of an SVG `<path>`.
+ * @returns                A tuple with an SVG `d` attribute and label coordinates.
  */
 export function createSmoothStepPath(
     startConnector: DfConnectorData,
     endConnector: DfConnectorData,
     radius = 5,
-): string {
+): [path: string, labelX: number, labelY: number] {
     // Default to Bottom/Top when the position is null (e.g. while a draft edge is dragged).
     const sourcePos = startConnector.position ?? DfConnectorPosition.Bottom;
     const targetPos = endConnector.position ?? DfConnectorPosition.Top;
 
-    const [polyline] = computeWaypoints({
+    const [polyline, labelX, labelY] = computeWaypoints({
         source: startConnector.point,
         sourcePos,
         target: endConnector.point,
@@ -47,5 +47,5 @@ export function createSmoothStepPath(
         '',
     );
 
-    return path; // ready-made `d` attribute for <path>
+    return [path, labelX, labelY]; // ready-made `d` attribute for <path>
 }

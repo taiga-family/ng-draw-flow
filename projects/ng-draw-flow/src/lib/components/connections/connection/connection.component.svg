@@ -1,4 +1,5 @@
 <svg class="connection" [class.optimize-speed]="optimization$ | async">
+    <!-- Marker start-->
     <defs>
         <marker
             id="df-arrowhead-arrowClosed"
@@ -37,6 +38,25 @@
             />
         </marker>
     </defs>
+    <!-- Marker end-->
+
+    <!-- Connection line start-->
     <path class="selectable-area" [attr.d]="path$ | async" (dfSelectableElement)="onSelectedChanged($event)" />
     <path class="main-path" [attr.d]="path$ | async" [class.df-selected]="selected" [attr.marker-end]="markerEnd" />
+    <!-- Connection line start-->
+
+    <!-- Label start -->
+    <foreignObject *ngIf="connection.label" class="label-container" width="100%" height="100%">
+        <div
+            xmlns="http://www.w3.org/1999/xhtml"
+            class="label"
+            [style.left.px]="(labelPosition$ | async)?.x"
+            [style.top.px]="(labelPosition$ | async)?.y"
+        >
+            <ng-container *polymorpheusOutlet="connection.label.content as label; context: connection.label.context">
+                {{ label }}
+            </ng-container>
+        </div>
+    </foreignObject>
+    <!-- Label end -->
 </svg>

@@ -14,7 +14,7 @@ export function getBezierEdgeCenter({
     const centerX =
         source.x * 0.125 +
         sourceControlPoint.x * 0.375 +
-        targetControlPoint.y * 0.375 +
+        targetControlPoint.x * 0.375 +
         target.x * 0.125;
     const centerY =
         source.y * 0.125 +

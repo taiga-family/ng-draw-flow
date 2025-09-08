@@ -123,10 +123,10 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     }
 
     public ngAfterViewInit(): void {
+        this.fillValue();
         this.createNodeContentComponent(this.node);
         this.subscribeToConnectorsChanges();
         this.saveInnerNodeSize();
-        this.fillValue();
         this.setInitialPosition();
         this.updateConnectorsCoordinates();
 
@@ -153,6 +153,8 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         this.innerComponent.model = data;
 
         this.cdr.detectChanges();
+
+        this.applyOutputsConnectionLabel();
     }
 
     protected onSelectedChanged(selected: boolean): void {
@@ -497,6 +499,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
                 this.innerComponent.outputs.changes.pipe(
                     tap((currentOutputs: QueryList<DfOutputComponent>) => {
                         this.handleRemovedOutputs(currentOutputs);
+                        this.applyOutputsConnectionLabel();
                     }),
                 ),
             );
@@ -537,5 +540,17 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         }
 
         this.previousOutputs = currentArray;
+    }
+
+    private applyOutputsConnectionLabel(): void {
+        const connectionLabel = this.value.data.connectionLabel;
+
+        if (!connectionLabel) {
+            return;
+        }
+
+        this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
+            output.connectionLabel = connectionLabel;
+        });
     }
 }
