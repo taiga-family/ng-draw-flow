@@ -1,0 +1,57 @@
+<tui-doc-page header="Labels">
+    <section>
+        <h2>Overview</h2>
+        <p>
+            <code>DfConnectionLabel</code>
+            adds textual or templated annotations to connections. A label is defined by the
+            <code>content</code>
+            that can be a string, template or component and an optional
+            <code>context</code>
+            passed to it.
+        </p>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Creation scenarios</h3>
+        <ul class="tui-list tui-list_extra-small">
+            <li class="tui-list__item">
+                <b>Connection level</b>
+                – specify the
+                <code>label</code>
+                property for a particular item in the
+                <code>connections</code>
+                array of the data model.
+            </li>
+            <li class="tui-list__item">
+                <b>Connector level</b>
+                – provide
+                <code>connectionLabel</code>
+                to a connector (for example,
+                <code>df-output</code>
+                ) so every created connection inherits it.
+            </li>
+            <li class="tui-list__item">
+                <b>Node level</b>
+                – define
+                <code>data.connectionLabel</code>
+                for a node to apply the same label to all of its output connectors.
+            </li>
+        </ul>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Example</h3>
+
+        <tui-doc-example
+            style="padding: 0"
+            [content]="labelsExample"
+        >
+            <div
+                tuiTheme="light"
+                class="editor"
+            >
+                <example-component />
+            </div>
+        </tui-doc-example>
+    </section>
+</tui-doc-page>

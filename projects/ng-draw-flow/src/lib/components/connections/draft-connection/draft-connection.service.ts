@@ -67,7 +67,7 @@ export class DraftConnectionService implements OnDestroy {
         this.connection$
             .pipe(
                 filter(() => this.options.options.connectionsCreatable),
-                tap((connectorData: DfDataConnector) => this.onDragStart(connectorData)),
+                tap((connectorData) => this.onDragStart(connectorData)),
                 switchMap(() => fromEvent<PointerEvent>(document, 'pointermove')),
                 filter(() => this.isConnectionCreating$.value),
                 observeOn(animationFrameScheduler),
@@ -153,6 +153,7 @@ export class DraftConnectionService implements OnDestroy {
             this.connectionCreated$.next({
                 source: this.sourceConnector,
                 target: targetConnector,
+                label: this.sourceConnector.connectionLabel,
             });
         }
 

@@ -68,6 +68,14 @@ export const appRoutes: Routes = [
         },
     },
     {
+        path: DemoPath.Labels,
+        loadComponent: async () =>
+            import('../pages/documentation/labels/labels.component'),
+        data: {
+            title: 'Labels',
+        },
+    },
+    {
         path: DemoPath.Validation,
         loadComponent: async () =>
             import('../pages/documentation/validation/validation.component'),

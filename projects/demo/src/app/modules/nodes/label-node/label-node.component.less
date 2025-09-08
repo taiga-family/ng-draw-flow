@@ -1,0 +1,38 @@
+:host {
+    display: block;
+    background: #fff;
+    inline-size: 12.5rem;
+    box-shadow: var(--tui-shadow-small);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 0.0625rem solid transparent;
+    transition: border-color 0.2s ease-in-out;
+    color: #000;
+
+    &.df-selected {
+        border-color: var(--tui-text-action);
+    }
+
+    &.df-invalid {
+        border-color: var(--tui-text-negative);
+    }
+}
+
+.output-wrapper {
+    position: absolute;
+    right: -0.4375rem;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-block-end: 0.25rem;
+    block-size: 100%;
+}
+
+.output-label {
+    margin-inline-end: 0.5rem;
+}
+
+.output {
+    position: relative;
+}

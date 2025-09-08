@@ -31,14 +31,17 @@ export class DraftConnectionComponent {
     @Output()
     protected readonly connectionCreated = this.draftConnectionService.connectionCreated$;
 
-    protected path: Signal<string> = computed(() => {
+    protected pathData: Signal<string> = computed(() => {
         const sourcePoint: DfConnectorData = this.draftConnectionService.source();
         const targetPoint: DfConnectorData = this.draftConnectionService.target();
         const curvature = this.options.connection.curvature;
 
         switch (this.options.connection.type) {
-            case DfConnectionType.SmoothStep:
-                return createSmoothStepPath(sourcePoint, targetPoint, curvature);
+            case DfConnectionType.SmoothStep: {
+                const [path] = createSmoothStepPath(sourcePoint, targetPoint, curvature);
+
+                return path;
+            }
             case DfConnectionType.Bezier:
             default: {
                 const [path] = createBezierPath(sourcePoint, targetPoint, curvature);

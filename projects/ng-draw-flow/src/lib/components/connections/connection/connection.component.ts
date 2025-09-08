@@ -1,4 +1,4 @@
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, NgIf} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
@@ -7,6 +7,7 @@ import {
     Input,
     Output,
 } from '@angular/core';
+import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
 import type {BehaviorSubject, Observable} from 'rxjs';
 import {
     animationFrameScheduler,
@@ -42,7 +43,7 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
 @Component({
     standalone: true,
     selector: 'df-connection',
-    imports: [AsyncPipe, SelectableElementDirective],
+    imports: [AsyncPipe, NgIf, PolymorpheusOutlet, SelectableElementDirective],
     templateUrl: './connection.component.svg',
     styleUrls: ['../connection.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -83,7 +84,11 @@ export class ConnectionComponent {
     @Output()
     protected readonly connectionSelected = new EventEmitter<void>();
 
-    protected readonly path$: Observable<string> = of(null).pipe(
+    private readonly pathWithLabel$: Observable<{
+        path: string;
+        labelX: number;
+        labelY: number;
+    }> = of(null).pipe(
         observeOn(asyncScheduler),
         switchMap(() =>
             combineLatest([
@@ -104,27 +109,41 @@ export class ConnectionComponent {
         observeOn(animationFrameScheduler),
         map(([start, end]) => {
             if (!start || !end) {
-                return '';
+                return {path: '', labelX: 0, labelY: 0};
             }
 
             switch (this.options.connection.type) {
-                case DfConnectionType.SmoothStep:
-                    return createSmoothStepPath(
+                case DfConnectionType.SmoothStep: {
+                    const [path, labelX, labelY] = createSmoothStepPath(
                         start,
                         end,
                         this.options.connection.curvature,
                     );
+
+                    return {path, labelX, labelY};
+                }
                 case DfConnectionType.Bezier:
                 default: {
                     const curvature = this.options.connection.curvature;
-                    const [path] = createBezierPath(start, end, curvature);
+                    const [path, labelX, labelY] = createBezierPath(
+                        start,
+                        end,
+                        curvature,
+                    );
 
-                    return path;
+                    return {path, labelX, labelY};
                 }
             }
         }),
         shareReplay({bufferSize: 1, refCount: true}),
     );
+
+    protected readonly path$: Observable<string> = this.pathWithLabel$.pipe(
+        map(({path}) => path),
+    );
+
+    protected readonly labelPosition$: Observable<{x: number; y: number}> =
+        this.pathWithLabel$.pipe(map(({labelX, labelY}) => ({x: labelX, y: labelY})));
 
     protected readonly optimization$: Observable<boolean> = this.path$.pipe(
         skip(1),

@@ -1,4 +1,5 @@
 import type {Type} from '@angular/core';
+import type {PolymorpheusContent} from '@taiga-ui/polymorpheus';
 
 import type {DrawFlowBaseNode} from './ng-draw-flow-node.base';
 
@@ -85,6 +86,7 @@ export interface DfDataInitialNode {
     id: string;
     data: {
         type: string;
+        connectionLabel?: DfConnectionLabel;
         [key: string]: any;
     };
     startNode?: boolean;
@@ -95,9 +97,15 @@ export interface DfDataNode extends DfDataInitialNode {
     position: DfPoint;
 }
 
+export interface DfConnectionLabel<Content = unknown, Context = unknown> {
+    content: PolymorpheusContent<Content>;
+    context?: Context;
+}
+
 export interface DfDataConnection {
     source: DfDataConnector;
     target: DfDataConnector;
+    label?: DfConnectionLabel;
 }
 
 export type DfId = string;
@@ -107,6 +115,7 @@ export interface DfDataConnector {
     readonly connectorType: DfConnectionPoint;
     readonly connectorId: DfId;
     readonly position?: string;
+    readonly connectionLabel?: DfConnectionLabel;
 }
 
 export interface DfDataConnectorConfig {
@@ -128,12 +137,4 @@ export enum DfConnectionPoint {
 export interface DfEvent<T> {
     readonly target: T;
     readonly model: DfDataModel;
-}
-
-export interface DfPathCoords {
-    startX: number;
-    startY: number;
-    endX: number;
-    endY: number;
-    radius: number;
 }

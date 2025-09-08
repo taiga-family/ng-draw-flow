@@ -41,4 +41,23 @@
             }
         }
     }
+
+    .label-container {
+        inline-size: 100%;
+        block-size: 100%;
+    }
+
+    .label {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        user-select: none;
+        pointer-events: all;
+        white-space: nowrap;
+        font: var(--df-connection-label-font, 0.625rem/1 sans-serif);
+        color: var(--df-connection-label-color, var(--df-connection-color));
+        background: var(--df-connection-label-background, #fff);
+        border: 0.0625rem solid var(--df-connection-label-border-color, #b1b1b7);
+        border-radius: var(--df-connection-label-border-radius, 0.125rem);
+        padding: var(--df-connection-label-padding, 0.125rem 0.25rem);
+    }
 }
