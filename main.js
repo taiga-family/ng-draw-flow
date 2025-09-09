@@ -89,7 +89,6 @@ var _AppComponent;
 
 
 
-// eslint-disable-next-line @angular-eslint/prefer-standalone
 class AppComponent {}
 _AppComponent = AppComponent;
 _AppComponent.ɵfac = function AppComponent_Factory(t) {
@@ -539,9 +538,9 @@ var _LogoComponent;
 
 class LogoComponent {
   constructor() {
-    this.stars = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.signal)('');
     this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.DestroyRef);
     this.http = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.HttpClient);
+    this.stars = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.signal)('');
   }
   ngOnInit() {
     this.http.get(_constants__WEBPACK_IMPORTED_MODULE_0__.GITHUB_API).pipe((0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__.takeUntilDestroyed)(this.destroyRef)).subscribe(response => this.stars.set(Intl.NumberFormat('en', {
@@ -674,6 +673,7 @@ function FormNodeComponent_div_4_Template(rf, ctx) {
 class FormNodeComponent extends _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DrawFlowBaseNode {
   constructor() {
     super(...arguments);
+    this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.DestroyRef);
     this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({
       field1: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormGroup({
         connectorId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl('node-5-output-1'),
@@ -684,7 +684,6 @@ class FormNodeComponent extends _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.
         fieldValue: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.Validators.required])
       })
     });
-    this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.DestroyRef);
   }
   set invalid(value) {
     super.invalid = value;
@@ -1535,19 +1534,9 @@ class ConnectionComponent {
     this.connectionsService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_connections_service__WEBPACK_IMPORTED_MODULE_5__.ConnectionsService);
     this.coordinatesService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_services_coordinates_service__WEBPACK_IMPORTED_MODULE_4__.CoordinatesService);
     this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_2__.DRAW_FLOW_OPTIONS);
-    this.selected = false;
     this.arrowhead = this.options.connection.arrowhead;
-    this.deletable = this.options.options.connectionsDeletable;
-    this.markerEnd = this.arrowhead.type === 'none' ? null : `url(#df-arrowhead-${this.arrowhead.type})`;
     this.arrowWidth = this.arrowhead.width;
     this.arrowHeight = this.arrowhead.height;
-    this.arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
-    this.arrowMarkerHeight = this.arrowHeight * 2;
-    this.arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
-    this.arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
-    this.arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
-    this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
-    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
     this.pathWithLabel$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(null).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_9__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_10__.asyncScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.combineLatest)([this.getConnectionPoint(this.connection?.source), this.getConnectionPoint(this.connection?.target)])), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(([sourcePoint, targetPoint]) => {
       if (!sourcePoint || !targetPoint) {
         console.warn('One of the connection points not found');
@@ -1588,6 +1577,13 @@ class ConnectionComponent {
       bufferSize: 1,
       refCount: true
     }));
+    this.selected = false;
+    this.arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
+    this.arrowMarkerHeight = this.arrowHeight * 2;
+    this.arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
+    this.arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
+    this.arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
+    this.markerEnd = this.arrowhead.type === _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_3__.DfArrowhead.None ? null : `url(#df-arrowhead-${this.arrowhead.type})`;
     this.path$ = this.pathWithLabel$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_15__.map)(({
       path
     }) => path));
@@ -1599,6 +1595,9 @@ class ConnectionComponent {
       y: labelY
     })));
     this.optimization$ = this.path$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_17__.skip)(1), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.concat)((0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(true), (0,rxjs__WEBPACK_IMPORTED_MODULE_8__.of)(false).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_19__.delay)(400)))), (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.startWith)(false), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.distinctUntilChanged)());
+    this.connectionDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
+    this.connectionSelected = new _angular_core__WEBPACK_IMPORTED_MODULE_7__.EventEmitter();
+    this.deletable = this.options.options.connectionsDeletable;
   }
   handleKeyboardEvent(event) {
     if (!this.selected || !this.deletable) {
@@ -1928,11 +1927,7 @@ class DraftConnectionService {
   }
   connectionSubscription() {
     const document = (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.inject)(_angular_common__WEBPACK_IMPORTED_MODULE_10__.DOCUMENT);
-    this.connection$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.options.options.connectionsCreatable), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.tap)(connectorData => this.onDragStart(connectorData)), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.fromEvent)(document, 'pointermove')), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_16__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.pairwise)(), (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.map)(([previousEvent, currentEvent]) => this.onDragMove(previousEvent, currentEvent)),
-    // eslint-disable-next-line rxjs/no-unsafe-takeuntil
-    (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.takeUntil)((0,rxjs__WEBPACK_IMPORTED_MODULE_14__.fromEvent)(document, 'pointerup').pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.tap)(event => this.onDragEnd(event)))),
-    // eslint-disable-next-line rxjs/no-unsafe-takeuntil
-    (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.takeUntil)(this.destroy$), (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.repeat)()).subscribe();
+    this.connection$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.options.options.connectionsCreatable), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.tap)(connectorData => this.onDragStart(connectorData)), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.switchMap)(() => (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.fromEvent)(document, 'pointermove')), (0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.observeOn)(rxjs__WEBPACK_IMPORTED_MODULE_16__.animationFrameScheduler), (0,rxjs__WEBPACK_IMPORTED_MODULE_17__.pairwise)(), (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.map)(([previousEvent, currentEvent]) => this.onDragMove(previousEvent, currentEvent)), (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.takeUntil)((0,rxjs__WEBPACK_IMPORTED_MODULE_14__.fromEvent)(document, 'pointerup').pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_11__.filter)(() => this.isConnectionCreating$.value), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.tap)(event => this.onDragEnd(event)))), (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.takeUntil)(this.destroy$), (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.repeat)()).subscribe();
   }
   onDragStart(connector) {
     if (!this.options.options.connectionsCreatable) {
@@ -2287,7 +2282,6 @@ __webpack_require__.r(__webpack_exports__);
  * @param endPoint    point after the bend
  * @param maxRadius   upper bound for the smoothing radius
  */
-// eslint-disable-next-line @typescript-eslint/max-params
 function bend(startPoint, cornerPoint, endPoint, maxRadius) {
   // Choose the largest radius that “fits” both legs and does not exceed maxRadius
   const bendRadius = Math.min((0,_calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__.calculateDistance)(startPoint, cornerPoint) / 2, (0,_calculate_distance_util__WEBPACK_IMPORTED_MODULE_0__.calculateDistance)(cornerPoint, endPoint) / 2, maxRadius);
@@ -2538,9 +2532,7 @@ function createSmoothStepPath(startConnector, endConnector, radius = 5) {
     targetPos
   });
   /** Convert the polyline to an SVG path (M, L, Q commands). */
-  const path = polyline.reduce(
-  // eslint-disable-next-line @typescript-eslint/max-params
-  (computedPath, point, pathStepIndex, arr) => {
+  const path = polyline.reduce((computedPath, point, pathStepIndex, arr) => {
     /* a) First point — use `M` (move-to). */
     if (pathStepIndex === 0) {
       return `M${point.x} ${point.y}`;
@@ -2652,11 +2644,11 @@ class BaseConnector {
   constructor() {
     this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.DestroyRef);
     this.isDisabled = false;
-    this.nativeElement = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.ElementRef).nativeElement;
     this.connectionsService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__.ConnectionsService);
     this.sub = this.connectionsService.usedConnectors$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_2__.filter)(() => !!this.data?.connectorId), (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_3__.takeUntilDestroyed)()).subscribe(usedConnectorIds => {
       this.setupDisabledState(usedConnectorIds.includes(this.data.connectorId));
     });
+    this.nativeElement = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.ElementRef).nativeElement;
   }
   get bindNodeId() {
     return this.data?.nodeId;
@@ -2667,6 +2659,9 @@ class BaseConnector {
   get bindPosition() {
     return this.position;
   }
+  destroy() {
+    this.connectionsService.removeConnectionsByConnectorId(this.data.connectorId);
+  }
   setupDisabledState(connected) {
     if (connected) {
       this.nativeElement.setAttribute('data-connected', 'true');
@@ -2675,9 +2670,6 @@ class BaseConnector {
     }
     this.isDisabled = this.data.single && connected;
     this.nativeElement.classList.toggle('df-disabled', this.isDisabled);
-  }
-  destroy() {
-    this.connectionsService.removeConnectionsByConnectorId(this.data.connectorId);
   }
 }
 _BaseConnector = BaseConnector;
@@ -2689,7 +2681,7 @@ _BaseConnector.ɵdir = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["
   hostVars: 4,
   hostBindings: function BaseConnector_HostBindings(rf, ctx) {
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵattribute"]("data-node-id", ctx.bindNodeId)("data-connector-id", ctx.bindConnectorId)("data-position", ctx.bindPosition)("data-connector-type", ctx.connectorType);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵattribute"]("data-connector-type", ctx.connectorType)("data-node-id", ctx.bindNodeId)("data-connector-id", ctx.bindConnectorId)("data-position", ctx.bindPosition);
     }
   }
 });
@@ -2790,9 +2782,9 @@ var _DfOutputComponent;
 class DfOutputComponent extends _base_connector__WEBPACK_IMPORTED_MODULE_3__.BaseConnector {
   constructor() {
     super(...arguments);
-    this.connectorType = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output;
     this.draftConnectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.inject)(_connections_draft_connection_draft_connection_service__WEBPACK_IMPORTED_MODULE_2__.DraftConnectionService);
     this.options = (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.inject)(_ng_draw_flow_configs__WEBPACK_IMPORTED_MODULE_0__.DRAW_FLOW_OPTIONS);
+    this.connectorType = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output;
     this.position = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectorPosition.Right;
   }
   onDragStart(_event) {
@@ -2909,12 +2901,6 @@ class NodeComponent {
     this.connectorDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
     this.cursor = 'initial';
   }
-  handleKeyboardEvent(event) {
-    if (this.selected && this.deletable && !this.node.startNode) {
-      event.preventDefault();
-      this.nodeDeleted.emit();
-    }
-  }
   ngOnChanges(changes) {
     if (changes.invalid && this.innerComponent) {
       this.innerComponent.invalid = changes.invalid.currentValue;
@@ -2922,15 +2908,22 @@ class NodeComponent {
     }
   }
   ngAfterViewInit() {
-    this.fillValue();
     this.createNodeContentComponent(this.node);
-    this.subscribeToConnectorsChanges();
     this.saveInnerNodeSize();
+    this.fillValue();
+    this.applyOutputsConnectionLabel();
+    this.subscribeToConnectorsChanges();
     this.setInitialPosition();
     this.updateConnectorsCoordinates();
     if (this.invalid) {
       this.innerComponent.invalid = true;
       this.innerComponent.markForCheck();
+    }
+  }
+  handleKeyboardEvent(event) {
+    if (this.selected && this.deletable && !this.node.startNode) {
+      event.preventDefault();
+      this.nodeDeleted.emit();
     }
   }
   createNodeContentComponent(node) {
@@ -2949,7 +2942,6 @@ class NodeComponent {
     this.innerComponent.endNode = endNode;
     this.innerComponent.model = data;
     this.cdr.detectChanges();
-    this.applyOutputsConnectionLabel();
   }
   onSelectedChanged(selected) {
     this.selected = selected;
@@ -3057,7 +3049,6 @@ class NodeComponent {
     connector.coordinates = newConnectorPosition;
     this.coordinatesService.addConnectionPoint(connectorData, newConnectorPosition, connector.position);
   }
-  /* eslint-disable @typescript-eslint/max-params */
   updateConnectorCoordinates(position, nodeId, connector, connectorType) {
     const calculatedConnectorPosition = this.calculateConnectorPosition(connector.nativeElement, position);
     connector.coordinates = calculatedConnectorPosition;
@@ -3068,7 +3059,6 @@ class NodeComponent {
     });
     this.coordinatesService.addConnectionPoint(connectorData, calculatedConnectorPosition, connector.position);
   }
-  /* eslint-enable @typescript-eslint/max-params */
   calculateConnectorPosition(element, nodePosition) {
     let x = nodePosition.x + element.offsetLeft + element.clientWidth / 2;
     let y = nodePosition.y + element.offsetTop + element.clientHeight / 2;
@@ -3402,6 +3392,26 @@ class PanZoomComponent {
       return translate;
     }));
   }
+  resetPanzoom() {
+    this.zoom$.next(_pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__.DF_PAN_ZOOM_INITIAL_SCALE);
+    this.coordinates$.next(_consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES);
+  }
+  zoomIn() {
+    const {
+      zoomStep,
+      maxZoom
+    } = this.panZoomOptions;
+    const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
+    this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
+  }
+  zoomOut() {
+    const {
+      zoomStep,
+      minZoom
+    } = this.panZoomOptions;
+    const zoom = this.panZoomService.panzoomModel.zoom - zoomStep;
+    this.setZoom(zoom >= minZoom ? zoom : minZoom);
+  }
   onPan({
     distance,
     stage
@@ -3422,26 +3432,6 @@ class PanZoomComponent {
       y: offsetY
     } = this.drawFlowRootElement.getBoundingClientRect();
     this.processZoom(clientX - offsetX, clientY - offsetY, delta);
-  }
-  resetPanzoom() {
-    this.zoom$.next(_pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__.DF_PAN_ZOOM_INITIAL_SCALE);
-    this.coordinates$.next(_consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES);
-  }
-  zoomIn() {
-    const {
-      zoomStep,
-      maxZoom
-    } = this.panZoomOptions;
-    const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
-    this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
-  }
-  zoomOut() {
-    const {
-      zoomStep,
-      minZoom
-    } = this.panZoomOptions;
-    const zoom = this.panZoomService.panzoomModel.zoom - zoomStep;
-    this.setZoom(zoom >= minZoom ? zoom : minZoom);
   }
   setZoom(zoom) {
     this.manualZoomAnimation$.next(true);
@@ -3928,6 +3918,20 @@ class SceneComponent {
   ngOnInit() {
     this.initializeConnectionsSubscription();
   }
+  writeValue(value) {
+    if (!value) {
+      return;
+    }
+    this.model = value;
+    this.connectionsService.addConnections(this.model.connections);
+    this.cdr.markForCheck();
+  }
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn) {
+    this.onTouched = fn;
+  }
   onConnectionCreated(connection) {
     this.connectionsService.addConnections([connection]);
     this.connectionCreated.emit({
@@ -3976,20 +3980,6 @@ class SceneComponent {
   }
   trackByConnectionsFn(_index, connection) {
     return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
-  }
-  writeValue(value) {
-    if (!value) {
-      return;
-    }
-    this.model = value;
-    this.connectionsService.addConnections(this.model.connections);
-    this.cdr.markForCheck();
-  }
-  registerOnChange(fn) {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn) {
-    this.onTouched = fn;
   }
   initializeConnectionsSubscription() {
     this.connectionsService.connections$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_8__.filter)(() => !!this.model), (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_9__.takeUntilDestroyed)(this.destroyRef)).subscribe(connections => {
@@ -4173,17 +4163,6 @@ var DfDragDropStage;
 
 /***/ }),
 
-/***/ 17598:
-/*!***********************************************************************************!*\
-  !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/drag-drop.interface.ts ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-
-
-/***/ }),
-
 /***/ 72830:
 /*!*********************************************************************************!*\
   !*** ./projects/ng-draw-flow/src/lib/directives/drag-drop/drag-drop.service.ts ***!
@@ -4302,13 +4281,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DfDragDropStage: () => (/* reexport safe */ _drag_drop_enum__WEBPACK_IMPORTED_MODULE_1__.DfDragDropStage),
 /* harmony export */   DragDropDirective: () => (/* reexport safe */ _drag_drop_directive__WEBPACK_IMPORTED_MODULE_0__.DragDropDirective),
-/* harmony export */   DragDropService: () => (/* reexport safe */ _drag_drop_service__WEBPACK_IMPORTED_MODULE_3__.DragDropService)
+/* harmony export */   DragDropService: () => (/* reexport safe */ _drag_drop_service__WEBPACK_IMPORTED_MODULE_2__.DragDropService)
 /* harmony export */ });
 /* harmony import */ var _drag_drop_directive__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./drag-drop.directive */ 88760);
 /* harmony import */ var _drag_drop_enum__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./drag-drop.enum */ 16984);
-/* harmony import */ var _drag_drop_interface__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./drag-drop.interface */ 17598);
-/* harmony import */ var _drag_drop_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./drag-drop.service */ 72830);
-
+/* harmony import */ var _drag_drop_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./drag-drop.service */ 72830);
 
 
 
@@ -4882,6 +4859,7 @@ class DrawFlowBaseNode {
   constructor() {
     this.invalidState = false;
     this.cdr = (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_1__.ChangeDetectorRef);
+    this.connectorsUpdated = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
     /**
      * Unique identifier for the node.
      * Can be used to create connector names in format `${nodeId}-${uniqConnectorId}`.
@@ -4907,7 +4885,6 @@ class DrawFlowBaseNode {
      * @default false
      */
     this.selected = false;
-    this.connectorsUpdated = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
   }
   /**
    * Validation state of the node.
@@ -5825,6 +5802,7 @@ function generateConnectionsHash(connections) {
       hash &= hash; // Convert to 32-bit integer
     }
   }
+
   return hash.toString(36); // Convert to base-36 string for compactness
 }
 

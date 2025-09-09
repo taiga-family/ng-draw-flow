@@ -224,8 +224,8 @@ class CopyComponent {
   constructor() {
     this.navigator = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.inject)(_ng_web_apis_common__WEBPACK_IMPORTED_MODULE_1__.WA_NAVIGATOR);
     this.context = (0,_taiga_ui_polymorpheus__WEBPACK_IMPORTED_MODULE_2__.injectContext)();
-    this.link = this.context.$implicit;
     this.copied = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)(false);
+    this.link = this.context.$implicit;
   }
   copy() {
     this.navigator.clipboard.writeText(this.link).then(() => {

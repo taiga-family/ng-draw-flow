@@ -1063,6 +1063,7 @@ Zone.__load_patch('ZoneAwarePromise', (global, Zone, api) => {
       // Do not return value or you will break the Promise spec.
     };
   }
+
   const once = function () {
     let wasCalled = false;
     return function wrapper(wrappedFunction) {
@@ -2628,6 +2629,7 @@ Zone.__load_patch('XHR', (global, Zone) => {
     });
   }
 });
+
 Zone.__load_patch('geolocation', global => {
   /// GEO_LOCATION
   if (global['navigator'] && global['navigator'].geolocation) {
