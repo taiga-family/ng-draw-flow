@@ -1,3 +1,16 @@
+### [0.16.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.15.0...v0.16.0) (2025-09-09)
+
+### 🚀 Features
+
+- labels [(5043860)](https://github.com/taiga-family/ng-draw-flow/commit/5043860c9acbdda73fa3cd2dc2f7d1e3d9f39d52)
+
+### 🐞 Bug Fixes
+
+- tests [(997a127)](https://github.com/taiga-family/ng-draw-flow/commit/997a127b6ba4890af41c314b4b663270679bbf24)
+- node position property in EditorComponent
+  [(67fc8da)](https://github.com/taiga-family/ng-draw-flow/commit/67fc8da7fb2eed88110e801843b8a39ea9b8c463)
+- tests [(289f0bc)](https://github.com/taiga-family/ng-draw-flow/commit/289f0bcc335bb290ccd62127aca70b147b6ae927)
+
 ### [0.15.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.14.0...v0.15.0) (2025-09-01)
 
 ### 🚀 Features
