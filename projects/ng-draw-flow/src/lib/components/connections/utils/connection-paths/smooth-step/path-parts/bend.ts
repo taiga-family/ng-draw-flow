@@ -1,4 +1,4 @@
-import type {DfPoint} from '../../../../../../ng-draw-flow.interfaces';
+import {type DfPoint} from '../../../../../../ng-draw-flow.interfaces';
 import {calculateDistance} from '../../../calculate-distance.util';
 
 /**
@@ -10,7 +10,7 @@ import {calculateDistance} from '../../../calculate-distance.util';
  * @param endPoint    point after the bend
  * @param maxRadius   upper bound for the smoothing radius
  */
-// eslint-disable-next-line @typescript-eslint/max-params
+
 export function bend(
     startPoint: DfPoint,
     cornerPoint: DfPoint,

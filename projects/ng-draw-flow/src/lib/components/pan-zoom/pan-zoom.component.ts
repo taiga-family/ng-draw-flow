@@ -8,7 +8,6 @@ import {
     Output,
 } from '@angular/core';
 import {ResizeObserverService} from '@ng-web-apis/resize-observer';
-import type {Observable} from 'rxjs';
 import {
     animationFrameScheduler,
     BehaviorSubject,
@@ -16,6 +15,7 @@ import {
     fromEvent,
     map,
     merge,
+    type Observable,
     startWith,
     Subject,
     take,
@@ -25,18 +25,20 @@ import {
 } from 'rxjs';
 
 import {DF_FALSE_HANDLER, INITIAL_COORDINATES} from '../../consts';
-import type {DfDragDrop} from '../../directives/drag-drop';
-import {DfDragDropStage, DragDropDirective} from '../../directives/drag-drop';
+import {
+    type DfDragDrop,
+    DfDragDropStage,
+    DragDropDirective,
+} from '../../directives/drag-drop';
 import {DfResizeObserver} from '../../directives/resize-observer';
 import {dfClamp, dfPx} from '../../helpers';
-import type {DfPoint} from '../../ng-draw-flow.interfaces';
+import {type DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {DF_PAN_ZOOM_INITIAL_SCALE} from './pan-zoom.const';
-import type {DfPanZoomOptions} from './pan-zoom.options';
-import {DF_PAN_ZOOM_OPTIONS} from './pan-zoom.options';
+import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
 import {PanZoomService} from './pan-zoom.service';
 import {ZoomDirective} from './zoom';
-import type {DfZoom} from './zoom/zoom.interfaces';
+import {type DfZoom} from './zoom/zoom.interfaces';
 
 @Component({
     standalone: true,
@@ -135,6 +137,25 @@ export class PanZoomComponent {
             }),
         );
 
+    public resetPanzoom(): void {
+        this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
+        this.coordinates$.next(INITIAL_COORDINATES);
+    }
+
+    public zoomIn(): void {
+        const {zoomStep, maxZoom} = this.panZoomOptions;
+        const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
+
+        this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
+    }
+
+    public zoomOut(): void {
+        const {zoomStep, minZoom} = this.panZoomOptions;
+        const zoom = this.panZoomService.panzoomModel.zoom - zoomStep;
+
+        this.setZoom(zoom >= minZoom ? zoom : minZoom);
+    }
+
     protected onPan({distance, stage}: DfDragDrop): void {
         if (this.panZoomService.panzoomDisabled) {
             return;
@@ -154,25 +175,6 @@ export class PanZoomComponent {
         const {x: offsetX, y: offsetY} = this.drawFlowRootElement.getBoundingClientRect();
 
         this.processZoom(clientX - offsetX, clientY - offsetY, delta);
-    }
-
-    public resetPanzoom(): void {
-        this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
-        this.coordinates$.next(INITIAL_COORDINATES);
-    }
-
-    public zoomIn(): void {
-        const {zoomStep, maxZoom} = this.panZoomOptions;
-        const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
-
-        this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
-    }
-
-    public zoomOut(): void {
-        const {zoomStep, minZoom} = this.panZoomOptions;
-        const zoom = this.panZoomService.panzoomModel.zoom - zoomStep;
-
-        this.setZoom(zoom >= minZoom ? zoom : minZoom);
     }
 
     private setZoom(zoom: number): void {

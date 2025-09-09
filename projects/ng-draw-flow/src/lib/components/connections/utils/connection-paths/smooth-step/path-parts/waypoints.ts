@@ -1,6 +1,6 @@
-import type {
-    DfConnectorPosition,
-    DfPoint,
+import {
+    type DfConnectorPosition,
+    type DfPoint,
 } from '../../../../../../ng-draw-flow.interfaces';
 import {getPrimaryDirection} from '../helpers/get-primary-direction';
 import {getSmoothStepEdgeCenter} from '../helpers/smooth-step-edge-center';

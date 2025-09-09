@@ -1,6 +1,9 @@
 // --- mock lower-level helpers ---------------------------------------------
-import type {DfConnectorData, DfPoint} from '../../../../../ng-draw-flow.interfaces';
-import {DfConnectorPosition} from '../../../../../ng-draw-flow.interfaces';
+import {
+    type DfConnectorData,
+    DfConnectorPosition,
+    type DfPoint,
+} from '../../../../../ng-draw-flow.interfaces';
 import {point} from '../../point';
 import {bend} from './path-parts/bend';
 import {computeWaypoints} from './path-parts/waypoints';

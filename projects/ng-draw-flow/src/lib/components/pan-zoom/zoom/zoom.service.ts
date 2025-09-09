@@ -13,7 +13,7 @@ import {
 
 import {dfDistanceBetweenTouches, dfPreventDefault} from '../../../helpers';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom.options';
-import type {DfZoom} from './zoom.interfaces';
+import {type DfZoom} from './zoom.interfaces';
 
 @Injectable()
 export class ZoomService extends Observable<DfZoom> {

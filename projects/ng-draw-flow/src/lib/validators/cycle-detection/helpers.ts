@@ -1,4 +1,4 @@
-import type {DfDataConnection, DfId} from '../../ng-draw-flow.interfaces';
+import {type DfDataConnection, type DfId} from '../../ng-draw-flow.interfaces';
 
 /**
  * Builds an adjacency map from a list of connections

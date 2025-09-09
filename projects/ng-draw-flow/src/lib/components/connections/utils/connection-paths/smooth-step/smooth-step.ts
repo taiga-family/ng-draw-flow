@@ -1,5 +1,8 @@
-import type {DfConnectorData, DfPoint} from '../../../../../ng-draw-flow.interfaces';
-import {DfConnectorPosition} from '../../../../../ng-draw-flow.interfaces';
+import {
+    type DfConnectorData,
+    DfConnectorPosition,
+    type DfPoint,
+} from '../../../../../ng-draw-flow.interfaces';
 import {bend} from './path-parts/bend';
 import {computeWaypoints} from './path-parts/waypoints';
 
@@ -29,7 +32,6 @@ export function createSmoothStepPath(
 
     /** Convert the polyline to an SVG path (M, L, Q commands). */
     const path = polyline.reduce<string>(
-        // eslint-disable-next-line @typescript-eslint/max-params
         (computedPath: string, point: DfPoint, pathStepIndex: number, arr: DfPoint[]) => {
             /* a) First point — use `M` (move-to). */
             if (pathStepIndex === 0) {

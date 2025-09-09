@@ -2,9 +2,8 @@ import {NgIf} from '@angular/common';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
-import type {DfDataModel} from '@ng-draw-flow/core';
-import type {TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {type DfDataModel} from '@ng-draw-flow/core';
+import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiLink, TuiNotification} from '@taiga-ui/core';
 
 @Component({
@@ -33,7 +32,7 @@ export default class ValidationComponent {
         ),
     };
 
-    protected nodeData: DfDataModel = {
+    public nodeData: DfDataModel = {
         nodes: [
             {
                 id: 'node-1',

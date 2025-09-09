@@ -1,8 +1,7 @@
 import {FormControl} from '@angular/forms';
 
 import {INITIAL_COORDINATES} from '../../consts';
-import type {DfDataModel} from '../../ng-draw-flow.interfaces';
-import {DfConnectionPoint} from '../../ng-draw-flow.interfaces';
+import {DfConnectionPoint, type DfDataModel} from '../../ng-draw-flow.interfaces';
 import {dfIsolatedNodesValidator} from './isolated-nodes.validator';
 
 describe('dfIsolatedNodesValidator', () => {

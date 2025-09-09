@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import type {Observable} from 'rxjs';
 import {
     animationFrameScheduler,
     filter,
     fromEvent,
     map,
     merge,
+    type Observable,
     repeat,
     share,
     shareReplay,
@@ -16,7 +16,7 @@ import {
 } from 'rxjs';
 
 import {DfDragDropStage} from './drag-drop.enum';
-import type {DfDragDrop} from './drag-drop.interface';
+import {type DfDragDrop} from './drag-drop.interface';
 
 /**
  * Centralised RxJS-based drag-and-drop stream factory.
@@ -93,7 +93,7 @@ export class DragDropService {
 
                         lastPointerEvent = e;
 
-                        return <DfDragDrop>{
+                        return {
                             stage: DfDragDropStage.Move,
                             sourceElement: el,
                             distance: {deltaX: dx, deltaY: dy},

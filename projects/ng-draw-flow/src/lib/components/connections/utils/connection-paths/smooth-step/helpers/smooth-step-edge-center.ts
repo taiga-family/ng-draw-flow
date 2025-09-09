@@ -1,4 +1,4 @@
-import type {DfPoint} from '../../../../../../ng-draw-flow.interfaces';
+import {type DfPoint} from '../../../../../../ng-draw-flow.interfaces';
 
 /**
  * Computes the geometric center between two endpoints **and**

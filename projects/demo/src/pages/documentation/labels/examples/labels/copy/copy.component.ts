@@ -25,9 +25,8 @@ import {injectContext} from '@taiga-ui/polymorpheus';
 export class CopyComponent {
     private readonly navigator = inject(WA_NAVIGATOR);
     protected readonly context = injectContext<{$implicit: string}>();
-    public link = this.context.$implicit;
-
     protected copied = signal(false);
+    public link = this.context.$implicit;
 
     protected copy(): void {
         this.navigator.clipboard.writeText(this.link).then(() => {

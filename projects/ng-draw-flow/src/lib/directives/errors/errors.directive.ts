@@ -1,5 +1,4 @@
-import type {OnInit} from '@angular/core';
-import {DestroyRef, Directive, inject} from '@angular/core';
+import {DestroyRef, Directive, inject, type OnInit} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {NgControl} from '@angular/forms';
 import {combineLatest, distinctUntilChanged, map, startWith} from 'rxjs';

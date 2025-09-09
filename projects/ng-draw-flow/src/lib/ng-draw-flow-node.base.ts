@@ -1,4 +1,3 @@
-import type {QueryList} from '@angular/core';
 import {
     ChangeDetectorRef,
     Directive,
@@ -6,6 +5,7 @@ import {
     inject,
     Input,
     Output,
+    type QueryList,
     ViewChildren,
 } from '@angular/core';
 
@@ -38,6 +38,9 @@ export abstract class DrawFlowBaseNode {
      */
     @ViewChildren(DfOutputComponent)
     public outputs!: QueryList<DfOutputComponent>;
+
+    @Output()
+    public readonly connectorsUpdated = new EventEmitter<void>();
 
     /**
      * Unique identifier for the node.
@@ -94,9 +97,6 @@ export abstract class DrawFlowBaseNode {
     public get invalid(): boolean {
         return this.invalidState;
     }
-
-    @Output()
-    public readonly connectorsUpdated = new EventEmitter<void>();
 
     public markForCheck(): void {
         this.cdr.markForCheck();

@@ -1,10 +1,16 @@
-import type {OnInit} from '@angular/core';
-import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    type OnInit,
+    ViewEncapsulation,
+} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import type {DfDataConnection, DfDataModel, DfDataNode} from '@ng-draw-flow/core';
 import {
     DfConnectionPoint,
     dfCycleDetectionValidator,
+    type DfDataConnection,
+    type DfDataModel,
+    type DfDataNode,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
 } from '@ng-draw-flow/core';

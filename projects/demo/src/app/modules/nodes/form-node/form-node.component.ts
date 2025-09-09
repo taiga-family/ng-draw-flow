@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
-import type {AfterViewInit} from '@angular/core';
 import {
+    type AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
@@ -44,6 +44,8 @@ interface NodeFormGroup {
     },
 })
 export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit {
+    private readonly destroyRef = inject(DestroyRef);
+
     public form = new FormGroup<NodeForm>({
         field1: new FormGroup<NodeFormGroup>({
             connectorId: new FormControl<string>('node-5-output-1'),
@@ -69,8 +71,6 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
 
         return super.invalid || formInvalid;
     }
-
-    private readonly destroyRef = inject(DestroyRef);
 
     public get fieldNames(): string[] {
         return Object.keys(this.form.controls);

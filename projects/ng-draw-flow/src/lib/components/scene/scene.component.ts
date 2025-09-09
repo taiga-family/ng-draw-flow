@@ -1,5 +1,4 @@
 import {CommonModule} from '@angular/common';
-import type {OnInit, Signal} from '@angular/core';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -8,19 +7,20 @@ import {
     EventEmitter,
     forwardRef,
     inject,
+    type OnInit,
     Output,
+    type Signal,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import type {ControlValueAccessor} from '@angular/forms';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {type ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {filter} from 'rxjs';
 
-import type {
-    DfDataConnection,
-    DfDataInitialNode,
-    DfDataModel,
-    DfDataNode,
-    DfEvent,
+import {
+    type DfDataConnection,
+    type DfDataInitialNode,
+    type DfDataModel,
+    type DfDataNode,
+    type DfEvent,
 } from '../../ng-draw-flow.interfaces';
 import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 import {ConnectionComponent} from '../connections/connection/connection.component';
@@ -83,6 +83,25 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         this.initializeConnectionsSubscription();
     }
 
+    public writeValue(value: DfDataModel): void {
+        if (!value) {
+            return;
+        }
+
+        this.model = value;
+        this.connectionsService.addConnections(this.model.connections);
+
+        this.cdr.markForCheck();
+    }
+
+    public registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    public registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
     protected onConnectionCreated(connection: DfDataConnection): void {
         this.connectionsService.addConnections([connection]);
         this.connectionCreated.emit({
@@ -138,25 +157,6 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
 
     protected trackByConnectionsFn(_index: number, connection: DfDataConnection): string {
         return `${connection.source.nodeId}-${connection.source.connectorId}to${connection.target.nodeId}-${connection.target.connectorId}`;
-    }
-
-    public writeValue(value: DfDataModel): void {
-        if (!value) {
-            return;
-        }
-
-        this.model = value;
-        this.connectionsService.addConnections(this.model.connections);
-
-        this.cdr.markForCheck();
-    }
-
-    public registerOnChange(fn: any): void {
-        this.onChange = fn;
-    }
-
-    public registerOnTouched(fn: any): void {
-        this.onTouched = fn;
     }
 
     private initializeConnectionsSubscription(): void {

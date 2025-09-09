@@ -1,10 +1,10 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import type {DfDataModel} from '@ng-draw-flow/core';
 import {
     DfArrowhead,
     DfConnectionPoint,
     DfConnectionType,
+    type DfDataModel,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,

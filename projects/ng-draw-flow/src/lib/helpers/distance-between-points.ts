@@ -1,4 +1,4 @@
-import type {DfDelta} from '../ng-draw-flow.interfaces';
+import {type DfDelta} from '../ng-draw-flow.interfaces';
 
 export function dfDistanceBetweenPoints(
     firstEvent: PointerEvent,

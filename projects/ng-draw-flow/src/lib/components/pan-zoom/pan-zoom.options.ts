@@ -1,5 +1,4 @@
-import type {FactoryProvider} from '@angular/core';
-import {InjectionToken} from '@angular/core';
+import {type FactoryProvider, InjectionToken} from '@angular/core';
 
 export interface DfPanZoomOptions {
     panSize: number;

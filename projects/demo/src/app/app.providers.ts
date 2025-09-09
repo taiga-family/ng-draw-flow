@@ -1,6 +1,5 @@
 import {isPlatformBrowser, LocationStrategy, PathLocationStrategy} from '@angular/common';
-import type {Provider} from '@angular/core';
-import {inject, PLATFORM_ID} from '@angular/core';
+import {inject, PLATFORM_ID, type Provider} from '@angular/core';
 import {provideNgDrawFlowConfigs} from '@ng-draw-flow/core';
 import {
     TUI_DOC_DEFAULT_TABS,

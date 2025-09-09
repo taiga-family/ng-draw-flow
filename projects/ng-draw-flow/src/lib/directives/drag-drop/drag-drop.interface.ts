@@ -1,4 +1,4 @@
-import type {DfDragDropStage} from './drag-drop.enum';
+import {type DfDragDropStage} from './drag-drop.enum';
 
 export interface DfDragDropDistance {
     deltaX: number;

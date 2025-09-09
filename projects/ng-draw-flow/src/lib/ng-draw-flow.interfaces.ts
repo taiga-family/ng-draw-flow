@@ -1,7 +1,7 @@
-import type {Type} from '@angular/core';
-import type {PolymorpheusContent} from '@taiga-ui/polymorpheus';
+import {type Type} from '@angular/core';
+import {type PolymorpheusContent} from '@taiga-ui/polymorpheus';
 
-import type {DrawFlowBaseNode} from './ng-draw-flow-node.base';
+import {type DrawFlowBaseNode} from './ng-draw-flow-node.base';
 
 export enum DfConnectionType {
     Bezier = 'bezier',

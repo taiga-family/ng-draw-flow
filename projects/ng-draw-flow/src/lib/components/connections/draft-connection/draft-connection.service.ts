@@ -1,6 +1,11 @@
 import {DOCUMENT} from '@angular/common';
-import type {OnDestroy, WritableSignal} from '@angular/core';
-import {inject, Injectable, signal} from '@angular/core';
+import {
+    inject,
+    Injectable,
+    type OnDestroy,
+    signal,
+    type WritableSignal,
+} from '@angular/core';
 import {
     animationFrameScheduler,
     BehaviorSubject,
@@ -19,13 +24,14 @@ import {
 import {INITIAL_COORDINATES} from '../../../consts';
 import {createConnectorHash, dfDistanceBetweenPoints} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import type {
-    DfConnectorData,
-    DfDataConnection,
-    DfDataConnector,
-    DfOptions,
+import {
+    DfConnectionPoint,
+    type DfConnectorData,
+    DfConnectorPosition,
+    type DfDataConnection,
+    type DfDataConnector,
+    type DfOptions,
 } from '../../../ng-draw-flow.interfaces';
-import {DfConnectionPoint, DfConnectorPosition} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {PanZoomService} from '../../pan-zoom/pan-zoom.service';
 import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
@@ -35,8 +41,8 @@ export class DraftConnectionService implements OnDestroy {
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
-    protected readonly destroy$ = new Subject<void>();
     private sourceConnector!: DfDataConnector;
+    protected readonly destroy$ = new Subject<void>();
 
     public source: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
         point: INITIAL_COORDINATES,
@@ -75,14 +81,14 @@ export class DraftConnectionService implements OnDestroy {
                 map(([previousEvent, currentEvent]) =>
                     this.onDragMove(previousEvent, currentEvent),
                 ),
-                // eslint-disable-next-line rxjs/no-unsafe-takeuntil
+
                 takeUntil(
                     fromEvent<PointerEvent>(document, 'pointerup').pipe(
                         filter(() => this.isConnectionCreating$.value),
                         tap((event: PointerEvent) => this.onDragEnd(event)),
                     ),
                 ),
-                // eslint-disable-next-line rxjs/no-unsafe-takeuntil
+
                 takeUntil(this.destroy$),
                 repeat(),
             )

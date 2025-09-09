@@ -1,8 +1,11 @@
-import type {FactoryProvider} from '@angular/core';
-import {InjectionToken} from '@angular/core';
+import {type FactoryProvider, InjectionToken} from '@angular/core';
 
-import type {DfOptions, DfOptionsInput} from './ng-draw-flow.interfaces';
-import {DfArrowhead, DfConnectionType} from './ng-draw-flow.interfaces';
+import {
+    DfArrowhead,
+    DfConnectionType,
+    type DfOptions,
+    type DfOptionsInput,
+} from './ng-draw-flow.interfaces';
 
 export const DRAW_FLOW_DEFAULT_OPTIONS: DfOptions = {
     connection: {
