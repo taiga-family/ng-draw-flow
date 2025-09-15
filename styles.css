@@ -951,8 +951,6 @@
 [tuiAppearance][data-appearance='floating']::after,
 [tuiAppearance][data-appearance='whiteblock']::after {
   transition-property: color, transform;
-  transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
   color: var(--tui-text-tertiary);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -2817,8 +2815,6 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
 [tuiAppearance][data-appearance='textfield']:not([tuiWrapper])::before,
 [tuiAppearance][data-appearance='textfield']:not([tuiWrapper])::after {
   transition-property: color, transform;
-  transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
   color: var(--tui-text-tertiary);
 }
 @media (hover: hover) and (pointer: fine) {
