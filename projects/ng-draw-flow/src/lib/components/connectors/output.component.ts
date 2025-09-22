@@ -18,7 +18,7 @@ import {BaseConnector} from './base-connector';
     styleUrls: ['./connector.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '(pointerdown.stop)': 'this.onDragStart($event)',
+        '(pointerdown)': 'this.onDragStart($event)',
     },
 })
 export class DfOutputComponent extends BaseConnector {
@@ -35,7 +35,9 @@ export class DfOutputComponent extends BaseConnector {
     @Input()
     public connectionLabel?: DfConnectionLabel;
 
-    protected onDragStart(_event: PointerEvent): void {
+    protected onDragStart(event: PointerEvent): void {
+        event.stopPropagation();
+
         const {nodeId, connectorId} = this.data;
 
         if (
