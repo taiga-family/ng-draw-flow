@@ -2787,7 +2787,8 @@ class DfOutputComponent extends _base_connector__WEBPACK_IMPORTED_MODULE_3__.Bas
     this.connectorType = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output;
     this.position = _ng_draw_flow_interfaces__WEBPACK_IMPORTED_MODULE_1__.DfConnectorPosition.Right;
   }
-  onDragStart(_event) {
+  onDragStart(event) {
+    event.stopPropagation();
     const {
       nodeId,
       connectorId
@@ -2816,7 +2817,7 @@ _DfOutputComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4
   selectors: [["df-output"]],
   hostBindings: function DfOutputComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("pointerdown.stop", function DfOutputComponent_pointerdown_stop_HostBindingHandler($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵlistener"]("pointerdown", function DfOutputComponent_pointerdown_HostBindingHandler($event) {
         return ctx.onDragStart($event);
       });
     }
