@@ -1,3 +1,10 @@
+### [0.17.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.16.0...v0.17.0) (2025-09-23)
+
+### 🐞 Bug Fixes
+
+- output connector
+  [(7e903bb)](https://github.com/taiga-family/ng-draw-flow/commit/7e903bbc8a5f840ce6afb39c2bb64e889f6d2704)
+
 ### [0.16.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.15.0...v0.16.0) (2025-09-09)
 
 ### 🚀 Features
