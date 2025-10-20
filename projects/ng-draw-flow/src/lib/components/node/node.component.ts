@@ -78,6 +78,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private accumulatedDelta: DfPoint = INITIAL_COORDINATES;
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
+    private moved = false;
 
     @ViewChild('nodeElement')
     public readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -157,6 +158,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     protected onSelectedChanged(selected: boolean): void {
         this.selected = selected;
         this.innerComponent.selected = selected;
+        this.innerComponent.markForCheck();
 
         if (selected) {
             this.nodeSelected.emit(this.value);
@@ -177,6 +179,10 @@ export class NodeComponent implements AfterViewInit, OnChanges {
 
     private onDragMove(distance: DfDragDropDistance): void {
         const {zoom} = this.panZoomService.panzoomModel;
+
+        if (distance.deltaX || distance.deltaY) {
+            this.moved = true;
+        }
 
         this.cursor = 'grabbing';
 
@@ -216,10 +222,14 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private onDragEnd(): void {
         this.cursor = 'initial';
         this.panZoomService.panzoomDisabled = false;
-        this.nodeMoved.emit(this.value);
-        this.applyPositionToStyle(this.getCenteredPosition(), false);
+
+        if (this.moved) {
+            this.nodeMoved.emit(this.value);
+            this.applyPositionToStyle(this.getCenteredPosition(), false);
+        }
 
         this.accumulatedDelta = INITIAL_COORDINATES;
+        this.moved = false;
     }
 
     private fillValue(): void {
