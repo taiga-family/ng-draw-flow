@@ -1,3 +1,10 @@
+### [0.17.1](https://github.com/taiga-family/ng-draw-flow/compare/v0.17.0...v0.17.1) (2025-10-21)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: update selection rendering and emit nodeMoved only on real move
+  [(0d430aa)](https://github.com/taiga-family/ng-draw-flow/commit/0d430aa0846352c9d5ebc39b52952a68e4f2a848)
+
 ### [0.17.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.16.0...v0.17.0) (2025-09-23)
 
 ### 🐞 Bug Fixes
