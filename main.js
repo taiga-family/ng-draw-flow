@@ -2895,6 +2895,7 @@ class NodeComponent {
     this.accumulatedDelta = _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES;
     this.previousInputs = [];
     this.previousOutputs = [];
+    this.moved = false;
     this.invalid = false;
     this.nodeMoved = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
     this.nodeDeleted = new _angular_core__WEBPACK_IMPORTED_MODULE_9__.EventEmitter();
@@ -2947,6 +2948,7 @@ class NodeComponent {
   onSelectedChanged(selected) {
     this.selected = selected;
     this.innerComponent.selected = selected;
+    this.innerComponent.markForCheck();
     if (selected) {
       this.nodeSelected.emit(this.value);
     }
@@ -2965,6 +2967,9 @@ class NodeComponent {
     const {
       zoom
     } = this.panZoomService.panzoomModel;
+    if (distance.deltaX || distance.deltaY) {
+      this.moved = true;
+    }
     this.cursor = 'grabbing';
     // Accumulate offset
     this.accumulatedDelta.x += distance.deltaX / zoom;
@@ -2994,9 +2999,12 @@ class NodeComponent {
   onDragEnd() {
     this.cursor = 'initial';
     this.panZoomService.panzoomDisabled = false;
-    this.nodeMoved.emit(this.value);
-    this.applyPositionToStyle(this.getCenteredPosition(), false);
+    if (this.moved) {
+      this.nodeMoved.emit(this.value);
+      this.applyPositionToStyle(this.getCenteredPosition(), false);
+    }
     this.accumulatedDelta = _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES;
+    this.moved = false;
   }
   fillValue() {
     if (!('position' in this.node)) {
