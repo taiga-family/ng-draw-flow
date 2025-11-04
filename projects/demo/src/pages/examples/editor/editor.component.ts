@@ -5,7 +5,6 @@ import {
     DestroyRef,
     inject,
     type OnInit,
-    ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -24,6 +23,7 @@ import {
     type DfPanZoomOptions,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
+    NgDrawFlowStoreService,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
@@ -81,8 +81,7 @@ export default class EditorComponent implements OnInit {
     public readonly panZoomOptions: DfPanZoomOptions =
         inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
-    @ViewChild(NgDrawFlowComponent)
-    public editor?: NgDrawFlowComponent;
+    public readonly drawFlowStore = inject(NgDrawFlowStoreService);
 
     public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
         Typescript: import('./examples/editor.component.md?raw'),
@@ -167,7 +166,6 @@ export default class EditorComponent implements OnInit {
         ],
     };
 
-    public currentScale$: BehaviorSubject<number> = new BehaviorSubject<number>(100);
     public readonly scaleControl = new FormControl<number>(1, {nonNullable: true});
     public fullscreen$ = new BehaviorSubject<boolean>(false);
     public counter = 0;
@@ -188,13 +186,52 @@ export default class EditorComponent implements OnInit {
         this.scaleControl.valueChanges
             .pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
             .subscribe((value: number) => {
-                this.editor?.setScale(value);
+                if (!Number.isFinite(value)) {
+                    return;
+                }
+
+                this.drawFlowStore.setScale(value);
+            });
+
+        this.drawFlowStore.connectionCreated$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data: DfEvent<DfDataConnection>) => {
+                console.warn(data, 'drawFlowStore connectionCreated');
+            });
+
+        this.drawFlowStore.connectionDeleted$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data: DfEvent<DfDataConnection>) => {
+                console.warn(data, 'drawFlowStore connectionDeleted');
+            });
+
+        this.drawFlowStore.connectionSelected$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data: DfDataConnection) => {
+                console.warn(data, 'drawFlowStore connectionSelected');
+            });
+
+        this.drawFlowStore.nodeDeleted$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data: DfEvent<DfDataNode>) => {
+                console.warn(data, 'drawFlowStore nodeDeleted');
+            });
+
+        this.drawFlowStore.nodeMoved$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data: DfEvent<DfDataNode>) => {
+                console.warn(data, 'drawFlowStore nodeMoved');
+            });
+
+        this.drawFlowStore.nodeSelected$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((data: DfDataNode) => {
+                console.warn(data, 'drawFlowStore nodeSelected');
             });
     }
 
     public onScaleChange(zoomLevel: number): void {
         this.scaleControl.setValue(zoomLevel / 100, {emitEvent: false});
-        this.currentScale$.next(zoomLevel);
     }
 
     public onConnectionCreated(event: DfEvent<DfDataConnection>): void {
@@ -223,11 +260,11 @@ export default class EditorComponent implements OnInit {
 
     public toggleFullscreen(): void {
         this.fullscreen$.next(!this.fullscreen$.value);
-        this.editor?.resetPosition();
+        this.drawFlowStore.resetPosition();
     }
 
     public addNodeToDrawFlow(): void {
-        const id = `new-node-id-${this.counter}`;
+        const id = `new-node-${this.counter}`;
 
         this.data.nodes.push({
             id,
@@ -236,6 +273,7 @@ export default class EditorComponent implements OnInit {
                 text: `created node ${this.counter + 1}`,
             },
         });
+
         this.form.setValue(this.data);
         this.counter++;
     }

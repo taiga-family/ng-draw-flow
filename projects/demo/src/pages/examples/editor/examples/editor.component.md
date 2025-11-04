@@ -2,20 +2,36 @@
 @Component({
   standalone: true,
   selector: 'editor',
-  imports: [AsyncPipe, ReactiveFormsModule, CommonModule, TuiButtonModule, NgDrawFlowComponent],
+  imports: [
+    AsyncPipe,
+    CommonModule,
+    ReactiveFormsModule,
+    NgDrawFlowComponent,
+    TuiButton,
+    TuiInputNumber,
+    TuiLabel,
+    TuiTextfield,
+    TuiTextfieldComponent,
+  ],
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.less'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
-    dfPanzoomOptionsProvider({
+    dfPanZoomOptionsProvider({
       leftPosition: 50,
     }),
   ],
 })
-export default class EditorComponent {
-  @ViewChild(NgDrawFlowComponent)
-  public editor!: NgDrawFlowComponent;
+export default class EditorComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
+  public readonly drawFlowStore = inject(NgDrawFlowStoreService);
+  public readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
+
+  public readonly scaleControl = new FormControl<number>(1, {nonNullable: true});
+  public fullscreen$ = new BehaviorSubject<boolean>(false);
+  public counter = 0;
+  public form = new FormControl<DfDataModel>(this.data);
 
   public data: DfDataModel = {
     nodes: [
@@ -94,50 +110,42 @@ export default class EditorComponent {
     ],
   };
 
-  public currentScale$: BehaviorSubject<number> = new BehaviorSubject<number>(100);
-  public fullscreen$ = new BehaviorSubject<boolean>(false);
-  public counter = 0;
-  public form = new FormControl<DfDataModel>(this.data);
+  public ngOnInit(): void {
+    this.scaleControl.valueChanges
+      .pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+      .subscribe((value: number) => {
+        if (!Number.isFinite(value)) {
+          return;
+        }
+
+        this.drawFlowStore.setScale(value);
+      });
+  }
 
   public onScaleChange(zoomLevel: number): void {
-    this.currentScale$.next(zoomLevel);
-  }
-
-  public onConnectionCreated(event: DfEvent<DfDataConnection>): void {
-    console.warn(event, 'onConnectionCreated');
-  }
-
-  public onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
-    console.warn(event, 'onConnectionDeleted');
-  }
-
-  public onNodeMoved(event: DfEvent<DfDataNode>): void {
-    console.warn(event, 'onNodeMoved');
-  }
-
-  public onNodeSelected(event: DfDataNode): void {
-    console.warn(event, 'onNodeSelected');
-  }
-
-  public onNodeDeleted(event: DfEvent<DfDataNode>): void {
-    console.warn(event, 'onNodeDeleted');
+    this.scaleControl.setValue(zoomLevel / 100, {emitEvent: false});
   }
 
   public toggleFullscreen(): void {
     this.fullscreen$.next(!this.fullscreen$.value);
-    this.editor.resetPosition();
+    this.drawFlowStore.resetPosition();
   }
 
   public addNodeToDrawFlow(): void {
-    const id = `qwqe${this.counter}`;
+    const id = `new-node-${this.counter}`;
 
-    this.data.nodes.set(id, {
-      id,
-      data: {
-        type: 'simpleNode',
-        text: `created node ${this.counter + 1}`,
+    this.data.nodes = [
+      ...this.data.nodes,
+      {
+        id,
+        data: {
+          type: 'simpleNode',
+          text: `created node ${this.counter + 1}`,
+        },
+        position: {x: 600, y: this.counter * 40},
       },
-    });
+    ];
+
     this.form.setValue(this.data);
     this.counter++;
   }
