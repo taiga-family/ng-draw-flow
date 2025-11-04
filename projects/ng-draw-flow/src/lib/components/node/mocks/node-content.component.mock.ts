@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {DrawFlowBaseNode} from '@ng-draw-flow/core';
+
+import {DrawFlowBaseNode} from '../../../ng-draw-flow-node.base';
 
 @Component({
     standalone: true,

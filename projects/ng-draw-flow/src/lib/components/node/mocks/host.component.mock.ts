@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
-import {type DfDataInitialNode} from '@ng-draw-flow/core';
 
+import {type DfDataInitialNode} from '../../../ng-draw-flow.interfaces';
 import {NodeComponent} from '../node.component';
 
 @Component({
