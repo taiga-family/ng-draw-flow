@@ -10,6 +10,20 @@
             <code>connection.type</code>
             option.
         </p>
+
+        <p>
+            When a node is selected, NgDrawFlow highlights every outgoing connection from that node. Lines that
+            originate at the node&rsquo;s output connectors receive the emphasis so you can immediately follow the path
+            of data leaving the selection instead of manually inspecting each edge.
+        </p>
+        <p>
+            The highlight palette ties into the same CSS custom properties that drive connector styling. Override
+            <code>--df-connection-selected-node-output-color</code>
+            (and its hover counterpart
+            <code>--df-connection-selected-node-output-hover-color</code>
+            ) to adjust the accent used for these emphasized connections and align them with your application&rsquo;s
+            branding.
+        </p>
     </section>
 
     <section class="tui-space_top-4">

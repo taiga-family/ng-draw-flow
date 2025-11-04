@@ -1,4 +1,8 @@
 .connection {
+    --df-connection-current-color: var(--df-connection-color);
+    --df-connection-current-hover-color: var(--df-connection-color-hover);
+    --df-connection-current-selectable-color: var(--df-connection-selectable-area-color);
+
     position: absolute;
     top: 0;
     left: 0;
@@ -17,7 +21,7 @@
     .main-path {
         fill: none;
         stroke-width: var(--df-connection-stroke-width);
-        stroke: var(--df-connection-color);
+        stroke: var(--df-connection-current-color);
         pointer-events: none;
 
         &.df-selected {
@@ -34,10 +38,10 @@
         transition: stroke 0.3s;
 
         &:hover {
-            stroke: var(--df-connection-selectable-area-color);
+            stroke: var(--df-connection-current-selectable-color);
 
             & + .main-path {
-                stroke: var(--df-connection-color-hover);
+                stroke: var(--df-connection-current-hover-color);
             }
         }
     }
@@ -59,5 +63,39 @@
         border: 0.0625rem solid var(--df-connection-label-border-color, #b1b1b7);
         border-radius: var(--df-connection-label-border-radius, 0.125rem);
         padding: var(--df-connection-label-padding, 0.125rem 0.25rem);
+    }
+}
+
+:host(.df-selected-node-input) {
+    .connection {
+        --df-connection-current-color: var(
+            --df-connection-selected-node-input-color,
+            var(--df-connector-input-color, var(--df-connection-color)),
+        );
+        --df-connection-current-hover-color: var(
+            --df-connection-selected-node-input-hover-color,
+            var(--df-connector-input-color-hover, var(--df-connection-color-hover)),
+        );
+        --df-connection-current-selectable-color: var(
+            --df-connection-selected-node-input-hover-color,
+            var(--df-connector-input-color-hover, var(--df-connection-selectable-area-color)),
+        );
+    }
+}
+
+:host(.df-selected-node-output) {
+    .connection {
+        --df-connection-current-color: var(
+            --df-connection-selected-node-output-color,
+            var(--df-connector-output-color, var(--df-connection-color)),
+        );
+        --df-connection-current-hover-color: var(
+            --df-connection-selected-node-output-hover-color,
+            var(--df-connector-output-color-hover, var(--df-connection-color-hover)),
+        );
+        --df-connection-current-selectable-color: var(
+            --df-connection-selected-node-output-hover-color,
+            var(--df-connector-output-color-hover, var(--df-connection-selectable-area-color)),
+        );
     }
 }

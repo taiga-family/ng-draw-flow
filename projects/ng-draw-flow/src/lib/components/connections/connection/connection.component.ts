@@ -2,11 +2,14 @@ import {AsyncPipe, NgIf} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     EventEmitter,
+    HostBinding,
     inject,
     Input,
     Output,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
 import {
     animationFrameScheduler,
@@ -63,6 +66,9 @@ export class ConnectionComponent {
     private readonly arrowhead: DfArrowheadOptions = this.options.connection.arrowhead;
     private readonly arrowWidth = this.arrowhead.width;
     private readonly arrowHeight = this.arrowhead.height;
+    private readonly destroyRef = inject(DestroyRef);
+    private selectedNodeId: string | null = null;
+    private connectionInternal: DfDataConnection | null = null;
     private readonly pathWithLabel$: Observable<{
         path: string;
         labelX: number;
@@ -142,8 +148,13 @@ export class ConnectionComponent {
         distinctUntilChanged(),
     );
 
-    @Input()
-    public connection!: DfDataConnection;
+    public deletable = this.options.options.connectionsDeletable;
+
+    @HostBinding('class.df-selected-node-input')
+    protected selectedNodeInput = false;
+
+    @HostBinding('class.df-selected-node-output')
+    protected selectedNodeOutput = false;
 
     @Output()
     public readonly connectionDeleted = new EventEmitter<void>();
@@ -151,7 +162,24 @@ export class ConnectionComponent {
     @Output()
     public readonly connectionSelected = new EventEmitter<void>();
 
-    public deletable = this.options.options.connectionsDeletable;
+    constructor() {
+        this.connectionsService.selectedNodeId$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((selectedNodeId: string | null) => {
+                this.selectedNodeId = selectedNodeId;
+                this.updateSelectedNodeClasses();
+            });
+    }
+
+    @Input()
+    public set connection(value: DfDataConnection) {
+        this.connectionInternal = value;
+        this.updateSelectedNodeClasses();
+    }
+
+    public get connection(): DfDataConnection {
+        return this.connectionInternal!;
+    }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (!this.selected || !this.deletable) {
@@ -160,8 +188,12 @@ export class ConnectionComponent {
 
         event.preventDefault();
 
+        if (!this.connectionInternal) {
+            return;
+        }
+
         this.store.clearSelectedConnection(this.connection);
-        this.connectionsService.removeConnection(this.connection);
+        this.connectionsService.removeConnection(this.connectionInternal);
         this.connectionDeleted.emit();
     }
 
@@ -180,5 +212,22 @@ export class ConnectionComponent {
         connector: DfDataConnector,
     ): BehaviorSubject<DfConnectorData> | BehaviorSubject<null> {
         return this.coordinatesService.getConnectionPoint(createConnectorHash(connector));
+    }
+
+    private updateSelectedNodeClasses(): void {
+        this.selectedNodeInput = false;
+        this.selectedNodeOutput = false;
+
+        if (!this.connectionInternal || !this.selectedNodeId) {
+            return;
+        }
+
+        if (this.connectionInternal.target.nodeId === this.selectedNodeId) {
+            this.selectedNodeInput = true;
+        }
+
+        if (this.connectionInternal.source.nodeId === this.selectedNodeId) {
+            this.selectedNodeOutput = true;
+        }
     }
 }

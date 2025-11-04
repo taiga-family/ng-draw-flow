@@ -15,6 +15,15 @@ describe('ConnectionsService', () => {
         target: {nodeId: 'n2', connectorType: DfConnectionPoint.Input, connectorId: 'i1'},
     };
 
+    const anotherConnection = {
+        source: {
+            nodeId: 'n3',
+            connectorType: DfConnectionPoint.Output,
+            connectorId: 'o2',
+        },
+        target: {nodeId: 'n4', connectorType: DfConnectionPoint.Input, connectorId: 'i2'},
+    };
+
     beforeEach(async () => {
         await MockBuilder(ConnectionsService);
         service = MockRender(ConnectionsService).point.componentInstance;
@@ -48,5 +57,21 @@ describe('ConnectionsService', () => {
         service.removeConnectionsByConnectorId('o1');
 
         expect(service.connections$.value.length).toBe(0);
+    });
+
+    it('updates selected node for highlighting connections', () => {
+        service.addConnections([connection, anotherConnection]);
+
+        service.highlightConnectionsForNode('n1');
+        expect(service.selectedNodeId$.value).toBe('n1');
+
+        service.highlightConnectionsForNode('n1');
+        expect(service.selectedNodeId$.value).toBe('n1');
+
+        service.highlightConnectionsForNode('n2');
+        expect(service.selectedNodeId$.value).toBe('n2');
+
+        service.highlightConnectionsForNode(null);
+        expect(service.selectedNodeId$.value).toBeNull();
     });
 });

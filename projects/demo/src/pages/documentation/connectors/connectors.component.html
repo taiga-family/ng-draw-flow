@@ -40,8 +40,9 @@
     </p>
     <h2>Customizing Connectors</h2>
     <p>
-        The color of the connectors, can be customized to fit the design requirements of your application. This is
-        achieved by altering CSS custom properties:
+        Input and output connectors ship with distinct default colors so that their roles are visually apparent at a
+        glance. You can override these defaults—or any other visual treatment—to align with your own design system.
+        Color customization is achieved by altering CSS custom properties:
     </p>
     <ul class="tui-list tui-list_extra-small">
         <li class="tui-list__item">
@@ -51,10 +52,25 @@
             specifications.
         </li>
         <li class="tui-list__item">
+            <code>--df-connector-input-color</code>
+            and
+            <code>--df-connector-output-color</code>
+            : These properties let you independently tailor the default colors of input and output connectors. By
+            default, NgDrawFlow differentiates them to make the direction of data flow obvious, but you can swap or
+            restyle the palette as needed.
+        </li>
+        <li class="tui-list__item">
             <code>--df-connector-color-hover</code>
             : When a user hovers over a connector, this property determines the color that the connector will change to.
             This interactive feedback is important for user experience, making it clear which connector is currently
             under consideration for connection creation.
+        </li>
+        <li class="tui-list__item">
+            <code>--df-connector-input-color-hover</code>
+            and
+            <code>--df-connector-output-color-hover</code>
+            : Define the hover feedback for each connector type individually so that directional cues remain clear even
+            during interaction.
         </li>
     </ul>
     <h2>Connector Positions</h2>

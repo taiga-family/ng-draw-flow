@@ -7,6 +7,7 @@ import {type DfDataConnection} from '../../ng-draw-flow.interfaces';
 export class ConnectionsService {
     public readonly connections$ = new BehaviorSubject<DfDataConnection[]>([]);
     public readonly usedConnectors$ = new BehaviorSubject<string[]>([]);
+    public readonly selectedNodeId$ = new BehaviorSubject<string | null>(null);
 
     public addConnections(connections: DfDataConnection[]): void {
         const newConnections = connections.filter(
@@ -89,6 +90,14 @@ export class ConnectionsService {
 
         this.usedConnectors$.next(usedConnectors);
         this.connections$.next(connectionsToKeep);
+    }
+
+    public highlightConnectionsForNode(nodeId: string | null): void {
+        if (this.selectedNodeId$.value === nodeId) {
+            return;
+        }
+
+        this.selectedNodeId$.next(nodeId);
     }
 
     private areConnectionsEqual(
