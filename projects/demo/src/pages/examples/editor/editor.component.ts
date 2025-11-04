@@ -2,12 +2,16 @@ import {AsyncPipe, CommonModule} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
+    inject,
     type OnInit,
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {
+    DF_PAN_ZOOM_OPTIONS,
     DfArrowhead,
     DfConnectionPoint,
     DfConnectionType,
@@ -17,14 +21,16 @@ import {
     type DfDataNode,
     type DfEvent,
     dfIsolatedNodesValidator,
+    type DfPanZoomOptions,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiButton} from '@taiga-ui/core';
+import {TuiButton, TuiLabel, TuiTextfield, TuiTextfieldComponent} from '@taiga-ui/core';
+import {TuiInputNumber} from '@taiga-ui/kit';
 import {MarkdownModule} from 'ngx-markdown';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, distinctUntilChanged} from 'rxjs';
 
 import {SimpleNodeComponent} from '../../../app/modules/nodes';
 
@@ -39,6 +45,10 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
         ReactiveFormsModule,
         TuiAddonDoc,
         TuiButton,
+        TuiInputNumber,
+        TuiLabel,
+        TuiTextfield,
+        TuiTextfieldComponent,
     ],
     templateUrl: './editor.component.html',
     styleUrls: ['./editor.component.less'],
@@ -67,6 +77,10 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
     ],
 })
 export default class EditorComponent implements OnInit {
+    private readonly destroyRef = inject(DestroyRef);
+    public readonly panZoomOptions: DfPanZoomOptions =
+        inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
+
     @ViewChild(NgDrawFlowComponent)
     public editor?: NgDrawFlowComponent;
 
@@ -154,6 +168,7 @@ export default class EditorComponent implements OnInit {
     };
 
     public currentScale$: BehaviorSubject<number> = new BehaviorSubject<number>(100);
+    public readonly scaleControl = new FormControl<number>(1, {nonNullable: true});
     public fullscreen$ = new BehaviorSubject<boolean>(false);
     public counter = 0;
     public form = new FormControl<DfDataModel>(this.data, [
@@ -169,9 +184,16 @@ export default class EditorComponent implements OnInit {
         this.form.valueChanges.subscribe((v) => {
             console.warn(v, 'onValueChange');
         });
+
+        this.scaleControl.valueChanges
+            .pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+            .subscribe((value: number) => {
+                this.editor?.setScale(value);
+            });
     }
 
     public onScaleChange(zoomLevel: number): void {
+        this.scaleControl.setValue(zoomLevel / 100, {emitEvent: false});
         this.currentScale$.next(zoomLevel);
     }
 

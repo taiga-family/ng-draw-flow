@@ -54,6 +54,24 @@
                         zoomOut
                     </button>
 
+                    <tui-textfield
+                        tuiTextfieldSize="m"
+                        tuiTheme="light"
+                        class="scale-field"
+                        [tuiTextfieldCleaner]="false"
+                    >
+                        <label tuiLabel>Set scale</label>
+
+                        <input
+                            aria-label="Set scale"
+                            tuiInputNumber
+                            [formControl]="scaleControl"
+                            [max]="panZoomOptions.maxZoom"
+                            [min]="panZoomOptions.minZoom"
+                            [step]="1"
+                        />
+                    </tui-textfield>
+
                     <div class="scale-value">{{ currentScale$ | async }}%</div>
 
                     <button
@@ -62,7 +80,7 @@
                         type="button"
                         (click)="editor?.zoomIn()"
                     >
-                        zomIn
+                        zoomIn
                     </button>
                 </div>
             </div>

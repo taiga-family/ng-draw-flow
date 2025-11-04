@@ -175,6 +175,14 @@
                 </ul>
             </li>
             <li class="tui-list__item">
+                <code>setScale(scale: number): void</code>
+                : Applies an absolute zoom factor (1 === 100%), automatically clamped between the configured
+                <code>minZoom</code>
+                and
+                <code>maxZoom</code>
+                bounds.
+            </li>
+            <li class="tui-list__item">
                 <code>removeConnection(connection: DfDataConnection): void</code>
                 : Programmatically removes a connection between nodes. The connection object must match exactly one
                 existing connection in the graph.

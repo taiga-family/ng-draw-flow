@@ -47,7 +47,7 @@ import {SelectionService} from './services/selection.service';
  *   …) and re-emits high-level events so host applications can stay
  *   framework-agnostic.
  * * Exposes a minimal public API (`zoomIn`, `zoomOut`, `resetPosition`,
- *   `removeConnection`) for programmatic control.
+ *   `setScale`, `removeConnection`) for programmatic control.
  */
 @Component({
     standalone: true,
@@ -165,6 +165,14 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
     /** Resets both zoom factor and pan offset to their defaults. */
     public resetPosition(): void {
         this.panzoom.resetPanzoom();
+    }
+
+    /**
+     * Applies an absolute zoom factor to the scene (1 === 100%) while respecting
+     * configured pan/zoom bounds.
+     */
+    public setScale(scale: number): void {
+        this.panzoom.setScale(scale);
     }
 
     /** Method that removes an existing edge. */
