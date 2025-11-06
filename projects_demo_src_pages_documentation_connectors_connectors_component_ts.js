@@ -32,7 +32,7 @@ _ConnectorsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   selectors: [["app-connectors"]],
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵStandaloneFeature"]],
-  decls: 82,
+  decls: 96,
   vars: 0,
   consts: [["header", "Connectors"], [1, "tui-list", "tui-list_extra-small"], [1, "tui-list__item"], ["routerLink", "/documentation/connections", "tuiLink", ""]],
   template: function ConnectorsComponent_Template(rf, ctx) {
@@ -101,7 +101,7 @@ _ConnectorsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "Customizing Connectors");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](48, " The color of the connectors, can be customized to fit the design requirements of your application. This is achieved by altering CSS custom properties: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](48, " Input and output connectors ship with distinct default colors so that their roles are visually apparent at a glance. You can override these defaults\u2014or any other visual treatment\u2014to align with your own design system. Color customization is achieved by altering CSS custom properties: ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "ul", 1)(50, "li", 2)(51, "code");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](52, "--df-connector-color");
@@ -109,42 +109,60 @@ _ConnectorsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](53, " : This property controls the default color of the connectors. By setting this variable, you can ensure that all connectors in your application adhere to a consistent color scheme that matches your branding or design specifications. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "li", 2)(55, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](56, "--df-connector-color-hover");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](56, "--df-connector-input-color");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](57, " : When a user hovers over a connector, this property determines the color that the connector will change to. This interactive feedback is important for user experience, making it clear which connector is currently under consideration for connection creation. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](57, " and ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](58, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](59, "--df-connector-output-color");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](60, " : These properties let you independently tailor the default colors of input and output connectors. By default, NgDrawFlow differentiates them to make the direction of data flow obvious, but you can swap or restyle the palette as needed. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](61, "li", 2)(62, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](63, "--df-connector-color-hover");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](64, " : When a user hovers over a connector, this property determines the color that the connector will change to. This interactive feedback is important for user experience, making it clear which connector is currently under consideration for connection creation. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "li", 2)(66, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](67, "--df-connector-input-color-hover");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](68, " and ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](69, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](70, "--df-connector-output-color-hover");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](71, " : Define the hover feedback for each connector type individually so that directional cues remain clear even during interaction. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](58, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](59, "Connector Positions");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](72, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](73, "Connector Positions");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](60, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](61, " The ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](62, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](63, "position");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](74, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](75, " The ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](76, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](77, "position");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](64, " input param specifies where connectors appear on a node: ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](66, "DfConnectorPosition.Top");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](78, " input param specifies where connectors appear on a node: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](79, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](80, "DfConnectorPosition.Top");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](67, " , ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](68, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](69, "DfConnectorPosition.Right");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](81, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](82, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](83, "DfConnectorPosition.Right");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](70, " , ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](71, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](72, "DfConnectorPosition.Bottom");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](84, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](85, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](86, "DfConnectorPosition.Bottom");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](73, " , or ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](74, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](75, "DfConnectorPosition.Left");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](87, " , or ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](88, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](89, "DfConnectorPosition.Left");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](76, " . ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](90, " . ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](77, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](78, " For information on adjusting connection curvature and line styles, refer to the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](79, "a", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](80, " connections documentation ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](91, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](92, " For information on adjusting connection curvature and line styles, refer to the ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](93, "a", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](94, " connections documentation ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](81, " . ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](95, " . ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
     }
   },
