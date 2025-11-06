@@ -4,7 +4,6 @@ import {
     Component,
     DestroyRef,
     EventEmitter,
-    HostBinding,
     inject,
     Input,
     Output,
@@ -56,6 +55,8 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
     host: {
         '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
         '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
+        '[class.df-selected-node-input]': 'this.selectedNodeInput',
+        '[class.df-selected-node-output]': 'this.selectedNodeOutput',
     },
 })
 export class ConnectionComponent {
@@ -150,10 +151,8 @@ export class ConnectionComponent {
 
     public deletable = this.options.options.connectionsDeletable;
 
-    @HostBinding('class.df-selected-node-input')
     protected selectedNodeInput = false;
 
-    @HostBinding('class.df-selected-node-output')
     protected selectedNodeOutput = false;
 
     @Output()
