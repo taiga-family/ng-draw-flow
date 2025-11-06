@@ -1,3 +1,16 @@
+### [0.18.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.17.1...v0.18.0) (2025-11-06)
+
+### 🚀 Features
+
+- **ng-draw-flow**: add global store facade
+  [(b1def13)](https://github.com/taiga-family/ng-draw-flow/commit/b1def13e61fa3192cd23669652006d5ea6d6a489)
+- **ng-draw-flow**: add visual distinction for input and output connectors
+  [(6928a8e)](https://github.com/taiga-family/ng-draw-flow/commit/6928a8ef52342bf94ecf59a2bc329490832b0426)
+- **ng-draw-flow**: expose set-scale api
+  [(12ddcf6)](https://github.com/taiga-family/ng-draw-flow/commit/12ddcf665453373440b6fd1314665d3d754f17cf)
+- **ng-draw-flow**: fix tests
+  [(505f153)](https://github.com/taiga-family/ng-draw-flow/commit/505f153db8e7575810eda948cd02adf709f91153)
+
 ### [0.17.1](https://github.com/taiga-family/ng-draw-flow/compare/v0.17.0...v0.17.1) (2025-10-21)
 
 ### 🐞 Bug Fixes
