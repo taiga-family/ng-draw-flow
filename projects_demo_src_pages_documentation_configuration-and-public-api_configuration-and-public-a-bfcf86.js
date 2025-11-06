@@ -32,7 +32,7 @@ _ConfigurationAndPublicApiComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_
   selectors: [["configuration-and-public-api"]],
   standalone: true,
   features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵStandaloneFeature"]],
-  decls: 169,
+  decls: 216,
   vars: 1,
   consts: [["header", "Configuration & Public API"], ["filename", "app.module.ts", 3, "code"], [1, "tui-space_top-4"], [1, "tui-list", "tui-list_extra-small", "tui-space_bottom-4"], [1, "tui-list__item"], [1, "tui-text_body-s"]],
   template: function ConfigurationAndPublicApiComponent_Template(rf, ctx) {
@@ -233,9 +233,71 @@ _ConfigurationAndPublicApiComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](164, "Viewport centers on the coordinate system origin (0,0)");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](165, "li", 4)(166, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](167, "removeConnection(connection: DfDataConnection): void");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](167, "setScale(scale: number): void");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](168, " : Programmatically removes a connection between nodes. The connection object must match exactly one existing connection in the graph. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](168, " : Applies an absolute zoom factor (1 === 100%), automatically clamped between the configured ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](169, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](170, "minZoom");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](171, " and ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](172, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](173, "maxZoom");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](174, " bounds. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](175, "li", 4)(176, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](177, "removeConnection(connection: DfDataConnection): void");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](178, " : Programmatically removes a connection between nodes. The connection object must match exactly one existing connection in the graph. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](179, "li", 4)(180, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](181, "NgDrawFlowStoreService");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](182, " : Root-scoped facade for runtime state and controls\u2014inject it anywhere to mirror component actions ( ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](183, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](184, "zoomIn");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](185, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](186, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](187, "zoomOut");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](188, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](189, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](190, "resetPosition");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](191, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](192, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](193, "setScale");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](194, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](195, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](196, "removeConnection");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](197, " ) and observe live data ( ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](198, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](199, "dataModel");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](200, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](201, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](202, "scale");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](203, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](204, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](205, "selectedNode");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](206, " , ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](207, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](208, "selectedConnection");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](209, " , plus event streams like ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](210, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](211, "nodeMoved$");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](212, " and ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](213, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](214, "connectionCreated$");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](215, " ). ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
     }
     if (rf & 2) {
