@@ -13,6 +13,7 @@ import {
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
+import {ConnectionsService} from '../connections/connections.service';
 import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 import {HostComponent} from './mocks/host.component.mock';
@@ -85,6 +86,9 @@ describe('NodeComponent', () => {
                     getConnectionPoint: () => new BehaviorSubject(null),
                 }),
                 MockProvider(DF_PAN_ZOOM_OPTIONS, panZoomOptions),
+                MockProvider(ConnectionsService, {
+                    selectedNodeId$: new BehaviorSubject(null),
+                } as ConnectionsService),
             ]);
     });
 
