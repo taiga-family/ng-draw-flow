@@ -167,7 +167,7 @@ export default class EditorComponent implements OnInit {
     };
 
     public readonly scaleControl = new FormControl<number>(1, {nonNullable: true});
-    public fullscreen$ = new BehaviorSubject<boolean>(false);
+    public readonly fullscreen$ = new BehaviorSubject<boolean>(false);
     public counter = 0;
     public form = new FormControl<DfDataModel>(this.data, [
         dfCycleDetectionValidator(),
