@@ -40,8 +40,8 @@ import {
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
-import {ConnectionsService} from '../connections/connections.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
+import {ConnectionsService} from '../connections/connections.service';
 import {type DfInputComponent, type DfOutputComponent} from '../connectors';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
@@ -172,17 +172,12 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.innerComponent.selected = selected;
         this.innerComponent.markForCheck();
 
-        if (this.connectionsService.selectedNodeId$.value === this.value.id) {
-            this.connectionsService.highlightConnectionsForNode(null);
-
-            return;
-        }
-
         if (selected) {
             this.connectionsService.highlightConnectionsForNode(this.value.id);
             this.store.emitNodeSelected(this.value);
             this.nodeSelected.emit(this.value);
         } else {
+            this.connectionsService.highlightConnectionsForNode(null);
             this.store.clearSelectedNode(this.value.id);
         }
     }
