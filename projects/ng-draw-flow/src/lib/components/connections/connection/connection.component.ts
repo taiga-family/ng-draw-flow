@@ -39,6 +39,7 @@ import {
     type DfOptions,
 } from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
+import {NgDrawFlowStoreService} from '../../../services/ng-draw-flow-store.service';
 import {ConnectionsService} from '../connections.service';
 import {createBezierPath, createSmoothStepPath} from '../utils';
 
@@ -57,6 +58,7 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
 export class ConnectionComponent {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
+    private readonly store = inject(NgDrawFlowStoreService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
     private readonly arrowhead: DfArrowheadOptions = this.options.connection.arrowhead;
     private readonly arrowWidth = this.arrowhead.width;
@@ -158,6 +160,7 @@ export class ConnectionComponent {
 
         event.preventDefault();
 
+        this.store.clearSelectedConnection(this.connection);
         this.connectionsService.removeConnection(this.connection);
         this.connectionDeleted.emit();
     }
@@ -166,7 +169,10 @@ export class ConnectionComponent {
         this.selected = selected;
 
         if (selected) {
+            this.store.emitConnectionSelected(this.connection);
             this.connectionSelected.emit();
+        } else {
+            this.store.clearSelectedConnection(this.connection);
         }
     }
 

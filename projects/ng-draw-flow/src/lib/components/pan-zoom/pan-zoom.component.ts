@@ -142,6 +142,16 @@ export class PanZoomComponent {
         this.coordinates$.next(INITIAL_COORDINATES);
     }
 
+    public setScale(scale: number): void {
+        const clampedScale = dfClamp(
+            scale,
+            this.panZoomOptions.minZoom,
+            this.panZoomOptions.maxZoom,
+        );
+
+        this.setZoom(clampedScale);
+    }
+
     public zoomIn(): void {
         const {zoomStep, maxZoom} = this.panZoomOptions;
         const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;

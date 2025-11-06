@@ -175,9 +175,43 @@
                 </ul>
             </li>
             <li class="tui-list__item">
+                <code>setScale(scale: number): void</code>
+                : Applies an absolute zoom factor (1 === 100%), automatically clamped between the configured
+                <code>minZoom</code>
+                and
+                <code>maxZoom</code>
+                bounds.
+            </li>
+            <li class="tui-list__item">
                 <code>removeConnection(connection: DfDataConnection): void</code>
                 : Programmatically removes a connection between nodes. The connection object must match exactly one
                 existing connection in the graph.
+            </li>
+            <li class="tui-list__item">
+                <code>NgDrawFlowStoreService</code>
+                : Root-scoped facade for runtime state and controls—inject it anywhere to mirror component actions (
+                <code>zoomIn</code>
+                ,
+                <code>zoomOut</code>
+                ,
+                <code>resetPosition</code>
+                ,
+                <code>setScale</code>
+                ,
+                <code>removeConnection</code>
+                ) and observe live data (
+                <code>dataModel</code>
+                ,
+                <code>scale</code>
+                ,
+                <code>selectedNode</code>
+                ,
+                <code>selectedConnection</code>
+                , plus event streams like
+                <code>nodeMoved$</code>
+                and
+                <code>connectionCreated$</code>
+                ).
             </li>
         </ul>
     </section>

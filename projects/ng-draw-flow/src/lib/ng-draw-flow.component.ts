@@ -1,5 +1,6 @@
 import {NgIf} from '@angular/common';
 import {
+    type AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
@@ -7,6 +8,7 @@ import {
     EventEmitter,
     forwardRef,
     inject,
+    type OnDestroy,
     type OnInit,
     Output,
     signal,
@@ -35,6 +37,7 @@ import {
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
+import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
 import {SelectionService} from './services/selection.service';
 
 /**
@@ -47,7 +50,9 @@ import {SelectionService} from './services/selection.service';
  *   …) and re-emits high-level events so host applications can stay
  *   framework-agnostic.
  * * Exposes a minimal public API (`zoomIn`, `zoomOut`, `resetPosition`,
- *   `removeConnection`) for programmatic control.
+ *   `setScale`, `removeConnection`) for programmatic control.
+ * * Broadcasts state and events through `NgDrawFlowStoreService` so host apps
+ *   can react without a direct reference to the component instance.
  */
 @Component({
     standalone: true,
@@ -90,9 +95,12 @@ import {SelectionService} from './services/selection.service';
         '(dfResizeObserver)': 'this.onResize($event)',
     },
 })
-export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
+export class NgDrawFlowComponent
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
+{
     private readonly destroyRef = inject(DestroyRef);
     private readonly connectionsService = inject(ConnectionsService);
+    private readonly store = inject(NgDrawFlowStoreService);
 
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
@@ -136,11 +144,28 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         this.watchFormChanges();
     }
 
+    public ngAfterViewInit(): void {
+        this.store.attach(this);
+
+        const model = this.form.value;
+
+        if (model) {
+            this.store.updateDataModel(model);
+        }
+    }
+
+    public ngOnDestroy(): void {
+        this.store.detach(this);
+    }
+
     public writeValue(value: DfDataModel): void {
         if (!value) {
             return;
         }
 
+        this.store.clearSelectedNode();
+        this.store.clearSelectedConnection();
+        this.store.updateDataModel(value);
         this.form.setValue(value, {emitEvent: false});
     }
 
@@ -167,9 +192,22 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         this.panzoom.resetPanzoom();
     }
 
+    /**
+     * Applies an absolute zoom factor to the scene (1 === 100%) while respecting
+     * configured pan/zoom bounds.
+     */
+    public setScale(scale: number): void {
+        this.panzoom.setScale(scale);
+    }
+
     /** Method that removes an existing edge. */
     public removeConnection(connection: DfDataConnection): void {
         this.connectionsService.removeConnection(connection);
+    }
+
+    protected onScaleChange(scale: number): void {
+        this.store.setScaleValue(scale);
+        this.scale.emit(scale);
     }
 
     protected onConnectionCreated(event: DfEvent<DfDataConnection>): void {
@@ -202,6 +240,7 @@ export class NgDrawFlowComponent implements ControlValueAccessor, OnInit {
         this.form.valueChanges
             .pipe(filter(Boolean), debounceTime(10), takeUntilDestroyed(this.destroyRef))
             .subscribe((value: DfDataModel) => {
+                this.store.updateDataModel(value);
                 this.onChange(value);
             });
     }

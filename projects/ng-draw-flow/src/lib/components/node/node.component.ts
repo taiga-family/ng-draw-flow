@@ -39,6 +39,7 @@ import {
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
+import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {type DfInputComponent, type DfOutputComponent} from '../connectors';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
@@ -60,6 +61,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
+    private readonly store = inject(NgDrawFlowStoreService);
     private readonly drawFlowOptions = inject<DfOptions>(DRAW_FLOW_OPTIONS);
     private readonly drawFlowComponents = this.drawFlowOptions.nodes;
     private readonly nodeDragThreshold = this.drawFlowOptions.options.nodeDragThreshold;
@@ -132,6 +134,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         if (this.selected && this.deletable && !this.node.startNode) {
             event.preventDefault();
 
+            this.store.clearSelectedNode(this.value.id);
             this.nodeDeleted.emit();
         }
     }
@@ -161,7 +164,10 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         this.innerComponent.markForCheck();
 
         if (selected) {
+            this.store.emitNodeSelected(this.value);
             this.nodeSelected.emit(this.value);
+        } else {
+            this.store.clearSelectedNode(this.value.id);
         }
     }
 
@@ -233,7 +239,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     }
 
     private fillValue(): void {
-        if (!('position' in this.node)) {
+        if (!this.hasPosition(this.node)) {
             this.value = {
                 ...this.node,
                 position: this.getCenterOfViewport(),
@@ -450,6 +456,12 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         }
 
         return position;
+    }
+
+    private hasPosition(node: DfDataInitialNode | DfDataNode): node is DfDataNode {
+        const position = (node as DfDataNode).position;
+
+        return !!position && Number.isFinite(position.x) && Number.isFinite(position.y);
     }
 
     private setInitialPosition(): void {
