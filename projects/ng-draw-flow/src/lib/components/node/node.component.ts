@@ -10,6 +10,7 @@ import {
     inject,
     Input,
     type OnChanges,
+    type OnDestroy,
     Output,
     type QueryList,
     type SimpleChanges,
@@ -40,6 +41,7 @@ import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
+import {ConnectionsService} from '../connections/connections.service';
 import {type DfInputComponent, type DfOutputComponent} from '../connectors';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
@@ -56,7 +58,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
         '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
     },
 })
-export class NodeComponent implements AfterViewInit, OnChanges {
+export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
@@ -67,6 +69,7 @@ export class NodeComponent implements AfterViewInit, OnChanges {
     private readonly nodeDragThreshold = this.drawFlowOptions.options.nodeDragThreshold;
     private readonly draggable = this.drawFlowOptions.options.nodesDraggable;
     private readonly deletable = this.drawFlowOptions.options.nodesDeletable;
+    private readonly connectionsService = inject(ConnectionsService);
 
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
@@ -130,6 +133,12 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         }
     }
 
+    public ngOnDestroy(): void {
+        if (this.connectionsService.selectedNodeId$.value === this.value?.id) {
+            this.connectionsService.highlightConnectionsForNode(null);
+        }
+    }
+
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.selected && this.deletable && !this.node.startNode) {
             event.preventDefault();
@@ -164,9 +173,11 @@ export class NodeComponent implements AfterViewInit, OnChanges {
         this.innerComponent.markForCheck();
 
         if (selected) {
+            this.connectionsService.highlightConnectionsForNode(this.value.id);
             this.store.emitNodeSelected(this.value);
             this.nodeSelected.emit(this.value);
         } else {
+            this.connectionsService.highlightConnectionsForNode(null);
             this.store.clearSelectedNode(this.value.id);
         }
     }

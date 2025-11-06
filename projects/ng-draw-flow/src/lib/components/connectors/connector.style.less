@@ -1,4 +1,7 @@
 :host {
+    --df-connector-color-current: var(--df-connector-color);
+    --df-connector-color-hover-current: var(--df-connector-color-hover);
+
     display: block;
     inline-size: 1rem;
     block-size: 1rem;
@@ -20,7 +23,7 @@
 
     &::before {
         z-index: 1;
-        background: var(--df-connector-color);
+        background: var(--df-connector-color-current);
         transform: translate(-50%, -50%);
     }
 
@@ -28,7 +31,7 @@
         z-index: 0;
         inline-size: 1rem;
         block-size: 1rem;
-        background: var(--df-connector-color-hover);
+        background: var(--df-connector-color-hover-current);
         transform: translate(-50%, -50%) scale(0);
         transition: transform 0.2s ease-in-out;
     }
@@ -40,6 +43,16 @@
     &.df-disabled {
         pointer-events: none;
     }
+}
+
+:host([data-connector-type='input']) {
+    --df-connector-color-current: var(--df-connector-input-color, var(--df-connector-color),);
+    --df-connector-color-hover-current: var(--df-connector-input-color-hover, var(--df-connector-color-hover),);
+}
+
+:host([data-connector-type='output']) {
+    --df-connector-color-current: var(--df-connector-output-color, var(--df-connector-color),);
+    --df-connector-color-hover-current: var(--df-connector-output-color-hover, var(--df-connector-color-hover),);
 }
 
 @keyframes dfPulse {
