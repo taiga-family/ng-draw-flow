@@ -30,7 +30,7 @@ import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiButton, TuiLabel, TuiTextfield, TuiTextfieldComponent} from '@taiga-ui/core';
 import {TuiInputNumber} from '@taiga-ui/kit';
 import {MarkdownModule} from 'ngx-markdown';
-import {BehaviorSubject, distinctUntilChanged} from 'rxjs';
+import {BehaviorSubject, distinctUntilChanged, filter} from 'rxjs';
 
 import {SimpleNodeComponent} from '../../../app/modules/nodes';
 
@@ -179,8 +179,8 @@ export default class EditorComponent implements OnInit {
             console.warn(v, 'onStatusChange');
         });
 
-        this.form.valueChanges.subscribe((v) => {
-            console.warn(v, 'onValueChange');
+        this.form.valueChanges.pipe(filter(Boolean)).subscribe((value: DfDataModel) => {
+            this.data = value;
         });
 
         this.scaleControl.valueChanges
