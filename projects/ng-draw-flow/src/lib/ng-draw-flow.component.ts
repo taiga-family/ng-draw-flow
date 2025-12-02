@@ -100,6 +100,7 @@ export class NgDrawFlowComponent
 {
     private readonly destroyRef = inject(DestroyRef);
     private readonly connectionsService = inject(ConnectionsService);
+    private readonly selectionService = inject(SelectionService);
     private readonly store = inject(NgDrawFlowStoreService);
 
     @ViewChild(PanZoomComponent)
@@ -203,6 +204,11 @@ export class NgDrawFlowComponent
     /** Method that removes an existing edge. */
     public removeConnection(connection: DfDataConnection): void {
         this.connectionsService.removeConnection(connection);
+    }
+
+    /** Clears any active selection in the scene. */
+    public clearSelection(): void {
+        this.selectionService.clearSelection();
     }
 
     protected onScaleChange(scale: number): void {

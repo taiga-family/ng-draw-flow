@@ -97,8 +97,8 @@ export class NgDrawFlowStoreService {
             return;
         }
 
-        this.host = undefined;
         this.reset();
+        this.host = undefined;
     }
 
     /** Forwards a zoom-in command to the live editor. */
@@ -157,6 +157,8 @@ export class NgDrawFlowStoreService {
         ) {
             this.selectedConnectionSignal.set(null);
         }
+
+        this.clearSelectionOnScene();
     }
 
     /** Pushes a new zoom scale in percents without touching the live editor. */
@@ -181,6 +183,7 @@ export class NgDrawFlowStoreService {
 
         if (!id || current.id === id) {
             this.selectedNodeSignal.set(null);
+            this.clearSelectionOnScene();
         }
     }
 
@@ -211,6 +214,7 @@ export class NgDrawFlowStoreService {
 
         if (!connection || this.isSameConnection(current, connection)) {
             this.selectedConnectionSignal.set(null);
+            this.clearSelectionOnScene();
         }
     }
 
@@ -274,6 +278,7 @@ export class NgDrawFlowStoreService {
         this.selectedNodeSignal.set(null);
         this.selectedConnectionSignal.set(null);
         this.scaleSignal.set(100);
+        this.clearSelectionOnScene();
     }
 
     private cloneModel(model: DfDataModel): DfDataModel {
@@ -308,6 +313,14 @@ export class NgDrawFlowStoreService {
             target: {...connection.target},
             label: connection.label ? {...connection.label} : undefined,
         };
+    }
+
+    private clearSelectionOnScene(): void {
+        if (!this.host || this.hasSelection()) {
+            return;
+        }
+
+        this.host.clearSelection();
     }
 
     private isSameConnection(left: DfDataConnection, right: DfDataConnection): boolean {

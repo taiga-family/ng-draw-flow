@@ -53,6 +53,7 @@ describe('NgDrawFlowStoreService', () => {
             resetPosition: jest.fn(),
             setScale: jest.fn(),
             removeConnection: jest.fn(),
+            clearSelection: jest.fn(),
         } as unknown as NgDrawFlowComponent;
 
         service.attach(host);
@@ -98,6 +99,17 @@ describe('NgDrawFlowStoreService', () => {
         service.updateDataModel({...model, connections: []});
 
         expect(service.selectedConnection()).toBeNull();
+    });
+
+    it('should clear scene selection when clearing node via API', () => {
+        const host = {clearSelection: jest.fn()} as unknown as NgDrawFlowComponent;
+
+        service.attach(host);
+        service.setSelectedNode(node);
+        service.clearSelectedNode(node.id);
+
+        expect(service.selectedNode()).toBeNull();
+        expect(host.clearSelection).toHaveBeenCalled();
     });
 
     it('should propagate node events', () => {
