@@ -1,3 +1,10 @@
+### [0.18.1](https://github.com/taiga-family/ng-draw-flow/compare/v0.18.0...v0.18.1) (2025-12-02)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: sync programmatic selection clearing
+  [(e1925cc)](https://github.com/taiga-family/ng-draw-flow/commit/e1925ccd8c539198f9de99e1958d545986f1470e)
+
 ### [0.18.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.17.1...v0.18.0) (2025-11-06)
 
 ### 🚀 Features

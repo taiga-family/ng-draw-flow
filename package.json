@@ -1,6 +1,6 @@
 {
     "name": "ng-draw-flow",
-    "version": "0.18.0",
+    "version": "0.18.1",
     "description": "A customizable Angular component for building node-based editors and interactive diagrams",
     "keywords": [
         "draw flow",
