@@ -5167,6 +5167,7 @@ class NgDrawFlowComponent {
   constructor() {
     this.destroyRef = (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.inject)(_angular_core__WEBPACK_IMPORTED_MODULE_11__.DestroyRef);
     this.connectionsService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.inject)(_components_connections_connections_service__WEBPACK_IMPORTED_MODULE_0__.ConnectionsService);
+    this.selectionService = (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.inject)(_services_selection_service__WEBPACK_IMPORTED_MODULE_8__.SelectionService);
     this.store = (0,_angular_core__WEBPACK_IMPORTED_MODULE_11__.inject)(_services_ng_draw_flow_store_service__WEBPACK_IMPORTED_MODULE_7__.NgDrawFlowStoreService);
     /** Emits the *current* zoom factor each time it changes. */
     this.scale = new _angular_core__WEBPACK_IMPORTED_MODULE_11__.EventEmitter();
@@ -5243,6 +5244,10 @@ class NgDrawFlowComponent {
   /** Method that removes an existing edge. */
   removeConnection(connection) {
     this.connectionsService.removeConnection(connection);
+  }
+  /** Clears any active selection in the scene. */
+  clearSelection() {
+    this.selectionService.clearSelection();
   }
   onScaleChange(scale) {
     this.store.setScaleValue(scale);
@@ -5600,8 +5605,8 @@ class NgDrawFlowStoreService {
     if (this.host !== host) {
       return;
     }
-    this.host = undefined;
     this.reset();
+    this.host = undefined;
   }
   /** Forwards a zoom-in command to the live editor. */
   zoomIn() {
@@ -5643,6 +5648,7 @@ class NgDrawFlowStoreService {
     if (selectedConnection && !model.connections.some(connection => this.isSameConnection(connection, selectedConnection))) {
       this.selectedConnectionSignal.set(null);
     }
+    this.clearSelectionOnScene();
   }
   /** Pushes a new zoom scale in percents without touching the live editor. */
   setScaleValue(scale) {
@@ -5662,6 +5668,7 @@ class NgDrawFlowStoreService {
     }
     if (!id || current.id === id) {
       this.selectedNodeSignal.set(null);
+      this.clearSelectionOnScene();
     }
   }
   /** Updates cached node data when the selected node changes externally. */
@@ -5685,6 +5692,7 @@ class NgDrawFlowStoreService {
     }
     if (!connection || this.isSameConnection(current, connection)) {
       this.selectedConnectionSignal.set(null);
+      this.clearSelectionOnScene();
     }
   }
   /** Updates cached connection data when the selected connection changes. */
@@ -5736,6 +5744,7 @@ class NgDrawFlowStoreService {
     this.selectedNodeSignal.set(null);
     this.selectedConnectionSignal.set(null);
     this.scaleSignal.set(100);
+    this.clearSelectionOnScene();
   }
   cloneModel(model) {
     return {
@@ -5773,6 +5782,12 @@ class NgDrawFlowStoreService {
         ...connection.label
       } : undefined
     };
+  }
+  clearSelectionOnScene() {
+    if (!this.host || this.hasSelection()) {
+      return;
+    }
+    this.host.clearSelection();
   }
   isSameConnection(left, right) {
     return left.source.nodeId === right.source.nodeId && left.source.connectorId === right.source.connectorId && left.target.nodeId === right.target.nodeId && left.target.connectorId === right.target.connectorId;
