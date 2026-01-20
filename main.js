@@ -3378,21 +3378,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PanZoomComponent: () => (/* binding */ PanZoomComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/common */ 39191);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/common */ 39191);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core/rxjs-interop */ 48065);
 /* harmony import */ var _ng_web_apis_resize_observer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ng-web-apis/resize-observer */ 65238);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! rxjs */ 95536);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! rxjs */ 63150);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 24406);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 56816);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 870);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 47066);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 83919);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 97757);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 11640);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 61969);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs */ 5219);
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs */ 75117);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! rxjs */ 63150);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs */ 24406);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! rxjs */ 56816);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! rxjs */ 870);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! rxjs */ 47066);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! rxjs */ 83919);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! rxjs */ 97757);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! rxjs */ 11640);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! rxjs */ 61969);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! rxjs */ 5219);
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! rxjs */ 75117);
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../consts */ 82110);
 /* harmony import */ var _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../directives/drag-drop */ 84967);
 /* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../helpers */ 50315);
@@ -3415,6 +3416,7 @@ var _PanZoomComponent;
 
 
 
+
 const _c0 = ["*"];
 class PanZoomComponent {
   constructor() {
@@ -3424,37 +3426,43 @@ class PanZoomComponent {
     this.panZoomOptions = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_pan_zoom_options__WEBPACK_IMPORTED_MODULE_5__.DF_PAN_ZOOM_OPTIONS);
     this.resizeObserver$ = (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.inject)(_ng_web_apis_resize_observer__WEBPACK_IMPORTED_MODULE_9__.ResizeObserverService);
     this.zoom$ = new rxjs__WEBPACK_IMPORTED_MODULE_10__.BehaviorSubject(_pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__.DF_PAN_ZOOM_INITIAL_SCALE);
+    this.zoom = (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_11__.toSignal)(this.zoom$, {
+      initialValue: _pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__.DF_PAN_ZOOM_INITIAL_SCALE
+    });
     this.coordinates$ = new rxjs__WEBPACK_IMPORTED_MODULE_10__.BehaviorSubject(_consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES);
-    this.manualZoomAnimation$ = new rxjs__WEBPACK_IMPORTED_MODULE_11__.Subject();
-    this.dragStage$ = new rxjs__WEBPACK_IMPORTED_MODULE_11__.Subject();
+    this.coordinates = (0,_angular_core_rxjs_interop__WEBPACK_IMPORTED_MODULE_11__.toSignal)(this.coordinates$, {
+      initialValue: _consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES
+    });
+    this.manualZoomAnimation$ = new rxjs__WEBPACK_IMPORTED_MODULE_12__.Subject();
+    this.dragStage$ = new rxjs__WEBPACK_IMPORTED_MODULE_12__.Subject();
     this.scale = new _angular_core__WEBPACK_IMPORTED_MODULE_8__.EventEmitter();
     this.zoomAnimationDuration = this.panZoomOptions.zoomAnimationDuration;
-    this.cursor$ = this.dragStage$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(stage => stage === _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__.DfDragDropStage.Move ? 'grabbing' : 'initial'), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.startWith)('initial'));
-    this.transitioned$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.merge)(this.manualZoomAnimation$, this.dragStage$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(stage => stage !== _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__.DfDragDropStage.Move)), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.fromEvent)(this.el.nativeElement, 'touchmove', {
+    this.cursor$ = this.dragStage$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(stage => stage === _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__.DfDragDropStage.Move ? 'grabbing' : 'initial'), (0,rxjs__WEBPACK_IMPORTED_MODULE_14__.startWith)('initial'));
+    this.transitioned$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.merge)(this.manualZoomAnimation$, this.dragStage$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(stage => stage !== _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__.DfDragDropStage.Move)), (0,rxjs__WEBPACK_IMPORTED_MODULE_16__.fromEvent)(this.el.nativeElement, 'touchmove', {
       passive: true
-    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_16__.throttleTime)(16, rxjs__WEBPACK_IMPORTED_MODULE_17__.animationFrameScheduler, {
+    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_17__.throttleTime)(16, rxjs__WEBPACK_IMPORTED_MODULE_18__.animationFrameScheduler, {
       leading: true,
       trailing: true
-    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(_consts__WEBPACK_IMPORTED_MODULE_0__.DF_FALSE_HANDLER)), (0,rxjs__WEBPACK_IMPORTED_MODULE_15__.fromEvent)(this.el.nativeElement, 'wheel', {
+    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(_consts__WEBPACK_IMPORTED_MODULE_0__.DF_FALSE_HANDLER)), (0,rxjs__WEBPACK_IMPORTED_MODULE_16__.fromEvent)(this.el.nativeElement, 'wheel', {
       passive: true
-    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_16__.throttleTime)(16, rxjs__WEBPACK_IMPORTED_MODULE_17__.animationFrameScheduler, {
+    }).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_17__.throttleTime)(16, rxjs__WEBPACK_IMPORTED_MODULE_18__.animationFrameScheduler, {
       leading: true,
       trailing: true
-    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(_consts__WEBPACK_IMPORTED_MODULE_0__.DF_FALSE_HANDLER)));
-    this.wrapperTransform$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_18__.combineLatest)([this.coordinates$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_19__.tap)(({
+    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(_consts__WEBPACK_IMPORTED_MODULE_0__.DF_FALSE_HANDLER)));
+    this.wrapperTransform$ = (0,rxjs__WEBPACK_IMPORTED_MODULE_19__.combineLatest)([this.coordinates$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_20__.tap)(({
       x,
       y
     }) => {
       this.panZoomService.panzoomModel.x = x;
       this.panZoomService.panzoomModel.y = y;
-    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(({
+    }), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(({
       x,
       y
-    }) => `${(0,_helpers__WEBPACK_IMPORTED_MODULE_2__.dfPx)(x)}, ${(0,_helpers__WEBPACK_IMPORTED_MODULE_2__.dfPx)(y)}`)), this.zoom$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_19__.tap)(zoom => {
+    }) => `${(0,_helpers__WEBPACK_IMPORTED_MODULE_2__.dfPx)(x)}, ${(0,_helpers__WEBPACK_IMPORTED_MODULE_2__.dfPx)(y)}`)), this.zoom$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_20__.tap)(zoom => {
       this.scale.emit(Math.round(zoom * 100));
       this.panZoomService.panzoomModel.zoom = zoom;
-    }))]).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(([translate, zoom]) => `translate(${translate}) scale(${zoom}) rotate(0deg)`));
-    this.panZoomContainerTransform$ = this.resizeObserver$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(entries => entries[0].contentRect), (0,rxjs__WEBPACK_IMPORTED_MODULE_12__.map)(rootSize => {
+    }))]).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(([translate, zoom]) => `translate(${translate}) scale(${zoom}) rotate(0deg)`));
+    this.panZoomContainerTransform$ = this.resizeObserver$.pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(entries => entries[0].contentRect), (0,rxjs__WEBPACK_IMPORTED_MODULE_13__.map)(rootSize => {
       let translate = '';
       const {
         leftPosition: panZoomLeftPosition,
@@ -3480,6 +3488,15 @@ class PanZoomComponent {
   resetPanzoom() {
     this.zoom$.next(_pan_zoom_const__WEBPACK_IMPORTED_MODULE_4__.DF_PAN_ZOOM_INITIAL_SCALE);
     this.coordinates$.next(_consts__WEBPACK_IMPORTED_MODULE_0__.INITIAL_COORDINATES);
+  }
+  setPosition(position) {
+    if (position?.zoom) {
+      this.zoom$.next(position.zoom || this.zoom());
+    }
+    this.coordinates$.next({
+      ...this.coordinates(),
+      ...position
+    });
   }
   setScale(scale) {
     const clampedScale = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.dfClamp)(scale, this.panZoomOptions.minZoom, this.panZoomOptions.maxZoom);
@@ -3530,7 +3547,7 @@ class PanZoomComponent {
       y
     } = this.coordinates$.value;
     this.coordinates$.next(this.getGuardedCoordinates(x, y));
-    (0,rxjs__WEBPACK_IMPORTED_MODULE_20__.timer)(this.zoomAnimationDuration).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_21__.take)(1)).subscribe(() => this.manualZoomAnimation$.next(false));
+    (0,rxjs__WEBPACK_IMPORTED_MODULE_21__.timer)(this.zoomAnimationDuration).pipe((0,rxjs__WEBPACK_IMPORTED_MODULE_22__.take)(1)).subscribe(() => this.manualZoomAnimation$.next(false));
   }
   processZoom(clientX, clientY, delta) {
     const oldScale = this.zoom$.value;
@@ -3625,7 +3642,7 @@ _PanZoomComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_8_
       _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵstyleProp"]("transform", _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵpipeBind1"](5, 14, ctx.panZoomContainerTransform$));
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_22__.AsyncPipe, _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__.DragDropDirective, _zoom__WEBPACK_IMPORTED_MODULE_7__.ZoomDirective],
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_23__.AsyncPipe, _directives_drag_drop__WEBPACK_IMPORTED_MODULE_1__.DragDropDirective, _zoom__WEBPACK_IMPORTED_MODULE_7__.ZoomDirective],
   styles: ["[_nghost-%COMP%] {\n  position: relative;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  inline-size: 100%;\n  block-size: 100%;\n  -webkit-user-select: none;\n          user-select: none;\n}\n.pan-zoom[_ngcontent-%COMP%] {\n  position: absolute;\n  background-image: url('dot.svg');\n  will-change: transform;\n  -webkit-backface-visibility: hidden;\n          backface-visibility: hidden;\n  contain: paint;\n  touch-action: none;\n}\n.transitive[_ngcontent-%COMP%] {\n  transition-duration: 0.3s;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBhbi16b29tLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSxhQUFBO0VBQ0EsdUJBQUE7RUFDQSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsZ0JBQUE7RUFDQSx5QkFBQTtVQUFBLGlCQUFBO0FBQ0o7QUFFQTtFQUNJLGtCQUFBO0VBQ0EsZ0NBQUE7RUFDQSxzQkFBQTtFQUNBLG1DQUFBO1VBQUEsMkJBQUE7RUFDQSxjQUFBO0VBQ0Esa0JBQUE7QUFBSjtBQUdBO0VBQ0kseUJBQUE7QUFESiIsImZpbGUiOiJwYW4tem9vbS5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIGJsb2NrLXNpemU6IDEwMCU7XG4gICAgdXNlci1zZWxlY3Q6IG5vbmU7XG59XG5cbi5wYW4tem9vbSB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL2RvdC5zdmcnKTtcbiAgICB3aWxsLWNoYW5nZTogdHJhbnNmb3JtO1xuICAgIGJhY2tmYWNlLXZpc2liaWxpdHk6IGhpZGRlbjtcbiAgICBjb250YWluOiBwYWludDtcbiAgICB0b3VjaC1hY3Rpb246IG5vbmU7XG59XG5cbi50cmFuc2l0aXZlIHtcbiAgICB0cmFuc2l0aW9uLWR1cmF0aW9uOiAwLjNzO1xufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL25nLWRyYXctZmxvdy9zcmMvbGliL2NvbXBvbmVudHMvcGFuLXpvb20vcGFuLXpvb20uY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLGFBQUE7RUFDQSx1QkFBQTtFQUNBLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtFQUNBLHlCQUFBO1VBQUEsaUJBQUE7QUFDSjtBQUVBO0VBQ0ksa0JBQUE7RUFDQSxnQ0FBQTtFQUNBLHNCQUFBO0VBQ0EsbUNBQUE7VUFBQSwyQkFBQTtFQUNBLGNBQUE7RUFDQSxrQkFBQTtBQUFKO0FBR0E7RUFDSSx5QkFBQTtBQURKOztBQUlBLHdrQ0FBd2tDIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgYmxvY2stc2l6ZTogMTAwJTtcbiAgICB1c2VyLXNlbGVjdDogbm9uZTtcbn1cblxuLnBhbi16b29tIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKCcuLi8uLi8uLi9hc3NldHMvaWNvbnMvZG90LnN2ZycpO1xuICAgIHdpbGwtY2hhbmdlOiB0cmFuc2Zvcm07XG4gICAgYmFja2ZhY2UtdmlzaWJpbGl0eTogaGlkZGVuO1xuICAgIGNvbnRhaW46IHBhaW50O1xuICAgIHRvdWNoLWFjdGlvbjogbm9uZTtcbn1cblxuLnRyYW5zaXRpdmUge1xuICAgIHRyYW5zaXRpb24tZHVyYXRpb246IDAuM3M7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
   changeDetection: 0
 });
@@ -5230,6 +5247,10 @@ class NgDrawFlowComponent {
   zoomOut() {
     this.panzoom.zoomOut();
   }
+  /** Set both zoom and coordinates. */
+  setPosition(position) {
+    this.panzoom.setPosition(position);
+  }
   /** Resets both zoom factor and pan offset to their defaults. */
   resetPosition() {
     this.panzoom.resetPanzoom();
@@ -5619,6 +5640,10 @@ class NgDrawFlowStoreService {
   /** Resets pan and zoom on the live editor. */
   resetPosition() {
     this.host?.resetPosition();
+  }
+  /** Set both zoom and coordinates. */
+  setPosition(position) {
+    this.host?.setPosition(position);
   }
   /**
    * Applies an absolute zoom factor on the live editor and stores its
