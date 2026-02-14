@@ -1,5 +1,7 @@
 import {type FactoryProvider, InjectionToken} from '@angular/core';
 
+export type DfWheelBehavior = 'scroll' | 'zoom';
+
 export interface DfPanZoomOptions {
     panSize: number;
     topPosition: number | null;
@@ -10,6 +12,10 @@ export interface DfPanZoomOptions {
     zoomAnimationDuration: number;
     zoomWheelSensitivity: number;
     touchSensitivity: number;
+    wheelBehavior: DfWheelBehavior;
+    wheelSpeed: number;
+    wheelStep: number;
+    pinchZoomSpeed: number;
 }
 
 export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
@@ -22,6 +28,10 @@ export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
     zoomAnimationDuration: 300,
     zoomWheelSensitivity: 0.01,
     touchSensitivity: 0.01,
+    wheelBehavior: 'zoom',
+    wheelSpeed: 1,
+    wheelStep: 0.008,
+    pinchZoomSpeed: 1,
 };
 
 export const DF_PAN_ZOOM_OPTIONS = new InjectionToken(

@@ -24,6 +24,8 @@ jest.mock('./node.component.html', () => '', {virtual: true});
 jest.mock('./node.component.less', () => '', {virtual: true});
 
 describe('NodeComponent', () => {
+    let panZoomOptions: DfPanZoomOptions;
+
     beforeEach(async () => {
         TestBed.overrideComponent(NodeComponent, {
             set: {
@@ -50,7 +52,7 @@ describe('NodeComponent', () => {
             },
         };
 
-        const panZoomOptions: DfPanZoomOptions = {
+        panZoomOptions = {
             panSize: 2000,
             leftPosition: null,
             topPosition: null,
@@ -60,6 +62,10 @@ describe('NodeComponent', () => {
             zoomAnimationDuration: 300,
             zoomWheelSensitivity: 0.01,
             touchSensitivity: 0.01,
+            wheelBehavior: 'zoom',
+            wheelSpeed: 1,
+            wheelStep: 0.008,
+            pinchZoomSpeed: 1,
         };
 
         return MockBuilder(HostComponent)
@@ -80,6 +86,12 @@ describe('NodeComponent', () => {
                         offsetY: 0,
                     },
                     panzoomDisabled: false,
+                    snapshot() {
+                        return this.panzoomModel;
+                    },
+                    setDisabled(value: boolean) {
+                        this.panzoomDisabled = value;
+                    },
                 }),
                 MockProvider(CoordinatesService, {
                     addConnectionPoint: jest.fn(),
@@ -127,5 +139,27 @@ describe('NodeComponent', () => {
             INITIAL_COORDINATES.y + (panZoomService.panzoomModel.y / 2) * -1,
             5,
         );
+
+        panZoomOptions.leftPosition = 100;
+        panZoomOptions.topPosition = 120;
+
+        const edgeShifted = component.getCenterOfViewport();
+
+        expect(edgeShifted.x).toBeCloseTo(475, 5);
+        expect(edgeShifted.y).toBeCloseTo(280, 5);
+
+        panZoomOptions.panSize = 10000;
+        panZoomService.panzoomModel = {
+            x: 0,
+            y: 0,
+            zoom: 1,
+            offsetX: 0,
+            offsetY: 0,
+        };
+
+        const withLargePanSize = component.getCenterOfViewport();
+
+        expect(withLargePanSize.x).toBeCloseTo(400, 5);
+        expect(withLargePanSize.y).toBeCloseTo(380, 5);
     });
 });

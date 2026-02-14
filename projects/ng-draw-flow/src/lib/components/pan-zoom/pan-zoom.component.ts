@@ -1,13 +1,17 @@
-import {AsyncPipe, NgIf} from '@angular/common';
 import {
+    type AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    computed,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     inject,
+    NgZone,
     Output,
+    signal,
 } from '@angular/core';
-import {toSignal} from '@angular/core/rxjs-interop';
 import {ResizeObserverService} from '@ng-web-apis/resize-observer';
 import {
     animationFrameScheduler,
@@ -25,130 +29,111 @@ import {
     timer,
 } from 'rxjs';
 
-import {DF_FALSE_HANDLER, INITIAL_COORDINATES} from '../../consts';
+import {INITIAL_COORDINATES} from '../../consts';
 import {
     type DfDragDrop,
     DfDragDropStage,
     DragDropDirective,
 } from '../../directives/drag-drop';
 import {DfResizeObserver} from '../../directives/resize-observer';
-import {dfClamp, dfPx} from '../../helpers';
+import {dfPx} from '../../helpers';
 import {type DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
+import {
+    clampByPanSize,
+    clampScale,
+    getContainerOffsets,
+    moveBy,
+    zoomAtPoint,
+} from './pan-zoom.camera.math';
 import {DF_PAN_ZOOM_INITIAL_SCALE} from './pan-zoom.const';
 import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
 import {PanZoomService} from './pan-zoom.service';
-import {ZoomDirective} from './zoom';
-import {type DfZoom} from './zoom/zoom.interfaces';
+import {
+    type DfPanZoomGesture,
+    type DfPanZoomPanGesture,
+    type DfPanZoomZoomGesture,
+} from './pan-zoom-gestures.interfaces';
+import {PanZoomGesturesService} from './pan-zoom-gestures.service';
 
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [AsyncPipe, DfResizeObserver, DragDropDirective, NgIf, ZoomDirective],
+    imports: [DfResizeObserver],
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [PanZoomGesturesService],
+    hostDirectives: [
+        {
+            directive: DragDropDirective,
+            outputs: ['dfDragDrop'],
+        },
+        {
+            directive: DfResizeObserver,
+            outputs: ['dfResizeObserver'],
+        },
+    ],
+    host: {
+        '(dfDragDrop)': 'onPan($event)',
+        '(dfResizeObserver)': 'onBoardResize($event)',
+    },
 })
-export class PanZoomComponent {
+export class PanZoomComponent implements AfterViewInit {
+    private readonly cdr = inject(ChangeDetectorRef);
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
+    private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly ngZone = inject(NgZone);
     private readonly panZoomService = inject(PanZoomService);
-    private readonly drawFlowRootElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
+    private readonly panZoomGestures = inject(PanZoomGesturesService);
     private readonly panZoomOptions: DfPanZoomOptions =
         inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
-    private readonly resizeObserver$ = inject(ResizeObserverService);
-    private readonly zoom$ = new BehaviorSubject<number>(DF_PAN_ZOOM_INITIAL_SCALE);
-    private readonly zoom = toSignal(this.zoom$, {
-        initialValue: DF_PAN_ZOOM_INITIAL_SCALE,
-    });
+    private readonly dragging = signal<boolean>(false);
+    private readonly transitioned = signal<boolean>(true);
 
-    private readonly coordinates$ = new BehaviorSubject<DfPoint>(INITIAL_COORDINATES);
-    private readonly coordinates = toSignal(this.coordinates$, {
-        initialValue: INITIAL_COORDINATES,
-    });
-
-    private readonly manualZoomAnimation$ = new Subject<boolean>();
-    private readonly dragStage$ = new Subject<DfDragDropStage>();
+    private emittedZoom = Number.NaN;
+    private renderScheduled = false;
 
     @Output()
     protected readonly scale = new EventEmitter<number>();
 
     protected readonly zoomAnimationDuration = this.panZoomOptions.zoomAnimationDuration;
-    protected readonly cursor$ = this.dragStage$.pipe(
-        map((stage) => (stage === DfDragDropStage.Move ? 'grabbing' : 'initial')),
-        startWith('initial'),
+    protected readonly cursor = computed(() =>
+        this.dragging() ? 'grabbing' : 'initial',
     );
 
-    protected readonly transitioned$ = merge(
-        this.manualZoomAnimation$,
-        this.dragStage$.pipe(
-            map((stage: DfDragDropStage) => stage !== DfDragDropStage.Move),
-        ),
-        fromEvent(this.el.nativeElement, 'touchmove', {passive: true}).pipe(
-            throttleTime(16, animationFrameScheduler, {leading: true, trailing: true}),
-            map(DF_FALSE_HANDLER),
-        ),
-        fromEvent(this.el.nativeElement, 'wheel', {passive: true}).pipe(
-            throttleTime(16, animationFrameScheduler, {leading: true, trailing: true}),
-            map(DF_FALSE_HANDLER),
-        ),
+    protected readonly wrapperTransform = computed(() => {
+        const {x, y, zoom} = this.panZoomService.camera();
+
+        return `translate(-50%, -50%) translate(${dfPx(x)}, ${dfPx(y)}) scale(${zoom}) rotate(0deg)`;
+    });
+
+    protected readonly panZoomContainerTransform = signal<string>('');
+    protected readonly transitionDuration = computed(() =>
+        this.transitioned() ? `${this.zoomAnimationDuration}ms` : '0s',
     );
 
-    protected readonly wrapperTransform$ = combineLatest([
-        this.coordinates$.pipe(
-            tap(({x, y}: DfPoint) => {
-                this.panZoomService.panzoomModel.x = x;
-                this.panZoomService.panzoomModel.y = y;
-            }),
-            map(({x, y}: DfPoint) => `${dfPx(x)}, ${dfPx(y)}`),
-        ),
-        this.zoom$.pipe(
-            tap((zoom: number) => {
-                this.scale.emit(Math.round(zoom * 100));
-                this.panZoomService.panzoomModel.zoom = zoom;
-            }),
-        ),
-    ]).pipe(
-        map(([translate, zoom]) => `translate(${translate}) scale(${zoom}) rotate(0deg)`),
-    );
+    constructor() {
+        this.watchGestures();
+    }
 
-    protected readonly panZoomContainerTransform$: Observable<string> =
-        this.resizeObserver$.pipe(
-            map((entries: readonly ResizeObserverEntry[]) => entries[0]!.contentRect),
-            map((rootSize: DOMRectReadOnly) => {
-                let translate = '';
-                const {
-                    leftPosition: panZoomLeftPosition,
-                    topPosition: panZoomTopPosition,
-                } = this.panZoomOptions;
-
-                if (panZoomLeftPosition || panZoomLeftPosition === 0) {
-                    const offset = (rootSize.width / 2) * -1 + panZoomLeftPosition;
-
-                    this.panZoomService.panzoomModel.offsetX = offset * -1;
-
-                    translate = `translateX(${offset}px)`;
-                } else {
-                    this.panZoomService.panzoomModel.offsetX = 0;
-                }
-
-                if (panZoomTopPosition || panZoomTopPosition === 0) {
-                    const offset = (rootSize.height / 2) * -1 + panZoomTopPosition;
-
-                    this.panZoomService.panzoomModel.offsetY = offset * -1;
-
-                    translate = `${translate}translateY(${offset}px)`;
-                } else {
-                    this.panZoomService.panzoomModel.offsetY = 0;
-                }
-
-                return translate;
-            }),
-        );
+    public ngAfterViewInit(): void {
+        this.syncContainerOffsets();
+        animationFrameScheduler.schedule(() => this.syncContainerOffsets());
+    }
 
     public resetPanzoom(): void {
-        this.zoom$.next(DF_PAN_ZOOM_INITIAL_SCALE);
-        this.coordinates$.next(INITIAL_COORDINATES);
+        const camera = this.panZoomService.snapshot();
+        const nextCamera = {
+            ...camera,
+            ...INITIAL_COORDINATES,
+            zoom: DF_PAN_ZOOM_INITIAL_SCALE,
+        };
+
+        this.panZoomService.setCamera(nextCamera);
+        this.emitScale(nextCamera.zoom);
     }
 
     public setPosition(position?: DfPoint & {zoom?: number}): void {
@@ -163,7 +148,7 @@ export class PanZoomComponent {
     }
 
     public setScale(scale: number): void {
-        const clampedScale = dfClamp(
+        const clampedScale = clampScale(
             scale,
             this.panZoomOptions.minZoom,
             this.panZoomOptions.maxZoom,
@@ -174,100 +159,168 @@ export class PanZoomComponent {
 
     public zoomIn(): void {
         const {zoomStep, maxZoom} = this.panZoomOptions;
-        const zoom = this.panZoomService.panzoomModel.zoom + zoomStep;
+        const zoom = this.panZoomService.snapshot().zoom + zoomStep;
 
         this.setZoom(zoom <= maxZoom ? zoom : maxZoom);
     }
 
     public zoomOut(): void {
         const {zoomStep, minZoom} = this.panZoomOptions;
-        const zoom = this.panZoomService.panzoomModel.zoom - zoomStep;
+        const zoom = this.panZoomService.snapshot().zoom - zoomStep;
 
         this.setZoom(zoom >= minZoom ? zoom : minZoom);
     }
 
     protected onPan({distance, stage}: DfDragDrop): void {
-        if (this.panZoomService.panzoomDisabled) {
+        if (this.panZoomService.isDisabled()) {
             return;
         }
 
-        this.dragStage$.next(stage);
-
-        this.coordinates$.next(
-            this.getGuardedCoordinates(
-                this.coordinates$.value.x + distance.deltaX,
-                this.coordinates$.value.y + distance.deltaY,
-            ),
-        );
+        if (stage === DfDragDropStage.Move) {
+            this.dragging.set(true);
+            this.transitioned.set(false);
+            this.panZoomService.setCamera(
+                clampByPanSize(
+                    moveBy(
+                        this.panZoomService.snapshot(),
+                        distance.deltaX,
+                        distance.deltaY,
+                    ),
+                    this.panZoomOptions.panSize,
+                ),
+            );
+        } else {
+            this.dragging.set(false);
+            this.transitioned.set(true);
+        }
     }
 
-    protected onZoom({clientX, clientY, delta}: DfZoom): void {
-        const {x: offsetX, y: offsetY} = this.drawFlowRootElement.getBoundingClientRect();
+    protected onBoardResize(entries: readonly ResizeObserverEntry[]): void {
+        if (!entries.length) {
+            return;
+        }
 
-        this.processZoom(clientX - offsetX, clientY - offsetY, delta);
+        this.syncContainerOffsets();
     }
 
     private setZoom(zoom: number): void {
-        this.manualZoomAnimation$.next(true);
-        this.zoom$.next(zoom);
-        const {x, y} = this.coordinates$.value;
+        const camera = this.panZoomService.snapshot();
 
-        this.coordinates$.next(this.getGuardedCoordinates(x, y));
+        this.transitioned.set(true);
+        const nextCamera = clampByPanSize({...camera, zoom}, this.panZoomOptions.panSize);
+
+        this.panZoomService.setCamera(nextCamera);
+        this.emitScale(nextCamera.zoom);
+
         timer(this.zoomAnimationDuration)
-            .pipe(take(1))
-            .subscribe(() => this.manualZoomAnimation$.next(false));
+            .pipe(take(1), takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.transitioned.set(false));
     }
 
-    private processZoom(clientX: number, clientY: number, delta: number): void {
-        const oldScale = this.zoom$.value;
-        const {minZoom, maxZoom} = this.panZoomOptions;
-        const newScale = dfClamp(oldScale + delta, minZoom, maxZoom);
+    private watchGestures(): void {
+        this.ngZone.runOutsideAngular(() => {
+            this.panZoomGestures
+                .streamFor(this.el.nativeElement)
+                .pipe(takeUntilDestroyed(this.destroyRef))
+                .subscribe((gesture) => this.processGesture(gesture));
+        });
+    }
 
-        const center = this.getScaleCenter(
-            {clientX, clientY},
-            this.coordinates$.value,
-            this.zoom$.value,
-        );
+    private processGesture(gesture: DfPanZoomGesture): void {
+        if (gesture.type === 'pan') {
+            this.processPanGesture(gesture);
+        } else {
+            this.processZoomGesture(gesture);
+        }
+    }
 
-        const moveX = center.x * oldScale - center.x * newScale;
-        const moveY = center.y * oldScale - center.y * newScale;
+    private processPanGesture(gesture: DfPanZoomPanGesture): void {
+        if (this.panZoomService.isDisabled()) {
+            return;
+        }
 
-        this.zoom$.next(newScale);
-        this.coordinates$.next(
-            this.getGuardedCoordinates(
-                this.coordinates$.value.x + moveX,
-                this.coordinates$.value.y + moveY,
+        this.transitioned.set(false);
+        this.panZoomService.setCamera(
+            clampByPanSize(
+                moveBy(this.panZoomService.snapshot(), gesture.deltaX, gesture.deltaY),
+                this.panZoomOptions.panSize,
             ),
         );
+        this.requestRender();
     }
 
-    private getGuardedCoordinates(x: number, y: number): DfPoint {
-        const {offsetX, offsetY} = this.offsets();
+    private processZoomGesture(gesture: DfPanZoomZoomGesture): void {
+        if (!gesture.deltaScale) {
+            return;
+        }
 
-        return {
-            x: dfClamp(x, -offsetX, offsetX),
-            y: dfClamp(y, -offsetY, offsetY),
+        const viewportRect = this.el.nativeElement.getBoundingClientRect();
+        const point: DfPoint = {
+            // Camera coordinates are center-based; normalize pointer to viewport center.
+            x: gesture.clientX - viewportRect.x - viewportRect.width / 2,
+            y: gesture.clientY - viewportRect.y - viewportRect.height / 2,
         };
+        const camera = this.panZoomService.snapshot();
+        const nextCamera = clampByPanSize(
+            zoomAtPoint(
+                camera,
+                point,
+                camera.zoom + gesture.deltaScale,
+                this.panZoomOptions,
+            ),
+            this.panZoomOptions.panSize,
+        );
+
+        this.transitioned.set(false);
+        this.panZoomService.setCamera(nextCamera);
+        this.emitScale(nextCamera.zoom);
+        this.requestRender();
     }
 
-    private getScaleCenter(
-        {clientX, clientY}: {clientX: number; clientY: number},
-        {x, y}: DfPoint,
-        scale: number,
-    ): DfPoint {
-        const {offsetWidth, offsetHeight} = this.el.nativeElement;
+    private emitScale(zoom: number): void {
+        if (zoom === this.emittedZoom) {
+            return;
+        }
 
-        return {
-            x: (clientX - x - offsetWidth / 2) / scale,
-            y: (clientY - y - offsetHeight / 2) / scale,
+        this.scale.emit(Math.round(zoom * 100));
+        this.emittedZoom = zoom;
+    }
+
+    private requestRender(): void {
+        if (this.renderScheduled) {
+            return;
+        }
+
+        this.renderScheduled = true;
+        animationFrameScheduler.schedule(() => {
+            this.renderScheduled = false;
+            this.cdr.detectChanges();
+        });
+    }
+
+    private syncContainerOffsets(): void {
+        const rootSize = {
+            width: this.drawFlowElement.offsetWidth,
+            height: this.drawFlowElement.offsetHeight,
         };
-    }
 
-    private offsets(): {offsetX: number; offsetY: number} {
-        const {panSize} = this.panZoomOptions;
-        const offsetX = this.zoom$.value * panSize;
-        const offsetY = this.zoom$.value * panSize;
+        if (!rootSize.width || !rootSize.height) {
+            return;
+        }
 
-        return {offsetX, offsetY};
+        const offsets = getContainerOffsets(rootSize, {
+            leftPosition: this.panZoomOptions.leftPosition,
+            topPosition: this.panZoomOptions.topPosition,
+        });
+
+        this.panZoomService.patchCamera({
+            offsetX: offsets.offsetX,
+            offsetY: offsets.offsetY,
+        });
+
+        this.panZoomContainerTransform.set(
+            `translateX(${offsets.translateX}px)translateY(${offsets.translateY}px)`,
+        );
+        this.requestRender();
     }
 }

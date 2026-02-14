@@ -195,7 +195,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private onDragMove(distance: DfDragDropDistance): void {
-        const {zoom} = this.panZoomService.panzoomModel;
+        const {zoom} = this.panZoomService.snapshot();
 
         if (distance.deltaX || distance.deltaY) {
             this.moved = true;
@@ -233,12 +233,12 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             }
         }
 
-        this.panZoomService.panzoomDisabled = true;
+        this.panZoomService.setDisabled(true);
     }
 
     private onDragEnd(): void {
         this.cursor = 'initial';
-        this.panZoomService.panzoomDisabled = false;
+        this.panZoomService.setDisabled(false);
 
         if (this.moved) {
             this.nodeMoved.emit(this.value);
@@ -290,7 +290,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private recalculateConnectorsPosition(distance: DfDragDropDistance): void {
-        const {zoom} = this.panZoomService.panzoomModel;
+        const {zoom} = this.panZoomService.snapshot();
         const currentMoveDistance = {
             deltaX: distance.deltaX / zoom,
             deltaY: distance.deltaY / zoom,
@@ -433,20 +433,15 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private getCenterOfViewport(): DfPoint {
-        // Get the current scale of the pan
-        const {x: panPositionX, y: panPositionY, zoom} = this.panZoomService.panzoomModel;
+        const {x: panPositionX, y: panPositionY, zoom} = this.panZoomService.snapshot();
         const {
             panSize,
             leftPosition: panZoomLeftPosition,
             topPosition: panZoomTopPosition,
         } = this.panZoomOptions;
         const halfOfPanSize = panSize / 2;
-
-        // Get current pan position
         const scaledPanPositionX = halfOfPanSize + (panPositionX * -1) / zoom;
         const scaledPanPositionY = halfOfPanSize + (panPositionY * -1) / zoom;
-
-        // Calculating the center of the visible part of the viewport relative to the whole board
         const position = {
             x: scaledPanPositionX - halfOfPanSize,
             y: scaledPanPositionY - halfOfPanSize,
