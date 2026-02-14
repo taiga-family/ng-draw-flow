@@ -29,7 +29,7 @@ import {ConnectionsService} from '../connections/connections.service';
 import {DraftConnectionComponent} from '../connections/draft-connection/draft-connection.component';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {NodeComponent} from '../node/node.component';
-import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
+import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 
 @Component({
     standalone: true,
@@ -47,8 +47,8 @@ import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
     ],
     host: {
         'data-element': 'scene',
-        '[style.height.px]': 'this.panSize',
-        '[style.width.px]': 'this.panSize',
+        '[style.height.px]': 'this.panSize()',
+        '[style.width.px]': 'this.panSize()',
     },
 })
 export class SceneComponent implements ControlValueAccessor, OnInit {
@@ -57,6 +57,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly destroyRef = inject(DestroyRef);
     private readonly store = inject(NgDrawFlowStoreService);
+    private readonly panZoomService = inject(PanZoomService);
 
     @Output()
     protected readonly nodeSelected = new EventEmitter<DfDataNode>();
@@ -77,7 +78,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
-    protected readonly panSize = inject(DF_PAN_ZOOM_OPTIONS).panSize;
+    protected readonly panSize = this.panZoomService.panSize;
     protected model!: DfDataModel;
     protected $invalidNodes: Signal<string[]> = inject(INVALID_NODES);
 

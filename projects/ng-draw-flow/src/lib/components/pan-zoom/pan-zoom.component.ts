@@ -172,6 +172,8 @@ export class PanZoomComponent implements AfterViewInit {
                 return;
             }
 
+            const panSize = this.panZoomService.panSize();
+
             this.dragging.set(true);
             this.transitioned.set(false);
             this.panZoomService.setCamera(
@@ -181,7 +183,7 @@ export class PanZoomComponent implements AfterViewInit {
                         distance.deltaX,
                         distance.deltaY,
                     ),
-                    this.panZoomOptions.panSize,
+                    panSize,
                 ),
             );
 
@@ -203,9 +205,10 @@ export class PanZoomComponent implements AfterViewInit {
 
     private setZoom(zoom: number): void {
         const camera = this.panZoomService.snapshot();
+        const panSize = this.panZoomService.panSize();
 
         this.transitioned.set(true);
-        const nextCamera = clampByPanSize({...camera, zoom}, this.panZoomOptions.panSize);
+        const nextCamera = clampByPanSize({...camera, zoom}, panSize);
 
         this.panZoomService.setCamera(nextCamera);
         this.emitScale(nextCamera.zoom);
@@ -261,7 +264,7 @@ export class PanZoomComponent implements AfterViewInit {
 
         const queue = this.pendingGestures.splice(0);
         const camera = this.panZoomService.snapshot();
-        const panSize = this.panZoomOptions.panSize;
+        const panSize = this.panZoomService.panSize();
         let nextCamera = camera;
         let viewportRect: DOMRect | null = null;
         let zoomChanged = false;

@@ -3,7 +3,7 @@ import {type FactoryProvider, InjectionToken} from '@angular/core';
 export type DfWheelBehavior = 'scroll' | 'zoom';
 
 export interface DfPanZoomOptions {
-    panSize: number;
+    panSize?: number;
     topPosition: number | null;
     leftPosition: number | null;
     minZoom: number;
@@ -19,7 +19,6 @@ export interface DfPanZoomOptions {
 }
 
 export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
-    panSize: 20000,
     topPosition: null,
     leftPosition: null,
     minZoom: 0.25,

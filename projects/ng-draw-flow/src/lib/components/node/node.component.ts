@@ -5,9 +5,12 @@ import {
     Component,
     type ComponentRef,
     DestroyRef,
+    effect,
+    type EffectRef,
     type ElementRef,
     EventEmitter,
     inject,
+    Injector,
     Input,
     type OnChanges,
     type OnDestroy,
@@ -61,6 +64,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly injector = inject(Injector);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
@@ -84,6 +88,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
     private moved = false;
+    private panSizeEffectRef: EffectRef | null = null;
+    private lastPanSize = Number.NaN;
 
     @ViewChild('nodeElement')
     public readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -126,6 +132,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.subscribeToConnectorsChanges();
         this.setInitialPosition();
         this.updateConnectorsCoordinates();
+        this.syncDynamicPanBounds();
+        this.watchPanSize();
 
         if (this.invalid) {
             this.innerComponent.invalid = true;
@@ -134,6 +142,13 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     public ngOnDestroy(): void {
+        this.panSizeEffectRef?.destroy();
+        this.panSizeEffectRef = null;
+
+        if (this.value?.id) {
+            this.panZoomService.removeNodeBounds(this.value.id);
+        }
+
         if (this.connectionsService.selectedNodeId$.value === this.value?.id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
@@ -214,6 +229,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             // Apply accumulated offset
             this.value.position.x += applyX ? this.accumulatedDelta.x : 0;
             this.value.position.y += applyY ? this.accumulatedDelta.y : 0;
+            this.syncDynamicPanBounds();
 
             const centeredPosition = this.getCenteredPosition();
 
@@ -390,11 +406,9 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private getCenteredPosition(): DfPoint {
-        const {
-            panSize,
-            leftPosition: panZoomLeftPosition,
-            topPosition: panZoomTopPosition,
-        } = this.panZoomOptions;
+        const {leftPosition: panZoomLeftPosition, topPosition: panZoomTopPosition} =
+            this.panZoomOptions;
+        const panSize = this.panZoomService.panSize();
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
         const halfOfPanSize = panSize / 2;
@@ -434,11 +448,9 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     private getCenterOfViewport(): DfPoint {
         const {x: panPositionX, y: panPositionY, zoom} = this.panZoomService.snapshot();
-        const {
-            panSize,
-            leftPosition: panZoomLeftPosition,
-            topPosition: panZoomTopPosition,
-        } = this.panZoomOptions;
+        const {leftPosition: panZoomLeftPosition, topPosition: panZoomTopPosition} =
+            this.panZoomOptions;
+        const panSize = this.panZoomService.panSize();
         const halfOfPanSize = panSize / 2;
         const scaledPanPositionX = halfOfPanSize + (panPositionX * -1) / zoom;
         const scaledPanPositionY = halfOfPanSize + (panPositionY * -1) / zoom;
@@ -474,6 +486,41 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         const centeredPosition = this.getCenteredPosition();
 
         this.applyPositionToStyle(centeredPosition, false);
+    }
+
+    private syncDynamicPanBounds(): void {
+        if (!this.value) {
+            return;
+        }
+
+        const halfOfNodeWidth = this.nodeWidth / 2;
+        const halfOfNodeHeight = this.nodeHeight / 2;
+
+        this.panZoomService.setNodeBounds(this.value.id, {
+            minX: this.value.position.x - halfOfNodeWidth,
+            maxX: this.value.position.x + halfOfNodeWidth,
+            minY: this.value.position.y - halfOfNodeHeight,
+            maxY: this.value.position.y + halfOfNodeHeight,
+        });
+    }
+
+    private watchPanSize(): void {
+        this.panSizeEffectRef = effect(
+            () => {
+                const panSize = this.panZoomService.panSize();
+                const hasPreviousPanSize = Number.isFinite(this.lastPanSize);
+
+                this.lastPanSize = panSize;
+
+                if (!hasPreviousPanSize) {
+                    return;
+                }
+
+                this.applyPositionToStyle(this.getCenteredPosition(), false);
+                this.updateConnectorsCoordinates();
+            },
+            {injector: this.injector},
+        );
     }
 
     /**

@@ -1,3 +1,4 @@
+import {signal, type WritableSignal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {MockBuilder, MockProvider, MockRender, ngMocks} from 'ng-mocks';
 import {BehaviorSubject} from 'rxjs';
@@ -25,6 +26,7 @@ jest.mock('./node.component.less', () => '', {virtual: true});
 
 describe('NodeComponent', () => {
     let panZoomOptions: DfPanZoomOptions;
+    let panSizeSignal: WritableSignal<number>;
 
     beforeEach(async () => {
         TestBed.overrideComponent(NodeComponent, {
@@ -68,6 +70,8 @@ describe('NodeComponent', () => {
             pinchZoomSpeed: 1,
         };
 
+        panSizeSignal = signal(panZoomOptions.panSize);
+
         return MockBuilder(HostComponent)
             .keep(NodeComponent)
             .provide([MockProvider(NgDrawFlowStoreService)])
@@ -85,6 +89,7 @@ describe('NodeComponent', () => {
                         offsetX: 0,
                         offsetY: 0,
                     },
+                    panSize: panSizeSignal,
                     panzoomDisabled: false,
                     snapshot() {
                         return this.panzoomModel;
@@ -92,6 +97,8 @@ describe('NodeComponent', () => {
                     setDisabled(value: boolean) {
                         this.panzoomDisabled = value;
                     },
+                    setNodeBounds: jest.fn(),
+                    removeNodeBounds: jest.fn(),
                 }),
                 MockProvider(CoordinatesService, {
                     addConnectionPoint: jest.fn(),
@@ -148,7 +155,7 @@ describe('NodeComponent', () => {
         expect(edgeShifted.x).toBeCloseTo(475, 5);
         expect(edgeShifted.y).toBeCloseTo(280, 5);
 
-        panZoomOptions.panSize = 10000;
+        panSizeSignal.set(10000);
         panZoomService.panzoomModel = {
             x: 0,
             y: 0,
