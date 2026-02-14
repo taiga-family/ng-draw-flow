@@ -1,6 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {
-    animationFrameScheduler,
     filter,
     fromEvent,
     map,
@@ -12,7 +11,6 @@ import {
     switchMap,
     takeUntil,
     tap,
-    throttleTime,
     withLatestFrom,
 } from 'rxjs';
 
@@ -68,18 +66,12 @@ export class PanZoomGesturesService {
             startWith(this.getElementCenter(nativeElement)),
         );
 
-        return fromEvent<WheelEvent>(nativeElement.ownerDocument, 'wheel', {
+        return fromEvent<WheelEvent>(nativeElement, 'wheel', {
             passive: false,
-            capture: true,
         }).pipe(
-            filter((event) => this.isInsideElement(event, nativeElement)),
             tap((event) => {
                 event.preventDefault();
                 event.stopPropagation();
-            }),
-            throttleTime(16, animationFrameScheduler, {
-                leading: true,
-                trailing: true,
             }),
             withLatestFrom(pointerPosition$),
             map(([event, pointer]) =>
@@ -102,10 +94,6 @@ export class PanZoomGesturesService {
                     tap((event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                    }),
-                    throttleTime(16, animationFrameScheduler, {
-                        leading: true,
-                        trailing: true,
                     }),
                     scan(
                         (prev, event) => {
@@ -230,18 +218,6 @@ export class PanZoomGesturesService {
 
     private isPinchGesture(event: WheelEvent): boolean {
         return this.isMetaKeyEvent(event) || event.deltaZ !== 0;
-    }
-
-    private isInsideElement(event: Event, nativeElement: HTMLElement): boolean {
-        const path = event.composedPath();
-
-        if (path.includes(nativeElement)) {
-            return true;
-        }
-
-        const target = event.target;
-
-        return target instanceof Node ? nativeElement.contains(target) : false;
     }
 
     private isTrackpadWheelEvent(

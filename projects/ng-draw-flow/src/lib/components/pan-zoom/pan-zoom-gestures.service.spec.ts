@@ -211,7 +211,7 @@ describe('PanZoomGesturesService', () => {
     it('creates a single wheel listener for repeated subscriptions', () => {
         setup();
 
-        const addEventListenerSpy = jest.spyOn(document, 'addEventListener');
+        const addEventListenerSpy = jest.spyOn(host, 'addEventListener');
 
         const first = service.streamFor(host).subscribe();
         const second = service.streamFor(host).subscribe();

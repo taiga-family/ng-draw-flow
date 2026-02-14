@@ -33,7 +33,7 @@ import {INITIAL_COORDINATES} from '../../consts';
 import {
     type DfDragDrop,
     DfDragDropStage,
-    DragDropDirective,
+    DragDropService,
 } from '../../directives/drag-drop';
 import {DfResizeObserver} from '../../directives/resize-observer';
 import {dfPx} from '../../helpers';
@@ -49,11 +49,7 @@ import {
 import {DF_PAN_ZOOM_INITIAL_SCALE} from './pan-zoom.const';
 import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
 import {PanZoomService} from './pan-zoom.service';
-import {
-    type DfPanZoomGesture,
-    type DfPanZoomPanGesture,
-    type DfPanZoomZoomGesture,
-} from './pan-zoom-gestures.interfaces';
+import {type DfPanZoomGesture} from './pan-zoom-gestures.interfaces';
 import {PanZoomGesturesService} from './pan-zoom-gestures.service';
 
 @Component({
@@ -66,16 +62,11 @@ import {PanZoomGesturesService} from './pan-zoom-gestures.service';
     providers: [PanZoomGesturesService],
     hostDirectives: [
         {
-            directive: DragDropDirective,
-            outputs: ['dfDragDrop'],
-        },
-        {
             directive: DfResizeObserver,
             outputs: ['dfResizeObserver'],
         },
     ],
     host: {
-        '(dfDragDrop)': 'onPan($event)',
         '(dfResizeObserver)': 'onBoardResize($event)',
     },
 })
@@ -87,6 +78,7 @@ export class PanZoomComponent implements AfterViewInit {
     private readonly ngZone = inject(NgZone);
     private readonly panZoomService = inject(PanZoomService);
     private readonly panZoomGestures = inject(PanZoomGesturesService);
+    private readonly dragDropService = inject(DragDropService);
     private readonly panZoomOptions: DfPanZoomOptions =
         inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
@@ -95,6 +87,8 @@ export class PanZoomComponent implements AfterViewInit {
 
     private emittedZoom = Number.NaN;
     private renderScheduled = false;
+    private flushScheduled = false;
+    private readonly pendingGestures: DfPanZoomGesture[] = [];
 
     @Output()
     protected readonly scale = new EventEmitter<number>();
@@ -134,6 +128,7 @@ export class PanZoomComponent implements AfterViewInit {
 
         this.panZoomService.setCamera(nextCamera);
         this.emitScale(nextCamera.zoom);
+        this.requestRender();
     }
 
     public setPosition(position?: DfPoint & {zoom?: number}): void {
@@ -172,11 +167,11 @@ export class PanZoomComponent implements AfterViewInit {
     }
 
     protected onPan({distance, stage}: DfDragDrop): void {
-        if (this.panZoomService.isDisabled()) {
-            return;
-        }
-
         if (stage === DfDragDropStage.Move) {
+            if (this.panZoomService.isDisabled()) {
+                return;
+            }
+
             this.dragging.set(true);
             this.transitioned.set(false);
             this.panZoomService.setCamera(
@@ -189,9 +184,12 @@ export class PanZoomComponent implements AfterViewInit {
                     this.panZoomOptions.panSize,
                 ),
             );
+
+            this.renderNow();
         } else {
             this.dragging.set(false);
             this.transitioned.set(true);
+            this.requestRender();
         }
     }
 
@@ -211,10 +209,14 @@ export class PanZoomComponent implements AfterViewInit {
 
         this.panZoomService.setCamera(nextCamera);
         this.emitScale(nextCamera.zoom);
+        this.requestRender();
 
         timer(this.zoomAnimationDuration)
             .pipe(take(1), takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => this.transitioned.set(false));
+            .subscribe(() => {
+                this.transitioned.set(false);
+                this.requestRender();
+            });
     }
 
     private watchGestures(): void {
@@ -223,58 +225,99 @@ export class PanZoomComponent implements AfterViewInit {
                 .streamFor(this.el.nativeElement)
                 .pipe(takeUntilDestroyed(this.destroyRef))
                 .subscribe((gesture) => this.processGesture(gesture));
+
+            this.dragDropService
+                .streamFor(this.el.nativeElement)
+                .pipe(takeUntilDestroyed(this.destroyRef))
+                .subscribe((event) => this.onPan(event));
         });
     }
 
     private processGesture(gesture: DfPanZoomGesture): void {
-        if (gesture.type === 'pan') {
-            this.processPanGesture(gesture);
-        } else {
-            this.processZoomGesture(gesture);
-        }
-    }
-
-    private processPanGesture(gesture: DfPanZoomPanGesture): void {
-        if (this.panZoomService.isDisabled()) {
+        if (gesture.type === 'pan' && this.panZoomService.isDisabled()) {
             return;
         }
 
         this.transitioned.set(false);
-        this.panZoomService.setCamera(
-            clampByPanSize(
-                moveBy(this.panZoomService.snapshot(), gesture.deltaX, gesture.deltaY),
-                this.panZoomOptions.panSize,
-            ),
-        );
-        this.requestRender();
+        this.pendingGestures.push(gesture);
+        this.scheduleGestureFlush();
     }
 
-    private processZoomGesture(gesture: DfPanZoomZoomGesture): void {
-        if (!gesture.deltaScale) {
+    private scheduleGestureFlush(): void {
+        if (this.flushScheduled) {
             return;
         }
 
-        const viewportRect = this.el.nativeElement.getBoundingClientRect();
-        const point: DfPoint = {
-            // Camera coordinates are center-based; normalize pointer to viewport center.
-            x: gesture.clientX - viewportRect.x - viewportRect.width / 2,
-            y: gesture.clientY - viewportRect.y - viewportRect.height / 2,
-        };
+        this.flushScheduled = true;
+        animationFrameScheduler.schedule(() => this.flushGestures());
+    }
+
+    private flushGestures(): void {
+        this.flushScheduled = false;
+
+        if (!this.pendingGestures.length) {
+            return;
+        }
+
+        const queue = this.pendingGestures.splice(0);
         const camera = this.panZoomService.snapshot();
-        const nextCamera = clampByPanSize(
-            zoomAtPoint(
-                camera,
-                point,
-                camera.zoom + gesture.deltaScale,
-                this.panZoomOptions,
-            ),
-            this.panZoomOptions.panSize,
-        );
+        const panSize = this.panZoomOptions.panSize;
+        let nextCamera = camera;
+        let viewportRect: DOMRect | null = null;
+        let zoomChanged = false;
 
-        this.transitioned.set(false);
-        this.panZoomService.setCamera(nextCamera);
-        this.emitScale(nextCamera.zoom);
-        this.requestRender();
+        for (const gesture of queue) {
+            if (gesture.type === 'pan') {
+                nextCamera = clampByPanSize(
+                    moveBy(nextCamera, gesture.deltaX, gesture.deltaY),
+                    panSize,
+                );
+                continue;
+            }
+
+            if (!gesture.deltaScale) {
+                continue;
+            }
+
+            if (!viewportRect) {
+                viewportRect = this.el.nativeElement.getBoundingClientRect();
+            }
+
+            const point: DfPoint = {
+                // Camera coordinates are center-based; normalize pointer to viewport center.
+                x: gesture.clientX - viewportRect.x - viewportRect.width / 2,
+                y: gesture.clientY - viewportRect.y - viewportRect.height / 2,
+            };
+            const previousZoom = nextCamera.zoom;
+
+            nextCamera = clampByPanSize(
+                zoomAtPoint(
+                    nextCamera,
+                    point,
+                    nextCamera.zoom + gesture.deltaScale,
+                    this.panZoomOptions,
+                ),
+                panSize,
+            );
+
+            if (nextCamera.zoom !== previousZoom) {
+                zoomChanged = true;
+            }
+        }
+
+        if (
+            nextCamera.x !== camera.x ||
+            nextCamera.y !== camera.y ||
+            nextCamera.zoom !== camera.zoom
+        ) {
+            this.panZoomService.setCamera(nextCamera);
+        }
+
+        if (zoomChanged) {
+            this.emitScale(nextCamera.zoom);
+        }
+
+        this.renderNow();
     }
 
     private emitScale(zoom: number): void {
@@ -296,6 +339,10 @@ export class PanZoomComponent implements AfterViewInit {
             this.renderScheduled = false;
             this.cdr.detectChanges();
         });
+    }
+
+    private renderNow(): void {
+        this.cdr.detectChanges();
     }
 
     private syncContainerOffsets(): void {
