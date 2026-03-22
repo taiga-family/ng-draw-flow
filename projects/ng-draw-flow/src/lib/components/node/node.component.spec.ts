@@ -15,7 +15,11 @@ import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {ConnectionsService} from '../connections/connections.service';
-import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from '../pan-zoom/pan-zoom.options';
+import {
+    DF_PAN_ZOOM_OPTIONS,
+    type DfPanSizeDimensions,
+    type DfPanZoomOptions,
+} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 import {HostComponent} from './mocks/host.component.mock';
 import {MockNodeContentComponent} from './mocks/node-content.component.mock';
@@ -26,7 +30,7 @@ jest.mock('./node.component.less', () => '', {virtual: true});
 
 describe('NodeComponent', () => {
     let panZoomOptions: DfPanZoomOptions;
-    let panSizeSignal: WritableSignal<number>;
+    let panSizeSignal: WritableSignal<DfPanSizeDimensions>;
 
     beforeEach(async () => {
         TestBed.overrideComponent(NodeComponent, {
@@ -70,7 +74,7 @@ describe('NodeComponent', () => {
             pinchZoomSpeed: 1,
         };
 
-        panSizeSignal = signal(panZoomOptions.panSize);
+        panSizeSignal = signal({width: 2000, height: 2000});
 
         return MockBuilder(HostComponent)
             .keep(NodeComponent)
@@ -97,8 +101,6 @@ describe('NodeComponent', () => {
                     setDisabled(value: boolean) {
                         this.panzoomDisabled = value;
                     },
-                    setNodeBounds: jest.fn(),
-                    removeNodeBounds: jest.fn(),
                 }),
                 MockProvider(CoordinatesService, {
                     addConnectionPoint: jest.fn(),
@@ -152,10 +154,10 @@ describe('NodeComponent', () => {
 
         const edgeShifted = component.getCenterOfViewport();
 
-        expect(edgeShifted.x).toBeCloseTo(475, 5);
-        expect(edgeShifted.y).toBeCloseTo(280, 5);
+        expect(edgeShifted.x).toBeCloseTo(275, 5);
+        expect(edgeShifted.y).toBeCloseTo(90, 5);
 
-        panSizeSignal.set(10000);
+        panSizeSignal.set({width: 10000, height: 10000});
         panZoomService.panzoomModel = {
             x: 0,
             y: 0,
@@ -168,5 +170,27 @@ describe('NodeComponent', () => {
 
         expect(withLargePanSize.x).toBeCloseTo(400, 5);
         expect(withLargePanSize.y).toBeCloseTo(380, 5);
+    });
+
+    it('keeps node positioning and clamping independent from viewport anchor', () => {
+        MockRender(HostComponent);
+        const component = ngMocks.findInstance(NodeComponent) as any;
+
+        component.nodeWidth = 120;
+        component.nodeHeight = 80;
+        component.value = {
+            id: 'node-1',
+            data: {type: 'simpleNode'},
+            position: {x: 0, y: 0},
+        };
+
+        panZoomOptions.leftPosition = 50;
+        panZoomOptions.topPosition = 60;
+
+        expect(component.getCenteredPosition()).toEqual({x: 940, y: 960});
+        expect(component.clampPositionToPanBounds({x: -2000, y: 2000})).toEqual({
+            x: -940,
+            y: 960,
+        });
     });
 });

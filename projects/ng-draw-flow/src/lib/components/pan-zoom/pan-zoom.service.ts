@@ -1,7 +1,12 @@
-import {inject, Injectable, type Signal, signal} from '@angular/core';
+import {computed, inject, Injectable, type Signal, signal} from '@angular/core';
 
 import {type DfPanzoomModel} from './pan-zoom.interfaces';
-import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
+import {
+    DF_PAN_ZOOM_OPTIONS,
+    type DfPanSize,
+    type DfPanSizeDimensions,
+    type DfPanZoomOptions,
+} from './pan-zoom.options';
 
 const INITIAL_CAMERA: DfPanzoomModel = {
     x: 0,
@@ -11,10 +16,9 @@ const INITIAL_CAMERA: DfPanzoomModel = {
     zoom: 1,
 };
 
-const USABLE_RECT_GAP = 400;
-const DEFAULT_BASE_PAN_SIZE = 1000;
+const DEFAULT_PAN_SIZE = 2000;
 
-interface DfPanZoomNodeBounds {
+export interface DfPanZoomUsableRect {
     readonly minX: number;
     readonly minY: number;
     readonly maxX: number;
@@ -26,12 +30,11 @@ export class PanZoomService {
     private readonly panZoomOptions: DfPanZoomOptions =
         inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
-    private readonly basePanSize = this.panZoomOptions.panSize ?? DEFAULT_BASE_PAN_SIZE;
-
     private readonly cameraSignal = signal<DfPanzoomModel>(INITIAL_CAMERA);
     private readonly disabledSignal = signal<boolean>(false);
-    private readonly panSizeSignal = signal<number>(this.basePanSize);
-    private readonly nodeBounds = new Map<string, DfPanZoomNodeBounds>();
+    private readonly panSizeSignal = signal<DfPanSizeDimensions>(
+        toPanSizeDimensions(this.panZoomOptions.panSize),
+    );
 
     private readonly legacyModelProxy = new Proxy({} as DfPanzoomModel, {
         get: (_target, property): unknown => {
@@ -72,7 +75,19 @@ export class PanZoomService {
     public readonly camera: Signal<DfPanzoomModel> = this.cameraSignal.asReadonly();
 
     public readonly disabled: Signal<boolean> = this.disabledSignal.asReadonly();
-    public readonly panSize: Signal<number> = this.panSizeSignal.asReadonly();
+    public readonly panSize: Signal<DfPanSizeDimensions> =
+        this.panSizeSignal.asReadonly();
+
+    public readonly usableRect: Signal<DfPanZoomUsableRect> = computed(() => {
+        const panSize = this.panSizeSignal();
+
+        return {
+            minX: -(panSize.width / 2),
+            maxX: panSize.width / 2,
+            minY: -(panSize.height / 2),
+            maxY: panSize.height / 2,
+        };
+    });
 
     /** @deprecated Backward-compatible mutable camera access */
     public get panzoomModel(): DfPanzoomModel {
@@ -111,64 +126,25 @@ export class PanZoomService {
     public isDisabled(): boolean {
         return this.disabledSignal();
     }
+}
 
-    public setNodeBounds(
-        nodeId: string,
-        bounds: {minX: number; minY: number; maxX: number; maxY: number},
-    ): void {
-        this.nodeBounds.set(nodeId, bounds);
-        this.recalculatePanSize();
+function toPanSizeDimensions(panSize?: DfPanSize): DfPanSizeDimensions {
+    if (typeof panSize === 'number' && Number.isFinite(panSize) && panSize > 0) {
+        return {width: panSize, height: panSize};
     }
 
-    public removeNodeBounds(nodeId: string): void {
-        if (this.nodeBounds.delete(nodeId)) {
-            this.recalculatePanSize();
+    if (panSize && typeof panSize === 'object') {
+        const {width, height} = panSize;
+
+        if (
+            Number.isFinite(width) &&
+            Number.isFinite(height) &&
+            width > 0 &&
+            height > 0
+        ) {
+            return {width, height};
         }
     }
 
-    private recalculatePanSize(): void {
-        const baseHalf = this.basePanSize / 2;
-
-        if (!this.nodeBounds.size) {
-            this.panSizeSignal.set(this.basePanSize);
-
-            return;
-        }
-
-        let minX = Number.POSITIVE_INFINITY;
-        let minY = Number.POSITIVE_INFINITY;
-        let maxX = Number.NEGATIVE_INFINITY;
-        let maxY = Number.NEGATIVE_INFINITY;
-
-        for (const bounds of this.nodeBounds.values()) {
-            if (bounds.minX < minX) {
-                minX = bounds.minX;
-            }
-
-            if (bounds.minY < minY) {
-                minY = bounds.minY;
-            }
-
-            if (bounds.maxX > maxX) {
-                maxX = bounds.maxX;
-            }
-
-            if (bounds.maxY > maxY) {
-                maxY = bounds.maxY;
-            }
-        }
-
-        const requiredHalf = Math.max(
-            Math.abs(minX - USABLE_RECT_GAP),
-            Math.abs(maxX + USABLE_RECT_GAP),
-            Math.abs(minY - USABLE_RECT_GAP),
-            Math.abs(maxY + USABLE_RECT_GAP),
-            baseHalf,
-        );
-        const nextPanSize = Math.ceil(requiredHalf * 2);
-
-        if (nextPanSize !== this.panSizeSignal()) {
-            this.panSizeSignal.set(nextPanSize);
-        }
-    }
+    return {width: DEFAULT_PAN_SIZE, height: DEFAULT_PAN_SIZE};
 }

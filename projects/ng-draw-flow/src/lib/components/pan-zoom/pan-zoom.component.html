@@ -1,13 +1,10 @@
 <div
     class="pan-zoom"
     [style.cursor]="cursor()"
-    [style.transform]="wrapperTransform()"
+    [style.transform]="panTransform()"
     [style.transition-duration]="transitionDuration()"
 >
-    <div
-        class="pan-zoom__container"
-        [style.transform]="panZoomContainerTransform()"
-    >
+    <div class="pan-zoom__container">
         <ng-content />
     </div>
 </div>

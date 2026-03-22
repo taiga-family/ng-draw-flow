@@ -30,14 +30,17 @@
                 <h3>Horizontal Alignment</h3>
                 <app-pan-zoom-configuration-example-1 />
                 <p>
-                    However, the
-                    <code>x&#58; 0, y&#58; 0</code>
-                    position can be altered. If you prefer the base node to be aligned to the left, you need to
-                    configure the
+                    However, the initial viewport can be shifted. Configure
                     <code>leftPosition</code>
                     in
-                    <code>dfPanzoomOptionsProvider</code>
-                    .
+                    <code>dfPanZoomOptionsProvider</code>
+                    to place the left edge of the
+                    <code>startNode</code>
+                    at an exact offset from the left viewport edge. If there is no
+                    <code>startNode</code>
+                    , the left edge of all rendered content is used instead.
+                    <code>leftPosition: 100</code>
+                    means the initial camera targets that left edge at 100px from the viewport.
                 </p>
             </div>
             <div class="code-example">
@@ -55,7 +58,13 @@
                 <app-pan-zoom-configuration-example-2 />
 
                 <p>
-                    Similarly, to adjust the positioning towards the top of the viewport, you should set up topPosition.
+                    Similarly, configure
+                    <code>topPosition</code>
+                    to place the top edge of the
+                    <code>startNode</code>
+                    or, if there is no
+                    <code>startNode</code>
+                    , the top edge of the rendered content at an exact offset from the top viewport edge.
                 </p>
             </div>
             <div class="code-example">
@@ -77,18 +86,28 @@
     <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
         <li class="tui-list__item">
             <code>panSize</code>
-            (default: 20000): Defines the total size of the layout where the nodes are placed. This determines the
-            area&#39;s dimensions that can be panned around.
+            (default: 2000): Defines the fixed size of the working area where nodes are placed.
+            <code>number</code>
+            means square area (
+            <code>width = height = value</code>
+            ).
+            <code>&#123; width, height &#125;</code>
+            sets each axis independently. The workspace does not expand dynamically, so nodes are limited by workspace
+            edges.
         </li>
         <li class="tui-list__item">
             <code>topPosition</code>
-            (default: null): Sets the y-coordinate of the base node&#39;s position. When set to null, the base node is
-            centered vertically. Specifying 0 will align the base node to the top of the layout.
+            (default: null): Initial and reset viewport padding from the top edge. If a
+            <code>startNode</code>
+            exists, its top edge is aligned to this offset; otherwise the top edge of the rendered node content is used.
+            Null keeps default centered framing on Y.
         </li>
         <li class="tui-list__item">
             <code>leftPosition</code>
-            (default: null): Similar to topPosition, but for the x-coordinate. A null value centers the base node
-            horizontally, while setting it to 0 aligns it to the left edge of the layout.
+            (default: null): Initial and reset viewport padding from the left edge. If a
+            <code>startNode</code>
+            exists, its left edge is aligned to this offset; otherwise the left edge of the rendered node content is
+            used. Null keeps default centered framing on X. This option does not redefine node world coordinates.
         </li>
         <li class="tui-list__item">
             <code>minZoom</code>
@@ -114,13 +133,55 @@
         </li>
         <li class="tui-list__item">
             <code>zoomWheelSensitivity</code>
-            (default: 0.01): Controls the zoom sensitivity when using a mouse wheel. The recommended value 0.01 ensures
-            that each scroll step results in a slight, controlled zoom change.
+            (default: 0.01): Legacy fallback value for wheel zoom sensitivity. If
+            <code>wheelStep</code>
+            is set (it is by default), it has priority.
         </li>
         <li class="tui-list__item">
             <code>touchSensitivity</code>
             (default: 0.01): Adjusts the pan and zoom sensitivity on touch devices. A low value such as 0.01 is used to
             achieve a fine-tuned control over the touch interactions.
         </li>
+        <li class="tui-list__item">
+            <code>wheelBehavior</code>
+            (default:
+            <code>'zoom'</code>
+            ): Defines wheel behavior:
+            <code>'zoom'</code>
+            for mouse wheel zoom, or
+            <code>'scroll'</code>
+            for panning with the wheel.
+        </li>
+        <li class="tui-list__item">
+            <code>wheelSpeed</code>
+            (default: 1): Additional multiplier for wheel zoom speed.
+        </li>
+        <li class="tui-list__item">
+            <code>wheelStep</code>
+            (default: 0.008): Base wheel zoom step. This option has priority over
+            <code>zoomWheelSensitivity</code>
+            .
+        </li>
+        <li class="tui-list__item">
+            <code>pinchZoomSpeed</code>
+            (default: 1): Multiplier for trackpad pinch-to-zoom speed.
+        </li>
     </ul>
+    <p>
+        Pan size examples:
+        <code>dfPanZoomOptionsProvider(&#123; panSize: 6000 &#125;)</code>
+        and
+        <code>dfPanZoomOptionsProvider(&#123; panSize: &#123; width: 8000, height: 4000 &#125; &#125;)</code>
+    </p>
+    <p>
+        Example for wheel scrolling mode:
+        <code>dfPanZoomOptionsProvider(&#123; wheelBehavior: 'scroll' &#125;)</code>
+    </p>
+    <p>
+        <code>leftPosition</code>
+        /
+        <code>topPosition</code>
+        affect initial and reset framing only. They do not change the meaning of saved node coordinates, and new nodes
+        are still created from the current viewport center.
+    </p>
 </tui-doc-page>

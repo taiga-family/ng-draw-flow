@@ -36,17 +36,18 @@ import {
     DragDropService,
 } from '../../directives/drag-drop';
 import {DfResizeObserver} from '../../directives/resize-observer';
-import {dfPx} from '../../helpers';
 import {type DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {
-    clampByPanSize,
+    clampByUsableRect,
     clampScale,
     getContainerOffsets,
+    getViewportZeroPoint,
     moveBy,
     zoomAtPoint,
 } from './pan-zoom.camera.math';
 import {DF_PAN_ZOOM_INITIAL_SCALE} from './pan-zoom.const';
+import {type DfPanzoomModel} from './pan-zoom.interfaces';
 import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
 import {PanZoomService} from './pan-zoom.service';
 import {type DfPanZoomGesture} from './pan-zoom-gestures.interfaces';
@@ -84,6 +85,12 @@ export class PanZoomComponent implements AfterViewInit {
 
     private readonly dragging = signal<boolean>(false);
     private readonly transitioned = signal<boolean>(true);
+    private readonly viewportSize = signal<{width: number; height: number}>({
+        width: 0,
+        height: 0,
+    });
+
+    private readonly layoutOffset = signal<{x: number; y: number}>({x: 0, y: 0});
 
     private emittedZoom = Number.NaN;
     private renderScheduled = false;
@@ -98,13 +105,15 @@ export class PanZoomComponent implements AfterViewInit {
         this.dragging() ? 'grabbing' : 'initial',
     );
 
-    protected readonly wrapperTransform = computed(() => {
+    protected readonly panTransform = computed(() => {
         const {x, y, zoom} = this.panZoomService.camera();
+        const {x: layoutX, y: layoutY} = this.layoutOffset();
+        const translateX = x + layoutX * zoom;
+        const translateY = y + layoutY * zoom;
 
-        return `translate(-50%, -50%) translate(${dfPx(x)}, ${dfPx(y)}) scale(${zoom}) rotate(0deg)`;
+        return `translate(-50%, -50%) matrix(${zoom}, 0, 0, ${zoom}, ${translateX}, ${translateY})`;
     });
 
-    protected readonly panZoomContainerTransform = signal<string>('');
     protected readonly transitionDuration = computed(() =>
         this.transitioned() ? `${this.zoomAnimationDuration}ms` : '0s',
     );
@@ -115,7 +124,6 @@ export class PanZoomComponent implements AfterViewInit {
 
     public ngAfterViewInit(): void {
         this.syncContainerOffsets();
-        animationFrameScheduler.schedule(() => this.syncContainerOffsets());
     }
 
     public resetPanzoom(): void {
@@ -172,18 +180,15 @@ export class PanZoomComponent implements AfterViewInit {
                 return;
             }
 
-            const panSize = this.panZoomService.panSize();
-
             this.dragging.set(true);
             this.transitioned.set(false);
             this.panZoomService.setCamera(
-                clampByPanSize(
+                this.clampCamera(
                     moveBy(
                         this.panZoomService.snapshot(),
                         distance.deltaX,
                         distance.deltaY,
                     ),
-                    panSize,
                 ),
             );
 
@@ -205,10 +210,9 @@ export class PanZoomComponent implements AfterViewInit {
 
     private setZoom(zoom: number): void {
         const camera = this.panZoomService.snapshot();
-        const panSize = this.panZoomService.panSize();
 
         this.transitioned.set(true);
-        const nextCamera = clampByPanSize({...camera, zoom}, panSize);
+        const nextCamera = this.clampCamera({...camera, zoom});
 
         this.panZoomService.setCamera(nextCamera);
         this.emitScale(nextCamera.zoom);
@@ -264,16 +268,14 @@ export class PanZoomComponent implements AfterViewInit {
 
         const queue = this.pendingGestures.splice(0);
         const camera = this.panZoomService.snapshot();
-        const panSize = this.panZoomService.panSize();
         let nextCamera = camera;
         let viewportRect: DOMRect | null = null;
         let zoomChanged = false;
 
         for (const gesture of queue) {
             if (gesture.type === 'pan') {
-                nextCamera = clampByPanSize(
+                nextCamera = this.clampCamera(
                     moveBy(nextCamera, gesture.deltaX, gesture.deltaY),
-                    panSize,
                 );
                 continue;
             }
@@ -293,14 +295,13 @@ export class PanZoomComponent implements AfterViewInit {
             };
             const previousZoom = nextCamera.zoom;
 
-            nextCamera = clampByPanSize(
+            nextCamera = this.clampCamera(
                 zoomAtPoint(
                     nextCamera,
                     point,
                     nextCamera.zoom + gesture.deltaScale,
                     this.panZoomOptions,
                 ),
-                panSize,
             );
 
             if (nextCamera.zoom !== previousZoom) {
@@ -358,6 +359,8 @@ export class PanZoomComponent implements AfterViewInit {
             return;
         }
 
+        this.viewportSize.set(rootSize);
+
         const offsets = getContainerOffsets(rootSize, {
             leftPosition: this.panZoomOptions.leftPosition,
             topPosition: this.panZoomOptions.topPosition,
@@ -367,10 +370,27 @@ export class PanZoomComponent implements AfterViewInit {
             offsetX: offsets.offsetX,
             offsetY: offsets.offsetY,
         });
-
-        this.panZoomContainerTransform.set(
-            `translateX(${offsets.translateX}px)translateY(${offsets.translateY}px)`,
-        );
+        this.layoutOffset.set({x: offsets.translateX, y: offsets.translateY});
         this.requestRender();
+    }
+
+    private clampCamera(camera: DfPanzoomModel): DfPanzoomModel {
+        const viewportSize = this.viewportSize();
+
+        if (!viewportSize.width || !viewportSize.height) {
+            return camera;
+        }
+
+        const zeroPoint = getViewportZeroPoint(viewportSize, {
+            leftPosition: this.panZoomOptions.leftPosition,
+            topPosition: this.panZoomOptions.topPosition,
+        });
+
+        return clampByUsableRect(
+            camera,
+            this.panZoomService.usableRect(),
+            viewportSize,
+            zeroPoint,
+        );
     }
 }

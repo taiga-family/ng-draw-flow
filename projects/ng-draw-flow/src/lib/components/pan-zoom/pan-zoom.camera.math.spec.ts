@@ -1,5 +1,7 @@
 import {
+    alignCameraToWorldRect,
     clampByPanSize,
+    clampByUsableRect,
     clampScale,
     getContainerOffsets,
     getViewportCenter,
@@ -35,17 +37,73 @@ describe('pan-zoom.camera.math', () => {
     it('clamps pan by current zoom and pan size', () => {
         const clamped = clampByPanSize(
             {x: 9000, y: -9000, zoom: 2, offsetX: 0, offsetY: 0},
-            2000,
+            {width: 2000, height: 2000},
         );
 
         expect(clamped.x).toBe(4000);
         expect(clamped.y).toBe(-4000);
     });
 
+    it('clamps camera movement with one-viewport gap around usable rect', () => {
+        const clamped = clampByUsableRect(
+            {x: 900, y: -900, zoom: 1, offsetX: 0, offsetY: 0},
+            {minX: -100, maxX: 100, minY: -50, maxY: 50},
+            {width: 1000, height: 800},
+            {x: 500, y: 400},
+        );
+
+        expect(clamped.x).toBe(600);
+        expect(clamped.y).toBe(-450);
+    });
+
+    it('accounts for left and top zero-point shift in usable rect clamping', () => {
+        const clamped = clampByUsableRect(
+            {x: 1200, y: 900, zoom: 1, offsetX: 0, offsetY: 0},
+            {minX: -100, maxX: 100, minY: -50, maxY: 50},
+            {width: 1000, height: 800},
+            {x: 100, y: 120},
+        );
+
+        expect(clamped.x).toBe(1000);
+        expect(clamped.y).toBe(730);
+    });
+
     it('calculates viewport center from camera position', () => {
-        const center = getViewportCenter({x: -150, y: 200, zoom: 2}, 2000);
+        const center = getViewportCenter(
+            {x: -150, y: 200, zoom: 2},
+            {width: 2000, height: 2000},
+        );
 
         expect(center).toEqual({x: 75, y: -100});
+    });
+
+    it('aligns camera so target world rect starts at configured viewport edge', () => {
+        const next = alignCameraToWorldRect(
+            {x: 0, y: 0, zoom: 1, offsetX: 0, offsetY: 0},
+            {minX: -120, minY: -40},
+            {width: 1000, height: 800},
+            {leftPosition: 50, topPosition: 60},
+        );
+
+        expect(next).toEqual({
+            x: 120,
+            y: 40,
+            zoom: 1,
+            offsetX: 0,
+            offsetY: 0,
+        });
+    });
+
+    it('keeps untouched axis when viewport edge is not configured', () => {
+        const next = alignCameraToWorldRect(
+            {x: 25, y: -35, zoom: 2, offsetX: 0, offsetY: 0},
+            {minX: -120, minY: -40},
+            {width: 1000, height: 800},
+            {leftPosition: 50, topPosition: null},
+        );
+
+        expect(next.x).toBe(240);
+        expect(next.y).toBe(-35);
     });
 
     it('centers zero point in viewport when left and top are null', () => {

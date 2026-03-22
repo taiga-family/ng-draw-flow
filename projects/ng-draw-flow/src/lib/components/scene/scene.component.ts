@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     DestroyRef,
     EventEmitter,
     forwardRef,
@@ -47,8 +48,8 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
     ],
     host: {
         'data-element': 'scene',
-        '[style.height.px]': 'this.panSize()',
-        '[style.width.px]': 'this.panSize()',
+        '[style.height.px]': 'this.panHeight()',
+        '[style.width.px]': 'this.panWidth()',
     },
 })
 export class SceneComponent implements ControlValueAccessor, OnInit {
@@ -79,6 +80,8 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     protected readonly panSize = this.panZoomService.panSize;
+    protected readonly panWidth = computed(() => this.panSize().width);
+    protected readonly panHeight = computed(() => this.panSize().height);
     protected model!: DfDataModel;
     protected $invalidNodes: Signal<string[]> = inject(INVALID_NODES);
 

@@ -2,6 +2,7 @@ import {NgIf} from '@angular/common';
 import {
     type AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
@@ -25,7 +26,17 @@ import {debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
+import {
+    alignCameraToWorldRect,
+    clampByUsableRect,
+    type DfPanZoomWorldRectBounds,
+    getViewportZeroPoint,
+} from './components/pan-zoom/pan-zoom.camera.math';
 import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
+import {
+    DF_PAN_ZOOM_OPTIONS,
+    type DfPanZoomOptions,
+} from './components/pan-zoom/pan-zoom.options';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
 import {DfResizeObserver, ErrorsDirective} from './directives';
@@ -99,10 +110,18 @@ import {SelectionService} from './services/selection.service';
 export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
 {
+    private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly connectionsService = inject(ConnectionsService);
+    private readonly panZoomService = inject(PanZoomService);
+    private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
     private readonly selectionService = inject(SelectionService);
     private readonly store = inject(NgDrawFlowStoreService);
+    private readonly maxViewportFrameRetries = 5;
+    private frameRequestId: number | null = null;
+    private viewportFrameRetryCount = 0;
+    private shouldFrameViewport = false;
 
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
@@ -154,9 +173,12 @@ export class NgDrawFlowComponent
         if (model) {
             this.store.updateDataModel(model);
         }
+
+        this.scheduleViewportFraming();
     }
 
     public ngOnDestroy(): void {
+        this.cancelViewportFraming();
         this.store.detach(this);
     }
 
@@ -169,6 +191,7 @@ export class NgDrawFlowComponent
         this.store.clearSelectedConnection();
         this.store.updateDataModel(value);
         this.form.setValue(value, {emitEvent: false});
+        this.scheduleViewportFraming();
     }
 
     public registerOnChange(fn: (value: DfDataModel) => void): void {
@@ -197,6 +220,7 @@ export class NgDrawFlowComponent
     /** Resets both zoom factor and pan offset to their defaults. */
     public resetPosition(): void {
         this.panzoom.resetPanzoom();
+        this.scheduleViewportFraming();
     }
 
     /**
@@ -246,6 +270,7 @@ export class NgDrawFlowComponent
         const {width, height} = event[0].contentRect;
 
         this.$rootReady.set(width && height);
+        this.scheduleViewportFraming();
     }
 
     private watchFormChanges(): void {
@@ -260,4 +285,176 @@ export class NgDrawFlowComponent
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
     // @ts-ignore
     private onTouched: () => void = () => {};
+
+    private scheduleViewportFraming(retry = false): void {
+        if (
+            this.panZoomOptions.leftPosition === null &&
+            this.panZoomOptions.topPosition === null
+        ) {
+            return;
+        }
+
+        if (!retry) {
+            this.shouldFrameViewport = true;
+            this.viewportFrameRetryCount = 0;
+        }
+
+        if (!this.$rootReady() || !this.panzoom) {
+            return;
+        }
+
+        if (typeof requestAnimationFrame !== 'function') {
+            this.applyViewportFraming();
+
+            return;
+        }
+
+        this.cancelViewportFraming();
+        this.frameRequestId = requestAnimationFrame(() => {
+            this.frameRequestId = requestAnimationFrame(() => {
+                this.frameRequestId = null;
+                this.applyViewportFraming();
+            });
+        });
+    }
+
+    private cancelViewportFraming(): void {
+        if (this.frameRequestId !== null && typeof cancelAnimationFrame === 'function') {
+            cancelAnimationFrame(this.frameRequestId);
+            this.frameRequestId = null;
+        }
+    }
+
+    private applyViewportFraming(): void {
+        if (!this.shouldFrameViewport || !this.$rootReady()) {
+            return;
+        }
+
+        const targetRect = this.getViewportFramingTargetRect();
+
+        if (!targetRect) {
+            this.retryViewportFraming();
+
+            return;
+        }
+
+        const viewportSize = {
+            width: this.hostElement.nativeElement.offsetWidth,
+            height: this.hostElement.nativeElement.offsetHeight,
+        };
+
+        if (!viewportSize.width || !viewportSize.height) {
+            this.retryViewportFraming();
+
+            return;
+        }
+
+        const zeroPoint = getViewportZeroPoint(viewportSize, {
+            leftPosition: this.panZoomOptions.leftPosition,
+            topPosition: this.panZoomOptions.topPosition,
+        });
+        const nextCamera = clampByUsableRect(
+            alignCameraToWorldRect(
+                this.panZoomService.snapshot(),
+                targetRect,
+                viewportSize,
+                {
+                    leftPosition: this.panZoomOptions.leftPosition,
+                    topPosition: this.panZoomOptions.topPosition,
+                },
+            ),
+            this.panZoomService.usableRect(),
+            viewportSize,
+            zeroPoint,
+        );
+
+        this.shouldFrameViewport = false;
+        this.panZoomService.setCamera(nextCamera);
+        this.cdr.detectChanges();
+    }
+
+    private retryViewportFraming(): void {
+        if (this.viewportFrameRetryCount >= this.maxViewportFrameRetries) {
+            return;
+        }
+
+        this.viewportFrameRetryCount += 1;
+        this.scheduleViewportFraming(true);
+    }
+
+    private getViewportFramingTargetRect(): DfPanZoomWorldRectBounds | null {
+        const nodeElements = Array.from(
+            this.hostElement.nativeElement.querySelectorAll<HTMLElement>(
+                '[data-draw-flow-node]',
+            ),
+        );
+
+        if (!nodeElements.length) {
+            return null;
+        }
+
+        const startNode = nodeElements.find(
+            (element) => element.dataset.startNode === 'true',
+        );
+
+        return this.getWorldRectFromNodes(startNode ? [startNode] : nodeElements);
+    }
+
+    private getWorldRectFromNodes(
+        elements: readonly HTMLElement[],
+    ): DfPanZoomWorldRectBounds | null {
+        const panSize = this.panZoomService.panSize();
+        let minX = Number.POSITIVE_INFINITY;
+        let minY = Number.POSITIVE_INFINITY;
+        let maxX = Number.NEGATIVE_INFINITY;
+        let maxY = Number.NEGATIVE_INFINITY;
+
+        for (const element of elements) {
+            const translate = parseTranslate(element.style.transform);
+
+            if (!translate) {
+                continue;
+            }
+
+            const left = translate.x - panSize.width / 2;
+            const top = translate.y - panSize.height / 2;
+            const right = left + element.offsetWidth;
+            const bottom = top + element.offsetHeight;
+
+            minX = Math.min(minX, left);
+            minY = Math.min(minY, top);
+            maxX = Math.max(maxX, right);
+            maxY = Math.max(maxY, bottom);
+        }
+
+        if (
+            !Number.isFinite(minX) ||
+            !Number.isFinite(minY) ||
+            !Number.isFinite(maxX) ||
+            !Number.isFinite(maxY)
+        ) {
+            return null;
+        }
+
+        return {minX, minY, maxX, maxY};
+    }
+}
+
+function parseTranslate(transform: string): {x: number; y: number} | null {
+    const match = /translate(?:3D)?\(\s*(-?\d+(?:\.\d+)?)px,\s*(-?\d+(?:\.\d+)?)px/i.exec(
+        transform,
+    );
+
+    if (!match) {
+        return null;
+    }
+
+    const x = Number(match[1]);
+    const y = Number(match[2]);
+
+    if (!Number.isFinite(x) || !Number.isFinite(y)) {
+        return null;
+    }
+
+    return {x, y};
 }

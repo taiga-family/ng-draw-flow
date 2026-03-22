@@ -20,13 +20,13 @@ describe('PanZoomService', () => {
         pinchZoomSpeed: 1,
     };
 
-    const setup = (): PanZoomService => {
+    const setup = (overrides?: Partial<DfPanZoomOptions>): PanZoomService => {
         TestBed.configureTestingModule({
             providers: [
                 PanZoomService,
                 {
                     provide: DF_PAN_ZOOM_OPTIONS,
-                    useValue: {...options},
+                    useValue: {...options, ...overrides},
                 },
             ],
         });
@@ -41,34 +41,48 @@ describe('PanZoomService', () => {
     it('uses configured panSize as initial value', () => {
         const service = setup();
 
-        expect(service.panSize()).toBe(2000);
+        expect(service.panSize()).toEqual({width: 2000, height: 2000});
+        expect(service.usableRect()).toEqual({
+            minX: -1000,
+            maxX: 1000,
+            minY: -1000,
+            maxY: 1000,
+        });
     });
 
-    it('expands panSize when a node approaches workspace edge', () => {
-        const service = setup();
+    it('supports object panSize shape', () => {
+        const service = setup({panSize: {width: 3200, height: 1800}});
 
-        service.setNodeBounds('node-1', {
-            minX: 900,
-            maxX: 1100,
-            minY: -50,
-            maxY: 50,
+        expect(service.panSize()).toEqual({width: 3200, height: 1800});
+        expect(service.usableRect()).toEqual({
+            minX: -1600,
+            maxX: 1600,
+            minY: -900,
+            maxY: 900,
         });
-
-        expect(service.panSize()).toBe(3000);
     });
 
-    it('shrinks panSize back to base value after bounds removal', () => {
-        const service = setup();
+    it('uses 2000 default panSize when panSize is not configured', () => {
+        const service = setup({panSize: undefined});
 
-        service.setNodeBounds('node-1', {
-            minX: -1700,
-            maxX: -1400,
-            minY: -100,
-            maxY: 100,
+        expect(service.panSize()).toEqual({width: 2000, height: 2000});
+        expect(service.usableRect()).toEqual({
+            minX: -1000,
+            maxX: 1000,
+            minY: -1000,
+            maxY: 1000,
         });
-        expect(service.panSize()).toBe(4200);
+    });
 
-        service.removeNodeBounds('node-1');
-        expect(service.panSize()).toBe(2000);
+    it('falls back to default panSize for invalid number value', () => {
+        const service = setup({panSize: 0});
+
+        expect(service.panSize()).toEqual({width: 2000, height: 2000});
+    });
+
+    it('falls back to default panSize for invalid object value', () => {
+        const service = setup({panSize: {width: Number.NaN, height: 1000}});
+
+        expect(service.panSize()).toEqual({width: 2000, height: 2000});
     });
 });
