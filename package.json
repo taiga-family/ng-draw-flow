@@ -108,7 +108,7 @@
         "@taiga-ui/styles": "4.57.0",
         "@taiga-ui/syncer": "0.332.0",
         "@taiga-ui/tsconfig": "0.332.0",
-        "@types/express": "5.0.3",
+        "@types/express": "5.0.6",
         "@types/jest": "29.5.14",
         "core-js": "3.46.0",
         "express": "4.21.2",
