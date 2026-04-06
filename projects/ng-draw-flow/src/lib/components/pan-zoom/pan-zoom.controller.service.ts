@@ -50,6 +50,11 @@ export class PanZoomControllerService {
         height: 0,
     });
 
+    private readonly viewportZeroPointSignal = signal<DfPoint>({
+        x: 0,
+        y: 0,
+    });
+
     private readonly layoutOffsetSignal = signal<{x: number; y: number}>({
         x: 0,
         y: 0,
@@ -65,6 +70,7 @@ export class PanZoomControllerService {
     public readonly dragging = this.draggingSignal.asReadonly();
     public readonly transitioned = this.transitionedSignal.asReadonly();
     public readonly viewportSize = this.viewportSizeSignal.asReadonly();
+    public readonly viewportZeroPoint = this.viewportZeroPointSignal.asReadonly();
     public readonly layoutOffset = this.layoutOffsetSignal.asReadonly();
 
     public readonly renderRequests$ = this.renderRequestsSubject.asObservable();
@@ -76,13 +82,11 @@ export class PanZoomControllerService {
 
     public readonly panTransform = computed(() => {
         const {x, y, zoom} = this.panZoomService.camera();
-        const {x: layoutX, y: layoutY} = this.layoutOffsetSignal();
-        const {x: workspaceCenterX, y: workspaceCenterY} =
-            this.panZoomService.workspaceCenter();
-        const translateX = x + layoutX * zoom + workspaceCenterX * zoom;
-        const translateY = y + layoutY * zoom + workspaceCenterY * zoom;
+        const {x: zeroPointX, y: zeroPointY} = this.viewportZeroPointSignal();
+        const translateX = x + zeroPointX;
+        const translateY = y + zeroPointY;
 
-        return `translate(-50%, -50%) matrix(${zoom}, 0, 0, ${zoom}, ${translateX}, ${translateY})`;
+        return `translate3d(${translateX}px, ${translateY}px, 0) scale(${zoom})`;
     });
 
     public readonly transitionDuration = computed(() =>
@@ -162,6 +166,12 @@ export class PanZoomControllerService {
         }
 
         this.viewportSizeSignal.set(rootSize);
+        this.viewportZeroPointSignal.set(
+            getViewportZeroPoint(rootSize, {
+                leftPosition: this.panZoomOptions.leftPosition,
+                topPosition: this.panZoomOptions.topPosition,
+            }),
+        );
 
         const offsets = getContainerOffsets(rootSize, {
             leftPosition: this.panZoomOptions.leftPosition,

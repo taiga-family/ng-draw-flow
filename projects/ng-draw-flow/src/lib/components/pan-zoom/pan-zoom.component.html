@@ -1,10 +1,19 @@
 <div
-    class="pan-zoom"
-    [style.cursor]="cursor()"
-    [style.transform]="panTransform()"
-    [style.transition-duration]="transitionDuration()"
+    data-element="scene"
+    style="position: relative; width: 100%; height: 100%"
+    class="pan-zoom__viewport"
 >
-    <div class="pan-zoom__container">
-        <ng-content />
+    <div
+        class="pan-zoom"
+        [style.cursor]="cursor()"
+        [style.transform]="panTransform()"
+        [style.transition-duration]="transitionDuration()"
+    >
+        <div
+            style="position: relative; width: 0; height: 0"
+            class="pan-zoom__container"
+        >
+            <ng-content />
+        </div>
     </div>
 </div>

@@ -8,7 +8,6 @@ import {
     type ElementRef,
     EventEmitter,
     inject,
-    Injector,
     Input,
     type OnChanges,
     type OnDestroy,
@@ -18,7 +17,7 @@ import {
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
-import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {merge, type Observable, tap} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
@@ -63,7 +62,6 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
-    private readonly injector = inject(Injector);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
@@ -130,7 +128,6 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.subscribeToConnectorsChanges();
         this.syncWorkspaceGeometry();
         this.refreshRenderedGeometry(false);
-        this.watchWorkspaceOrigin();
         this.observeNodeSize();
 
         if (this.invalid) {
@@ -407,13 +404,12 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private getCenteredPosition(): DfPoint {
-        const workspaceOrigin = this.panZoomService.workspaceOrigin();
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
 
         return {
-            x: this.value.position.x + workspaceOrigin.x - halfOfNodeWidth,
-            y: this.value.position.y + workspaceOrigin.y - halfOfNodeHeight,
+            x: this.value.position.x - halfOfNodeWidth,
+            y: this.value.position.y - halfOfNodeHeight,
         };
     }
 
@@ -563,12 +559,6 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
             output.connectionLabel = connectionLabel;
         });
-    }
-
-    private watchWorkspaceOrigin(): void {
-        toObservable(this.panZoomService.workspaceOrigin, {injector: this.injector})
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe(() => this.refreshRenderedGeometry(false));
     }
 
     private observeNodeSize(): void {

@@ -9,6 +9,10 @@ export interface DfPanSizeDimensions {
 }
 
 export interface DfPanZoomOptions {
+    /**
+     * @deprecated Dynamic workspace sizing ignores this option.
+     * Kept only for backward compatibility and will be removed in a future major version.
+     */
     panSize: DfPanSize;
     topPosition: number | null;
     leftPosition: number | null;

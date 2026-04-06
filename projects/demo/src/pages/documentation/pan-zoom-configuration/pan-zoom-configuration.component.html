@@ -86,14 +86,15 @@
     <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
         <li class="tui-list__item">
             <code>panSize</code>
-            (default: 2000): Defines the fixed size of the working area where nodes are placed.
+            (default: 2000, deprecated): Previously defined the fixed size of the working area. Dynamic workspace sizing
+            now ignores this option and derives bounds from rendered nodes instead.
             <code>number</code>
-            means square area (
+            still means square area (
             <code>width = height = value</code>
             ).
             <code>&#123; width, height &#125;</code>
-            sets each axis independently. The workspace does not expand dynamically, so nodes are limited by workspace
-            edges.
+            still means rectangular area, but both forms are preserved only for backward compatibility and no longer
+            affect runtime workspace sizing.
         </li>
         <li class="tui-list__item">
             <code>topPosition</code>
@@ -168,7 +169,7 @@
         </li>
     </ul>
     <p>
-        Pan size examples:
+        Deprecated pan size examples kept for backward compatibility:
         <code>dfPanZoomOptionsProvider(&#123; panSize: 6000 &#125;)</code>
         and
         <code>dfPanZoomOptionsProvider(&#123; panSize: &#123; width: 8000, height: 4000 &#125; &#125;)</code>

@@ -181,7 +181,7 @@ describe('NodeComponent', () => {
         expect(withShiftedWorkspaceOrigin.y).toBeCloseTo(380, 5);
     });
 
-    it('positions node relative to dynamic workspace origin and no longer clamps by panSize', () => {
+    it('keeps node position stable when workspace origin changes and no longer clamps by panSize', () => {
         MockRender(HostComponent);
         const component = ngMocks.findInstance(NodeComponent) as any;
 
@@ -190,12 +190,16 @@ describe('NodeComponent', () => {
         component.value = {
             id: 'node-1',
             data: {type: 'simpleNode'},
-            position: {x: 0, y: 0},
+            position: {x: 460, y: 440},
         };
 
         panZoomOptions.leftPosition = 50;
         panZoomOptions.topPosition = 60;
         workspaceOriginSignal.set({x: 460, y: 440});
+
+        expect(component.getCenteredPosition()).toEqual({x: 400, y: 400});
+
+        workspaceOriginSignal.set({x: 10_460, y: 10_440});
 
         expect(component.getCenteredPosition()).toEqual({x: 400, y: 400});
         expect(component.clampPositionToPanBounds({x: -2000, y: 2000})).toEqual({

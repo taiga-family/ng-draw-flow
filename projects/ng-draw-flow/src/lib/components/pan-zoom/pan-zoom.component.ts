@@ -1,5 +1,4 @@
 import {
-    type AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -8,6 +7,7 @@ import {
     EventEmitter,
     inject,
     NgZone,
+    type OnInit,
     Output,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -39,7 +39,7 @@ import {PanZoomGesturesService} from './pan-zoom-gestures.service';
         '(dfResizeObserver)': 'onBoardResize($event)',
     },
 })
-export class PanZoomComponent implements AfterViewInit {
+export class PanZoomComponent implements OnInit {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
@@ -63,7 +63,7 @@ export class PanZoomComponent implements AfterViewInit {
         this.watchGestures();
     }
 
-    public ngAfterViewInit(): void {
+    public ngOnInit(): void {
         this.syncContainerOffsets();
     }
 
@@ -144,9 +144,10 @@ export class PanZoomComponent implements AfterViewInit {
         }
 
         const viewportRect = this.el.nativeElement.getBoundingClientRect();
+        const zeroPoint = this.panZoomController.viewportZeroPoint();
         const point: DfPoint = {
-            x: gesture.clientX - viewportRect.x - viewportRect.width / 2,
-            y: gesture.clientY - viewportRect.y - viewportRect.height / 2,
+            x: gesture.clientX - viewportRect.x - zeroPoint.x,
+            y: gesture.clientY - viewportRect.y - zeroPoint.y,
         };
 
         this.panZoomController.queueGesture({

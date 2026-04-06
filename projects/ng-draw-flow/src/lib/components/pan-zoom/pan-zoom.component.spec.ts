@@ -20,6 +20,32 @@ describe('PanZoomComponent', () => {
     let panZoomOptions: DfPanZoomOptions;
 
     beforeEach(async () => {
+        TestBed.overrideComponent(PanZoomComponent, {
+            set: {
+                template: `
+                    <div
+                        class="pan-zoom__viewport"
+                        data-element="scene"
+                        style="position: relative; width: 100%; height: 100%;"
+                    >
+                        <div
+                            class="pan-zoom"
+                            [style.cursor]="cursor()"
+                            [style.transform]="panTransform()"
+                            [style.transition-duration]="transitionDuration()"
+                        >
+                            <div
+                                class="pan-zoom__container"
+                                style="position: relative; width: 0; height: 0;"
+                            >
+                                <ng-content />
+                            </div>
+                        </div>
+                    </div>
+                `,
+            },
+        });
+
         const drawFlowRootElement = document.createElement('div');
 
         Object.defineProperties(drawFlowRootElement, {
@@ -73,6 +99,35 @@ describe('PanZoomComponent', () => {
 
         component.setScale(0.1);
         expect(panZoomService.snapshot().zoom).toBe(DF_PAN_ZOOM_DEFAULT_OPTIONS.minZoom);
+    });
+
+    it('renders a zero-sized world layer inside a viewport-sized hit area', () => {
+        const viewportElement = fixture.nativeElement.querySelector(
+            '.pan-zoom__viewport',
+        ) as HTMLElement;
+        const panElement = fixture.nativeElement.querySelector(
+            '.pan-zoom',
+        ) as HTMLElement;
+        const containerElement = fixture.nativeElement.querySelector(
+            '.pan-zoom__container',
+        ) as HTMLElement;
+
+        expect(viewportElement.style.width).toBe('100%');
+        expect(viewportElement.style.height).toBe('100%');
+        expect(viewportElement.style.position).toBe('relative');
+        expect(panElement.style.width).toBe('');
+        expect(panElement.style.height).toBe('');
+        expect(containerElement.style.width).toBe('0px');
+        expect(containerElement.style.height).toBe('0px');
+        expect(containerElement.style.position).toBe('relative');
+    });
+
+    it('marks the viewport hit area as the scene target', () => {
+        const viewportElement = fixture.nativeElement.querySelector(
+            '.pan-zoom__viewport',
+        ) as HTMLElement;
+
+        expect(viewportElement.dataset.element).toBe('scene');
     });
 
     it('resets camera position and zoom', () => {
@@ -186,17 +241,11 @@ describe('PanZoomComponent', () => {
         });
 
         expect((component as any).panTransform()).toBe(
-            'translate(-50%, -50%) matrix(2, 0, 0, 2, -900, -750)',
+            'translate3d(100px, 50px, 0) scale(2)',
         );
     });
 
-    it('accounts for dynamic workspace center in transform', () => {
-        panZoomService.upsertNodeBounds('node-1', {
-            minX: 100,
-            maxX: 300,
-            minY: 50,
-            maxY: 150,
-        });
+    it('does not shift transform when dynamic workspace bounds change', () => {
         panZoomOptions.leftPosition = 0;
         panZoomOptions.topPosition = 0;
         (component as any).onBoardResize([
@@ -212,8 +261,18 @@ describe('PanZoomComponent', () => {
             zoom: 2,
         });
 
+        const transformBeforeBoundsUpdate = (component as any).panTransform();
+
+        panZoomService.upsertNodeBounds('node-1', {
+            minX: 100,
+            maxX: 300,
+            minY: 50,
+            maxY: 150,
+        });
+
+        expect((component as any).panTransform()).toBe(transformBeforeBoundsUpdate);
         expect((component as any).panTransform()).toBe(
-            'translate(-50%, -50%) matrix(2, 0, 0, 2, -500, -550)',
+            'translate3d(100px, 50px, 0) scale(2)',
         );
     });
 
