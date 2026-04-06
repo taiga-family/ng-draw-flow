@@ -122,6 +122,7 @@ export class NgDrawFlowComponent
     private frameRequestId: number | null = null;
     private viewportFrameRetryCount = 0;
     private shouldFrameViewport = false;
+    private hasFramedExternalModel = false;
 
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
@@ -191,7 +192,15 @@ export class NgDrawFlowComponent
         this.store.clearSelectedConnection();
         this.store.updateDataModel(value);
         this.form.setValue(value, {emitEvent: false});
-        this.scheduleViewportFraming();
+
+        if (value.nodes.length) {
+            if (!this.hasFramedExternalModel) {
+                this.hasFramedExternalModel = true;
+                this.scheduleViewportFraming();
+            }
+        } else {
+            this.hasFramedExternalModel = false;
+        }
     }
 
     public registerOnChange(fn: (value: DfDataModel) => void): void {
