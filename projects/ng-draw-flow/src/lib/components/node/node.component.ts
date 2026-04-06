@@ -8,6 +8,7 @@ import {
     type ElementRef,
     EventEmitter,
     inject,
+    Injector,
     Input,
     type OnChanges,
     type OnDestroy,
@@ -17,7 +18,7 @@ import {
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
 import {merge, type Observable, tap} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
@@ -62,6 +63,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly injector = inject(Injector);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
@@ -85,6 +87,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
     private moved = false;
+    private resizeObserver: ResizeObserver | null = null;
 
     @ViewChild('nodeElement')
     public readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -125,8 +128,10 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.fillValue();
         this.applyOutputsConnectionLabel();
         this.subscribeToConnectorsChanges();
-        this.setInitialPosition();
-        this.updateConnectorsCoordinates();
+        this.syncWorkspaceGeometry();
+        this.refreshRenderedGeometry(false);
+        this.watchWorkspaceOrigin();
+        this.observeNodeSize();
 
         if (this.invalid) {
             this.innerComponent.invalid = true;
@@ -138,6 +143,9 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         if (this.connectionsService.selectedNodeId$.value === this.value?.id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
+
+        this.resizeObserver?.disconnect();
+        this.panZoomService.removeNodeBounds(this.value.id);
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
@@ -225,6 +233,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             const appliedDeltaX = this.value.position.x - previousPosition.x;
             const appliedDeltaY = this.value.position.y - previousPosition.y;
 
+            this.syncWorkspaceGeometry();
             const centeredPosition = this.getCenteredPosition();
 
             this.applyPositionToStyle(centeredPosition, true);
@@ -249,7 +258,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
         if (this.moved) {
             this.nodeMoved.emit(this.value);
-            this.applyPositionToStyle(this.getCenteredPosition(), false);
+            this.refreshRenderedGeometry(false);
         }
 
         this.accumulatedDelta = INITIAL_COORDINATES;
@@ -261,7 +270,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         if (!this.hasPosition(this.node)) {
             this.value = {
                 ...this.node,
-                position: this.clampPositionToPanBounds(this.getCenterOfViewport()),
+                position: this.getCenterOfViewport(),
             };
         } else {
             this.value = this.node;
@@ -398,15 +407,13 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private getCenteredPosition(): DfPoint {
-        const panSize = this.panZoomService.panSize();
+        const workspaceOrigin = this.panZoomService.workspaceOrigin();
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
-        const halfOfPanWidth = panSize.width / 2;
-        const halfOfPanHeight = panSize.height / 2;
 
         return {
-            x: this.value.position.x + halfOfPanWidth - halfOfNodeWidth,
-            y: this.value.position.y + halfOfPanHeight - halfOfNodeHeight,
+            x: this.value.position.x + workspaceOrigin.x - halfOfNodeWidth,
+            y: this.value.position.y + workspaceOrigin.y - halfOfNodeHeight,
         };
     }
 
@@ -453,23 +460,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         return !!position && Number.isFinite(position.x) && Number.isFinite(position.y);
     }
 
-    private setInitialPosition(): void {
-        const centeredPosition = this.getCenteredPosition();
-
-        this.applyPositionToStyle(centeredPosition, false);
-    }
-
     private clampPositionToPanBounds(position: DfPoint): DfPoint {
-        const panSize = this.panZoomService.panSize();
-        const minX = -panSize.width / 2 + this.nodeWidth / 2;
-        const maxX = panSize.width / 2 - this.nodeWidth / 2;
-        const minY = -panSize.height / 2 + this.nodeHeight / 2;
-        const maxY = panSize.height / 2 - this.nodeHeight / 2;
-
-        return {
-            x: Math.min(Math.max(position.x, Math.min(minX, maxX)), Math.max(minX, maxX)),
-            y: Math.min(Math.max(position.y, Math.min(minY, maxY)), Math.max(minY, maxY)),
-        };
+        return position;
     }
 
     /**
@@ -570,6 +562,42 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
         this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
             output.connectionLabel = connectionLabel;
+        });
+    }
+
+    private watchWorkspaceOrigin(): void {
+        toObservable(this.panZoomService.workspaceOrigin, {injector: this.injector})
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.refreshRenderedGeometry(false));
+    }
+
+    private observeNodeSize(): void {
+        if (typeof ResizeObserver !== 'function') {
+            return;
+        }
+
+        this.resizeObserver = new ResizeObserver(() => {
+            this.saveInnerNodeSize();
+            this.syncWorkspaceGeometry();
+            this.refreshRenderedGeometry(false);
+        });
+        this.resizeObserver.observe(this.nodeElementRef.nativeElement);
+    }
+
+    private refreshRenderedGeometry(dynamic: boolean): void {
+        this.applyPositionToStyle(this.getCenteredPosition(), dynamic);
+        this.updateConnectorsCoordinates();
+    }
+
+    private syncWorkspaceGeometry(): void {
+        const halfOfNodeWidth = this.nodeWidth / 2;
+        const halfOfNodeHeight = this.nodeHeight / 2;
+
+        this.panZoomService.upsertNodeBounds(this.value.id, {
+            minX: this.value.position.x - halfOfNodeWidth,
+            minY: this.value.position.y - halfOfNodeHeight,
+            maxX: this.value.position.x + halfOfNodeWidth,
+            maxY: this.value.position.y + halfOfNodeHeight,
         });
     }
 }

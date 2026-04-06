@@ -31,6 +31,9 @@ jest.mock('./node.component.less', () => '', {virtual: true});
 describe('NodeComponent', () => {
     let panZoomOptions: DfPanZoomOptions;
     let panSizeSignal: WritableSignal<DfPanSizeDimensions>;
+    let workspaceOriginSignal: WritableSignal<{x: number; y: number}>;
+    let upsertNodeBounds: jest.Mock;
+    let removeNodeBounds: jest.Mock;
 
     beforeEach(async () => {
         TestBed.overrideComponent(NodeComponent, {
@@ -75,6 +78,9 @@ describe('NodeComponent', () => {
         };
 
         panSizeSignal = signal({width: 2000, height: 2000});
+        workspaceOriginSignal = signal({x: 1000, y: 1000});
+        upsertNodeBounds = jest.fn();
+        removeNodeBounds = jest.fn();
 
         return MockBuilder(HostComponent)
             .keep(NodeComponent)
@@ -94,7 +100,10 @@ describe('NodeComponent', () => {
                         offsetY: 0,
                     },
                     panSize: panSizeSignal,
+                    workspaceOrigin: workspaceOriginSignal,
                     panzoomDisabled: false,
+                    upsertNodeBounds,
+                    removeNodeBounds,
                     snapshot() {
                         return this.panzoomModel;
                     },
@@ -157,7 +166,7 @@ describe('NodeComponent', () => {
         expect(edgeShifted.x).toBeCloseTo(275, 5);
         expect(edgeShifted.y).toBeCloseTo(90, 5);
 
-        panSizeSignal.set({width: 10000, height: 10000});
+        workspaceOriginSignal.set({x: 10000, y: 10000});
         panZoomService.panzoomModel = {
             x: 0,
             y: 0,
@@ -166,13 +175,13 @@ describe('NodeComponent', () => {
             offsetY: 0,
         };
 
-        const withLargePanSize = component.getCenterOfViewport();
+        const withShiftedWorkspaceOrigin = component.getCenterOfViewport();
 
-        expect(withLargePanSize.x).toBeCloseTo(400, 5);
-        expect(withLargePanSize.y).toBeCloseTo(380, 5);
+        expect(withShiftedWorkspaceOrigin.x).toBeCloseTo(400, 5);
+        expect(withShiftedWorkspaceOrigin.y).toBeCloseTo(380, 5);
     });
 
-    it('keeps node positioning and clamping independent from viewport anchor', () => {
+    it('positions node relative to dynamic workspace origin and no longer clamps by panSize', () => {
         MockRender(HostComponent);
         const component = ngMocks.findInstance(NodeComponent) as any;
 
@@ -186,11 +195,31 @@ describe('NodeComponent', () => {
 
         panZoomOptions.leftPosition = 50;
         panZoomOptions.topPosition = 60;
+        workspaceOriginSignal.set({x: 460, y: 440});
 
-        expect(component.getCenteredPosition()).toEqual({x: 940, y: 960});
+        expect(component.getCenteredPosition()).toEqual({x: 400, y: 400});
         expect(component.clampPositionToPanBounds({x: -2000, y: 2000})).toEqual({
-            x: -940,
-            y: 960,
+            x: -2000,
+            y: 2000,
         });
+    });
+
+    it('registers and unregisters node bounds in the dynamic workspace tracker', () => {
+        const fixture = MockRender(HostComponent);
+        const component = ngMocks.findInstance(NodeComponent);
+
+        expect(upsertNodeBounds).toHaveBeenCalledWith(
+            'draft-node',
+            expect.objectContaining({
+                minX: expect.any(Number),
+                minY: expect.any(Number),
+                maxX: expect.any(Number),
+                maxY: expect.any(Number),
+            }),
+        );
+
+        fixture.destroy();
+
+        expect(removeNodeBounds).toHaveBeenCalledWith(component.node.id);
     });
 });

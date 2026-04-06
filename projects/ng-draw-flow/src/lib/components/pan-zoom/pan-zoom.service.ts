@@ -1,12 +1,13 @@
-import {computed, inject, Injectable, type Signal, signal} from '@angular/core';
+import {computed, Injectable, type Signal, signal} from '@angular/core';
 
-import {type DfPanzoomModel} from './pan-zoom.interfaces';
+import {type DfPoint} from '../../ng-draw-flow.interfaces';
 import {
-    DF_PAN_ZOOM_OPTIONS,
-    type DfPanSize,
-    type DfPanSizeDimensions,
-    type DfPanZoomOptions,
-} from './pan-zoom.options';
+    type DfPanZoomBounds,
+    type DfPanZoomTrackedBounds,
+    PanZoomBoundsTracker,
+} from './pan-zoom.bounds-tracker';
+import {type DfPanzoomModel} from './pan-zoom.interfaces';
+import {type DfPanSizeDimensions} from './pan-zoom.options';
 
 const INITIAL_CAMERA: DfPanzoomModel = {
     x: 0,
@@ -16,7 +17,7 @@ const INITIAL_CAMERA: DfPanzoomModel = {
     zoom: 1,
 };
 
-const DEFAULT_PAN_SIZE = 2000;
+const DEFAULT_WORKSPACE_GAP = 400;
 
 export interface DfPanZoomUsableRect {
     readonly minX: number;
@@ -25,16 +26,25 @@ export interface DfPanZoomUsableRect {
     readonly maxY: number;
 }
 
+export interface DfPanZoomWorkspaceRect extends DfPanZoomUsableRect {
+    readonly width: number;
+    readonly height: number;
+}
+
 @Injectable()
 export class PanZoomService {
-    private readonly panZoomOptions: DfPanZoomOptions =
-        inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
-
     private readonly cameraSignal = signal<DfPanzoomModel>(INITIAL_CAMERA);
     private readonly disabledSignal = signal<boolean>(false);
-    private readonly panSizeSignal = signal<DfPanSizeDimensions>(
-        toPanSizeDimensions(this.panZoomOptions.panSize),
-    );
+    private readonly trackedNodesCountSignal = signal<number>(0);
+    private readonly usableRectSignal = signal<DfPanZoomUsableRect>({
+        minX: 0,
+        minY: 0,
+        maxX: 0,
+        maxY: 0,
+    });
+
+    private readonly boundsTracker = new PanZoomBoundsTracker();
+    private readonly nodeBounds = new Map<string, DfPanZoomTrackedBounds>();
 
     private readonly legacyModelProxy = new Proxy({} as DfPanzoomModel, {
         get: (_target, property): unknown => {
@@ -75,17 +85,54 @@ export class PanZoomService {
     public readonly camera: Signal<DfPanzoomModel> = this.cameraSignal.asReadonly();
 
     public readonly disabled: Signal<boolean> = this.disabledSignal.asReadonly();
-    public readonly panSize: Signal<DfPanSizeDimensions> =
-        this.panSizeSignal.asReadonly();
 
-    public readonly usableRect: Signal<DfPanZoomUsableRect> = computed(() => {
-        const panSize = this.panSizeSignal();
+    public readonly usableRect: Signal<DfPanZoomUsableRect> =
+        this.usableRectSignal.asReadonly();
+
+    public readonly workspaceRect: Signal<DfPanZoomWorkspaceRect> = computed(() => {
+        const usableRect = this.usableRectSignal();
+
+        if (!this.trackedNodesCountSignal()) {
+            return toWorkspaceRect({
+                minX: -DEFAULT_WORKSPACE_GAP,
+                minY: -DEFAULT_WORKSPACE_GAP,
+                maxX: DEFAULT_WORKSPACE_GAP,
+                maxY: DEFAULT_WORKSPACE_GAP,
+            });
+        }
+
+        return toWorkspaceRect({
+            minX: usableRect.minX - DEFAULT_WORKSPACE_GAP,
+            minY: usableRect.minY - DEFAULT_WORKSPACE_GAP,
+            maxX: usableRect.maxX + DEFAULT_WORKSPACE_GAP,
+            maxY: usableRect.maxY + DEFAULT_WORKSPACE_GAP,
+        });
+    });
+
+    public readonly panSize: Signal<DfPanSizeDimensions> = computed(() => {
+        const workspaceRect = this.workspaceRect();
 
         return {
-            minX: -(panSize.width / 2),
-            maxX: panSize.width / 2,
-            minY: -(panSize.height / 2),
-            maxY: panSize.height / 2,
+            width: workspaceRect.width,
+            height: workspaceRect.height,
+        };
+    });
+
+    public readonly workspaceOrigin: Signal<DfPoint> = computed(() => {
+        const workspaceRect = this.workspaceRect();
+
+        return {
+            x: -workspaceRect.minX,
+            y: -workspaceRect.minY,
+        };
+    });
+
+    public readonly workspaceCenter: Signal<DfPoint> = computed(() => {
+        const workspaceRect = this.workspaceRect();
+
+        return {
+            x: workspaceRect.minX + workspaceRect.width / 2,
+            y: workspaceRect.minY + workspaceRect.height / 2,
         };
     });
 
@@ -126,25 +173,89 @@ export class PanZoomService {
     public isDisabled(): boolean {
         return this.disabledSignal();
     }
-}
 
-function toPanSizeDimensions(panSize?: DfPanSize): DfPanSizeDimensions {
-    if (typeof panSize === 'number' && Number.isFinite(panSize) && panSize > 0) {
-        return {width: panSize, height: panSize};
+    public upsertNodeBounds(id: string, bounds: DfPanZoomBounds): void {
+        const tracked = this.nodeBounds.get(id);
+
+        if (tracked) {
+            this.boundsTracker.update(tracked, bounds);
+        } else {
+            const item = {id, ...bounds};
+
+            this.nodeBounds.set(id, item);
+            this.boundsTracker.add(item);
+            this.trackedNodesCountSignal.set(this.nodeBounds.size);
+        }
+
+        this.syncUsableRect();
     }
 
-    if (panSize && typeof panSize === 'object') {
-        const {width, height} = panSize;
+    public removeNodeBounds(id: string): void {
+        const tracked = this.nodeBounds.get(id);
+
+        if (!tracked) {
+            return;
+        }
+
+        this.boundsTracker.remove(tracked);
+        this.nodeBounds.delete(id);
+        this.trackedNodesCountSignal.set(this.nodeBounds.size);
+        this.syncUsableRect();
+    }
+
+    public getBoundsForNodeIds(ids: readonly string[]): DfPanZoomUsableRect | null {
+        if (!ids.length) {
+            return null;
+        }
+
+        let minX = Number.POSITIVE_INFINITY;
+        let minY = Number.POSITIVE_INFINITY;
+        let maxX = Number.NEGATIVE_INFINITY;
+        let maxY = Number.NEGATIVE_INFINITY;
+
+        for (const id of ids) {
+            const bounds = this.nodeBounds.get(id);
+
+            if (!bounds) {
+                return null;
+            }
+
+            minX = Math.min(minX, bounds.minX);
+            minY = Math.min(minY, bounds.minY);
+            maxX = Math.max(maxX, bounds.maxX);
+            maxY = Math.max(maxY, bounds.maxY);
+        }
+
+        return {minX, minY, maxX, maxY};
+    }
+
+    private syncUsableRect(): void {
+        const rect = this.boundsTracker.toJSON();
+        const nextRect = {
+            minX: rect.minX,
+            minY: rect.minY,
+            maxX: rect.maxX,
+            maxY: rect.maxY,
+        };
+        const currentRect = this.usableRectSignal();
 
         if (
-            Number.isFinite(width) &&
-            Number.isFinite(height) &&
-            width > 0 &&
-            height > 0
+            currentRect.minX === nextRect.minX &&
+            currentRect.minY === nextRect.minY &&
+            currentRect.maxX === nextRect.maxX &&
+            currentRect.maxY === nextRect.maxY
         ) {
-            return {width, height};
+            return;
         }
-    }
 
-    return {width: DEFAULT_PAN_SIZE, height: DEFAULT_PAN_SIZE};
+        this.usableRectSignal.set(nextRect);
+    }
+}
+
+function toWorkspaceRect(bounds: DfPanZoomBounds): DfPanZoomWorkspaceRect {
+    return {
+        ...bounds,
+        width: bounds.maxX - bounds.minX,
+        height: bounds.maxY - bounds.minY,
+    };
 }

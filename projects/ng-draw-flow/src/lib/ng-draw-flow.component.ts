@@ -383,78 +383,16 @@ export class NgDrawFlowComponent
     }
 
     private getViewportFramingTargetRect(): DfPanZoomWorldRectBounds | null {
-        const nodeElements = Array.from(
-            this.hostElement.nativeElement.querySelectorAll<HTMLElement>(
-                '[data-draw-flow-node]',
-            ),
-        );
+        const nodes = this.form.value?.nodes ?? [];
 
-        if (!nodeElements.length) {
+        if (!nodes.length) {
             return null;
         }
 
-        const startNode = nodeElements.find(
-            (element) => element.dataset.startNode === 'true',
+        const startNode = nodes.find((node) => node.startNode === true);
+
+        return this.panZoomService.getBoundsForNodeIds(
+            startNode ? [startNode.id] : nodes.map(({id}) => id),
         );
-
-        return this.getWorldRectFromNodes(startNode ? [startNode] : nodeElements);
     }
-
-    private getWorldRectFromNodes(
-        elements: readonly HTMLElement[],
-    ): DfPanZoomWorldRectBounds | null {
-        const panSize = this.panZoomService.panSize();
-        let minX = Number.POSITIVE_INFINITY;
-        let minY = Number.POSITIVE_INFINITY;
-        let maxX = Number.NEGATIVE_INFINITY;
-        let maxY = Number.NEGATIVE_INFINITY;
-
-        for (const element of elements) {
-            const translate = parseTranslate(element.style.transform);
-
-            if (!translate) {
-                continue;
-            }
-
-            const left = translate.x - panSize.width / 2;
-            const top = translate.y - panSize.height / 2;
-            const right = left + element.offsetWidth;
-            const bottom = top + element.offsetHeight;
-
-            minX = Math.min(minX, left);
-            minY = Math.min(minY, top);
-            maxX = Math.max(maxX, right);
-            maxY = Math.max(maxY, bottom);
-        }
-
-        if (
-            !Number.isFinite(minX) ||
-            !Number.isFinite(minY) ||
-            !Number.isFinite(maxX) ||
-            !Number.isFinite(maxY)
-        ) {
-            return null;
-        }
-
-        return {minX, minY, maxX, maxY};
-    }
-}
-
-function parseTranslate(transform: string): {x: number; y: number} | null {
-    const match = /translate(?:3D)?\(\s*(-?\d+(?:\.\d+)?)px,\s*(-?\d+(?:\.\d+)?)px/i.exec(
-        transform,
-    );
-
-    if (!match) {
-        return null;
-    }
-
-    const x = Number(match[1]);
-    const y = Number(match[2]);
-
-    if (!Number.isFinite(x) || !Number.isFinite(y)) {
-        return null;
-    }
-
-    return {x, y};
 }

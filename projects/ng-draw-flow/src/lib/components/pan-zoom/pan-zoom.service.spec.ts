@@ -38,51 +38,74 @@ describe('PanZoomService', () => {
         TestBed.resetTestingModule();
     });
 
-    it('uses configured panSize as initial value', () => {
+    it('derives workspace size from tracked node bounds', () => {
         const service = setup();
 
-        expect(service.panSize()).toEqual({width: 2000, height: 2000});
+        expect(service.usableRect()).toEqual({
+            minX: 0,
+            maxX: 0,
+            minY: 0,
+            maxY: 0,
+        });
+        expect(service.panSize()).toEqual({width: 800, height: 800});
+
+        service.upsertNodeBounds('node-1', {
+            minX: -1000,
+            maxX: 100,
+            minY: -200,
+            maxY: 150,
+        });
+
         expect(service.usableRect()).toEqual({
             minX: -1000,
-            maxX: 1000,
-            minY: -1000,
-            maxY: 1000,
+            maxX: 100,
+            minY: -200,
+            maxY: 150,
         });
+        expect(service.panSize()).toEqual({width: 1900, height: 1150});
+        expect(service.workspaceOrigin()).toEqual({x: 1400, y: 600});
+        expect(service.workspaceCenter()).toEqual({x: -450, y: -25});
     });
 
-    it('supports object panSize shape', () => {
+    it('ignores panSize option values and always uses dynamic workspace sizing', () => {
         const service = setup({panSize: {width: 3200, height: 1800}});
 
-        expect(service.panSize()).toEqual({width: 3200, height: 1800});
-        expect(service.usableRect()).toEqual({
-            minX: -1600,
-            maxX: 1600,
-            minY: -900,
-            maxY: 900,
+        expect(service.panSize()).toEqual({width: 800, height: 800});
+
+        service.upsertNodeBounds('node-1', {
+            minX: -50,
+            maxX: 50,
+            minY: -25,
+            maxY: 25,
         });
+
+        expect(service.panSize()).toEqual({width: 900, height: 850});
     });
 
-    it('uses 2000 default panSize when panSize is not configured', () => {
-        const service = setup({panSize: undefined});
+    it('returns subset bounds only when all requested nodes are registered', () => {
+        const service = setup();
 
-        expect(service.panSize()).toEqual({width: 2000, height: 2000});
-        expect(service.usableRect()).toEqual({
-            minX: -1000,
-            maxX: 1000,
-            minY: -1000,
-            maxY: 1000,
+        service.upsertNodeBounds('node-1', {
+            minX: -50,
+            maxX: 50,
+            minY: -25,
+            maxY: 25,
         });
-    });
 
-    it('falls back to default panSize for invalid number value', () => {
-        const service = setup({panSize: 0});
+        expect(service.getBoundsForNodeIds(['node-1', 'node-2'])).toBeNull();
 
-        expect(service.panSize()).toEqual({width: 2000, height: 2000});
-    });
+        service.upsertNodeBounds('node-2', {
+            minX: 100,
+            maxX: 180,
+            minY: -10,
+            maxY: 90,
+        });
 
-    it('falls back to default panSize for invalid object value', () => {
-        const service = setup({panSize: {width: Number.NaN, height: 1000}});
-
-        expect(service.panSize()).toEqual({width: 2000, height: 2000});
+        expect(service.getBoundsForNodeIds(['node-1', 'node-2'])).toEqual({
+            minX: -50,
+            maxX: 180,
+            minY: -25,
+            maxY: 90,
+        });
     });
 });

@@ -190,6 +190,33 @@ describe('PanZoomComponent', () => {
         );
     });
 
+    it('accounts for dynamic workspace center in transform', () => {
+        panZoomService.upsertNodeBounds('node-1', {
+            minX: 100,
+            maxX: 300,
+            minY: 50,
+            maxY: 150,
+        });
+        panZoomOptions.leftPosition = 0;
+        panZoomOptions.topPosition = 0;
+        (component as any).onBoardResize([
+            {
+                contentRect: {width: 1000, height: 800},
+            },
+        ] as unknown as ResizeObserverEntry[]);
+
+        panZoomService.setCamera({
+            ...panZoomService.snapshot(),
+            x: 100,
+            y: 50,
+            zoom: 2,
+        });
+
+        expect((component as any).panTransform()).toBe(
+            'translate(-50%, -50%) matrix(2, 0, 0, 2, -500, -550)',
+        );
+    });
+
     it('processes wheel events on host and updates zoom', async () => {
         fixture.nativeElement.dispatchEvent(
             new WheelEvent('wheel', {
