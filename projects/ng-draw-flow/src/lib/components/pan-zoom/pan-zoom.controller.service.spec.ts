@@ -126,4 +126,67 @@ describe('PanZoomControllerService', () => {
         expect(panZoomService.snapshot().offsetX).toBe(400);
         expect(panZoomService.snapshot().offsetY).toBe(280);
     });
+
+    it('updates only provided coordinates in setPosition and keeps the rest of camera state', () => {
+        panZoomService.setCamera({
+            x: 120,
+            y: -80,
+            zoom: 1.5,
+            offsetX: 40,
+            offsetY: 30,
+        });
+        const scaleSpy = jest.fn();
+
+        service.scaleChanges$.subscribe(scaleSpy);
+        service.setPosition({x: 300});
+
+        expect(panZoomService.snapshot()).toEqual({
+            x: 300,
+            y: -80,
+            zoom: 1.5,
+            offsetX: 40,
+            offsetY: 30,
+        });
+        expect(scaleSpy).not.toHaveBeenCalled();
+    });
+
+    it('updates zoom in setPosition without resetting coordinates', () => {
+        panZoomService.setCamera({
+            x: 120,
+            y: -80,
+            zoom: 1.5,
+            offsetX: 40,
+            offsetY: 30,
+        });
+
+        service.setPosition({zoom: 2});
+
+        expect(panZoomService.snapshot()).toEqual({
+            x: 120,
+            y: -80,
+            zoom: 2,
+            offsetX: 40,
+            offsetY: 30,
+        });
+    });
+
+    it('resets x/y/zoom while keeping legacy offsets in resetPanzoom', () => {
+        panZoomService.setCamera({
+            x: 120,
+            y: -80,
+            zoom: 1.5,
+            offsetX: 40,
+            offsetY: 30,
+        });
+
+        service.resetPanzoom();
+
+        expect(panZoomService.snapshot()).toEqual({
+            x: 0,
+            y: 0,
+            zoom: 1,
+            offsetX: 40,
+            offsetY: 30,
+        });
+    });
 });

@@ -72,14 +72,7 @@ export class PanZoomComponent implements OnInit {
     }
 
     public setPosition(position?: DfPoint & {zoom?: number}): void {
-        if (position?.zoom) {
-            this.zoom$.next(position.zoom || this.zoom());
-        }
-
-        this.coordinates$.next({
-            ...this.coordinates(),
-            ...position,
-        });
+        this.panZoomController.setPosition(position);
     }
 
     public setScale(scale: number): void {

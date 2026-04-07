@@ -8,6 +8,7 @@ import {
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {NgDrawFlowComponent} from './ng-draw-flow.component';
 import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
+import {SelectionService} from './services/selection.service';
 
 jest.mock('./ng-draw-flow.component.html', () => '', {virtual: true});
 jest.mock('./ng-draw-flow.component.less', () => '', {virtual: true});
@@ -71,6 +72,12 @@ describe('NgDrawFlowComponent', () => {
                             clearSelectedNode: jest.fn(),
                             clearSelectedConnection: jest.fn(),
                             setScaleValue: jest.fn(),
+                        },
+                    },
+                    {
+                        provide: SelectionService,
+                        useValue: {
+                            clearSelection: jest.fn(),
                         },
                     },
                     {

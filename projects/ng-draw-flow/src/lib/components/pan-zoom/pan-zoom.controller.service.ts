@@ -50,15 +50,9 @@ export class PanZoomControllerService {
         height: 0,
     });
 
-    private readonly viewportZeroPointSignal = signal<DfPoint>({
-        x: 0,
-        y: 0,
-    });
+    private readonly viewportZeroPointSignal = signal<DfPoint>(INITIAL_COORDINATES);
 
-    private readonly layoutOffsetSignal = signal<{x: number; y: number}>({
-        x: 0,
-        y: 0,
-    });
+    private readonly layoutOffsetSignal = signal<DfPoint>(INITIAL_COORDINATES);
 
     private readonly renderRequestsSubject = new Subject<DfPanZoomRenderMode>();
     private readonly scaleChangesSubject = new Subject<number>();
@@ -96,15 +90,26 @@ export class PanZoomControllerService {
     );
 
     public resetPanzoom(): void {
+        this.setPosition({
+            ...INITIAL_COORDINATES,
+            zoom: DF_PAN_ZOOM_INITIAL_SCALE,
+        });
+    }
+
+    public setPosition(position?: DfPoint & {zoom?: number}): void {
         const camera = this.panZoomService.snapshot();
         const nextCamera = {
             ...camera,
-            ...INITIAL_COORDINATES,
-            zoom: DF_PAN_ZOOM_INITIAL_SCALE,
+            ...position,
+            zoom: position?.zoom || camera.zoom,
         };
 
         this.panZoomService.setCamera(nextCamera);
-        this.emitScale(nextCamera.zoom);
+
+        if (position?.zoom) {
+            this.emitScale(nextCamera.zoom);
+        }
+
         this.requestRender();
     }
 
