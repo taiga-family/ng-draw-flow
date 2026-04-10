@@ -18,9 +18,7 @@ export default class CreatingNodesComponent {
         Template: import('./examples/node.template.html?raw'),
     };
 
-    public gettingStarted = {
-        baseNode: import('./examples/base-node.md?raw'),
-    };
+    public gettingStarted = {baseNode: import('./examples/base-node.md?raw')};
 
     public nodeData: DfDataModel = {
         nodes: [

@@ -13,8 +13,8 @@ describe('deepEqual', () => {
         });
 
         it('should handle NaN correctly', () => {
-            expect(deepEqual(NaN, NaN)).toBe(true);
-            expect(deepEqual(NaN, 1)).toBe(false);
+            expect(deepEqual(Number.NaN, Number.NaN)).toBe(true);
+            expect(deepEqual(Number.NaN, 1)).toBe(false);
         });
 
         it('should compare strings correctly', () => {

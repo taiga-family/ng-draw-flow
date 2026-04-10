@@ -27,6 +27,7 @@ export function dfCycleDetectionValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const model: DfDataModel = control.value;
 
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!model?.connections || model.connections.length === 0) {
             previousConnectionsHash = null;
             previousResult = null;
@@ -40,6 +41,7 @@ export function dfCycleDetectionValidator(): ValidatorFn {
         // If the hash hasn't changed, return the previous result
         if (
             previousConnectionsHash === currentConnectionsHash &&
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             previousResult !== undefined
         ) {
             return previousResult;

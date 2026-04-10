@@ -1,5 +1,5 @@
 const nxPreset = require('@nx/jest/preset').default;
-const {resolve} = require('path');
+const {resolve} = require('node:path');
 
 module.exports = {
     ...nxPreset,
@@ -9,7 +9,7 @@ module.exports = {
             'ts-jest',
             {
                 tsconfig: resolve(__dirname, 'tsconfig.spec.json'),
-                stringifyContentPathRegex: '\\.(html|svg)$',
+                stringifyContentPathRegex: String.raw`\.(html|svg)$`,
             },
         ],
     },

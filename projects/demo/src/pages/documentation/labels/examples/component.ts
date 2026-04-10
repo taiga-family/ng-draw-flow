@@ -97,9 +97,7 @@ export default class ExampleComponent {
                     connectorType: DfConnectionPoint.Input,
                     connectorId: 'node-2-input-1',
                 },
-                label: {
-                    content: 'Label 1',
-                },
+                label: {content: 'Label 1'},
             },
             {
                 source: {
@@ -128,9 +126,7 @@ export default class ExampleComponent {
                     connectorType: DfConnectionPoint.Input,
                     connectorId: 'node-4-input-1',
                 },
-                label: {
-                    content: 'Label 3',
-                },
+                label: {content: 'Label 3'},
             },
             {
                 source: {
@@ -143,9 +139,7 @@ export default class ExampleComponent {
                     connectorType: DfConnectionPoint.Input,
                     connectorId: 'node-4-input-1',
                 },
-                label: {
-                    content: 'Label 4',
-                },
+                label: {content: 'Label 4'},
             },
         ],
     };

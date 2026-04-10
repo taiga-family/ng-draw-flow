@@ -11,7 +11,7 @@ import {
 export class CoordinatesService {
     private connectionPointsMap: Record<string, BehaviorSubject<DfConnectorData>> = {};
 
-    public connectionPointsMapChange$: ReplaySubject<void> = new ReplaySubject<void>(1);
+    public connectionPointsMapChange$ = new ReplaySubject<void>(1);
 
     public getConnectionPoint(
         connectorHash: string,

@@ -15,13 +15,7 @@ import {ConnectorsComponent} from '../nodes/connectors/connectors.component';
     templateUrl: './connectors-example.component.html',
     styleUrls: ['./connectors-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        provideNgDrawFlowConfigs({
-            nodes: {
-                connectors: ConnectorsComponent,
-            },
-        }),
-    ],
+    providers: [provideNgDrawFlowConfigs({nodes: {connectors: ConnectorsComponent}})],
 })
 export default class ConnectorsExampleComponent {
     protected data: DfDataModel = {

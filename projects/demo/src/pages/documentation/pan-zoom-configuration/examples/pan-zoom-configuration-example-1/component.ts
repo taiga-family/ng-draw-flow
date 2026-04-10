@@ -17,11 +17,7 @@ import {PanComponent} from '../../nodes/pan/pan.component';
     styleUrls: ['./styles.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        provideNgDrawFlowConfigs({
-            nodes: {
-                pan: PanComponent,
-            },
-        }),
+        provideNgDrawFlowConfigs({nodes: {pan: PanComponent}}),
         dfPanZoomOptionsProvider({
             topPosition: null,
             leftPosition: 0,

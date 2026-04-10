@@ -10,11 +10,7 @@ import {
 } from '@angular/core';
 
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import {
-    DfConnectionType,
-    type DfConnectorData,
-    type DfOptions,
-} from '../../../ng-draw-flow.interfaces';
+import {DfConnectionType, type DfOptions} from '../../../ng-draw-flow.interfaces';
 import {createBezierPath, createSmoothStepPath} from '../utils';
 import {DraftConnectionService} from './draft-connection.service';
 
@@ -36,8 +32,8 @@ export class DraftConnectionComponent {
     protected readonly connectionCreated = this.draftConnectionService.connectionCreated$;
 
     protected pathData: Signal<string> = computed(() => {
-        const sourcePoint: DfConnectorData = this.draftConnectionService.source();
-        const targetPoint: DfConnectorData = this.draftConnectionService.target();
+        const sourcePoint = this.draftConnectionService.source();
+        const targetPoint = this.draftConnectionService.target();
         const curvature = this.options.connection.curvature;
 
         switch (this.options.connection.type) {

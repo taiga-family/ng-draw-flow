@@ -1,18 +1,19 @@
 {
     "extends": "@taiga-ui/tsconfig",
-    "exclude": ["projects/**/*.spec.ts"],
-    "angularCompilerOptions": {
-        "strictTemplates": true
-    },
     "compilerOptions": {
         "baseUrl": "./",
-        "outDir": "./dist/out-tsc",
-        "typeRoots": ["node_modules/@types", "node_modules/@taiga-ui/tsconfig/@types"],
-        "sourceMap": true,
         "checkJs": false,
+        "outDir": "./dist/out-tsc",
         "paths": {
             "@demo/constants": ["projects/demo/src/app/constants/index.ts"],
             "@ng-draw-flow/core": ["projects/ng-draw-flow/src/index.ts"]
-        }
-    }
+        },
+        "sourceMap": true,
+        "typeRoots": ["node_modules/@types", "node_modules/@taiga-ui/tsconfig/@types"]
+    },
+    "angularCompilerOptions": {
+        "strictTemplates": true,
+        "checks": {}
+    },
+    "exclude": ["projects/**/*.spec.ts"]
 }

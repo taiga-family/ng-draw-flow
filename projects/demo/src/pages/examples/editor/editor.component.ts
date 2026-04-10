@@ -27,7 +27,7 @@ import {
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiButton, TuiLabel, TuiTextfield, TuiTextfieldComponent} from '@taiga-ui/core';
+import {TuiButton, TuiLabel, TuiTextfield} from '@taiga-ui/core';
 import {TuiInputNumber} from '@taiga-ui/kit';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject, distinctUntilChanged, filter} from 'rxjs';
@@ -48,25 +48,20 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
         TuiInputNumber,
         TuiLabel,
         TuiTextfield,
-        TuiTextfieldComponent,
     ],
     templateUrl: './editor.component.html',
     styleUrls: ['./editor.component.less'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        dfPanZoomOptionsProvider({
-            leftPosition: 50,
-        }),
+        dfPanZoomOptionsProvider({leftPosition: 50}),
         provideNgDrawFlowConfigs({
             connection: {
                 type: DfConnectionType.SmoothStep,
                 arrowhead: {type: DfArrowhead.Arrow},
                 curvature: 10,
             },
-            nodes: {
-                simpleNode: SimpleNodeComponent,
-            },
+            nodes: {simpleNode: SimpleNodeComponent},
             options: {
                 nodesDraggable: true,
                 nodesDeletable: true,
@@ -78,8 +73,7 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
 })
 export default class EditorComponent implements OnInit {
     private readonly destroyRef = inject(DestroyRef);
-    public readonly panZoomOptions: DfPanZoomOptions =
-        inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
+    public readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
     public readonly drawFlowStore = inject(NgDrawFlowStoreService);
 

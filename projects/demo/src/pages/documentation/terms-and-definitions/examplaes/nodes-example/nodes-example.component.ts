@@ -15,13 +15,7 @@ import {NodeComponent} from '../nodes/node/node.component';
     templateUrl: './nodes-example.component.html',
     styleUrls: ['./nodes-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        provideNgDrawFlowConfigs({
-            nodes: {
-                node: NodeComponent,
-            },
-        }),
-    ],
+    providers: [provideNgDrawFlowConfigs({nodes: {node: NodeComponent}})],
 })
 export default class NodesExampleComponent {
     protected data: DfDataModel = {

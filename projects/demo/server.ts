@@ -19,12 +19,7 @@ export function app(): Express {
         : 'index';
 
     // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-    server.engine(
-        'html',
-        ngExpressEngine({
-            bootstrap: AppServerModule,
-        }) as any,
-    );
+    server.engine('html', ngExpressEngine({bootstrap: AppServerModule}) as any);
 
     server.set('view engine', 'html');
     server.set('views', distFolder);
@@ -32,12 +27,7 @@ export function app(): Express {
     // Example Express Rest API endpoints
     // server.get('/api/**', (req, res) => { });
     // Serve static files from /browser
-    server.get(
-        '*.*',
-        express.static(distFolder, {
-            maxAge: '1y',
-        }),
-    );
+    server.get('*.*', express.static(distFolder, {maxAge: '1y'}));
 
     // All regular routes use the Universal engine
     server.get('*', (req: any, res: any) => {

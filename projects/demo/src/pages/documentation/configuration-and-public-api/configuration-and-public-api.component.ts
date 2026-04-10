@@ -9,7 +9,5 @@ import {TuiAddonDoc} from '@taiga-ui/addon-doc';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ConfigurationAndPublicApiComponent {
-    public data = {
-        configurations: import('./examples/configurations.md?raw'),
-    };
+    public data = {configurations: import('./examples/configurations.md?raw')};
 }

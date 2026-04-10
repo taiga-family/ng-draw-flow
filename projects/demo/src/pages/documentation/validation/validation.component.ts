@@ -24,12 +24,10 @@ import {TuiLink, TuiNotification} from '@taiga-ui/core';
 export default class ValidationComponent {
     public readonly validationExamples: Record<string, TuiRawLoaderContent> = {
         LocalValidation: import('./examples/local-1.md?raw'),
-        CycleDetectionValidatorError: import(
-            './examples/cycle-detection-validator-error.md?raw'
-        ),
-        IsolatedNodesValidatorError: import(
-            './examples/isolated-nodes-validator-error.md?raw'
-        ),
+        CycleDetectionValidatorError:
+            import('./examples/cycle-detection-validator-error.md?raw'),
+        IsolatedNodesValidatorError:
+            import('./examples/isolated-nodes-validator-error.md?raw'),
     };
 
     public nodeData: DfDataModel = {

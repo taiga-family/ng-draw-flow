@@ -26,9 +26,7 @@ export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
 
 export const DF_PAN_ZOOM_OPTIONS = new InjectionToken(
     '[DF_PAN_ZOOM_OPTIONS]: [PAN_ZOOM_OPTIONS]',
-    {
-        factory: () => DF_PAN_ZOOM_DEFAULT_OPTIONS,
-    },
+    {factory: () => DF_PAN_ZOOM_DEFAULT_OPTIONS},
 );
 
 export function dfPanZoomOptionsProvider(

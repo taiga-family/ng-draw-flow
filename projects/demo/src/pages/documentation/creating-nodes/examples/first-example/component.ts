@@ -14,11 +14,7 @@ import {
     templateUrl: './template.html',
     styleUrls: ['./styles.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        dfPanZoomOptionsProvider({
-            leftPosition: 50,
-        }),
-    ],
+    providers: [dfPanZoomOptionsProvider({leftPosition: 50})],
 })
 export default class FirstExampleComponent {
     public data: DfDataModel = {

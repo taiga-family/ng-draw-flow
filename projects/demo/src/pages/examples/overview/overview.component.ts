@@ -30,33 +30,24 @@ export default class OverviewComponent {
     public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
         'app.module.ts': import('./examples/app.module.md?raw'),
         'app.component.ts': import('./examples/app.component.md?raw'),
-        'simple-node.component.ts': import(
-            '../../../app/modules/nodes/simple-node/simple-node.component.ts?raw'
-        ),
-        'simple-node.component.html': import(
-            '../../../app/modules/nodes/simple-node/simple-node.component.html?raw'
-        ),
-        'simple-node.component.less': import(
-            '../../../app/modules/nodes/simple-node/simple-node.component.less?raw'
-        ),
-        'info-node.component.ts': import(
-            '../../../app/modules/nodes/info-node/info-node.component.ts?raw'
-        ),
-        'info-node.component.html': import(
-            '../../../app/modules/nodes/info-node/info-node.component.html?raw'
-        ),
-        'info-node.component.less': import(
-            '../../../app/modules/nodes/info-node/info-node.component.less?raw'
-        ),
-        'form-node.component.ts': import(
-            '../../../app/modules/nodes/form-node/form-node.component.ts?raw'
-        ),
-        'form-node.component.html': import(
-            '../../../app/modules/nodes/form-node/form-node.component.html?raw'
-        ),
-        'form-node.component.less': import(
-            '../../../app/modules/nodes/form-node/form-node.component.less?raw'
-        ),
+        'simple-node.component.ts':
+            import('../../../app/modules/nodes/simple-node/simple-node.component.ts?raw'),
+        'simple-node.component.html':
+            import('../../../app/modules/nodes/simple-node/simple-node.component.html?raw'),
+        'simple-node.component.less':
+            import('../../../app/modules/nodes/simple-node/simple-node.component.less?raw'),
+        'info-node.component.ts':
+            import('../../../app/modules/nodes/info-node/info-node.component.ts?raw'),
+        'info-node.component.html':
+            import('../../../app/modules/nodes/info-node/info-node.component.html?raw'),
+        'info-node.component.less':
+            import('../../../app/modules/nodes/info-node/info-node.component.less?raw'),
+        'form-node.component.ts':
+            import('../../../app/modules/nodes/form-node/form-node.component.ts?raw'),
+        'form-node.component.html':
+            import('../../../app/modules/nodes/form-node/form-node.component.html?raw'),
+        'form-node.component.less':
+            import('../../../app/modules/nodes/form-node/form-node.component.less?raw'),
     };
 
     public data: DfDataModel = {

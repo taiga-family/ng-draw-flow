@@ -1,11 +1,5 @@
 import {DOCUMENT} from '@angular/common';
-import {
-    inject,
-    Injectable,
-    type OnDestroy,
-    signal,
-    type WritableSignal,
-} from '@angular/core';
+import {inject, Injectable, type OnDestroy, signal} from '@angular/core';
 import {
     animationFrameScheduler,
     BehaviorSubject,
@@ -44,12 +38,12 @@ export class DraftConnectionService implements OnDestroy {
     private sourceConnector!: DfDataConnector;
     protected readonly destroy$ = new Subject<void>();
 
-    public source: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
+    public source = signal<DfConnectorData>({
         point: INITIAL_COORDINATES,
         position: DfConnectorPosition.Right,
     });
 
-    public target: WritableSignal<DfConnectorData> = signal<DfConnectorData>({
+    public target = signal<DfConnectorData>({
         point: INITIAL_COORDINATES,
         position: DfConnectorPosition.Left,
     });
@@ -103,8 +97,7 @@ export class DraftConnectionService implements OnDestroy {
         this.sourceConnector = connector;
         this.isConnectionCreating$.next(true);
         const sourceId = createConnectorHash(connector);
-        const sourcePoint: DfConnectorData | null =
-            this.coordinatesService.getConnectionPoint(sourceId)?.value;
+        const sourcePoint = this.coordinatesService.getConnectionPoint(sourceId).value;
 
         if (!sourcePoint) {
             return;
@@ -120,7 +113,7 @@ export class DraftConnectionService implements OnDestroy {
     private onDragMove(previousEvent: PointerEvent, currentEvent: PointerEvent): void {
         const {deltaX, deltaY} = dfDistanceBetweenPoints(previousEvent, currentEvent);
         const {zoom} = this.panZoomService.panzoomModel;
-        const target: DfConnectorData = this.target();
+        const target = this.target();
 
         this.target.set({
             position: target.position,
@@ -152,10 +145,7 @@ export class DraftConnectionService implements OnDestroy {
         const target = event.target as HTMLElement | null;
         const targetConnector = target ? getConnectorDataset(target) : null;
 
-        if (
-            targetConnector &&
-            targetConnector.connectorType === DfConnectionPoint.Input
-        ) {
+        if (targetConnector?.connectorType === DfConnectionPoint.Input) {
             this.connectionCreated$.next({
                 source: this.sourceConnector,
                 target: targetConnector,

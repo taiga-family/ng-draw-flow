@@ -17,9 +17,7 @@ import {BaseConnector} from './base-connector';
     template: '',
     styleUrls: ['./connector.style.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: {
-        '(pointerdown)': 'this.onDragStart($event)',
-    },
+    host: {'(pointerdown)': 'this.onDragStart($event)'},
 })
 export class DfOutputComponent extends BaseConnector {
     private readonly draftConnectionService = inject(DraftConnectionService);

@@ -28,13 +28,13 @@ export function dfIsolatedNodesValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
         const model: DfDataModel = control.value;
 
-        if (!model?.nodes?.length) {
+        if (!model.nodes.length) {
             return null;
         }
 
         const connectedIds = new Set<DfId>();
 
-        model.connections?.forEach((c: DfDataConnection) => {
+        model.connections.forEach((c: DfDataConnection) => {
             connectedIds.add(c.source.nodeId);
             connectedIds.add(c.target.nodeId);
         });

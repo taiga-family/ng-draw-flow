@@ -1,23 +1,43 @@
 {
-    "name": "demo",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "name": "demo",
+    "generators": {},
+    "prefix": "app",
     "projectType": "application",
     "sourceRoot": "projects/demo/src",
-    "prefix": "app",
-    "generators": {},
     "targets": {
         "build": {
+            "configurations": {
+                "development": {},
+                "github": {
+                    "baseHref": "/ng-draw-flow/"
+                },
+                "production": {
+                    "budgets": [
+                        {
+                            "maximumError": "5mb",
+                            "maximumWarning": "2mb",
+                            "type": "initial"
+                        }
+                    ],
+                    "buildOptimizer": true,
+                    "extractLicenses": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "projects/demo/src/environments/environment.ts",
+                            "with": "projects/demo/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "namedChunks": false,
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "vendorChunk": false
+                }
+            },
+            "defaultConfiguration": "production",
             "executor": "@angular-builders/custom-webpack:browser",
             "options": {
-                "customWebpackConfig": {
-                    "path": "projects/demo/webpack.config.ts"
-                },
-                "baseHref": "/",
-                "outputPath": "dist/demo/browser",
-                "index": "projects/demo/src/index.html",
-                "main": "projects/demo/src/main.browser.ts",
-                "polyfills": "projects/demo/src/polyfills.ts",
-                "tsConfig": "projects/demo/tsconfig.app.json",
                 "assets": [
                     {
                         "glob": "**/*",
@@ -31,54 +51,33 @@
                         "output": "assets/taiga-ui/icons"
                     }
                 ],
+                "baseHref": "/",
+                "buildOptimizer": false,
+                "customWebpackConfig": {
+                    "path": "projects/demo/webpack.config.ts"
+                },
+                "extractLicenses": false,
+                "index": "projects/demo/src/index.html",
+                "main": "projects/demo/src/main.browser.ts",
+                "namedChunks": true,
+                "optimization": false,
+                "outputPath": "dist/demo/browser",
+                "polyfills": "projects/demo/src/polyfills.ts",
+                "scripts": [],
+                "sourceMap": true,
                 "styles": [
                     "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
                     "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
                     "node_modules/@taiga-ui/styles/taiga-ui-global.less",
                     "projects/demo/src/styles.css"
                 ],
-                "scripts": [],
-                "vendorChunk": true,
-                "extractLicenses": false,
-                "buildOptimizer": false,
-                "sourceMap": true,
-                "optimization": false,
-                "namedChunks": true
-            },
-            "configurations": {
-                "production": {
-                    "fileReplacements": [
-                        {
-                            "replace": "projects/demo/src/environments/environment.ts",
-                            "with": "projects/demo/src/environments/environment.prod.ts"
-                        }
-                    ],
-                    "optimization": true,
-                    "outputHashing": "all",
-                    "sourceMap": false,
-                    "namedChunks": false,
-                    "extractLicenses": true,
-                    "vendorChunk": false,
-                    "buildOptimizer": true,
-                    "budgets": [
-                        {
-                            "type": "initial",
-                            "maximumWarning": "2mb",
-                            "maximumError": "5mb"
-                        }
-                    ]
-                },
-                "github": {
-                    "baseHref": "/ng-draw-flow/"
-                },
-                "development": {}
-            },
-            "defaultConfiguration": "production"
+                "tsConfig": "projects/demo/tsconfig.app.json",
+                "vendorChunk": true
+            }
         },
         "build-gh-pages": {
             "executor": "nx:run-commands",
             "options": {
-                "parallel": false,
                 "commands": [
                     "echo 'Github pages require special 404.html'",
                     "echo 'Read more: https://angular.io/guide/deployment#deploy-to-github-pages'",
@@ -86,25 +85,40 @@
                     "nx build demo -c production,github",
                     "nx run demo:prerender -c github",
                     "cp dist/demo/browser/index.html dist/demo/browser/404.html"
-                ]
+                ],
+                "parallel": false
+            }
+        },
+        "prerender": {
+            "configurations": {
+                "github": {
+                    "browserTarget": "demo:build:github"
+                },
+                "production": {}
+            },
+            "executor": "@nguniversal/builders:prerender",
+            "options": {
+                "browserTarget": "demo:build:production",
+                "routes": ["/"],
+                "serverTarget": "demo:server:production"
             }
         },
         "serve": {
+            "configurations": {
+                "development": {
+                    "browserTarget": "demo:build:development"
+                },
+                "production": {
+                    "browserTarget": "demo:build:production"
+                }
+            },
+            "defaultConfiguration": "development",
             "executor": "@angular-builders/custom-webpack:dev-server",
             "options": {
                 "browserTarget": "demo:build",
                 "sslCert": ".ssl/localhost.pem",
                 "sslKey": ".ssl/localhost-key.pem"
-            },
-            "configurations": {
-                "production": {
-                    "browserTarget": "demo:build:production"
-                },
-                "development": {
-                    "browserTarget": "demo:build:development"
-                }
-            },
-            "defaultConfiguration": "development"
+            }
         },
         "serve-ip": {
             "executor": "nx:run-commands",
@@ -115,7 +129,6 @@
         "serve-ssl": {
             "executor": "nx:run-commands",
             "options": {
-                "parallel": false,
                 "commands": [
                     "echo \"mkcert is a simple tool for making locally-trusted development certificates\"",
                     "echo \"Read about installation and more: https://github.com/FiloSottile/mkcert\"",
@@ -124,75 +137,62 @@
                     "mkdir -p .ssl",
                     "mkcert -key-file .ssl/localhost-key.pem -cert-file .ssl/localhost.pem localhost 127.0.0.1 ::1",
                     "nx serve --ssl"
-                ]
+                ],
+                "parallel": false
             }
         },
-        "test": {
-            "executor": "@nx/jest:jest",
-            "outputs": ["{workspaceRoot}/coverage/projects/demo"],
+        "serve-ssr": {
+            "configurations": {
+                "development": {
+                    "browserTarget": "demo:build:development",
+                    "serverTarget": "demo:server:development"
+                },
+                "production": {
+                    "browserTarget": "demo:build:production",
+                    "serverTarget": "demo:server:production"
+                }
+            },
+            "defaultConfiguration": "development",
+            "executor": "@nguniversal/builders:ssr-dev-server",
             "options": {
-                "jestConfig": "projects/demo/jest.config.ts"
+                "browserTarget": "demo:build",
+                "serverTarget": "demo:server"
             }
         },
         "server": {
+            "configurations": {
+                "development": {},
+                "production": {
+                    "optimization": true,
+                    "outputHashing": "media",
+                    "sourceMap": false
+                }
+            },
+            "defaultConfiguration": "production",
+            "development": {},
             "executor": "@angular-builders/custom-webpack:server",
             "options": {
                 "customWebpackConfig": {
                     "path": "projects/demo/webpack.config.ts"
                 },
-                "outputPath": "dist/demo/server",
                 "main": "projects/demo/server.ts",
-                "tsConfig": "projects/demo/tsconfig.server.json",
+                "optimization": false,
+                "outputPath": "dist/demo/server",
                 "sourceMap": true,
-                "optimization": false
+                "tsConfig": "projects/demo/tsconfig.server.json"
             },
-            "configurations": {
-                "production": {
-                    "outputHashing": "media",
-                    "sourceMap": false,
-                    "optimization": true
-                },
-                "development": {}
-            },
-            "defaultConfiguration": "production",
             "production": {
+                "optimization": true,
                 "outputHashing": "media",
-                "sourceMap": false,
-                "optimization": true
-            },
-            "development": {}
-        },
-        "serve-ssr": {
-            "executor": "@nguniversal/builders:ssr-dev-server",
-            "options": {
-                "browserTarget": "demo:build",
-                "serverTarget": "demo:server"
-            },
-            "configurations": {
-                "production": {
-                    "browserTarget": "demo:build:production",
-                    "serverTarget": "demo:server:production"
-                },
-                "development": {
-                    "serverTarget": "demo:server:development",
-                    "browserTarget": "demo:build:development"
-                }
-            },
-            "defaultConfiguration": "development"
-        },
-        "prerender": {
-            "executor": "@nguniversal/builders:prerender",
-            "options": {
-                "browserTarget": "demo:build:production",
-                "serverTarget": "demo:server:production",
-                "routes": ["/"]
-            },
-            "configurations": {
-                "production": {},
-                "github": {
-                    "browserTarget": "demo:build:github"
-                }
+                "sourceMap": false
             }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "options": {
+                "jestConfig": "projects/demo/jest.config.ts"
+            },
+            "outputs": ["{workspaceRoot}/coverage/projects/demo"]
         }
     }
 }

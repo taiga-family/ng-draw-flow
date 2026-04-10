@@ -13,21 +13,19 @@ import {AppRoutingModule} from './app.routes';
 
 @NgModule({
     imports: [
-        BrowserModule.withServerTransition({
-            appId: 'demo',
-        }),
         AppRoutingModule,
         BrowserAnimationsModule,
-        TuiRoot,
-        TuiDialog,
-        TuiAlert,
+        BrowserModule.withServerTransition({appId: 'demo'}),
         HttpClientModule,
         MarkdownModule.forRoot({
             loader: HttpClient,
             sanitize: SecurityContext.NONE,
         }),
-        ...TuiAddonDoc,
+        TuiAlert,
+        TuiDialog,
         TuiLink,
+        TuiRoot,
+        ...TuiAddonDoc,
     ],
     declarations: [AppComponent],
     providers: [APP_PROVIDERS, NG_EVENT_PLUGINS],

@@ -2,7 +2,7 @@ import {inject, Injectable, NgZone, type OnDestroy} from '@angular/core';
 
 interface SelectableItem {
     element: HTMLElement;
-    callback: (selected: boolean) => void;
+    callback(selected: boolean): void;
 }
 
 @Injectable()
@@ -192,6 +192,7 @@ export class SelectionService implements OnDestroy {
         }
 
         // If clicked on the scene (not while dragging)
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (this.clickedOnScene && !this.isDragging) {
             // Clear selection only when clicking on the scene, not when dragging
             this.clearSelection();
