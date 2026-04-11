@@ -13,6 +13,15 @@
         app.module.ts file as follows:
     </p>
     <tui-doc-code [code]="gettingStarted.data0" />
+    <p>
+        This example shows the most common non-default placement options:
+        <code>leftPosition</code>
+        and
+        <code>topPosition</code>
+        . They control initial and reset framing relative to the viewport edges. Deprecated options such as
+        <code>panSize</code>
+        are documented separately in the options reference below.
+    </p>
 
     <h2>Placement of Elements on the Screen.</h2>
 
@@ -173,6 +182,16 @@
         <code>dfPanZoomOptionsProvider(&#123; panSize: 6000 &#125;)</code>
         and
         <code>dfPanZoomOptionsProvider(&#123; panSize: &#123; width: 8000, height: 4000 &#125; &#125;)</code>
+    </p>
+    <p>
+        The workspace is now dynamic rather than a fixed rectangle. Node coordinates are stored in world space, and the
+        usable workspace bounds are recalculated from the rendered node bounds as nodes move or resize.
+    </p>
+    <p>
+        As a result, there is no longer a hard
+        <code>panSize</code>
+        border that blocks node dragging. Camera clamping and initial or reset framing are derived from the current
+        rendered content instead.
     </p>
     <p>
         Example for wheel scrolling mode:
