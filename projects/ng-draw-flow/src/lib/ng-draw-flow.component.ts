@@ -2,6 +2,7 @@ import {NgIf} from '@angular/common';
 import {
     type AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     DestroyRef,
     ElementRef,
@@ -25,7 +26,17 @@ import {debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
+import {
+    alignCameraToWorldRect,
+    clampByUsableRect,
+    type DfPanZoomWorldRectBounds,
+    getViewportZeroPoint,
+} from './components/pan-zoom/pan-zoom.camera.math';
 import {PanZoomComponent} from './components/pan-zoom/pan-zoom.component';
+import {
+    DF_PAN_ZOOM_OPTIONS,
+    type DfPanZoomOptions,
+} from './components/pan-zoom/pan-zoom.options';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
 import {DfResizeObserver, ErrorsDirective} from './directives';
@@ -97,10 +108,19 @@ import {SelectionService} from './services/selection.service';
 export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
 {
+    private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly connectionsService = inject(ConnectionsService);
+    private readonly panZoomService = inject(PanZoomService);
+    private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
     private readonly selectionService = inject(SelectionService);
     private readonly store = inject(NgDrawFlowStoreService);
+    private readonly maxViewportFrameRetries = 5;
+    private frameRequestId: number | null = null;
+    private viewportFrameRetryCount = 0;
+    private shouldFrameViewport = false;
+    private hasFramedExternalModel = false;
 
     @ViewChild(PanZoomComponent)
     protected panzoom!: PanZoomComponent;
@@ -152,9 +172,12 @@ export class NgDrawFlowComponent
         if (model) {
             this.store.updateDataModel(model);
         }
+
+        this.scheduleViewportFraming();
     }
 
     public ngOnDestroy(): void {
+        this.cancelViewportFraming();
         this.store.detach(this);
     }
 
@@ -168,6 +191,15 @@ export class NgDrawFlowComponent
         this.store.clearSelectedConnection();
         this.store.updateDataModel(value);
         this.form.setValue(value, {emitEvent: false});
+
+        if (value.nodes.length) {
+            if (!this.hasFramedExternalModel) {
+                this.hasFramedExternalModel = true;
+                this.scheduleViewportFraming();
+            }
+        } else {
+            this.hasFramedExternalModel = false;
+        }
     }
 
     public registerOnChange(fn: (value: DfDataModel) => void): void {
@@ -196,6 +228,7 @@ export class NgDrawFlowComponent
     /** Resets both zoom factor and pan offset to their defaults. */
     public resetPosition(): void {
         this.panzoom.resetPanzoom();
+        this.scheduleViewportFraming();
     }
 
     /**
@@ -245,6 +278,7 @@ export class NgDrawFlowComponent
         const {width, height} = event[0].contentRect;
 
         this.$rootReady.set(width && height);
+        this.scheduleViewportFraming();
     }
 
     private watchFormChanges(): void {
@@ -260,4 +294,114 @@ export class NgDrawFlowComponent
     // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
     private onTouched: () => void = () => {};
+
+    private scheduleViewportFraming(retry = false): void {
+        if (
+            this.panZoomOptions.leftPosition === null &&
+            this.panZoomOptions.topPosition === null
+        ) {
+            return;
+        }
+
+        if (!retry) {
+            this.shouldFrameViewport = true;
+            this.viewportFrameRetryCount = 0;
+        }
+
+        if (!this.$rootReady() || !this.panzoom) {
+            return;
+        }
+
+        if (typeof requestAnimationFrame !== 'function') {
+            this.applyViewportFraming();
+
+            return;
+        }
+
+        this.cancelViewportFraming();
+        this.frameRequestId = requestAnimationFrame(() => {
+            this.frameRequestId = requestAnimationFrame(() => {
+                this.frameRequestId = null;
+                this.applyViewportFraming();
+            });
+        });
+    }
+
+    private cancelViewportFraming(): void {
+        if (this.frameRequestId !== null && typeof cancelAnimationFrame === 'function') {
+            cancelAnimationFrame(this.frameRequestId);
+            this.frameRequestId = null;
+        }
+    }
+
+    private applyViewportFraming(): void {
+        if (!this.shouldFrameViewport || !this.$rootReady()) {
+            return;
+        }
+
+        const targetRect = this.getViewportFramingTargetRect();
+
+        if (!targetRect) {
+            this.retryViewportFraming();
+
+            return;
+        }
+
+        const viewportSize = {
+            width: this.hostElement.nativeElement.offsetWidth,
+            height: this.hostElement.nativeElement.offsetHeight,
+        };
+
+        if (!viewportSize.width || !viewportSize.height) {
+            this.retryViewportFraming();
+
+            return;
+        }
+
+        const zeroPoint = getViewportZeroPoint(viewportSize, {
+            leftPosition: this.panZoomOptions.leftPosition,
+            topPosition: this.panZoomOptions.topPosition,
+        });
+        const nextCamera = clampByUsableRect(
+            alignCameraToWorldRect(
+                this.panZoomService.snapshot(),
+                targetRect,
+                viewportSize,
+                {
+                    leftPosition: this.panZoomOptions.leftPosition,
+                    topPosition: this.panZoomOptions.topPosition,
+                },
+            ),
+            this.panZoomService.usableRect(),
+            viewportSize,
+            zeroPoint,
+        );
+
+        this.shouldFrameViewport = false;
+        this.panZoomService.setCamera(nextCamera);
+        this.cdr.detectChanges();
+    }
+
+    private retryViewportFraming(): void {
+        if (this.viewportFrameRetryCount >= this.maxViewportFrameRetries) {
+            return;
+        }
+
+        this.viewportFrameRetryCount += 1;
+        this.scheduleViewportFraming(true);
+    }
+
+    private getViewportFramingTargetRect(): DfPanZoomWorldRectBounds | null {
+        const nodes = this.form.value?.nodes ?? [];
+
+        if (!nodes.length) {
+            return null;
+        }
+
+        const startNode = nodes.find((node) => node.startNode === true);
+
+        return this.panZoomService.getBoundsForNodeIds(
+            startNode ? [startNode.id] : nodes.map(({id}) => id),
+        );
+    }
 }

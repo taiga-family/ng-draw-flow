@@ -4,10 +4,12 @@
     --df-connection-current-selectable-color: var(--df-connection-selectable-area-color);
 
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: 0;
+    top: 0;
+    left: 0;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: visible;
     pointer-events: none;
-    aspect-ratio: 1 / 1;
     shape-rendering: auto;
 
     &.optimize-speed {
@@ -47,8 +49,9 @@
     }
 
     .label-container {
-        inline-size: 100%;
-        block-size: 100%;
+        inline-size: 1px;
+        block-size: 1px;
+        overflow: visible;
     }
 
     .label {
