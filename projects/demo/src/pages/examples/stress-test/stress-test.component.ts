@@ -32,7 +32,6 @@ const COLUMNS_COUNT = 23;
         dfPanZoomOptionsProvider({
             topPosition: 50,
             leftPosition: 50,
-            panSize: 5000,
         }),
     ],
 })

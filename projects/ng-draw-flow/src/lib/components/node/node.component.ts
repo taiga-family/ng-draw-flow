@@ -43,6 +43,7 @@ import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {ConnectionsService} from '../connections/connections.service';
 import {type DfInputComponent, type DfOutputComponent} from '../connectors';
+import {getViewportZeroPoint} from '../pan-zoom/pan-zoom.camera.math';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 
@@ -84,6 +85,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
     private moved = false;
+    private resizeObserver: ResizeObserver | null = null;
 
     @ViewChild('nodeElement')
     public readonly nodeElementRef!: ElementRef<HTMLElement>;
@@ -124,8 +126,9 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.fillValue();
         this.applyOutputsConnectionLabel();
         this.subscribeToConnectorsChanges();
-        this.setInitialPosition();
-        this.updateConnectorsCoordinates();
+        this.syncWorkspaceGeometry();
+        this.refreshRenderedGeometry(false);
+        this.observeNodeSize();
 
         if (this.invalid) {
             this.innerComponent.invalid = true;
@@ -137,6 +140,9 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         if (this.connectionsService.selectedNodeId$.value === this.value?.id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
+
+        this.resizeObserver?.disconnect();
+        this.panZoomService.removeNodeBounds(this.value.id);
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
@@ -195,13 +201,14 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private onDragMove(distance: DfDragDropDistance): void {
-        const {zoom} = this.panZoomService.panzoomModel;
+        const {zoom} = this.panZoomService.snapshot();
 
         if (distance.deltaX || distance.deltaY) {
             this.moved = true;
         }
 
         this.cursor = 'grabbing';
+        this.panZoomService.setDisabled(true);
 
         // Accumulate offset
         this.accumulatedDelta.x += distance.deltaX / zoom;
@@ -211,16 +218,25 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         const applyY = Math.abs(this.accumulatedDelta.y) >= this.nodeDragThreshold;
 
         if (applyX || applyY) {
-            // Apply accumulated offset
-            this.value.position.x += applyX ? this.accumulatedDelta.x : 0;
-            this.value.position.y += applyY ? this.accumulatedDelta.y : 0;
+            const previousPosition = {...this.value.position};
+            const requestedDeltaX = applyX ? this.accumulatedDelta.x : 0;
+            const requestedDeltaY = applyY ? this.accumulatedDelta.y : 0;
+            const unclampedPosition = {
+                x: this.value.position.x + requestedDeltaX,
+                y: this.value.position.y + requestedDeltaY,
+            };
 
+            this.value.position = this.clampPositionToPanBounds(unclampedPosition);
+            const appliedDeltaX = this.value.position.x - previousPosition.x;
+            const appliedDeltaY = this.value.position.y - previousPosition.y;
+
+            this.syncWorkspaceGeometry();
             const centeredPosition = this.getCenteredPosition();
 
             this.applyPositionToStyle(centeredPosition, true);
             this.recalculateConnectorsPosition({
-                deltaX: applyX ? this.accumulatedDelta.x * zoom : 0,
-                deltaY: applyY ? this.accumulatedDelta.y * zoom : 0,
+                deltaX: appliedDeltaX * zoom,
+                deltaY: appliedDeltaY * zoom,
             });
 
             // Reset only used directions
@@ -232,21 +248,19 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
                 this.accumulatedDelta.y = 0;
             }
         }
-
-        this.panZoomService.panzoomDisabled = true;
     }
 
     private onDragEnd(): void {
         this.cursor = 'initial';
-        this.panZoomService.panzoomDisabled = false;
 
         if (this.moved) {
             this.nodeMoved.emit(this.value);
-            this.applyPositionToStyle(this.getCenteredPosition(), false);
+            this.refreshRenderedGeometry(false);
         }
 
         this.accumulatedDelta = INITIAL_COORDINATES;
         this.moved = false;
+        this.panZoomService.setDisabled(false);
     }
 
     private fillValue(): void {
@@ -290,7 +304,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private recalculateConnectorsPosition(distance: DfDragDropDistance): void {
-        const {zoom} = this.panZoomService.panzoomModel;
+        const {zoom} = this.panZoomService.snapshot();
         const currentMoveDistance = {
             deltaX: distance.deltaX / zoom,
             deltaY: distance.deltaY / zoom,
@@ -390,29 +404,13 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private getCenteredPosition(): DfPoint {
-        const {
-            panSize,
-            leftPosition: panZoomLeftPosition,
-            topPosition: panZoomTopPosition,
-        } = this.panZoomOptions;
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
-        const halfOfPanSize = panSize / 2;
 
-        const centeredPosition = {
-            x: this.value.position.x + halfOfPanSize - halfOfNodeWidth,
-            y: this.value.position.y + halfOfPanSize - halfOfNodeHeight,
+        return {
+            x: this.value.position.x - halfOfNodeWidth,
+            y: this.value.position.y - halfOfNodeHeight,
         };
-
-        if (panZoomTopPosition || panZoomTopPosition === 0) {
-            centeredPosition.y += halfOfNodeHeight;
-        }
-
-        if (panZoomLeftPosition || panZoomLeftPosition === 0) {
-            centeredPosition.x += halfOfNodeWidth;
-        }
-
-        return centeredPosition;
     }
 
     private subscribeToConnectorsChanges(): void {
@@ -433,40 +431,23 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private getCenterOfViewport(): DfPoint {
-        // Get the current scale of the pan
-        const {x: panPositionX, y: panPositionY, zoom} = this.panZoomService.panzoomModel;
-        const {
-            panSize,
-            leftPosition: panZoomLeftPosition,
-            topPosition: panZoomTopPosition,
-        } = this.panZoomOptions;
-        const halfOfPanSize = panSize / 2;
+        const {x: cameraX, y: cameraY, zoom} = this.panZoomService.snapshot();
+        const viewportWidth = this.drawFlowElement.offsetWidth;
+        const viewportHeight = this.drawFlowElement.offsetHeight;
+        const viewportCenterX = viewportWidth / 2;
+        const viewportCenterY = viewportHeight / 2;
+        const zeroPoint = getViewportZeroPoint(
+            {width: viewportWidth, height: viewportHeight},
+            {
+                leftPosition: this.panZoomOptions.leftPosition,
+                topPosition: this.panZoomOptions.topPosition,
+            },
+        );
 
-        // Get current pan position
-        const scaledPanPositionX = halfOfPanSize + (panPositionX * -1) / zoom;
-        const scaledPanPositionY = halfOfPanSize + (panPositionY * -1) / zoom;
-
-        // Calculating the center of the visible part of the viewport relative to the whole board
-        const position = {
-            x: scaledPanPositionX - halfOfPanSize,
-            y: scaledPanPositionY - halfOfPanSize,
+        return {
+            x: (viewportCenterX - zeroPoint.x - cameraX) / zoom,
+            y: (viewportCenterY - zeroPoint.y - cameraY) / zoom,
         };
-
-        if (panZoomLeftPosition) {
-            position.x -=
-                (this.drawFlowElement.offsetWidth / 2) * -1 +
-                panZoomLeftPosition +
-                this.nodeWidth / 2;
-        }
-
-        if (panZoomTopPosition) {
-            position.y -=
-                (this.drawFlowElement.offsetHeight / 2) * -1 +
-                panZoomTopPosition +
-                this.nodeHeight / 2;
-        }
-
-        return position;
     }
 
     private hasPosition(node: DfDataInitialNode | DfDataNode): node is DfDataNode {
@@ -475,10 +456,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         return !!position && Number.isFinite(position.x) && Number.isFinite(position.y);
     }
 
-    private setInitialPosition(): void {
-        const centeredPosition = this.getCenteredPosition();
-
-        this.applyPositionToStyle(centeredPosition, false);
+    private clampPositionToPanBounds(position: DfPoint): DfPoint {
+        return position;
     }
 
     /**
@@ -579,6 +558,36 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
         this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
             output.connectionLabel = connectionLabel;
+        });
+    }
+
+    private observeNodeSize(): void {
+        if (typeof ResizeObserver !== 'function') {
+            return;
+        }
+
+        this.resizeObserver = new ResizeObserver(() => {
+            this.saveInnerNodeSize();
+            this.syncWorkspaceGeometry();
+            this.refreshRenderedGeometry(false);
+        });
+        this.resizeObserver.observe(this.nodeElementRef.nativeElement);
+    }
+
+    private refreshRenderedGeometry(dynamic: boolean): void {
+        this.applyPositionToStyle(this.getCenteredPosition(), dynamic);
+        this.updateConnectorsCoordinates();
+    }
+
+    private syncWorkspaceGeometry(): void {
+        const halfOfNodeWidth = this.nodeWidth / 2;
+        const halfOfNodeHeight = this.nodeHeight / 2;
+
+        this.panZoomService.upsertNodeBounds(this.value.id, {
+            minX: this.value.position.x - halfOfNodeWidth,
+            minY: this.value.position.y - halfOfNodeHeight,
+            maxX: this.value.position.x + halfOfNodeWidth,
+            maxY: this.value.position.y + halfOfNodeHeight,
         });
     }
 }

@@ -1,5 +1,5 @@
 ```ts
-dfPanzoomOptionsProvider({
+dfPanZoomOptionsProvider({
   topPosition: 0,
   leftPosition: null,
 });

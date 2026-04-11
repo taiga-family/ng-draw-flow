@@ -17,7 +17,7 @@ import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         dfPanZoomOptionsProvider({
-            leftPosition: 0,
+            leftPosition: 50,
         }),
     ],
 })
