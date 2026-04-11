@@ -38,8 +38,13 @@ describe('NodeComponent', () => {
     beforeEach(async () => {
         TestBed.overrideComponent(NodeComponent, {
             set: {
-                template:
-                    '<div #nodeElement class="mock-node"><div class="node-content"><ng-container #container></ng-container></div></div>',
+                template: `
+                    <div #nodeElement class="mock-node">
+                        <div class="node-content">
+                            <ng-container #container></ng-container>
+                        </div>
+                    </div>
+                `,
             },
         });
 
