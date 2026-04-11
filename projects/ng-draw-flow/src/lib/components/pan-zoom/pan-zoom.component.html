@@ -1,15 +1,19 @@
 <div
-    class="pan-zoom"
-    [style.cursor]="cursor$ | async"
-    [style.transform]="wrapperTransform$ | async"
-    [style.transition-duration]="(transitioned$ | async) ? zoomAnimationDuration + 'ms' : '0s'"
-    (dfDragDrop)="onPan($event)"
-    (dfZoom)="onZoom($event)"
+    data-element="scene"
+    class="pan-zoom__viewport"
 >
+    <df-pan-zoom-background-canvas *ngIf="backgroundCanvasVisible" />
     <div
-        class="panzoom__container"
-        [style.transform]="panZoomContainerTransform$ | async"
+        class="pan-zoom"
+        [style.cursor]="cursor()"
+        [style.transform]="panTransform()"
+        [style.transition-duration]="transitionDuration()"
     >
-        <ng-content />
+        <div
+            style="position: relative; width: 0; height: 0"
+            class="pan-zoom__container"
+        >
+            <ng-content />
+        </div>
     </div>
 </div>
