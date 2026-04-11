@@ -10,4 +10,12 @@ describe('pan-zoom.options public api', () => {
         expect(source).toContain('Kept only for backward compatibility');
         expect(source).toContain('Dynamic workspace sizing ignores this option');
     });
+
+    it('declares configurable background canvas options', () => {
+        const source = readFileSync(join(__dirname, 'pan-zoom.options.ts'), 'utf-8');
+
+        expect(source).toContain('export interface DfPanZoomBackgroundCanvasOptions');
+        expect(source).toContain('backgroundCanvas: DfPanZoomBackgroundCanvasOptions;');
+        expect(source).toContain('visible: true');
+    });
 });

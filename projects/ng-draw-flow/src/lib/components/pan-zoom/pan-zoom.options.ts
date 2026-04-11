@@ -8,6 +8,10 @@ export interface DfPanSizeDimensions {
     height: number;
 }
 
+export interface DfPanZoomBackgroundCanvasOptions {
+    visible: boolean;
+}
+
 export interface DfPanZoomOptions {
     /**
      * @deprecated Dynamic workspace sizing ignores this option.
@@ -26,6 +30,7 @@ export interface DfPanZoomOptions {
     wheelSpeed: number;
     wheelStep: number;
     pinchZoomSpeed: number;
+    backgroundCanvas: DfPanZoomBackgroundCanvasOptions;
 }
 
 export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
@@ -42,6 +47,9 @@ export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
     wheelSpeed: 1,
     wheelStep: 0.008,
     pinchZoomSpeed: 1,
+    backgroundCanvas: {
+        visible: true,
+    },
 };
 
 export const DF_PAN_ZOOM_OPTIONS = new InjectionToken(
@@ -59,6 +67,10 @@ export function dfPanZoomOptionsProvider(
         useFactory: (): DfPanZoomOptions => ({
             ...DF_PAN_ZOOM_DEFAULT_OPTIONS,
             ...options,
+            backgroundCanvas: {
+                ...DF_PAN_ZOOM_DEFAULT_OPTIONS.backgroundCanvas,
+                ...options.backgroundCanvas,
+            },
         }),
     };
 }

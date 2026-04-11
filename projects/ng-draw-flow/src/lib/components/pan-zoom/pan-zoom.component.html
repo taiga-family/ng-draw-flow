@@ -1,8 +1,8 @@
 <div
     data-element="scene"
-    style="position: relative; width: 100%; height: 100%"
     class="pan-zoom__viewport"
 >
+    <df-pan-zoom-background-canvas *ngIf="backgroundCanvasVisible" />
     <div
         class="pan-zoom"
         [style.cursor]="cursor()"

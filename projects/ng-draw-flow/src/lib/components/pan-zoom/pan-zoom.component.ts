@@ -1,3 +1,4 @@
+import {NgIf} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -18,13 +19,15 @@ import {DfResizeObserver} from '../../directives/resize-observer';
 import {type DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {PanZoomControllerService} from './pan-zoom.controller.service';
+import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
+import {PanZoomBackgroundCanvasComponent} from './pan-zoom-background-canvas.component';
 import {type DfPanZoomGesture} from './pan-zoom-gestures.interfaces';
 import {PanZoomGesturesService} from './pan-zoom-gestures.service';
 
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [DfResizeObserver],
+    imports: [DfResizeObserver, NgIf, PanZoomBackgroundCanvasComponent],
     templateUrl: './pan-zoom.component.html',
     styleUrls: ['./pan-zoom.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,13 +48,14 @@ export class PanZoomComponent implements OnInit {
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly destroyRef = inject(DestroyRef);
     private readonly ngZone = inject(NgZone);
+    private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
     private readonly panZoomController = inject(PanZoomControllerService);
     private readonly panZoomGestures = inject(PanZoomGesturesService);
     private readonly dragDropService = inject(DragDropService);
     private renderScheduled = false;
 
     @Output()
-    protected readonly scale = new EventEmitter<number>();
+    public readonly scale = new EventEmitter<number>();
 
     protected readonly cursor = this.panZoomController.cursor;
     protected readonly layoutOffset = this.panZoomController.layoutOffset;
@@ -85,6 +89,10 @@ export class PanZoomComponent implements OnInit {
 
     public zoomOut(): void {
         this.panZoomController.zoomOut();
+    }
+
+    protected get backgroundCanvasVisible(): boolean {
+        return this.panZoomOptions.backgroundCanvas?.visible ?? true;
     }
 
     protected onPan(event: Parameters<PanZoomControllerService['handlePan']>[0]): void {
