@@ -12,8 +12,8 @@
         "typeRoots": ["node_modules/@types", "node_modules/@taiga-ui/tsconfig/@types"]
     },
     "angularCompilerOptions": {
-        "strictTemplates": true,
-        "checks": {}
+        "checks": {},
+        "strictTemplates": true
     },
     "exclude": ["projects/**/*.spec.ts"]
 }
