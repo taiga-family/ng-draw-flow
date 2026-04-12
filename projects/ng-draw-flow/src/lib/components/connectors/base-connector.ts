@@ -14,6 +14,7 @@ import {ConnectionsService} from '../connections/connections.service';
 export abstract class BaseConnector {
     protected abstract data: DfDataConnectorConfig;
 
+    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-connector-type')
     protected connectorType!: DfConnectionPoint;
 
@@ -23,7 +24,7 @@ export abstract class BaseConnector {
 
     protected readonly sub = this.connectionsService.usedConnectors$
         .pipe(
-            filter(() => !!this.data?.connectorId),
+            filter(() => !!this.data.connectorId),
             takeUntilDestroyed(),
         )
         .subscribe((usedConnectorIds: string[]) => {
@@ -34,16 +35,19 @@ export abstract class BaseConnector {
     public position?: DfConnectorPosition;
     public readonly nativeElement = inject(ElementRef).nativeElement;
 
+    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-node-id')
     public get bindNodeId(): string {
-        return this.data?.nodeId;
+        return this.data.nodeId;
     }
 
+    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-connector-id')
     public get bindConnectorId(): string {
-        return this.data?.connectorId;
+        return this.data.connectorId;
     }
 
+    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-position')
     public get bindPosition(): DfConnectorPosition | undefined {
         return this.position;

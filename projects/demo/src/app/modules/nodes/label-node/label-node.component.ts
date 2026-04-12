@@ -12,7 +12,7 @@ import {TuiButton} from '@taiga-ui/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelNodeComponent extends DrawFlowBaseNode {
-    public outputConnectors: number[] = [0];
+    public outputConnectors = [0];
 
     public addOutputConnector(): void {
         this.outputConnectors.push(this.outputs.length);

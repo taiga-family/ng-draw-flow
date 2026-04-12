@@ -14,7 +14,7 @@ export class ErrorsDirective implements OnInit {
     private readonly $invalidNodes = inject(INVALID_NODES);
 
     public ngOnInit(): void {
-        if (!this.ngControl?.control) {
+        if (!this.ngControl.control) {
             return;
         }
 

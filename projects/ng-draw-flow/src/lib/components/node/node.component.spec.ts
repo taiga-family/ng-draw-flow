@@ -38,9 +38,7 @@ describe('NodeComponent', () => {
                 arrowhead: {type: DfArrowhead.Arrow, height: 8, width: 8},
                 curvature: 0,
             },
-            nodes: {
-                simpleNode: MockNodeContentComponent,
-            },
+            nodes: {simpleNode: MockNodeContentComponent},
             options: {
                 nodeDragThreshold: 1,
                 nodesDraggable: true,

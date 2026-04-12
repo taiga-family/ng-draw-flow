@@ -80,7 +80,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private nodeHeight!: number;
     private selected = false;
     private value!: DfDataNode;
-    private accumulatedDelta: DfPoint = INITIAL_COORDINATES;
+    private accumulatedDelta = INITIAL_COORDINATES;
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
     private moved = false;
@@ -112,6 +112,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     public cursor: 'grabbing' | 'initial' = 'initial';
 
     public ngOnChanges(changes: SimpleChanges): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (changes.invalid && this.innerComponent) {
             this.innerComponent.invalid = changes.invalid.currentValue;
             this.innerComponent.markForCheck();
@@ -134,7 +135,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        if (this.connectionsService.selectedNodeId$.value === this.value?.id) {
+        if (this.connectionsService.selectedNodeId$.value === this.value.id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
     }
@@ -250,13 +251,13 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private fillValue(): void {
-        if (!this.hasPosition(this.node)) {
+        if (this.hasPosition(this.node)) {
+            this.value = this.node;
+        } else {
             this.value = {
                 ...this.node,
                 position: this.getCenterOfViewport(),
             };
-        } else {
-            this.value = this.node;
         }
     }
 
@@ -270,7 +271,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private updateConnectorsCoordinates(): void {
         const centeredCoordinates = this.getCenteredPosition();
 
-        this.innerComponent.inputs?.forEach((input: DfInputComponent) => {
+        this.innerComponent.inputs.forEach((input: DfInputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
                 this.value.id,
@@ -279,7 +280,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             );
         });
 
-        this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
+        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
                 this.value.id,
@@ -296,7 +297,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             deltaY: distance.deltaY / zoom,
         };
 
-        this.innerComponent.inputs?.forEach((input: DfInputComponent) => {
+        this.innerComponent.inputs.forEach((input: DfInputComponent) => {
             this.recalculateConnectorPositionFromLast(
                 currentMoveDistance,
                 input,
@@ -304,7 +305,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             );
         });
 
-        this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
+        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
             this.recalculateConnectorPositionFromLast(
                 currentMoveDistance,
                 output,
@@ -371,9 +372,11 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         let x = nodePosition.x + element.offsetLeft + element.clientWidth / 2;
         let y = nodePosition.y + element.offsetTop + element.clientHeight / 2;
 
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         while (element && !element.hasAttribute('data-draw-flow-node')) {
             element = element.offsetParent as HTMLElement;
 
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
             if (element) {
                 x += element.offsetLeft;
                 y += element.offsetTop;
@@ -416,11 +419,14 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private subscribeToConnectorsChanges(): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!this.innerComponent) {
             return;
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         this.previousOutputs = this.innerComponent?.outputs?.toArray() || [];
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         this.previousInputs = this.innerComponent?.inputs?.toArray() || [];
 
         const connectorsUpdates$ = this.collectConnectorUpdateSources();
@@ -472,6 +478,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private hasPosition(node: DfDataInitialNode | DfDataNode): node is DfDataNode {
         const position = (node as DfDataNode).position;
 
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         return !!position && Number.isFinite(position.x) && Number.isFinite(position.y);
     }
 
@@ -498,6 +505,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
      * Adds updates from the node content component
      */
     private addContentComponentUpdates(sources: Array<Observable<void>>): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (this.innerComponent?.connectorsUpdated) {
             sources.push(this.innerComponent.connectorsUpdated);
         }
@@ -507,6 +515,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
      * Adds updates from inputs
      */
     private addInputsUpdates(sources: Array<Observable<any>>): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (this.innerComponent?.inputs?.changes) {
             sources.push(
                 this.innerComponent.inputs.changes.pipe(
@@ -522,6 +531,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
      * Adds updates from outputs with handling for removed items
      */
     private addOutputsUpdates(sources: Array<Observable<any>>): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (this.innerComponent?.outputs?.changes) {
             sources.push(
                 this.innerComponent.outputs.changes.pipe(
@@ -577,7 +587,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             return;
         }
 
-        this.innerComponent.outputs?.forEach((output: DfOutputComponent) => {
+        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
             output.connectionLabel = connectionLabel;
         });
     }

@@ -7,9 +7,7 @@ import {ZoomService} from './zoom.service';
     selector: '[dfZoom]',
     outputs: ['dfZoom'],
     providers: [ZoomService],
-    host: {
-        '[style.touch-action]': '"none"',
-    },
+    host: {'[style.touch-action]': '"none"'},
 })
 export class ZoomDirective {
     protected readonly dfZoom = inject(ZoomService);

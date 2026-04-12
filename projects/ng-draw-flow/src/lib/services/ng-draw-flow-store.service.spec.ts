@@ -133,7 +133,7 @@ describe('NgDrawFlowStoreService', () => {
 
         service.emitNodeSelected(node);
         service.emitNodeMoved(moveEvent);
-        expect((service.dataModel()?.nodes[0] as DfDataNode)?.position).toEqual({
+        expect((service.dataModel()?.nodes[0] as DfDataNode).position).toEqual({
             x: 50,
             y: 70,
         });

@@ -16,11 +16,9 @@ export default class LabelsComponent {
         TypeScript: import('./examples/component.ts?raw'),
         Template: import('./examples/template.html?raw'),
         'Copy label example': import('./examples/labels/copy/copy.component.ts?raw'),
-        'Label node component': import(
-            '../../../app/modules/nodes/label-node/label-node.component.ts?raw'
-        ),
-        'Label node template': import(
-            '../../../app/modules/nodes/label-node/label-node.component.html?raw'
-        ),
+        'Label node component':
+            import('../../../app/modules/nodes/label-node/label-node.component.ts?raw'),
+        'Label node template':
+            import('../../../app/modules/nodes/label-node/label-node.component.html?raw'),
     };
 }

@@ -294,7 +294,7 @@ All notable changes to this project will be documented in this file. See
 - **deps**: update taiga-ui (#42)
   [(95ab5f2)](https://github.com/taiga-family/ng-draw-flow/commit/95ab5f20fd2bfd9189f6d0f07526ab7fcfba4ecd)
 
-### [0.0.6]() (2024-09-22)
+### [0.0.6](https://github.com/taiga-family/ng-draw-flow/compare/v0.0.6) (2024-09-22)
 
 ### 🚀 Features
 

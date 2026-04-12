@@ -92,9 +92,7 @@ import {SelectionService} from './services/selection.service';
             outputs: ['dfResizeObserver'],
         },
     ],
-    host: {
-        '(dfResizeObserver)': 'this.onResize($event)',
-    },
+    host: {'(dfResizeObserver)': 'this.onResize($event)'},
 })
 export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
@@ -161,6 +159,7 @@ export class NgDrawFlowComponent
     }
 
     public writeValue(value: DfDataModel): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!value) {
             return;
         }
@@ -259,5 +258,6 @@ export class NgDrawFlowComponent
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
     private onTouched: () => void = () => {};
 }

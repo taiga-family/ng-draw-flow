@@ -290,7 +290,7 @@ export class NgDrawFlowStoreService {
     private cloneModel(model: DfDataModel): DfDataModel {
         return {
             ...model,
-            nodes: model.nodes?.map((node) =>
+            nodes: model.nodes.map((node) =>
                 'position' in node
                     ? this.cloneNode(node)
                     : {
@@ -298,7 +298,7 @@ export class NgDrawFlowStoreService {
                           data: {...node.data},
                       },
             ),
-            connections: model.connections?.map((connection) =>
+            connections: model.connections.map((connection) =>
                 this.cloneConnection(connection),
             ),
         };

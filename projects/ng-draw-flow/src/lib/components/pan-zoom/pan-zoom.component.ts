@@ -53,8 +53,7 @@ export class PanZoomComponent {
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly drawFlowRootElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
-    private readonly panZoomOptions: DfPanZoomOptions =
-        inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
+    private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
     private readonly resizeObserver$ = inject(ResizeObserverService);
     private readonly zoom$ = new BehaviorSubject<number>(DF_PAN_ZOOM_INITIAL_SCALE);

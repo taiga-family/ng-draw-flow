@@ -16,13 +16,7 @@ import {SimpleNodeComponent} from '../../../../../app/modules/nodes';
     templateUrl: './connections-example.component.html',
     styleUrls: ['./connections-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        provideNgDrawFlowConfigs({
-            nodes: {
-                simpleNode: SimpleNodeComponent,
-            },
-        }),
-    ],
+    providers: [provideNgDrawFlowConfigs({nodes: {simpleNode: SimpleNodeComponent}})],
 })
 export default class ConnectionsExampleComponent {
     protected data: DfDataModel = {

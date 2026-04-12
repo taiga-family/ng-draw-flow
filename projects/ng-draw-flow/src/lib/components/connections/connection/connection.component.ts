@@ -33,7 +33,6 @@ import {createConnectorHash, deepEqual} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import {
     DfArrowhead,
-    type DfArrowheadOptions,
     DfConnectionType,
     type DfConnectorData,
     type DfDataConnection,
@@ -64,7 +63,7 @@ export class ConnectionComponent {
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
-    private readonly arrowhead: DfArrowheadOptions = this.options.connection.arrowhead;
+    private readonly arrowhead = this.options.connection.arrowhead;
     private readonly arrowWidth = this.arrowhead.width;
     private readonly arrowHeight = this.arrowhead.height;
     private readonly destroyRef = inject(DestroyRef);
@@ -78,8 +77,8 @@ export class ConnectionComponent {
         observeOn(asyncScheduler),
         switchMap(() =>
             combineLatest([
-                this.getConnectionPoint(this.connection?.source),
-                this.getConnectionPoint(this.connection?.target),
+                this.getConnectionPoint(this.connection.source),
+                this.getConnectionPoint(this.connection.target),
             ]),
         ),
         switchMap(([sourcePoint, targetPoint]) => {

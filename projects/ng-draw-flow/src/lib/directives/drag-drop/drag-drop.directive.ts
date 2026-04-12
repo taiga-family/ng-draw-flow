@@ -1,7 +1,5 @@
 import {Directive, ElementRef, inject} from '@angular/core';
-import {type Observable} from 'rxjs';
 
-import {type DfDragDrop} from './drag-drop.interface';
 import {DragDropService} from './drag-drop.service';
 
 @Directive({
@@ -11,7 +9,7 @@ import {DragDropService} from './drag-drop.service';
 })
 export class DragDropDirective {
     protected readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
-    protected readonly dfDragDrop: Observable<DfDragDrop> = inject(
-        DragDropService,
-    ).streamFor(this.elementRef.nativeElement);
+    protected readonly dfDragDrop = inject(DragDropService).streamFor(
+        this.elementRef.nativeElement,
+    );
 }

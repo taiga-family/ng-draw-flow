@@ -5,7 +5,7 @@ export function collectInvalidNodeIds(errors: ValidationErrors | null): Set<stri
         return new Set();
     }
 
-    const allIds: string[] = Object.values(errors)
+    const allIds = Object.values(errors)
         .map((v) => {
             if (Array.isArray(v) && v.every((x) => typeof x === 'string')) {
                 return v as string[];

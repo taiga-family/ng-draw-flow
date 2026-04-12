@@ -60,7 +60,7 @@ export function computeWaypoints(
      * head *towards* the target rather than backwards.
      */
     const firstStep = getPrimaryDirection(sourceGap, sourcePos, targetGap);
-    const primaryAxis: 'x' | 'y' = firstStep.x !== 0 ? 'x' : 'y';
+    const primaryAxis = firstStep.x === 0 ? 'y' : 'x';
     const axisSign = firstStep[primaryAxis]; //  +1 or -1
 
     /**
@@ -108,7 +108,7 @@ export function computeWaypoints(
 
         /** Detect & flip elbow to avoid overlap with the nodes */
         if (sourcePos !== targetPos) {
-            const crossAxis: 'x' | 'y' = primaryAxis === 'x' ? 'y' : 'x';
+            const crossAxis = primaryAxis === 'x' ? 'y' : 'x';
             const sameCardinal = sourceDir[primaryAxis] === targetDir[crossAxis];
 
             const mustFlip =
@@ -147,7 +147,7 @@ export function computeWaypoints(
     /**
      * Assemble the full polyline: connector-center ➜ gap ➜ elbows
      */
-    const polyline: DfPoint[] = [
+    const polyline = [
         source, // 0. start at connector center
         sourceGap, // 1. leave the node
         ...elbows, // 2. one or two elbows

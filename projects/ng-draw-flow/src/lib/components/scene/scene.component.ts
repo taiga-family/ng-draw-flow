@@ -86,6 +86,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     }
 
     public writeValue(value: DfDataModel): void {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!value) {
             return;
         }
@@ -160,9 +161,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     }
 
     protected onNodeDeleted(id: string): void {
-        const deleted: DfDataNode = this.model.nodes.find(
-            (n) => n.id === id,
-        ) as DfDataNode;
+        const deleted = this.model.nodes.find((n) => n.id === id) as DfDataNode;
 
         this.model = {
             ...this.model,
@@ -208,7 +207,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
                     connection.source.nodeId === nodeId ||
                     connection.target.nodeId === nodeId,
             )
-            ?.forEach((connection) => {
+            .forEach((connection) => {
                 this.model = {
                     ...this.model,
                     connections: this.model.connections.filter(
@@ -235,7 +234,9 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     }
 
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
     private onTouched: () => void = () => {};
 }

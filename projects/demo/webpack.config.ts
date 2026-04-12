@@ -37,9 +37,7 @@ const config: Configuration = {
             },
         ],
     },
-    output: {
-        hashFunction: 'xxhash64',
-    },
+    output: {hashFunction: 'xxhash64'},
 };
 
 export default (ngConfigs: Configuration): Configuration => {
@@ -48,7 +46,7 @@ export default (ngConfigs: Configuration): Configuration => {
             rule &&
             typeof rule === 'object' &&
             DONT_MUTATE_RAW_FILE_CONTENTS.some(
-                (pattern) => rule.test instanceof RegExp && rule.test?.test(pattern),
+                (pattern) => rule.test instanceof RegExp && rule.test.test(pattern),
             )
         ) {
             return {...rule, resourceQuery: {not: [RAW_QUERY]}};

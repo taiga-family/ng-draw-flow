@@ -20,8 +20,8 @@ export class ZoomService extends Observable<DfZoom> {
     constructor() {
         const nativeElement: HTMLElement = inject(ElementRef).nativeElement;
         const options = inject(DF_PAN_ZOOM_OPTIONS);
-        const wheelSensitivity = options?.zoomWheelSensitivity;
-        const touchSensitivity = options?.touchSensitivity;
+        const wheelSensitivity = options.zoomWheelSensitivity;
+        const touchSensitivity = options.touchSensitivity;
 
         super((subscriber) => {
             merge(
