@@ -35,7 +35,7 @@ import {NodeComponent} from '../node/node.component';
     selector: 'df-scene',
     imports: [CommonModule, ConnectionComponent, DraftConnectionComponent, NodeComponent],
     templateUrl: './scene.component.html',
-    styleUrls: ['./scene.component.less'],
+    styleUrl: './scene.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
@@ -80,7 +80,6 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     }
 
     public writeValue(value: DfDataModel): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!value) {
             return;
         }
@@ -228,9 +227,9 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     }
 
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
+
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
+
     private onTouched: () => void = () => {};
 }

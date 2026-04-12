@@ -17,7 +17,7 @@ import FirstExampleComponent from './examples/first-example/component';
         TuiLink,
     ],
     templateUrl: './quickstart.component.html',
-    styleUrls: ['./quickstart.component.less'],
+    styleUrl: './quickstart.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class QuickstartComponent {

@@ -16,7 +16,7 @@ import {MarkdownModule} from 'ngx-markdown';
     selector: 'changelog',
     imports: [MarkdownModule, NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './overview.template.html',
-    styleUrls: ['./overview.style.less'],
+    styleUrl: './overview.style.less',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

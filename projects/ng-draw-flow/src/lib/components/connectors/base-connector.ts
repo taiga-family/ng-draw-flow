@@ -14,7 +14,6 @@ import {ConnectionsService} from '../connections/connections.service';
 export abstract class BaseConnector {
     protected abstract data: DfDataConnectorConfig;
 
-    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-connector-type')
     protected connectorType!: DfConnectionPoint;
 
@@ -24,10 +23,14 @@ export abstract class BaseConnector {
 
     protected readonly sub = this.connectionsService.usedConnectors$
         .pipe(
-            filter(() => !!this.data.connectorId),
+            filter(() => !!this.data?.connectorId),
             takeUntilDestroyed(),
         )
         .subscribe((usedConnectorIds: string[]) => {
+            if (!this.data?.connectorId) {
+                return;
+            }
+
             this.setupDisabledState(usedConnectorIds.includes(this.data.connectorId));
         });
 
@@ -35,25 +38,26 @@ export abstract class BaseConnector {
     public position?: DfConnectorPosition;
     public readonly nativeElement = inject(ElementRef).nativeElement;
 
-    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-node-id')
-    public get bindNodeId(): string {
-        return this.data.nodeId;
+    public get bindNodeId(): string | undefined {
+        return this.data?.nodeId;
     }
 
-    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-connector-id')
-    public get bindConnectorId(): string {
-        return this.data.connectorId;
+    public get bindConnectorId(): string | undefined {
+        return this.data?.connectorId;
     }
 
-    // eslint-disable-next-line @angular-eslint/prefer-host-metadata-property
     @HostBinding('attr.data-position')
     public get bindPosition(): DfConnectorPosition | undefined {
         return this.position;
     }
 
     public destroy(): void {
+        if (!this.data?.connectorId) {
+            return;
+        }
+
         this.connectionsService.removeConnectionsByConnectorId(this.data.connectorId);
     }
 
@@ -64,7 +68,7 @@ export abstract class BaseConnector {
             this.nativeElement.removeAttribute('data-connected');
         }
 
-        this.isDisabled = this.data.single && connected;
+        this.isDisabled = (this.data?.single satisfies boolean) && connected;
 
         this.nativeElement.classList.toggle('df-disabled', this.isDisabled);
     }

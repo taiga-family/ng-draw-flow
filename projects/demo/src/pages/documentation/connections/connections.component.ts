@@ -9,7 +9,7 @@ import SmoothStepExampleComponent from './smooth-step-example/smooth-step-exampl
     selector: 'connections',
     imports: [BezierExampleComponent, SmoothStepExampleComponent, TuiAddonDoc],
     templateUrl: './connections.component.html',
-    styleUrls: ['./connections.component.less'],
+    styleUrl: './connections.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ConnectionsComponent {}

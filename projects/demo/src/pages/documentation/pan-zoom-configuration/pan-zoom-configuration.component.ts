@@ -17,7 +17,7 @@ import {
         TuiAddonDoc,
     ],
     templateUrl: './pan-zoom-configuration.component.html',
-    styleUrls: ['./pan-zoom-configuration.component.less'],
+    styleUrl: './pan-zoom-configuration.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class PanZoomConfigurationComponent {

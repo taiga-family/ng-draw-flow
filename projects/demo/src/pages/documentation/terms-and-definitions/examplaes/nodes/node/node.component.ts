@@ -5,7 +5,7 @@ import {DrawFlowBaseNode} from '@ng-draw-flow/core';
     standalone: true,
     selector: 'app-node',
     templateUrl: './node.component.html',
-    styleUrls: ['./node.component.less'],
+    styleUrl: './node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NodeComponent extends DrawFlowBaseNode {}

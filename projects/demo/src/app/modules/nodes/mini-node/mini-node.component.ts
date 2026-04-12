@@ -7,7 +7,7 @@ import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-fl
     selector: 'app-mini-node',
     imports: [CommonModule, DfInputComponent, DfOutputComponent],
     templateUrl: './mini-node.component.html',
-    styleUrls: ['./mini-node.component.less'],
+    styleUrl: './mini-node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MiniNodeComponent extends DrawFlowBaseNode {}

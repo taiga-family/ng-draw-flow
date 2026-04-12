@@ -66,9 +66,9 @@
                 "scripts": [],
                 "sourceMap": true,
                 "styles": [
-                    "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
-                    "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
-                    "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+                    "node_modules/@taiga-ui/styles/taiga-ui-theme.less",
+                    "node_modules/@taiga-ui/styles/taiga-ui-fonts.less",
+                    "node_modules/@taiga-ui/legacy/styles/taiga-ui-global.less",
                     "projects/demo/src/styles.css"
                 ],
                 "tsConfig": "projects/demo/tsconfig.app.json",
@@ -96,7 +96,7 @@
                 },
                 "production": {}
             },
-            "executor": "@nguniversal/builders:prerender",
+            "executor": "@angular-devkit/build-angular:prerender",
             "options": {
                 "browserTarget": "demo:build:production",
                 "routes": ["/"],
@@ -106,16 +106,16 @@
         "serve": {
             "configurations": {
                 "development": {
-                    "browserTarget": "demo:build:development"
+                    "buildTarget": "demo:build:development"
                 },
                 "production": {
-                    "browserTarget": "demo:build:production"
+                    "buildTarget": "demo:build:production"
                 }
             },
             "defaultConfiguration": "development",
             "executor": "@angular-builders/custom-webpack:dev-server",
             "options": {
-                "browserTarget": "demo:build",
+                "buildTarget": "demo:build",
                 "sslCert": ".ssl/localhost.pem",
                 "sslKey": ".ssl/localhost-key.pem"
             }
@@ -153,7 +153,7 @@
                 }
             },
             "defaultConfiguration": "development",
-            "executor": "@nguniversal/builders:ssr-dev-server",
+            "executor": "@angular-devkit/build-angular:ssr-dev-server",
             "options": {
                 "browserTarget": "demo:build",
                 "serverTarget": "demo:server"
@@ -163,28 +163,24 @@
             "configurations": {
                 "development": {},
                 "production": {
-                    "optimization": true,
+                    "buildOptimizer": false,
+                    "optimization": false,
                     "outputHashing": "media",
                     "sourceMap": false
                 }
             },
             "defaultConfiguration": "production",
-            "development": {},
-            "executor": "@angular-builders/custom-webpack:server",
+            "executor": "@nx/angular:webpack-server",
             "options": {
                 "customWebpackConfig": {
                     "path": "projects/demo/webpack.config.ts"
                 },
                 "main": "projects/demo/server.ts",
+                "buildOptimizer": false,
                 "optimization": false,
                 "outputPath": "dist/demo/server",
                 "sourceMap": true,
                 "tsConfig": "projects/demo/tsconfig.server.json"
-            },
-            "production": {
-                "optimization": true,
-                "outputHashing": "media",
-                "sourceMap": false
             }
         },
         "test": {

@@ -13,7 +13,7 @@ import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
     selector: 'simple-example',
     imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './simple-example.component.html',
-    styleUrls: ['./simple-example.component.less'],
+    styleUrl: './simple-example.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [dfPanZoomOptionsProvider({leftPosition: 50})],
 })

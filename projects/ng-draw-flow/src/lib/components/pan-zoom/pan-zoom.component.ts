@@ -1,4 +1,4 @@
-import {NgIf} from '@angular/common';
+import {isPlatformBrowser, NgIf} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -10,12 +10,13 @@ import {
     NgZone,
     type OnInit,
     Output,
+    PLATFORM_ID,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {WaResizeObserver} from '@ng-web-apis/resize-observer';
 import {animationFrameScheduler} from 'rxjs';
 
 import {DragDropService} from '../../directives/drag-drop';
-import {DfResizeObserver} from '../../directives/resize-observer';
 import {type DfPoint} from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {PanZoomControllerService} from './pan-zoom.controller.service';
@@ -27,18 +28,18 @@ import {PanZoomGesturesService} from './pan-zoom-gestures.service';
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [DfResizeObserver, NgIf, PanZoomBackgroundCanvasComponent],
+    imports: [NgIf, PanZoomBackgroundCanvasComponent],
     templateUrl: './pan-zoom.component.html',
-    styleUrls: ['./pan-zoom.component.less'],
+    styleUrl: './pan-zoom.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [PanZoomControllerService, PanZoomGesturesService],
     hostDirectives: [
         {
-            directive: DfResizeObserver,
-            outputs: ['dfResizeObserver'],
+            directive: WaResizeObserver,
+            outputs: ['waResizeObserver'],
         },
     ],
-    host: {'(dfResizeObserver)': 'onBoardResize($event)'},
+    host: {'(waResizeObserver)': 'onBoardResize($event)'},
 })
 export class PanZoomComponent implements OnInit {
     private readonly cdr = inject(ChangeDetectorRef);
@@ -46,6 +47,7 @@ export class PanZoomComponent implements OnInit {
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly destroyRef = inject(DestroyRef);
     private readonly ngZone = inject(NgZone);
+    private readonly platformId = inject(PLATFORM_ID);
     private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
     private readonly panZoomController = inject(PanZoomControllerService);
     private readonly panZoomGestures = inject(PanZoomGesturesService);
@@ -122,6 +124,10 @@ export class PanZoomComponent implements OnInit {
     }
 
     private watchGestures(): void {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         this.ngZone.runOutsideAngular(() => {
             this.panZoomGestures
                 .streamFor(this.el.nativeElement)

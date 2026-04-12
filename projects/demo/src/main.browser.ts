@@ -1,21 +1,14 @@
 import './polyfills';
 
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {enableProdMode} from '@angular/core';
+import {bootstrapApplication} from '@angular/platform-browser';
 
-import {AppBrowserModule} from './app/app.browser.module';
+import {AppComponent} from './app/app.component';
+import {appConfig} from './app/app.config';
+import {environment} from './environments/environment';
 
-document.addEventListener('DOMContentLoaded', () => {
-    platformBrowserDynamic()
-        .bootstrapModule(AppBrowserModule)
-        .then((ref) => {
-            const windowRef: any = window;
+if (environment.production) {
+    enableProdMode();
+}
 
-            // Ensure Angular destroys itself on hot reloads for Stackblitz
-            if (windowRef.ngRef) {
-                windowRef.ngRef.destroy();
-            }
-
-            windowRef.ngRef = ref;
-        })
-        .catch((err: unknown) => console.error(err));
-});
+bootstrapApplication(AppComponent, appConfig).catch((err: unknown) => console.error(err));

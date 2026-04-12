@@ -8,7 +8,7 @@ import {TuiButton} from '@taiga-ui/core';
     selector: 'app-label-node',
     imports: [AsyncPipe, DfInputComponent, DfOutputComponent, NgForOf, NgIf, TuiButton],
     templateUrl: './label-node.component.html',
-    styleUrls: ['./label-node.component.less'],
+    styleUrl: './label-node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelNodeComponent extends DrawFlowBaseNode {
