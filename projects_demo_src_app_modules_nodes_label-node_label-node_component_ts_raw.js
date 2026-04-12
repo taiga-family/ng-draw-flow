@@ -7,7 +7,7 @@
   \************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "import {AsyncPipe, NgForOf, NgIf} from '@angular/common';\nimport {ChangeDetectionStrategy, Component} from '@angular/core';\nimport {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';\nimport {TuiButton} from '@taiga-ui/core';\n\n@Component({\n    standalone: true,\n    selector: 'app-label-node',\n    imports: [AsyncPipe, DfInputComponent, DfOutputComponent, NgForOf, NgIf, TuiButton],\n    templateUrl: './label-node.component.html',\n    styleUrls: ['./label-node.component.less'],\n    changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class LabelNodeComponent extends DrawFlowBaseNode {\n    public outputConnectors: number[] = [0];\n\n    public addOutputConnector(): void {\n        this.outputConnectors.push(this.outputs.length);\n    }\n}\n";
+module.exports = "import {AsyncPipe, NgForOf, NgIf} from '@angular/common';\nimport {ChangeDetectionStrategy, Component} from '@angular/core';\nimport {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';\nimport {TuiButton} from '@taiga-ui/core';\n\n@Component({\n    standalone: true,\n    selector: 'app-label-node',\n    imports: [AsyncPipe, DfInputComponent, DfOutputComponent, NgForOf, NgIf, TuiButton],\n    templateUrl: './label-node.component.html',\n    styleUrls: ['./label-node.component.less'],\n    changeDetection: ChangeDetectionStrategy.OnPush,\n})\nexport class LabelNodeComponent extends DrawFlowBaseNode {\n    public outputConnectors = [0];\n\n    public addOutputConnector(): void {\n        this.outputConnectors.push(this.outputs.length);\n    }\n}\n";
 
 /***/ })
 

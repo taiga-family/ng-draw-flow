@@ -7,7 +7,7 @@
   \**********************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```\n{\n  hasCycle: boolean;\n  cycleNodes: DfId[]; // array of nodeIds that form a cycle\n}\n```\n";
+module.exports = "```ts\n{\n  hasCycle: boolean;\n  cycleNodes: DfId[]; // array of nodeIds that form a cycle\n}\n```\n";
 
 /***/ })
 

@@ -7,7 +7,7 @@
   \*********************************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```\n{\n  hasIsolatedNodes: boolean;\n  isolatedNodes: DfId[] // array of nodeIds without connections\n}\n```\n";
+module.exports = "```ts\n{\n  hasIsolatedNodes: boolean;\n  isolatedNodes: DfId[] // array of nodeIds without connections\n}\n```\n";
 
 /***/ })
 

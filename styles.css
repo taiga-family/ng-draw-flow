@@ -6,21 +6,21 @@
   --tui-font-heading: 'Manrope', -apple-system, 'BlinkMacSystemFont', system-ui, 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
   --tui-font-text: 'Manrope', -apple-system, 'BlinkMacSystemFont', system-ui, 'Roboto', 'Segoe UI', 'Helvetica Neue', sans-serif;
   --tui-font-offset: 0rem;
-  --tui-font-heading-1: bold calc(var(--tui-font-offset) + 3.125rem) / 3.5rem var(--tui-font-heading);
-  --tui-font-heading-2: bold calc(var(--tui-font-offset) + 2.75rem) / 3rem var(--tui-font-heading);
-  --tui-font-heading-3: bold calc(var(--tui-font-offset) + 2.25rem) / 2.5rem var(--tui-font-heading);
-  --tui-font-heading-4: bold calc(var(--tui-font-offset) + 1.75rem) / 2rem var(--tui-font-heading);
-  --tui-font-heading-5: bold calc(var(--tui-font-offset) + 1.5rem) / 1.75rem var(--tui-font-heading);
-  --tui-font-heading-6: bold calc(var(--tui-font-offset) + 1.25rem) / 1.5rem var(--tui-font-heading);
-  --tui-font-text-xl: normal calc(var(--tui-font-offset) + 1.1875rem) / 1.75rem var(--tui-font-text);
-  --tui-font-text-l: normal calc(var(--tui-font-offset) + 1.0625rem) / 1.75rem var(--tui-font-text);
-  --tui-font-text-m: normal calc(var(--tui-font-offset) + 1rem) / 1.5rem var(--tui-font-text);
-  --tui-font-text-s: normal calc(var(--tui-font-offset) + 0.8125rem) / 1.25rem var(--tui-font-text);
-  --tui-font-text-xs: normal calc(var(--tui-font-offset) + 0.6875rem) / 1rem var(--tui-font-text);
-  --tui-font-text-ui-l: normal calc(var(--tui-font-offset) + 1.0625rem) / 1.5rem var(--tui-font-text);
-  --tui-font-text-ui-m: normal calc(var(--tui-font-offset) + 1rem) / 1.25rem var(--tui-font-text);
-  --tui-font-text-ui-s: normal calc(var(--tui-font-offset) + 0.8125rem) / 1rem var(--tui-font-text);
-  --tui-font-text-ui-xs: normal calc(var(--tui-font-offset) + 0.6875rem) / 0.8125rem var(--tui-font-text);
+  --tui-font-heading-1: bold calc(var(--tui-font-offset) + 3.125rem) / calc(50 / 56) var(--tui-font-heading);
+  --tui-font-heading-2: bold calc(var(--tui-font-offset) + 2.75rem) / calc(48 / 44) var(--tui-font-heading);
+  --tui-font-heading-3: bold calc(var(--tui-font-offset) + 2.25rem) / calc(40 / 36) var(--tui-font-heading);
+  --tui-font-heading-4: bold calc(var(--tui-font-offset) + 1.75rem) / calc(32 / 28) var(--tui-font-heading);
+  --tui-font-heading-5: bold calc(var(--tui-font-offset) + 1.5rem) / calc(28 / 24) var(--tui-font-heading);
+  --tui-font-heading-6: bold calc(var(--tui-font-offset) + 1.25rem) / calc(24 / 20) var(--tui-font-heading);
+  --tui-font-text-xl: normal calc(var(--tui-font-offset) + 1.1875rem) / calc(28 / 19) var(--tui-font-text);
+  --tui-font-text-l: normal calc(var(--tui-font-offset) + 1.0625rem) / calc(28 / 17) var(--tui-font-text);
+  --tui-font-text-m: normal calc(var(--tui-font-offset) + 1rem) / calc(24 / 16) var(--tui-font-text);
+  --tui-font-text-s: normal calc(var(--tui-font-offset) + 0.8125rem) / calc(20 / 13) var(--tui-font-text);
+  --tui-font-text-xs: normal calc(var(--tui-font-offset) + 0.6875rem) / calc(16 / 11) var(--tui-font-text);
+  --tui-font-text-ui-l: normal calc(var(--tui-font-offset) + 1.0625rem) / calc(24 / 17) var(--tui-font-text);
+  --tui-font-text-ui-m: normal calc(var(--tui-font-offset) + 1rem) / calc(20 / 16) var(--tui-font-text);
+  --tui-font-text-ui-s: normal calc(var(--tui-font-offset) + 0.8125rem) / calc(16 / 13) var(--tui-font-text);
+  --tui-font-text-ui-xs: normal calc(var(--tui-font-offset) + 0.6875rem) / calc(13 / 11) var(--tui-font-text);
   --tui-radius-xs: 0.25rem;
   --tui-radius-s: 0.5rem;
   --tui-radius-m: 0.625rem;
@@ -2400,6 +2400,7 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   border-block-end: calc(var(--t-row-height) - var(--t-height)) solid transparent;
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
+  /* @deprecated TODO remove in v5 */
 }
 [tuiAppearance][data-appearance='table']:not([tuiWrapper]):not(._empty) {
   color: var(--tui-text-primary);
@@ -2431,8 +2432,11 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   outline-offset: -0.125rem;
   outline: 0.125rem solid var(--tui-border-focus);
 }
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[tuiWrapper]._focused {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[tuiWrapper]:not(._focused):has(:focus-visible) {
+  outline-offset: -0.125rem;
+  outline: 0.125rem solid var(--tui-border-focus);
+}
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[tuiWrapper]._focused._focused {
   outline-offset: -0.125rem;
   outline: 0.125rem solid var(--tui-border-focus);
 }
@@ -2444,6 +2448,7 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
   background-repeat: no-repeat;
   background-image: linear-gradient(to top right, transparent 0% 50%, var(--tui-status-negative) 50% 100%);
   background-size: 0.5rem 0.5rem;
+  /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
@@ -2516,10 +2521,14 @@ TODO: remove :not([tuiWrapper]) after legacy controls deletion
 }
 [tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]:not(._focused):has(:focus-visible),
 [tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]._focused,
-[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]._focused,
-[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]._focused {
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]:not(._focused):has(:focus-visible) {
+  background-color: transparent;
+  outline-offset: -0.0625rem;
+  outline: 0.0625rem solid var(--tui-status-negative);
+}
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]):invalid:not([data-mode])[tuiWrapper]._focused._focused,
+[tuiAppearance][data-appearance='table']:not([tuiWrapper])[data-mode~='invalid'][tuiWrapper]._focused._focused,
+[tuiAppearance][data-appearance='table']:not([tuiWrapper]).tui-invalid:not([data-mode])[tuiWrapper]._focused._focused {
   background-color: transparent;
   outline-offset: -0.0625rem;
   outline: 0.0625rem solid var(--tui-status-negative);
@@ -2811,6 +2820,7 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
+  /* @deprecated TODO remove in v5 */
 }
 [tuiAppearance][data-appearance='textfield']:not([tuiWrapper])::before,
 [tuiAppearance][data-appearance='textfield']:not([tuiWrapper])::after {
@@ -2884,8 +2894,12 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
   outline: 0.125rem solid var(--tui-background-accent-1);
   outline-offset: -0.125rem;
 }
-[tuiAppearance][data-appearance='textfield'][tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiAppearance][data-appearance='textfield'][tuiWrapper]._focused {
+[tuiAppearance][data-appearance='textfield'][tuiWrapper]:not(._focused):has(:focus-visible) {
+  box-shadow: none;
+  outline: 0.125rem solid var(--tui-background-accent-1);
+  outline-offset: -0.125rem;
+}
+[tuiAppearance][data-appearance='textfield'][tuiWrapper]._focused._focused {
   box-shadow: none;
   outline: 0.125rem solid var(--tui-background-accent-1);
   outline-offset: -0.125rem;
@@ -2899,7 +2913,7 @@ tui-input-tag:hover:not(._disabled) [tuiAppearance][data-appearance='icon'][data
   box-shadow: none;
 }
 [tuiAppearance][data-appearance='textfield'][data-mode~='invalid'][data-mode~='invalid'],
-[tuiAppearance][data-appearance='textfield']:invalid:not([data-mode]),
+[tuiAppearance][data-appearance='textfield']:invalid:not([data-mode]):not(.ng-untouched),
 [tuiAppearance][data-appearance='textfield'].tui-invalid:not([data-mode]) {
   outline-color: var(--tui-status-negative);
 }
@@ -2920,6 +2934,7 @@ input[tuiAppearance][data-appearance='textfield']:read-only:not([data-mode]) {
 [tuiTheme='dark'] [tuiAppearance][data-appearance='textfield'],
 [tuiTheme='dark'][tuiAppearance][data-appearance='textfield'] {
   background-color: var(--tui-background-neutral-1);
+  /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
   /* @deprecated TODO remove in v5 */
 }
@@ -2956,9 +2971,11 @@ input[tuiAppearance][data-appearance='textfield']:read-only:not([data-mode]) {
   background-color: transparent !important;
 }
 [tuiTheme='dark'] [tuiAppearance][data-appearance='textfield'][tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiTheme='dark'][tuiAppearance][data-appearance='textfield'][tuiWrapper]:not(._focused):has(:focus-visible),
-[tuiTheme='dark'] [tuiAppearance][data-appearance='textfield'][tuiWrapper]._focused,
-[tuiTheme='dark'][tuiAppearance][data-appearance='textfield'][tuiWrapper]._focused {
+[tuiTheme='dark'][tuiAppearance][data-appearance='textfield'][tuiWrapper]:not(._focused):has(:focus-visible) {
+  background-color: transparent !important;
+}
+[tuiTheme='dark'] [tuiAppearance][data-appearance='textfield'][tuiWrapper]._focused._focused,
+[tuiTheme='dark'][tuiAppearance][data-appearance='textfield'][tuiWrapper]._focused._focused {
   background-color: transparent !important;
 }
 
