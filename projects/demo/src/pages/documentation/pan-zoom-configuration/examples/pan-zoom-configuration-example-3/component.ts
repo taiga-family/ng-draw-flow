@@ -14,7 +14,7 @@ import {PanComponent} from '../../nodes/pan/pan.component';
     selector: 'app-pan-zoom-configuration-example-3',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: './template.html',
-    styleUrls: ['./styles.less'],
+    styleUrl: './styles.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         provideNgDrawFlowConfigs({nodes: {pan: PanComponent}}),

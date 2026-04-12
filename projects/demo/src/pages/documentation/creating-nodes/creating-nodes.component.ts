@@ -8,7 +8,7 @@ import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
     selector: 'app-creating-nodes',
     imports: [NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './creating-nodes.component.html',
-    styleUrls: ['./creating-nodes.component.less'],
+    styleUrl: './creating-nodes.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class CreatingNodesComponent {

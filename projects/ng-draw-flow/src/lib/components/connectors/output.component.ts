@@ -15,7 +15,7 @@ import {BaseConnector} from './base-connector';
     standalone: true,
     selector: 'df-output',
     template: '',
-    styleUrls: ['./connector.style.less'],
+    styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {'(pointerdown)': 'this.onDragStart($event)'},
 })

@@ -1,4 +1,5 @@
-import {inject, Injectable, NgZone, type OnDestroy} from '@angular/core';
+import {DOCUMENT, isPlatformBrowser} from '@angular/common';
+import {inject, Injectable, NgZone, type OnDestroy, PLATFORM_ID} from '@angular/core';
 
 interface SelectableItem {
     element: HTMLElement;
@@ -7,7 +8,9 @@ interface SelectableItem {
 
 @Injectable()
 export class SelectionService implements OnDestroy {
+    private readonly document = inject(DOCUMENT);
     private readonly ngZone = inject(NgZone);
+    private readonly platformId = inject(PLATFORM_ID);
     private readonly selectedElements = new Set<HTMLElement>();
     private readonly registeredElements = new Map<HTMLElement, SelectableItem>();
     private isDragging = false;
@@ -23,17 +26,19 @@ export class SelectionService implements OnDestroy {
     constructor() {
         // Use NgZone.runOutsideAngular to prevent change detection
         // from running on every mouse event
-        this.ngZone.runOutsideAngular(() => {
-            document.addEventListener('mousedown', this.boundMouseDown);
-            document.addEventListener('mousemove', this.boundMouseMove);
-            document.addEventListener('mouseup', this.boundMouseUp);
-        });
+        if (isPlatformBrowser(this.platformId)) {
+            this.ngZone.runOutsideAngular(() => {
+                this.document.addEventListener('mousedown', this.boundMouseDown);
+                this.document.addEventListener('mousemove', this.boundMouseMove);
+                this.document.addEventListener('mouseup', this.boundMouseUp);
+            });
+        }
     }
 
     public ngOnDestroy(): void {
-        document.removeEventListener('mousedown', this.boundMouseDown);
-        document.removeEventListener('mousemove', this.boundMouseMove);
-        document.removeEventListener('mouseup', this.boundMouseUp);
+        this.document.removeEventListener('mousedown', this.boundMouseDown);
+        this.document.removeEventListener('mousemove', this.boundMouseMove);
+        this.document.removeEventListener('mouseup', this.boundMouseUp);
 
         this.registeredElements.clear();
         this.selectedElements.clear();
@@ -191,7 +196,7 @@ export class SelectionService implements OnDestroy {
         }
 
         // If clicked on the scene (not while dragging)
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
         if (this.clickedOnScene && !this.isDragging) {
             // Clear selection only when clicking on the scene, not when dragging
             this.clearSelection();

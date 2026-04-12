@@ -25,7 +25,7 @@ const COLUMNS_COUNT = 23;
     selector: 'stress-test',
     imports: [MarkdownModule, NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './stress-test.component.html',
-    styleUrls: ['./stress-test.component.less'],
+    styleUrl: './stress-test.component.less',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

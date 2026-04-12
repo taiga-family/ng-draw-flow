@@ -12,7 +12,7 @@ import {
     selector: 'simple-example-doc-page',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: '../simple-example.component.html',
-    styleUrls: ['../simple-example.component.less'],
+    styleUrl: '../simple-example.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [dfPanZoomOptionsProvider({leftPosition: 0})],
 })

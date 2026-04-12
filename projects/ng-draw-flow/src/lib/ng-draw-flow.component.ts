@@ -22,6 +22,7 @@ import {
     NG_VALUE_ACCESSOR,
     ReactiveFormsModule,
 } from '@angular/forms';
+import {WaResizeObserver} from '@ng-web-apis/resize-observer';
 import {debounceTime, filter} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
@@ -39,7 +40,7 @@ import {
 } from './components/pan-zoom/pan-zoom.options';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
-import {DfResizeObserver, ErrorsDirective} from './directives';
+import {ErrorsDirective} from './directives';
 import {
     type DfDataConnection,
     type DfDataModel,
@@ -69,15 +70,9 @@ import {SelectionService} from './services/selection.service';
 @Component({
     standalone: true,
     selector: 'ng-draw-flow',
-    imports: [
-        DfResizeObserver,
-        NgIf,
-        PanZoomComponent,
-        ReactiveFormsModule,
-        SceneComponent,
-    ],
+    imports: [NgIf, PanZoomComponent, ReactiveFormsModule, SceneComponent],
     templateUrl: './ng-draw-flow.component.html',
-    styleUrls: ['./ng-draw-flow.component.less'],
+    styleUrl: './ng-draw-flow.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         PanZoomService,
@@ -99,11 +94,13 @@ import {SelectionService} from './services/selection.service';
     hostDirectives: [
         ErrorsDirective,
         {
-            directive: DfResizeObserver,
-            outputs: ['dfResizeObserver'],
+            directive: WaResizeObserver,
+            outputs: ['waResizeObserver'],
         },
     ],
-    host: {'(dfResizeObserver)': 'this.onResize($event)'},
+    host: {
+        '(waResizeObserver)': 'this.onResize($event)',
+    },
 })
 export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
@@ -182,7 +179,6 @@ export class NgDrawFlowComponent
     }
 
     public writeValue(value: DfDataModel): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!value) {
             return;
         }
@@ -275,6 +271,7 @@ export class NgDrawFlowComponent
     }
 
     protected onResize(event: any): void {
+        console.warn('onResize');
         const {width, height} = event[0].contentRect;
 
         this.$rootReady.set(width && height);
@@ -291,8 +288,8 @@ export class NgDrawFlowComponent
     }
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
+
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
     private onTouched: () => void = () => {};
 
     private scheduleViewportFraming(retry = false): void {

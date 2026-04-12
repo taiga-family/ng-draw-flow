@@ -18,7 +18,7 @@ import {TuiLink, TuiNotification} from '@taiga-ui/core';
         TuiNotification,
     ],
     templateUrl: './validation.component.html',
-    styleUrls: ['./validation.component.less'],
+    styleUrl: './validation.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ValidationComponent {
