@@ -8,7 +8,7 @@ import ExampleComponent from './examples/component';
     standalone: true,
     imports: [ExampleComponent, NgDrawFlowComponent, TuiAddonDoc],
     templateUrl: './labels.component.html',
-    styleUrls: ['./labels.component.less'],
+    styleUrl: './labels.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LabelsComponent {

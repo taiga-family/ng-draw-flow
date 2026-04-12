@@ -1,4 +1,5 @@
-import {Injectable} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {inject, Injectable} from '@angular/core';
 import {
     animationFrameScheduler,
     filter,
@@ -25,6 +26,8 @@ import {type DfDragDrop} from './drag-drop.interface';
  */
 @Injectable({providedIn: 'root'})
 export class DragDropService {
+    private readonly document = inject(DOCUMENT);
+
     /** Cache for element-scoped `pointerdown` observables (lazy–created). */
     private readonly pointerDownMap = new WeakMap<
         HTMLElement,
@@ -35,14 +38,16 @@ export class DragDropService {
     private readonly dragDropStreams = new WeakMap<HTMLElement, Observable<DfDragDrop>>();
 
     /** Shared `pointermove` stream on the whole document (ref-counted). */
-    private readonly pointerMove$ = fromEvent<PointerEvent>(document, 'pointermove').pipe(
-        share(),
-    );
+    private readonly pointerMove$ = fromEvent<PointerEvent>(
+        this.document,
+        'pointermove',
+    ).pipe(share());
 
     /** Shared `pointerup` stream on the whole document (ref-counted). */
-    private readonly pointerUp$ = fromEvent<PointerEvent>(document, 'pointerup').pipe(
-        share(),
-    );
+    private readonly pointerUp$ = fromEvent<PointerEvent>(
+        this.document,
+        'pointerup',
+    ).pipe(share());
 
     /**
      * Returns (and caches) a drag-and-drop observable for the provided element.

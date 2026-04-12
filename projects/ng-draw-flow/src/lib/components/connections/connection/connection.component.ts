@@ -49,7 +49,7 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
     selector: 'df-connection',
     imports: [AsyncPipe, NgIf, PolymorpheusOutlet, SelectableElementDirective],
     templateUrl: './connection.component.svg',
-    styleUrls: ['../connection.component.less'],
+    styleUrl: '../connection.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.df-selected-node-input]': 'this.selectedNodeInput',

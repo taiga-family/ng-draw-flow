@@ -10,8 +10,7 @@ import {
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
-import {TuiButton} from '@taiga-ui/core';
-import {TuiInputModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
+import {TuiButton, TuiInput, TuiTextfield} from '@taiga-ui/core';
 
 interface NodeForm {
     field1: FormGroup<NodeFormGroup>;
@@ -32,11 +31,11 @@ interface NodeFormGroup {
         DfOutputComponent,
         ReactiveFormsModule,
         TuiButton,
-        TuiInputModule,
-        TuiTextfieldControllerModule,
+        TuiInput,
+        TuiTextfield,
     ],
     templateUrl: './form-node.component.html',
-    styleUrls: ['./form-node.component.less'],
+    styleUrl: './form-node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {'(keydown.backspace.stop)': '0', '(keydown.delete.stop)': '0'},
 })

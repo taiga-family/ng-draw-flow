@@ -50,7 +50,7 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
         TuiTextfield,
     ],
     templateUrl: './editor.component.html',
-    styleUrls: ['./editor.component.less'],
+    styleUrl: './editor.component.less',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [

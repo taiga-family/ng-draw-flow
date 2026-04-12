@@ -19,7 +19,7 @@ import {injectContext} from '@taiga-ui/polymorpheus';
             {{ copied() ? 'Copied' : 'Copy' }}
         </div>
     `,
-    styleUrls: ['./copy.component.less'],
+    styleUrl: './copy.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CopyComponent {

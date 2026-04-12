@@ -10,7 +10,7 @@ import {TuiLink} from '@taiga-ui/core';
     selector: 'app-connectors',
     imports: [NgDrawFlowComponent, ReactiveFormsModule, RouterLink, TuiAddonDoc, TuiLink],
     templateUrl: './connectors.component.html',
-    styleUrls: ['./connectors.component.less'],
+    styleUrl: './connectors.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ConnectorsComponent {}

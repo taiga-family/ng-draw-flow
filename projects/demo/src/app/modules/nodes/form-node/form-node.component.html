@@ -17,10 +17,15 @@
         [formGroupName]="fieldName"
     >
         <div class="field tui-space_bottom-4">
-            <tui-input
-                formControlName="fieldValue"
-                [tuiTextfieldSize]="'s'"
-            />
+            <tui-textfield
+                tuiTextfieldSize="s"
+                tuiTheme="light"
+            >
+                <input
+                    formControlName="fieldValue"
+                    tuiInput
+                />
+            </tui-textfield>
 
             <ng-container *ngIf="!!getConnectorId(fieldName)">
                 <df-output

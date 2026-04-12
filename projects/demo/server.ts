@@ -4,22 +4,19 @@ import {existsSync} from 'node:fs';
 import {join} from 'node:path';
 
 import {APP_BASE_HREF} from '@angular/common';
-import {provideLocation, provideUserAgent} from '@ng-web-apis/universal';
-import {ngExpressEngine} from '@nguniversal/express-engine';
+import {CommonEngine} from '@angular/ssr/node';
 import express, {type Express} from 'express';
 
-import {AppServerModule} from './src/main.server';
+import bootstrap from './src/main.server';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): Express {
     const server = express();
     const distFolder = join(process.cwd(), 'dist/demo/browser');
     const indexHtml = existsSync(join(distFolder, 'index.original.html'))
-        ? 'index.original.html'
-        : 'index';
-
-    // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-    server.engine('html', ngExpressEngine({bootstrap: AppServerModule}) as any);
+        ? join(distFolder, 'index.original.html')
+        : join(distFolder, 'index.html');
+    const commonEngine = new CommonEngine();
 
     server.set('view engine', 'html');
     server.set('views', distFolder);
@@ -27,18 +24,31 @@ export function app(): Express {
     // Example Express Rest API endpoints
     // server.get('/api/**', (req, res) => { });
     // Serve static files from /browser
-    server.get('*.*', express.static(distFolder, {maxAge: '1y'}));
+    server.get(
+        '*.*',
+        express.static(distFolder, {
+            maxAge: '1y',
+        }),
+    );
 
     // All regular routes use the Universal engine
-    server.get('*', (req: any, res: any) => {
-        res.render(indexHtml, {
-            req,
-            providers: [
-                {provide: APP_BASE_HREF, useValue: req.baseUrl},
-                provideLocation(req),
-                provideUserAgent(req),
-            ],
-        });
+    server.get('*', (req: any, res: any, next: any) => {
+        const {protocol, originalUrl, baseUrl, headers} = req;
+
+        void commonEngine
+            .render({
+                bootstrap,
+                documentFilePath: indexHtml,
+                url: `${protocol}://${headers.host}${originalUrl}`,
+                publicPath: distFolder,
+                providers: [{provide: APP_BASE_HREF, useValue: baseUrl}],
+            })
+            .then((html) => {
+                res.send(html);
+            })
+            .catch((err: unknown) => {
+                next(err);
+            });
     });
 
     return server;
@@ -67,3 +77,4 @@ if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
 }
 
 export * from './src/main.server';
+export default bootstrap;

@@ -11,7 +11,7 @@ import {BaseConnector} from './base-connector';
     standalone: true,
     selector: 'df-input',
     template: '',
-    styleUrls: ['./connector.style.less'],
+    styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DfInputComponent extends BaseConnector {

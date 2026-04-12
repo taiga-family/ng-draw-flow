@@ -10,7 +10,7 @@ import {
     selector: 'app-output-node',
     imports: [DfOutputComponent],
     templateUrl: './output-node.component.html',
-    styleUrls: ['./output-node.component.less'],
+    styleUrl: './output-node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OutputNodeComponent extends DrawFlowBaseNode {

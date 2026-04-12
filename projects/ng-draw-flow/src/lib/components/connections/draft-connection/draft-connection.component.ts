@@ -18,7 +18,7 @@ import {DraftConnectionService} from './draft-connection.service';
     standalone: true,
     selector: 'df-draft-connection',
     templateUrl: './draft-connection.component.svg',
-    styleUrls: ['../connection.component.less'],
+    styleUrl: '../connection.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftConnectionComponent {

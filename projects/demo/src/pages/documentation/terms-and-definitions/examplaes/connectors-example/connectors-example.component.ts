@@ -13,7 +13,7 @@ import {ConnectorsComponent} from '../nodes/connectors/connectors.component';
     selector: 'app-connectors-example',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: './connectors-example.component.html',
-    styleUrls: ['./connectors-example.component.less'],
+    styleUrl: './connectors-example.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [provideNgDrawFlowConfigs({nodes: {connectors: ConnectorsComponent}})],
 })
