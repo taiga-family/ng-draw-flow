@@ -1,20 +1,33 @@
 :host {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
     inline-size: 100%;
     block-size: 100%;
     user-select: none;
 }
 
+.pan-zoom__viewport {
+    position: relative;
+    inline-size: 100%;
+    block-size: 100%;
+}
+
 .pan-zoom {
     position: absolute;
-    background-image: url('../../../assets/icons/dot.svg');
+    z-index: 1;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 0;
+    block-size: 0;
+    transform-origin: 0 0;
     will-change: transform;
-    backface-visibility: hidden;
-    contain: paint;
     touch-action: none;
+}
+
+.pan-zoom__container {
+    position: relative;
+    inline-size: 0;
+    block-size: 0;
 }
 
 .transitive {

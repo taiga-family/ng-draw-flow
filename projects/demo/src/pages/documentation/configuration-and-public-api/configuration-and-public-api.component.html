@@ -168,11 +168,23 @@
             </li>
             <li class="tui-list__item">
                 <code>resetPosition(): void</code>
-                : Resets both zoom level and pan position to their initial states:
+                : Resets zoom to
+                <code>1.0</code>
+                and pan to the default camera state. If
+                <code>leftPosition</code>
+                or
+                <code>topPosition</code>
+                are configured, the viewport is then reframed using the same content-based alignment rules as the
+                initial render:
                 <ul>
-                    <li>Zoom returns to 1.0 (100%)</li>
-                    <li>Viewport centers on the coordinate system origin (0,0)</li>
+                    <li>With both values set to null, the camera returns to the world origin</li>
+                    <li>With configured offsets, the viewport aligns to the start node or rendered content bounds</li>
                 </ul>
+            </li>
+            <li class="tui-list__item">
+                <code>setPosition(position?: &#123; x?: number; y?: number; zoom?: number &#125;): void</code>
+                : Partially updates the current camera state. Omitted fields keep their current values, so you can move
+                only along one axis, change only the zoom level, or update both pan and zoom in one call.
             </li>
             <li class="tui-list__item">
                 <code>setScale(scale: number): void</code>
@@ -195,6 +207,8 @@
                 <code>zoomOut</code>
                 ,
                 <code>resetPosition</code>
+                ,
+                <code>setPosition</code>
                 ,
                 <code>setScale</code>
                 ,
