@@ -1,3 +1,10 @@
+### [0.20.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.19.0...v0.20.0) (2026-04-13)
+
+### 🚀 Features
+
+- **ng-draw-flow**: rewrite panzoom with dynamic workspace bounds
+  [(531578e)](https://github.com/taiga-family/ng-draw-flow/commit/531578eeddd952d97d9c1a70e7ac011216af8f8d)
+
 ### [0.19.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.18.1...v0.19.0) (2026-01-21)
 
 ### 🚀 Features
