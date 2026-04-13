@@ -27,9 +27,7 @@ describe('SceneComponent', () => {
             providers: [
                 {
                     provide: PanZoomService,
-                    useValue: {
-                        panSize: signal({width: 2_000, height: 1_500}),
-                    },
+                    useValue: {panSize: signal({width: 2_000, height: 1_500})},
                 },
                 {
                     provide: ConnectionsService,
@@ -42,9 +40,7 @@ describe('SceneComponent', () => {
                 },
                 {
                     provide: DraftConnectionService,
-                    useValue: {
-                        isConnectionCreating$: new BehaviorSubject(false),
-                    },
+                    useValue: {isConnectionCreating$: new BehaviorSubject(false)},
                 },
                 {
                     provide: NgDrawFlowStoreService,

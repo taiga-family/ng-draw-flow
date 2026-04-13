@@ -15,11 +15,7 @@ import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
     templateUrl: './simple-example.component.html',
     styleUrls: ['./simple-example.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        dfPanZoomOptionsProvider({
-            leftPosition: 50,
-        }),
-    ],
+    providers: [dfPanZoomOptionsProvider({leftPosition: 50})],
 })
 export default class SimpleExampleComponent {
     public readonly gettingStartedExample: Record<string, TuiRawLoaderContent> = {

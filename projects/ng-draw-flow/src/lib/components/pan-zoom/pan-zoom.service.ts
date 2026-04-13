@@ -59,18 +59,14 @@ export class PanZoomService {
                 return false;
             }
 
-            this.patchCamera({
-                [property]: value,
-            } as Partial<DfPanzoomModel>);
+            this.patchCamera({[property]: value} as Partial<DfPanzoomModel>);
 
             return true;
         },
-        ownKeys: (): ArrayLike<string | symbol> => {
-            return Reflect.ownKeys(this.cameraSignal());
-        },
+        ownKeys: (): ArrayLike<string | symbol> => Reflect.ownKeys(this.cameraSignal()),
         getOwnPropertyDescriptor: (_target, property) => {
             if (typeof property !== 'string') {
-                return undefined;
+                return;
             }
 
             return {
@@ -82,12 +78,11 @@ export class PanZoomService {
         },
     });
 
-    public readonly camera: Signal<DfPanzoomModel> = this.cameraSignal.asReadonly();
+    public readonly camera = this.cameraSignal.asReadonly();
 
-    public readonly disabled: Signal<boolean> = this.disabledSignal.asReadonly();
+    public readonly disabled = this.disabledSignal.asReadonly();
 
-    public readonly usableRect: Signal<DfPanZoomUsableRect> =
-        this.usableRectSignal.asReadonly();
+    public readonly usableRect = this.usableRectSignal.asReadonly();
 
     public readonly workspaceRect: Signal<DfPanZoomWorkspaceRect> = computed(() => {
         const usableRect = this.usableRectSignal();

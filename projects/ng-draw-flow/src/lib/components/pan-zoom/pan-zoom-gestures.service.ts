@@ -55,20 +55,14 @@ export class PanZoomGesturesService {
 
     private createWheelStream(nativeElement: HTMLElement): Observable<DfPanZoomGesture> {
         const pointerPosition$ = merge(
-            fromEvent<PointerEvent>(nativeElement, 'pointermove', {
-                passive: true,
-            }),
-            fromEvent<MouseEvent>(nativeElement, 'mousemove', {
-                passive: true,
-            }),
+            fromEvent<PointerEvent>(nativeElement, 'pointermove', {passive: true}),
+            fromEvent<MouseEvent>(nativeElement, 'mousemove', {passive: true}),
         ).pipe(
             map(({clientX, clientY}) => ({clientX, clientY})),
             startWith(this.getElementCenter(nativeElement)),
         );
 
-        return fromEvent<WheelEvent>(nativeElement, 'wheel', {
-            passive: false,
-        }).pipe(
+        return fromEvent<WheelEvent>(nativeElement, 'wheel', {passive: false}).pipe(
             tap((event) => {
                 event.preventDefault();
                 event.stopPropagation();
@@ -83,14 +77,10 @@ export class PanZoomGesturesService {
     private createTouchStream(
         nativeElement: HTMLElement,
     ): Observable<DfPanZoomZoomGesture> {
-        return fromEvent<TouchEvent>(nativeElement, 'touchstart', {
-            passive: true,
-        }).pipe(
+        return fromEvent<TouchEvent>(nativeElement, 'touchstart', {passive: true}).pipe(
             filter(({touches}) => touches.length > 1),
             switchMap((startEvent) =>
-                fromEvent<TouchEvent>(nativeElement, 'touchmove', {
-                    passive: false,
-                }).pipe(
+                fromEvent<TouchEvent>(nativeElement, 'touchmove', {passive: false}).pipe(
                     tap((event) => {
                         event.preventDefault();
                         event.stopPropagation();
@@ -224,10 +214,7 @@ export class PanZoomGesturesService {
         event: WheelEvent,
         dpr: number = globalThis.devicePixelRatio || 1,
     ): boolean {
-        const now =
-            globalThis.performance !== undefined
-                ? globalThis.performance.now()
-                : Date.now();
+        const now = globalThis.performance.now();
 
         if (this.trackpadDetected && this.lastTrackpadDetectionTime !== null) {
             if (

@@ -308,7 +308,7 @@ export class NgDrawFlowComponent
             this.viewportFrameRetryCount = 0;
         }
 
-        if (!this.$rootReady() || !this.panzoom) {
+        if (!this.$rootReady()) {
             return;
         }
 

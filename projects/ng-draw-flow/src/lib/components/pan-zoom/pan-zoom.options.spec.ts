@@ -2,11 +2,7 @@ import {DF_PAN_ZOOM_DEFAULT_OPTIONS, dfPanZoomOptionsProvider} from './pan-zoom.
 
 describe('dfPanZoomOptionsProvider', () => {
     it('merges nested background canvas options with defaults', () => {
-        const provider = dfPanZoomOptionsProvider({
-            backgroundCanvas: {
-                visible: false,
-            },
-        });
+        const provider = dfPanZoomOptionsProvider({backgroundCanvas: {visible: false}});
         const createOptions =
             provider.useFactory as () => typeof DF_PAN_ZOOM_DEFAULT_OPTIONS;
 

@@ -44,9 +44,7 @@ import {NodeComponent} from '../node/node.component';
             multi: true,
         },
     ],
-    host: {
-        'data-element': 'scene',
-    },
+    host: {'data-element': 'scene'},
 })
 export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly cdr = inject(ChangeDetectorRef);

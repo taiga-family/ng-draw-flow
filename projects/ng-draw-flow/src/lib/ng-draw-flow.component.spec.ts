@@ -22,9 +22,7 @@ jest.mock('./components/connections/connection/connection.component.svg', () => 
 jest.mock(
     './components/connections/draft-connection/draft-connection.component.svg',
     () => '',
-    {
-        virtual: true,
-    },
+    {virtual: true},
 );
 jest.mock('./components/node/node.component.html', () => '', {virtual: true});
 jest.mock('./components/node/node.component.less', () => '', {virtual: true});
@@ -59,9 +57,7 @@ describe('NgDrawFlowComponent', () => {
                     },
                     {
                         provide: ConnectionsService,
-                        useValue: {
-                            removeConnection: jest.fn(),
-                        },
+                        useValue: {removeConnection: jest.fn()},
                     },
                     {
                         provide: NgDrawFlowStoreService,
@@ -76,15 +72,11 @@ describe('NgDrawFlowComponent', () => {
                     },
                     {
                         provide: SelectionService,
-                        useValue: {
-                            clearSelection: jest.fn(),
-                        },
+                        useValue: {clearSelection: jest.fn()},
                     },
                     {
                         provide: DF_PAN_ZOOM_OPTIONS,
-                        useValue: {
-                            ...DF_PAN_ZOOM_DEFAULT_OPTIONS,
-                        },
+                        useValue: {...DF_PAN_ZOOM_DEFAULT_OPTIONS},
                     },
                 ],
             },

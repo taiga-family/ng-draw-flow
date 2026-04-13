@@ -113,7 +113,7 @@ export class DraftConnectionService implements OnDestroy {
     private onDragMove(previousEvent: PointerEvent, currentEvent: PointerEvent): void {
         const {deltaX, deltaY} = dfDistanceBetweenPoints(previousEvent, currentEvent);
         const {zoom} = this.panZoomService.snapshot();
-        const target: DfConnectorData = this.target();
+        const target = this.target();
 
         this.target.set({
             position: target.position,

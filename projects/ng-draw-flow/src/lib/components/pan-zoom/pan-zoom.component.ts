@@ -38,9 +38,7 @@ import {PanZoomGesturesService} from './pan-zoom-gestures.service';
             outputs: ['dfResizeObserver'],
         },
     ],
-    host: {
-        '(dfResizeObserver)': 'onBoardResize($event)',
-    },
+    host: {'(dfResizeObserver)': 'onBoardResize($event)'},
 })
 export class PanZoomComponent implements OnInit {
     private readonly cdr = inject(ChangeDetectorRef);
@@ -92,7 +90,7 @@ export class PanZoomComponent implements OnInit {
     }
 
     protected get backgroundCanvasVisible(): boolean {
-        return this.panZoomOptions.backgroundCanvas?.visible ?? true;
+        return this.panZoomOptions.backgroundCanvas.visible;
     }
 
     protected onPan(event: Parameters<PanZoomControllerService['handlePan']>[0]): void {

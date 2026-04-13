@@ -47,7 +47,7 @@ describe('PanZoomGesturesService', () => {
     };
 
     afterEach(() => {
-        host?.remove();
+        host.remove();
         TestBed.resetTestingModule();
     });
 
@@ -56,7 +56,7 @@ describe('PanZoomGesturesService', () => {
 
         const gesture = await nextGesture(
             (item) => item.type === 'zoom',
-            () =>
+            () => {
                 host.dispatchEvent(
                     new WheelEvent('wheel', {
                         deltaY: 100,
@@ -65,7 +65,8 @@ describe('PanZoomGesturesService', () => {
                         bubbles: true,
                         cancelable: true,
                     }),
-                ),
+                );
+            },
         );
 
         expect(gesture.type).toBe('zoom');
@@ -84,7 +85,7 @@ describe('PanZoomGesturesService', () => {
 
         const gesture = await nextGesture(
             (item) => item.type === 'pan',
-            () =>
+            () => {
                 host.dispatchEvent(
                     new WheelEvent('wheel', {
                         deltaX: 12,
@@ -92,7 +93,8 @@ describe('PanZoomGesturesService', () => {
                         bubbles: true,
                         cancelable: true,
                     }),
-                ),
+                );
+            },
         );
 
         expect(gesture.type).toBe('pan');
@@ -110,7 +112,7 @@ describe('PanZoomGesturesService', () => {
 
         const gesture = await nextGesture(
             (item) => item.type === 'pan',
-            () =>
+            () => {
                 host.dispatchEvent(
                     new WheelEvent('wheel', {
                         deltaX: 1.5,
@@ -118,7 +120,8 @@ describe('PanZoomGesturesService', () => {
                         bubbles: true,
                         cancelable: true,
                     }),
-                ),
+                );
+            },
         );
 
         expect(gesture.type).toBe('pan');
@@ -138,7 +141,7 @@ describe('PanZoomGesturesService', () => {
 
         const gesture = await nextGesture(
             (item) => item.type === 'zoom',
-            () =>
+            () => {
                 host.dispatchEvent(
                     new WheelEvent('wheel', {
                         deltaY: 2,
@@ -146,7 +149,8 @@ describe('PanZoomGesturesService', () => {
                         bubbles: true,
                         cancelable: true,
                     }),
-                ),
+                );
+            },
         );
 
         expect(gesture.type).toBe('zoom');

@@ -40,8 +40,7 @@ export type DfPanZoomViewportGesture =
 export class PanZoomControllerService {
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
-    private readonly panZoomOptions: DfPanZoomOptions =
-        inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
+    private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
 
     private readonly draggingSignal = signal<boolean>(false);
     private readonly transitionedSignal = signal<boolean>(true);

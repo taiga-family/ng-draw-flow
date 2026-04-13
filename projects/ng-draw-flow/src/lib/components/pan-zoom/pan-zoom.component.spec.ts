@@ -178,9 +178,7 @@ describe('PanZoomComponent', () => {
 
     it('updates container offsets on resize', () => {
         (component as any).onBoardResize([
-            {
-                contentRect: {width: 1000, height: 800},
-            },
+            {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
         expect((component as any).layoutOffset()).toEqual({x: 0, y: 0});
@@ -190,9 +188,7 @@ describe('PanZoomComponent', () => {
         panZoomOptions.leftPosition = 0;
         panZoomOptions.topPosition = 0;
         (component as any).onBoardResize([
-            {
-                contentRect: {width: 1000, height: 800},
-            },
+            {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
         expect((component as any).layoutOffset()).toEqual({x: -500, y: -400});
@@ -202,9 +198,7 @@ describe('PanZoomComponent', () => {
         panZoomOptions.leftPosition = 100;
         panZoomOptions.topPosition = 120;
         (component as any).onBoardResize([
-            {
-                contentRect: {width: 1000, height: 800},
-            },
+            {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
         expect((component as any).layoutOffset()).toEqual({x: -400, y: -280});
@@ -214,9 +208,7 @@ describe('PanZoomComponent', () => {
         panZoomOptions.leftPosition = null;
         panZoomOptions.topPosition = null;
         (component as any).onBoardResize([
-            {
-                contentRect: {width: 1000, height: 800},
-            },
+            {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
         expect((component as any).layoutOffset()).toEqual({x: 0, y: 0});
@@ -228,9 +220,7 @@ describe('PanZoomComponent', () => {
         panZoomOptions.leftPosition = 0;
         panZoomOptions.topPosition = 0;
         (component as any).onBoardResize([
-            {
-                contentRect: {width: 1000, height: 800},
-            },
+            {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
         panZoomService.setCamera({
@@ -249,9 +239,7 @@ describe('PanZoomComponent', () => {
         panZoomOptions.leftPosition = 0;
         panZoomOptions.topPosition = 0;
         (component as any).onBoardResize([
-            {
-                contentRect: {width: 1000, height: 800},
-            },
+            {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
         panZoomService.setCamera({
@@ -286,7 +274,9 @@ describe('PanZoomComponent', () => {
                 cancelable: true,
             }),
         );
-        await new Promise((resolve) => setTimeout(resolve, 20));
+        await new Promise((resolve) => {
+            setTimeout(resolve, 20);
+        });
 
         expect(panZoomService.snapshot().zoom).not.toBe(1);
     });

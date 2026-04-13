@@ -28,7 +28,7 @@ export interface DfPanZoomOptions {
     touchSensitivity: number;
     wheelBehavior: DfWheelBehavior;
     wheelSpeed: number;
-    wheelStep: number;
+    wheelStep?: number;
     pinchZoomSpeed: number;
     backgroundCanvas: DfPanZoomBackgroundCanvasOptions;
 }
@@ -47,9 +47,7 @@ export const DF_PAN_ZOOM_DEFAULT_OPTIONS: DfPanZoomOptions = {
     wheelSpeed: 1,
     wheelStep: 0.008,
     pinchZoomSpeed: 1,
-    backgroundCanvas: {
-        visible: true,
-    },
+    backgroundCanvas: {visible: true},
 };
 
 export const DF_PAN_ZOOM_OPTIONS = new InjectionToken(
