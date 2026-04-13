@@ -7,7 +7,7 @@
   \*********************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```ts\nimport {dfPanZoomOptionsProvider} from '@ng-draw-flow/core';\n\nproviders: [\n  dfPanzoomOptionsProvider({\n    panSize: 20000,\n    // ...other options\n  }),\n];\n```\n";
+module.exports = "```ts\nimport {dfPanZoomOptionsProvider} from '@ng-draw-flow/core';\n\nproviders: [\n  dfPanZoomOptionsProvider({\n    // align initial and reset framing from the viewport edges\n    leftPosition: 80,\n    topPosition: 40,\n    // ...other options\n  }),\n];\n```\n";
 
 /***/ })
 

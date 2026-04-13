@@ -7,7 +7,7 @@
   \*********************************************************************************************/
 /***/ ((module) => {
 
-module.exports = "```ts\ndfPanzoomOptionsProvider({\n  topPosition: null,\n  leftPosition: 0,\n});\n```\n";
+module.exports = "```ts\ndfPanZoomOptionsProvider({\n  topPosition: null,\n  leftPosition: 0,\n});\n```\n";
 
 /***/ })
 
