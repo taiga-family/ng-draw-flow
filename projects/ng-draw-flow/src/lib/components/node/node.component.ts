@@ -55,8 +55,8 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
     styleUrls: ['./node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
         '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
+        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
     },
 })
 export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {

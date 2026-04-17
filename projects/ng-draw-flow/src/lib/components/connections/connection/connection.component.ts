@@ -52,10 +52,10 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
     styleUrls: ['../connection.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
-        '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
         '[class.df-selected-node-input]': 'this.selectedNodeInput',
         '[class.df-selected-node-output]': 'this.selectedNodeOutput',
+        '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
+        '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
     },
 })
 export class ConnectionComponent {
