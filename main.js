@@ -730,9 +730,9 @@ _FormNodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1
   selectors: [["app-form-node"]],
   hostBindings: function FormNodeComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("keydown.delete.stop", function FormNodeComponent_keydown_delete_stop_HostBindingHandler() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("keydown.backspace.stop", function FormNodeComponent_keydown_backspace_stop_HostBindingHandler() {
         return 0;
-      })("keydown.backspace.stop", function FormNodeComponent_keydown_backspace_stop_HostBindingHandler() {
+      })("keydown.delete.stop", function FormNodeComponent_keydown_delete_stop_HostBindingHandler() {
         return 0;
       });
     }
@@ -1671,9 +1671,9 @@ _ConnectionComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE
   hostVars: 4,
   hostBindings: function ConnectionComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("keydown.delete", function ConnectionComponent_keydown_delete_HostBindingHandler($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵlistener"]("keydown.backspace", function ConnectionComponent_keydown_backspace_HostBindingHandler($event) {
         return ctx.handleKeyboardEvent($event);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresolveDocument"])("keydown.backspace", function ConnectionComponent_keydown_backspace_HostBindingHandler($event) {
+      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresolveDocument"])("keydown.delete", function ConnectionComponent_keydown_delete_HostBindingHandler($event) {
         return ctx.handleKeyboardEvent($event);
       }, false, _angular_core__WEBPACK_IMPORTED_MODULE_8__["ɵɵresolveDocument"]);
     }
@@ -3355,9 +3355,9 @@ _NodeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_12__[
   },
   hostBindings: function NodeComponent_HostBindings(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵlistener"]("keydown.delete", function NodeComponent_keydown_delete_HostBindingHandler($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵlistener"]("keydown.backspace", function NodeComponent_keydown_backspace_HostBindingHandler($event) {
         return ctx.handleKeyboardEvent($event);
-      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵresolveDocument"])("keydown.backspace", function NodeComponent_keydown_backspace_HostBindingHandler($event) {
+      }, false, _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵresolveDocument"])("keydown.delete", function NodeComponent_keydown_delete_HostBindingHandler($event) {
         return ctx.handleKeyboardEvent($event);
       }, false, _angular_core__WEBPACK_IMPORTED_MODULE_12__["ɵɵresolveDocument"]);
     }
