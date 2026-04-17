@@ -38,10 +38,7 @@ interface NodeFormGroup {
     templateUrl: './form-node.component.html',
     styleUrls: ['./form-node.component.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: {
-        '(keydown.delete.stop)': '0',
-        '(keydown.backspace.stop)': '0',
-    },
+    host: {'(keydown.backspace.stop)': '0', '(keydown.delete.stop)': '0'},
 })
 export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit {
     private readonly destroyRef = inject(DestroyRef);
