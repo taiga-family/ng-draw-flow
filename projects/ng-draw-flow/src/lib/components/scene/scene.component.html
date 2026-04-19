@@ -1,4 +1,4 @@
-<ng-container *ngFor="let node of model?.nodes; trackBy: trackByNodeId">
+@for (node of model?.nodes; track trackByNodeId($index, node)) {
     <df-node
         [invalid]="$invalidNodes().includes(node.id)"
         [node]="node"
@@ -7,17 +7,16 @@
         (nodeMoved)="onNodeMoved($event)"
         (nodeSelected)="onNodeSelected($event)"
     />
-</ng-container>
+}
 
-<ng-container *ngFor="let connection of model?.connections; trackBy: trackByConnectionsFn">
+@for (connection of model?.connections; track trackByConnectionsFn($index, connection)) {
     <df-connection
         [connection]="connection"
         (connectionDeleted)="onConnectionDeleted(connection)"
         (connectionSelected)="onConnectionSelected(connection)"
     />
-</ng-container>
+}
 
-<df-draft-connection
-    *ngIf="isConnectionCreating$ | async"
-    (connectionCreated)="onConnectionCreated($event)"
-/>
+@if (isConnectionCreating$ | async) {
+    <df-draft-connection (connectionCreated)="onConnectionCreated($event)" />
+}

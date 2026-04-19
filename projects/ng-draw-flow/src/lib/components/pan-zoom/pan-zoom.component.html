@@ -2,7 +2,9 @@
     data-element="scene"
     class="pan-zoom__viewport"
 >
-    <df-pan-zoom-background-canvas *ngIf="backgroundCanvasVisible" />
+    @if (backgroundCanvasVisible) {
+        <df-pan-zoom-background-canvas />
+    }
     <div
         class="pan-zoom"
         [style.cursor]="cursor()"

@@ -13,7 +13,14 @@
         "flow",
         "draw",
         "diagram",
-        "chart"
+        "chart",
+        "graph-editor",
+        "flowchart",
+        "workflow",
+        "node-based",
+        "node-editor",
+        "block-diagram",
+        "data-visualization"
     ],
     "targets": {
         "build": {

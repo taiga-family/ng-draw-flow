@@ -11,7 +11,14 @@
         "flow",
         "draw",
         "diagram",
-        "chart"
+        "chart",
+        "graph-editor",
+        "flowchart",
+        "workflow",
+        "node-based",
+        "node-editor",
+        "block-diagram",
+        "data-visualization"
     ],
     "homepage": "https://github.com/taiga-family/ng-draw-flow",
     "bugs": "https://github.com/taiga-family/ng-draw-flow/issues",
