@@ -5,11 +5,10 @@ import {
     Component,
     DestroyRef,
     ElementRef,
-    EventEmitter,
     inject,
     NgZone,
     type OnInit,
-    Output,
+    output,
     PLATFORM_ID,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -54,11 +53,9 @@ export class PanZoomComponent implements OnInit {
     private readonly dragDropService = inject(DragDropService);
     private renderScheduled = false;
 
-    @Output()
-    public readonly scale = new EventEmitter<number>();
+    public readonly scale = output<number>();
 
     protected readonly cursor = this.panZoomController.cursor;
-    protected readonly layoutOffset = this.panZoomController.layoutOffset;
     protected readonly panTransform = this.panZoomController.panTransform;
     protected readonly transitionDuration = this.panZoomController.transitionDuration;
 
