@@ -1,25 +1,33 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Injectable, signal} from '@angular/core';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 import {type DfDataConnection} from '../../ng-draw-flow.interfaces';
 
 @Injectable()
 export class ConnectionsService {
-    public readonly connections$ = new BehaviorSubject<DfDataConnection[]>([]);
-    public readonly usedConnectors$ = new BehaviorSubject<string[]>([]);
-    public readonly selectedNodeId$ = new BehaviorSubject<string | null>(null);
+    private readonly connectionsSignal = signal<DfDataConnection[]>([]);
+    private readonly usedConnectorsSignal = signal<string[]>([]);
+    private readonly selectedNodeIdSignal = signal<string | null>(null);
+
+    public readonly connections = this.connectionsSignal.asReadonly();
+    public readonly usedConnectors = this.usedConnectorsSignal.asReadonly();
+    public readonly selectedNodeId = this.selectedNodeIdSignal.asReadonly();
+
+    public readonly connections$ = toObservable(this.connectionsSignal);
+    public readonly usedConnectors$ = toObservable(this.usedConnectorsSignal);
+    public readonly selectedNodeId$ = toObservable(this.selectedNodeIdSignal);
 
     public setConnections(connections: DfDataConnection[]): void {
         const usedConnectors = this.collectUsedConnectors(connections);
 
-        this.usedConnectors$.next(usedConnectors);
-        this.connections$.next([...connections]);
+        this.usedConnectorsSignal.set(usedConnectors);
+        this.connectionsSignal.set([...connections]);
     }
 
     public addConnections(connections: DfDataConnection[]): void {
         const newConnections = connections.filter(
             (newConnection) =>
-                !this.connections$.value.some((existingConnection) =>
+                !this.connectionsSignal().some((existingConnection) =>
                     this.areConnectionsEqual(existingConnection, newConnection),
                 ),
         );
@@ -28,7 +36,7 @@ export class ConnectionsService {
             return;
         }
 
-        const updatedUsedConnectors = [...this.usedConnectors$.value];
+        const updatedUsedConnectors = [...this.usedConnectorsSignal()];
 
         newConnections.forEach((connection) => {
             if (!updatedUsedConnectors.includes(connection.source.connectorId)) {
@@ -40,17 +48,17 @@ export class ConnectionsService {
             }
         });
 
-        this.usedConnectors$.next(updatedUsedConnectors);
-        this.connections$.next([...this.connections$.value, ...newConnections]);
+        this.usedConnectorsSignal.set(updatedUsedConnectors);
+        this.connectionsSignal.set([...this.connectionsSignal(), ...newConnections]);
     }
 
     public removeConnection(connectionToRemove: DfDataConnection): void {
-        const filteredConnections = this.connections$.value.filter(
+        const filteredConnections = this.connectionsSignal().filter(
             (existingConnection) =>
                 !this.areConnectionsEqual(existingConnection, connectionToRemove),
         );
 
-        const usedConnectors = this.usedConnectors$.value.filter((connectorId: string) =>
+        const usedConnectors = this.usedConnectorsSignal().filter((connectorId: string) =>
             filteredConnections.some(
                 (connection) =>
                     connection.source.connectorId === connectorId ||
@@ -58,17 +66,17 @@ export class ConnectionsService {
             ),
         );
 
-        this.usedConnectors$.next(usedConnectors);
-        this.connections$.next(filteredConnections);
+        this.usedConnectorsSignal.set(usedConnectors);
+        this.connectionsSignal.set(filteredConnections);
     }
 
     public removeConnectionsByNodeId(id: string): void {
-        const connectionsToKeep = this.connections$.value.filter(
+        const connectionsToKeep = this.connectionsSignal().filter(
             (connection) =>
                 connection.source.nodeId !== id && connection.target.nodeId !== id,
         );
 
-        const usedConnectors = this.usedConnectors$.value.filter((connectorId: string) =>
+        const usedConnectors = this.usedConnectorsSignal().filter((connectorId: string) =>
             connectionsToKeep.some(
                 (connection) =>
                     connection.source.connectorId === connectorId ||
@@ -76,8 +84,8 @@ export class ConnectionsService {
             ),
         );
 
-        this.usedConnectors$.next(usedConnectors);
-        this.connections$.next(connectionsToKeep);
+        this.usedConnectorsSignal.set(usedConnectors);
+        this.connectionsSignal.set(connectionsToKeep);
     }
 
     public removeConnectionsByConnectorId(connectorIdToRemove: string): void {
@@ -85,26 +93,26 @@ export class ConnectionsService {
             return;
         }
 
-        const connectionsToKeep = this.connections$.value.filter(
+        const connectionsToKeep = this.connectionsSignal().filter(
             (connection) =>
                 connection.source.connectorId !== connectorIdToRemove &&
                 connection.target.connectorId !== connectorIdToRemove,
         );
 
-        const usedConnectors = this.usedConnectors$.value.filter(
+        const usedConnectors = this.usedConnectorsSignal().filter(
             (connectorId) => connectorId !== connectorIdToRemove,
         );
 
-        this.usedConnectors$.next(usedConnectors);
-        this.connections$.next(connectionsToKeep);
+        this.usedConnectorsSignal.set(usedConnectors);
+        this.connectionsSignal.set(connectionsToKeep);
     }
 
     public highlightConnectionsForNode(nodeId: string | null): void {
-        if (this.selectedNodeId$.value === nodeId) {
+        if (this.selectedNodeIdSignal() === nodeId) {
             return;
         }
 
-        this.selectedNodeId$.next(nodeId);
+        this.selectedNodeIdSignal.set(nodeId);
     }
 
     private areConnectionsEqual(

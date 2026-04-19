@@ -1,10 +1,11 @@
-import {AsyncPipe, CommonModule} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
     inject,
     type OnInit,
+    signal,
     ViewEncapsulation,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -30,7 +31,7 @@ import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
 import {TuiButton, TuiLabel, TuiTextfield} from '@taiga-ui/core';
 import {TuiInputNumber} from '@taiga-ui/kit';
 import {MarkdownModule} from 'ngx-markdown';
-import {BehaviorSubject, distinctUntilChanged, filter} from 'rxjs';
+import {distinctUntilChanged, filter} from 'rxjs';
 
 import {SimpleNodeComponent} from '../../../app/modules/nodes';
 
@@ -38,7 +39,6 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
     standalone: true,
     selector: 'editor',
     imports: [
-        AsyncPipe,
         CommonModule,
         MarkdownModule,
         NgDrawFlowComponent,
@@ -160,7 +160,7 @@ export default class EditorComponent implements OnInit {
     };
 
     public readonly scaleControl = new FormControl<number>(1, {nonNullable: true});
-    public readonly fullscreen$ = new BehaviorSubject<boolean>(false);
+    public readonly fullscreen = signal(false);
     public counter = 0;
 
     public form = new FormControl<DfDataModel>(this.data, [
@@ -253,7 +253,7 @@ export default class EditorComponent implements OnInit {
     }
 
     public toggleFullscreen(): void {
-        this.fullscreen$.next(!this.fullscreen$.value);
+        this.fullscreen.update((value) => !value);
         this.drawFlowStore.resetPosition();
     }
 

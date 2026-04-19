@@ -1,6 +1,6 @@
 import {signal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs';
+import {of} from 'rxjs';
 
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {INVALID_NODES} from '../../validators/invalid-nodes.token';
@@ -32,15 +32,17 @@ describe('SceneComponent', () => {
                 {
                     provide: ConnectionsService,
                     useValue: {
-                        connections$: new BehaviorSubject([]),
+                        connections$: of([]),
+                        connections: signal([]),
                         addConnections: jest.fn(),
+                        setConnections: jest.fn(),
                         removeConnectionsByConnectorId: jest.fn(),
                         removeConnectionsByNodeId: jest.fn(),
                     },
                 },
                 {
                     provide: DraftConnectionService,
-                    useValue: {isConnectionCreating$: new BehaviorSubject(false)},
+                    useValue: {isConnectionCreating: signal(false)},
                 },
                 {
                     provide: NgDrawFlowStoreService,

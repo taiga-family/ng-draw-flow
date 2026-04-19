@@ -17,6 +17,6 @@
     />
 }
 
-@if (isConnectionCreating$ | async) {
+@if (isConnectionCreating()) {
     <df-draft-connection (connectionCreated)="onConnectionCreated($event)" />
 }

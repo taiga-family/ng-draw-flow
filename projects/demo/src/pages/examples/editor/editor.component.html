@@ -11,7 +11,7 @@
         >
             <div
                 class="editor"
-                [ngClass]="{fullscreen: fullscreen$ | async}"
+                [ngClass]="{fullscreen: fullscreen()}"
             >
                 <ng-draw-flow
                     [formControl]="form"
@@ -41,7 +41,7 @@
                     class="fullscreen-btn"
                     (click)="toggleFullscreen()"
                 >
-                    {{ (fullscreen$ | async) ? 'Exit from fullscreen' : 'Fullscreen' }}
+                    {{ fullscreen() ? 'Exit from fullscreen' : 'Fullscreen' }}
                 </button>
 
                 <div class="scale-controls">
@@ -72,7 +72,7 @@
                         />
                     </tui-textfield>
 
-                    <div class="scale-value">{{ drawFlowStore.scale$ | async }}%</div>
+                    <div class="scale-value">{{ drawFlowStore.scale() }}%</div>
 
                     <button
                         size="s"
