@@ -21,7 +21,7 @@ import {
     ReactiveFormsModule,
 } from '@angular/forms';
 import {WaResizeObserver} from '@ng-web-apis/resize-observer';
-import {debounceTime, filter} from 'rxjs';
+import {debounceTime} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
@@ -98,6 +98,9 @@ import {SelectionService} from './services/selection.service';
     ],
     host: {
         '(waResizeObserver)': 'this.onResize($event)',
+        '(focusout)': 'this.markAsTouched()',
+        '(pointerdown)': 'this.markAsTouched()',
+        '[class.ng-draw-flow_disabled]': 'disabled()',
     },
 })
 export class NgDrawFlowComponent
@@ -116,8 +119,10 @@ export class NgDrawFlowComponent
     private viewportFrameRetryCount = 0;
     private shouldFrameViewport = false;
     private hasFramedExternalModel = false;
+    private touched = false;
 
     protected readonly panzoom = viewChild.required(PanZoomComponent);
+    protected readonly disabled = signal(false);
 
     /** Emits the *current* zoom factor each time it changes. */
     protected readonly scale = output<number>();
@@ -140,10 +145,15 @@ export class NgDrawFlowComponent
     /** Fired when a node is removed from the graph. */
     protected readonly nodeDeleted = output<DfEvent<DfDataNode>>();
 
-    protected readonly form = new FormControl<DfDataModel>({
-        nodes: [],
-        connections: [],
-    });
+    protected readonly form = new FormControl<DfDataModel>(
+        {
+            nodes: [],
+            connections: [],
+        },
+        {
+            nonNullable: true,
+        },
+    );
 
     protected readonly $rootReady = signal<boolean>(false);
 
@@ -196,6 +206,16 @@ export class NgDrawFlowComponent
         this.onTouched = fn;
     }
 
+    public setDisabledState(isDisabled: boolean): void {
+        this.disabled.set(isDisabled);
+
+        if (isDisabled) {
+            this.form.disable({emitEvent: false});
+        } else {
+            this.form.enable({emitEvent: false});
+        }
+    }
+
     /** Zooms one step *in* towards the center of the scene. */
     public zoomIn(): void {
         this.panzoom().zoomIn();
@@ -242,34 +262,45 @@ export class NgDrawFlowComponent
 
     protected onConnectionCreated(event: DfEvent<DfDataConnection>): void {
         this.connectionCreated.emit(event);
-        this.form.setValue(event.model);
     }
 
     protected onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
         this.connectionDeleted.emit(event);
-        this.form.setValue(event.model);
     }
 
     protected onNodeDeleted(event: DfEvent<DfDataNode>): void {
         this.nodeDeleted.emit(event);
-        this.form.setValue(event.model);
     }
 
     protected onNodeMoved(event: DfEvent<DfDataNode>): void {
         this.nodeMoved.emit(event);
-        this.form.setValue(event.model);
     }
 
-    protected onResize(event: any): void {
-        const {width, height} = event[0].contentRect;
+    protected onResize(event: readonly ResizeObserverEntry[]): void {
+        const entry = event[0];
 
-        this.$rootReady.set(width && height);
+        if (!entry) {
+            return;
+        }
+
+        const {width, height} = entry.contentRect;
+
+        this.$rootReady.set(Boolean(width && height));
         this.scheduleViewportFraming();
+    }
+
+    protected markAsTouched(): void {
+        if (this.touched) {
+            return;
+        }
+
+        this.touched = true;
+        this.onTouched();
     }
 
     private watchFormChanges(): void {
         this.form.valueChanges
-            .pipe(filter(Boolean), debounceTime(10), takeUntilDestroyed(this.destroyRef))
+            .pipe(debounceTime(10), takeUntilDestroyed(this.destroyRef))
             .subscribe((value: DfDataModel) => {
                 this.store.updateDataModel(value);
                 this.onChange(value);
@@ -278,7 +309,6 @@ export class NgDrawFlowComponent
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
 
-    // @ts-ignore
     private onTouched: () => void = () => {};
 
     private scheduleViewportFraming(retry = false): void {
