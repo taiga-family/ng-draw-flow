@@ -2,11 +2,9 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    type ElementRef,
     inject,
     type OutputRef,
     type Signal,
-    ViewChild,
 } from '@angular/core';
 import {outputFromObservable} from '@angular/core/rxjs-interop';
 
@@ -29,9 +27,6 @@ import {DraftConnectionService} from './draft-connection.service';
 export class DraftConnectionComponent {
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly options: DfOptions = inject(DRAW_FLOW_OPTIONS);
-
-    @ViewChild('connectionPath')
-    protected connectionPath!: ElementRef;
 
     protected readonly connectionCreated: OutputRef<DfDataConnection> =
         outputFromObservable(this.draftConnectionService.connectionCreated$);
