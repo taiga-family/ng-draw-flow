@@ -3,7 +3,6 @@ import {
     Directive,
     effect,
     ElementRef,
-    HostBinding,
     inject,
     Injector,
     type OnInit,
@@ -18,9 +17,15 @@ import {
 } from '../../ng-draw-flow.interfaces';
 import {ConnectionsService} from '../connections/connections.service';
 
-@Directive()
+@Directive({
+    host: {
+        '[attr.data-connector-type]': 'connectorType',
+        '[attr.data-node-id]': 'bindNodeId',
+        '[attr.data-connector-id]': 'bindConnectorId',
+        '[attr.data-position]': 'bindPosition',
+    },
+})
 export abstract class BaseConnector implements OnInit {
-    @HostBinding('attr.data-connector-type')
     protected connectorType!: DfConnectionPoint;
 
     protected readonly destroyRef = inject(DestroyRef);
@@ -35,17 +40,14 @@ export abstract class BaseConnector implements OnInit {
 
     protected abstract get data(): DfDataConnectorConfig;
 
-    @HostBinding('attr.data-node-id')
     public get bindNodeId(): string | undefined {
         return this.data?.nodeId;
     }
 
-    @HostBinding('attr.data-connector-id')
     public get bindConnectorId(): string | undefined {
         return this.data?.connectorId;
     }
 
-    @HostBinding('attr.data-position')
     public get bindPosition(): DfConnectorPosition | undefined {
         return this.position;
     }
