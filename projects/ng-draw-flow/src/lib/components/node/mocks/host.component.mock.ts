@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, viewChild} from '@angular/core';
 
 import {type DfDataInitialNode} from '../../../ng-draw-flow.interfaces';
 import {NodeComponent} from '../node.component';
@@ -10,8 +10,7 @@ import {NodeComponent} from '../node.component';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HostComponent {
-    @ViewChild(NodeComponent)
-    public nodeComponent!: NodeComponent;
+    public readonly nodeComponent = viewChild.required(NodeComponent);
 
     public node: DfDataInitialNode = {
         id: 'draft-node',

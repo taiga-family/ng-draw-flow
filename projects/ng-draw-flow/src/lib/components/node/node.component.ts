@@ -11,12 +11,15 @@ import {
     type OnChanges,
     type OnDestroy,
     output,
-    type QueryList,
     type SimpleChanges,
-    ViewChild,
+    viewChild,
     ViewContainerRef,
 } from '@angular/core';
-import {outputToObservable, takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {
+    outputToObservable,
+    takeUntilDestroyed,
+    toObservable,
+} from '@angular/core/rxjs-interop';
 import {merge, type Observable, tap} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
@@ -84,11 +87,12 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private moved = false;
     private resizeObserver: ResizeObserver | null = null;
 
-    @ViewChild('nodeElement')
-    public readonly nodeElementRef!: ElementRef<HTMLElement>;
+    public readonly nodeElementRef =
+        viewChild.required<ElementRef<HTMLElement>>('nodeElement');
 
-    @ViewChild('container', {read: ViewContainerRef})
-    public readonly containerRef!: ViewContainerRef;
+    public readonly containerRef = viewChild.required('container', {
+        read: ViewContainerRef,
+    });
 
     public readonly node = input.required<DfDataInitialNode | DfDataNode>();
 
@@ -155,8 +159,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         const {id: nodeId, startNode, endNode, data} = node;
         const nodeType = data.type;
 
-        this.containerRef.clear();
-        this.nodeContentComponentRef = this.containerRef.createComponent(
+        this.containerRef().clear();
+        this.nodeContentComponentRef = this.containerRef().createComponent(
             this.drawFlowComponents[nodeType]!,
         );
 
@@ -283,7 +287,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private updateConnectorsCoordinates(): void {
         const centeredCoordinates = this.getCenteredPosition();
 
-        this.innerComponent.inputs.forEach((input: DfInputComponent) => {
+        this.innerComponent.inputs().forEach((input: DfInputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
                 this.value.id,
@@ -292,7 +296,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             );
         });
 
-        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
+        this.innerComponent.outputs().forEach((output: DfOutputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
                 this.value.id,
@@ -309,7 +313,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             deltaY: distance.deltaY / zoom,
         };
 
-        this.innerComponent.inputs.forEach((input: DfInputComponent) => {
+        this.innerComponent.inputs().forEach((input: DfInputComponent) => {
             this.recalculateConnectorPositionFromLast(
                 currentMoveDistance,
                 input,
@@ -317,7 +321,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             );
         });
 
-        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
+        this.innerComponent.outputs().forEach((output: DfOutputComponent) => {
             this.recalculateConnectorPositionFromLast(
                 currentMoveDistance,
                 output,
@@ -397,7 +401,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private applyPositionToStyle(position: DfPoint, dynamic: boolean): void {
-        this.nodeElementRef.nativeElement.style.transform = dynamic
+        this.nodeElementRef().nativeElement.style.transform = dynamic
             ? `translate3D(${position.x}px, ${position.y}px, 0)`
             : `translate(${position.x}px, ${position.y}px)`;
     }
@@ -417,9 +421,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             return;
         }
 
-        this.previousOutputs = this.innerComponent?.outputs?.toArray() || [];
-
-        this.previousInputs = this.innerComponent?.inputs?.toArray() || [];
+        this.previousOutputs = [...this.innerComponent.outputs()];
+        this.previousInputs = [...this.innerComponent.inputs()];
 
         const connectorsUpdates$ = this.collectConnectorUpdateSources();
 
@@ -486,38 +489,33 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
      * Adds updates from inputs
      */
     private addInputsUpdates(sources: Array<Observable<any>>): void {
-        if (this.innerComponent?.inputs?.changes) {
-            sources.push(
-                this.innerComponent.inputs.changes.pipe(
-                    tap((currentInputs: QueryList<DfInputComponent>) => {
-                        this.handleRemovedInputs(currentInputs);
-                    }),
-                ),
-            );
-        }
+        sources.push(
+            toObservable(this.innerComponent.inputs).pipe(
+                tap((currentInputs: readonly DfInputComponent[]) => {
+                    this.handleRemovedInputs(currentInputs);
+                }),
+            ),
+        );
     }
 
     /**
      * Adds updates from outputs with handling for removed items
      */
     private addOutputsUpdates(sources: Array<Observable<any>>): void {
-        if (this.innerComponent?.outputs?.changes) {
-            sources.push(
-                this.innerComponent.outputs.changes.pipe(
-                    tap((currentOutputs: QueryList<DfOutputComponent>) => {
-                        this.handleRemovedOutputs(currentOutputs);
-                        this.applyOutputsConnectionLabel();
-                    }),
-                ),
-            );
-        }
+        sources.push(
+            toObservable(this.innerComponent.outputs).pipe(
+                tap((currentOutputs: readonly DfOutputComponent[]) => {
+                    this.handleRemovedOutputs(currentOutputs);
+                    this.applyOutputsConnectionLabel();
+                }),
+            ),
+        );
     }
 
     /**
      * Processes removed inputs
      */
-    private handleRemovedInputs(currentInputs: QueryList<DfInputComponent>): void {
-        const currentArray = currentInputs.toArray();
+    private handleRemovedInputs(currentArray: readonly DfInputComponent[]): void {
         const removedOutputs = this.previousInputs.filter(
             (prev) => !currentArray.some((curr) => curr === prev),
         );
@@ -528,14 +526,13 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             });
         }
 
-        this.previousInputs = currentArray;
+        this.previousInputs = [...currentArray];
     }
 
     /**
      * Processes removed outputs
      */
-    private handleRemovedOutputs(currentOutputs: QueryList<DfOutputComponent>): void {
-        const currentArray = currentOutputs.toArray();
+    private handleRemovedOutputs(currentArray: readonly DfOutputComponent[]): void {
         const removedOutputs = this.previousOutputs.filter(
             (prev) => !currentArray.some((curr) => curr === prev),
         );
@@ -546,7 +543,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             });
         }
 
-        this.previousOutputs = currentArray;
+        this.previousOutputs = [...currentArray];
     }
 
     private applyOutputsConnectionLabel(): void {
@@ -556,7 +553,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             return;
         }
 
-        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
+        this.innerComponent.outputs().forEach((output: DfOutputComponent) => {
             output.setConnectionLabel(connectionLabel);
         });
     }
@@ -571,7 +568,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             this.syncWorkspaceGeometry();
             this.refreshRenderedGeometry(false);
         });
-        this.resizeObserver.observe(this.nodeElementRef.nativeElement);
+        this.resizeObserver.observe(this.nodeElementRef().nativeElement);
     }
 
     private refreshRenderedGeometry(dynamic: boolean): void {

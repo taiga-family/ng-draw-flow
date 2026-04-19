@@ -15,6 +15,6 @@ export class LabelNodeComponent extends DrawFlowBaseNode {
     public outputConnectors = [0];
 
     public addOutputConnector(): void {
-        this.outputConnectors.push(this.outputs.length);
+        this.outputConnectors.push(this.outputs().length);
     }
 }
