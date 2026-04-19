@@ -32,6 +32,7 @@ import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
 
 @Injectable()
 export class DraftConnectionService implements OnDestroy {
+    private readonly document = inject(DOCUMENT);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
@@ -62,13 +63,11 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private connectionSubscription(): void {
-        const document = inject(DOCUMENT);
-
         this.connection$
             .pipe(
                 filter(() => this.options.options.connectionsCreatable),
                 tap((connectorData) => this.onDragStart(connectorData)),
-                switchMap(() => fromEvent<PointerEvent>(document, 'pointermove')),
+                switchMap(() => fromEvent<PointerEvent>(this.document, 'pointermove')),
                 filter(() => this.isConnectionCreating$.value),
                 observeOn(animationFrameScheduler),
                 pairwise(),
@@ -77,7 +76,7 @@ export class DraftConnectionService implements OnDestroy {
                 ),
 
                 takeUntil(
-                    fromEvent<PointerEvent>(document, 'pointerup').pipe(
+                    fromEvent<PointerEvent>(this.document, 'pointerup').pipe(
                         filter(() => this.isConnectionCreating$.value),
                         tap((event: PointerEvent) => this.onDragEnd(event)),
                     ),
