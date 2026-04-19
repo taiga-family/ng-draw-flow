@@ -1,35 +1,30 @@
-import {AsyncPipe} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
-    DestroyRef,
+    computed,
     effect,
     inject,
     input,
     output,
     type OutputEmitterRef,
+    type Signal,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
 import {
     animationFrameScheduler,
-    asyncScheduler,
-    type BehaviorSubject,
-    combineLatest,
     concat,
     delay,
     distinctUntilChanged,
-    map,
     observeOn,
     of,
-    shareReplay,
     skip,
     startWith,
     switchMap,
 } from 'rxjs';
 
 import {SelectableElementDirective} from '../../../directives';
-import {createConnectorHash, deepEqual} from '../../../helpers';
+import {createConnectorHash} from '../../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import {
     DfArrowhead,
@@ -47,7 +42,7 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
 @Component({
     standalone: true,
     selector: 'df-connection',
-    imports: [AsyncPipe, PolymorpheusOutlet, SelectableElementDirective],
+    imports: [PolymorpheusOutlet, SelectableElementDirective],
     templateUrl: './connection.component.svg',
     styleUrl: '../connection.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,59 +61,42 @@ export class ConnectionComponent {
     private readonly arrowhead = this.options.connection.arrowhead;
     private readonly arrowWidth = this.arrowhead.width;
     private readonly arrowHeight = this.arrowhead.height;
-    private readonly destroyRef = inject(DestroyRef);
-    private selectedNodeId: string | null = null;
     private connectionInternal: DfDataConnection | null = null;
+    private readonly pathWithLabel: Signal<{
+        path: string;
+        labelX: number;
+        labelY: number;
+    }> = computed(() => {
+        const sourcePoint = this.getConnectionPoint(this.connection.source)();
+        const targetPoint = this.getConnectionPoint(this.connection.target)();
 
-    private readonly pathWithLabel$ = of(null).pipe(
-        observeOn(asyncScheduler),
-        switchMap(() =>
-            combineLatest([
-                this.getConnectionPoint(this.connection.source),
-                this.getConnectionPoint(this.connection.target),
-            ]),
-        ),
-        switchMap(([sourcePoint, targetPoint]) => {
-            if (!sourcePoint || !targetPoint) {
-                console.warn('One of the connection points not found');
+        if (!sourcePoint || !targetPoint) {
+            return {path: '', labelX: 0, labelY: 0};
+        }
 
-                return of([]);
+        switch (this.options.connection.type) {
+            case DfConnectionType.SmoothStep: {
+                const [path, labelX, labelY] = createSmoothStepPath(
+                    sourcePoint,
+                    targetPoint,
+                    this.options.connection.curvature,
+                );
+
+                return {path, labelX, labelY};
             }
+            case DfConnectionType.Bezier:
+            default: {
+                const curvature = this.options.connection.curvature;
+                const [path, labelX, labelY] = createBezierPath(
+                    sourcePoint,
+                    targetPoint,
+                    curvature,
+                );
 
-            return of([sourcePoint, targetPoint]);
-        }),
-        distinctUntilChanged(deepEqual),
-        observeOn(animationFrameScheduler),
-        map(([start, end]) => {
-            if (!start || !end) {
-                return {path: '', labelX: 0, labelY: 0};
+                return {path, labelX, labelY};
             }
-
-            switch (this.options.connection.type) {
-                case DfConnectionType.SmoothStep: {
-                    const [path, labelX, labelY] = createSmoothStepPath(
-                        start,
-                        end,
-                        this.options.connection.curvature,
-                    );
-
-                    return {path, labelX, labelY};
-                }
-                case DfConnectionType.Bezier:
-                default: {
-                    const curvature = this.options.connection.curvature;
-                    const [path, labelX, labelY] = createBezierPath(
-                        start,
-                        end,
-                        curvature,
-                    );
-
-                    return {path, labelX, labelY};
-                }
-            }
-        }),
-        shareReplay({bufferSize: 1, refCount: true}),
-    );
+        }
+    });
 
     protected selected = false;
     protected readonly arrowMarkerWidth = this.arrowWidth + this.arrowHeight;
@@ -126,27 +104,34 @@ export class ConnectionComponent {
     protected readonly arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
     protected readonly arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
     protected readonly arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
-
     protected readonly markerEnd =
         this.arrowhead.type === DfArrowhead.None
             ? null
             : `url(#df-arrowhead-${this.arrowhead.type})`;
 
-    protected readonly path$ = this.pathWithLabel$.pipe(map(({path}) => path));
+    protected readonly path = computed(() => this.pathWithLabel().path);
 
-    protected readonly labelPosition$ = this.pathWithLabel$.pipe(
-        map(({labelX, labelY}) => ({x: labelX, y: labelY})),
-    );
+    protected readonly labelPosition = computed(() => {
+        const {labelX, labelY} = this.pathWithLabel();
 
-    protected readonly optimization$ = this.path$.pipe(
-        skip(1),
-        switchMap(() => concat(of(true), of(false).pipe(delay(400)))),
-        startWith(false),
-        distinctUntilChanged(),
+        return {x: labelX, y: labelY};
+    });
+
+    protected readonly optimization = toSignal(
+        toObservable(this.path).pipe(
+            observeOn(animationFrameScheduler),
+            skip(1),
+            distinctUntilChanged(),
+            switchMap(() => concat(of(true), of(false).pipe(delay(400)))),
+            startWith(false),
+        ),
+        {initialValue: false},
     );
 
     public deletable = this.options.options.connectionsDeletable;
+
     protected selectedNodeInput = false;
+
     protected selectedNodeOutput = false;
 
     public readonly connectionDeleted: OutputEmitterRef<void> = output();
@@ -161,12 +146,10 @@ export class ConnectionComponent {
             this.updateSelectedNodeClasses();
         });
 
-        this.connectionsService.selectedNodeId$
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((selectedNodeId: string | null) => {
-                this.selectedNodeId = selectedNodeId;
-                this.updateSelectedNodeClasses();
-            });
+        effect(() => {
+            this.connectionsService.selectedNodeId();
+            this.updateSelectedNodeClasses();
+        });
     }
 
     public get connection(): DfDataConnection {
@@ -202,23 +185,27 @@ export class ConnectionComponent {
 
     private getConnectionPoint(
         connector: DfDataConnector,
-    ): BehaviorSubject<DfConnectorData> | BehaviorSubject<null> {
-        return this.coordinatesService.getConnectionPoint(createConnectorHash(connector));
+    ): Signal<DfConnectorData | null> {
+        return this.coordinatesService.getConnectionPointSignal(
+            createConnectorHash(connector),
+        );
     }
 
     private updateSelectedNodeClasses(): void {
         this.selectedNodeInput = false;
         this.selectedNodeOutput = false;
 
-        if (!this.connectionInternal || !this.selectedNodeId) {
+        const selectedNodeId = this.connectionsService.selectedNodeId();
+
+        if (!this.connectionInternal || !selectedNodeId) {
             return;
         }
 
-        if (this.connectionInternal.target.nodeId === this.selectedNodeId) {
+        if (this.connectionInternal.target.nodeId === selectedNodeId) {
             this.selectedNodeInput = true;
         }
 
-        if (this.connectionInternal.source.nodeId === this.selectedNodeId) {
+        if (this.connectionInternal.source.nodeId === selectedNodeId) {
             this.selectedNodeOutput = true;
         }
     }

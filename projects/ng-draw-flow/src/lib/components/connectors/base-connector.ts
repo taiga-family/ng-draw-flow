@@ -1,13 +1,14 @@
 import {
     DestroyRef,
     Directive,
+    effect,
     ElementRef,
     HostBinding,
     inject,
+    Injector,
     type OnInit,
+    runInInjectionContext,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {filter} from 'rxjs';
 
 import {
     type DfConnectionPoint,
@@ -23,6 +24,7 @@ export abstract class BaseConnector implements OnInit {
     protected connectorType!: DfConnectionPoint;
 
     protected readonly destroyRef = inject(DestroyRef);
+    protected readonly injector = inject(Injector);
     protected isDisabled = false;
     protected readonly connectionsService = inject(ConnectionsService);
 
@@ -49,18 +51,19 @@ export abstract class BaseConnector implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.connectionsService.usedConnectors$
-            .pipe(
-                filter(() => !!this.data?.connectorId),
-                takeUntilDestroyed(this.destroyRef),
-            )
-            .subscribe((usedConnectorIds: string[]) => {
-                if (!this.data?.connectorId) {
+        runInInjectionContext(this.injector, () => {
+            effect(() => {
+                const connectorId = this.data?.connectorId;
+
+                if (!connectorId) {
                     return;
                 }
 
-                this.setupDisabledState(usedConnectorIds.includes(this.data.connectorId));
+                this.setupDisabledState(
+                    this.connectionsService.usedConnectors().includes(connectorId),
+                );
             });
+        });
     }
 
     public destroy(): void {
