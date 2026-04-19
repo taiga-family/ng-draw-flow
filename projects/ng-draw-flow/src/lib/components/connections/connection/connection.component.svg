@@ -53,7 +53,8 @@
     <!-- Connection line start-->
 
     <!-- Label start -->
-    <foreignObject *ngIf="connection.label" class="label-container" width="1" height="1" overflow="visible">
+    @if (connection.label) {
+    <foreignObject class="label-container" width="1" height="1" overflow="visible">
         <div
             xmlns="http://www.w3.org/1999/xhtml"
             class="label"
@@ -65,5 +66,6 @@
             </ng-container>
         </div>
     </foreignObject>
+    }
     <!-- Label end -->
 </svg>

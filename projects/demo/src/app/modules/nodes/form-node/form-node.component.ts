@@ -1,4 +1,3 @@
-import {CommonModule} from '@angular/common';
 import {
     type AfterViewInit,
     ChangeDetectionStrategy,
@@ -26,7 +25,6 @@ interface NodeFormGroup {
     standalone: true,
     selector: 'app-form-node',
     imports: [
-        CommonModule,
         DfInputComponent,
         DfOutputComponent,
         ReactiveFormsModule,

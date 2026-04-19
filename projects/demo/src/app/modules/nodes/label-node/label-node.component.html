@@ -1,13 +1,13 @@
 <p class="tui-text_body-xs">{{ model.text }}</p>
 
 <div class="output-wrapper">
-    <ng-container *ngFor="let output of outputConnectors; let i = index">
+    @for (output of outputConnectors; track output; let i = $index) {
         <df-output
             class="output"
             [connectionLabel]="{content: i}"
             [connectorData]="{nodeId, connectorId: nodeId + '-output-' + (i + 1), single: false}"
         />
-    </ng-container>
+    }
 </div>
 
 <button

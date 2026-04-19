@@ -1,4 +1,4 @@
-import {isPlatformBrowser, NgIf} from '@angular/common';
+import {isPlatformBrowser} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -28,7 +28,7 @@ import {PanZoomGesturesService} from './pan-zoom-gestures.service';
 @Component({
     standalone: true,
     selector: 'df-pan-zoom',
-    imports: [NgIf, PanZoomBackgroundCanvasComponent],
+    imports: [PanZoomBackgroundCanvasComponent],
     templateUrl: './pan-zoom.component.html',
     styleUrl: './pan-zoom.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
