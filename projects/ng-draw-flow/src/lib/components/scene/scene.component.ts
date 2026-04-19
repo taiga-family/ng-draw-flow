@@ -1,4 +1,3 @@
-import {CommonModule} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -31,7 +30,7 @@ import {NodeComponent} from '../node/node.component';
 @Component({
     standalone: true,
     selector: 'df-scene',
-    imports: [CommonModule, ConnectionComponent, DraftConnectionComponent, NodeComponent],
+    imports: [ConnectionComponent, DraftConnectionComponent, NodeComponent],
     templateUrl: './scene.component.html',
     styleUrl: './scene.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,7 +58,9 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected readonly connectionDeleted = output<DfEvent<DfDataConnection>>();
     protected readonly connectionSelected = output<DfDataConnection>();
 
-    protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
+    protected readonly isConnectionCreating =
+        this.draftConnectionService.isConnectionCreating;
+
     protected model: DfDataModel = {nodes: [], connections: []};
     protected $invalidNodes: Signal<string[]> = inject(INVALID_NODES);
 
@@ -181,7 +182,8 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     }
 
     private emitConnectionDeletedByNodeId(nodeId: string): void {
-        this.connectionsService.connections$.value
+        this.connectionsService
+            .connections()
             .filter(
                 (connection) =>
                     connection.source.nodeId === nodeId ||

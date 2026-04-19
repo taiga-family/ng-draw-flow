@@ -1,7 +1,6 @@
 import {signal, type WritableSignal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 import {MockBuilder, MockProvider, MockRender, ngMocks} from 'ng-mocks';
-import {BehaviorSubject} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
@@ -116,11 +115,11 @@ describe('NodeComponent', () => {
                 }),
                 MockProvider(CoordinatesService, {
                     addConnectionPoint: jest.fn(),
-                    getConnectionPoint: () => new BehaviorSubject(null),
+                    getConnectionPointSignal: () => signal(null),
                 }),
                 MockProvider(DF_PAN_ZOOM_OPTIONS, panZoomOptions),
                 MockProvider(ConnectionsService, {
-                    selectedNodeId$: new BehaviorSubject(null),
+                    selectedNodeId: signal<string | null>(null),
                 } as ConnectionsService),
             ]);
     });

@@ -1,5 +1,12 @@
-import {DestroyRef, Directive, inject, type OnInit} from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {
+    Directive,
+    effect,
+    inject,
+    Injector,
+    type OnInit,
+    runInInjectionContext,
+} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {NgControl} from '@angular/forms';
 import {combineLatest, distinctUntilChanged, map, startWith} from 'rxjs';
 
@@ -9,7 +16,7 @@ import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 
 @Directive({standalone: true, selector: '[dfErrors]'})
 export class ErrorsDirective implements OnInit {
-    private readonly destroyRef = inject(DestroyRef);
+    private readonly injector = inject(Injector);
     private readonly ngControl = inject(NgControl);
     private readonly $invalidNodes = inject(INVALID_NODES);
 
@@ -20,17 +27,21 @@ export class ErrorsDirective implements OnInit {
 
         const control = this.ngControl.control;
 
-        combineLatest([
-            control.statusChanges.pipe(startWith(control.status)),
-            control.valueChanges.pipe(startWith(control.value)),
-        ])
-            .pipe(
-                map(() => collectInvalidNodeIds(control.errors)),
-                distinctUntilChanged(deepEqual),
-                takeUntilDestroyed(this.destroyRef),
-            )
-            .subscribe((idsSet: Set<string>) => {
-                this.$invalidNodes.set(Array.from(idsSet));
+        runInInjectionContext(this.injector, () => {
+            const invalidNodeIds = toSignal(
+                combineLatest([
+                    control.statusChanges.pipe(startWith(control.status)),
+                    control.valueChanges.pipe(startWith(control.value)),
+                ]).pipe(
+                    map(() => collectInvalidNodeIds(control.errors)),
+                    distinctUntilChanged(deepEqual),
+                ),
+                {initialValue: collectInvalidNodeIds(control.errors)},
+            );
+
+            effect(() => {
+                this.$invalidNodes.set(Array.from(invalidNodeIds()));
             });
+        });
     }
 }

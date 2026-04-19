@@ -143,7 +143,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
             return;
         }
 
-        if (this.connectionsService.selectedNodeId$.value === this.value.id) {
+        if (this.connectionsService.selectedNodeId() === this.value.id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
 

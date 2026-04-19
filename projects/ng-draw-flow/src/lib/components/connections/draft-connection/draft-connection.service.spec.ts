@@ -1,5 +1,5 @@
+import {signal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs';
 
 import {
     DRAW_FLOW_DEFAULT_OPTIONS,
@@ -23,7 +23,7 @@ describe('DraftConnectionService', () => {
                 {
                     provide: CoordinatesService,
                     useValue: {
-                        getConnectionPoint: jest.fn(() => new BehaviorSubject(null)),
+                        getConnectionPointSignal: jest.fn(() => signal(null)),
                     },
                 },
             ],

@@ -1,5 +1,4 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, ReplaySubject} from 'rxjs';
+import {Injectable, signal, type WritableSignal} from '@angular/core';
 
 import {
     type DfConnectorData,
@@ -9,14 +8,15 @@ import {
 
 @Injectable()
 export class CoordinatesService {
-    private connectionPointsMap: Record<string, BehaviorSubject<DfConnectorData>> = {};
+    private readonly connectionPointsMap: Record<
+        string,
+        WritableSignal<DfConnectorData | null>
+    > = {};
 
-    public connectionPointsMapChange$ = new ReplaySubject<void>(1);
-
-    public getConnectionPoint(
+    public getConnectionPointSignal(
         connectorHash: string,
-    ): BehaviorSubject<DfConnectorData> | BehaviorSubject<null> {
-        return this.connectionPointsMap[connectorHash] || new BehaviorSubject(null);
+    ): WritableSignal<DfConnectorData | null> {
+        return this.ensureConnectionPointSignal(connectorHash);
     }
 
     public addConnectionPoint(
@@ -24,16 +24,22 @@ export class CoordinatesService {
         point: DfPoint,
         position: DfConnectorPosition,
     ): void {
-        if (this.connectionPointsMap[connectorHash]) {
-            this.connectionPointsMap[connectorHash].next({point, position});
-        } else {
-            this.connectionPointsMap[connectorHash] =
-                new BehaviorSubject<DfConnectorData>({
-                    point,
-                    position,
-                });
+        this.ensureConnectionPointSignal(connectorHash).set({point, position});
+    }
+
+    private ensureConnectionPointSignal(
+        connectorHash: string,
+    ): WritableSignal<DfConnectorData | null> {
+        const pointSignal = this.connectionPointsMap[connectorHash];
+
+        if (pointSignal) {
+            return pointSignal;
         }
 
-        this.connectionPointsMapChange$.next();
+        const nextSignal = signal<DfConnectorData | null>(null);
+
+        this.connectionPointsMap[connectorHash] = nextSignal;
+
+        return nextSignal;
     }
 }

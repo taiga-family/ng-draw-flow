@@ -1,8 +1,8 @@
 import {DOCUMENT} from '@angular/common';
 import {inject, Injectable, type OnDestroy, signal} from '@angular/core';
+import {toObservable} from '@angular/core/rxjs-interop';
 import {
     animationFrameScheduler,
-    BehaviorSubject,
     filter,
     fromEvent,
     map,
@@ -49,7 +49,8 @@ export class DraftConnectionService implements OnDestroy {
         position: DfConnectorPosition.Left,
     });
 
-    public readonly isConnectionCreating$ = new BehaviorSubject<boolean>(false);
+    public readonly isConnectionCreating = signal(false);
+    public readonly isConnectionCreating$ = toObservable(this.isConnectionCreating);
     public readonly connectionCreated$ = new Subject<DfDataConnection>();
     public readonly connection$ = new Subject<DfDataConnector>();
 
@@ -68,7 +69,7 @@ export class DraftConnectionService implements OnDestroy {
                 filter(() => this.options.options.connectionsCreatable),
                 tap((connectorData) => this.onDragStart(connectorData)),
                 switchMap(() => fromEvent<PointerEvent>(this.document, 'pointermove')),
-                filter(() => this.isConnectionCreating$.value),
+                filter(() => this.isConnectionCreating()),
                 observeOn(animationFrameScheduler),
                 pairwise(),
                 map(([previousEvent, currentEvent]) =>
@@ -77,7 +78,7 @@ export class DraftConnectionService implements OnDestroy {
 
                 takeUntil(
                     fromEvent<PointerEvent>(this.document, 'pointerup').pipe(
-                        filter(() => this.isConnectionCreating$.value),
+                        filter(() => this.isConnectionCreating()),
                         tap((event: PointerEvent) => this.onDragEnd(event)),
                     ),
                 ),
@@ -94,9 +95,9 @@ export class DraftConnectionService implements OnDestroy {
         }
 
         this.sourceConnector = connector;
-        this.isConnectionCreating$.next(true);
+        this.isConnectionCreating.set(true);
         const sourceId = createConnectorHash(connector);
-        const sourcePoint = this.coordinatesService.getConnectionPoint(sourceId).value;
+        const sourcePoint = this.coordinatesService.getConnectionPointSignal(sourceId)();
 
         if (!sourcePoint) {
             return;
@@ -153,7 +154,7 @@ export class DraftConnectionService implements OnDestroy {
         }
 
         this.resetConnectors();
-        this.isConnectionCreating$.next(false);
+        this.isConnectionCreating.set(false);
     }
 
     private resetConnectors(): void {
