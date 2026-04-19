@@ -6,12 +6,11 @@ import {
     type ComponentRef,
     DestroyRef,
     type ElementRef,
-    EventEmitter,
     inject,
     Input,
     type OnChanges,
     type OnDestroy,
-    Output,
+    output,
     type QueryList,
     type SimpleChanges,
     ViewChild,
@@ -99,17 +98,10 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Input()
     public invalid = false;
 
-    @Output()
-    public readonly nodeMoved = new EventEmitter<DfDataNode>();
-
-    @Output()
-    public readonly nodeDeleted = new EventEmitter<void>();
-
-    @Output()
-    public readonly nodeSelected = new EventEmitter<DfDataNode>();
-
-    @Output()
-    public readonly connectorDeleted = new EventEmitter<string>();
+    public readonly nodeMoved = output<DfDataNode>();
+    public readonly nodeDeleted = output();
+    public readonly nodeSelected = output<DfDataNode>();
+    public readonly connectorDeleted = output<string>();
 
     public cursor: 'grabbing' | 'initial' = 'initial';
 
