@@ -85,7 +85,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private nodeWidth!: number;
     private nodeHeight!: number;
     private readonly selected = signal(false);
-    private value!: DfDataNode;
+    private resolvedNodeValue: DfDataNode | null = null;
     private accumulatedDelta = INITIAL_COORDINATES;
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
@@ -123,7 +123,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     public ngAfterViewInit(): void {
-        this.fillValue();
+        this.initializeResolvedNode();
         this.createNodeContentComponent();
         this.saveInnerNodeSize();
         this.applyOutputsConnectionLabel();
@@ -134,31 +134,31 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
-        if (!this.value) {
+        if (!this.resolvedNodeValue) {
             this.resizeObserver?.disconnect();
 
             return;
         }
 
-        if (this.connectionsService.selectedNodeId() === this.value.id) {
+        if (this.connectionsService.selectedNodeId() === this.getResolvedNode().id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
 
         this.resizeObserver?.disconnect();
-        this.panZoomService.removeNodeBounds(this.value.id);
+        this.panZoomService.removeNodeBounds(this.getResolvedNode().id);
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
         if (this.selected() && this.deletable && !this.node().startNode) {
             event.preventDefault();
 
-            this.store.clearSelectedNode(this.value.id);
+            this.store.clearSelectedNode(this.getResolvedNode().id);
             this.nodeDeleted.emit();
         }
     }
 
     protected createNodeContentComponent(): void {
-        const nodeType = this.value.data.type;
+        const nodeType = this.getResolvedNode().data.type;
 
         this.containerRef().clear();
         this.nodeContentComponentRef.set(null);
@@ -178,15 +178,17 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     protected onSelectedChanged(selected: boolean): void {
+        const node = this.getResolvedNode();
+
         this.selected.set(selected);
 
         if (selected) {
-            this.connectionsService.highlightConnectionsForNode(this.value.id);
-            this.store.emitNodeSelected(this.value);
-            this.nodeSelected.emit(this.value);
+            this.connectionsService.highlightConnectionsForNode(node.id);
+            this.store.emitNodeSelected(node);
+            this.nodeSelected.emit(node);
         } else {
             this.connectionsService.highlightConnectionsForNode(null);
-            this.store.clearSelectedNode(this.value.id);
+            this.store.clearSelectedNode(node.id);
         }
     }
 
@@ -203,6 +205,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     private onDragMove(distance: DfDragDropDistance): void {
+        const node = this.getResolvedNode();
         const {zoom} = this.panZoomService.snapshot();
 
         if (distance.deltaX || distance.deltaY) {
@@ -220,17 +223,17 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         const applyY = Math.abs(this.accumulatedDelta.y) >= this.nodeDragThreshold;
 
         if (applyX || applyY) {
-            const previousPosition = {...this.value.position};
+            const previousPosition = {...node.position};
             const requestedDeltaX = applyX ? this.accumulatedDelta.x : 0;
             const requestedDeltaY = applyY ? this.accumulatedDelta.y : 0;
             const unclampedPosition = {
-                x: this.value.position.x + requestedDeltaX,
-                y: this.value.position.y + requestedDeltaY,
+                x: node.position.x + requestedDeltaX,
+                y: node.position.y + requestedDeltaY,
             };
 
-            this.value.position = this.clampPositionToPanBounds(unclampedPosition);
-            const appliedDeltaX = this.value.position.x - previousPosition.x;
-            const appliedDeltaY = this.value.position.y - previousPosition.y;
+            node.position = this.clampPositionToPanBounds(unclampedPosition);
+            const appliedDeltaX = node.position.x - previousPosition.x;
+            const appliedDeltaY = node.position.y - previousPosition.y;
 
             this.syncWorkspaceGeometry();
             const centeredPosition = this.getCenteredPosition();
@@ -256,7 +259,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.cursor = 'initial';
 
         if (this.moved) {
-            this.nodeMoved.emit(this.value);
+            this.nodeMoved.emit(this.getResolvedNode());
             this.refreshRenderedGeometry(false);
         }
 
@@ -265,17 +268,27 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.panZoomService.setDisabled(false);
     }
 
-    private fillValue(): void {
-        const node = this.node();
+    private initializeResolvedNode(): void {
+        this.resolvedNodeValue = this.resolveNode(this.node());
+    }
 
-        if (this.hasPosition(node)) {
-            this.value = node;
-        } else {
-            this.value = {
-                ...node,
-                position: this.getCenterOfViewport(),
-            };
+    private getResolvedNode(): DfDataNode {
+        if (!this.resolvedNodeValue) {
+            throw new Error('NodeComponent resolved node is not initialized');
         }
+
+        return this.resolvedNodeValue;
+    }
+
+    private resolveNode(node: DfDataInitialNode | DfDataNode): DfDataNode {
+        if (this.hasPosition(node)) {
+            return node;
+        }
+
+        return {
+            ...node,
+            position: this.getCenterOfViewport(),
+        };
     }
 
     private saveInnerNodeSize(): void {
@@ -292,12 +305,12 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private syncNodeContentInputs(
         nodeContentComponentRef: ComponentRef<DrawFlowBaseNode>,
     ): void {
-        const node = this.node();
+        const node = this.getResolvedNode();
 
-        nodeContentComponentRef.setInput('nodeId', this.value.id);
+        nodeContentComponentRef.setInput('nodeId', node.id);
         nodeContentComponentRef.setInput('startNode', node.startNode === true);
         nodeContentComponentRef.setInput('endNode', node.endNode === true);
-        nodeContentComponentRef.setInput('model', this.value.data);
+        nodeContentComponentRef.setInput('model', node.data);
         nodeContentComponentRef.setInput('selected', this.selected());
         nodeContentComponentRef.setInput('invalid', this.invalid());
     }
@@ -308,7 +321,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.innerComponent.inputs().forEach((input: DfInputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
-                this.value.id,
+                this.getResolvedNode().id,
                 input,
                 DfConnectionPoint.Input,
             );
@@ -317,7 +330,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.innerComponent.outputs().forEach((output: DfOutputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
-                this.value.id,
+                this.getResolvedNode().id,
                 output,
                 DfConnectionPoint.Output,
             );
@@ -429,8 +442,8 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         const halfOfNodeHeight = this.nodeHeight / 2;
 
         return {
-            x: this.value.position.x - halfOfNodeWidth,
-            y: this.value.position.y - halfOfNodeHeight,
+            x: this.getResolvedNode().position.x - halfOfNodeWidth,
+            y: this.getResolvedNode().position.y - halfOfNodeHeight,
         };
     }
 
@@ -569,7 +582,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     private applyOutputsConnectionLabel(): void {
-        const connectionLabel = this.value.data.connectionLabel;
+        const connectionLabel = this.getResolvedNode().data.connectionLabel;
 
         if (!connectionLabel) {
             return;
@@ -599,14 +612,15 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     private syncWorkspaceGeometry(): void {
+        const node = this.getResolvedNode();
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
 
-        this.panZoomService.upsertNodeBounds(this.value.id, {
-            minX: this.value.position.x - halfOfNodeWidth,
-            minY: this.value.position.y - halfOfNodeHeight,
-            maxX: this.value.position.x + halfOfNodeWidth,
-            maxY: this.value.position.y + halfOfNodeHeight,
+        this.panZoomService.upsertNodeBounds(node.id, {
+            minX: node.position.x - halfOfNodeWidth,
+            minY: node.position.y - halfOfNodeHeight,
+            maxX: node.position.x + halfOfNodeWidth,
+            maxY: node.position.y + halfOfNodeHeight,
         });
     }
 }
