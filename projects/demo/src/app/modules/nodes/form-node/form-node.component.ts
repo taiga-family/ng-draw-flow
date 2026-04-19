@@ -4,7 +4,6 @@ import {
     Component,
     DestroyRef,
     inject,
-    Input,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -51,21 +50,6 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
         }),
     });
 
-    @Input()
-    public override set invalid(value: boolean) {
-        super.invalid = value;
-    }
-
-    public override get invalid(): boolean {
-        const formInvalid = Object.values(this.form.controls).some(
-            (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
-                fieldGroup.controls.fieldValue.touched &&
-                fieldGroup.controls.fieldValue.invalid,
-        );
-
-        return super.invalid || formInvalid;
-    }
-
     public get fieldNames(): string[] {
         return Object.keys(this.form.controls);
     }
@@ -98,5 +82,15 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
 
         // @ts-ignore
         this.form.addControl(newFieldKey, newField);
+    }
+
+    protected override get invalidState(): boolean {
+        const formInvalid = Object.values(this.form.controls).some(
+            (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
+                fieldGroup.controls.fieldValue.touched &&
+                fieldGroup.controls.fieldValue.invalid,
+        );
+
+        return this.invalidSignal() || formInvalid;
     }
 }
