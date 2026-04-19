@@ -6,11 +6,13 @@ import {
     type ComponentRef,
     DestroyRef,
     type ElementRef,
+    EnvironmentInjector,
     inject,
     input,
     type OnChanges,
     type OnDestroy,
     output,
+    runInInjectionContext,
     type SimpleChanges,
     viewChild,
     ViewContainerRef,
@@ -68,6 +70,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
     private readonly drawFlowOptions = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private readonly environmentInjector = inject(EnvironmentInjector);
     private readonly drawFlowComponents = this.drawFlowOptions.nodes;
     private readonly nodeDragThreshold = this.drawFlowOptions.options.nodeDragThreshold;
     private readonly draggable = this.drawFlowOptions.options.nodesDraggable;
@@ -491,27 +494,31 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
      * Adds updates from inputs
      */
     private addInputsUpdates(sources: Array<Observable<any>>): void {
-        sources.push(
-            toObservable(this.innerComponent.inputs).pipe(
-                tap((currentInputs: readonly DfInputComponent[]) => {
-                    this.handleRemovedInputs(currentInputs);
-                }),
-            ),
-        );
+        runInInjectionContext(this.environmentInjector, () => {
+            sources.push(
+                toObservable(this.innerComponent.inputs).pipe(
+                    tap((currentInputs: readonly DfInputComponent[]) => {
+                        this.handleRemovedInputs(currentInputs);
+                    }),
+                ),
+            );
+        });
     }
 
     /**
      * Adds updates from outputs with handling for removed items
      */
     private addOutputsUpdates(sources: Array<Observable<any>>): void {
-        sources.push(
-            toObservable(this.innerComponent.outputs).pipe(
-                tap((currentOutputs: readonly DfOutputComponent[]) => {
-                    this.handleRemovedOutputs(currentOutputs);
-                    this.applyOutputsConnectionLabel();
-                }),
-            ),
-        );
+        runInInjectionContext(this.environmentInjector, () => {
+            sources.push(
+                toObservable(this.innerComponent.outputs).pipe(
+                    tap((currentOutputs: readonly DfOutputComponent[]) => {
+                        this.handleRemovedOutputs(currentOutputs);
+                        this.applyOutputsConnectionLabel();
+                    }),
+                ),
+            );
+        });
     }
 
     /**

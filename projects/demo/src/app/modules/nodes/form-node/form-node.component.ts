@@ -6,18 +6,19 @@ import {
     inject,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {
+    FormControl,
+    FormGroup,
+    FormRecord,
+    ReactiveFormsModule,
+    Validators,
+} from '@angular/forms';
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
 import {TuiButton, TuiInput, TuiTextfield} from '@taiga-ui/core';
 
-interface NodeForm {
-    field1: FormGroup<NodeFormGroup>;
-    field2: FormGroup<NodeFormGroup>;
-}
-
-interface NodeFormGroup {
-    connectorId: FormControl<string | null>;
-    fieldValue: FormControl<string | null>;
+interface NodeFieldForm {
+    connectorId: FormControl<string>;
+    fieldValue: FormControl<string>;
 }
 
 @Component({
@@ -39,15 +40,9 @@ interface NodeFormGroup {
 export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit {
     private readonly destroyRef = inject(DestroyRef);
 
-    public form = new FormGroup<NodeForm>({
-        field1: new FormGroup<NodeFormGroup>({
-            connectorId: new FormControl<string>('node-5-output-1'),
-            fieldValue: new FormControl<string>('', [Validators.required]),
-        }),
-        field2: new FormGroup<NodeFormGroup>({
-            connectorId: new FormControl<string>('node-5-output-2'),
-            fieldValue: new FormControl<string>('', [Validators.required]),
-        }),
+    public readonly form = new FormRecord<FormGroup<NodeFieldForm>>({
+        field1: this.createFieldGroup(1, true),
+        field2: this.createFieldGroup(2, true),
     });
 
     public get fieldNames(): string[] {
@@ -59,7 +54,11 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
             return null;
         }
 
-        const group = this.form.get(fieldName) as FormGroup<NodeFormGroup>;
+        const group = this.form.controls[fieldName];
+
+        if (!group) {
+            return null;
+        }
 
         return group.controls.connectorId.value;
     }
@@ -75,22 +74,29 @@ export class FormNodeComponent extends DrawFlowBaseNode implements AfterViewInit
     public add(): void {
         const index = Object.keys(this.form.controls).length + 1;
         const newFieldKey = `field${index}`;
-        const newField = new FormGroup({
-            connectorId: new FormControl(`node-5-output-${index}`),
-            fieldValue: new FormControl(''),
-        });
 
-        // @ts-ignore
-        this.form.addControl(newFieldKey, newField);
+        this.form.addControl(newFieldKey, this.createFieldGroup(index, false));
     }
 
     protected override get invalidState(): boolean {
         const formInvalid = Object.values(this.form.controls).some(
-            (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
+            (fieldGroup: FormGroup<NodeFieldForm>): boolean =>
                 fieldGroup.controls.fieldValue.touched &&
                 fieldGroup.controls.fieldValue.invalid,
         );
 
         return this.invalidSignal() || formInvalid;
+    }
+
+    private createFieldGroup(index: number, required: boolean): FormGroup<NodeFieldForm> {
+        return new FormGroup<NodeFieldForm>({
+            connectorId: new FormControl(`node-5-output-${index}`, {
+                nonNullable: true,
+            }),
+            fieldValue: new FormControl('', {
+                nonNullable: true,
+                validators: required ? [Validators.required] : [],
+            }),
+        });
     }
 }
