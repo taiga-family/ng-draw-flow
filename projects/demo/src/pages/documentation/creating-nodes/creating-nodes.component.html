@@ -31,6 +31,22 @@
         holds the necessary data for the node&#39;s functionality.
     </p>
     <p>
+        For backward compatibility these values are also available as plain properties on the base class. If you want to
+        work with Angular signals directly, use
+        <code>nodeIdSignal()</code>
+        ,
+        <code>modelSignal()</code>
+        ,
+        <code>startNodeSignal()</code>
+        ,
+        <code>endNodeSignal()</code>
+        ,
+        <code>selectedSignal()</code>
+        and
+        <code>invalidSignal()</code>
+        in your custom nodes.
+    </p>
+    <p>
         The
         <code>selected</code>
         attribute aids in reflecting the node&#39;s selected state in the UI, enhancing the user&#39;s experience by

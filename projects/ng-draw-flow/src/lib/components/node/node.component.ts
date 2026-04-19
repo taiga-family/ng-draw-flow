@@ -7,7 +7,7 @@ import {
     DestroyRef,
     type ElementRef,
     inject,
-    Input,
+    input,
     type OnChanges,
     type OnDestroy,
     output,
@@ -90,11 +90,9 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     @ViewChild('container', {read: ViewContainerRef})
     public readonly containerRef!: ViewContainerRef;
 
-    @Input()
-    public node!: DfDataInitialNode | DfDataNode;
+    public readonly node = input.required<DfDataInitialNode | DfDataNode>();
 
-    @Input()
-    public invalid = false;
+    public readonly invalid = input(false);
 
     public readonly nodeMoved = output<DfDataNode>();
     public readonly nodeDeleted = output();
@@ -105,13 +103,16 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.invalid && this.innerComponent) {
-            this.innerComponent.invalid = changes.invalid.currentValue;
+            this.nodeContentComponentRef.setInput(
+                'invalid',
+                changes.invalid.currentValue,
+            );
             this.innerComponent.markForCheck();
         }
     }
 
     public ngAfterViewInit(): void {
-        this.createNodeContentComponent(this.node);
+        this.createNodeContentComponent(this.node());
         this.saveInnerNodeSize();
         this.fillValue();
         this.applyOutputsConnectionLabel();
@@ -120,13 +121,19 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         this.refreshRenderedGeometry(false);
         this.observeNodeSize();
 
-        if (this.invalid) {
-            this.innerComponent.invalid = true;
+        if (this.invalid()) {
+            this.nodeContentComponentRef.setInput('invalid', true);
             this.innerComponent.markForCheck();
         }
     }
 
     public ngOnDestroy(): void {
+        if (!this.value) {
+            this.resizeObserver?.disconnect();
+
+            return;
+        }
+
         if (this.connectionsService.selectedNodeId$.value === this.value.id) {
             this.connectionsService.highlightConnectionsForNode(null);
         }
@@ -136,7 +143,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.selected && this.deletable && !this.node.startNode) {
+        if (this.selected && this.deletable && !this.node().startNode) {
             event.preventDefault();
 
             this.store.clearSelectedNode(this.value.id);
@@ -155,17 +162,17 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
         this.innerComponent = this.nodeContentComponentRef.instance;
 
-        this.innerComponent.nodeId = nodeId;
-        this.innerComponent.startNode = startNode;
-        this.innerComponent.endNode = endNode;
-        this.innerComponent.model = data;
+        this.nodeContentComponentRef.setInput('nodeId', nodeId);
+        this.nodeContentComponentRef.setInput('startNode', startNode);
+        this.nodeContentComponentRef.setInput('endNode', endNode);
+        this.nodeContentComponentRef.setInput('model', data);
 
         this.cdr.detectChanges();
     }
 
     protected onSelectedChanged(selected: boolean): void {
         this.selected = selected;
-        this.innerComponent.selected = selected;
+        this.nodeContentComponentRef.setInput('selected', selected);
         this.innerComponent.markForCheck();
 
         if (selected) {
@@ -179,7 +186,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     protected onDrag(event: DfDragDrop): void {
-        if (this.node.startNode || !this.draggable) {
+        if (this.node().startNode || !this.draggable) {
             return;
         }
 
@@ -254,11 +261,13 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private fillValue(): void {
-        if (this.hasPosition(this.node)) {
-            this.value = this.node;
+        const node = this.node();
+
+        if (this.hasPosition(node)) {
+            this.value = node;
         } else {
             this.value = {
-                ...this.node,
+                ...node,
                 position: this.getCenterOfViewport(),
             };
         }
@@ -548,7 +557,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         }
 
         this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
-            output.connectionLabel = connectionLabel;
+            output.setConnectionLabel(connectionLabel);
         });
     }
 
