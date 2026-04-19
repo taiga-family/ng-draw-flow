@@ -9,6 +9,13 @@ export class ConnectionsService {
     public readonly usedConnectors$ = new BehaviorSubject<string[]>([]);
     public readonly selectedNodeId$ = new BehaviorSubject<string | null>(null);
 
+    public setConnections(connections: DfDataConnection[]): void {
+        const usedConnectors = this.collectUsedConnectors(connections);
+
+        this.usedConnectors$.next(usedConnectors);
+        this.connections$.next([...connections]);
+    }
+
     public addConnections(connections: DfDataConnection[]): void {
         const newConnections = connections.filter(
             (newConnection) =>
@@ -112,5 +119,19 @@ export class ConnectionsService {
             connection1.target.connectorType === connection2.target.connectorType &&
             connection1.target.connectorId === connection2.target.connectorId
         );
+    }
+
+    private collectUsedConnectors(connections: DfDataConnection[]): string[] {
+        return connections.reduce<string[]>((result, connection) => {
+            if (!result.includes(connection.source.connectorId)) {
+                result.push(connection.source.connectorId);
+            }
+
+            if (!result.includes(connection.target.connectorId)) {
+                result.push(connection.target.connectorId);
+            }
+
+            return result;
+        }, []);
     }
 }

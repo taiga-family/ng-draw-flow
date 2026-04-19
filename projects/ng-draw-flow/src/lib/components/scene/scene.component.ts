@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {type ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {filter} from 'rxjs';
 
 import {
     type DfDataConnection,
@@ -51,6 +50,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly destroyRef = inject(DestroyRef);
     private readonly store = inject(NgDrawFlowStoreService);
+    private syncingExternalValue = false;
 
     protected readonly nodeSelected = output<DfDataNode>();
     protected readonly nodeMoved = output<DfEvent<DfDataNode>>();
@@ -60,7 +60,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     protected readonly connectionSelected = output<DfDataConnection>();
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
-    protected model!: DfDataModel;
+    protected model: DfDataModel = {nodes: [], connections: []};
     protected $invalidNodes: Signal<string[]> = inject(INVALID_NODES);
 
     public ngOnInit(): void {
@@ -74,18 +74,21 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
 
         this.model = value;
         this.store.updateDataModel(this.model);
-        this.connectionsService.addConnections(this.model.connections);
+        this.syncingExternalValue = true;
+        this.connectionsService.setConnections(this.model.connections);
 
         this.cdr.markForCheck();
     }
 
-    public registerOnChange(fn: any): void {
+    public registerOnChange(fn: (value: DfDataModel) => void): void {
         this.onChange = fn;
     }
 
-    public registerOnTouched(fn: any): void {
+    public registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
+
+    public setDisabledState(_isDisabled: boolean): void {}
 
     protected onConnectionCreated(connection: DfDataConnection): void {
         this.connectionsService.addConnections([connection]);
@@ -139,6 +142,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
 
         this.store.emitNodeMoved(event);
         this.nodeMoved.emit(event);
+        this.emitModelChange();
     }
 
     protected onNodeDeleted(id: string): void {
@@ -154,6 +158,7 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         this.nodeDeleted.emit(event);
         this.emitConnectionDeletedByNodeId(id);
         this.connectionsService.removeConnectionsByNodeId(id);
+        this.emitModelChange();
     }
 
     protected onNodeSelected(node: DfDataNode): void {
@@ -170,13 +175,11 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
 
     private initializeConnectionsSubscription(): void {
         this.connectionsService.connections$
-            .pipe(
-                filter(() => !!this.model),
-                takeUntilDestroyed(this.destroyRef),
-            )
+            .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((connections: DfDataConnection[]) => {
-                this.model.connections = connections;
+                this.model = {...this.model, connections};
                 this.store.updateDataModel(this.model);
+                this.emitModelChange();
                 this.cdr.markForCheck();
             });
     }
@@ -214,10 +217,17 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
         );
     }
 
-    // @ts-ignore
-
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
-    // @ts-ignore
-
     private onTouched: () => void = () => {};
+
+    private emitModelChange(): void {
+        if (this.syncingExternalValue) {
+            this.syncingExternalValue = false;
+
+            return;
+        }
+
+        this.onTouched();
+        this.onChange(this.model);
+    }
 }
