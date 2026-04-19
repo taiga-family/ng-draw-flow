@@ -3,8 +3,9 @@ import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
+    effect,
     inject,
-    Input,
+    input,
     output,
     type OutputEmitterRef,
 } from '@angular/core';
@@ -156,8 +157,16 @@ export class ConnectionComponent {
 
     public readonly connectionDeleted: OutputEmitterRef<void> = output();
     public readonly connectionSelected: OutputEmitterRef<void> = output();
+    public readonly connectionInput = input.required<DfDataConnection>({
+        alias: 'connection',
+    });
 
     constructor() {
+        effect(() => {
+            this.connectionInternal = this.connectionInput();
+            this.updateSelectedNodeClasses();
+        });
+
         this.connectionsService.selectedNodeId$
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((selectedNodeId: string | null) => {
@@ -166,14 +175,8 @@ export class ConnectionComponent {
             });
     }
 
-    @Input()
-    public set connection(value: DfDataConnection) {
-        this.connectionInternal = value;
-        this.updateSelectedNodeClasses();
-    }
-
     public get connection(): DfDataConnection {
-        return this.connectionInternal!;
+        return this.connectionInternal ?? this.connectionInput();
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
