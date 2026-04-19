@@ -5,12 +5,11 @@ import {
     Component,
     DestroyRef,
     ElementRef,
-    EventEmitter,
     forwardRef,
     inject,
     type OnDestroy,
     type OnInit,
-    Output,
+    output,
     signal,
     ViewChild,
 } from '@angular/core';
@@ -122,32 +121,25 @@ export class NgDrawFlowComponent
     protected panzoom!: PanZoomComponent;
 
     /** Emits the *current* zoom factor each time it changes. */
-    @Output()
-    protected readonly scale = new EventEmitter<number>();
+    protected readonly scale = output<number>();
 
     /** Fired after a new edge is successfully created. */
-    @Output()
-    protected readonly connectionCreated = new EventEmitter<DfEvent<DfDataConnection>>();
+    protected readonly connectionCreated = output<DfEvent<DfDataConnection>>();
 
     /** Fired after an edge is removed—via UI or `removeConnection()`. */
-    @Output()
-    protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>();
+    protected readonly connectionDeleted = output<DfEvent<DfDataConnection>>();
 
     /** Fired when an edge receives focus in the scene. */
-    @Output()
-    protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
+    protected readonly connectionSelected = output<DfDataConnection>();
 
     /** Fired when a node receives focus in the scene. */
-    @Output()
-    protected readonly nodeSelected = new EventEmitter<DfDataNode>();
+    protected readonly nodeSelected = output<DfDataNode>();
 
     /** Fired whenever the user drags a node to a new position. */
-    @Output()
-    protected readonly nodeMoved = new EventEmitter<DfEvent<DfDataNode>>();
+    protected readonly nodeMoved = output<DfEvent<DfDataNode>>();
 
     /** Fired when a node is removed from the graph. */
-    @Output()
-    protected readonly nodeDeleted = new EventEmitter<DfEvent<DfDataNode>>();
+    protected readonly nodeDeleted = output<DfEvent<DfDataNode>>();
 
     protected readonly form = new FormControl<DfDataModel>({
         nodes: [],

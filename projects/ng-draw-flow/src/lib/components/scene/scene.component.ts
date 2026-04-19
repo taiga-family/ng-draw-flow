@@ -4,11 +4,10 @@ import {
     ChangeDetectorRef,
     Component,
     DestroyRef,
-    EventEmitter,
     forwardRef,
     inject,
     type OnInit,
-    Output,
+    output,
     type Signal,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -53,23 +52,12 @@ export class SceneComponent implements ControlValueAccessor, OnInit {
     private readonly destroyRef = inject(DestroyRef);
     private readonly store = inject(NgDrawFlowStoreService);
 
-    @Output()
-    protected readonly nodeSelected = new EventEmitter<DfDataNode>();
-
-    @Output()
-    protected readonly nodeMoved = new EventEmitter<DfEvent<DfDataNode>>();
-
-    @Output()
-    protected readonly nodeDeleted = new EventEmitter<DfEvent<DfDataNode>>();
-
-    @Output()
-    protected readonly connectionCreated = new EventEmitter<DfEvent<DfDataConnection>>();
-
-    @Output()
-    protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>();
-
-    @Output()
-    protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
+    protected readonly nodeSelected = output<DfDataNode>();
+    protected readonly nodeMoved = output<DfEvent<DfDataNode>>();
+    protected readonly nodeDeleted = output<DfEvent<DfDataNode>>();
+    protected readonly connectionCreated = output<DfEvent<DfDataConnection>>();
+    protected readonly connectionDeleted = output<DfEvent<DfDataConnection>>();
+    protected readonly connectionSelected = output<DfDataConnection>();
 
     protected isConnectionCreating$ = this.draftConnectionService.isConnectionCreating$;
     protected model!: DfDataModel;

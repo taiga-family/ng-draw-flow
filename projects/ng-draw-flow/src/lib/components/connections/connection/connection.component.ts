@@ -1,12 +1,12 @@
-import {AsyncPipe, NgIf} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
-    EventEmitter,
     inject,
     Input,
-    Output,
+    output,
+    type OutputEmitterRef,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
@@ -46,7 +46,7 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
 @Component({
     standalone: true,
     selector: 'df-connection',
-    imports: [AsyncPipe, NgIf, PolymorpheusOutlet, SelectableElementDirective],
+    imports: [AsyncPipe, PolymorpheusOutlet, SelectableElementDirective],
     templateUrl: './connection.component.svg',
     styleUrl: '../connection.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -148,11 +148,8 @@ export class ConnectionComponent {
     protected selectedNodeInput = false;
     protected selectedNodeOutput = false;
 
-    @Output()
-    public readonly connectionDeleted = new EventEmitter<void>();
-
-    @Output()
-    public readonly connectionSelected = new EventEmitter<void>();
+    public readonly connectionDeleted: OutputEmitterRef<void> = output();
+    public readonly connectionSelected: OutputEmitterRef<void> = output();
 
     constructor() {
         this.connectionsService.selectedNodeId$
