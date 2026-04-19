@@ -5,15 +5,15 @@ import {
     Component,
     type ComponentRef,
     DestroyRef,
+    effect,
     type ElementRef,
     EnvironmentInjector,
     inject,
     input,
-    type OnChanges,
     type OnDestroy,
     output,
     runInInjectionContext,
-    type SimpleChanges,
+    signal,
     viewChild,
     ViewContainerRef,
 } from '@angular/core';
@@ -63,7 +63,7 @@ import {PanZoomService} from '../pan-zoom/pan-zoom.service';
         '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
     },
 })
-export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class NodeComponent implements AfterViewInit, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
@@ -81,10 +81,12 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
 
     private innerComponent!: DrawFlowBaseNode;
-    private nodeContentComponentRef!: ComponentRef<DrawFlowBaseNode>;
+    private readonly nodeContentComponentRef =
+        signal<ComponentRef<DrawFlowBaseNode> | null>(null);
+
     private nodeWidth!: number;
     private nodeHeight!: number;
-    private selected = false;
+    private readonly selected = signal(false);
     private value!: DfDataNode;
     private accumulatedDelta = INITIAL_COORDINATES;
     private previousInputs: DfInputComponent[] = [];
@@ -110,30 +112,27 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     public cursor: 'grabbing' | 'initial' = 'initial';
 
-    public ngOnChanges(changes: SimpleChanges): void {
-        if (changes.invalid && this.innerComponent) {
-            this.nodeContentComponentRef.setInput(
-                'invalid',
-                changes.invalid.currentValue,
-            );
-            this.innerComponent.markForCheck();
-        }
+    constructor() {
+        effect(() => {
+            const nodeContentComponentRef = this.nodeContentComponentRef();
+
+            if (!nodeContentComponentRef) {
+                return;
+            }
+
+            this.syncNodeContentInputs(nodeContentComponentRef);
+        });
     }
 
     public ngAfterViewInit(): void {
-        this.createNodeContentComponent(this.node());
-        this.saveInnerNodeSize();
         this.fillValue();
+        this.createNodeContentComponent();
+        this.saveInnerNodeSize();
         this.applyOutputsConnectionLabel();
         this.subscribeToConnectorsChanges();
         this.syncWorkspaceGeometry();
         this.refreshRenderedGeometry(false);
         this.observeNodeSize();
-
-        if (this.invalid()) {
-            this.nodeContentComponentRef.setInput('invalid', true);
-            this.innerComponent.markForCheck();
-        }
     }
 
     public ngOnDestroy(): void {
@@ -152,7 +151,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.selected && this.deletable && !this.node().startNode) {
+        if (this.selected() && this.deletable && !this.node().startNode) {
             event.preventDefault();
 
             this.store.clearSelectedNode(this.value.id);
@@ -160,29 +159,28 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
         }
     }
 
-    protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {
-        const {id: nodeId, startNode, endNode, data} = node;
-        const nodeType = data.type;
+    protected createNodeContentComponent(): void {
+        const nodeType = this.value.data.type;
 
         this.containerRef().clear();
-        this.nodeContentComponentRef = this.containerRef().createComponent(
+        this.nodeContentComponentRef.set(null);
+
+        const nodeContentComponentRef = this.containerRef().createComponent(
             this.drawFlowComponents[nodeType]!,
+            {
+                environmentInjector: this.environmentInjector,
+            },
         );
 
-        this.innerComponent = this.nodeContentComponentRef.instance;
-
-        this.nodeContentComponentRef.setInput('nodeId', nodeId);
-        this.nodeContentComponentRef.setInput('startNode', startNode);
-        this.nodeContentComponentRef.setInput('endNode', endNode);
-        this.nodeContentComponentRef.setInput('model', data);
+        this.syncNodeContentInputs(nodeContentComponentRef);
+        this.innerComponent = nodeContentComponentRef.instance;
+        this.nodeContentComponentRef.set(nodeContentComponentRef);
 
         this.cdr.detectChanges();
     }
 
     protected onSelectedChanged(selected: boolean): void {
-        this.selected = selected;
-        this.nodeContentComponentRef.setInput('selected', selected);
-        this.innerComponent.markForCheck();
+        this.selected.set(selected);
 
         if (selected) {
             this.connectionsService.highlightConnectionsForNode(this.value.id);
@@ -283,10 +281,27 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     private saveInnerNodeSize(): void {
-        const nativeElement = this.nodeContentComponentRef.location.nativeElement;
+        const nativeElement = this.nodeContentComponentRef()?.location.nativeElement;
+
+        if (!nativeElement) {
+            return;
+        }
 
         this.nodeWidth = nativeElement.offsetWidth;
         this.nodeHeight = nativeElement.offsetHeight;
+    }
+
+    private syncNodeContentInputs(
+        nodeContentComponentRef: ComponentRef<DrawFlowBaseNode>,
+    ): void {
+        const node = this.node();
+
+        nodeContentComponentRef.setInput('nodeId', this.value.id);
+        nodeContentComponentRef.setInput('startNode', node.startNode === true);
+        nodeContentComponentRef.setInput('endNode', node.endNode === true);
+        nodeContentComponentRef.setInput('model', this.value.data);
+        nodeContentComponentRef.setInput('selected', this.selected());
+        nodeContentComponentRef.setInput('invalid', this.invalid());
     }
 
     private updateConnectorsCoordinates(): void {
