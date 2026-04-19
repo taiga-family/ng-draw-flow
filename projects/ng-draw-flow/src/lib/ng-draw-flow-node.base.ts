@@ -4,8 +4,7 @@ import {
     inject,
     input,
     output,
-    type QueryList,
-    ViewChildren,
+    viewChildren,
 } from '@angular/core';
 
 import {DfInputComponent, DfOutputComponent} from './components/connectors';
@@ -27,15 +26,13 @@ export abstract class DrawFlowBaseNode {
      * Collection of input connectors for this node.
      * Accessible from outside to monitor changes in the number of inputs.
      */
-    @ViewChildren(DfInputComponent)
-    public inputs!: QueryList<DfInputComponent>;
+    public readonly inputs = viewChildren(DfInputComponent);
 
     /**
      * Collection of output connectors for this node.
      * Accessible from outside to monitor changes in the number of outputs.
      */
-    @ViewChildren(DfOutputComponent)
-    public outputs!: QueryList<DfOutputComponent>;
+    public readonly outputs = viewChildren(DfOutputComponent);
 
     public readonly connectorsUpdated = output();
 

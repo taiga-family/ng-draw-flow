@@ -11,7 +11,7 @@ import {
     type OnInit,
     output,
     signal,
-    ViewChild,
+    viewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {
@@ -117,8 +117,7 @@ export class NgDrawFlowComponent
     private shouldFrameViewport = false;
     private hasFramedExternalModel = false;
 
-    @ViewChild(PanZoomComponent)
-    protected panzoom!: PanZoomComponent;
+    protected readonly panzoom = viewChild.required(PanZoomComponent);
 
     /** Emits the *current* zoom factor each time it changes. */
     protected readonly scale = output<number>();
@@ -199,22 +198,22 @@ export class NgDrawFlowComponent
 
     /** Zooms one step *in* towards the center of the scene. */
     public zoomIn(): void {
-        this.panzoom.zoomIn();
+        this.panzoom().zoomIn();
     }
 
     /** Zooms one step *out* from the center of the scene. */
     public zoomOut(): void {
-        this.panzoom.zoomOut();
+        this.panzoom().zoomOut();
     }
 
     /** Set both zoom and coordinates. */
     public setPosition(position?: DfPoint & {zoom?: number}): void {
-        this.panzoom.setPosition(position);
+        this.panzoom().setPosition(position);
     }
 
     /** Resets both zoom factor and pan offset to their defaults. */
     public resetPosition(): void {
-        this.panzoom.resetPanzoom();
+        this.panzoom().resetPanzoom();
         this.scheduleViewportFraming();
     }
 
@@ -223,7 +222,7 @@ export class NgDrawFlowComponent
      * configured pan/zoom bounds.
      */
     public setScale(scale: number): void {
-        this.panzoom.setScale(scale);
+        this.panzoom().setScale(scale);
     }
 
     /** Method that removes an existing edge. */

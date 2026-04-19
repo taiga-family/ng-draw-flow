@@ -8,7 +8,7 @@ import {
     ElementRef,
     inject,
     PLATFORM_ID,
-    ViewChild,
+    viewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {animationFrameScheduler} from 'rxjs';
@@ -52,8 +52,8 @@ interface DfPanZoomBackgroundPatterns {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
-    @ViewChild('backgroundCanvas')
-    private readonly backgroundCanvasRef?: ElementRef<HTMLCanvasElement>;
+    private readonly backgroundCanvasRef =
+        viewChild<ElementRef<HTMLCanvasElement>>('backgroundCanvas');
 
     private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly destroyRef = inject(DestroyRef);
@@ -87,7 +87,7 @@ export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
             return;
         }
 
-        this.backgroundCanvas = this.backgroundCanvasRef?.nativeElement ?? null;
+        this.backgroundCanvas = this.backgroundCanvasRef()?.nativeElement ?? null;
         this.drawNow();
     }
 
@@ -124,7 +124,7 @@ export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
     }
 
     private drawBackground(): void {
-        const canvas = this.backgroundCanvas ?? this.backgroundCanvasRef?.nativeElement;
+        const canvas = this.backgroundCanvas ?? this.backgroundCanvasRef()?.nativeElement;
         const context = this.getBackgroundContext(canvas);
         const {width, height} = this.getViewportSize();
 
