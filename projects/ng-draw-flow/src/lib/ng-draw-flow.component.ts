@@ -1,4 +1,3 @@
-import {NgIf} from '@angular/common';
 import {
     type AfterViewInit,
     ChangeDetectionStrategy,
@@ -70,7 +69,7 @@ import {SelectionService} from './services/selection.service';
 @Component({
     standalone: true,
     selector: 'ng-draw-flow',
-    imports: [NgIf, PanZoomComponent, ReactiveFormsModule, SceneComponent],
+    imports: [PanZoomComponent, ReactiveFormsModule, SceneComponent],
     templateUrl: './ng-draw-flow.component.html',
     styleUrl: './ng-draw-flow.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,

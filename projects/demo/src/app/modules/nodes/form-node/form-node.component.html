@@ -1,8 +1,9 @@
-<df-input
-    *ngIf="!startNode"
-    class="input"
-    [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
-/>
+@if (!startNode) {
+    <df-input
+        class="input"
+        [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+    />
+}
 
 <div class="tui-space_bottom-4 tui-text_body-s">
     {{ model.text }}
@@ -12,29 +13,27 @@
     tuiTheme="light"
     [formGroup]="form"
 >
-    <div
-        *ngFor="let fieldName of fieldNames; let i = index"
-        [formGroupName]="fieldName"
-    >
-        <div class="field tui-space_bottom-4">
-            <tui-textfield
-                tuiTextfieldSize="s"
-                tuiTheme="light"
-            >
-                <input
-                    formControlName="fieldValue"
-                    tuiInput
-                />
-            </tui-textfield>
-
-            <ng-container *ngIf="!!getConnectorId(fieldName)">
-                <df-output
-                    class="output"
-                    [connectorData]="{nodeId, connectorId: getConnectorId(fieldName)!, single: false}"
-                />
-            </ng-container>
+    @for (fieldName of fieldNames; track fieldName; let i = $index) {
+        <div [formGroupName]="fieldName">
+            <div class="field tui-space_bottom-4">
+                <tui-textfield
+                    tuiTextfieldSize="s"
+                    tuiTheme="light"
+                >
+                    <input
+                        formControlName="fieldValue"
+                        tuiInput
+                    />
+                </tui-textfield>
+                @if (!!getConnectorId(fieldName)) {
+                    <df-output
+                        class="output"
+                        [connectorData]="{nodeId, connectorId: getConnectorId(fieldName)!, single: false}"
+                    />
+                }
+            </div>
         </div>
-    </div>
+    }
 </form>
 
 <button
