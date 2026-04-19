@@ -4,13 +4,18 @@ import {
     computed,
     type ElementRef,
     inject,
-    Output,
+    type OutputRef,
     type Signal,
     ViewChild,
 } from '@angular/core';
+import {outputFromObservable} from '@angular/core/rxjs-interop';
 
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import {DfConnectionType, type DfOptions} from '../../../ng-draw-flow.interfaces';
+import {
+    DfConnectionType,
+    type DfDataConnection,
+    type DfOptions,
+} from '../../../ng-draw-flow.interfaces';
 import {createBezierPath, createSmoothStepPath} from '../utils';
 import {DraftConnectionService} from './draft-connection.service';
 
@@ -28,8 +33,8 @@ export class DraftConnectionComponent {
     @ViewChild('connectionPath')
     protected connectionPath!: ElementRef;
 
-    @Output()
-    protected readonly connectionCreated = this.draftConnectionService.connectionCreated$;
+    protected readonly connectionCreated: OutputRef<DfDataConnection> =
+        outputFromObservable(this.draftConnectionService.connectionCreated$);
 
     protected pathData: Signal<string> = computed(() => {
         const sourcePoint = this.draftConnectionService.source();

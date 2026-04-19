@@ -16,7 +16,7 @@ import {
     ViewChild,
     ViewContainerRef,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {outputToObservable, takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {merge, type Observable, tap} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
@@ -471,7 +471,7 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
      */
     private addContentComponentUpdates(sources: Array<Observable<void>>): void {
         if (this.innerComponent?.connectorsUpdated) {
-            sources.push(this.innerComponent.connectorsUpdated);
+            sources.push(outputToObservable(this.innerComponent.connectorsUpdated));
         }
     }
 
