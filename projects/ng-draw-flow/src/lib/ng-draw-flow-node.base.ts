@@ -1,10 +1,9 @@
 import {
     ChangeDetectorRef,
     Directive,
-    EventEmitter,
     inject,
     Input,
-    Output,
+    output,
     type QueryList,
     ViewChildren,
 } from '@angular/core';
@@ -39,8 +38,7 @@ export abstract class DrawFlowBaseNode {
     @ViewChildren(DfOutputComponent)
     public outputs!: QueryList<DfOutputComponent>;
 
-    @Output()
-    public readonly connectorsUpdated = new EventEmitter<void>();
+    public readonly connectorsUpdated = output();
 
     /**
      * Unique identifier for the node.
