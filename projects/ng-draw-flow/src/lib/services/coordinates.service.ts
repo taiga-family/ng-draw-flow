@@ -10,7 +10,6 @@ import {
 @Injectable()
 export class CoordinatesService {
     private connectionPointsMap: Record<string, BehaviorSubject<DfConnectorData>> = {};
-
     public connectionPointsMapChange$ = new ReplaySubject<void>(1);
 
     public getConnectionPoint(

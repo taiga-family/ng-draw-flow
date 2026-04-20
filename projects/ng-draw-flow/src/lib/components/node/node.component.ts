@@ -71,10 +71,8 @@ export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
     private readonly draggable = this.drawFlowOptions.options.nodesDraggable;
     private readonly deletable = this.drawFlowOptions.options.nodesDeletable;
     private readonly connectionsService = inject(ConnectionsService);
-
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
-
     private innerComponent!: DrawFlowBaseNode;
     private nodeContentComponentRef!: ComponentRef<DrawFlowBaseNode>;
     private nodeWidth!: number;

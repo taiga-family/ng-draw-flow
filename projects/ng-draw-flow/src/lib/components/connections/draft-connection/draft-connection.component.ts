@@ -5,12 +5,11 @@ import {
     type ElementRef,
     inject,
     Output,
-    type Signal,
     ViewChild,
 } from '@angular/core';
 
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import {DfConnectionType, type DfOptions} from '../../../ng-draw-flow.interfaces';
+import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
 import {createBezierPath, createSmoothStepPath} from '../utils';
 import {DraftConnectionService} from './draft-connection.service';
 
@@ -23,7 +22,7 @@ import {DraftConnectionService} from './draft-connection.service';
 })
 export class DraftConnectionComponent {
     private readonly draftConnectionService = inject(DraftConnectionService);
-    private readonly options: DfOptions = inject(DRAW_FLOW_OPTIONS);
+    private readonly options = inject(DRAW_FLOW_OPTIONS);
 
     @ViewChild('connectionPath')
     protected connectionPath!: ElementRef;
@@ -31,7 +30,7 @@ export class DraftConnectionComponent {
     @Output()
     protected readonly connectionCreated = this.draftConnectionService.connectionCreated$;
 
-    protected pathData: Signal<string> = computed(() => {
+    protected pathData = computed(() => {
         const sourcePoint = this.draftConnectionService.source();
         const targetPoint = this.draftConnectionService.target();
         const curvature = this.options.connection.curvature;

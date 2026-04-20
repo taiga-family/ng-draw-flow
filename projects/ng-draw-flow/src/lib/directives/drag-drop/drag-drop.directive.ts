@@ -9,6 +9,7 @@ import {DragDropService} from './drag-drop.service';
 })
 export class DragDropDirective {
     protected readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
+
     protected readonly dfDragDrop = inject(DragDropService).streamFor(
         this.elementRef.nativeElement,
     );

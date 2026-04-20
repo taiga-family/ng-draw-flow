@@ -10,7 +10,6 @@ export class SelectionService implements OnDestroy {
     private readonly ngZone = inject(NgZone);
     private readonly selectedElements = new Set<HTMLElement>();
     private readonly registeredElements = new Map<HTMLElement, SelectableItem>();
-
     private isDragging = false;
     private clickedOnScene = false;
     private startX: number | null = null;

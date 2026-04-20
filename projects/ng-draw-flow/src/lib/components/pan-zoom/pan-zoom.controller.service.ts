@@ -41,31 +41,26 @@ export class PanZoomControllerService {
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
-
     private readonly draggingSignal = signal<boolean>(false);
     private readonly transitionedSignal = signal<boolean>(true);
+
     private readonly viewportSizeSignal = signal<{width: number; height: number}>({
         width: 0,
         height: 0,
     });
 
     private readonly viewportZeroPointSignal = signal<DfPoint>(INITIAL_COORDINATES);
-
     private readonly layoutOffsetSignal = signal<DfPoint>(INITIAL_COORDINATES);
-
     private readonly renderRequestsSubject = new Subject<DfPanZoomRenderMode>();
     private readonly scaleChangesSubject = new Subject<number>();
-
     private readonly pendingGestures: DfPanZoomViewportGesture[] = [];
     private emittedZoom = Number.NaN;
     private flushScheduled = false;
-
     public readonly dragging = this.draggingSignal.asReadonly();
     public readonly transitioned = this.transitionedSignal.asReadonly();
     public readonly viewportSize = this.viewportSizeSignal.asReadonly();
     public readonly viewportZeroPoint = this.viewportZeroPointSignal.asReadonly();
     public readonly layoutOffset = this.layoutOffsetSignal.asReadonly();
-
     public readonly renderRequests$ = this.renderRequestsSubject.asObservable();
     public readonly scaleChanges$ = this.scaleChangesSubject.asObservable();
 

@@ -12,6 +12,7 @@ export interface DfPanZoomTrackedBounds extends DfPanZoomBounds {
 export class PanZoomBoundsTracker<T extends DfPanZoomBounds = DfPanZoomTrackedBounds> {
     private readonly items = new Set<T>();
     private bounds = {minX: Infinity, minY: Infinity, maxX: -Infinity, maxY: -Infinity};
+
     private boundaryItems = {
         minX: new Set<T>(),
         minY: new Set<T>(),
