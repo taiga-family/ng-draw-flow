@@ -15,7 +15,7 @@ import {
 } from 'rxjs';
 
 import {dfClamp, dfDistanceBetweenTouches} from '../../helpers';
-import {DF_PAN_ZOOM_OPTIONS, type DfPanZoomOptions} from './pan-zoom.options';
+import {DF_PAN_ZOOM_OPTIONS} from './pan-zoom.options';
 import {PanZoomService} from './pan-zoom.service';
 import {
     type DfPanZoomGesture,
@@ -27,11 +27,9 @@ const TRACKPAD_DETECTION_STATE_TIMEOUT = 60_000;
 
 @Injectable()
 export class PanZoomGesturesService {
-    private readonly panZoomOptions: DfPanZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
+    private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
     private readonly panZoomService = inject(PanZoomService);
-
     private readonly streams = new WeakMap<HTMLElement, Observable<DfPanZoomGesture>>();
-
     private trackpadDetected = false;
     private lastTrackpadDetectionTime: number | null = null;
     private lastTrackpadDpr = 0;

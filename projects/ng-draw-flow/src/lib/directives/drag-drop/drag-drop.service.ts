@@ -63,7 +63,7 @@ export class DragDropService {
 
         this.pointerDownMap.set(el, pointerDown$);
 
-        const drag$: Observable<DfDragDrop> = pointerDown$.pipe(
+        const drag$ = pointerDown$.pipe(
             switchMap((startEvent: PointerEvent): Observable<DfDragDrop> => {
                 const id = startEvent.pointerId;
                 let lastPointerEvent = startEvent;

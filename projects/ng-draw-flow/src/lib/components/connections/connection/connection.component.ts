@@ -19,7 +19,6 @@ import {
     delay,
     distinctUntilChanged,
     map,
-    type Observable,
     observeOn,
     of,
     shareReplay,
@@ -69,11 +68,8 @@ export class ConnectionComponent {
     private readonly destroyRef = inject(DestroyRef);
     private selectedNodeId: string | null = null;
     private connectionInternal: DfDataConnection | null = null;
-    private readonly pathWithLabel$: Observable<{
-        path: string;
-        labelX: number;
-        labelY: number;
-    }> = of(null).pipe(
+
+    private readonly pathWithLabel$ = of(null).pipe(
         observeOn(asyncScheduler),
         switchMap(() =>
             combineLatest([
@@ -129,19 +125,19 @@ export class ConnectionComponent {
     protected readonly arrowViewBox = `-${this.arrowMarkerWidth} -${this.arrowMarkerHeight / 2} ${this.arrowMarkerWidth} ${this.arrowMarkerHeight}`;
     protected readonly arrowPoints = `-${this.arrowWidth},-${this.arrowHeight / 2} 0,0 -${this.arrowWidth},${this.arrowHeight / 2}`;
     protected readonly arrowClosedPoints = `${this.arrowPoints} -${this.arrowWidth},-${this.arrowHeight / 2}`;
+
     protected readonly markerEnd =
         this.arrowhead.type === DfArrowhead.None
             ? null
             : `url(#df-arrowhead-${this.arrowhead.type})`;
 
-    protected readonly path$: Observable<string> = this.pathWithLabel$.pipe(
-        map(({path}) => path),
+    protected readonly path$ = this.pathWithLabel$.pipe(map(({path}) => path));
+
+    protected readonly labelPosition$ = this.pathWithLabel$.pipe(
+        map(({labelX, labelY}) => ({x: labelX, y: labelY})),
     );
 
-    protected readonly labelPosition$: Observable<{x: number; y: number}> =
-        this.pathWithLabel$.pipe(map(({labelX, labelY}) => ({x: labelX, y: labelY})));
-
-    protected readonly optimization$: Observable<boolean> = this.path$.pipe(
+    protected readonly optimization$ = this.path$.pipe(
         skip(1),
         switchMap(() => concat(of(true), of(false).pipe(delay(400)))),
         startWith(false),
@@ -149,9 +145,7 @@ export class ConnectionComponent {
     );
 
     public deletable = this.options.options.connectionsDeletable;
-
     protected selectedNodeInput = false;
-
     protected selectedNodeOutput = false;
 
     @Output()

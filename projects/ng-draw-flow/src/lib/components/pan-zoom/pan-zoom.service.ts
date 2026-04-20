@@ -36,6 +36,7 @@ export class PanZoomService {
     private readonly cameraSignal = signal<DfPanzoomModel>(INITIAL_CAMERA);
     private readonly disabledSignal = signal<boolean>(false);
     private readonly trackedNodesCountSignal = signal<number>(0);
+
     private readonly usableRectSignal = signal<DfPanZoomUsableRect>({
         minX: 0,
         minY: 0,
@@ -79,12 +80,10 @@ export class PanZoomService {
     });
 
     public readonly camera = this.cameraSignal.asReadonly();
-
     public readonly disabled = this.disabledSignal.asReadonly();
-
     public readonly usableRect = this.usableRectSignal.asReadonly();
 
-    public readonly workspaceRect: Signal<DfPanZoomWorkspaceRect> = computed(() => {
+    public readonly workspaceRect = computed(() => {
         const usableRect = this.usableRectSignal();
 
         if (!this.trackedNodesCountSignal()) {

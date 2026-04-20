@@ -39,7 +39,7 @@ export function dfIsolatedNodesValidator(): ValidatorFn {
             connectedIds.add(c.target.nodeId);
         });
 
-        const isolatedNodes: DfId[] = model.nodes
+        const isolatedNodes = model.nodes
             .filter((node: DfDataInitialNode | DfDataNode) => !connectedIds.has(node.id))
             .map((node) => node.id);
 

@@ -26,6 +26,5 @@ import {
 })
 export class DfResizeObserver {
     protected readonly dfResizeObserver = inject(ResizeObserverService);
-
     public box: ResizeObserverBoxOptions = RESIZE_OPTION_BOX_DEFAULT;
 }

@@ -21,16 +21,13 @@ type Nullable<T> = T | null;
 @Injectable({providedIn: 'root'})
 export class NgDrawFlowStoreService {
     private host?: NgDrawFlowComponent;
-
     private readonly dataModelSignal = signal<Nullable<DfDataModel>>(null);
     private readonly selectedNodeSignal = signal<Nullable<DfDataNode>>(null);
     private readonly selectedConnectionSignal = signal<Nullable<DfDataConnection>>(null);
     private readonly scaleSignal = signal<number>(100);
-
     private readonly nodeDeletedSubject = new Subject<DfEvent<DfDataNode>>();
     private readonly nodeMovedSubject = new Subject<DfEvent<DfDataNode>>();
     private readonly nodeSelectedSubject = new Subject<DfDataNode>();
-
     private readonly connectionCreatedSubject = new Subject<DfEvent<DfDataConnection>>();
     private readonly connectionDeletedSubject = new Subject<DfEvent<DfDataConnection>>();
     private readonly connectionSelectedSubject = new Subject<DfDataConnection>();
