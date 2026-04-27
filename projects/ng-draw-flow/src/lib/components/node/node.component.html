@@ -4,7 +4,7 @@
     class="draw-flow-node"
     [attr.data-node-id]="node().id"
     [attr.data-start-node]="node().startNode ? 'true' : null"
-    [style.cursor]="cursor"
+    [style.cursor]="cursor()"
     (dfDragDrop)="onDrag($event)"
     (dfSelectableElement)="onSelectedChanged($event)"
 >
