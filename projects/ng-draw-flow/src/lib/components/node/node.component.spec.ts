@@ -263,8 +263,7 @@ describe('NodeComponent', () => {
         const fixture = MockRender(HostComponent);
         const host = fixture.point.componentInstance;
         const component = host.nodeComponent();
-        const innerComponent = (component as any).getNodeContentAdapter()
-            .instance as MockNodeContentComponent;
+        const innerComponent = ngMocks.findInstance(MockNodeContentComponent);
 
         expect(innerComponent.nodeId).toBe('draft-node');
         expect(innerComponent.model).toEqual({type: 'simpleNode'});
@@ -278,6 +277,70 @@ describe('NodeComponent', () => {
         await fixture.whenStable();
 
         expect(innerComponent.selected).toBe(true);
+    });
+
+    it('synchronizes dynamic content when node input is replaced', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const component = host.nodeComponent();
+        const innerComponent = ngMocks.findInstance(MockNodeContentComponent);
+
+        host.node.set({
+            id: 'draft-node',
+            data: {type: 'simpleNode', title: 'updated'},
+            position: {x: 123, y: 456},
+        });
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(innerComponent.model).toEqual({
+            type: 'simpleNode',
+            title: 'updated',
+        });
+        expect((component as any).getResolvedNode().position).toEqual({
+            x: 123,
+            y: 456,
+        });
+    });
+
+    it('preserves resolved position when same node input is replaced without position', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const component = host.nodeComponent();
+        const previousPosition = {
+            ...((component as any).getResolvedNode() as DfDataNode).position,
+        };
+
+        host.node.set({
+            id: 'draft-node',
+            data: {type: 'simpleNode', title: 'without position'},
+        });
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        const resolvedNode = (component as any).getResolvedNode() as DfDataNode;
+
+        expect(resolvedNode.data).toEqual({
+            type: 'simpleNode',
+            title: 'without position',
+        });
+        expect(resolvedNode.position).toEqual(previousPosition);
+    });
+
+    it('throws readable error when node type is not registered', () => {
+        expect(() => {
+            MockRender(NodeComponent, {
+                invalid: false,
+                node: {
+                    id: 'unknown-node',
+                    data: {type: 'unknownNode'},
+                } satisfies DfDataInitialNode,
+            });
+        }).toThrow(
+            'NodeComponent cannot render node "unknown-node" because node type "unknownNode" is not registered',
+        );
     });
 
     it('emits nodeSelected and clears selection on delete for non-start nodes', () => {

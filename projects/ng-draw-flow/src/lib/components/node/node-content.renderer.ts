@@ -1,9 +1,12 @@
 import {
     type ComponentRef,
     type EnvironmentInjector,
+    type Signal,
     type Type,
     type ViewContainerRef,
 } from '@angular/core';
+import {outputToObservable} from '@angular/core/rxjs-interop';
+import {type Observable} from 'rxjs';
 
 import {type DfConnectionLabel} from '../../ng-draw-flow.interfaces';
 import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
@@ -18,38 +21,27 @@ export interface DfNodeContentInputs {
     readonly invalid: boolean;
 }
 
-export interface DfNodeContentAdapter {
-    readonly instance: DrawFlowBaseNode;
+export interface DfNodeContentRenderer {
     readonly nativeElement: HTMLElement;
-    readonly connectorsUpdated: DrawFlowBaseNode['connectorsUpdated'];
+    readonly inputConnectors: Signal<readonly DfInputComponent[]>;
+    readonly outputConnectors: Signal<readonly DfOutputComponent[]>;
+    readonly connectorUpdates$: Observable<void>;
 
-    inputs(): readonly DfInputComponent[];
-    outputs(): readonly DfOutputComponent[];
     syncInputs(inputs: DfNodeContentInputs): void;
     applyConnectionLabel(label: DfConnectionLabel | undefined): void;
 }
 
-class AngularNodeContentAdapter implements DfNodeContentAdapter {
-    constructor(private readonly componentRef: ComponentRef<DrawFlowBaseNode>) {}
+class ComponentNodeContentRenderer implements DfNodeContentRenderer {
+    public readonly inputConnectors = this.componentRef.instance.inputs;
+    public readonly outputConnectors = this.componentRef.instance.outputs;
+    public readonly connectorUpdates$ = outputToObservable(
+        this.componentRef.instance.connectorsUpdated,
+    );
 
-    public get instance(): DrawFlowBaseNode {
-        return this.componentRef.instance;
-    }
+    constructor(private readonly componentRef: ComponentRef<DrawFlowBaseNode>) {}
 
     public get nativeElement(): HTMLElement {
         return this.componentRef.location.nativeElement;
-    }
-
-    public get connectorsUpdated(): DrawFlowBaseNode['connectorsUpdated'] {
-        return this.componentRef.instance.connectorsUpdated;
-    }
-
-    public inputs(): readonly DfInputComponent[] {
-        return this.componentRef.instance.inputs();
-    }
-
-    public outputs(): readonly DfOutputComponent[] {
-        return this.componentRef.instance.outputs();
     }
 
     public syncInputs(inputs: DfNodeContentInputs): void {
@@ -62,20 +54,20 @@ class AngularNodeContentAdapter implements DfNodeContentAdapter {
     }
 
     public applyConnectionLabel(label: DfConnectionLabel | undefined): void {
-        this.outputs().forEach((output: DfOutputComponent) => {
+        this.outputConnectors().forEach((output: DfOutputComponent) => {
             output.setConnectionLabel(label);
         });
     }
 }
 
-export function createNodeContentAdapter(
+export function createComponentNodeContentRenderer(
     containerRef: ViewContainerRef,
     componentType: Type<DrawFlowBaseNode>,
     environmentInjector: EnvironmentInjector,
-): DfNodeContentAdapter {
+): DfNodeContentRenderer {
     const componentRef = containerRef.createComponent(componentType, {
         environmentInjector,
     });
 
-    return new AngularNodeContentAdapter(componentRef);
+    return new ComponentNodeContentRenderer(componentRef);
 }

@@ -12,6 +12,7 @@ import {
     input,
     type OnDestroy,
     output,
+    untracked,
     viewChild,
     ViewContainerRef,
 } from '@angular/core';
@@ -34,11 +35,11 @@ import {ConnectionsService} from '../connections/connections.service';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
 import {NodeConnectorsController} from './node-connectors.controller';
-import {
-    type DfNodeContentAdapter,
-    type DfNodeContentInputs,
-} from './node-content.adapter';
 import {NodeContentHost} from './node-content.host';
+import {
+    type DfNodeContentInputs,
+    type DfNodeContentRenderer,
+} from './node-content.renderer';
 import {NodeGeometryController} from './node-geometry.controller';
 import {NodeInteractionController} from './node-interaction.controller';
 
@@ -93,21 +94,98 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     public readonly nodeSelected = output<DfDataNode>();
     public readonly connectorDeleted = output<string>();
 
-    public cursor = computed(() => this.nodeInteraction.cursor());
+    public readonly cursor = computed(() => this.nodeInteraction.cursor());
 
     constructor() {
-        this.nodeConnectors = new NodeConnectorsController({
+        this.nodeConnectors = this.createNodeConnectorsController();
+        this.nodeInteraction = this.createNodeInteractionController();
+
+        effect(() => {
+            const nodeContentRenderer = this.nodeContentHost.renderer();
+
+            if (!nodeContentRenderer) {
+                return;
+            }
+
+            this.nodeContentHost.syncInputs(this.getNodeContentInputs());
+        });
+
+        effect(() => {
+            const node = this.node();
+
+            untracked(() => {
+                this.applyNodeInputUpdate(node);
+            });
+        });
+    }
+
+    public ngAfterViewInit(): void {
+        this.initializeResolvedNode();
+        this.createNodeContentComponent();
+        this.measureNodeContent();
+        this.nodeConnectors.applyOutputsConnectionLabel();
+        this.nodeConnectors.watch();
+        this.syncWorkspaceGeometry();
+        this.refreshRenderedGeometry(false);
+        this.observeNodeSize();
+    }
+
+    public ngOnDestroy(): void {
+        if (!this.resolvedNodeValue) {
+            this.nodeConnectors.disconnect();
+            this.nodeGeometry.disconnect();
+
+            return;
+        }
+
+        this.nodeInteraction.clearHighlightedConnectionsFor(this.getResolvedNode().id);
+        this.nodeConnectors.disconnect();
+        this.nodeGeometry.disconnect();
+        this.nodeGeometry.removeWorkspaceGeometry(this.getResolvedNode().id);
+    }
+
+    protected handleKeyboardEvent(event: KeyboardEvent): void {
+        this.nodeInteraction.handleKeyboardEvent(event);
+    }
+
+    protected createNodeContentComponent(): void {
+        const nodeType = this.getResolvedNode().data.type;
+        const nodeContentComponent = this.getNodeContentComponent(nodeType);
+
+        const nodeContentRenderer = this.nodeContentHost.renderComponent(
+            this.containerRef(),
+            nodeContentComponent,
+        );
+
+        nodeContentRenderer.syncInputs(this.getNodeContentInputs());
+
+        this.cdr.detectChanges();
+    }
+
+    protected onSelectedChanged(selected: boolean): void {
+        this.nodeInteraction.setSelected(selected);
+    }
+
+    protected onDrag(event: DfDragDrop): void {
+        this.nodeInteraction.handleDrag(event);
+    }
+
+    private createNodeConnectorsController(): NodeConnectorsController {
+        return new NodeConnectorsController({
             coordinatesService: this.coordinatesService,
             destroyRef: this.destroyRef,
             environmentInjector: this.environmentInjector,
             getCenteredPosition: (node) => this.nodeGeometry.getCenteredPosition(node),
             getNode: () => this.getResolvedNode(),
-            getNodeContentAdapter: () => this.getNodeContentAdapter(),
+            getNodeContentRenderer: () => this.getNodeContentRenderer(),
             onConnectorDeleted: (connectorId) => {
                 this.connectorDeleted.emit(connectorId);
             },
         });
-        this.nodeInteraction = new NodeInteractionController({
+    }
+
+    private createNodeInteractionController(): NodeInteractionController {
+        return new NodeInteractionController({
             connectionsService: this.connectionsService,
             deletable: this.drawFlowOptions.options.nodesDeletable,
             draggable: this.drawFlowOptions.options.nodesDraggable,
@@ -145,68 +223,34 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
                 this.syncWorkspaceGeometry();
             },
         });
-
-        effect(() => {
-            const nodeContentAdapter = this.nodeContentHost.adapter();
-
-            if (!nodeContentAdapter) {
-                return;
-            }
-
-            this.nodeContentHost.syncInputs(this.getNodeContentInputs());
-        });
-    }
-
-    public ngAfterViewInit(): void {
-        this.initializeResolvedNode();
-        this.createNodeContentComponent();
-        this.measureNodeContent();
-        this.nodeConnectors.applyOutputsConnectionLabel();
-        this.nodeConnectors.watch();
-        this.syncWorkspaceGeometry();
-        this.refreshRenderedGeometry(false);
-        this.observeNodeSize();
-    }
-
-    public ngOnDestroy(): void {
-        if (!this.resolvedNodeValue) {
-            this.nodeGeometry.disconnect();
-
-            return;
-        }
-
-        this.nodeInteraction.clearHighlightedConnectionsFor(this.getResolvedNode().id);
-        this.nodeGeometry.disconnect();
-        this.nodeGeometry.removeWorkspaceGeometry(this.getResolvedNode().id);
-    }
-
-    protected handleKeyboardEvent(event: KeyboardEvent): void {
-        this.nodeInteraction.handleKeyboardEvent(event);
-    }
-
-    protected createNodeContentComponent(): void {
-        const nodeType = this.getResolvedNode().data.type;
-
-        const nodeContentAdapter = this.nodeContentHost.mount(
-            this.containerRef(),
-            this.drawFlowComponents[nodeType]!,
-        );
-
-        nodeContentAdapter.syncInputs(this.getNodeContentInputs());
-
-        this.cdr.detectChanges();
-    }
-
-    protected onSelectedChanged(selected: boolean): void {
-        this.nodeInteraction.setSelected(selected);
-    }
-
-    protected onDrag(event: DfDragDrop): void {
-        this.nodeInteraction.handleDrag(event);
     }
 
     private initializeResolvedNode(): void {
         this.resolvedNodeValue = this.nodeGeometry.resolveNode(this.node());
+    }
+
+    private applyNodeInputUpdate(node: DfDataInitialNode | DfDataNode): void {
+        if (!this.resolvedNodeValue) {
+            return;
+        }
+
+        const previousNodeType = this.resolvedNodeValue.data.type;
+
+        this.resolvedNodeValue = this.nodeGeometry.resolveUpdatedNode(
+            node,
+            this.resolvedNodeValue,
+        );
+
+        if (this.resolvedNodeValue.data.type !== previousNodeType) {
+            this.createNodeContentComponent();
+            this.measureNodeContent();
+            this.nodeConnectors.watch();
+        }
+
+        this.nodeContentHost.syncInputs(this.getNodeContentInputs());
+        this.nodeConnectors.applyOutputsConnectionLabel();
+        this.syncWorkspaceGeometry();
+        this.refreshRenderedGeometry(false);
     }
 
     private getResolvedNode(): DfDataNode {
@@ -242,14 +286,26 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.nodeGeometry.syncWorkspaceGeometry(this.getResolvedNode());
     }
 
-    private getNodeContentAdapter(): DfNodeContentAdapter {
-        const nodeContentAdapter = this.nodeContentHost.adapter();
+    private getNodeContentComponent(nodeType: string): DfOptions['nodes'][string] {
+        const nodeContentComponent = this.drawFlowComponents[nodeType];
 
-        if (!nodeContentAdapter) {
-            throw new Error('NodeComponent content host is not initialized');
+        if (!nodeContentComponent) {
+            throw new Error(
+                `NodeComponent cannot render node "${this.getResolvedNode().id}" because node type "${nodeType}" is not registered`,
+            );
         }
 
-        return nodeContentAdapter;
+        return nodeContentComponent;
+    }
+
+    private getNodeContentRenderer(): DfNodeContentRenderer {
+        const nodeContentRenderer = this.nodeContentHost.renderer();
+
+        if (!nodeContentRenderer) {
+            throw new Error('NodeComponent content renderer is not initialized');
+        }
+
+        return nodeContentRenderer;
     }
 
     private getNodeContentInputs(): DfNodeContentInputs {

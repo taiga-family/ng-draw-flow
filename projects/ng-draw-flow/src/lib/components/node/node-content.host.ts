@@ -7,45 +7,45 @@ import {
 
 import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {
-    createNodeContentAdapter,
-    type DfNodeContentAdapter,
+    createComponentNodeContentRenderer,
     type DfNodeContentInputs,
-} from './node-content.adapter';
+    type DfNodeContentRenderer,
+} from './node-content.renderer';
 
 export class NodeContentHost {
-    private readonly adapterSignal = signal<DfNodeContentAdapter | null>(null);
+    private readonly rendererSignal = signal<DfNodeContentRenderer | null>(null);
 
-    public readonly adapter = this.adapterSignal.asReadonly();
+    public readonly renderer = this.rendererSignal.asReadonly();
 
     constructor(private readonly environmentInjector: EnvironmentInjector) {}
 
-    public mount(
+    public renderComponent(
         containerRef: ViewContainerRef,
         componentType: Type<DrawFlowBaseNode>,
-    ): DfNodeContentAdapter {
+    ): DfNodeContentRenderer {
         this.clear(containerRef);
 
-        const adapter = createNodeContentAdapter(
+        const renderer = createComponentNodeContentRenderer(
             containerRef,
             componentType,
             this.environmentInjector,
         );
 
-        this.adapterSignal.set(adapter);
+        this.rendererSignal.set(renderer);
 
-        return adapter;
+        return renderer;
     }
 
     public clear(containerRef: ViewContainerRef): void {
         containerRef.clear();
-        this.adapterSignal.set(null);
+        this.rendererSignal.set(null);
     }
 
     public syncInputs(inputs: DfNodeContentInputs): void {
-        this.adapterSignal()?.syncInputs(inputs);
+        this.rendererSignal()?.syncInputs(inputs);
     }
 
     public nativeElement(): HTMLElement | null {
-        return this.adapterSignal()?.nativeElement ?? null;
+        return this.rendererSignal()?.nativeElement ?? null;
     }
 }
