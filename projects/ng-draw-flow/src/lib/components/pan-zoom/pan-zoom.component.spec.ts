@@ -177,11 +177,13 @@ describe('PanZoomComponent', () => {
     });
 
     it('updates container offsets on resize', () => {
+        const controller = (component as any).panZoomController;
+
         (component as any).onBoardResize([
             {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
-        expect((component as any).layoutOffset()).toEqual({x: 0, y: 0});
+        expect(controller.layoutOffset()).toEqual({x: 0, y: 0});
         expect(panZoomService.snapshot().offsetX).toBeCloseTo(0, 8);
         expect(panZoomService.snapshot().offsetY).toBeCloseTo(0, 8);
 
@@ -191,7 +193,7 @@ describe('PanZoomComponent', () => {
             {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
-        expect((component as any).layoutOffset()).toEqual({x: -500, y: -400});
+        expect(controller.layoutOffset()).toEqual({x: -500, y: -400});
         expect(panZoomService.snapshot().offsetX).toBe(500);
         expect(panZoomService.snapshot().offsetY).toBe(400);
 
@@ -201,7 +203,7 @@ describe('PanZoomComponent', () => {
             {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
-        expect((component as any).layoutOffset()).toEqual({x: -400, y: -280});
+        expect(controller.layoutOffset()).toEqual({x: -400, y: -280});
         expect(panZoomService.snapshot().offsetX).toBe(400);
         expect(panZoomService.snapshot().offsetY).toBe(280);
 
@@ -211,7 +213,7 @@ describe('PanZoomComponent', () => {
             {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
 
-        expect((component as any).layoutOffset()).toEqual({x: 0, y: 0});
+        expect(controller.layoutOffset()).toEqual({x: 0, y: 0});
         expect(panZoomService.snapshot().offsetX).toBeCloseTo(0, 8);
         expect(panZoomService.snapshot().offsetY).toBeCloseTo(0, 8);
     });
