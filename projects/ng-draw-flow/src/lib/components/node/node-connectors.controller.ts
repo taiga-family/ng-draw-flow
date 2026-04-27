@@ -3,12 +3,8 @@ import {
     type EnvironmentInjector,
     runInInjectionContext,
 } from '@angular/core';
-import {
-    outputToObservable,
-    takeUntilDestroyed,
-    toObservable,
-} from '@angular/core/rxjs-interop';
-import {map, merge, type Observable, tap} from 'rxjs';
+import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
+import {map, merge, type Observable, type Subscription, tap} from 'rxjs';
 
 import {type DfDragDropDistance} from '../../directives';
 import {createConnectorHash} from '../../helpers';
@@ -19,7 +15,7 @@ import {
 } from '../../ng-draw-flow.interfaces';
 import {type CoordinatesService} from '../../services/coordinates.service';
 import {type DfInputComponent, type DfOutputComponent} from '../connectors';
-import {type DfNodeContentAdapter} from './node-content.adapter';
+import {type DfNodeContentRenderer} from './node-content.renderer';
 
 export interface DfNodeConnectorsControllerOptions {
     readonly coordinatesService: CoordinatesService;
@@ -27,22 +23,23 @@ export interface DfNodeConnectorsControllerOptions {
     readonly environmentInjector: EnvironmentInjector;
     readonly getCenteredPosition: (node: DfDataNode) => DfPoint;
     readonly getNode: () => DfDataNode;
-    readonly getNodeContentAdapter: () => DfNodeContentAdapter;
+    readonly getNodeContentRenderer: () => DfNodeContentRenderer;
     readonly onConnectorDeleted: (connectorId: string) => void;
 }
 
 export class NodeConnectorsController {
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
+    private connectorUpdatesSubscription: Subscription | null = null;
 
     constructor(private readonly options: DfNodeConnectorsControllerOptions) {}
 
     public updateCoordinates(): void {
         const node = this.options.getNode();
-        const nodeContentAdapter = this.options.getNodeContentAdapter();
+        const nodeContentRenderer = this.options.getNodeContentRenderer();
         const centeredCoordinates = this.options.getCenteredPosition(node);
 
-        nodeContentAdapter.inputs().forEach((input: DfInputComponent) => {
+        nodeContentRenderer.inputConnectors().forEach((input: DfInputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
                 node.id,
@@ -51,7 +48,7 @@ export class NodeConnectorsController {
             );
         });
 
-        nodeContentAdapter.outputs().forEach((output: DfOutputComponent) => {
+        nodeContentRenderer.outputConnectors().forEach((output: DfOutputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
                 node.id,
@@ -62,13 +59,13 @@ export class NodeConnectorsController {
     }
 
     public recalculatePositions(distance: DfDragDropDistance, zoom: number): void {
-        const nodeContentAdapter = this.options.getNodeContentAdapter();
+        const nodeContentRenderer = this.options.getNodeContentRenderer();
         const currentMoveDistance = {
             deltaX: distance.deltaX / zoom,
             deltaY: distance.deltaY / zoom,
         };
 
-        nodeContentAdapter.inputs().forEach((input: DfInputComponent) => {
+        nodeContentRenderer.inputConnectors().forEach((input: DfInputComponent) => {
             this.recalculateConnectorPositionFromLast(
                 currentMoveDistance,
                 input,
@@ -76,7 +73,7 @@ export class NodeConnectorsController {
             );
         });
 
-        nodeContentAdapter.outputs().forEach((output: DfOutputComponent) => {
+        nodeContentRenderer.outputConnectors().forEach((output: DfOutputComponent) => {
             this.recalculateConnectorPositionFromLast(
                 currentMoveDistance,
                 output,
@@ -86,13 +83,14 @@ export class NodeConnectorsController {
     }
 
     public watch(): void {
-        const nodeContentAdapter = this.options.getNodeContentAdapter();
+        const nodeContentRenderer = this.options.getNodeContentRenderer();
 
-        this.previousOutputs = [...nodeContentAdapter.outputs()];
-        this.previousInputs = [...nodeContentAdapter.inputs()];
+        this.connectorUpdatesSubscription?.unsubscribe();
+        this.previousOutputs = [...nodeContentRenderer.outputConnectors()];
+        this.previousInputs = [...nodeContentRenderer.inputConnectors()];
 
         const connectorsUpdates$ = this.collectConnectorUpdateSources(
-            nodeContentAdapter,
+            nodeContentRenderer,
             () => this.applyOutputsConnectionLabel(),
         );
 
@@ -100,9 +98,14 @@ export class NodeConnectorsController {
             return;
         }
 
-        merge(...connectorsUpdates$)
+        this.connectorUpdatesSubscription = merge(...connectorsUpdates$)
             .pipe(takeUntilDestroyed(this.options.destroyRef))
             .subscribe(() => this.updateCoordinates());
+    }
+
+    public disconnect(): void {
+        this.connectorUpdatesSubscription?.unsubscribe();
+        this.connectorUpdatesSubscription = null;
     }
 
     public applyOutputsConnectionLabel(): void {
@@ -113,7 +116,7 @@ export class NodeConnectorsController {
             return;
         }
 
-        this.options.getNodeContentAdapter().applyConnectionLabel(connectionLabel);
+        this.options.getNodeContentRenderer().applyConnectionLabel(connectionLabel);
     }
 
     private recalculateConnectorPositionFromLast(
@@ -187,32 +190,32 @@ export class NodeConnectorsController {
     }
 
     private collectConnectorUpdateSources(
-        nodeContentAdapter: DfNodeContentAdapter,
+        nodeContentRenderer: DfNodeContentRenderer,
         onOutputsChanged: () => void,
     ): Array<Observable<void>> {
         const sources: Array<Observable<void>> = [];
 
-        this.addContentComponentUpdates(sources, nodeContentAdapter);
-        this.addInputsUpdates(sources, nodeContentAdapter);
-        this.addOutputsUpdates(sources, nodeContentAdapter, onOutputsChanged);
+        this.addContentRendererUpdates(sources, nodeContentRenderer);
+        this.addInputsUpdates(sources, nodeContentRenderer);
+        this.addOutputsUpdates(sources, nodeContentRenderer, onOutputsChanged);
 
         return sources;
     }
 
-    private addContentComponentUpdates(
+    private addContentRendererUpdates(
         sources: Array<Observable<void>>,
-        nodeContentAdapter: DfNodeContentAdapter,
+        nodeContentRenderer: DfNodeContentRenderer,
     ): void {
-        sources.push(outputToObservable(nodeContentAdapter.connectorsUpdated));
+        sources.push(nodeContentRenderer.connectorUpdates$);
     }
 
     private addInputsUpdates(
         sources: Array<Observable<void>>,
-        nodeContentAdapter: DfNodeContentAdapter,
+        nodeContentRenderer: DfNodeContentRenderer,
     ): void {
         runInInjectionContext(this.options.environmentInjector, () => {
             sources.push(
-                toObservable(nodeContentAdapter.instance.inputs).pipe(
+                toObservable(nodeContentRenderer.inputConnectors).pipe(
                     tap((currentInputs: readonly DfInputComponent[]) => {
                         this.handleRemovedInputs(currentInputs);
                     }),
@@ -224,12 +227,12 @@ export class NodeConnectorsController {
 
     private addOutputsUpdates(
         sources: Array<Observable<void>>,
-        nodeContentAdapter: DfNodeContentAdapter,
+        nodeContentRenderer: DfNodeContentRenderer,
         onOutputsChanged: () => void,
     ): void {
         runInInjectionContext(this.options.environmentInjector, () => {
             sources.push(
-                toObservable(nodeContentAdapter.instance.outputs).pipe(
+                toObservable(nodeContentRenderer.outputConnectors).pipe(
                     tap((currentOutputs: readonly DfOutputComponent[]) => {
                         this.handleRemovedOutputs(currentOutputs);
                         onOutputsChanged();

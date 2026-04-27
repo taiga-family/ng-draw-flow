@@ -31,6 +31,24 @@ export class NodeGeometryController {
         };
     }
 
+    public resolveUpdatedNode(
+        node: DfDataInitialNode | DfDataNode,
+        currentNode: DfDataNode,
+    ): DfDataNode {
+        if (this.hasPosition(node)) {
+            return node;
+        }
+
+        if (node.id === currentNode.id) {
+            return {
+                ...node,
+                position: currentNode.position,
+            };
+        }
+
+        return this.resolveNode(node);
+    }
+
     public measureContent(nativeElement: HTMLElement | null): void {
         if (!nativeElement) {
             return;
