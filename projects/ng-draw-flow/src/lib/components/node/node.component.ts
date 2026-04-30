@@ -16,6 +16,7 @@ import {
     viewChild,
     ViewContainerRef,
 } from '@angular/core';
+import {animationFrameScheduler, type Subscription} from 'rxjs';
 
 import {
     type DfDragDrop,
@@ -77,6 +78,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private resolvedNodeValue: DfDataNode | null = null;
     private readonly nodeConnectors: NodeConnectorsController;
     private readonly nodeInteraction: NodeInteractionController;
+    private nodeSizeSyncSubscription: Subscription | null = null;
 
     public readonly nodeElementRef =
         viewChild.required<ElementRef<HTMLElement>>('nodeElement');
@@ -131,6 +133,8 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     public ngOnDestroy(): void {
+        this.cancelScheduledNodeSizeSync();
+
         if (!this.resolvedNodeValue) {
             this.nodeConnectors.disconnect();
             this.nodeGeometry.disconnect();
@@ -234,23 +238,63 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             return;
         }
 
-        const previousNodeType = this.resolvedNodeValue.data.type;
+        const previousNode = this.resolvedNodeValue;
 
         this.resolvedNodeValue = this.nodeGeometry.resolveUpdatedNode(
             node,
             this.resolvedNodeValue,
         );
 
-        if (this.resolvedNodeValue.data.type !== previousNodeType) {
+        const nodeTypeChanged =
+            this.resolvedNodeValue.data.type !== previousNode.data.type;
+        const positionChanged = this.nodeGeometry.hasPositionChanged(
+            previousNode,
+            this.resolvedNodeValue,
+        );
+        const startNodeChanged =
+            (this.resolvedNodeValue.startNode === true) !==
+            (previousNode.startNode === true);
+        const endNodeChanged =
+            (this.resolvedNodeValue.endNode === true) !== (previousNode.endNode === true);
+        const nodeIdentityChanged = this.resolvedNodeValue.id !== previousNode.id;
+        const nodeDataChanged = this.resolvedNodeValue.data !== previousNode.data;
+        const connectionLabelChanged =
+            this.resolvedNodeValue.data.connectionLabel !==
+            previousNode.data.connectionLabel;
+        const contentInputsChanged =
+            nodeIdentityChanged || nodeDataChanged || startNodeChanged || endNodeChanged;
+
+        if (
+            !nodeTypeChanged &&
+            !positionChanged &&
+            !contentInputsChanged &&
+            !connectionLabelChanged
+        ) {
+            return;
+        }
+
+        if (nodeTypeChanged) {
             this.createNodeContentComponent();
             this.measureNodeContent();
             this.nodeConnectors.watch();
+        } else if (contentInputsChanged) {
+            this.nodeContentHost.syncInputs(this.getNodeContentInputs());
         }
 
-        this.nodeContentHost.syncInputs(this.getNodeContentInputs());
-        this.nodeConnectors.applyOutputsConnectionLabel();
-        this.syncWorkspaceGeometry();
-        this.refreshRenderedGeometry(false);
+        if (nodeTypeChanged || connectionLabelChanged) {
+            this.nodeConnectors.applyOutputsConnectionLabel();
+        }
+
+        if (
+            nodeTypeChanged ||
+            positionChanged ||
+            nodeIdentityChanged ||
+            startNodeChanged ||
+            endNodeChanged
+        ) {
+            this.syncWorkspaceGeometry();
+            this.refreshRenderedGeometry(false);
+        }
     }
 
     private getResolvedNode(): DfDataNode {
@@ -267,10 +311,30 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
 
     private observeNodeSize(): void {
         this.nodeGeometry.observeNodeSize(this.nodeElementRef().nativeElement, () => {
-            this.measureNodeContent();
-            this.syncWorkspaceGeometry();
-            this.refreshRenderedGeometry(false);
+            this.scheduleNodeSizeSync();
         });
+    }
+
+    private scheduleNodeSizeSync(): void {
+        if (this.nodeSizeSyncSubscription) {
+            return;
+        }
+
+        this.nodeSizeSyncSubscription = animationFrameScheduler.schedule(() => {
+            this.nodeSizeSyncSubscription = null;
+            this.syncNodeSize();
+        });
+    }
+
+    private cancelScheduledNodeSizeSync(): void {
+        this.nodeSizeSyncSubscription?.unsubscribe();
+        this.nodeSizeSyncSubscription = null;
+    }
+
+    private syncNodeSize(): void {
+        this.measureNodeContent();
+        this.syncWorkspaceGeometry();
+        this.refreshRenderedGeometry(false);
     }
 
     private refreshRenderedGeometry(dynamic: boolean): void {

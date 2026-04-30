@@ -1,4 +1,5 @@
 import {type ComponentFixture, TestBed} from '@angular/core/testing';
+import {animationFrameScheduler, Subscription} from 'rxjs';
 
 import {type DfDragDrop, DfDragDropStage} from '../../directives/drag-drop';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
@@ -18,8 +19,45 @@ describe('PanZoomComponent', () => {
     let component: PanZoomComponent;
     let panZoomService: PanZoomService;
     let panZoomOptions: DfPanZoomOptions;
+    let animationFrameScheduleSpy: jest.SpyInstance;
+    let scheduledAnimationFrameCallbacks: Array<() => void>;
+
+    const flushAnimationFrames = (): void => {
+        while (scheduledAnimationFrameCallbacks.length) {
+            scheduledAnimationFrameCallbacks.splice(0).forEach((callback) => {
+                callback();
+            });
+        }
+    };
+
+    const resizeBoard = (width = 1000, height = 800): void => {
+        (component as any).onBoardResize([
+            {contentRect: {width, height}},
+        ] as unknown as ResizeObserverEntry[]);
+
+        flushAnimationFrames();
+    };
 
     beforeEach(async () => {
+        scheduledAnimationFrameCallbacks = [];
+        animationFrameScheduleSpy = jest
+            .spyOn(animationFrameScheduler, 'schedule')
+            .mockImplementation(((
+                work: (this: Subscription, state?: unknown) => void,
+                _delay?: number,
+                state?: unknown,
+            ): Subscription => {
+                const subscription = new Subscription();
+
+                scheduledAnimationFrameCallbacks.push(() => {
+                    if (!subscription.closed) {
+                        work.call(subscription, state);
+                    }
+                });
+
+                return subscription;
+            }) as typeof animationFrameScheduler.schedule);
+
         TestBed.overrideComponent(PanZoomComponent, {
             set: {
                 template: `
@@ -81,9 +119,12 @@ describe('PanZoomComponent', () => {
         panZoomService = TestBed.inject(PanZoomService);
 
         fixture.detectChanges();
+        flushAnimationFrames();
+        animationFrameScheduleSpy.mockClear();
     });
 
     afterEach(() => {
+        animationFrameScheduleSpy.mockRestore();
         fixture.destroy();
     });
 
@@ -146,12 +187,11 @@ describe('PanZoomComponent', () => {
         });
     });
 
-    it('emits scale in percents on zoom updates', async () => {
+    it('emits scale in percents on zoom updates', () => {
         const scaleSpy = jest.fn();
 
         component.scale.subscribe(scaleSpy);
         component.setScale(1.5);
-        await fixture.whenStable();
 
         expect(scaleSpy).toHaveBeenLastCalledWith(150);
     });
@@ -179,9 +219,7 @@ describe('PanZoomComponent', () => {
     it('updates container offsets on resize', () => {
         const controller = (component as any).panZoomController;
 
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
+        resizeBoard();
 
         expect(controller.layoutOffset()).toEqual({x: 0, y: 0});
         expect(panZoomService.snapshot().offsetX).toBeCloseTo(0, 8);
@@ -189,9 +227,7 @@ describe('PanZoomComponent', () => {
 
         panZoomOptions.leftPosition = 0;
         panZoomOptions.topPosition = 0;
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
+        resizeBoard();
 
         expect(controller.layoutOffset()).toEqual({x: -500, y: -400});
         expect(panZoomService.snapshot().offsetX).toBe(500);
@@ -199,9 +235,7 @@ describe('PanZoomComponent', () => {
 
         panZoomOptions.leftPosition = 100;
         panZoomOptions.topPosition = 120;
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
+        resizeBoard();
 
         expect(controller.layoutOffset()).toEqual({x: -400, y: -280});
         expect(panZoomService.snapshot().offsetX).toBe(400);
@@ -209,21 +243,39 @@ describe('PanZoomComponent', () => {
 
         panZoomOptions.leftPosition = null;
         panZoomOptions.topPosition = null;
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
+        resizeBoard();
 
         expect(controller.layoutOffset()).toEqual({x: 0, y: 0});
         expect(panZoomService.snapshot().offsetX).toBeCloseTo(0, 8);
         expect(panZoomService.snapshot().offsetY).toBeCloseTo(0, 8);
     });
 
-    it('combines camera and layout offsets in one transform', () => {
-        panZoomOptions.leftPosition = 0;
-        panZoomOptions.topPosition = 0;
+    it('coalesces resize offset sync into one animation frame', () => {
+        const syncContainerOffsetsSpy = jest.spyOn(
+            component as any,
+            'syncContainerOffsets',
+        );
+
+        syncContainerOffsetsSpy.mockClear();
+
         (component as any).onBoardResize([
             {contentRect: {width: 1000, height: 800}},
         ] as unknown as ResizeObserverEntry[]);
+        (component as any).onBoardResize([
+            {contentRect: {width: 1000, height: 800}},
+        ] as unknown as ResizeObserverEntry[]);
+
+        expect(syncContainerOffsetsSpy).not.toHaveBeenCalled();
+
+        flushAnimationFrames();
+
+        expect(syncContainerOffsetsSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('combines camera and layout offsets in one transform', () => {
+        panZoomOptions.leftPosition = 0;
+        panZoomOptions.topPosition = 0;
+        resizeBoard();
 
         panZoomService.setCamera({
             ...panZoomService.snapshot(),
@@ -240,9 +292,7 @@ describe('PanZoomComponent', () => {
     it('does not shift transform when dynamic workspace bounds change', () => {
         panZoomOptions.leftPosition = 0;
         panZoomOptions.topPosition = 0;
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
+        resizeBoard();
 
         panZoomService.setCamera({
             ...panZoomService.snapshot(),
@@ -266,7 +316,7 @@ describe('PanZoomComponent', () => {
         );
     });
 
-    it('processes wheel events on host and updates zoom', async () => {
+    it('processes wheel events on host and updates zoom', () => {
         fixture.nativeElement.dispatchEvent(
             new WheelEvent('wheel', {
                 deltaY: 120,
@@ -276,9 +326,7 @@ describe('PanZoomComponent', () => {
                 cancelable: true,
             }),
         );
-        await new Promise((resolve) => {
-            setTimeout(resolve, 20);
-        });
+        flushAnimationFrames();
 
         expect(panZoomService.snapshot().zoom).not.toBe(1);
     });
