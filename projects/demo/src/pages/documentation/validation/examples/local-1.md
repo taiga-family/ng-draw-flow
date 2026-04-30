@@ -26,18 +26,13 @@ export class FormNodeComponent extends DrawFlowBaseNode {
     }),
   });
 
-  @Input()
-  public override set invalid(value: boolean) {
-    super.invalid = value;
-  }
-
-  public override get invalid(): boolean {
+  protected override get invalidState(): boolean {
     const formInvalid = Object.values(this.form.controls).some(
       (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
         fieldGroup.controls.fieldValue.touched && fieldGroup.controls.fieldValue.invalid,
     );
 
-    return super.invalid || formInvalid;
+    return this.invalidSignal() || formInvalid;
   }
 }
 ```

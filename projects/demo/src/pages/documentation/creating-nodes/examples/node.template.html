@@ -1,15 +1,15 @@
-@if (!startNode) {
+@if (!startNodeSignal()) {
     <df-input
         class="input"
-        [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+        [connectorData]="{nodeId: nodeIdSignal(), connectorId: nodeIdSignal() + '-input-1', single: false}"
     />
 }
 
-<p class="tui-text_body-xs">{{ model.text }}</p>
+<p class="tui-text_body-xs">{{ modelSignal().text }}</p>
 
-@if (!endNode) {
+@if (!endNodeSignal()) {
     <df-output
         class="output"
-        [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+        [connectorData]="{nodeId: nodeIdSignal(), connectorId: nodeIdSignal() + '-output-1', single: false}"
     />
 }

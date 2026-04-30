@@ -2,11 +2,11 @@
     <p>
         In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
         node, you should develop a component that extends from the
-        <code>NgDrawFlowBaseNode</code>
-        class. This component will incorporate directives such as
-        <code>DrawFlowInputDirective</code>
+        <code>DrawFlowBaseNode</code>
+        class. This component can render connector components such as
+        <code>DfInputComponent</code>
         and
-        <code>DrawFlowOutputDirective</code>
+        <code>DfOutputComponent</code>
         .
     </p>
 
@@ -14,13 +14,14 @@
     <tui-doc-code [code]="gettingStarted.baseNode" />
 
     <p>
-        The use of ViewChildren with QueryList
+        The base class uses signal queries
+        <code>viewChildren()</code>
+        for
         <code>DfInputComponent</code>
-        and QueryList
+        and
         <code>DfOutputComponent</code>
-        is crucial for managing input and output connectors of the node. These properties ensure the component remains
-        aware of the existing connectors and detects any changes in their count, which is essential for maintaining the
-        flow&#39;s data integrity and interaction logic.
+        . These signals keep the node aware of existing connectors and detect changes in their count, which is essential
+        for maintaining the flow&#39;s data integrity and interaction logic.
     </p>
 
     <p>
