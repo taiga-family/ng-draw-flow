@@ -1,11 +1,11 @@
 ```ts
 @Directive()
 export abstract class DrawFlowBaseNode {
-  @ViewChildren(DfInputComponent)
-  public inputs!: QueryList<DfInputComponent>;
+  public readonly inputs = viewChildren(DfInputComponent);
 
-  @ViewChildren(DfOutputComponent)
-  public outputs!: QueryList<DfOutputComponent>;
+  public readonly outputs = viewChildren(DfOutputComponent);
+
+  public readonly connectorsUpdated = output();
 
   public readonly nodeIdSignal = input('', {alias: 'nodeId'});
 
@@ -34,6 +34,14 @@ export abstract class DrawFlowBaseNode {
 
   public get endNode(): boolean {
     return this.endNodeSignal();
+  }
+
+  public get selected(): boolean {
+    return this.selectedSignal();
+  }
+
+  public get invalid(): boolean {
+    return this.invalidSignal();
   }
 }
 ```
