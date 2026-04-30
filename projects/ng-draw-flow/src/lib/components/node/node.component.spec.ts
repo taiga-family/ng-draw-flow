@@ -1,5 +1,5 @@
 import {signal, type WritableSignal} from '@angular/core';
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {MockBuilder, MockProvider, MockRender, ngMocks} from 'ng-mocks';
 
 import {INITIAL_COORDINATES} from '../../consts';
@@ -328,6 +328,102 @@ describe('NodeComponent', () => {
         });
         expect(resolvedNode.position).toEqual(previousPosition);
     });
+
+    it('skips node refresh when node input is replaced with equivalent values', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const component = host.nodeComponent();
+        const resolvedNode = (component as any).getResolvedNode() as DfDataNode;
+        const refreshRenderedGeometrySpy = jest.spyOn(
+            component as any,
+            'refreshRenderedGeometry',
+        );
+        const syncWorkspaceGeometrySpy = jest.spyOn(
+            component as any,
+            'syncWorkspaceGeometry',
+        );
+        const syncInputsSpy = jest.spyOn(
+            (component as any).nodeContentHost,
+            'syncInputs',
+        );
+
+        host.node.set({
+            id: resolvedNode.id,
+            data: resolvedNode.data,
+            position: {...resolvedNode.position},
+        });
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(refreshRenderedGeometrySpy).not.toHaveBeenCalled();
+        expect(syncWorkspaceGeometrySpy).not.toHaveBeenCalled();
+        expect(syncInputsSpy).not.toHaveBeenCalled();
+    });
+
+    it('syncs data-only node input updates without recalculating geometry', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const component = host.nodeComponent();
+        const innerComponent = ngMocks.findInstance(MockNodeContentComponent);
+        const resolvedNode = (component as any).getResolvedNode() as DfDataNode;
+        const refreshRenderedGeometrySpy = jest.spyOn(
+            component as any,
+            'refreshRenderedGeometry',
+        );
+        const syncWorkspaceGeometrySpy = jest.spyOn(
+            component as any,
+            'syncWorkspaceGeometry',
+        );
+
+        host.node.set({
+            id: resolvedNode.id,
+            data: {type: 'simpleNode', title: 'data only'},
+            position: {...resolvedNode.position},
+        });
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(innerComponent.model).toEqual({
+            type: 'simpleNode',
+            title: 'data only',
+        });
+        expect(refreshRenderedGeometrySpy).not.toHaveBeenCalled();
+        expect(syncWorkspaceGeometrySpy).not.toHaveBeenCalled();
+    });
+
+    it('coalesces node size sync into one animation frame', fakeAsync(() => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent();
+        const measureNodeContentSpy = jest.spyOn(component as any, 'measureNodeContent');
+        const refreshRenderedGeometrySpy = jest.spyOn(
+            component as any,
+            'refreshRenderedGeometry',
+        );
+        const syncWorkspaceGeometrySpy = jest.spyOn(
+            component as any,
+            'syncWorkspaceGeometry',
+        );
+
+        measureNodeContentSpy.mockClear();
+        refreshRenderedGeometrySpy.mockClear();
+        syncWorkspaceGeometrySpy.mockClear();
+
+        (component as any).scheduleNodeSizeSync();
+        (component as any).scheduleNodeSizeSync();
+
+        expect(measureNodeContentSpy).not.toHaveBeenCalled();
+        expect(refreshRenderedGeometrySpy).not.toHaveBeenCalled();
+        expect(syncWorkspaceGeometrySpy).not.toHaveBeenCalled();
+
+        tick(16);
+
+        expect(measureNodeContentSpy).toHaveBeenCalledTimes(1);
+        expect(syncWorkspaceGeometrySpy).toHaveBeenCalledTimes(1);
+        expect(refreshRenderedGeometrySpy).toHaveBeenCalledTimes(1);
+        expect(refreshRenderedGeometrySpy).toHaveBeenCalledWith(false);
+    }));
 
     it('throws readable error when node type is not registered', () => {
         expect(() => {

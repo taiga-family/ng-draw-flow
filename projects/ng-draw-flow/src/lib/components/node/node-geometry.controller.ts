@@ -49,6 +49,16 @@ export class NodeGeometryController {
         return this.resolveNode(node);
     }
 
+    public hasPositionChanged(
+        previousNode: DfDataNode,
+        currentNode: DfDataNode,
+    ): boolean {
+        return (
+            previousNode.position.x !== currentNode.position.x ||
+            previousNode.position.y !== currentNode.position.y
+        );
+    }
+
     public measureContent(nativeElement: HTMLElement | null): void {
         if (!nativeElement) {
             return;
