@@ -7,13 +7,14 @@ import {
     ElementRef,
     inject,
     NgZone,
+    type OnDestroy,
     type OnInit,
     output,
     PLATFORM_ID,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {WaResizeObserver} from '@ng-web-apis/resize-observer';
-import {animationFrameScheduler} from 'rxjs';
+import {animationFrameScheduler, type Subscription} from 'rxjs';
 
 import {DragDropService} from '../../directives/drag-drop';
 import {type DfPoint} from '../../ng-draw-flow.interfaces';
@@ -40,7 +41,7 @@ import {PanZoomGesturesService} from './pan-zoom-gestures.service';
     ],
     host: {'(waResizeObserver)': 'onBoardResize($event)'},
 })
-export class PanZoomComponent implements OnInit {
+export class PanZoomComponent implements OnInit, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
@@ -51,7 +52,8 @@ export class PanZoomComponent implements OnInit {
     private readonly panZoomController = inject(PanZoomControllerService);
     private readonly panZoomGestures = inject(PanZoomGesturesService);
     private readonly dragDropService = inject(DragDropService);
-    private renderScheduled = false;
+    private renderFrameSubscription: Subscription | null = null;
+    private containerOffsetSyncSubscription: Subscription | null = null;
 
     public readonly scale = output<number>();
 
@@ -66,6 +68,11 @@ export class PanZoomComponent implements OnInit {
 
     public ngOnInit(): void {
         this.syncContainerOffsets();
+    }
+
+    public ngOnDestroy(): void {
+        this.cancelScheduledRender();
+        this.cancelScheduledContainerOffsetSync();
     }
 
     public resetPanzoom(): void {
@@ -101,7 +108,7 @@ export class PanZoomComponent implements OnInit {
             return;
         }
 
-        this.syncContainerOffsets();
+        this.requestContainerOffsetSync();
     }
 
     private watchController(): void {
@@ -160,19 +167,40 @@ export class PanZoomComponent implements OnInit {
     }
 
     private requestRender(): void {
-        if (this.renderScheduled) {
+        if (this.renderFrameSubscription) {
             return;
         }
 
-        this.renderScheduled = true;
-        animationFrameScheduler.schedule(() => {
-            this.renderScheduled = false;
+        this.renderFrameSubscription = animationFrameScheduler.schedule(() => {
+            this.renderFrameSubscription = null;
             this.cdr.detectChanges();
         });
     }
 
     private renderNow(): void {
+        this.cancelScheduledRender();
         this.cdr.detectChanges();
+    }
+
+    private cancelScheduledRender(): void {
+        this.renderFrameSubscription?.unsubscribe();
+        this.renderFrameSubscription = null;
+    }
+
+    private requestContainerOffsetSync(): void {
+        if (this.containerOffsetSyncSubscription) {
+            return;
+        }
+
+        this.containerOffsetSyncSubscription = animationFrameScheduler.schedule(() => {
+            this.containerOffsetSyncSubscription = null;
+            this.syncContainerOffsets();
+        });
+    }
+
+    private cancelScheduledContainerOffsetSync(): void {
+        this.containerOffsetSyncSubscription?.unsubscribe();
+        this.containerOffsetSyncSubscription = null;
     }
 
     private syncContainerOffsets(): void {
