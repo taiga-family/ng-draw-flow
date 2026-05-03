@@ -77,6 +77,8 @@ describe('NgDrawFlowStoreService', () => {
         expect(service.selectedNode()).toBeNull();
         expect(service.selectedConnection()).toBeNull();
         expect(service.scale()).toBe(100);
+        expect(service.lastNodeSelected()).toBeNull();
+        expect(service.lastConnectionSelected()).toBeNull();
     });
 
     it('should keep data model up to date', () => {
@@ -132,12 +134,16 @@ describe('NgDrawFlowStoreService', () => {
         };
 
         service.emitNodeSelected(node);
+        expect(service.lastNodeSelected()).toEqual(node);
+
         service.emitNodeMoved(moveEvent);
+        expect(service.lastNodeMoved()).toEqual(moveEvent);
         expect((service.dataModel()?.nodes[0] as DfDataNode).position).toEqual({
             x: 50,
             y: 70,
         });
         service.emitNodeDeleted(deleteEvent);
+        expect(service.lastNodeDeleted()).toEqual(deleteEvent);
 
         expect(selectedSpy).toHaveBeenCalledWith(node);
         expect(movedSpy).toHaveBeenCalledWith(moveEvent);
@@ -165,8 +171,13 @@ describe('NgDrawFlowStoreService', () => {
         };
 
         service.emitConnectionCreated(createdEvent);
+        expect(service.lastConnectionCreated()).toEqual(createdEvent);
+
         service.emitConnectionSelected(connection);
+        expect(service.lastConnectionSelected()).toEqual(connection);
+
         service.emitConnectionDeleted(deletedEvent);
+        expect(service.lastConnectionDeleted()).toEqual(deletedEvent);
 
         expect(createdSpy).toHaveBeenCalledWith(createdEvent);
         expect(selectedSpy).toHaveBeenCalledWith(connection);
