@@ -1,9 +1,9 @@
 <div
     #nodeElement
     data-draw-flow-node
-    class="draw-flow-node"
     [attr.data-node-id]="node().id"
     [attr.data-start-node]="node().startNode ? 'true' : null"
+    [class]="nodeClassName()"
     [style.cursor]="cursor()"
     (dfDragDrop)="onDrag($event)"
     (dfSelectableElement)="onSelectedChanged($event)"

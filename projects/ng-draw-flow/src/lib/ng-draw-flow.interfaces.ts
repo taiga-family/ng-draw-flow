@@ -84,6 +84,12 @@ export interface DfDataModel {
 
 export interface DfDataInitialNode {
     id: string;
+    /**
+     * Additional CSS class or classes applied to the node wrapper.
+     * Use it to target a particular node from application styles without
+     * coupling styles to the node content implementation.
+     */
+    className?: string[] | string;
     data: {
         type: string;
         connectionLabel?: DfConnectionLabel;
