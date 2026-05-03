@@ -32,6 +32,18 @@ export class NgDrawFlowStoreService {
     private readonly connectionDeletedSubject = new Subject<DfEvent<DfDataConnection>>();
     private readonly connectionSelectedSubject = new Subject<DfDataConnection>();
 
+    private readonly lastNodeDeletedSignal = signal<Nullable<DfEvent<DfDataNode>>>(null);
+    private readonly lastNodeMovedSignal = signal<Nullable<DfEvent<DfDataNode>>>(null);
+    private readonly lastNodeSelectedSignal = signal<Nullable<DfDataNode>>(null);
+    private readonly lastConnectionCreatedSignal =
+        signal<Nullable<DfEvent<DfDataConnection>>>(null);
+
+    private readonly lastConnectionDeletedSignal =
+        signal<Nullable<DfEvent<DfDataConnection>>>(null);
+
+    private readonly lastConnectionSelectedSignal =
+        signal<Nullable<DfDataConnection>>(null);
+
     /** Snapshot of the current editor data model. */
     public readonly dataModel = this.dataModelSignal.asReadonly();
 
@@ -64,20 +76,39 @@ export class NgDrawFlowStoreService {
     /** Emits whenever a node is deleted (UI or API). */
     public readonly nodeDeleted$ = this.nodeDeletedSubject.asObservable();
 
+    /** Last node deletion event. Signal-first counterpart of `nodeDeleted$`. */
+    public readonly lastNodeDeleted = this.lastNodeDeletedSignal.asReadonly();
+
     /** Emits whenever a node moves. */
     public readonly nodeMoved$ = this.nodeMovedSubject.asObservable();
+
+    /** Last node movement event. Signal-first counterpart of `nodeMoved$`. */
+    public readonly lastNodeMoved = this.lastNodeMovedSignal.asReadonly();
 
     /** Emits whenever a node becomes selected. */
     public readonly nodeSelected$ = this.nodeSelectedSubject.asObservable();
 
+    /** Last selected node event payload. Signal-first counterpart of `nodeSelected$`. */
+    public readonly lastNodeSelected = this.lastNodeSelectedSignal.asReadonly();
+
     /** Emits whenever a connection is created. */
     public readonly connectionCreated$ = this.connectionCreatedSubject.asObservable();
+
+    /** Last connection creation event. Signal-first counterpart of `connectionCreated$`. */
+    public readonly lastConnectionCreated = this.lastConnectionCreatedSignal.asReadonly();
 
     /** Emits whenever a connection is removed. */
     public readonly connectionDeleted$ = this.connectionDeletedSubject.asObservable();
 
+    /** Last connection deletion event. Signal-first counterpart of `connectionDeleted$`. */
+    public readonly lastConnectionDeleted = this.lastConnectionDeletedSignal.asReadonly();
+
     /** Emits whenever a connection becomes selected. */
     public readonly connectionSelected$ = this.connectionSelectedSubject.asObservable();
+
+    /** Last selected connection payload. Signal-first counterpart of `connectionSelected$`. */
+    public readonly lastConnectionSelected =
+        this.lastConnectionSelectedSignal.asReadonly();
 
     /**
      * Binds a component instance so store methods can forward commands and
@@ -173,6 +204,7 @@ export class NgDrawFlowStoreService {
     public setSelectedNode(node: DfDataNode): void {
         this.selectedNodeSignal.set(this.cloneNode(node));
         this.selectedConnectionSignal.set(null);
+        this.lastNodeSelectedSignal.set(this.cloneNode(node));
         this.nodeSelectedSubject.next(node);
     }
 
@@ -203,6 +235,7 @@ export class NgDrawFlowStoreService {
     public setSelectedConnection(connection: DfDataConnection): void {
         this.selectedConnectionSignal.set(this.cloneConnection(connection));
         this.selectedNodeSignal.set(null);
+        this.lastConnectionSelectedSignal.set(this.cloneConnection(connection));
 
         this.connectionSelectedSubject.next(connection);
     }
@@ -232,6 +265,7 @@ export class NgDrawFlowStoreService {
 
     /** Emits a node deletion event and reconciles cached state. */
     public emitNodeDeleted(event: DfEvent<DfDataNode>): void {
+        this.lastNodeDeletedSignal.set(this.cloneNodeEvent(event));
         this.nodeDeletedSubject.next(event);
 
         if (this.selectedNodeSignal()?.id === event.target.id) {
@@ -243,6 +277,7 @@ export class NgDrawFlowStoreService {
 
     /** Emits a node movement event and reconciles cached state. */
     public emitNodeMoved(event: DfEvent<DfDataNode>): void {
+        this.lastNodeMovedSignal.set(this.cloneNodeEvent(event));
         this.nodeMovedSubject.next(event);
         this.updateSelectedNode(event.target);
         this.updateDataModel(event.model);
@@ -250,12 +285,14 @@ export class NgDrawFlowStoreService {
 
     /** Emits a connection creation event and reconciles cached state. */
     public emitConnectionCreated(event: DfEvent<DfDataConnection>): void {
+        this.lastConnectionCreatedSignal.set(this.cloneConnectionEvent(event));
         this.connectionCreatedSubject.next(event);
         this.updateDataModel(event.model);
     }
 
     /** Emits a connection deletion event and reconciles cached state. */
     public emitConnectionDeleted(event: DfEvent<DfDataConnection>): void {
+        this.lastConnectionDeletedSignal.set(this.cloneConnectionEvent(event));
         this.connectionDeletedSubject.next(event);
         this.clearSelectedConnection(event.target);
         this.updateDataModel(event.model);
@@ -281,6 +318,12 @@ export class NgDrawFlowStoreService {
         this.selectedNodeSignal.set(null);
         this.selectedConnectionSignal.set(null);
         this.scaleSignal.set(100);
+        this.lastNodeDeletedSignal.set(null);
+        this.lastNodeMovedSignal.set(null);
+        this.lastNodeSelectedSignal.set(null);
+        this.lastConnectionCreatedSignal.set(null);
+        this.lastConnectionDeletedSignal.set(null);
+        this.lastConnectionSelectedSignal.set(null);
         this.clearSelectionOnScene();
     }
 
@@ -315,6 +358,22 @@ export class NgDrawFlowStoreService {
             source: {...connection.source},
             target: {...connection.target},
             label: connection.label ? {...connection.label} : undefined,
+        };
+    }
+
+    private cloneNodeEvent(event: DfEvent<DfDataNode>): DfEvent<DfDataNode> {
+        return {
+            target: this.cloneNode(event.target),
+            model: this.cloneModel(event.model),
+        };
+    }
+
+    private cloneConnectionEvent(
+        event: DfEvent<DfDataConnection>,
+    ): DfEvent<DfDataConnection> {
+        return {
+            target: this.cloneConnection(event.target),
+            model: this.cloneModel(event.model),
         };
     }
 

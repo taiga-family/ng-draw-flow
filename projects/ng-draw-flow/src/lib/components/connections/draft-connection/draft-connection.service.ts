@@ -36,6 +36,8 @@ export class DraftConnectionService implements OnDestroy {
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private readonly activeConnectorSignal = signal<DfDataConnector | null>(null);
+    private readonly lastConnectionCreatedSignal = signal<DfDataConnection | null>(null);
     private sourceConnector!: DfDataConnector;
     protected readonly destroy$ = new Subject<void>();
 
@@ -51,6 +53,9 @@ export class DraftConnectionService implements OnDestroy {
 
     public readonly isConnectionCreating = signal(false);
     public readonly isConnectionCreating$ = toObservable(this.isConnectionCreating);
+    public readonly activeConnector = this.activeConnectorSignal.asReadonly();
+    public readonly lastConnectionCreated = this.lastConnectionCreatedSignal.asReadonly();
+
     public readonly connectionCreated$ = new Subject<DfDataConnection>();
     public readonly connection$ = new Subject<DfDataConnector>();
 
@@ -95,6 +100,7 @@ export class DraftConnectionService implements OnDestroy {
         }
 
         this.sourceConnector = connector;
+        this.activeConnectorSignal.set(connector);
         this.isConnectionCreating.set(true);
         const sourceId = createConnectorHash(connector);
         const sourcePoint = this.coordinatesService.getConnectionPointSignal(sourceId)();
@@ -146,11 +152,14 @@ export class DraftConnectionService implements OnDestroy {
         const targetConnector = target ? getConnectorDataset(target) : null;
 
         if (targetConnector?.connectorType === DfConnectionPoint.Input) {
-            this.connectionCreated$.next({
+            const connection: DfDataConnection = {
                 source: this.sourceConnector,
                 target: targetConnector,
                 label: this.sourceConnector.connectionLabel,
-            });
+            };
+
+            this.lastConnectionCreatedSignal.set(connection);
+            this.connectionCreated$.next(connection);
         }
 
         this.resetConnectors();
@@ -158,6 +167,7 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private resetConnectors(): void {
+        this.activeConnectorSignal.set(null);
         this.source.set({
             point: INITIAL_COORDINATES,
             position: DfConnectorPosition.Right,
