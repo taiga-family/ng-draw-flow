@@ -66,7 +66,7 @@ describe('NodeComponent', () => {
         TestBed.overrideComponent(NodeComponent, {
             set: {
                 template: `
-                    <div #nodeElement class="mock-node">
+                    <div #nodeElement [class]="nodeClassName()">
                         <div class="node-content">
                             <ng-container #container></ng-container>
                         </div>
@@ -302,6 +302,38 @@ describe('NodeComponent', () => {
             x: 123,
             y: 456,
         });
+    });
+
+    it('applies node className to the node wrapper', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const nodeElement = fixture.nativeElement.querySelector(
+            '.draw-flow-node',
+        ) as HTMLElement;
+
+        host.node.set({
+            id: 'draft-node',
+            className: 'warning-node',
+            data: {type: 'simpleNode'},
+        });
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('warning-node')).toBe(true);
+
+        host.node.set({
+            id: 'draft-node',
+            className: ['wide-node', 'accent-node'],
+            data: {type: 'simpleNode'},
+        });
+
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('warning-node')).toBe(false);
+        expect(nodeElement.classList.contains('wide-node')).toBe(true);
+        expect(nodeElement.classList.contains('accent-node')).toBe(true);
     });
 
     it('preserves resolved position when same node input is replaced without position', async () => {
