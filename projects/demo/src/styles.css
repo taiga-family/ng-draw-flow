@@ -5,3 +5,11 @@ tui-root {
 tui-doc-navigation {
     z-index: 0 !important;
 }
+
+ng-draw-flow {
+    --df-node-border-color: transparent;
+    --df-node-box-shadow: var(--tui-shadow-small);
+    --df-node-color: #000;
+    --df-node-selected-border-color: var(--tui-text-action);
+    --df-node-invalid-border-color: var(--tui-text-negative);
+}

@@ -174,6 +174,26 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.nodeInteraction.handleDrag(event);
     }
 
+    protected isSelected(): boolean {
+        return this.nodeInteraction.selected();
+    }
+
+    protected nodeClassName(): string {
+        const classNames = ['draw-flow-node'];
+
+        if (this.invalid()) {
+            classNames.push('df-invalid');
+        }
+
+        if (this.isSelected()) {
+            classNames.push('df-selected');
+        }
+
+        classNames.push(...this.getCustomClassNames());
+
+        return classNames.join(' ');
+    }
+
     private createNodeConnectorsController(): NodeConnectorsController {
         return new NodeConnectorsController({
             coordinatesService: this.coordinatesService,
@@ -227,6 +247,16 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
                 this.syncWorkspaceGeometry();
             },
         });
+    }
+
+    private getCustomClassNames(): string[] {
+        const className = this.node().data?.className;
+
+        if (!className) {
+            return [];
+        }
+
+        return Array.isArray(className) ? className : [className];
     }
 
     private initializeResolvedNode(): void {

@@ -58,7 +58,11 @@ export default class StressTestComponent implements OnInit {
 
                 nodes.push({
                     id: nodeId,
-                    data: {type: 'miniNode', index: (i - 1) * columns + j},
+                    data: {
+                        type: 'miniNode',
+                        className: ['stress-test-node'],
+                        index: (i - 1) * columns + j,
+                    },
                     position: {x: (j - 1) * 70, y: (i - 1) * 70},
                 });
             }

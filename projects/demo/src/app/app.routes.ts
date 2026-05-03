@@ -10,6 +10,12 @@ export const appRoutes: Routes = [
         data: {title: 'Quickstart'},
     },
     {
+        path: DemoPath.Migrations,
+        loadComponent: async () =>
+            import('../pages/documentation/migrations/migrations.component'),
+        data: {title: 'Migrations'},
+    },
+    {
         path: DemoPath.TermsAndDefinitions,
         loadComponent: async () =>
             import('../pages/documentation/terms-and-definitions/terms-and-definitions.component'),
