@@ -27,7 +27,7 @@ import {
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
 import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiButton, TuiLabel, TuiTextfield} from '@taiga-ui/core';
+import { TuiButton, TuiLabel, TuiInput } from '@taiga-ui/core';
 import {TuiInputNumber} from '@taiga-ui/kit';
 import {MarkdownModule} from 'ngx-markdown';
 import {BehaviorSubject, distinctUntilChanged, filter} from 'rxjs';
@@ -47,7 +47,7 @@ import {SimpleNodeComponent} from '../../../app/modules/nodes';
         TuiButton,
         TuiInputNumber,
         TuiLabel,
-        TuiTextfield,
+        TuiInput,
     ],
     templateUrl: './editor.component.html',
     styleUrls: ['./editor.component.less'],

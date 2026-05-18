@@ -1,9 +1,5 @@
 import {Directive, ElementRef, inject} from '@angular/core';
-import {
-    RESIZE_OPTION_BOX,
-    RESIZE_OPTION_BOX_DEFAULT,
-    ResizeObserverService,
-} from '@ng-web-apis/resize-observer';
+import { RESIZE_OPTION_BOX, RESIZE_OPTION_BOX_DEFAULT, WaResizeObserverService } from '@ng-web-apis/resize-observer';
 
 /**
  * @deprecated: internal use only
@@ -15,7 +11,7 @@ import {
     inputs: ['dfResizeBox: box'],
     outputs: ['dfResizeObserver'],
     providers: [
-        ResizeObserverService,
+        WaResizeObserverService,
         {
             provide: RESIZE_OPTION_BOX,
             useFactory: (): ResizeObserverBoxOptions =>
@@ -25,6 +21,6 @@ import {
     ],
 })
 export class DfResizeObserver {
-    protected readonly dfResizeObserver = inject(ResizeObserverService);
+    protected readonly dfResizeObserver = inject(WaResizeObserverService);
     public box: ResizeObserverBoxOptions = RESIZE_OPTION_BOX_DEFAULT;
 }
