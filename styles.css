@@ -35,13 +35,6 @@
   --tui-padding-l: 1rem;
   --tui-duration: 0.3s;
   --tui-disabled-opacity: 0.56;
-  --tui-lh: 1.4em;
-}
-@supports (font-size: 1lh) {
-  :root,
-  :host {
-    --tui-lh: 1lh;
-  }
 }
 @media screen {
   [tuiTheme='dark'] {
