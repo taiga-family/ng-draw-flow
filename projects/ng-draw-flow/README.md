@@ -9,6 +9,54 @@ graphs.
 
 [taiga-family.github.io/ng-draw-flow](https://taiga-family.github.io/ng-draw-flow)
 
+## Migration from 0.x to 1.x
+
+Version 1 raises the framework baseline to Angular 19 and Taiga UI 5. Make sure your application uses compatible peer
+versions before upgrading `@ng-draw-flow/core`:
+
+- `@angular/common` and `@angular/core` `>=19.0.0`
+- `@taiga-ui/polymorpheus` `^5.0.0`
+- `@ng-web-apis/resize-observer` `^5.2.0`
+
+Node appearance also moved to the library wrapper. If your custom node components used to define reusable wrapper styles
+such as background, padding, border, radius, shadow, text color, selected state or invalid state, move those styles to
+application-level CSS variables on `ng-draw-flow`:
+
+```less
+ng-draw-flow {
+  --df-node-background: #fff;
+  --df-node-color: #111;
+  --df-node-padding: 0.75rem 1rem;
+  --df-node-border: 0.0625rem solid #d0d2ce;
+  --df-node-border-radius: 0.5rem;
+  --df-node-box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
+  --df-node-selected-border-color: #156ed4;
+  --df-node-invalid-border-color: #f04438;
+}
+```
+
+For a single node or a group of nodes, pass `className` in the node data and override variables through that class:
+
+```ts
+{
+  id: 'node-1',
+  className: 'warning-node',
+  data: {type: 'yourNode', text: 'Needs attention'},
+  position: {x: 0, y: 0},
+}
+```
+
+`DrawFlowBaseNode` now exposes signal-first inputs: `nodeIdSignal()`, `modelSignal()`, `startNodeSignal()`,
+`endNodeSignal()`, `selectedSignal()` and `invalidSignal()`. The classic getters (`nodeId`, `model`, `startNode`,
+`endNode`, `selected`, `invalid`) remain available for compatibility, but new node templates should prefer the signal
+API.
+
+If a custom node previously overrode the `invalid` input/setter, move that logic to
+`protected override get invalidState()` and combine it with `this.invalidSignal()`.
+
+`NgDrawFlowStoreService` now has signal snapshots such as `dataModel`, `selectedNode`, `selectedConnection`,
+`lastNodeMoved` and `lastConnectionCreated`; the existing `$` streams remain available for RxJS-based integrations.
+
 ## Installation
 
 To get started locally you should have a few things:
@@ -152,40 +200,32 @@ The `connections` array contains objects that describe the start and end points 
 
 ## Creating Custom Nodes
 
-In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own node, you
-should develop a component that extends from the NgDrawFlowBaseNode class. This component will incorporate directives
-such as `DrawFlowInputDirective` and `DrawFlowOutputDirective`.
+In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own node,
+develop a component that extends from the `DrawFlowBaseNode` class. This component can render connector components such
+as `DfInputComponent` and `DfOutputComponent`.
 
 ```ts
-import {NgIf} from '@angular/common';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-flow/core';
 
 @Component({
   standalone: true,
   selector: 'app-your-node',
-  imports: [NgIf, DfInputComponent, DfOutputComponent],
-  templateUrl: './your-node.component.html',
-  styleUrls: ['./your-node.component.less'],
+  imports: [DfInputComponent, DfOutputComponent],
+  templateUrl: './your-connectors.component.html',
+  styleUrl: './your-connectors.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YourNodeComponent extends DrawFlowBaseNode {}
 ```
 
+Keep custom node styles focused on the inner layout and connector placement. The common node wrapper appearance is
+configured through `ng-draw-flow` CSS variables.
+
 ```less
 :host {
-  background: var(--tui-base-09);
-  width: 10rem;
-  box-shadow: var(--tui-shadow);
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  border: 0.0625rem solid transparent;
-  transition: border-color 0.2s ease-in-out;
-  color: var(--tui-base-01);
-
-  &.df-selected {
-    border-color: var(--tui-text-action);
-  }
+  display: block;
+  inline-size: 10rem;
 }
 
 .input,
@@ -195,8 +235,8 @@ export class YourNodeComponent extends DrawFlowBaseNode {}
 }
 
 .input {
-  left: -0.5rem;
-  top: 0.25rem;
+  inset-inline-start: -0.5rem;
+  inset-block-start: 0.25rem;
 }
 
 .output-wrapper {
@@ -204,23 +244,25 @@ export class YourNodeComponent extends DrawFlowBaseNode {}
 }
 
 .output {
-  right: -0.5rem;
-  top: 0;
+  inset-inline-end: -0.5rem;
+  inset-block-start: 0;
 }
 ```
 
 ```html
+@if (!startNodeSignal()) {
 <df-input
   class="input"
-  *ngIf="!startNode"
-  [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
+  [connectorData]="{nodeId: nodeIdSignal(), connectorId: nodeIdSignal() + '-input-1', single: false}"
 />
+}
 
-<p class="tui-text_body-xs">{{ model.text }}</p>
+<p class="tui-text_body-xs">{{ modelSignal().text }}</p>
 
+@if (!endNodeSignal()) {
 <df-output
   class="output"
-  *ngIf="!endNode"
-  [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
+  [connectorData]="{nodeId: nodeIdSignal(), connectorId: nodeIdSignal() + '-output-1', single: false}"
 />
+}
 ```
