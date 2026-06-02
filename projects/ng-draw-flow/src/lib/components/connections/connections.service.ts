@@ -130,16 +130,13 @@ export class ConnectionsService {
     }
 
     private collectUsedConnectors(connections: DfDataConnection[]): string[] {
-        return connections.reduce<string[]>((result, connection) => {
-            if (!result.includes(connection.source.connectorId)) {
-                result.push(connection.source.connectorId);
-            }
+        const connectorIds = new Set<string>();
 
-            if (!result.includes(connection.target.connectorId)) {
-                result.push(connection.target.connectorId);
-            }
+        connections.forEach((connection) => {
+            connectorIds.add(connection.source.connectorId);
+            connectorIds.add(connection.target.connectorId);
+        });
 
-            return result;
-        }, []);
+        return Array.from(connectorIds);
     }
 }
