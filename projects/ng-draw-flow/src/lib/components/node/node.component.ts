@@ -250,7 +250,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     private getCustomClassNames(): string[] {
-        const className = this.node().data?.className;
+        const className = this.node().className;
 
         if (!className) {
             return [];
