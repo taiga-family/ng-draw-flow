@@ -47,7 +47,7 @@ ng-draw-flow {
 }
 ```
 
-For a single node or a group of nodes, pass `className` in the node data and override variables through that class:
+For a single node or a group of nodes, pass `className` in the node object and override variables through that class:
 
 ```ts
 {
