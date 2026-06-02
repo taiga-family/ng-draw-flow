@@ -61,7 +61,6 @@ export class ConnectionComponent {
     private readonly arrowhead = this.options.connection.arrowhead;
     private readonly arrowWidth = this.arrowhead.width;
     private readonly arrowHeight = this.arrowhead.height;
-    private connectionInternal: DfDataConnection | null = null;
     private readonly pathWithLabel: Signal<{
         path: string;
         labelX: number;
@@ -141,7 +140,7 @@ export class ConnectionComponent {
 
     constructor() {
         effect(() => {
-            this.connectionInternal = this.connectionInput();
+            this.connectionInput();
             this.updateSelectedNodeClasses();
         });
 
@@ -152,7 +151,7 @@ export class ConnectionComponent {
     }
 
     public get connection(): DfDataConnection {
-        return this.connectionInternal ?? this.connectionInput();
+        return this.connectionInput();
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
@@ -162,12 +161,8 @@ export class ConnectionComponent {
 
         event.preventDefault();
 
-        if (!this.connectionInternal) {
-            return;
-        }
-
         this.store.clearSelectedConnection(this.connection);
-        this.connectionsService.removeConnection(this.connectionInternal);
+        this.connectionsService.removeConnection(this.connection);
         this.connectionDeleted.emit();
     }
 
@@ -196,15 +191,17 @@ export class ConnectionComponent {
 
         const selectedNodeId = this.connectionsService.selectedNodeId();
 
-        if (!this.connectionInternal || !selectedNodeId) {
+        if (!selectedNodeId) {
             return;
         }
 
-        if (this.connectionInternal.target.nodeId === selectedNodeId) {
+        const connection = this.connection;
+
+        if (connection.target.nodeId === selectedNodeId) {
             this.selectedNodeInput = true;
         }
 
-        if (this.connectionInternal.source.nodeId === selectedNodeId) {
+        if (connection.source.nodeId === selectedNodeId) {
             this.selectedNodeOutput = true;
         }
     }
