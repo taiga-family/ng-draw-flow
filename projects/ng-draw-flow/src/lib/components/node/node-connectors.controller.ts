@@ -112,10 +112,6 @@ export class NodeConnectorsController {
         const node = this.options.getNode();
         const connectionLabel = node.data.connectionLabel;
 
-        if (!connectionLabel) {
-            return;
-        }
-
         this.options.getNodeContentRenderer().applyConnectionLabel(connectionLabel);
     }
 
