@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    effect,
     inject,
     input,
     output,
@@ -47,8 +46,8 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
     styleUrl: '../connection.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[class.df-selected-node-input]': 'this.selectedNodeInput',
-        '[class.df-selected-node-output]': 'this.selectedNodeOutput',
+        '[class.df-selected-node-input]': 'this.selectedNodeInput()',
+        '[class.df-selected-node-output]': 'this.selectedNodeOutput()',
         '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
         '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
     },
@@ -129,26 +128,19 @@ export class ConnectionComponent {
     );
 
     public deletable = this.options.options.connectionsDeletable;
-    protected selectedNodeInput = false;
-    protected selectedNodeOutput = false;
+    protected readonly selectedNodeInput = computed(
+        () => this.connection.target.nodeId === this.connectionsService.selectedNodeId(),
+    );
+
+    protected readonly selectedNodeOutput = computed(
+        () => this.connection.source.nodeId === this.connectionsService.selectedNodeId(),
+    );
 
     public readonly connectionDeleted: OutputEmitterRef<void> = output();
     public readonly connectionSelected: OutputEmitterRef<void> = output();
     public readonly connectionInput = input.required<DfDataConnection>({
         alias: 'connection',
     });
-
-    constructor() {
-        effect(() => {
-            this.connectionInput();
-            this.updateSelectedNodeClasses();
-        });
-
-        effect(() => {
-            this.connectionsService.selectedNodeId();
-            this.updateSelectedNodeClasses();
-        });
-    }
 
     public get connection(): DfDataConnection {
         return this.connectionInput();
@@ -183,26 +175,5 @@ export class ConnectionComponent {
         return this.coordinatesService.getConnectionPointSignal(
             createConnectorHash(connector),
         );
-    }
-
-    private updateSelectedNodeClasses(): void {
-        this.selectedNodeInput = false;
-        this.selectedNodeOutput = false;
-
-        const selectedNodeId = this.connectionsService.selectedNodeId();
-
-        if (!selectedNodeId) {
-            return;
-        }
-
-        const connection = this.connection;
-
-        if (connection.target.nodeId === selectedNodeId) {
-            this.selectedNodeInput = true;
-        }
-
-        if (connection.source.nodeId === selectedNodeId) {
-            this.selectedNodeOutput = true;
-        }
     }
 }
