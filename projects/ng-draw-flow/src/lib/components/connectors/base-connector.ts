@@ -1,13 +1,4 @@
-import {
-    DestroyRef,
-    Directive,
-    effect,
-    ElementRef,
-    inject,
-    Injector,
-    type OnInit,
-    runInInjectionContext,
-} from '@angular/core';
+import {Directive, effect, ElementRef, inject} from '@angular/core';
 
 import {
     type DfConnectionPoint,
@@ -25,16 +16,28 @@ import {ConnectionsService} from '../connections/connections.service';
         '[attr.data-position]': 'bindPosition',
     },
 })
-export abstract class BaseConnector implements OnInit {
+export abstract class BaseConnector {
     protected connectorType!: DfConnectionPoint;
 
-    protected readonly destroyRef = inject(DestroyRef);
-    protected readonly injector = inject(Injector);
     protected isDisabled = false;
     protected readonly connectionsService = inject(ConnectionsService);
 
     public coordinates?: DfPoint;
     public readonly nativeElement = inject(ElementRef).nativeElement;
+
+    constructor() {
+        effect(() => {
+            const connectorId = this.data?.connectorId;
+
+            if (!connectorId) {
+                return;
+            }
+
+            this.setupDisabledState(
+                this.connectionsService.usedConnectors().includes(connectorId),
+            );
+        });
+    }
 
     public abstract get position(): DfConnectorPosition | undefined;
 
@@ -50,22 +53,6 @@ export abstract class BaseConnector implements OnInit {
 
     public get bindPosition(): DfConnectorPosition | undefined {
         return this.position;
-    }
-
-    public ngOnInit(): void {
-        runInInjectionContext(this.injector, () => {
-            effect(() => {
-                const connectorId = this.data?.connectorId;
-
-                if (!connectorId) {
-                    return;
-                }
-
-                this.setupDisabledState(
-                    this.connectionsService.usedConnectors().includes(connectorId),
-                );
-            });
-        });
     }
 
     public destroy(): void {
