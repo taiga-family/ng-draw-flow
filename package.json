@@ -87,7 +87,7 @@
         "@angular/platform-browser-dynamic": "19.2.20",
         "@angular/platform-server": "19.2.20",
         "@angular/router": "19.2.20",
-        "@angular/ssr": "19.2.23",
+        "@angular/ssr": "19.2.25",
         "@maskito/angular": "5.2.2",
         "@maskito/core": "5.2.2",
         "@maskito/kit": "5.2.2",
