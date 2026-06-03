@@ -17,9 +17,9 @@ describe('CoordinatesService', () => {
 
         service.addConnectionPoint(hash, point, DfConnectorPosition.Left);
 
-        const subject = service.getConnectionPoint(hash);
+        const connectionPoint = service.getConnectionPointSignal(hash);
 
-        expect(subject.value).toEqual({point, position: DfConnectorPosition.Left});
+        expect(connectionPoint()).toEqual({point, position: DfConnectorPosition.Left});
     });
 
     it('updates existing connection point', () => {
@@ -30,9 +30,9 @@ describe('CoordinatesService', () => {
         service.addConnectionPoint(hash, first, DfConnectorPosition.Top);
         service.addConnectionPoint(hash, second, DfConnectorPosition.Bottom);
 
-        const subject = service.getConnectionPoint(hash);
+        const connectionPoint = service.getConnectionPointSignal(hash);
 
-        expect(subject.value).toEqual({
+        expect(connectionPoint()).toEqual({
             point: second,
             position: DfConnectorPosition.Bottom,
         });

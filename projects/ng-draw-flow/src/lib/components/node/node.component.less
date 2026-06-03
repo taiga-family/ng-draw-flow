@@ -3,14 +3,35 @@
     z-index: 2;
     inset-block-start: 0;
     inset-inline-start: 0;
+    box-sizing: border-box;
+    padding: var(--df-node-padding, var(--df-node-padding-default));
+    color: var(--df-node-color, var(--df-node-color-default));
+    background: var(--df-node-background, var(--df-node-background-default));
+    border: var(--df-node-border, var(--df-node-border-default));
+    border-radius: var(--df-node-border-radius, var(--df-node-border-radius-default));
+    box-shadow: var(--df-node-box-shadow-current, var(--df-node-box-shadow, var(--df-node-box-shadow-default)));
     touch-action: none;
+    transition: var(--df-node-transition, var(--df-node-transition-default));
 
     &.df-selected {
+        --df-node-box-shadow-current: var(--df-node-box-shadow-selected, var(--df-node-box-shadow-selected-default));
+
         z-index: 3;
+        border-color: var(--df-node-selected-border-color, var(--df-node-selected-border-color-default));
+    }
+
+    &.df-invalid {
+        --df-node-box-shadow-current: var(--df-node-box-shadow-invalid, var(--df-node-box-shadow-invalid-default));
+
+        border-color: var(--df-node-invalid-border-color, var(--df-node-invalid-border-color-default));
     }
 
     &:hover {
         will-change: transform;
+        box-shadow: var(
+            --df-node-box-shadow-hover,
+            var(--df-node-box-shadow-current, var(--df-node-box-shadow-hover-default))
+        );
     }
 
     .drag-handle {

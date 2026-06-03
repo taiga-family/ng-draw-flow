@@ -1,12 +1,13 @@
 <df-pan-zoom (scale)="onScaleChange($event)">
-    <df-scene
-        *ngIf="$rootReady()"
-        [formControl]="form"
-        (connectionCreated)="onConnectionCreated($event)"
-        (connectionDeleted)="onConnectionDeleted($event)"
-        (connectionSelected)="connectionSelected.emit($event)"
-        (nodeDeleted)="onNodeDeleted($event)"
-        (nodeMoved)="onNodeMoved($event)"
-        (nodeSelected)="nodeSelected.emit($event)"
-    />
+    @if ($rootReady()) {
+        <df-scene
+            [formControl]="form"
+            (connectionCreated)="onConnectionCreated($event)"
+            (connectionDeleted)="onConnectionDeleted($event)"
+            (connectionSelected)="connectionSelected.emit($event)"
+            (nodeDeleted)="onNodeDeleted($event)"
+            (nodeMoved)="onNodeMoved($event)"
+            (nodeSelected)="nodeSelected.emit($event)"
+        />
+    }
 </df-pan-zoom>

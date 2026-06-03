@@ -1,11 +1,10 @@
 import {
     Directive,
     ElementRef,
-    EventEmitter,
     inject,
     type OnDestroy,
     type OnInit,
-    Output,
+    output,
 } from '@angular/core';
 
 import {SelectionService} from '../../services/selection.service';
@@ -20,8 +19,7 @@ export class SelectableElementDirective implements OnInit, OnDestroy {
     private readonly selectionService = inject(SelectionService);
     private unregisterFn: (() => void) | null = null;
 
-    @Output('dfSelectableElement')
-    protected readonly selectionChanged = new EventEmitter<boolean>();
+    protected readonly selectionChanged = output<boolean>({alias: 'dfSelectableElement'});
 
     public ngOnInit(): void {
         // Register the element in the service and save the unregistration function.

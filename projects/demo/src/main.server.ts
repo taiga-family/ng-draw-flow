@@ -1,10 +1,14 @@
-import {enableProdMode} from '@angular/core';
+import {type ApplicationRef, mergeApplicationConfig} from '@angular/core';
+import {bootstrapApplication, type BootstrapContext} from '@angular/platform-browser';
+import {provideServerRendering} from '@angular/platform-server';
+import {UNIVERSAL_PROVIDERS} from '@ng-web-apis/universal';
 
-import {environment} from './environments/environment';
+import {AppComponent} from './app/app.component';
+import {appConfig} from './app/app.config';
 
-if (environment.production) {
-    enableProdMode();
-}
+const serverConfig = mergeApplicationConfig(appConfig, {
+    providers: [provideServerRendering(), UNIVERSAL_PROVIDERS],
+});
 
-export {AppServerModule} from './app/app.server.module';
-export {renderModule} from '@angular/platform-server';
+export default async (context: BootstrapContext): Promise<ApplicationRef> =>
+    bootstrapApplication(AppComponent, serverConfig, context);

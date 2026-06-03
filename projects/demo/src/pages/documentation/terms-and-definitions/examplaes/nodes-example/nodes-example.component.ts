@@ -13,7 +13,7 @@ import {NodeComponent} from '../nodes/node/node.component';
     selector: 'app-nodes-example',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: './nodes-example.component.html',
-    styleUrls: ['./nodes-example.component.less'],
+    styleUrl: './nodes-example.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [provideNgDrawFlowConfigs({nodes: {node: NodeComponent}})],
 })

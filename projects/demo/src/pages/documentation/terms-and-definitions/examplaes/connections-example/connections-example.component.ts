@@ -14,7 +14,7 @@ import {SimpleNodeComponent} from '../../../../../app/modules/nodes';
     selector: 'app-connections-example',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: './connections-example.component.html',
-    styleUrls: ['./connections-example.component.less'],
+    styleUrl: './connections-example.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [provideNgDrawFlowConfigs({nodes: {simpleNode: SimpleNodeComponent}})],
 })

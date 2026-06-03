@@ -1,5 +1,4 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, type Routes} from '@angular/router';
+import {type Routes} from '@angular/router';
 import {DemoPath} from '@demo/constants';
 
 export const appRoutes: Routes = [
@@ -9,6 +8,12 @@ export const appRoutes: Routes = [
         loadComponent: async () =>
             import('../pages/documentation/quickstart/quickstart.component'),
         data: {title: 'Quickstart'},
+    },
+    {
+        path: DemoPath.Migrations,
+        loadComponent: async () =>
+            import('../pages/documentation/migrations/migrations.component'),
+        data: {title: 'Migrations'},
     },
     {
         path: DemoPath.TermsAndDefinitions,
@@ -87,14 +92,3 @@ export const appRoutes: Routes = [
         redirectTo: DemoPath.Quickstart,
     },
 ];
-
-@NgModule({
-    imports: [
-        RouterModule.forRoot(appRoutes, {
-            initialNavigation: 'enabledBlocking',
-            scrollPositionRestoration: 'enabled',
-        }),
-    ],
-    exports: [RouterModule],
-})
-export class AppRoutingModule {}

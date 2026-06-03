@@ -1,4 +1,3 @@
-import {NgIf} from '@angular/common';
 import {
     type AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,14 +5,13 @@ import {
     Component,
     DestroyRef,
     ElementRef,
-    EventEmitter,
     forwardRef,
     inject,
     type OnDestroy,
     type OnInit,
-    Output,
+    output,
     signal,
-    ViewChild,
+    viewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {
@@ -22,7 +20,8 @@ import {
     NG_VALUE_ACCESSOR,
     ReactiveFormsModule,
 } from '@angular/forms';
-import {debounceTime, filter} from 'rxjs';
+import {WaResizeObserver} from '@ng-web-apis/resize-observer';
+import {debounceTime} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
@@ -39,7 +38,7 @@ import {
 } from './components/pan-zoom/pan-zoom.options';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
-import {DfResizeObserver, ErrorsDirective} from './directives';
+import {ErrorsDirective} from './directives';
 import {
     type DfDataConnection,
     type DfDataModel,
@@ -69,15 +68,9 @@ import {SelectionService} from './services/selection.service';
 @Component({
     standalone: true,
     selector: 'ng-draw-flow',
-    imports: [
-        DfResizeObserver,
-        NgIf,
-        PanZoomComponent,
-        ReactiveFormsModule,
-        SceneComponent,
-    ],
+    imports: [PanZoomComponent, ReactiveFormsModule, SceneComponent],
     templateUrl: './ng-draw-flow.component.html',
-    styleUrls: ['./ng-draw-flow.component.less'],
+    styleUrl: './ng-draw-flow.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         PanZoomService,
@@ -99,11 +92,16 @@ import {SelectionService} from './services/selection.service';
     hostDirectives: [
         ErrorsDirective,
         {
-            directive: DfResizeObserver,
-            outputs: ['dfResizeObserver'],
+            directive: WaResizeObserver,
+            outputs: ['waResizeObserver'],
         },
     ],
-    host: {'(dfResizeObserver)': 'this.onResize($event)'},
+    host: {
+        '(waResizeObserver)': 'this.onResize($event)',
+        '(focusout)': 'this.markAsTouched()',
+        '(pointerdown)': 'this.markAsTouched()',
+        '[class.ng-draw-flow_disabled]': 'disabled()',
+    },
 })
 export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
@@ -121,42 +119,41 @@ export class NgDrawFlowComponent
     private viewportFrameRetryCount = 0;
     private shouldFrameViewport = false;
     private hasFramedExternalModel = false;
+    private touched = false;
 
-    @ViewChild(PanZoomComponent)
-    protected panzoom!: PanZoomComponent;
+    protected readonly panzoom = viewChild.required(PanZoomComponent);
+    protected readonly disabled = signal(false);
 
     /** Emits the *current* zoom factor each time it changes. */
-    @Output()
-    protected readonly scale = new EventEmitter<number>();
+    protected readonly scale = output<number>();
 
     /** Fired after a new edge is successfully created. */
-    @Output()
-    protected readonly connectionCreated = new EventEmitter<DfEvent<DfDataConnection>>();
+    protected readonly connectionCreated = output<DfEvent<DfDataConnection>>();
 
     /** Fired after an edge is removed—via UI or `removeConnection()`. */
-    @Output()
-    protected readonly connectionDeleted = new EventEmitter<DfEvent<DfDataConnection>>();
+    protected readonly connectionDeleted = output<DfEvent<DfDataConnection>>();
 
     /** Fired when an edge receives focus in the scene. */
-    @Output()
-    protected readonly connectionSelected = new EventEmitter<DfDataConnection>();
+    protected readonly connectionSelected = output<DfDataConnection>();
 
     /** Fired when a node receives focus in the scene. */
-    @Output()
-    protected readonly nodeSelected = new EventEmitter<DfDataNode>();
+    protected readonly nodeSelected = output<DfDataNode>();
 
     /** Fired whenever the user drags a node to a new position. */
-    @Output()
-    protected readonly nodeMoved = new EventEmitter<DfEvent<DfDataNode>>();
+    protected readonly nodeMoved = output<DfEvent<DfDataNode>>();
 
     /** Fired when a node is removed from the graph. */
-    @Output()
-    protected readonly nodeDeleted = new EventEmitter<DfEvent<DfDataNode>>();
+    protected readonly nodeDeleted = output<DfEvent<DfDataNode>>();
 
-    protected readonly form = new FormControl<DfDataModel>({
-        nodes: [],
-        connections: [],
-    });
+    protected readonly form = new FormControl<DfDataModel>(
+        {
+            nodes: [],
+            connections: [],
+        },
+        {
+            nonNullable: true,
+        },
+    );
 
     protected readonly $rootReady = signal<boolean>(false);
 
@@ -182,7 +179,6 @@ export class NgDrawFlowComponent
     }
 
     public writeValue(value: DfDataModel): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (!value) {
             return;
         }
@@ -210,24 +206,34 @@ export class NgDrawFlowComponent
         this.onTouched = fn;
     }
 
+    public setDisabledState(isDisabled: boolean): void {
+        this.disabled.set(isDisabled);
+
+        if (isDisabled) {
+            this.form.disable({emitEvent: false});
+        } else {
+            this.form.enable({emitEvent: false});
+        }
+    }
+
     /** Zooms one step *in* towards the center of the scene. */
     public zoomIn(): void {
-        this.panzoom.zoomIn();
+        this.panzoom().zoomIn();
     }
 
     /** Zooms one step *out* from the center of the scene. */
     public zoomOut(): void {
-        this.panzoom.zoomOut();
+        this.panzoom().zoomOut();
     }
 
     /** Set both zoom and coordinates. */
     public setPosition(position?: DfPoint & {zoom?: number}): void {
-        this.panzoom.setPosition(position);
+        this.panzoom().setPosition(position);
     }
 
     /** Resets both zoom factor and pan offset to their defaults. */
     public resetPosition(): void {
-        this.panzoom.resetPanzoom();
+        this.panzoom().resetPanzoom();
         this.scheduleViewportFraming();
     }
 
@@ -236,7 +242,7 @@ export class NgDrawFlowComponent
      * configured pan/zoom bounds.
      */
     public setScale(scale: number): void {
-        this.panzoom.setScale(scale);
+        this.panzoom().setScale(scale);
     }
 
     /** Method that removes an existing edge. */
@@ -256,34 +262,45 @@ export class NgDrawFlowComponent
 
     protected onConnectionCreated(event: DfEvent<DfDataConnection>): void {
         this.connectionCreated.emit(event);
-        this.form.setValue(event.model);
     }
 
     protected onConnectionDeleted(event: DfEvent<DfDataConnection>): void {
         this.connectionDeleted.emit(event);
-        this.form.setValue(event.model);
     }
 
     protected onNodeDeleted(event: DfEvent<DfDataNode>): void {
         this.nodeDeleted.emit(event);
-        this.form.setValue(event.model);
     }
 
     protected onNodeMoved(event: DfEvent<DfDataNode>): void {
         this.nodeMoved.emit(event);
-        this.form.setValue(event.model);
     }
 
-    protected onResize(event: any): void {
-        const {width, height} = event[0].contentRect;
+    protected onResize(event: readonly ResizeObserverEntry[]): void {
+        const entry = event[0];
 
-        this.$rootReady.set(width && height);
+        if (!entry) {
+            return;
+        }
+
+        const {width, height} = entry.contentRect;
+
+        this.$rootReady.set(Boolean(width && height));
         this.scheduleViewportFraming();
+    }
+
+    protected markAsTouched(): void {
+        if (this.touched) {
+            return;
+        }
+
+        this.touched = true;
+        this.onTouched();
     }
 
     private watchFormChanges(): void {
         this.form.valueChanges
-            .pipe(filter(Boolean), debounceTime(10), takeUntilDestroyed(this.destroyRef))
+            .pipe(debounceTime(10), takeUntilDestroyed(this.destroyRef))
             .subscribe((value: DfDataModel) => {
                 this.store.updateDataModel(value);
                 this.onChange(value);
@@ -291,8 +308,7 @@ export class NgDrawFlowComponent
     }
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unused-private-class-members
+
     private onTouched: () => void = () => {};
 
     private scheduleViewportFraming(retry = false): void {

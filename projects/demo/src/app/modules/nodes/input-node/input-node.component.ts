@@ -10,7 +10,7 @@ import {
     selector: 'app-input-node',
     imports: [DfInputComponent],
     templateUrl: './input-node.component.html',
-    styleUrls: ['./input-node.component.less'],
+    styleUrl: './input-node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputNodeComponent extends DrawFlowBaseNode {

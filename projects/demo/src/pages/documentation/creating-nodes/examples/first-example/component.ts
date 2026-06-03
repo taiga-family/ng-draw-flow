@@ -12,7 +12,7 @@ import {
     selector: 'first-example',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
     templateUrl: './template.html',
-    styleUrls: ['./styles.less'],
+    styleUrl: './styles.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [dfPanZoomOptionsProvider({leftPosition: 50})],
 })

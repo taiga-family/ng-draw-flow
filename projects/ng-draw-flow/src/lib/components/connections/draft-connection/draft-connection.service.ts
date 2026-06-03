@@ -1,8 +1,8 @@
 import {DOCUMENT} from '@angular/common';
 import {inject, Injectable, type OnDestroy, signal} from '@angular/core';
+import {toObservable} from '@angular/core/rxjs-interop';
 import {
     animationFrameScheduler,
-    BehaviorSubject,
     filter,
     fromEvent,
     map,
@@ -32,9 +32,12 @@ import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
 
 @Injectable()
 export class DraftConnectionService implements OnDestroy {
+    private readonly document = inject(DOCUMENT);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private readonly activeConnectorSignal = signal<DfDataConnector | null>(null);
+    private readonly lastConnectionCreatedSignal = signal<DfDataConnection | null>(null);
     private sourceConnector!: DfDataConnector;
     protected readonly destroy$ = new Subject<void>();
 
@@ -48,7 +51,11 @@ export class DraftConnectionService implements OnDestroy {
         position: DfConnectorPosition.Left,
     });
 
-    public readonly isConnectionCreating$ = new BehaviorSubject<boolean>(false);
+    public readonly isConnectionCreating = signal(false);
+    public readonly isConnectionCreating$ = toObservable(this.isConnectionCreating);
+    public readonly activeConnector = this.activeConnectorSignal.asReadonly();
+    public readonly lastConnectionCreated = this.lastConnectionCreatedSignal.asReadonly();
+
     public readonly connectionCreated$ = new Subject<DfDataConnection>();
     public readonly connection$ = new Subject<DfDataConnector>();
 
@@ -62,14 +69,12 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private connectionSubscription(): void {
-        const document = inject(DOCUMENT);
-
         this.connection$
             .pipe(
                 filter(() => this.options.options.connectionsCreatable),
                 tap((connectorData) => this.onDragStart(connectorData)),
-                switchMap(() => fromEvent<PointerEvent>(document, 'pointermove')),
-                filter(() => this.isConnectionCreating$.value),
+                switchMap(() => fromEvent<PointerEvent>(this.document, 'pointermove')),
+                filter(() => this.isConnectionCreating()),
                 observeOn(animationFrameScheduler),
                 pairwise(),
                 map(([previousEvent, currentEvent]) =>
@@ -77,8 +82,8 @@ export class DraftConnectionService implements OnDestroy {
                 ),
 
                 takeUntil(
-                    fromEvent<PointerEvent>(document, 'pointerup').pipe(
-                        filter(() => this.isConnectionCreating$.value),
+                    fromEvent<PointerEvent>(this.document, 'pointerup').pipe(
+                        filter(() => this.isConnectionCreating()),
                         tap((event: PointerEvent) => this.onDragEnd(event)),
                     ),
                 ),
@@ -95,9 +100,10 @@ export class DraftConnectionService implements OnDestroy {
         }
 
         this.sourceConnector = connector;
-        this.isConnectionCreating$.next(true);
+        this.activeConnectorSignal.set(connector);
+        this.isConnectionCreating.set(true);
         const sourceId = createConnectorHash(connector);
-        const sourcePoint = this.coordinatesService.getConnectionPoint(sourceId).value;
+        const sourcePoint = this.coordinatesService.getConnectionPointSignal(sourceId)();
 
         if (!sourcePoint) {
             return;
@@ -146,18 +152,22 @@ export class DraftConnectionService implements OnDestroy {
         const targetConnector = target ? getConnectorDataset(target) : null;
 
         if (targetConnector?.connectorType === DfConnectionPoint.Input) {
-            this.connectionCreated$.next({
+            const connection: DfDataConnection = {
                 source: this.sourceConnector,
                 target: targetConnector,
                 label: this.sourceConnector.connectionLabel,
-            });
+            };
+
+            this.lastConnectionCreatedSignal.set(connection);
+            this.connectionCreated$.next(connection);
         }
 
         this.resetConnectors();
-        this.isConnectionCreating$.next(false);
+        this.isConnectionCreating.set(false);
     }
 
     private resetConnectors(): void {
+        this.activeConnectorSignal.set(null);
         this.source.set({
             point: INITIAL_COORDINATES,
             position: DfConnectorPosition.Right,

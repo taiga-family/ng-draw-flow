@@ -3,13 +3,11 @@ import {type PolymorpheusContent} from '@taiga-ui/polymorpheus';
 
 import {type DrawFlowBaseNode} from './ng-draw-flow-node.base';
 
-// eslint-disable-next-line no-restricted-syntax
 export enum DfConnectionType {
     Bezier = 'bezier',
     SmoothStep = 'smoothStep',
 }
 
-// eslint-disable-next-line no-restricted-syntax
 export enum DfConnectorPosition {
     Top = 'top',
     Right = 'right',
@@ -17,7 +15,6 @@ export enum DfConnectorPosition {
     Left = 'left',
 }
 
-// eslint-disable-next-line no-restricted-syntax
 export enum DfArrowhead {
     Arrow = 'arrow',
     ArrowClosed = 'arrowClosed',
@@ -87,6 +84,12 @@ export interface DfDataModel {
 
 export interface DfDataInitialNode {
     id: string;
+    /**
+     * Additional CSS class or classes applied to the node wrapper.
+     * Use it to target a particular node from application styles without
+     * coupling styles to the node content implementation.
+     */
+    className?: string[] | string;
     data: {
         type: string;
         connectionLabel?: DfConnectionLabel;
@@ -132,7 +135,6 @@ export interface DfConnectorData {
     position: DfConnectorPosition | null;
 }
 
-// eslint-disable-next-line no-restricted-syntax
 export enum DfConnectionPoint {
     Input = 'input',
     Output = 'output',

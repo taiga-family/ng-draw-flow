@@ -33,45 +33,45 @@ describe('ConnectionsService', () => {
         service.addConnections([connection]);
         service.addConnections([connection]);
 
-        expect(service.connections$.value.length).toBe(1);
-        expect(service.usedConnectors$.value).toEqual(['o1', 'i1']);
+        expect(service.connections().length).toBe(1);
+        expect(service.usedConnectors()).toEqual(['o1', 'i1']);
     });
 
     it('removes connection and updates used connectors', () => {
         service.addConnections([connection]);
         service.removeConnection(connection);
 
-        expect(service.connections$.value.length).toBe(0);
-        expect(service.usedConnectors$.value.length).toBe(0);
+        expect(service.connections().length).toBe(0);
+        expect(service.usedConnectors().length).toBe(0);
     });
 
     it('removes connections by node id', () => {
         service.addConnections([connection]);
         service.removeConnectionsByNodeId('n1');
 
-        expect(service.connections$.value.length).toBe(0);
+        expect(service.connections().length).toBe(0);
     });
 
     it('removes connections by connector id', () => {
         service.addConnections([connection]);
         service.removeConnectionsByConnectorId('o1');
 
-        expect(service.connections$.value.length).toBe(0);
+        expect(service.connections().length).toBe(0);
     });
 
     it('updates selected node for highlighting connections', () => {
         service.addConnections([connection, anotherConnection]);
 
         service.highlightConnectionsForNode('n1');
-        expect(service.selectedNodeId$.value).toBe('n1');
+        expect(service.selectedNodeId()).toBe('n1');
 
         service.highlightConnectionsForNode('n1');
-        expect(service.selectedNodeId$.value).toBe('n1');
+        expect(service.selectedNodeId()).toBe('n1');
 
         service.highlightConnectionsForNode('n2');
-        expect(service.selectedNodeId$.value).toBe('n2');
+        expect(service.selectedNodeId()).toBe('n2');
 
         service.highlightConnectionsForNode(null);
-        expect(service.selectedNodeId$.value).toBeNull();
+        expect(service.selectedNodeId()).toBeNull();
     });
 });

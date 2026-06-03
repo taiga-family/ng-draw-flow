@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 
 import {
     DfConnectionPoint,
@@ -11,15 +11,25 @@ import {BaseConnector} from './base-connector';
     standalone: true,
     selector: 'df-input',
     template: '',
-    styleUrls: ['./connector.style.less'],
+    styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DfInputComponent extends BaseConnector {
     protected override connectorType = DfConnectionPoint.Input;
 
-    @Input('connectorData')
-    public data!: DfDataConnectorConfig;
+    public readonly dataInput = input.required<DfDataConnectorConfig>({
+        alias: 'connectorData',
+    });
 
-    @Input()
-    public override position = DfConnectorPosition.Left;
+    public readonly positionInput = input(DfConnectorPosition.Left, {
+        alias: 'position',
+    });
+
+    public get data(): DfDataConnectorConfig {
+        return this.dataInput();
+    }
+
+    public override get position(): DfConnectorPosition {
+        return this.positionInput();
+    }
 }

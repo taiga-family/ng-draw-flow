@@ -2,14 +2,18 @@ import {
     ChangeDetectionStrategy,
     Component,
     computed,
-    type ElementRef,
     inject,
-    Output,
-    ViewChild,
+    type OutputRef,
+    type Signal,
 } from '@angular/core';
+import {outputFromObservable} from '@angular/core/rxjs-interop';
 
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
-import {DfConnectionType} from '../../../ng-draw-flow.interfaces';
+import {
+    DfConnectionType,
+    type DfDataConnection,
+    type DfOptions,
+} from '../../../ng-draw-flow.interfaces';
 import {createBezierPath, createSmoothStepPath} from '../utils';
 import {DraftConnectionService} from './draft-connection.service';
 
@@ -17,20 +21,17 @@ import {DraftConnectionService} from './draft-connection.service';
     standalone: true,
     selector: 'df-draft-connection',
     templateUrl: './draft-connection.component.svg',
-    styleUrls: ['../connection.component.less'],
+    styleUrl: '../connection.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraftConnectionComponent {
     private readonly draftConnectionService = inject(DraftConnectionService);
-    private readonly options = inject(DRAW_FLOW_OPTIONS);
+    private readonly options: DfOptions = inject(DRAW_FLOW_OPTIONS);
 
-    @ViewChild('connectionPath')
-    protected connectionPath!: ElementRef;
+    protected readonly connectionCreated: OutputRef<DfDataConnection> =
+        outputFromObservable(this.draftConnectionService.connectionCreated$);
 
-    @Output()
-    protected readonly connectionCreated = this.draftConnectionService.connectionCreated$;
-
-    protected pathData = computed(() => {
+    protected pathData: Signal<string> = computed(() => {
         const sourcePoint = this.draftConnectionService.source();
         const targetPoint = this.draftConnectionService.target();
         const curvature = this.options.connection.curvature;

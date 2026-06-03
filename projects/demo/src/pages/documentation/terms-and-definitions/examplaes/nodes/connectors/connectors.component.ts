@@ -6,7 +6,7 @@ import {DfInputComponent, DfOutputComponent, DrawFlowBaseNode} from '@ng-draw-fl
     selector: 'app-node',
     imports: [DfInputComponent, DfOutputComponent],
     templateUrl: './connectors.component.html',
-    styleUrls: ['./connectors.component.less'],
+    styleUrl: './connectors.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectorsComponent extends DrawFlowBaseNode {}

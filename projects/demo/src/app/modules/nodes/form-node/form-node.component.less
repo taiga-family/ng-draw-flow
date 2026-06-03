@@ -1,23 +1,7 @@
-@import '@taiga-ui/core/styles/taiga-ui-local';
-
 :host {
     display: block;
-    background: #fff;
     inline-size: 12.5rem;
     min-block-size: 2.5rem;
-    border-radius: 0.25rem;
-    color: #000;
-    border: 0.125rem solid #000;
-    padding: 1.25rem;
-    box-sizing: border-box;
-
-    &.df-selected {
-        border-color: var(--tui-text-action);
-    }
-
-    &.df-invalid {
-        border-color: var(--tui-text-negative);
-    }
 }
 
 .field {
@@ -25,7 +9,7 @@
     display: flex;
     align-items: center;
 
-    tui-input {
+    .text-field {
         inline-size: 100%;
     }
 }
@@ -46,6 +30,6 @@
 }
 
 .output {
-    inset-inline-end: -1.8125rem;
+    inset-inline-end: -0.5rem;
     inset-block-start: 0.75rem;
 }

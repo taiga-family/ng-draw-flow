@@ -9,6 +9,11 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Documentation',
+        title: 'Migrations',
+        route: DemoPath.Migrations,
+    },
+    {
+        section: 'Documentation',
         title: 'Terms and Definitions',
         route: DemoPath.TermsAndDefinitions,
     },

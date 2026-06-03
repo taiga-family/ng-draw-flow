@@ -2,11 +2,11 @@
     <p>
         In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
         node, you should develop a component that extends from the
-        <code>NgDrawFlowBaseNode</code>
-        class. This component will incorporate directives such as
-        <code>DrawFlowInputDirective</code>
+        <code>DrawFlowBaseNode</code>
+        class. This component can render connector components such as
+        <code>DfInputComponent</code>
         and
-        <code>DrawFlowOutputDirective</code>
+        <code>DfOutputComponent</code>
         .
     </p>
 
@@ -14,13 +14,14 @@
     <tui-doc-code [code]="gettingStarted.baseNode" />
 
     <p>
-        The use of ViewChildren with QueryList
+        The base class uses signal queries
+        <code>viewChildren()</code>
+        for
         <code>DfInputComponent</code>
-        and QueryList
+        and
         <code>DfOutputComponent</code>
-        is crucial for managing input and output connectors of the node. These properties ensure the component remains
-        aware of the existing connectors and detects any changes in their count, which is essential for maintaining the
-        flow&#39;s data integrity and interaction logic.
+        . These signals keep the node aware of existing connectors and detect changes in their count, which is essential
+        for maintaining the flow&#39;s data integrity and interaction logic.
     </p>
 
     <p>
@@ -31,10 +32,28 @@
         holds the necessary data for the node&#39;s functionality.
     </p>
     <p>
+        For backward compatibility these values are also available as plain properties on the base class. If you want to
+        work with Angular signals directly, use
+        <code>nodeIdSignal()</code>
+        ,
+        <code>modelSignal()</code>
+        ,
+        <code>startNodeSignal()</code>
+        ,
+        <code>endNodeSignal()</code>
+        ,
+        <code>selectedSignal()</code>
+        and
+        <code>invalidSignal()</code>
+        in your custom nodes.
+    </p>
+    <p>
         The
         <code>selected</code>
-        attribute aids in reflecting the node&#39;s selected state in the UI, enhancing the user&#39;s experience by
-        providing visual feedback.
+        attribute is still passed to the node content for custom behavior, while the default wrapper selection styles
+        are handled by
+        <code>NodeComponent</code>
+        and configured with CSS variables.
     </p>
     <p>
         The optional

@@ -1,0 +1,71 @@
+<tui-doc-page header="Migrations">
+    <section>
+        <h2>From 0.x to 1.x</h2>
+        <p>
+            In v1,
+            <code>NodeComponent</code>
+            owns the visual wrapper of every node. Padding, text color, background, border, border radius, shadow,
+            transition and selected or invalid states are now defined by the library and configured through CSS
+            variables.
+        </p>
+
+        <p>
+            Move reusable node wrapper styles from custom node components to application styles. Keep custom node
+            component styles focused on internal layout, form controls, labels, connector placement and other content
+            details.
+        </p>
+
+        <p>
+            Set node variables on
+            <code>ng-draw-flow</code>
+            to configure all nodes. For one node or a group of nodes, pass
+            <code>className</code>
+            in the node object and override variables through that class.
+        </p>
+
+        <tui-doc-code
+            filename="styles.less"
+            [code]="data.nodeVariables"
+        />
+    </section>
+
+    <section class="tui-space_top-4">
+        <h3>Node variables</h3>
+        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
+            <li class="tui-list__item">
+                <code>--df-node-background</code>
+                ,
+                <code>--df-node-color</code>
+                ,
+                <code>--df-node-padding</code>
+            </li>
+            <li class="tui-list__item">
+                <code>--df-node-border</code>
+                ,
+                <code>--df-node-border-width</code>
+                ,
+                <code>--df-node-border-style</code>
+                ,
+                <code>--df-node-border-color</code>
+                ,
+                <code>--df-node-border-radius</code>
+            </li>
+            <li class="tui-list__item">
+                <code>--df-node-box-shadow</code>
+                ,
+                <code>--df-node-box-shadow-hover</code>
+                ,
+                <code>--df-node-box-shadow-selected</code>
+                ,
+                <code>--df-node-box-shadow-invalid</code>
+            </li>
+            <li class="tui-list__item">
+                <code>--df-node-selected-border-color</code>
+                ,
+                <code>--df-node-invalid-border-color</code>
+                ,
+                <code>--df-node-transition</code>
+            </li>
+        </ul>
+    </section>
+</tui-doc-page>

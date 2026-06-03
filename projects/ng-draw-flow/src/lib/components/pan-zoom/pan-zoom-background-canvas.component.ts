@@ -1,3 +1,4 @@
+import {isPlatformBrowser} from '@angular/common';
 import {
     type AfterViewInit,
     ChangeDetectionStrategy,
@@ -6,7 +7,8 @@ import {
     effect,
     ElementRef,
     inject,
-    ViewChild,
+    PLATFORM_ID,
+    viewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {animationFrameScheduler} from 'rxjs';
@@ -46,16 +48,17 @@ interface DfPanZoomBackgroundPatterns {
             class="pan-zoom-background__canvas"
         ></canvas>
     `,
-    styleUrls: ['./pan-zoom-background-canvas.component.less'],
+    styleUrl: './pan-zoom-background-canvas.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
-    @ViewChild('backgroundCanvas')
-    private readonly backgroundCanvasRef?: ElementRef<HTMLCanvasElement>;
+    private readonly backgroundCanvasRef =
+        viewChild<ElementRef<HTMLCanvasElement>>('backgroundCanvas');
 
     private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly destroyRef = inject(DestroyRef);
     private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
+    private readonly platformId = inject(PLATFORM_ID);
     private readonly panZoomService = inject(PanZoomService);
     private readonly panZoomController = inject(PanZoomControllerService);
     private renderScheduled = false;
@@ -80,11 +83,19 @@ export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
     }
 
     public ngAfterViewInit(): void {
-        this.backgroundCanvas = this.backgroundCanvasRef?.nativeElement ?? null;
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
+        this.backgroundCanvas = this.backgroundCanvasRef()?.nativeElement ?? null;
         this.drawNow();
     }
 
     private watchRenderRequests(): void {
+        if (!isPlatformBrowser(this.platformId)) {
+            return;
+        }
+
         this.panZoomController.renderRequests$
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((mode) => {
@@ -113,7 +124,7 @@ export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
     }
 
     private drawBackground(): void {
-        const canvas = this.backgroundCanvas ?? this.backgroundCanvasRef?.nativeElement;
+        const canvas = this.backgroundCanvas ?? this.backgroundCanvasRef()?.nativeElement;
         const context = this.getBackgroundContext(canvas);
         const {width, height} = this.getViewportSize();
 

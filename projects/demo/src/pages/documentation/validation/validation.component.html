@@ -26,12 +26,12 @@
         a node contains a form or other input elements that require validation.
     </p>
 
-    <ng-container *ngIf="validationExamples.LocalValidation as localValidation">
+    @if (validationExamples.LocalValidation; as localValidation) {
         <tui-doc-code
             filename="Example: Node with Form and Validation"
             [code]="localValidation"
         />
-    </ng-container>
+    }
 
     <h2>Graph-level Validation</h2>
 
@@ -52,13 +52,13 @@
         node.
     </p>
 
-    <ng-container *ngIf="validationExamples.CycleDetectionValidatorError as cycleDetectionValidatorError">
+    @if (validationExamples.CycleDetectionValidatorError; as cycleDetectionValidatorError) {
         <tui-doc-code
             filename="dfCycleDetectionValidator error"
             class="tui-space_bottom-4"
             [code]="cycleDetectionValidatorError"
         />
-    </ng-container>
+    }
 
     <b>
         2.
@@ -67,12 +67,12 @@
 
     <p>Checks the graph for isolated nodes - nodes that have neither incoming nor outgoing connections.</p>
 
-    <ng-container *ngIf="validationExamples.IsolatedNodesValidatorError as isolatedNodesValidatorError">
+    @if (validationExamples.IsolatedNodesValidatorError; as isolatedNodesValidatorError) {
         <tui-doc-code
             filename="dfIsolatedNodesValidator error"
             [code]="isolatedNodesValidatorError"
         />
-    </ng-container>
+    }
 
     <h2>Creating Custom Validators</h2>
 
@@ -82,13 +82,14 @@
         interface from Angular.
     </p>
 
-    <tui-notification
+    <section
         appearance="warning"
         size="m"
+        tuiNotification
     >
         Important: If your validator should highlight problematic nodes, it must return an array with the IDs of these
         nodes.
-    </tui-notification>
+    </section>
 
     <a
         routerLink="/examples/editor"

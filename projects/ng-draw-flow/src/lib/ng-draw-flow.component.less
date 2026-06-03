@@ -27,8 +27,30 @@
     --df-connection-label-border-radius: 0.125rem;
     --df-connection-label-font: inherit;
     --df-connection-label-padding: 0.125rem 0.25rem;
+    --df-node-background-default: #fff;
+    --df-node-color-default: inherit;
+    --df-node-border-color-default: #d0d2ce;
+    --df-node-border-width-default: 0.0625rem;
+    --df-node-border-style-default: solid;
+    --df-node-border-default: var(--df-node-border-width, var(--df-node-border-width-default))
+        var(--df-node-border-style, var(--df-node-border-style-default))
+        var(--df-node-border-color, var(--df-node-border-color-default));
+    --df-node-border-radius-default: 0.5rem;
+    --df-node-box-shadow-default: none;
+    --df-node-box-shadow-hover-default: var(--df-node-box-shadow, var(--df-node-box-shadow-default));
+    --df-node-box-shadow-selected-default: 0 0 0 0.125rem rgba(21, 110, 212, 0.16);
+    --df-node-box-shadow-invalid-default: 0 0 0 0.125rem rgba(240, 68, 56, 0.16);
+    --df-node-padding-default: 0.5rem;
+    --df-node-selected-border-color-default: var(--df-connection-color-active);
+    --df-node-invalid-border-color-default: #f04438;
+    --df-node-transition-default:
+        border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
     --df-pan-zoom-viewport-background: #eaeaea;
     --df-pan-zoom-workspace-background: #f9f9f9;
     --df-pan-zoom-grid-color: #d0d2ce;
     --df-pan-zoom-border-color: #eaeaea;
+}
+
+:host.ng-draw-flow_disabled {
+    pointer-events: none;
 }

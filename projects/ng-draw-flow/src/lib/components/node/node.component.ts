@@ -3,599 +3,415 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    type ComponentRef,
+    computed,
     DestroyRef,
+    effect,
     type ElementRef,
-    EventEmitter,
+    EnvironmentInjector,
     inject,
-    Input,
-    type OnChanges,
+    input,
     type OnDestroy,
-    Output,
-    type QueryList,
-    type SimpleChanges,
-    ViewChild,
+    output,
+    untracked,
+    viewChild,
     ViewContainerRef,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {merge, type Observable, tap} from 'rxjs';
+import {animationFrameScheduler, type Subscription} from 'rxjs';
 
-import {INITIAL_COORDINATES} from '../../consts';
 import {
     type DfDragDrop,
-    type DfDragDropDistance,
-    DfDragDropStage,
     DragDropDirective,
     SelectableElementDirective,
 } from '../../directives';
-import {createConnectorHash} from '../../helpers';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {
-    DfConnectionPoint,
     type DfDataInitialNode,
     type DfDataNode,
     type DfOptions,
-    type DfPoint,
 } from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
-import {type DrawFlowBaseNode} from '../../ng-draw-flow-node.base';
 import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {ConnectionsService} from '../connections/connections.service';
-import {type DfInputComponent, type DfOutputComponent} from '../connectors';
-import {getViewportZeroPoint} from '../pan-zoom/pan-zoom.camera.math';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
+import {NodeConnectorsController} from './node-connectors.controller';
+import {NodeContentHost} from './node-content.host';
+import {
+    type DfNodeContentInputs,
+    type DfNodeContentRenderer,
+} from './node-content.renderer';
+import {NodeGeometryController} from './node-geometry.controller';
+import {NodeInteractionController} from './node-interaction.controller';
 
 @Component({
     standalone: true,
     selector: 'df-node',
     imports: [DragDropDirective, SelectableElementDirective],
     templateUrl: './node.component.html',
-    styleUrls: ['./node.component.less'],
+    styleUrl: './node.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '(document:keydown.backspace)': 'this.handleKeyboardEvent($event)',
         '(document:keydown.delete)': 'this.handleKeyboardEvent($event)',
     },
 })
-export class NodeComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class NodeComponent implements AfterViewInit, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
     private readonly drawFlowOptions = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private readonly environmentInjector = inject(EnvironmentInjector);
     private readonly drawFlowComponents = this.drawFlowOptions.nodes;
-    private readonly nodeDragThreshold = this.drawFlowOptions.options.nodeDragThreshold;
-    private readonly draggable = this.drawFlowOptions.options.nodesDraggable;
-    private readonly deletable = this.drawFlowOptions.options.nodesDeletable;
     private readonly connectionsService = inject(ConnectionsService);
-    private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
-    private readonly panZoomOptions = inject(DF_PAN_ZOOM_OPTIONS);
-    private innerComponent!: DrawFlowBaseNode;
-    private nodeContentComponentRef!: ComponentRef<DrawFlowBaseNode>;
-    private nodeWidth!: number;
-    private nodeHeight!: number;
-    private selected = false;
-    private value!: DfDataNode;
-    private accumulatedDelta = INITIAL_COORDINATES;
-    private previousInputs: DfInputComponent[] = [];
-    private previousOutputs: DfOutputComponent[] = [];
-    private moved = false;
-    private resizeObserver: ResizeObserver | null = null;
 
-    @ViewChild('nodeElement')
-    public readonly nodeElementRef!: ElementRef<HTMLElement>;
+    private readonly nodeGeometry = new NodeGeometryController({
+        drawFlowElement: inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT),
+        panZoomOptions: inject(DF_PAN_ZOOM_OPTIONS),
+        panZoomService: this.panZoomService,
+    });
 
-    @ViewChild('container', {read: ViewContainerRef})
-    public readonly containerRef!: ViewContainerRef;
+    private readonly nodeContentHost = new NodeContentHost(this.environmentInjector);
 
-    @Input()
-    public node!: DfDataInitialNode | DfDataNode;
+    private resolvedNodeValue: DfDataNode | null = null;
+    private readonly nodeConnectors: NodeConnectorsController;
+    private readonly nodeInteraction: NodeInteractionController;
+    private nodeSizeSyncSubscription: Subscription | null = null;
 
-    @Input()
-    public invalid = false;
+    public readonly nodeElementRef =
+        viewChild.required<ElementRef<HTMLElement>>('nodeElement');
 
-    @Output()
-    public readonly nodeMoved = new EventEmitter<DfDataNode>();
+    public readonly containerRef = viewChild.required('container', {
+        read: ViewContainerRef,
+    });
 
-    @Output()
-    public readonly nodeDeleted = new EventEmitter<void>();
+    public readonly node = input.required<DfDataInitialNode | DfDataNode>();
 
-    @Output()
-    public readonly nodeSelected = new EventEmitter<DfDataNode>();
+    public readonly invalid = input(false);
 
-    @Output()
-    public readonly connectorDeleted = new EventEmitter<string>();
+    public readonly nodeMoved = output<DfDataNode>();
+    public readonly nodeDeleted = output();
+    public readonly nodeSelected = output<DfDataNode>();
+    public readonly connectorDeleted = output<string>();
 
-    public cursor: 'grabbing' | 'initial' = 'initial';
+    public readonly cursor = computed(() => this.nodeInteraction.cursor());
 
-    public ngOnChanges(changes: SimpleChanges): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (changes.invalid && this.innerComponent) {
-            this.innerComponent.invalid = changes.invalid.currentValue;
-            this.innerComponent.markForCheck();
-        }
+    constructor() {
+        this.nodeConnectors = this.createNodeConnectorsController();
+        this.nodeInteraction = this.createNodeInteractionController();
+
+        effect(() => {
+            const nodeContentRenderer = this.nodeContentHost.renderer();
+
+            if (!nodeContentRenderer) {
+                return;
+            }
+
+            this.nodeContentHost.syncInputs(this.getNodeContentInputs());
+        });
+
+        effect(() => {
+            const node = this.node();
+
+            untracked(() => {
+                this.applyNodeInputUpdate(node);
+            });
+        });
     }
 
     public ngAfterViewInit(): void {
-        this.createNodeContentComponent(this.node);
-        this.saveInnerNodeSize();
-        this.fillValue();
-        this.applyOutputsConnectionLabel();
-        this.subscribeToConnectorsChanges();
+        this.initializeResolvedNode();
+        this.createNodeContentComponent();
+        this.measureNodeContent();
+        this.nodeConnectors.applyOutputsConnectionLabel();
+        this.nodeConnectors.watch();
         this.syncWorkspaceGeometry();
         this.refreshRenderedGeometry(false);
         this.observeNodeSize();
-
-        if (this.invalid) {
-            this.innerComponent.invalid = true;
-            this.innerComponent.markForCheck();
-        }
     }
 
     public ngOnDestroy(): void {
-        if (this.connectionsService.selectedNodeId$.value === this.value.id) {
-            this.connectionsService.highlightConnectionsForNode(null);
+        this.cancelScheduledNodeSizeSync();
+
+        if (!this.resolvedNodeValue) {
+            this.nodeConnectors.disconnect();
+            this.nodeGeometry.disconnect();
+
+            return;
         }
 
-        this.resizeObserver?.disconnect();
-        this.panZoomService.removeNodeBounds(this.value.id);
+        this.nodeInteraction.clearHighlightedConnectionsFor(this.getResolvedNode().id);
+        this.nodeConnectors.disconnect();
+        this.nodeGeometry.disconnect();
+        this.nodeGeometry.removeWorkspaceGeometry(this.getResolvedNode().id);
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (this.selected && this.deletable && !this.node.startNode) {
-            event.preventDefault();
-
-            this.store.clearSelectedNode(this.value.id);
-            this.nodeDeleted.emit();
-        }
+        this.nodeInteraction.handleKeyboardEvent(event);
     }
 
-    protected createNodeContentComponent(node: DfDataInitialNode | DfDataNode): void {
-        const {id: nodeId, startNode, endNode, data} = node;
-        const nodeType = data.type;
+    protected createNodeContentComponent(): void {
+        const nodeType = this.getResolvedNode().data.type;
+        const nodeContentComponent = this.getNodeContentComponent(nodeType);
 
-        this.containerRef.clear();
-        this.nodeContentComponentRef = this.containerRef.createComponent(
-            this.drawFlowComponents[nodeType]!,
+        const nodeContentRenderer = this.nodeContentHost.renderComponent(
+            this.containerRef(),
+            nodeContentComponent,
         );
 
-        this.innerComponent = this.nodeContentComponentRef.instance;
-
-        this.innerComponent.nodeId = nodeId;
-        this.innerComponent.startNode = startNode;
-        this.innerComponent.endNode = endNode;
-        this.innerComponent.model = data;
+        nodeContentRenderer.syncInputs(this.getNodeContentInputs());
 
         this.cdr.detectChanges();
     }
 
     protected onSelectedChanged(selected: boolean): void {
-        this.selected = selected;
-        this.innerComponent.selected = selected;
-        this.innerComponent.markForCheck();
-
-        if (selected) {
-            this.connectionsService.highlightConnectionsForNode(this.value.id);
-            this.store.emitNodeSelected(this.value);
-            this.nodeSelected.emit(this.value);
-        } else {
-            this.connectionsService.highlightConnectionsForNode(null);
-            this.store.clearSelectedNode(this.value.id);
-        }
+        this.nodeInteraction.setSelected(selected);
     }
 
     protected onDrag(event: DfDragDrop): void {
-        if (this.node.startNode || !this.draggable) {
+        this.nodeInteraction.handleDrag(event);
+    }
+
+    protected isSelected(): boolean {
+        return this.nodeInteraction.selected();
+    }
+
+    protected nodeClassName(): string {
+        const classNames = ['draw-flow-node'];
+
+        if (this.invalid()) {
+            classNames.push('df-invalid');
+        }
+
+        if (this.isSelected()) {
+            classNames.push('df-selected');
+        }
+
+        classNames.push(...this.getCustomClassNames());
+
+        return classNames.join(' ');
+    }
+
+    private createNodeConnectorsController(): NodeConnectorsController {
+        return new NodeConnectorsController({
+            coordinatesService: this.coordinatesService,
+            destroyRef: this.destroyRef,
+            environmentInjector: this.environmentInjector,
+            getCenteredPosition: (node) => this.nodeGeometry.getCenteredPosition(node),
+            getNode: () => this.getResolvedNode(),
+            getNodeContentRenderer: () => this.getNodeContentRenderer(),
+            onConnectorDeleted: (connectorId) => {
+                this.connectorDeleted.emit(connectorId);
+            },
+        });
+    }
+
+    private createNodeInteractionController(): NodeInteractionController {
+        return new NodeInteractionController({
+            connectionsService: this.connectionsService,
+            deletable: this.drawFlowOptions.options.nodesDeletable,
+            draggable: this.drawFlowOptions.options.nodesDraggable,
+            getCenteredPosition: (node) => this.nodeGeometry.getCenteredPosition(node),
+            getNode: () => this.getResolvedNode(),
+            isStartNode: () => this.node().startNode === true,
+            nodeDragThreshold: this.drawFlowOptions.options.nodeDragThreshold,
+            panZoomService: this.panZoomService,
+            store: this.store,
+            applyPositionToStyle: (position, dynamic) => {
+                this.nodeGeometry.applyPositionToStyle(
+                    this.nodeElementRef().nativeElement,
+                    position,
+                    dynamic,
+                );
+            },
+            clampPosition: (position) =>
+                this.nodeGeometry.clampPositionToPanBounds(position),
+            emitNodeDeleted: () => {
+                this.nodeDeleted.emit();
+            },
+            emitNodeMoved: (node) => {
+                this.nodeMoved.emit(node);
+            },
+            emitNodeSelected: (node) => {
+                this.nodeSelected.emit(node);
+            },
+            recalculateConnectorsPosition: (distance, zoom) => {
+                this.nodeConnectors.recalculatePositions(distance, zoom);
+            },
+            refreshRenderedGeometry: (dynamic) => {
+                this.refreshRenderedGeometry(dynamic);
+            },
+            syncWorkspaceGeometry: () => {
+                this.syncWorkspaceGeometry();
+            },
+        });
+    }
+
+    private getCustomClassNames(): string[] {
+        const className = this.node().className;
+
+        if (!className) {
+            return [];
+        }
+
+        return Array.isArray(className) ? className : [className];
+    }
+
+    private initializeResolvedNode(): void {
+        this.resolvedNodeValue = this.nodeGeometry.resolveNode(this.node());
+    }
+
+    private applyNodeInputUpdate(node: DfDataInitialNode | DfDataNode): void {
+        if (!this.resolvedNodeValue) {
             return;
         }
 
-        if (event.stage === DfDragDropStage.Move) {
-            this.onDragMove(event.distance);
-        } else {
-            this.onDragEnd();
+        const previousNode = this.resolvedNodeValue;
+
+        this.resolvedNodeValue = this.nodeGeometry.resolveUpdatedNode(
+            node,
+            this.resolvedNodeValue,
+        );
+
+        const nodeTypeChanged =
+            this.resolvedNodeValue.data.type !== previousNode.data.type;
+        const positionChanged = this.nodeGeometry.hasPositionChanged(
+            previousNode,
+            this.resolvedNodeValue,
+        );
+        const startNodeChanged =
+            (this.resolvedNodeValue.startNode === true) !==
+            (previousNode.startNode === true);
+        const endNodeChanged =
+            (this.resolvedNodeValue.endNode === true) !== (previousNode.endNode === true);
+        const nodeIdentityChanged = this.resolvedNodeValue.id !== previousNode.id;
+        const nodeDataChanged = this.resolvedNodeValue.data !== previousNode.data;
+        const connectionLabelChanged =
+            this.resolvedNodeValue.data.connectionLabel !==
+            previousNode.data.connectionLabel;
+        const contentInputsChanged =
+            nodeIdentityChanged || nodeDataChanged || startNodeChanged || endNodeChanged;
+
+        if (
+            !nodeTypeChanged &&
+            !positionChanged &&
+            !contentInputsChanged &&
+            !connectionLabelChanged
+        ) {
+            return;
         }
-    }
 
-    private onDragMove(distance: DfDragDropDistance): void {
-        const {zoom} = this.panZoomService.snapshot();
-
-        if (distance.deltaX || distance.deltaY) {
-            this.moved = true;
+        if (nodeTypeChanged) {
+            this.createNodeContentComponent();
+            this.measureNodeContent();
+            this.nodeConnectors.watch();
+        } else if (contentInputsChanged) {
+            this.nodeContentHost.syncInputs(this.getNodeContentInputs());
         }
 
-        this.cursor = 'grabbing';
-        this.panZoomService.setDisabled(true);
+        if (nodeTypeChanged || connectionLabelChanged) {
+            this.nodeConnectors.applyOutputsConnectionLabel();
+        }
 
-        // Accumulate offset
-        this.accumulatedDelta.x += distance.deltaX / zoom;
-        this.accumulatedDelta.y += distance.deltaY / zoom;
-
-        const applyX = Math.abs(this.accumulatedDelta.x) >= this.nodeDragThreshold;
-        const applyY = Math.abs(this.accumulatedDelta.y) >= this.nodeDragThreshold;
-
-        if (applyX || applyY) {
-            const previousPosition = {...this.value.position};
-            const requestedDeltaX = applyX ? this.accumulatedDelta.x : 0;
-            const requestedDeltaY = applyY ? this.accumulatedDelta.y : 0;
-            const unclampedPosition = {
-                x: this.value.position.x + requestedDeltaX,
-                y: this.value.position.y + requestedDeltaY,
-            };
-
-            this.value.position = this.clampPositionToPanBounds(unclampedPosition);
-            const appliedDeltaX = this.value.position.x - previousPosition.x;
-            const appliedDeltaY = this.value.position.y - previousPosition.y;
-
+        if (
+            nodeTypeChanged ||
+            positionChanged ||
+            nodeIdentityChanged ||
+            startNodeChanged ||
+            endNodeChanged
+        ) {
             this.syncWorkspaceGeometry();
-            const centeredPosition = this.getCenteredPosition();
-
-            this.applyPositionToStyle(centeredPosition, true);
-            this.recalculateConnectorsPosition({
-                deltaX: appliedDeltaX * zoom,
-                deltaY: appliedDeltaY * zoom,
-            });
-
-            // Reset only used directions
-            if (applyX) {
-                this.accumulatedDelta.x = 0;
-            }
-
-            if (applyY) {
-                this.accumulatedDelta.y = 0;
-            }
-        }
-    }
-
-    private onDragEnd(): void {
-        this.cursor = 'initial';
-
-        if (this.moved) {
-            this.nodeMoved.emit(this.value);
             this.refreshRenderedGeometry(false);
         }
-
-        this.accumulatedDelta = INITIAL_COORDINATES;
-        this.moved = false;
-        this.panZoomService.setDisabled(false);
     }
 
-    private fillValue(): void {
-        if (this.hasPosition(this.node)) {
-            this.value = this.node;
-        } else {
-            this.value = {
-                ...this.node,
-                position: this.getCenterOfViewport(),
-            };
-        }
-    }
-
-    private saveInnerNodeSize(): void {
-        const nativeElement = this.nodeContentComponentRef.location.nativeElement;
-
-        this.nodeWidth = nativeElement.offsetWidth;
-        this.nodeHeight = nativeElement.offsetHeight;
-    }
-
-    private updateConnectorsCoordinates(): void {
-        const centeredCoordinates = this.getCenteredPosition();
-
-        this.innerComponent.inputs.forEach((input: DfInputComponent) => {
-            this.updateConnectorCoordinates(
-                centeredCoordinates,
-                this.value.id,
-                input,
-                DfConnectionPoint.Input,
-            );
-        });
-
-        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
-            this.updateConnectorCoordinates(
-                centeredCoordinates,
-                this.value.id,
-                output,
-                DfConnectionPoint.Output,
-            );
-        });
-    }
-
-    private recalculateConnectorsPosition(distance: DfDragDropDistance): void {
-        const {zoom} = this.panZoomService.snapshot();
-        const currentMoveDistance = {
-            deltaX: distance.deltaX / zoom,
-            deltaY: distance.deltaY / zoom,
-        };
-
-        this.innerComponent.inputs.forEach((input: DfInputComponent) => {
-            this.recalculateConnectorPositionFromLast(
-                currentMoveDistance,
-                input,
-                DfConnectionPoint.Input,
-            );
-        });
-
-        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
-            this.recalculateConnectorPositionFromLast(
-                currentMoveDistance,
-                output,
-                DfConnectionPoint.Output,
-            );
-        });
-    }
-
-    private recalculateConnectorPositionFromLast(
-        distance: DfDragDropDistance,
-        connector: DfInputComponent | DfOutputComponent,
-        connectorType: DfConnectionPoint,
-    ): void {
-        const newConnectorPosition = {
-            x: (connector.coordinates?.x ?? 0) + distance.deltaX,
-            y: (connector.coordinates?.y ?? 0) + distance.deltaY,
-        };
-
-        const connectorData = createConnectorHash({
-            nodeId: connector.data.nodeId,
-            connectorType,
-            connectorId: connector.data.connectorId,
-        });
-
-        connector.coordinates = newConnectorPosition;
-
-        this.coordinatesService.addConnectionPoint(
-            connectorData,
-            newConnectorPosition,
-            connector.position,
-        );
-    }
-
-    private updateConnectorCoordinates(
-        position: DfPoint,
-        nodeId: string,
-        connector: DfInputComponent | DfOutputComponent,
-        connectorType: DfConnectionPoint,
-    ): void {
-        const calculatedConnectorPosition = this.calculateConnectorPosition(
-            connector.nativeElement,
-            position,
-        );
-
-        connector.coordinates = calculatedConnectorPosition;
-
-        const connectorData = createConnectorHash({
-            nodeId,
-            connectorType,
-            connectorId: connector.nativeElement.dataset.connectorId,
-        });
-
-        this.coordinatesService.addConnectionPoint(
-            connectorData,
-            calculatedConnectorPosition,
-            connector.position,
-        );
-    }
-
-    private calculateConnectorPosition(
-        element: HTMLElement,
-        nodePosition: DfPoint,
-    ): DfPoint {
-        let x = nodePosition.x + element.offsetLeft + element.clientWidth / 2;
-        let y = nodePosition.y + element.offsetTop + element.clientHeight / 2;
-
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        while (element && !element.hasAttribute('data-draw-flow-node')) {
-            element = element.offsetParent as HTMLElement;
-
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-            if (element) {
-                x += element.offsetLeft;
-                y += element.offsetTop;
-            }
+    private getResolvedNode(): DfDataNode {
+        if (!this.resolvedNodeValue) {
+            throw new Error('NodeComponent resolved node is not initialized');
         }
 
-        return {x, y};
+        return this.resolvedNodeValue;
     }
 
-    private applyPositionToStyle(position: DfPoint, dynamic: boolean): void {
-        this.nodeElementRef.nativeElement.style.transform = dynamic
-            ? `translate3D(${position.x}px, ${position.y}px, 0)`
-            : `translate(${position.x}px, ${position.y}px)`;
-    }
-
-    private getCenteredPosition(): DfPoint {
-        const halfOfNodeWidth = this.nodeWidth / 2;
-        const halfOfNodeHeight = this.nodeHeight / 2;
-
-        return {
-            x: this.value.position.x - halfOfNodeWidth,
-            y: this.value.position.y - halfOfNodeHeight,
-        };
-    }
-
-    private subscribeToConnectorsChanges(): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (!this.innerComponent) {
-            return;
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        this.previousOutputs = this.innerComponent?.outputs?.toArray() || [];
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        this.previousInputs = this.innerComponent?.inputs?.toArray() || [];
-
-        const connectorsUpdates$ = this.collectConnectorUpdateSources();
-
-        if (connectorsUpdates$.length > 0) {
-            merge(...connectorsUpdates$)
-                .pipe(takeUntilDestroyed(this.destroyRef))
-                .subscribe(() => this.updateConnectorsCoordinates());
-        }
-    }
-
-    private getCenterOfViewport(): DfPoint {
-        const {x: cameraX, y: cameraY, zoom} = this.panZoomService.snapshot();
-        const viewportWidth = this.drawFlowElement.offsetWidth;
-        const viewportHeight = this.drawFlowElement.offsetHeight;
-        const viewportCenterX = viewportWidth / 2;
-        const viewportCenterY = viewportHeight / 2;
-        const zeroPoint = getViewportZeroPoint(
-            {width: viewportWidth, height: viewportHeight},
-            {
-                leftPosition: this.panZoomOptions.leftPosition,
-                topPosition: this.panZoomOptions.topPosition,
-            },
-        );
-
-        return {
-            x: (viewportCenterX - zeroPoint.x - cameraX) / zoom,
-            y: (viewportCenterY - zeroPoint.y - cameraY) / zoom,
-        };
-    }
-
-    private hasPosition(node: DfDataInitialNode | DfDataNode): node is DfDataNode {
-        const position = (node as DfDataNode).position;
-
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        return !!position && Number.isFinite(position.x) && Number.isFinite(position.y);
-    }
-
-    private clampPositionToPanBounds(position: DfPoint): DfPoint {
-        return position;
-    }
-
-    /**
-     * Collects all sources of connector updates
-     */
-    private collectConnectorUpdateSources(): Array<Observable<void>> {
-        const sources: Array<Observable<void>> = [];
-
-        this.addContentComponentUpdates(sources);
-        this.addInputsUpdates(sources);
-        this.addOutputsUpdates(sources);
-
-        return sources;
-    }
-
-    /**
-     * Adds updates from the node content component
-     */
-    private addContentComponentUpdates(sources: Array<Observable<void>>): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (this.innerComponent?.connectorsUpdated) {
-            sources.push(this.innerComponent.connectorsUpdated);
-        }
-    }
-
-    /**
-     * Adds updates from inputs
-     */
-    private addInputsUpdates(sources: Array<Observable<any>>): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (this.innerComponent?.inputs?.changes) {
-            sources.push(
-                this.innerComponent.inputs.changes.pipe(
-                    tap((currentInputs: QueryList<DfInputComponent>) => {
-                        this.handleRemovedInputs(currentInputs);
-                    }),
-                ),
-            );
-        }
-    }
-
-    /**
-     * Adds updates from outputs with handling for removed items
-     */
-    private addOutputsUpdates(sources: Array<Observable<any>>): void {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (this.innerComponent?.outputs?.changes) {
-            sources.push(
-                this.innerComponent.outputs.changes.pipe(
-                    tap((currentOutputs: QueryList<DfOutputComponent>) => {
-                        this.handleRemovedOutputs(currentOutputs);
-                        this.applyOutputsConnectionLabel();
-                    }),
-                ),
-            );
-        }
-    }
-
-    /**
-     * Processes removed inputs
-     */
-    private handleRemovedInputs(currentInputs: QueryList<DfInputComponent>): void {
-        const currentArray = currentInputs.toArray();
-        const removedOutputs = this.previousInputs.filter(
-            (prev) => !currentArray.some((curr) => curr === prev),
-        );
-
-        if (removedOutputs.length > 0) {
-            removedOutputs.forEach((output: DfInputComponent) => {
-                this.connectorDeleted.emit(output.data.connectorId);
-            });
-        }
-
-        this.previousInputs = currentArray;
-    }
-
-    /**
-     * Processes removed outputs
-     */
-    private handleRemovedOutputs(currentOutputs: QueryList<DfOutputComponent>): void {
-        const currentArray = currentOutputs.toArray();
-        const removedOutputs = this.previousOutputs.filter(
-            (prev) => !currentArray.some((curr) => curr === prev),
-        );
-
-        if (removedOutputs.length > 0) {
-            removedOutputs.forEach((output: DfOutputComponent) => {
-                this.connectorDeleted.emit(output.data.connectorId);
-            });
-        }
-
-        this.previousOutputs = currentArray;
-    }
-
-    private applyOutputsConnectionLabel(): void {
-        const connectionLabel = this.value.data.connectionLabel;
-
-        if (!connectionLabel) {
-            return;
-        }
-
-        this.innerComponent.outputs.forEach((output: DfOutputComponent) => {
-            output.connectionLabel = connectionLabel;
-        });
+    private measureNodeContent(): void {
+        this.nodeGeometry.measureContent(this.nodeContentHost.nativeElement());
     }
 
     private observeNodeSize(): void {
-        if (typeof ResizeObserver !== 'function') {
+        this.nodeGeometry.observeNodeSize(this.nodeElementRef().nativeElement, () => {
+            this.scheduleNodeSizeSync();
+        });
+    }
+
+    private scheduleNodeSizeSync(): void {
+        if (this.nodeSizeSyncSubscription) {
             return;
         }
 
-        this.resizeObserver = new ResizeObserver(() => {
-            this.saveInnerNodeSize();
-            this.syncWorkspaceGeometry();
-            this.refreshRenderedGeometry(false);
+        this.nodeSizeSyncSubscription = animationFrameScheduler.schedule(() => {
+            this.nodeSizeSyncSubscription = null;
+            this.syncNodeSize();
         });
-        this.resizeObserver.observe(this.nodeElementRef.nativeElement);
+    }
+
+    private cancelScheduledNodeSizeSync(): void {
+        this.nodeSizeSyncSubscription?.unsubscribe();
+        this.nodeSizeSyncSubscription = null;
+    }
+
+    private syncNodeSize(): void {
+        this.measureNodeContent();
+        this.syncWorkspaceGeometry();
+        this.refreshRenderedGeometry(false);
     }
 
     private refreshRenderedGeometry(dynamic: boolean): void {
-        this.applyPositionToStyle(this.getCenteredPosition(), dynamic);
-        this.updateConnectorsCoordinates();
+        this.nodeGeometry.applyPositionToStyle(
+            this.nodeElementRef().nativeElement,
+            this.nodeGeometry.getCenteredPosition(this.getResolvedNode()),
+            dynamic,
+        );
+        this.nodeConnectors.updateCoordinates();
     }
 
     private syncWorkspaceGeometry(): void {
-        const halfOfNodeWidth = this.nodeWidth / 2;
-        const halfOfNodeHeight = this.nodeHeight / 2;
+        this.nodeGeometry.syncWorkspaceGeometry(this.getResolvedNode());
+    }
 
-        this.panZoomService.upsertNodeBounds(this.value.id, {
-            minX: this.value.position.x - halfOfNodeWidth,
-            minY: this.value.position.y - halfOfNodeHeight,
-            maxX: this.value.position.x + halfOfNodeWidth,
-            maxY: this.value.position.y + halfOfNodeHeight,
-        });
+    private getNodeContentComponent(nodeType: string): DfOptions['nodes'][string] {
+        const nodeContentComponent = this.drawFlowComponents[nodeType];
+
+        if (!nodeContentComponent) {
+            throw new Error(
+                `NodeComponent cannot render node "${this.getResolvedNode().id}" because node type "${nodeType}" is not registered`,
+            );
+        }
+
+        return nodeContentComponent;
+    }
+
+    private getNodeContentRenderer(): DfNodeContentRenderer {
+        const nodeContentRenderer = this.nodeContentHost.renderer();
+
+        if (!nodeContentRenderer) {
+            throw new Error('NodeComponent content renderer is not initialized');
+        }
+
+        return nodeContentRenderer;
+    }
+
+    private getNodeContentInputs(): DfNodeContentInputs {
+        const node = this.getResolvedNode();
+
+        return {
+            nodeId: node.id,
+            startNode: node.startNode === true,
+            endNode: node.endNode === true,
+            model: node.data,
+            selected: this.nodeInteraction.selected(),
+            invalid: this.invalid(),
+        };
     }
 }

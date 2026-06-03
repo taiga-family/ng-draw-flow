@@ -1,11 +1,15 @@
+import {signal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs';
 
 import {
     DRAW_FLOW_DEFAULT_OPTIONS,
     DRAW_FLOW_OPTIONS,
 } from '../../../ng-draw-flow.configs';
-import {DfConnectorPosition} from '../../../ng-draw-flow.interfaces';
+import {
+    DfConnectionPoint,
+    DfConnectorPosition,
+    type DfDataConnector,
+} from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {PanZoomService} from '../../pan-zoom/pan-zoom.service';
 import {DraftConnectionService} from './draft-connection.service';
@@ -23,7 +27,7 @@ describe('DraftConnectionService', () => {
                 {
                     provide: CoordinatesService,
                     useValue: {
-                        getConnectionPoint: jest.fn(() => new BehaviorSubject(null)),
+                        getConnectionPointSignal: jest.fn(() => signal(null)),
                     },
                 },
             ],
@@ -52,5 +56,39 @@ describe('DraftConnectionService', () => {
 
         expect(service.target().point.x).toBeCloseTo(110, 6);
         expect(service.target().point.y).toBeCloseTo(45, 6);
+    });
+
+    it('exposes signal state for active connector and created connection', () => {
+        const createdSpy = jest.fn();
+        const sourceConnector: DfDataConnector = {
+            nodeId: 'source',
+            connectorId: 'source-output',
+            connectorType: DfConnectionPoint.Output,
+        };
+        const targetElement = document.createElement('div');
+
+        targetElement.dataset.nodeId = 'target';
+        targetElement.dataset.connectorId = 'target-input';
+        targetElement.dataset.connectorType = DfConnectionPoint.Input;
+        service.connectionCreated$.subscribe(createdSpy);
+
+        (service as any).onDragStart(sourceConnector);
+
+        expect(service.activeConnector()).toEqual(sourceConnector);
+
+        (service as any).onDragEnd({target: targetElement} as unknown as PointerEvent);
+
+        expect(service.activeConnector()).toBeNull();
+        expect(service.lastConnectionCreated()).toEqual({
+            source: sourceConnector,
+            target: {
+                nodeId: 'target',
+                connectorId: 'target-input',
+                connectorType: DfConnectionPoint.Input,
+                position: undefined,
+            },
+            label: undefined,
+        });
+        expect(createdSpy).toHaveBeenCalledWith(service.lastConnectionCreated());
     });
 });

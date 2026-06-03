@@ -1,7 +1,8 @@
 import {signal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
-import {BehaviorSubject} from 'rxjs';
+import {of} from 'rxjs';
 
+import {DfConnectionPoint, type DfDataConnection} from '../../ng-draw-flow.interfaces';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 import {ConnectionsService} from '../connections/connections.service';
@@ -32,15 +33,17 @@ describe('SceneComponent', () => {
                 {
                     provide: ConnectionsService,
                     useValue: {
-                        connections$: new BehaviorSubject([]),
+                        connections$: of([]),
+                        connections: signal([]),
                         addConnections: jest.fn(),
+                        setConnections: jest.fn(),
                         removeConnectionsByConnectorId: jest.fn(),
                         removeConnectionsByNodeId: jest.fn(),
                     },
                 },
                 {
                     provide: DraftConnectionService,
-                    useValue: {isConnectionCreating$: new BehaviorSubject(false)},
+                    useValue: {isConnectionCreating: signal(false)},
                 },
                 {
                     provide: NgDrawFlowStoreService,
@@ -74,5 +77,26 @@ describe('SceneComponent', () => {
 
         expect(scene.style.width).toBe('');
         expect(scene.style.height).toBe('');
+    });
+
+    it('keeps connection track keys unique for duplicate edges', () => {
+        const fixture = TestBed.createComponent(SceneComponent);
+        const component = fixture.componentInstance;
+        const connection: DfDataConnection = {
+            source: {
+                nodeId: 'source',
+                connectorId: 'output',
+                connectorType: DfConnectionPoint.Output,
+            },
+            target: {
+                nodeId: 'target',
+                connectorId: 'input',
+                connectorType: DfConnectionPoint.Input,
+            },
+        };
+
+        expect((component as any).trackByConnectionsFn(0, connection)).not.toBe(
+            (component as any).trackByConnectionsFn(1, connection),
+        );
     });
 });

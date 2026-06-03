@@ -24,6 +24,25 @@
 
         <hr />
 
+        <h3>Node CSS variables:</h3>
+        <p>
+            Node wrapper styles are controlled by CSS variables on
+            <code>ng-draw-flow</code>
+            . Override these variables globally from application styles to keep node content focused on layout, controls
+            and connectors. For a particular node, set
+            <code>className</code>
+            in the node data, for example
+            <code>className: 'warning-node'</code>
+            , and override variables through that class.
+        </p>
+
+        <tui-doc-code
+            filename="styles.less"
+            [code]="data.nodeStyles"
+        />
+
+        <hr />
+
         <h3>connection:</h3>
         <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
             <li class="tui-list__item">
@@ -221,7 +240,11 @@
                 <code>selectedNode</code>
                 ,
                 <code>selectedConnection</code>
-                , plus event streams like
+                , signal event snapshots like
+                <code>lastNodeMoved</code>
+                and
+                <code>lastConnectionCreated</code>
+                , plus backward-compatible event streams like
                 <code>nodeMoved$</code>
                 and
                 <code>connectionCreated$</code>

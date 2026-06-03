@@ -25,7 +25,7 @@ const COLUMNS_COUNT = 23;
     selector: 'stress-test',
     imports: [MarkdownModule, NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './stress-test.component.html',
-    styleUrls: ['./stress-test.component.less'],
+    styleUrl: './stress-test.component.less',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
@@ -58,7 +58,11 @@ export default class StressTestComponent implements OnInit {
 
                 nodes.push({
                     id: nodeId,
-                    data: {type: 'miniNode', index: (i - 1) * columns + j},
+                    className: ['stress-test-node'],
+                    data: {
+                        type: 'miniNode',
+                        index: (i - 1) * columns + j,
+                    },
                     position: {x: (j - 1) * 70, y: (i - 1) * 70},
                 });
             }

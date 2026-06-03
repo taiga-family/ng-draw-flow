@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, inject, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, input} from '@angular/core';
 
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {
@@ -15,23 +15,45 @@ import {BaseConnector} from './base-connector';
     standalone: true,
     selector: 'df-output',
     template: '',
-    styleUrls: ['./connector.style.less'],
+    styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {'(pointerdown)': 'this.onDragStart($event)'},
 })
 export class DfOutputComponent extends BaseConnector {
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private connectionLabelOverride?: DfConnectionLabel;
+
     protected override connectorType = DfConnectionPoint.Output;
 
-    @Input('connectorData')
-    public data!: DfDataConnectorConfig;
+    public readonly dataInput = input.required<DfDataConnectorConfig>({
+        alias: 'connectorData',
+    });
 
-    @Input()
-    public override position = DfConnectorPosition.Right;
+    public readonly positionInput = input(DfConnectorPosition.Right, {
+        alias: 'position',
+    });
 
-    @Input()
-    public connectionLabel?: DfConnectionLabel;
+    public readonly connectionLabelInput = input<DfConnectionLabel | undefined>(
+        undefined,
+        {alias: 'connectionLabel'},
+    );
+
+    public get data(): DfDataConnectorConfig {
+        return this.dataInput();
+    }
+
+    public override get position(): DfConnectorPosition {
+        return this.positionInput();
+    }
+
+    public get connectionLabel(): DfConnectionLabel | undefined {
+        return this.connectionLabelOverride ?? this.connectionLabelInput();
+    }
+
+    public setConnectionLabel(value: DfConnectionLabel | undefined): void {
+        this.connectionLabelOverride = value;
+    }
 
     protected onDragStart(event: PointerEvent): void {
         event.stopPropagation();

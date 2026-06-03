@@ -1,4 +1,4 @@
-import {AsyncPipe, CommonModule} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {
@@ -17,13 +17,7 @@ import {InputNodeComponent, OutputNodeComponent} from '../../../../app/modules/n
 @Component({
     standalone: true,
     selector: 'bezier-example',
-    imports: [
-        AsyncPipe,
-        CommonModule,
-        NgDrawFlowComponent,
-        ReactiveFormsModule,
-        TuiAddonDoc,
-    ],
+    imports: [AsyncPipe, NgDrawFlowComponent, ReactiveFormsModule, TuiAddonDoc],
     templateUrl: './bezier-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
