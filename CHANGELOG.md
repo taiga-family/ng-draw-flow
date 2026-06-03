@@ -1,3 +1,45 @@
+## [1.0.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.20.0...v1.0.0) (2026-06-03)
+
+### 🚀 Features
+
+- **ng-draw-flow**: upgrade ng-draw-flow demo to Angular 19 and Taiga UI 5
+  [(a3722e5)](https://github.com/taiga-family/ng-draw-flow/commit/a3722e53e9be9e1a933972fd73db8261126e2dd8)
+- **ng-draw-flow**: split node runtime responsibilities
+  [(ecf77e0)](https://github.com/taiga-family/ng-draw-flow/commit/ecf77e022a291fa7b584f9eed0181e9d9c4b21be)
+- **ng-draw-flow**: introduce content renderer abstraction
+  [(2015bfa)](https://github.com/taiga-family/ng-draw-flow/commit/2015bfa383985417d802630ae28ebe8e29e6ef0b)
+- **ng-draw-flow**: move node appearance to CSS variables
+  [(8aad372)](https://github.com/taiga-family/ng-draw-flow/commit/8aad37223df2ce01767118af2995283c3ed210f0)
+- **ng-draw-flow**: modernize Angular 19 forms, CVA and typed node forms
+  [(c7530e0)](https://github.com/taiga-family/ng-draw-flow/commit/c7530e024bff714fa73dca290d33554cee494f41)
+- **ng-draw-flow**: register connector effect in constructor
+  [(e13f761)](https://github.com/taiga-family/ng-draw-flow/commit/e13f761113bb31d2d697091b65cbe306d1f70b7c)
+- **ng-draw-flow**: simplify resolved node state and dynamic content bootstrap
+  [(1a6ead8)](https://github.com/taiga-family/ng-draw-flow/commit/1a6ead83a763c59b8633348b726f1ab69c497537)
+- **ng-draw-flow**: modernize dynamic node creation for Angular 19
+  [(25880c3)](https://github.com/taiga-family/ng-draw-flow/commit/25880c30e70566922105021cb3937819f68bbbc0)
+- **ng-draw-flow**: compute selected connection classes
+  [(4553687)](https://github.com/taiga-family/ng-draw-flow/commit/455368789446889e8e062a99c8bc6ba2e33b1ccc)
+- **ng-draw-flow**: migrate host bindings and remaining editor state to modern Angular APIs
+  [(eac4172)](https://github.com/taiga-family/ng-draw-flow/commit/eac41728bb3997bf26867cc6818e07bee529e2e5)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: coalesce graph geometry updates
+  [(ab6b915)](https://github.com/taiga-family/ng-draw-flow/commit/ab6b9158f4bef48c63753ab03068cd7a11fe726f)
+- **ng-draw-flow**: migrate editor state and connection rendering to Angular signals
+  [(2b95493)](https://github.com/taiga-family/ng-draw-flow/commit/2b954933ff6b9dd0cb9502353837ee22b9392b65)
+- **ng-draw-flow**: clear removed connection labels
+  [(f7fc2a4)](https://github.com/taiga-family/ng-draw-flow/commit/f7fc2a4e26b591b3f196994d926afc22b7cfac16)
+- **ng-draw-flow**: clear removed connection labels
+  [(04732b1)](https://github.com/taiga-family/ng-draw-flow/commit/04732b1d1a5ec6fabe51ae8a02b8c95d409fc5c0)
+- **ng-draw-flow**: collect used connectors with set
+  [(3f45761)](https://github.com/taiga-family/ng-draw-flow/commit/3f45761d45049cc09ac643a39417f8c737801f87)
+- **ng-draw-flow**: apply node className from node object
+  [(d68c421)](https://github.com/taiga-family/ng-draw-flow/commit/d68c421ddfdcb249fa64ec20f60977b5c69dcfcc)
+- **ng-draw-flow**: avoid duplicating connections in scene model
+  [(53df6d0)](https://github.com/taiga-family/ng-draw-flow/commit/53df6d0c758009d9c7f3e2e35f09b453e5d29376)
+
 ### [0.20.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.19.0...v0.20.0) (2026-04-13)
 
 ### 🚀 Features
