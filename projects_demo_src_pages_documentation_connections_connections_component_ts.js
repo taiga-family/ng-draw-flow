@@ -1,23 +1,21 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_documentation_connections_connections_component_ts"],{
 
-/***/ 99873:
+/***/ 99873
 /*!******************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/connections/bezier-example/bezier-example.component.ts ***!
   \******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ BezierExampleComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/modules/nodes */ 85989);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _app_modules_nodes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/modules/nodes */ 85989);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
 var _BezierExampleComponent;
-
 
 
 
@@ -50,76 +48,75 @@ class BezierExampleComponent {
       connections: [{
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-1'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-3'
         }
       }, {
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-2'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-1'
         }
       }, {
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-3'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-4'
         }
       }, {
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-4'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-2'
         }
       }]
     };
-    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);
+    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControl(this.data);
   }
 }
 _BezierExampleComponent = BezierExampleComponent;
-_BezierExampleComponent.ɵfac = function BezierExampleComponent_Factory(t) {
-  return new (t || _BezierExampleComponent)();
+_BezierExampleComponent.ɵfac = function BezierExampleComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _BezierExampleComponent)();
 };
 _BezierExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
   type: _BezierExampleComponent,
   selectors: [["bezier-example"]],
-  standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfPanZoomOptionsProvider)({
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.dfPanZoomOptionsProvider)({
     topPosition: 50,
     leftPosition: null
-  }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
+  }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.provideNgDrawFlowConfigs)({
     connection: {
-      type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.Bezier,
+      type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionType.Bezier,
       arrowhead: {
-        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfArrowhead.ArrowClosed
+        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfArrowhead.ArrowClosed
       },
       curvature: 0.25
     },
     nodes: {
-      inputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__.InputNodeComponent,
-      outputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__.OutputNodeComponent
+      inputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_2__.InputNodeComponent,
+      outputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_2__.OutputNodeComponent
     }
-  })]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵStandaloneFeature"]],
+  })])],
   decls: 1,
   vars: 1,
   consts: [[3, "formControl"]],
@@ -131,23 +128,22 @@ _BezierExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MOD
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("formControl", ctx.form);
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule, _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlDirective],
+  dependencies: [_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControlDirective],
   encapsulation: 2,
   changeDetection: 0
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BezierExampleComponent);
 
-/***/ }),
+/***/ },
 
-/***/ 69445:
+/***/ 69445
 /*!************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/connections/connections.component.ts ***!
   \************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ ConnectionsComponent)
 /* harmony export */ });
 /* harmony import */ var _bezier_example_bezier_example_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bezier-example/bezier-example.component */ 99873);
 /* harmony import */ var _smooth_step_example_smooth_step_example_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./smooth-step-example/smooth-step-example.component */ 86723);
@@ -160,14 +156,12 @@ var _ConnectionsComponent;
 
 class ConnectionsComponent {}
 _ConnectionsComponent = ConnectionsComponent;
-_ConnectionsComponent.ɵfac = function ConnectionsComponent_Factory(t) {
-  return new (t || _ConnectionsComponent)();
+_ConnectionsComponent.ɵfac = function ConnectionsComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _ConnectionsComponent)();
 };
 _ConnectionsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
   type: _ConnectionsComponent,
   selectors: [["connections"]],
-  standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵStandaloneFeature"]],
   decls: 85,
   vars: 0,
   consts: [["header", "Connection Lines"], [1, "tui-space_top-4"], [1, "tui-list", "tui-list_extra-small"], [1, "tui-list__item"], [1, "editor", "tui-space_top-4"]],
@@ -282,27 +276,24 @@ _ConnectionsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODUL
   styles: [".editor[_ngcontent-%COMP%] {\n  position: relative;\n  block-size: 20rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbm5lY3Rpb25zLmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksa0JBQUE7RUFDQSxpQkFBQTtFQUNBLGlCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FBQ0oiLCJmaWxlIjoiY29ubmVjdGlvbnMuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZWRpdG9yIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYmxvY2stc2l6ZTogMjByZW07XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vY29ubmVjdGlvbnMvY29ubmVjdGlvbnMuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLGlCQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0VBQ0EsZ0JBQUE7QUFDSjs7QUFFQSxnZkFBZ2YiLCJzb3VyY2VzQ29udGVudCI6WyIuZWRpdG9yIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYmxvY2stc2l6ZTogMjByZW07XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */"],
   changeDetection: 0
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ConnectionsComponent);
 
-/***/ }),
+/***/ },
 
-/***/ 86723:
+/***/ 86723
 /*!****************************************************************************************************************!*\
   !*** ./projects/demo/src/pages/documentation/connections/smooth-step-example/smooth-step-example.component.ts ***!
   \****************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ SmoothStepExampleComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 39191);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/modules/nodes */ 85989);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/forms */ 48015);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _app_modules_nodes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/modules/nodes */ 85989);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 96623);
 var _SmoothStepExampleComponent;
-
 
 
 
@@ -335,76 +326,75 @@ class SmoothStepExampleComponent {
       connections: [{
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-1'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-3'
         }
       }, {
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-2'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-1'
         }
       }, {
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-3'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-4'
         }
       }, {
         source: {
           nodeId: 'node-1',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Output,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Output,
           connectorId: 'node-1-output-4'
         },
         target: {
           nodeId: 'node-2',
-          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionPoint.Input,
+          connectorType: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionPoint.Input,
           connectorId: 'node-2-input-2'
         }
       }]
     };
-    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControl(this.data);
+    this.form = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControl(this.data);
   }
 }
 _SmoothStepExampleComponent = SmoothStepExampleComponent;
-_SmoothStepExampleComponent.ɵfac = function SmoothStepExampleComponent_Factory(t) {
-  return new (t || _SmoothStepExampleComponent)();
+_SmoothStepExampleComponent.ɵfac = function SmoothStepExampleComponent_Factory(__ngFactoryType__) {
+  return new (__ngFactoryType__ || _SmoothStepExampleComponent)();
 };
 _SmoothStepExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
   type: _SmoothStepExampleComponent,
   selectors: [["smooth-step-example"]],
-  standalone: true,
-  features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.dfPanZoomOptionsProvider)({
+  features: [_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵProvidersFeature"]([(0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.dfPanZoomOptionsProvider)({
     topPosition: 50,
     leftPosition: null
-  }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.provideNgDrawFlowConfigs)({
+  }), (0,_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.provideNgDrawFlowConfigs)({
     connection: {
-      type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfConnectionType.SmoothStep,
+      type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfConnectionType.SmoothStep,
       arrowhead: {
-        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.DfArrowhead.ArrowClosed
+        type: _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.DfArrowhead.ArrowClosed
       },
       curvature: 10
     },
     nodes: {
-      inputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__.InputNodeComponent,
-      outputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_1__.OutputNodeComponent
+      inputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_2__.InputNodeComponent,
+      outputNode: _app_modules_nodes__WEBPACK_IMPORTED_MODULE_2__.OutputNodeComponent
     }
-  })]), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵStandaloneFeature"]],
+  })])],
   decls: 1,
   vars: 1,
   consts: [[3, "formControl"]],
@@ -416,13 +406,12 @@ _SmoothStepExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
       _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("formControl", ctx.form);
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule, _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_0__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.FormControlDirective],
+  dependencies: [_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControlDirective],
   encapsulation: 2,
   changeDetection: 0
 });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SmoothStepExampleComponent);
 
-/***/ })
+/***/ }
 
 }]);
 //# sourceMappingURL=projects_demo_src_pages_documentation_connections_connections_component_ts.js.map

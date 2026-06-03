@@ -1,14 +1,14 @@
 "use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["projects_demo_src_pages_examples_editor_examples_editor_template_md_raw"],{
 
-/***/ 53696:
+/***/ 53696
 /*!*********************************************************************************!*\
   !*** ./projects/demo/src/pages/examples/editor/examples/editor.template.md?raw ***!
   \*********************************************************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = "```html\n<div\n  class=\"editor\"\n  [ngClass]=\"{fullscreen: fullscreen$ | async}\"\n>\n  <ng-draw-flow\n    [formControl]=\"form\"\n    (connectionCreated)=\"onConnectionCreated($event)\"\n    (connectionDeleted)=\"onConnectionDeleted($event)\"\n    (connectionSelected)=\"onConnectionSelected($event)\"\n    (nodeDeleted)=\"onNodeDeleted($event)\"\n    (nodeMoved)=\"onNodeMoved($event)\"\n    (nodeSelected)=\"onNodeSelected($event)\"\n    (scale)=\"onScaleChange($event)\"\n  />\n\n  <button\n    class=\"add\"\n    size=\"s\"\n    tuiButton\n    type=\"button\"\n    (click)=\"addNodeToDrawFlow()\"\n  >\n    Add node\n  </button>\n\n  <button\n    class=\"fullscreen-btn\"\n    size=\"s\"\n    tuiButton\n    type=\"button\"\n    (click)=\"toggleFullscreen()\"\n  >\n    {{ (fullscreen$ | async) ? 'Exit from fullscreen' : 'Fullscreen' }}\n  </button>\n\n  <div class=\"scale-controls\">\n    <button\n      size=\"s\"\n      tuiButton\n      type=\"button\"\n      (click)=\"drawFlowStore.zoomOut()\"\n    >\n      zoomOut\n    </button>\n\n    <tui-textfield\n      class=\"scale-field\"\n      tuiTextfieldSize=\"m\"\n      tuiTheme=\"light\"\n      [tuiTextfieldCleaner]=\"false\"\n    >\n      <label tuiLabel>Set scale</label>\n\n      <input\n        aria-label=\"Set scale\"\n        tuiInputNumber\n        [formControl]=\"scaleControl\"\n        [max]=\"panZoomOptions.maxZoom\"\n        [min]=\"panZoomOptions.minZoom\"\n        [step]=\"0.05\"\n      />\n    </tui-textfield>\n\n    <div class=\"scale-value\">{{ drawFlowStore.scale$ | async }}%</div>\n\n    <button\n      size=\"s\"\n      tuiButton\n      type=\"button\"\n      (click)=\"drawFlowStore.zoomIn()\"\n    >\n      zoomIn\n    </button>\n  </div>\n\n  <div class=\"selection-info\">\n    <ng-container *ngIf=\"drawFlowStore.selectedNode() as node; else connectionInfo\">\n      <div class=\"selection-title\">Selected node</div>\n      <div class=\"selection-value\">{{ node.id }}</div>\n    </ng-container>\n\n    <ng-template #connectionInfo>\n      <ng-container\n        *ngIf=\"\n          drawFlowStore.selectedConnection() as connection;\n          else noSelection\n        \"\n      >\n        <div class=\"selection-title\">Selected connection</div>\n        <div class=\"selection-value\">{{ connection.source.nodeId }} → {{ connection.target.nodeId }}</div>\n      </ng-container>\n    </ng-template>\n\n    <ng-template #noSelection>\n      <div class=\"selection-title\">Nothing selected</div>\n    </ng-template>\n  </div>\n</div>\n```\n";
 
-/***/ })
+/***/ }
 
 }]);
