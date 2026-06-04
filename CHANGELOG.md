@@ -1,3 +1,10 @@
+### [1.0.2](https://github.com/taiga-family/ng-draw-flow/compare/v1.0.1...v1.0.2) (2026-06-04)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: fix syncer
+  [(41da03f)](https://github.com/taiga-family/ng-draw-flow/commit/41da03fabf98e44ae36d68270dbb16badd10e45c)
+
 ### [1.0.1](https://github.com/taiga-family/ng-draw-flow/compare/v1.0.0...v1.0.1) (2026-06-04)
 
 ### 🐞 Bug Fixes
