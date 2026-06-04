@@ -7,6 +7,7 @@ import {
 } from './components/pan-zoom/pan-zoom.options';
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {NgDrawFlowComponent} from './ng-draw-flow.component';
+import {DfConnectionPoint} from './ng-draw-flow.interfaces';
 import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
 import {SelectionService} from './services/selection.service';
 
@@ -57,7 +58,10 @@ describe('NgDrawFlowComponent', () => {
                     },
                     {
                         provide: ConnectionsService,
-                        useValue: {removeConnection: jest.fn()},
+                        useValue: {
+                            removeConnection: jest.fn(),
+                            setConnections: jest.fn(),
+                        },
                     },
                     {
                         provide: NgDrawFlowStoreService,
@@ -68,6 +72,8 @@ describe('NgDrawFlowComponent', () => {
                             clearSelectedNode: jest.fn(),
                             clearSelectedConnection: jest.fn(),
                             setScaleValue: jest.fn(),
+                            emitNodeDeleted: jest.fn(),
+                            emitConnectionDeleted: jest.fn(),
                         },
                     },
                     {
@@ -158,5 +164,79 @@ describe('NgDrawFlowComponent', () => {
         });
 
         expect(scheduleViewportFraming).toHaveBeenCalledTimes(1);
+    });
+
+    it('removes a node with related connections through public API', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const store = fixture.debugElement.injector.get(NgDrawFlowStoreService);
+        const connectionsService = fixture.debugElement.injector.get(ConnectionsService);
+        const nodeDeletedSpy = jest.spyOn(component['nodeDeleted'], 'emit');
+        const connectionDeletedSpy = jest.spyOn(component['connectionDeleted'], 'emit');
+        const model = {
+            nodes: [
+                {
+                    id: 'node-1',
+                    data: {type: 'simpleNode'},
+                    position: {x: 0, y: 0},
+                },
+                {
+                    id: 'node-2',
+                    data: {type: 'simpleNode'},
+                    position: {x: 10, y: 10},
+                },
+            ],
+            connections: [
+                {
+                    source: {
+                        nodeId: 'node-1',
+                        connectorId: 'source',
+                        connectorType: DfConnectionPoint.Output,
+                    },
+                    target: {
+                        nodeId: 'node-2',
+                        connectorId: 'target',
+                        connectorType: DfConnectionPoint.Input,
+                    },
+                },
+            ],
+        };
+
+        component.writeValue(model);
+        component.removeNode('node-1');
+
+        expect(component['form'].value).toEqual({
+            nodes: [model.nodes[1]],
+            connections: [],
+        });
+        expect(connectionsService.setConnections).toHaveBeenCalledWith([]);
+        expect(store.emitNodeDeleted).toHaveBeenCalledWith({
+            target: model.nodes[0],
+            model: {
+                nodes: [model.nodes[1]],
+                connections: [],
+            },
+        });
+        expect(store.emitConnectionDeleted).toHaveBeenCalledWith({
+            target: model.connections[0],
+            model: {
+                nodes: [model.nodes[1]],
+                connections: [],
+            },
+        });
+        expect(nodeDeletedSpy).toHaveBeenCalledWith({
+            target: model.nodes[0],
+            model: {
+                nodes: [model.nodes[1]],
+                connections: [],
+            },
+        });
+        expect(connectionDeletedSpy).toHaveBeenCalledWith({
+            target: model.connections[0],
+            model: {
+                nodes: [model.nodes[1]],
+                connections: [],
+            },
+        });
     });
 });

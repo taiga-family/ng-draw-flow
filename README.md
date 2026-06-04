@@ -67,7 +67,9 @@ If a custom node previously overrode the `invalid` input/setter, move that logic
 `protected override get invalidState()` and combine it with `this.invalidSignal()`.
 
 `NgDrawFlowStoreService` now has signal snapshots such as `dataModel`, `selectedNode`, `selectedConnection`,
-`lastNodeMoved` and `lastConnectionCreated`; the existing `$` streams remain available for RxJS-based integrations.
+`lastNodeMoved` and `lastConnectionCreated`; the existing `$` streams remain available for RxJS-based integrations. It
+also mirrors runtime controls such as `setPosition`, `removeConnection` and `removeNode`, where `removeNode` accepts a
+node object or node id and deletes related connections.
 
 ## Installation
 

@@ -219,6 +219,11 @@
                 existing connection in the graph.
             </li>
             <li class="tui-list__item">
+                <code>removeNode(node: DfDataNode | string): void</code>
+                : Programmatically removes a node by object or id and removes every connection that uses this node as a
+                source or target.
+            </li>
+            <li class="tui-list__item">
                 <code>NgDrawFlowStoreService</code>
                 : Root-scoped facade for runtime state and controls—inject it anywhere to mirror component actions (
                 <code>zoomIn</code>
@@ -232,6 +237,8 @@
                 <code>setScale</code>
                 ,
                 <code>removeConnection</code>
+                ,
+                <code>removeNode</code>
                 ) and observe live data (
                 <code>dataModel</code>
                 ,

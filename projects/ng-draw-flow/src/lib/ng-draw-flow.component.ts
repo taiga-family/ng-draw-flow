@@ -61,7 +61,7 @@ import {SelectionService} from './services/selection.service';
  *   …) and re-emits high-level events so host applications can stay
  *   framework-agnostic.
  * * Exposes a minimal public API (`zoomIn`, `zoomOut`, `resetPosition`,
- *   `setScale`, `removeConnection`) for programmatic control.
+ *   `setScale`, `removeConnection`, `removeNode`) for programmatic control.
  * * Broadcasts state and events through `NgDrawFlowStoreService` so host apps
  *   can react without a direct reference to the component instance.
  */
@@ -130,7 +130,7 @@ export class NgDrawFlowComponent
     /** Fired after a new edge is successfully created. */
     protected readonly connectionCreated = output<DfEvent<DfDataConnection>>();
 
-    /** Fired after an edge is removed—via UI or `removeConnection()`. */
+    /** Fired after an edge is removed—via UI, `removeConnection()` or `removeNode()`. */
     protected readonly connectionDeleted = output<DfEvent<DfDataConnection>>();
 
     /** Fired when an edge receives focus in the scene. */
@@ -248,6 +248,48 @@ export class NgDrawFlowComponent
     /** Method that removes an existing edge. */
     public removeConnection(connection: DfDataConnection): void {
         this.connectionsService.removeConnection(connection);
+    }
+
+    /** Method that removes an existing node and all related edges. */
+    public removeNode(node: DfDataNode | string): void {
+        const nodeId = typeof node === 'string' ? node : node.id;
+        const current = this.form.value;
+        const deleted = current.nodes.find(({id}) => id === nodeId);
+
+        if (!deleted) {
+            return;
+        }
+
+        const deletedConnections = current.connections.filter(
+            (connection) =>
+                connection.source.nodeId === nodeId ||
+                connection.target.nodeId === nodeId,
+        );
+        const model: DfDataModel = {
+            ...current,
+            nodes: current.nodes.filter(({id}) => id !== nodeId),
+            connections: current.connections.filter(
+                (connection) =>
+                    connection.source.nodeId !== nodeId &&
+                    connection.target.nodeId !== nodeId,
+            ),
+        };
+        const event: DfEvent<DfDataNode> = {target: deleted as DfDataNode, model};
+
+        this.form.setValue(model);
+        this.connectionsService.setConnections(model.connections);
+        this.store.emitNodeDeleted(event);
+        this.nodeDeleted.emit(event);
+
+        deletedConnections.forEach((connection) => {
+            const connectionEvent: DfEvent<DfDataConnection> = {
+                target: connection,
+                model,
+            };
+
+            this.store.emitConnectionDeleted(connectionEvent);
+            this.connectionDeleted.emit(connectionEvent);
+        });
     }
 
     /** Clears any active selection in the scene. */
