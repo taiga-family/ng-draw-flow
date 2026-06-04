@@ -1,3 +1,10 @@
+### [1.0.1](https://github.com/taiga-family/ng-draw-flow/compare/v1.0.0...v1.0.1) (2026-06-04)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: fix-release
+  [(ddc1297)](https://github.com/taiga-family/ng-draw-flow/commit/ddc129786f5fc87ba25ab6edf496c029e94ca1e1)
+
 ## [1.0.0](https://github.com/taiga-family/ng-draw-flow/compare/v0.20.0...v1.0.0) (2026-06-03)
 
 ### 🚀 Features
