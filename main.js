@@ -6435,7 +6435,7 @@ function NgDrawFlowComponent_Conditional_1_Template(rf, ctx) {
  *   …) and re-emits high-level events so host applications can stay
  *   framework-agnostic.
  * * Exposes a minimal public API (`zoomIn`, `zoomOut`, `resetPosition`,
- *   `setScale`, `removeConnection`) for programmatic control.
+ *   `setScale`, `removeConnection`, `removeNode`) for programmatic control.
  * * Broadcasts state and events through `NgDrawFlowStoreService` so host apps
  *   can react without a direct reference to the component instance.
  */
@@ -6461,7 +6461,7 @@ class NgDrawFlowComponent {
     this.scale = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.output)();
     /** Fired after a new edge is successfully created. */
     this.connectionCreated = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.output)();
-    /** Fired after an edge is removed—via UI or `removeConnection()`. */
+    /** Fired after an edge is removed—via UI, `removeConnection()` or `removeNode()`. */
     this.connectionDeleted = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.output)();
     /** Fired when an edge receives focus in the scene. */
     this.connectionSelected = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.output)();
@@ -6560,6 +6560,41 @@ class NgDrawFlowComponent {
   /** Method that removes an existing edge. */
   removeConnection(connection) {
     this.connectionsService.removeConnection(connection);
+  }
+  /** Method that removes an existing node and all related edges. */
+  removeNode(node) {
+    const nodeId = typeof node === 'string' ? node : node.id;
+    const current = this.form.value;
+    const deleted = current.nodes.find(({
+      id
+    }) => id === nodeId);
+    if (!deleted) {
+      return;
+    }
+    const deletedConnections = current.connections.filter(connection => connection.source.nodeId === nodeId || connection.target.nodeId === nodeId);
+    const model = {
+      ...current,
+      nodes: current.nodes.filter(({
+        id
+      }) => id !== nodeId),
+      connections: current.connections.filter(connection => connection.source.nodeId !== nodeId && connection.target.nodeId !== nodeId)
+    };
+    const event = {
+      target: deleted,
+      model
+    };
+    this.form.setValue(model);
+    this.connectionsService.setConnections(model.connections);
+    this.store.emitNodeDeleted(event);
+    this.nodeDeleted.emit(event);
+    deletedConnections.forEach(connection => {
+      const connectionEvent = {
+        target: connection,
+        model
+      };
+      this.store.emitConnectionDeleted(connectionEvent);
+      this.connectionDeleted.emit(connectionEvent);
+    });
   }
   /** Clears any active selection in the scene. */
   clearSelection() {
@@ -7057,6 +7092,12 @@ class NgDrawFlowStoreService {
    */
   removeConnection(connection) {
     this.host?.removeConnection(connection);
+  }
+  /**
+   * Removes the provided node via the live editor instance.
+   */
+  removeNode(node) {
+    this.host?.removeNode(node);
   }
   /**
    * Replaces the cached data model and revalidates current selections.
