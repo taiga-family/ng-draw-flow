@@ -165,6 +165,9 @@
         "matchPackageNames": [
             "@ng-draw-flow/*",
             "ng-draw-flow"
+        ],
+        "ignorePackageNames": [
+            "@ng-draw-flow/ignored"
         ]
     }
 }
