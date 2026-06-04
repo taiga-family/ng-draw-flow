@@ -170,6 +170,13 @@ export class NgDrawFlowStoreService {
     }
 
     /**
+     * Removes the provided node via the live editor instance.
+     */
+    public removeNode(node: DfDataNode | string): void {
+        this.host?.removeNode(node);
+    }
+
+    /**
      * Replaces the cached data model and revalidates current selections.
      */
     public updateDataModel(model: DfDataModel): void {

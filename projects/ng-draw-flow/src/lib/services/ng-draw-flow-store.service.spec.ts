@@ -53,6 +53,7 @@ describe('NgDrawFlowStoreService', () => {
             resetPosition: jest.fn(),
             setScale: jest.fn(),
             removeConnection: jest.fn(),
+            removeNode: jest.fn(),
             clearSelection: jest.fn(),
         } as unknown as NgDrawFlowComponent;
 
@@ -63,12 +64,14 @@ describe('NgDrawFlowStoreService', () => {
         service.resetPosition();
         service.setScale(1.25);
         service.removeConnection(connection);
+        service.removeNode(node);
 
         expect(host.zoomIn).toHaveBeenCalled();
         expect(host.zoomOut).toHaveBeenCalled();
         expect(host.resetPosition).toHaveBeenCalled();
         expect(host.setScale).toHaveBeenCalledWith(1.25);
         expect(host.removeConnection).toHaveBeenCalledWith(connection);
+        expect(host.removeNode).toHaveBeenCalledWith(node);
         expect(service.scale()).toBe(125);
 
         service.detach(host);

@@ -34,6 +34,16 @@
     {{ (fullscreen$ | async) ? 'Exit from fullscreen' : 'Fullscreen' }}
   </button>
 
+  <button
+    class="remove-node-btn"
+    size="s"
+    tuiButton
+    type="button"
+    (click)="drawFlowStore.removeNode('node-3')"
+  >
+    Remove node-3
+  </button>
+
   <div class="scale-controls">
     <button
       size="s"
