@@ -6951,8 +6951,8 @@ var _NgDrawFlowStoreService;
  */
 class NgDrawFlowStoreService {
   constructor() {
-    this.dataModelSignal = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)(null);
     this.selectedNodeSignal = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)(null);
+    this.dataModelSignal = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)(null);
     this.selectedConnectionSignal = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)(null);
     this.scaleSignal = (0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.signal)(100);
     this.nodeDeletedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__.Subject();
