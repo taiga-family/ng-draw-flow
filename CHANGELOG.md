@@ -1,3 +1,10 @@
+### [1.1.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.0.2...v1.1.0) (2026-06-04)
+
+### 🚀 Features
+
+- **ng-draw-flow**: add remove node public API
+  [(3b8e9e8)](https://github.com/taiga-family/ng-draw-flow/commit/3b8e9e896586aeaf42c1d806900a8d5b3ab63b2f)
+
 ### [1.0.2](https://github.com/taiga-family/ng-draw-flow/compare/v1.0.1...v1.0.2) (2026-06-04)
 
 ### 🐞 Bug Fixes
