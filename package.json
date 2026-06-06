@@ -155,7 +155,7 @@
         "typescript": "5.8.3",
         "webpack": "5.107.1",
         "webpack-merge": "6.0.1",
-        "zone.js": "0.15.1"
+        "zone.js": "0.16.2"
     },
     "syncer": {
         "includePaths": [
