@@ -135,7 +135,12 @@ describe('DfAutoLayoutService', () => {
         expect(setDataModel).toHaveBeenCalledWith(service.result()?.model);
     });
 
-    it('publishes strict-tree errors through a signal', () => {
+    it('clears the previous result when a later layout fails', () => {
+        service.apply();
+
+        expect(service.result()).not.toBeNull();
+
+        setDataModel.mockClear();
         service.apply({
             model: {
                 ...sourceModel,

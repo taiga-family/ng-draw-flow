@@ -65,15 +65,18 @@ export class NodeConnectorsController {
     }
 
     public recalculatePositions(distance: DfDragDropDistance, zoom: number): void {
-        const nodeContentRenderer = this.options.getNodeContentRenderer();
-        const currentMoveDistance = {
+        this.translateCoordinates({
             deltaX: distance.deltaX / zoom,
             deltaY: distance.deltaY / zoom,
-        };
+        });
+    }
+
+    public translateCoordinates(distance: DfDragDropDistance): void {
+        const nodeContentRenderer = this.options.getNodeContentRenderer();
 
         nodeContentRenderer.inputConnectors().forEach((input: DfInputComponent) => {
             this.recalculateConnectorPositionFromLast(
-                currentMoveDistance,
+                distance,
                 input,
                 DfConnectionPoint.Input,
             );
@@ -81,7 +84,7 @@ export class NodeConnectorsController {
 
         nodeContentRenderer.outputConnectors().forEach((output: DfOutputComponent) => {
             this.recalculateConnectorPositionFromLast(
-                currentMoveDistance,
+                distance,
                 output,
                 DfConnectionPoint.Output,
             );

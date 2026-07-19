@@ -489,6 +489,67 @@ describe('NodeComponent', () => {
         expect(removeNodeSize).toHaveBeenCalledWith('draft-node');
     });
 
+    it('translates connector coordinates without remeasuring animated frames', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent() as any;
+        const connectors = component.nodeConnectors;
+        const animationFrames: FrameRequestCallback[] = [];
+        const requestAnimationFrameSpy = jest
+            .spyOn(globalThis, 'requestAnimationFrame')
+            .mockImplementation((callback) => {
+                animationFrames.push(callback);
+
+                return animationFrames.length;
+            });
+        const translateCoordinatesSpy = jest.spyOn(connectors, 'translateCoordinates');
+        const updateCoordinatesSpy = jest.spyOn(connectors, 'updateCoordinatesAt');
+        const previousPosition = {...component.renderedPositionValue};
+        const nextPosition = {
+            x: previousPosition.x + 24,
+            y: previousPosition.y - 12,
+        };
+
+        component.drawFlowOptions.positionAnimation = {
+            duration: 100,
+            easing: 'linear',
+        };
+
+        expect(component.animatePositionChange(previousPosition, nextPosition)).toBe(
+            true,
+        );
+
+        animationFrames.shift()?.(0);
+        animationFrames.shift()?.(50);
+
+        expect(translateCoordinatesSpy).toHaveBeenLastCalledWith({
+            deltaX: 12,
+            deltaY: -6,
+        });
+        expect(updateCoordinatesSpy).not.toHaveBeenCalled();
+
+        fixture.destroy();
+        requestAnimationFrameSpy.mockRestore();
+    });
+
+    it('cancels an active animation when the target is already rendered', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent() as any;
+        const position = {...component.renderedPositionValue};
+        const cancelPositionAnimationSpy = jest.spyOn(
+            component,
+            'cancelPositionAnimation',
+        );
+
+        component.drawFlowOptions.positionAnimation = {
+            duration: 100,
+            easing: 'linear',
+        };
+
+        expect(component.animatePositionChange(position, {...position})).toBe(false);
+        expect(cancelPositionAnimationSpy).toHaveBeenCalledTimes(1);
+        expect(component.positionAnimationFrameId).toBeNull();
+    });
+
     it('throws readable error when node type is not registered', () => {
         expect(() => {
             MockRender(NodeComponent, {

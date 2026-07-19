@@ -117,4 +117,45 @@ describe('NodeConnectorsController', () => {
         expect(connectorElement.getBoundingClientRect).toHaveBeenCalled();
         expect(nodeElement.getBoundingClientRect).toHaveBeenCalled();
     });
+
+    it('translates stored coordinates without measuring DOM', () => {
+        const connectorElement = document.createElement('div');
+        const addConnectionPoint = jest.fn();
+        const connector = {
+            nativeElement: connectorElement,
+            position: DfConnectorPosition.Right,
+            coordinates: {x: 166, y: 52},
+            data: {
+                nodeId: 'node-1',
+                connectorId: 'output-1',
+            },
+        };
+        const renderer = {
+            inputConnectors: () => [],
+            outputConnectors: () => [connector as DfOutputComponent],
+        };
+
+        connectorElement.getBoundingClientRect = jest.fn();
+
+        const controller = new NodeConnectorsController({
+            coordinatesService: {addConnectionPoint} as unknown as CoordinatesService,
+            destroyRef: null as never,
+            environmentInjector: null as never,
+            getCenteredPosition: jest.fn(),
+            getNode: jest.fn(),
+            getNodeContentRenderer: () => renderer as DfNodeContentRenderer,
+            getZoom: () => 1,
+            onConnectorDeleted: jest.fn(),
+        });
+
+        controller.translateCoordinates({deltaX: 10, deltaY: -5});
+
+        expect(connector.coordinates).toEqual({x: 176, y: 47});
+        expect(addConnectionPoint).toHaveBeenCalledWith(
+            'nodeId:node-1,connectorType:output,connectorId:output-1',
+            {x: 176, y: 47},
+            DfConnectorPosition.Right,
+        );
+        expect(connectorElement.getBoundingClientRect).not.toHaveBeenCalled();
+    });
 });

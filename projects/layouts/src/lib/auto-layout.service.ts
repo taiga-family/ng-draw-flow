@@ -157,6 +157,7 @@ export class DfAutoLayoutService {
             this.store.setDataModel(anchoredResult.model);
             this.resultSignal.set(anchoredResult);
         } catch (error) {
+            this.resultSignal.set(null);
             this.errorSignal.set(
                 error instanceof Error ? error : new Error(String(error)),
             );

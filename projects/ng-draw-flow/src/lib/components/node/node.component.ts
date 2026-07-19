@@ -411,7 +411,11 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.renderPosition(this.getResolvedNode().position, dynamic);
     }
 
-    private renderPosition(position: DfPoint, dynamic: boolean): void {
+    private renderPosition(
+        position: DfPoint,
+        dynamic: boolean,
+        translateConnectorCoordinates = false,
+    ): void {
         const node = this.getResolvedNode();
         const centeredPosition = this.nodeGeometry.getCenteredPoint(position);
 
@@ -420,7 +424,16 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             centeredPosition,
             dynamic,
         );
-        this.nodeConnectors.updateCoordinatesAt(centeredPosition, node.id);
+
+        if (translateConnectorCoordinates && this.renderedPositionValue) {
+            this.nodeConnectors.translateCoordinates({
+                deltaX: position.x - this.renderedPositionValue.x,
+                deltaY: position.y - this.renderedPositionValue.y,
+            });
+        } else {
+            this.nodeConnectors.updateCoordinatesAt(centeredPosition, node.id);
+        }
+
         this.nodeGeometry.syncWorkspaceGeometryAt(node.id, position);
         this.renderedPositionValue = {...position};
     }
@@ -440,15 +453,16 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         const animation = this.drawFlowOptions.positionAnimation;
         const duration = animation?.duration ?? 0;
 
+        this.cancelPositionAnimation();
+
         if (
+            (from.x === to.x && from.y === to.y) ||
             duration <= 0 ||
             typeof requestAnimationFrame !== 'function' ||
             this.prefersReducedMotion()
         ) {
             return false;
         }
-
-        this.cancelPositionAnimation();
 
         let startedAt: number | null = null;
 
@@ -463,6 +477,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
                     x: from.x + (to.x - from.x) * eased,
                     y: from.y + (to.y - from.y) * eased,
                 },
+                true,
                 true,
             );
 
