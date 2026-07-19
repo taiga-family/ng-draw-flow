@@ -1,0 +1,185 @@
+<tui-doc-page header="State & Events">
+    <section>
+        <p>
+            <code>ng-draw-flow</code>
+            is a ControlValueAccessor. Use an Angular form control as the source of truth, component outputs for local
+            template reactions, and
+            <code>NgDrawFlowStoreService</code>
+            when controls or observers live outside the editor component.
+        </p>
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            Treat
+            <code>DfDataModel</code>
+            as immutable application state. Replace node, connection and position objects when updating the control so
+            Angular and the editor can reconcile them predictably.
+        </section>
+    </section>
+
+    <section>
+        <h2>Interactive State Inspector</h2>
+        <p>
+            Select and drag nodes, select an edge, use the camera controls, add a node, or remove the selected node. The
+            inspector reads signals from the store while the event list is populated from component outputs.
+        </p>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.interactive"
+        >
+            <state-events-example />
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2>Component Outputs</h2>
+        <p>
+            Use outputs when the editor and its consumer share a template. Mutation events contain both the affected
+            item and the complete resulting model through
+            <code>DfEvent&lt;T&gt;</code>
+            . Selection events return the selected item directly.
+        </p>
+        <tui-doc-code
+            filename="editor.component.html"
+            [code]="examples.componentEvents"
+        />
+        <ul class="tui-list tui-list_extra-small">
+            <li class="tui-list__item">
+                <code>scale</code>
+                : current zoom percentage, where 100 is actual size.
+            </li>
+            <li class="tui-list__item">
+                <code>nodeSelected</code>
+                : selected
+                <code>DfDataNode</code>
+                .
+            </li>
+            <li class="tui-list__item">
+                <code>connectionSelected</code>
+                : selected
+                <code>DfDataConnection</code>
+                .
+            </li>
+            <li class="tui-list__item">
+                <code>nodeMoved</code>
+                and
+                <code>nodeDeleted</code>
+                :
+                <code>DfEvent&lt;DfDataNode&gt;</code>
+                .
+            </li>
+            <li class="tui-list__item">
+                <code>connectionCreated</code>
+                and
+                <code>connectionDeleted</code>
+                :
+                <code>DfEvent&lt;DfDataConnection&gt;</code>
+                .
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Signal-first Store</h2>
+        <p>
+            The root-scoped store mirrors live editor state. Every long-lived snapshot is available as an Angular signal
+            and, where useful, as an RxJS stream. Event streams have a matching last-event signal for computed state and
+            OnPush templates.
+        </p>
+        <tui-doc-code
+            filename="toolbar.component.ts"
+            [code]="examples.storeSignals"
+        />
+        <ul class="tui-list tui-list_extra-small">
+            <li class="tui-list__item">
+                <code>dataModel</code>
+                /
+                <code>dataModel$</code>
+            </li>
+            <li class="tui-list__item">
+                <code>selectedNode</code>
+                /
+                <code>selectedNode$</code>
+            </li>
+            <li class="tui-list__item">
+                <code>selectedConnection</code>
+                /
+                <code>selectedConnection$</code>
+            </li>
+            <li class="tui-list__item">
+                <code>scale</code>
+                /
+                <code>scale$</code>
+                and
+                <code>hasSelection</code>
+            </li>
+            <li class="tui-list__item">
+                <code>lastNodeMoved</code>
+                ,
+                <code>lastNodeDeleted</code>
+                and
+                <code>lastNodeSelected</code>
+            </li>
+            <li class="tui-list__item">
+                <code>lastConnectionCreated</code>
+                ,
+                <code>lastConnectionDeleted</code>
+                and
+                <code>lastConnectionSelected</code>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Store Commands</h2>
+        <p>
+            <code>zoomIn()</code>
+            ,
+            <code>zoomOut()</code>
+            ,
+            <code>resetPosition()</code>
+            ,
+            <code>setPosition()</code>
+            ,
+            <code>setScale()</code>
+            ,
+            <code>setDataModel()</code>
+            ,
+            <code>removeNode()</code>
+            and
+            <code>removeConnection()</code>
+            forward to the attached editor. Model replacement preserves node selection by node id and connection
+            selection by source and target connector endpoints while those items still exist.
+        </p>
+        <p>
+            Read scale signals and events as percentages, but pass a factor to
+            <code>setScale()</code>
+            and the optional
+            <code>setPosition().zoom</code>
+            field. For example, read
+            <code>75</code>
+            for 75% and write
+            <code>0.75</code>
+            to restore it.
+        </p>
+        <p>
+            Disable the bound form control to disable editor interaction while keeping the current graph rendered:
+            <code>form.disable()</code>
+            .
+        </p>
+    </section>
+
+    <section>
+        <h2>Multiple Editors</h2>
+        <p>
+            A root-scoped store controls the currently attached editor. When a page contains independent editors, scope
+            one store instance to each editor host through component providers.
+        </p>
+        <tui-doc-code
+            filename="editor-host.component.ts"
+            [code]="examples.localStore"
+        />
+    </section>
+</tui-doc-page>

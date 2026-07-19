@@ -1,0 +1,12 @@
+```html
+<ng-draw-flow
+  [formControl]="form"
+  (scale)="onScale($event)"
+  (nodeSelected)="onNodeSelected($event)"
+  (connectionSelected)="onConnectionSelected($event)"
+  (nodeMoved)="onNodeMoved($event)"
+  (nodeDeleted)="onNodeDeleted($event)"
+  (connectionCreated)="onConnectionCreated($event)"
+  (connectionDeleted)="onConnectionDeleted($event)"
+/>
+```

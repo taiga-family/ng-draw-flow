@@ -9,8 +9,9 @@
 
     <h2>Configuring PanZoom in Your Application</h2>
     <p>
-        To configure the Panzoom component for your Angular application, you can set up the PanzoomOptions in your
-        app.module.ts file as follows:
+        Configure the camera with
+        <code>dfPanZoomOptionsProvider()</code>
+        in application-level or component-level providers:
     </p>
     <tui-doc-code [code]="gettingStarted.data0" />
     <p>
@@ -54,7 +55,7 @@
             </div>
             <div class="code-example">
                 <tui-doc-code
-                    filename="app.module.ts"
+                    filename="graph-editor.component.ts"
                     [code]="gettingStarted.data1"
                 />
             </div>
@@ -78,7 +79,7 @@
             </div>
             <div class="code-example">
                 <tui-doc-code
-                    filename="app.module.ts"
+                    filename="graph-editor.component.ts"
                     [code]="gettingStarted.data2"
                 />
             </div>
@@ -209,4 +210,30 @@
         affect initial and reset framing only. They do not change the meaning of saved node coordinates, and new nodes
         are still created from the current viewport center.
     </p>
+
+    <h2>Programmatic Camera Control</h2>
+    <p>
+        Use a
+        <code>viewChild(NgDrawFlowComponent)</code>
+        or inject
+        <code>NgDrawFlowStoreService</code>
+        from a toolbar. Scale values are factors, so
+        <code>1</code>
+        means 100%. Coordinates are optional and omitted fields preserve their current value.
+    </p>
+    <tui-doc-code
+        filename="editor-toolbar.component.ts"
+        [code]="gettingStarted.commands"
+    />
+
+    <h2>Background Theming</h2>
+    <p>
+        The dedicated background canvas follows the viewport and workspace CSS variables. Set
+        <code>backgroundCanvas.visible</code>
+        to false when the application supplies its own background.
+    </p>
+    <tui-doc-code
+        filename="styles.less"
+        [code]="gettingStarted.theming"
+    />
 </tui-doc-page>

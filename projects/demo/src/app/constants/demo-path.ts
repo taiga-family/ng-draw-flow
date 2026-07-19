@@ -3,6 +3,7 @@ export const DemoPath = {
     Migrations: 'documentation/migrations',
     TermsAndDefinitions: 'documentation/terms-and-definitions',
     ConfigurationAndPublicApi: 'documentation/configuration-and-public-api',
+    StateAndEvents: 'documentation/state-and-events',
     PanZoom: 'documentation/pan-zoom-configuration',
     Nodes: 'documentation/creating-nodes',
     Connectors: 'documentation/connectors',

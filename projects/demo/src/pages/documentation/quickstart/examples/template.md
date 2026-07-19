@@ -1,3 +1,3 @@
 ```html
-<ng-draw-flow [formControl]="form"></ng-draw-flow>
+<ng-draw-flow [formControl]="form" />
 ```

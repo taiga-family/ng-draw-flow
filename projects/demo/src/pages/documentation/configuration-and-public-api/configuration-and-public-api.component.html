@@ -4,11 +4,12 @@
         <p>
             The library is configured via the
             <code>provideNgDrawFlowConfigs()</code>
-            provider in the application module. Available parameters:
+            provider in application-level or component-level providers. Component-level configuration is useful when
+            multiple editors need different node registries or connection styles. Available parameters:
         </p>
 
         <tui-doc-code
-            filename="app.module.ts"
+            filename="app.config.ts"
             [code]="data.configurations"
         />
     </section>
@@ -166,6 +167,35 @@
                 </p>
             </li>
         </ul>
+
+        <hr />
+
+        <h3>positionAnimation:</h3>
+        <p>
+            Animates node coordinates when the data model changes. The default
+            <code>duration</code>
+            is
+            <code>0</code>
+            , so existing editors keep immediate positioning until animation is explicitly enabled.
+        </p>
+        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
+            <li class="tui-list__item">
+                <code>duration</code>
+                : transition duration in milliseconds.
+            </li>
+            <li class="tui-list__item">
+                <code>easing</code>
+                : either
+                <code>ease-in-out</code>
+                or
+                <code>linear</code>
+                .
+            </li>
+        </ul>
+        <tui-doc-code
+            filename="app.config.ts"
+            [code]="data.positionAnimation"
+        />
         <hr />
     </section>
     <section class="tui-space_top-4">
@@ -214,6 +244,10 @@
                 bounds.
             </li>
             <li class="tui-list__item">
+                <code>setDataModel(model: DfDataModel): void</code>
+                : Replaces the complete model and propagates it to the bound form control.
+            </li>
+            <li class="tui-list__item">
                 <code>removeConnection(connection: DfDataConnection): void</code>
                 : Programmatically removes a connection between nodes. The connection object must match exactly one
                 existing connection in the graph.
@@ -224,39 +258,20 @@
                 source or target.
             </li>
             <li class="tui-list__item">
-                <code>NgDrawFlowStoreService</code>
-                : Root-scoped facade for runtime state and controls—inject it anywhere to mirror component actions (
-                <code>zoomIn</code>
-                ,
-                <code>zoomOut</code>
-                ,
-                <code>resetPosition</code>
-                ,
-                <code>setPosition</code>
-                ,
-                <code>setScale</code>
-                ,
-                <code>removeConnection</code>
-                ,
-                <code>removeNode</code>
-                ) and observe live data (
-                <code>dataModel</code>
-                ,
-                <code>scale</code>
-                ,
-                <code>selectedNode</code>
-                ,
-                <code>selectedConnection</code>
-                , signal event snapshots like
-                <code>lastNodeMoved</code>
-                and
-                <code>lastConnectionCreated</code>
-                , plus backward-compatible event streams like
-                <code>nodeMoved$</code>
-                and
-                <code>connectionCreated$</code>
-                ).
+                <code>clearSelection(): void</code>
+                : Clears the active node or connection selection without changing the graph.
             </li>
         </ul>
+        <p>
+            Component outputs, store signals, RxJS streams and store commands are covered with an interactive inspector
+            in the
+            <a
+                routerLink="/documentation/state-and-events"
+                tuiLink
+            >
+                state and events guide
+            </a>
+            .
+        </p>
     </section>
 </tui-doc-page>

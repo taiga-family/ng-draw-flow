@@ -25,5 +25,7 @@ export default class PanZoomConfigurationComponent {
         data0: import('./examples/data-0.md?raw'),
         data1: import('./examples/data-1.md?raw'),
         data2: import('./examples/data-2.md?raw'),
+        commands: import('./examples/camera-commands.md?raw'),
+        theming: import('./examples/background-theming.md?raw'),
     };
 }

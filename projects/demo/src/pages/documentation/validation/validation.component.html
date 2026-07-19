@@ -39,6 +39,12 @@
         ng-draw-flow also provides the ability to validate the entire graph as a whole. For this purpose, ready-made
         validators are available that can be applied to the FormControl associated with the ng-draw-flow component.
     </p>
+    @if (validationExamples.Setup; as setup) {
+        <tui-doc-code
+            filename="editor.component.ts"
+            [code]="setup"
+        />
+    }
 
     <h3>Built-in Validators</h3>
 
@@ -87,9 +93,25 @@
         size="m"
         tuiNotification
     >
-        Important: If your validator should highlight problematic nodes, it must return an array with the IDs of these
-        nodes.
+        To highlight problematic nodes, return their ids either as a string array value or as a nested
+        <code>&#123; nodeIds: string[] &#125;</code>
+        value. The built-in errors directive collects these ids and passes
+        <code>invalid</code>
+        to the corresponding node components.
     </section>
+
+    @if (validationExamples.CustomValidator; as customValidator) {
+        <tui-doc-code
+            filename="required-root.validator.ts"
+            [code]="customValidator"
+        />
+    }
+
+    <p>
+        Validators run on the complete graph value. Keep them pure and avoid mutating nodes or connections. The cycle
+        validator caches its previous result by connection structure, while isolated-node validation also depends on the
+        node list.
+    </p>
 
     <a
         routerLink="/examples/editor"

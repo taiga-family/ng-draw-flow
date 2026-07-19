@@ -1,0 +1,42 @@
+<ng-template #actionIcon>
+    <tui-icon icon="@tui.sparkles" />
+</ng-template>
+
+@if (!startNodeSignal()) {
+    <df-input
+        class="input"
+        [connectorData]="{
+            nodeId: nodeIdSignal(),
+            connectorId: nodeIdSignal() + '-input-1',
+            single: false,
+        }"
+    />
+}
+
+<strong>{{ modelSignal().text }}</strong>
+<span>{{ startNodeSignal() ? 'Drag the orange output' : 'Drop the edge here' }}</span>
+
+@if (!endNodeSignal()) {
+    <df-output
+        class="output"
+        [connectorData]="{
+            nodeId: nodeIdSignal(),
+            connectorId: nodeIdSignal() + '-output-1',
+            single: false,
+        }"
+    />
+}
+
+<df-output
+    title="Run node action"
+    class="action"
+    [connectorData]="{
+        nodeId: nodeIdSignal(),
+        connectorId: nodeIdSignal() + '-action-1',
+        single: false,
+        data: {action: 'inspect', nodeType: modelSignal().type},
+    }"
+    [content]="actionIcon"
+    [mode]="outputMode.Action"
+    (activated)="activate($event)"
+/>

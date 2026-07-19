@@ -12,4 +12,18 @@ import SmoothStepExampleComponent from './smooth-step-example/smooth-step-exampl
     styleUrl: './connections.component.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ConnectionsComponent {}
+export default class ConnectionsComponent {
+    public readonly examples = {
+        bezier: {
+            TypeScript: import('./bezier-example/bezier-example.component.ts?raw'),
+            Template: import('./bezier-example/bezier-example.component.html?raw'),
+        },
+        smoothStep: {
+            TypeScript:
+                import('./smooth-step-example/smooth-step-example.component.ts?raw'),
+            Template:
+                import('./smooth-step-example/smooth-step-example.component.html?raw'),
+        },
+        theming: import('./examples/connection-theming.md?raw'),
+    };
+}

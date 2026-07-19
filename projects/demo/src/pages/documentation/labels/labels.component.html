@@ -37,6 +37,22 @@
                 for a node to apply the same label to all of its output connectors.
             </li>
         </ul>
+        <p>
+            A label set directly on a connection is the final value for that edge. During interactive creation, an
+            output connector's
+            <code>connectionLabel</code>
+            takes precedence over
+            <code>node.data.connectionLabel</code>
+            . Connector labels can also be replaced imperatively with
+            <code>setConnectionLabel()</code>
+            before creating the next edge.
+        </p>
+        <p>
+            Polymorpheus templates and components receive the optional
+            <code>context</code>
+            unchanged. Use a typed application interface for the context when labels expose controls such as copy,
+            status or delete actions.
+        </p>
     </section>
 
     <section class="tui-space_top-4">

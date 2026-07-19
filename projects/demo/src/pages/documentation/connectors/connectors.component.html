@@ -26,6 +26,13 @@
         <b>true</b>
         , it means that once a connection is made to this input connector, no additional connections will be accepted.
     </p>
+    <p>
+        Connector ids must be unique across the complete graph, not only inside one node. Prefixing them with
+        <code>nodeId</code>
+        is the recommended convention because deletion and the
+        <code>single</code>
+        constraint are reconciled by connector id.
+    </p>
     <h3>Output Connectors (df-output)</h3>
     <p>
         Similarly, output connectors are the points from which connections originate to other node&#39;s input
@@ -88,12 +95,94 @@
         .
     </p>
     <p>
+        This value describes the direction from which a connection path leaves or approaches the connector. It does not
+        position the connector element inside a custom node; use the node component's CSS for physical placement and
+        keep both values consistent.
+    </p>
+
+    <h2>Custom Content</h2>
+    <p>
+        Both
+        <code>df-input</code>
+        and
+        <code>df-output</code>
+        accept Polymorpheus content through the
+        <code>[content]</code>
+        input. It can be text, a component, or an
+        <code>ng-template</code>
+        . The template's implicit context is the complete
+        <code>DfDataConnectorConfig</code>
+        , including optional application-specific
+        <code>data</code>
+        .
+    </p>
+    <tui-doc-code
+        filename="node.component.html"
+        [code]="examples.customContent"
+    />
+
+    <h2>Action Outputs</h2>
+    <p>
+        Set an output connector to
+        <code>DfOutputMode.Action</code>
+        when activating it should run an application action instead of starting a draggable connection. Action outputs
+        emit their connector config through
+        <code>(activated)</code>
+        and support mouse, Enter and Space activation.
+    </p>
+    <p>
+        They remain visible when
+        <code>connectionsCreatable</code>
+        is disabled, never create a draft edge, and still respect the
+        <code>single</code>
+        constraint. Multiple action outputs can be rendered in one node; give each one a unique
+        <code>connectorId</code>
+        and use
+        <code>data</code>
+        to describe the requested action or child type.
+    </p>
+    <p>
+        Strict-tree layouts use
+        <code>[layoutOrder]</code>
+        when one node has children connected through multiple outputs. Assign unique zero-based values in visual order:
+        top to bottom for horizontal trees and left to right for vertical trees. A single connected output does not
+        require an order.
+    </p>
+    <tui-doc-code
+        filename="node.component.html"
+        [code]="examples.actionOutput"
+    />
+
+    <h2>Interactive Example</h2>
+    <p>
+        The orange connector creates ordinary edges by dragging. The icon connector is an action output: click it or
+        focus it and press Enter or Space. It never creates a draft edge and exposes its application data through the
+        activation event.
+    </p>
+    <tui-doc-example
+        style="padding: 0"
+        [content]="examples.interactive"
+    >
+        <connector-example />
+    </tui-doc-example>
+
+    <p>
         For information on adjusting connection curvature and line styles, refer to the
         <a
             routerLink="/documentation/connections"
             tuiLink
         >
             connections documentation
+        </a>
+        .
+    </p>
+    <p>
+        For action outputs that create children in a self-organizing tree, see
+        <a
+            routerLink="/documentation/layouts"
+            tuiLink
+        >
+            automatic layouts
         </a>
         .
     </p>

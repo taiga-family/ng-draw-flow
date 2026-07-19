@@ -52,8 +52,12 @@
         </ul>
         <p>First, spin up a new Angular project</p>
         <code>ng new my-app</code>
-        <p>NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.</p>
-        <code>npm i &commat;ng-draw-flow/core --save</code>
+        <p>
+            NgDrawFlow is published on npm as
+            <code>&commat;ng-draw-flow/core</code>
+            .
+        </p>
+        <code>npm i &commat;ng-draw-flow/core</code>
         <p>Lastly, spin up the dev server and we're good to go!</p>
         <code>ng serve</code>
     </section>
@@ -62,29 +66,26 @@
         <h2>Import Dependencies and Register Node Components</h2>
 
         <p>
-            To get started with the ng-draw-flow library, begin by setting up your module with the necessary imports and
-            component registrations.
+            Import the editor and reactive forms into the standalone component that owns the graph. Register node
+            renderers in the same component providers or in application-level providers when they are shared.
         </p>
         <p>
             Add the
             <code>NgDrawFlowComponent</code>
             and
             <code>ReactiveFormsModule</code>
-            to your module's imports array:
+            to the component imports:
         </p>
 
         <tui-doc-code
-            filename="app.module.ts"
+            filename="graph-editor.component.ts"
             [code]="gettingStarted.imports"
         />
 
-        <p>
-            Then, within the providers section, register the components that you want to be available for use as nodes
-            within the graph editor:
-        </p>
+        <p>Then register the components that should be available as node renderers:</p>
 
         <tui-doc-code
-            filename="app.module.ts"
+            filename="graph-editor.component.ts"
             [code]="gettingStarted.providing"
         />
 
@@ -125,6 +126,15 @@
             This setup ensures that your ng-draw-flow component is fully integrated with the Angular forms system,
             enabling seamless data flow and state management for your graph.
         </p>
+        <p>
+            Use a non-nullable control because the editor always expects a complete
+            <code>DfDataModel</code>
+            . To apply external changes, create new node, connection and position objects and call
+            <code>form.setValue(nextModel)</code>
+            . Disable the control with
+            <code>form.disable()</code>
+            when the graph should remain visible but non-interactive.
+        </p>
     </section>
 
     <section>
@@ -155,6 +165,14 @@
             <code>data</code>
             field, you need to specify the node type that was previously registered and all the data you want to provide
             to the node.
+        </p>
+        <p>
+            Nodes without a
+            <code>position</code>
+            are initial nodes. The editor assigns their first position from the current viewport; persisted and
+            externally managed graphs should normally use
+            <code>DfDataNode</code>
+            with explicit world coordinates.
         </p>
         <p>
             The

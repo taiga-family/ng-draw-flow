@@ -24,6 +24,14 @@
             ) to adjust the accent used for these emphasized connections and align them with your application&rsquo;s
             branding.
         </p>
+        <p>
+            Connections are identified by their source and target node and connector ids. Selecting an edge and pressing
+            Delete or Backspace removes it when
+            <code>connectionsDeletable</code>
+            is enabled. Programmatic deletion is available through
+            <code>removeConnection()</code>
+            on the component or store.
+        </p>
     </section>
 
     <section class="tui-space_top-4">
@@ -73,9 +81,14 @@
 
     <section class="tui-space_top-4">
         <h3>Example</h3>
-        <div class="editor tui-space_top-4">
-            <smooth-step-example />
-        </div>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.smoothStep"
+        >
+            <div class="editor">
+                <smooth-step-example />
+            </div>
+        </tui-doc-example>
     </section>
 
     <section class="tui-space_top-4">
@@ -95,8 +108,27 @@
 
     <section class="tui-space_top-4">
         <h3>Example</h3>
-        <div class="editor tui-space_top-4">
-            <bezier-example />
-        </div>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.bezier"
+        >
+            <div class="editor">
+                <bezier-example />
+            </div>
+        </tui-doc-example>
+    </section>
+
+    <section class="tui-space_top-4">
+        <h2>Connection Theming</h2>
+        <p>
+            Style the visible path, larger selectable hit area, active edge, node-related highlights and labels with CSS
+            variables on
+            <code>ng-draw-flow</code>
+            . Increasing the selectable area does not make the rendered stroke thicker.
+        </p>
+        <tui-doc-code
+            filename="styles.less"
+            [code]="examples.theming"
+        />
     </section>
 </tui-doc-page>

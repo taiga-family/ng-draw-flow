@@ -28,6 +28,12 @@ export const appRoutes: Routes = [
         data: {title: 'Configuration & Public API'},
     },
     {
+        path: DemoPath.StateAndEvents,
+        loadComponent: async () =>
+            import('../pages/documentation/state-and-events/state-and-events.component'),
+        data: {title: 'State & Events'},
+    },
+    {
         path: DemoPath.PanZoom,
         loadComponent: async () =>
             import('../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'),

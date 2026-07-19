@@ -20,6 +20,8 @@ export default class ValidationComponent {
             import('./examples/cycle-detection-validator-error.md?raw'),
         IsolatedNodesValidatorError:
             import('./examples/isolated-nodes-validator-error.md?raw'),
+        Setup: import('./examples/validator-setup.md?raw'),
+        CustomValidator: import('./examples/custom-validator.md?raw'),
     };
 
     public nodeData: DfDataModel = {

@@ -63,6 +63,44 @@
         inputs determine the node&#39;s ability to connect with others, defining its role within the flow as either the
         initiation or termination point.
     </p>
+    <p>
+        These flags are capabilities, not visual positions:
+        <code>startNode</code>
+        prevents incoming connections and
+        <code>endNode</code>
+        prevents outgoing connections. Custom templates usually use them to hide the corresponding connector.
+    </p>
+
+    <h2>Register the Node Type</h2>
+    <p>
+        Register every node component under the same key used by
+        <code>node.data.type</code>
+        . Providers can be application-wide or scoped to a particular editor.
+    </p>
+    <tui-doc-code
+        filename="app.config.ts"
+        [code]="gettingStarted.providing"
+    />
+
+    <h2>Reactive Node Content</h2>
+    <p>
+        Prefer signal inputs in computed values and templates. Use
+        <code>markForCheck()</code>
+        only after imperative state changes that Angular cannot observe. The
+        <code>inputs</code>
+        and
+        <code>outputs</code>
+        signal queries update when conditional connectors are added or removed, and
+        <code>connectorsUpdated</code>
+        notifies the wrapper to remeasure their coordinates.
+    </p>
+    <p>
+        Keep graph state in
+        <code>modelSignal()</code>
+        and local UI state in the node component. Apply wrapper themes through
+        <code>DfDataInitialNode.className</code>
+        and CSS variables instead of coupling outer node styles to internal markup.
+    </p>
 
     <p>Here is a basic blueprint for a simple node component:</p>
 

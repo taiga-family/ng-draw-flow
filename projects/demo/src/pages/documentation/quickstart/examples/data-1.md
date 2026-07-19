@@ -1,7 +1,10 @@
 ```ts
-data: DfDataModel = {
+readonly data: DfDataModel = {
   nodes: [],
   connections: [],
 };
-form = new FormControl(this.data);
+
+readonly form = new FormControl<DfDataModel>(this.data, {
+  nonNullable: true,
+});
 ```
