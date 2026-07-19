@@ -3,17 +3,15 @@ import {TestBed} from '@angular/core/testing';
 import {
     DF_CONNECTOR_ORDER_REGISTRY,
     DF_NODE_SIZE_REGISTRY,
+    DfConnectionPoint,
+    type DfDataConnection,
+    type DfDataModel,
+    type DfDataNode,
     type DfNodeConnectorOrders,
     type DfNodeSize,
     NgDrawFlowStoreService,
 } from '@ng-draw-flow/core';
 
-import {
-    DfConnectionPoint,
-    type DfDataConnection,
-    type DfDataModel,
-    type DfDataNode,
-} from '../../../ng-draw-flow/src/lib/ng-draw-flow.interfaces';
 import {DfAutoLayoutService} from './auto-layout.service';
 import {DfNodeSizingStrategy} from './layout.interfaces';
 import {DF_TREE_LAYOUT_OPTIONS} from './tree-layout-options.token';

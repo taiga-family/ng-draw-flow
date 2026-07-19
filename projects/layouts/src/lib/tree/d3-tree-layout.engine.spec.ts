@@ -3,7 +3,8 @@ import {
     type DfDataConnection,
     type DfDataModel,
     type DfDataNode,
-} from '../../../../ng-draw-flow/src/lib/ng-draw-flow.interfaces';
+} from '@ng-draw-flow/core';
+
 import {DfNodeSizingStrategy, DfTreeLayoutDirection} from '../layout.interfaces';
 import {D3TreeLayoutEngine} from './d3-tree-layout.engine';
 import {type DfTreeLayoutError} from './tree-layout.error';

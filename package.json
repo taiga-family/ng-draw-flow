@@ -62,7 +62,8 @@
         ]
     },
     "browserslist": [
-        "extends @taiga-ui/browserslist-config"
+        "extends @taiga-ui/browserslist-config",
+        "Chrome >= 73"
     ],
     "prettier": "@taiga-ui/prettier-config",
     "stylelint": {
