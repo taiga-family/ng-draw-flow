@@ -1,63 +1,80 @@
-<tui-doc-page header="Labels">
+<tui-doc-page header="Connection Labels">
+    <p class="docs-lead">
+        <code>DfConnectionLabel</code>
+        adds text, templates or Angular components to an edge. Labels can be persisted on one connection or supplied as
+        defaults while users create new connections.
+    </p>
+
+    <div class="docs-summary">
+        <div>
+            <strong>Connection label</strong>
+            <span>Final persisted value for one edge.</span>
+        </div>
+        <div>
+            <strong>Output label</strong>
+            <span>Default inherited by edges created from that output.</span>
+        </div>
+        <div>
+            <strong>Node label</strong>
+            <span>Shared default applied to all outputs in a node.</span>
+        </div>
+    </div>
+
     <section>
-        <h2>Overview</h2>
+        <h2>Define Labels</h2>
         <p>
-            <code>DfConnectionLabel</code>
-            adds textual or templated annotations to connections. A label is defined by the
+            Label
             <code>content</code>
-            that can be a string, template or component and an optional
+            is Polymorpheus content and optional
             <code>context</code>
-            passed to it.
+            is passed through unchanged. Use a typed application object when a template or component exposes controls.
         </p>
+        <tui-doc-code
+            filename="graph-model.ts"
+            [code]="labelCreation"
+        />
     </section>
 
-    <section class="tui-space_top-4">
-        <h3>Creation scenarios</h3>
-        <ul class="tui-list tui-list_extra-small">
-            <li class="tui-list__item">
-                <b>Connection level</b>
-                – specify the
-                <code>label</code>
-                property for a particular item in the
-                <code>connections</code>
-                array of the data model.
+    <section>
+        <h2>Precedence</h2>
+        <ol class="docs-flow">
+            <li>
+                <strong>Connection</strong>
+                <span>
+                    <code>connection.label</code>
+                    is the stored value rendered for that edge.
+                </span>
             </li>
-            <li class="tui-list__item">
-                <b>Connector level</b>
-                – provide
-                <code>connectionLabel</code>
-                to a connector (for example,
-                <code>df-output</code>
-                ) so every created connection inherits it.
+            <li>
+                <strong>Output connector</strong>
+                <span>
+                    <code>[connectionLabel]</code>
+                    is copied during interactive creation.
+                </span>
             </li>
-            <li class="tui-list__item">
-                <b>Node level</b>
-                – define
-                <code>data.connectionLabel</code>
-                for a node to apply the same label to all of its output connectors.
+            <li>
+                <strong>Node data</strong>
+                <span>
+                    <code>data.connectionLabel</code>
+                    supplies a fallback to every output.
+                </span>
             </li>
-        </ul>
+        </ol>
         <p>
-            A label set directly on a connection is the final value for that edge. During interactive creation, an
-            output connector's
-            <code>connectionLabel</code>
-            takes precedence over
-            <code>node.data.connectionLabel</code>
-            . Connector labels can also be replaced imperatively with
+            An output connector label overrides the node-level default. Call
             <code>setConnectionLabel()</code>
-            before creating the next edge.
-        </p>
-        <p>
-            Polymorpheus templates and components receive the optional
-            <code>context</code>
-            unchanged. Use a typed application interface for the context when labels expose controls such as copy,
-            status or delete actions.
+            on a
+            <code>DfOutputComponent</code>
+            reference when the next created edge needs an imperative override.
         </p>
     </section>
 
-    <section class="tui-space_top-4">
-        <h3>Example</h3>
-
+    <section>
+        <h2>Interactive Example</h2>
+        <p>
+            This graph demonstrates text labels and a component label with a copy action. Inspect the source tabs for
+            the model, label component and node template.
+        </p>
         <tui-doc-example
             style="padding: 0"
             [content]="labelsExample"

@@ -29,7 +29,7 @@ arranged diagrams and applications that calculate positions themselves.
 - [Documentation](https://taiga-family.github.io/ng-draw-flow)
 - [Quick start](https://taiga-family.github.io/ng-draw-flow/documentation/quickstart)
 - [Connectors](https://taiga-family.github.io/ng-draw-flow/documentation/connectors)
-- [Automatic layouts](https://taiga-family.github.io/ng-draw-flow/documentation/layouts)
+- [Dynamic layouts](https://taiga-family.github.io/ng-draw-flow/documentation/layouts)
 - [Examples](https://taiga-family.github.io/ng-draw-flow/examples/overview)
 - [Migration guides](https://taiga-family.github.io/ng-draw-flow/documentation/migrations)
 
@@ -187,7 +187,7 @@ Changes made through the editor are written back to the control. Applications ca
 - signal snapshots, RxJS event streams and imperative controls through `NgDrawFlowStoreService`;
 - read-only or constrained editors through `provideNgDrawFlowConfigs`.
 
-## Optional Automatic Layouts
+## Optional Dynamic Layouts
 
 Install `@ng-draw-flow/layouts` when a strict tree should calculate node positions automatically. It is an optional
 package; core does not depend on it and continues to support fully manual graphs.
@@ -196,7 +196,7 @@ package; core does not depend on it and continues to support fully manual graphs
 npm install @ng-draw-flow/layouts
 ```
 
-See the [automatic layouts documentation](https://taiga-family.github.io/ng-draw-flow/documentation/layouts) for tree
+See the [dynamic layouts documentation](https://taiga-family.github.io/ng-draw-flow/documentation/layouts) for tree
 constraints, dynamic node sizing and action-output examples.
 
 ## Development

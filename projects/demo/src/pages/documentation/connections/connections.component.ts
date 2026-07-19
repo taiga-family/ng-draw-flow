@@ -18,6 +18,7 @@ export default class ConnectionsComponent {
             TypeScript: import('./bezier-example/bezier-example.component.ts?raw'),
             Template: import('./bezier-example/bezier-example.component.html?raw'),
         },
+        configuration: import('./examples/connection-options.md?raw'),
         smoothStep: {
             TypeScript:
                 import('./smooth-step-example/smooth-step-example.component.ts?raw'),

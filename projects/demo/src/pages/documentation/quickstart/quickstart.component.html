@@ -1,225 +1,89 @@
-<tui-doc-page header="Getting started">
-    <section>
-        <img
-            alt="ng-draw-flow logo"
-            src="assets/icons/logo.svg"
-            class="logo"
-        />
+<tui-doc-page header="Getting Started">
+    <p class="docs-lead">
+        Build a working Angular graph from one custom node component, one immutable data model and one reactive form
+        control. Core owns the editor surface and interactions; your application owns node content and graph data.
+    </p>
 
-        <p>
-            If you're looking to get up and running swiftly, you're in the right spot! This guide will expedite your
-            journey from the starting point to a working application with NgDrawFlow in just a few minutes. Following
-            this, you'll have the opportunity to explore NgDrawFlow more thoroughly through examples or by delving into
-            the API documentation.
-        </p>
-    </section>
-    <section>
-        <h2>Play online</h2>
-        <p>
-            You can try NgDrawFlow without setting anything up locally by checking out the starter projects we have on
-            <a
-                href="https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts"
-                target="_blank"
-                tuiLink
-            >
-                CodeSandbox
-            </a>
-        </p>
-    </section>
-    <section>
-        <h2>Installation</h2>
-        <p>To get started locally you should have a few things:</p>
-        <ul class="tui-list tui-list_small">
-            <li class="tui-list__item">
-                <a
-                    href="https://nodejs.org/"
-                    tuiLink
-                >
-                    Node.js
-                </a>
-                installed.
-            </li>
-            <li class="tui-list__item">
-                A working knowledge of
-                <a
-                    href="https://angular.dev/"
-                    tuiLink
-                >
-                    Angular
-                </a>
-                . You don't need to be an expert, but you should be comfortable with the basics.
-            </li>
-        </ul>
-        <p>First, spin up a new Angular project</p>
-        <code>ng new my-app</code>
-        <p>
-            NgDrawFlow is published on npm as
-            <code>&commat;ng-draw-flow/core</code>
-            .
-        </p>
-        <code>npm i &commat;ng-draw-flow/core</code>
-        <p>Lastly, spin up the dev server and we're good to go!</p>
-        <code>ng serve</code>
-    </section>
+    <div class="docs-summary">
+        <div>
+            <strong>Angular components</strong>
+            <span>Render any domain UI inside a node.</span>
+        </div>
+        <div>
+            <strong>Reactive Forms</strong>
+            <span>Read and replace the complete graph as one value.</span>
+        </div>
+        <div>
+            <strong>Application-owned data</strong>
+            <span>Persist, validate and synchronize plain node and connection objects.</span>
+        </div>
+    </div>
+
+    <div class="docs-actions">
+        <a
+            appearance="secondary"
+            routerLink="/examples/overview"
+            size="m"
+            tuiButton
+        >
+            Explore the feature overview
+        </a>
+        <a
+            appearance="flat"
+            routerLink="/documentation/terms-and-definitions"
+            size="m"
+            tuiButton
+        >
+            Learn the graph model
+        </a>
+    </div>
 
     <section>
-        <h2>Import Dependencies and Register Node Components</h2>
-
+        <h2>Install Core</h2>
         <p>
-            Import the editor and reactive forms into the standalone component that owns the graph. Register node
-            renderers in the same component providers or in application-level providers when they are shared.
-        </p>
-        <p>
-            Add the
-            <code>NgDrawFlowComponent</code>
-            and
+            NgDrawFlow requires Angular 19 or later. Install the core package, then import
             <code>ReactiveFormsModule</code>
-            to the component imports:
+            in the standalone component that owns the graph.
         </p>
-
-        <tui-doc-code
-            filename="graph-editor.component.ts"
-            [code]="gettingStarted.imports"
-        />
-
-        <p>Then register the components that should be available as node renderers:</p>
-
-        <tui-doc-code
-            filename="graph-editor.component.ts"
-            [code]="gettingStarted.providing"
-        />
-
-        <p>
-            Make sure to replace
-            <code>yourNode</code>
-            with your specific component identifier for the node within the editor, and
-            <code>YourNodeComponent</code>
-            with the actual component class you intend to use.
-        </p>
+        <tui-doc-code [code]="gettingStarted.installation" />
     </section>
 
     <section>
-        <h2>Set Up Data Model and Control for Graph Structure</h2>
-
-        <p>
-            In the component where you intend to construct your graph, you need to create a data structure that defines
-            the nodes and connections.
-        </p>
-
-        <tui-doc-code
-            filename="app.connectors.component.ts"
-            [code]="gettingStarted.data1"
-        />
-
-        <p>
-            Next, link this data structure to your ng-draw-flow component using a
-            <code>FormControl</code>
-            . This will allow for reactive updates and interactions within your graph editor:
-        </p>
-
-        <tui-doc-code
-            filename="app.component.html"
-            [code]="gettingStarted.template"
-        />
-
-        <p>
-            This setup ensures that your ng-draw-flow component is fully integrated with the Angular forms system,
-            enabling seamless data flow and state management for your graph.
-        </p>
-        <p>
-            Use a non-nullable control because the editor always expects a complete
-            <code>DfDataModel</code>
-            . To apply external changes, create new node, connection and position objects and call
-            <code>form.setValue(nextModel)</code>
-            . Disable the control with
-            <code>form.disable()</code>
-            when the graph should remain visible but non-interactive.
-        </p>
+        <h2>Build the First Graph</h2>
+        <ol class="docs-flow">
+            <li>
+                <strong>Render a node</strong>
+                <span>
+                    Extend
+                    <code>DrawFlowBaseNode</code>
+                    and place input and output connectors.
+                </span>
+            </li>
+            <li>
+                <strong>Register its type</strong>
+                <span>
+                    Map
+                    <code>data.type</code>
+                    to the Angular component in the core provider.
+                </span>
+            </li>
+            <li>
+                <strong>Bind the model</strong>
+                <span>
+                    Pass a non-nullable
+                    <code>FormControl&lt;DfDataModel&gt;</code>
+                    to the editor.
+                </span>
+            </li>
+        </ol>
     </section>
 
     <section>
-        <h2>Populate Example DfDataModel</h2>
-
+        <h3>1. Custom Node Component</h3>
         <p>
-            To illustrate how to set up the
-            <code>DfDataModel</code>
-            with actual data, the following example lays out a scenario with a collection of nodes and their
-            connections:
+            Connector placement belongs to the custom node. The example hides the input for a start node and the output
+            for an end node, and uses signal inputs from the base class.
         </p>
-
-        <tui-doc-code
-            filename="app.connectors.component.ts"
-            [code]="gettingStarted.data2"
-        />
-
-        <p>
-            Each
-            <code>node</code>
-            mainly consists of an
-            <code>id</code>
-            , a
-            <code>position</code>
-            , and a
-            <code>data</code>
-            field. Inside the
-            <code>data</code>
-            field, you need to specify the node type that was previously registered and all the data you want to provide
-            to the node.
-        </p>
-        <p>
-            Nodes without a
-            <code>position</code>
-            are initial nodes. The editor assigns their first position from the current viewport; persisted and
-            externally managed graphs should normally use
-            <code>DfDataNode</code>
-            with explicit world coordinates.
-        </p>
-        <p>
-            The
-            <code>connections</code>
-            array contains objects that describe the start and end points of each connection. The
-            <code>source</code>
-            and
-            <code>target</code>
-            holds information about which node and specific connector are used for each connection.
-        </p>
-    </section>
-
-    <section class="tui-space_top-4">
-        <first-example />
-    </section>
-
-    <section>
-        <h2>Creating Nodes</h2>
-        <p>
-            In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
-            node, you should develop a component that extends from the
-            <code>DrawFlowBaseNode</code>
-            class. This component can render connector components such as
-            <code>DfInputComponent</code>
-            and
-            <code>DfOutputComponent</code>
-            .
-        </p>
-        <p>
-            The base class supports both styles: the classic properties
-            <code>nodeId</code>
-            /
-            <code>model</code>
-            /
-            <code>startNode</code>
-            and the signal API
-            <code>nodeIdSignal()</code>
-            /
-            <code>modelSignal()</code>
-            /
-            <code>startNodeSignal()</code>
-            when you need to build
-            <code>computed()</code>
-            values.
-        </p>
-        <p>Here is a basic blueprint for a simple node component:</p>
-
         <tui-doc-example
             style="padding: 0"
             [content]="customNodeExample"
@@ -228,5 +92,61 @@
                 <ng-draw-flow [formControl]="nodeForm" />
             </div>
         </tui-doc-example>
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            Connector ids must be unique across the complete graph. Prefix them with the node id, for example
+            <code>task-1-output-1</code>
+            .
+        </section>
+    </section>
+
+    <section>
+        <h3>2. Standalone Editor Component</h3>
+        <p>
+            This complete component registers the node, configures the editor, defines two positioned nodes and connects
+            their rendered connector ids.
+        </p>
+        <tui-doc-code
+            filename="graph-editor.component.ts"
+            [code]="gettingStarted.editor"
+        />
+        <p>
+            User interactions write a new value to the control. For application-side changes, create the next immutable
+            model and call
+            <code>form.setValue(nextModel)</code>
+            . Disable the control with
+            <code>form.disable()</code>
+            when the graph should remain visible but non-interactive.
+        </p>
+    </section>
+
+    <section>
+        <h3>3. Working Result</h3>
+        <p>
+            The same model can branch, merge and use multiple connectors. Positions are world coordinates for the
+            top-left corner of each node wrapper.
+        </p>
+        <first-example />
+    </section>
+
+    <section>
+        <h2>Where to Go Next</h2>
+        <div class="docs-summary">
+            <div>
+                <strong>Custom nodes</strong>
+                <span>Typed node data, reactive content and wrapper styling.</span>
+            </div>
+            <div>
+                <strong>Connectors</strong>
+                <span>Multiple handles, custom content and connection constraints.</span>
+            </div>
+            <div>
+                <strong>Dynamic layouts</strong>
+                <span>Optional strict-tree positioning with measured node sizes.</span>
+            </div>
+        </div>
     </section>
 </tui-doc-page>

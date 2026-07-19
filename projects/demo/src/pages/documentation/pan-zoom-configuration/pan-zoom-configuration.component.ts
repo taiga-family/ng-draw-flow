@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiNotification} from '@taiga-ui/core';
 
 import {
     PanZoomConfigurationExample1Component,
@@ -15,6 +16,7 @@ import {
         PanZoomConfigurationExample2Component,
         PanZoomConfigurationExample3Component,
         TuiAddonDoc,
+        TuiNotification,
     ],
     templateUrl: './pan-zoom-configuration.component.html',
     styleUrl: './pan-zoom-configuration.component.less',

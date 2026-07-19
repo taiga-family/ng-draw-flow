@@ -1,38 +1,30 @@
 ```ts
 @Component({
   standalone: true,
-  selector: 'app-your-form-node',
-  imports: [
-    ReactiveFormsModule,
-    // another imports
-  ],
-  templateUrl: './form-node.component.html',
-  styleUrls: ['./form-node.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-form-node',
+  imports: [ReactiveFormsModule],
+  template: `
+    <label>
+      Task name
+      <input [formControl]="name" />
+    </label>
+  `,
   host: {
     '(keydown.delete.stop)': '0',
     '(keydown.backspace.stop)': '0',
   },
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormNodeComponent extends DrawFlowBaseNode {
-  public form = new FormGroup<NodeForm>({
-    field1: new FormGroup<NodeFormGroup>({
-      connectorId: new FormControl<string>('node-5-output-1'),
-      fieldValue: new FormControl<string>('', [Validators.required]),
-    }),
-    field2: new FormGroup<NodeFormGroup>({
-      connectorId: new FormControl<string>('node-5-output-2'),
-      fieldValue: new FormControl<string>('', [Validators.required]),
-    }),
+  readonly name = new FormControl('', {
+    nonNullable: true,
+    validators: [Validators.required],
   });
 
   protected override get invalidState(): boolean {
-    const formInvalid = Object.values(this.form.controls).some(
-      (fieldGroup: FormGroup<NodeFormGroup>): boolean =>
-        fieldGroup.controls.fieldValue.touched && fieldGroup.controls.fieldValue.invalid,
-    );
+    const localInvalid = this.name.touched && this.name.invalid;
 
-    return this.invalidSignal() || formInvalid;
+    return this.invalidSignal() || localInvalid;
   }
 }
 ```

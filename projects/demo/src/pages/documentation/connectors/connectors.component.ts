@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
-import {TuiLink} from '@taiga-ui/core';
+import {TuiLink, TuiNotification} from '@taiga-ui/core';
 
 import ConnectorExampleComponent from './example/connector-example.component';
 import DynamicConnectorExampleComponent from './example/dynamic-connector-example.component';
@@ -15,6 +15,7 @@ import DynamicConnectorExampleComponent from './example/dynamic-connector-exampl
         RouterLink,
         TuiAddonDoc,
         TuiLink,
+        TuiNotification,
     ],
     templateUrl: './connectors.component.html',
     styleUrl: './connectors.component.less',
@@ -23,6 +24,7 @@ import DynamicConnectorExampleComponent from './example/dynamic-connector-exampl
 export default class ConnectorsComponent {
     public readonly examples = {
         actionOutput: import('./examples/action-output.md?raw'),
+        actionHandler: import('./examples/action-handler.md?raw'),
         customContent: import('./examples/custom-content.md?raw'),
         regular: {
             TypeScript: import('./example/connector-example.component.ts?raw'),

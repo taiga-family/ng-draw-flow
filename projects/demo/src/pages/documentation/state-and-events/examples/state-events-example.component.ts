@@ -71,10 +71,9 @@ export default class StateEventsExampleComponent {
     public addNode(): void {
         const model = this.form.getRawValue();
         const id = `node-${this.nodeId++}`;
-        const node: DfDataNode = {
+        const node = {
             id,
             data: {type: 'simpleNode', text: `Node ${id.slice(5)}`},
-            position: {x: 200, y: 80 + model.nodes.length * 45},
         };
 
         this.store.setDataModel({...model, nodes: [...model.nodes, node]});

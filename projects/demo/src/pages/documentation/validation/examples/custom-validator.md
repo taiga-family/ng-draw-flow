@@ -2,9 +2,9 @@
 export function requiredRootValidator(): ValidatorFn {
   return (control): ValidationErrors | null => {
     const model = control.value as DfDataModel;
-    const invalidIds = model.nodes.filter((node) => node.startNode !== true).map((node) => node.id);
+    const roots = model.nodes.filter((node) => node.startNode === true);
 
-    return invalidIds.length ? {requiredRoot: {nodeIds: invalidIds}} : null;
+    return roots.length === 1 ? null : {requiredRoot: {nodeIds: model.nodes.map(({id}) => id)}};
   };
 }
 ```

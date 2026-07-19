@@ -29,7 +29,7 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Documentation',
-        title: 'PanZoom Configuration',
+        title: 'Pan and Zoom',
         route: DemoPath.PanZoom,
     },
     {
@@ -44,7 +44,7 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Documentation',
-        title: 'Automatic Layouts',
+        title: 'Dynamic Layouts',
         route: DemoPath.Layouts,
     },
     {
@@ -79,7 +79,7 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Examples',
-        title: 'Dynamic Layouting',
+        title: 'Dynamic Layouts',
         route: DemoPath.DynamicLayout,
     },
     {

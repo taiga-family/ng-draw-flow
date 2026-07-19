@@ -37,7 +37,7 @@ export const appRoutes: Routes = [
         path: DemoPath.PanZoom,
         loadComponent: async () =>
             import('../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'),
-        data: {title: 'PanZoom Configuration'},
+        data: {title: 'Pan and Zoom'},
     },
     {
         path: DemoPath.Nodes,
@@ -55,7 +55,7 @@ export const appRoutes: Routes = [
         path: DemoPath.Layouts,
         loadComponent: async () =>
             import('../pages/documentation/layouts/layouts.component'),
-        data: {title: 'Automatic Layouts'},
+        data: {title: 'Dynamic Layouts'},
     },
     {
         path: DemoPath.Connections,
@@ -97,7 +97,7 @@ export const appRoutes: Routes = [
         path: DemoPath.DynamicLayout,
         loadComponent: async () =>
             import('../pages/examples/dynamic-layout/dynamic-layout.component'),
-        data: {title: 'Dynamic Layouting'},
+        data: {title: 'Dynamic Layouts'},
     },
     {
         path: DemoPath.StressTest,

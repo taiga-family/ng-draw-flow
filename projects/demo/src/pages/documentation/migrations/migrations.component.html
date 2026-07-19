@@ -1,6 +1,21 @@
 <tui-doc-page header="Migrations">
+    <p class="docs-lead">
+        Breaking changes are documented by release line. Apply migrations before adopting new examples so node wrappers
+        and application styles have one clear owner.
+    </p>
+
     <section>
         <h2>From 0.x to 1.x</h2>
+        <div class="docs-summary">
+            <div>
+                <strong>Before</strong>
+                <span>Every custom node repeated wrapper background, border and selection styles.</span>
+            </div>
+            <div>
+                <strong>Now</strong>
+                <span>Core owns the wrapper and custom components own their internal content.</span>
+            </div>
+        </div>
         <p>
             In v1,
             <code>NodeComponent</code>

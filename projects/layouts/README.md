@@ -1,6 +1,6 @@
 # @ng-draw-flow/layouts
 
-Automatic strict-tree positioning for graphs rendered by `@ng-draw-flow/core`.
+Dynamic strict-tree positioning for graphs rendered by `@ng-draw-flow/core`.
 
 - [Layouts documentation](https://taiga-family.github.io/ng-draw-flow/documentation/layouts)
 - [Interactive dynamic-tree example](https://taiga-family.github.io/ng-draw-flow/examples/dynamic-layout)

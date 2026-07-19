@@ -1,275 +1,239 @@
 <tui-doc-page header="Configuration & Public API">
-    <section>
-        <h2>NgDrawFlow Configuration</h2>
-        <p>
-            The library is configured via the
-            <code>provideNgDrawFlowConfigs()</code>
-            provider in application-level or component-level providers. Component-level configuration is useful when
-            multiple editors need different node registries or connection styles. Available parameters:
-        </p>
+    <p class="docs-lead">
+        Configure each editor with Angular providers, bind its graph through a form control and use either the component
+        reference or the store facade for commands.
+    </p>
 
+    <div class="docs-summary">
+        <div>
+            <strong>Core provider</strong>
+            <span>Node registry, connection rendering and interaction constraints.</span>
+        </div>
+        <div>
+            <strong>Camera provider</strong>
+            <span>Initial framing, zoom limits and wheel behavior.</span>
+        </div>
+        <div>
+            <strong>Public controls</strong>
+            <span>Camera, model, selection and deletion commands.</span>
+        </div>
+    </div>
+
+    <section>
+        <h2>Core Configuration</h2>
+        <p>
+            Call
+            <code>provideNgDrawFlowConfigs()</code>
+            in application-level providers for shared defaults or in component providers when editors need independent
+            node registries and behavior.
+        </p>
         <tui-doc-code
-            filename="app.config.ts"
+            filename="graph-editor.component.ts"
             [code]="data.configurations"
         />
+
+        <div class="docs-table-scroll">
+            <table class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Default</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connection.type</code></td>
+                        <td><code>Bezier</code></td>
+                        <td>
+                            Uses Bezier curves or orthogonal
+                            <code>SmoothStep</code>
+                            paths.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>connection.curvature</code></td>
+                        <td><code>0.25</code></td>
+                        <td>Bezier bend coefficient or SmoothStep corner radius in pixels.</td>
+                    </tr>
+                    <tr>
+                        <td><code>connection.arrowhead</code></td>
+                        <td>
+                            <code>None</code>
+                            , 8 x 4
+                        </td>
+                        <td>Arrow shape, width and height at the target connector.</td>
+                    </tr>
+                    <tr>
+                        <td><code>options.nodeDragThreshold</code></td>
+                        <td><code>1</code></td>
+                        <td>Pointer travel in pixels before a node drag begins.</td>
+                    </tr>
+                    <tr>
+                        <td><code>options.nodesDraggable</code></td>
+                        <td><code>true</code></td>
+                        <td>Allows users to move nodes.</td>
+                    </tr>
+                    <tr>
+                        <td><code>options.nodesDeletable</code></td>
+                        <td><code>true</code></td>
+                        <td>Allows selected nodes to be deleted from the UI.</td>
+                    </tr>
+                    <tr>
+                        <td><code>options.connectionsCreatable</code></td>
+                        <td><code>true</code></td>
+                        <td>Allows regular outputs to start draggable connections.</td>
+                    </tr>
+                    <tr>
+                        <td><code>options.connectionsDeletable</code></td>
+                        <td><code>true</code></td>
+                        <td>Allows selected connections to be deleted from the UI.</td>
+                    </tr>
+                    <tr>
+                        <td><code>positionAnimation.duration</code></td>
+                        <td><code>0</code></td>
+                        <td>Animation duration for externally changed node coordinates.</td>
+                    </tr>
+                    <tr>
+                        <td><code>positionAnimation.easing</code></td>
+                        <td><code>ease-in-out</code></td>
+                        <td>
+                            Uses
+                            <code>ease-in-out</code>
+                            or
+                            <code>linear</code>
+                            interpolation.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
 
-    <section class="tui-space_top-4">
-        <h3>nodes:</h3>
+    <section>
+        <h2>Node Wrapper Styling</h2>
         <p>
-            A collection of Angular components that can be used as node content. The object keys serve as unique node
-            type identifiers (specified in the node's
-            <code>data.type</code>
-            property).
-        </p>
-
-        <hr />
-
-        <h3>Node CSS variables:</h3>
-        <p>
-            Node wrapper styles are controlled by CSS variables on
+            Override node CSS variables on
             <code>ng-draw-flow</code>
-            . Override these variables globally from application styles to keep node content focused on layout, controls
-            and connectors. For a particular node, set
+            . Set
             <code>className</code>
-            in the node data, for example
-            <code>className: 'warning-node'</code>
-            , and override variables through that class.
+            on a node to target one node or a domain-specific group without coupling wrapper styles to the custom
+            component markup.
         </p>
-
         <tui-doc-code
             filename="styles.less"
             [code]="data.nodeStyles"
         />
+    </section>
 
-        <hr />
-
-        <h3>connection:</h3>
-        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
-            <li class="tui-list__item">
-                <code>type</code>
-                (default:
-                <code>DfConnectionType.Bezier</code>
-                ) - connection line style:
-                <ul>
-                    <li>
-                        <code>Bezier</code>
-                        : Classic Bezier curves with control points
-                    </li>
-                    <li>
-                        <code>SmoothStep</code>
-                        : Connections with straight segments and rounded corners
-                    </li>
-                </ul>
-            </li>
-            <li class="tui-list__item">
-                <code>curvature</code>
-                <ul>
-                    <li>
-                        <p>
-                            For
-                            <code>Bezier</code>
-                            : A dimensionless coefficient that controls how strongly the connection bends
-                        </p>
-
-                        <p class="tui-text_body-s">
-                            <strong>Since v0.14.0:</strong>
-                            The value is relative to the distance between connectors. In earlier versions it was a fixed
-                            pixel offset for control points.
-                        </p>
-                    </li>
-                    <li>
-                        For
-                        <code>SmoothStep</code>
-                        : Determines the corner rounding radius in pixels
-                    </li>
-                    <li class="tui-list__item">
-                        <code>arrowhead</code>
-                        <ul>
-                            <li>
-                                <code>type</code>
-                                : arrowhead shape (
-                                <code>DfArrowhead.Arrow</code>
-                                ,
-                                <code>DfArrowhead.ArrowClosed</code>
-                                ,
-                                <code>DfArrowhead.None</code>
-                                )
-                            </li>
-                            <li>
-                                <code>width</code>
-                                : arrowhead width in pixels
-                            </li>
-                            <li>
-                                <code>height</code>
-                                : arrowhead height in pixels
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
-        <hr />
-
-        <h3>options:</h3>
-        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
-            <li class="tui-list__item">
-                <code>nodeDragThreshold</code>
-                (default: 1)
-                <p>Defines the minimum distance (in pixels) required to initiate node dragging:</p>
-                <ul>
-                    <li>
-                        Value
-                        <code>1</code>
-                        prevents accidental drag events during clicks
-                    </li>
-                    <li>
-                        <code>0</code>
-                        Dragging starts immediately (may interfere with interactions)
-                    </li>
-                </ul>
-            </li>
-            <li class="tui-list__item">
-                <code>nodesDraggable</code>
-                (default: true)
-                <p>
-                    Disables node dragging when set to
-                    <code>false</code>
-                    .
-                </p>
-            </li>
-            <li class="tui-list__item">
-                <code>nodesDeletable</code>
-                (default: true)
-                <p>
-                    Prevents deleting nodes via keyboard when
-                    <code>false</code>
-                    .
-                </p>
-            </li>
-            <li class="tui-list__item">
-                <code>connectionsCreatable</code>
-                (default: true)
-                <p>
-                    Disallows creating new connections when set to
-                    <code>false</code>
-                    .
-                </p>
-            </li>
-            <li class="tui-list__item">
-                <code>connectionsDeletable</code>
-                (default: true)
-                <p>
-                    Prevents connection deletion when set to
-                    <code>false</code>
-                    .
-                </p>
-            </li>
-        </ul>
-
-        <hr />
-
-        <h3>positionAnimation:</h3>
+    <section>
+        <h2>Position Animation</h2>
         <p>
-            Animates node coordinates when the data model changes. The default
-            <code>duration</code>
-            is
+            Position animation is opt-in and applies whenever a new model changes node coordinates, including layouts
+            and application-side alignment. A duration of
             <code>0</code>
-            , so existing editors keep immediate positioning until animation is explicitly enabled.
+            preserves immediate updates.
         </p>
-        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
-            <li class="tui-list__item">
-                <code>duration</code>
-                : transition duration in milliseconds.
-            </li>
-            <li class="tui-list__item">
-                <code>easing</code>
-                : either
-                <code>ease-in-out</code>
-                or
-                <code>linear</code>
-                .
-            </li>
-        </ul>
         <tui-doc-code
-            filename="app.config.ts"
+            filename="graph-editor.component.ts"
             [code]="data.positionAnimation"
         />
-        <hr />
     </section>
-    <section class="tui-space_top-4">
-        <h2>Public API</h2>
-        <p>
-            The
-            <code>ng-draw-flow</code>
-            component exposes these public methods for programmatic control:
-        </p>
 
-        <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
-            <li class="tui-list__item">
-                <code>zoomIn(): void</code>
-                : Zooms the workspace in by one step (as defined by the zoomStep configuration).
-            </li>
-            <li class="tui-list__item">
-                <code>zoomOut(): void</code>
-                : Zooms the workspace out by one step (as defined by the zoomStep configuration).
-            </li>
-            <li class="tui-list__item">
-                <code>resetPosition(): void</code>
-                : Resets zoom to
-                <code>1.0</code>
-                and pan to the default camera state. If
-                <code>leftPosition</code>
-                or
-                <code>topPosition</code>
-                are configured, the viewport is then reframed using the same content-based alignment rules as the
-                initial render:
-                <ul>
-                    <li>With both values set to null, the camera returns to the world origin</li>
-                    <li>With configured offsets, the viewport aligns to the start node or rendered content bounds</li>
-                </ul>
-            </li>
-            <li class="tui-list__item">
-                <code>setPosition(position?: &#123; x?: number; y?: number; zoom?: number &#125;): void</code>
-                : Partially updates the current camera state. Omitted fields keep their current values, so you can move
-                only along one axis, change only the zoom level, or update both pan and zoom in one call.
-            </li>
-            <li class="tui-list__item">
-                <code>setScale(scale: number): void</code>
-                : Applies an absolute zoom factor (1 === 100%), automatically clamped between the configured
-                <code>minZoom</code>
-                and
-                <code>maxZoom</code>
-                bounds.
-            </li>
-            <li class="tui-list__item">
-                <code>setDataModel(model: DfDataModel): void</code>
-                : Replaces the complete model and propagates it to the bound form control.
-            </li>
-            <li class="tui-list__item">
-                <code>removeConnection(connection: DfDataConnection): void</code>
-                : Programmatically removes a connection between nodes. The connection object must match exactly one
-                existing connection in the graph.
-            </li>
-            <li class="tui-list__item">
-                <code>removeNode(node: DfDataNode | string): void</code>
-                : Programmatically removes a node by object or id and removes every connection that uses this node as a
-                source or target.
-            </li>
-            <li class="tui-list__item">
-                <code>clearSelection(): void</code>
-                : Clears the active node or connection selection without changing the graph.
-            </li>
-        </ul>
+    <section>
+        <h2>Component Methods</h2>
         <p>
-            Component outputs, store signals, RxJS streams and store commands are covered with an interactive inspector
-            in the
+            Call these methods through a
+            <code>viewChild(NgDrawFlowComponent)</code>
+            . The same graph and camera commands, except
+            <code>clearSelection()</code>
+            , are available through
+            <code>NgDrawFlowStoreService</code>
+            .
+        </p>
+        <div class="docs-table-scroll">
+            <table class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <code>zoomIn()</code>
+                            /
+                            <code>zoomOut()</code>
+                        </td>
+                        <td>
+                            Changes zoom by the configured
+                            <code>zoomStep</code>
+                            .
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>resetPosition()</code></td>
+                        <td>Restores zoom and reframes content with current left/top placement options.</td>
+                    </tr>
+                    <tr>
+                        <td><code>setPosition(&#123;x?, y?, zoom?&#125;)</code></td>
+                        <td>Partially updates camera coordinates or zoom; omitted fields keep their values.</td>
+                    </tr>
+                    <tr>
+                        <td><code>setScale(scale)</code></td>
+                        <td>
+                            Sets an absolute zoom factor and clamps it to
+                            <code>minZoom</code>
+                            /
+                            <code>maxZoom</code>
+                            .
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>setDataModel(model)</code></td>
+                        <td>Replaces the model and propagates it to the bound form control.</td>
+                    </tr>
+                    <tr>
+                        <td><code>removeNode(node | id)</code></td>
+                        <td>Removes a node and every connection that references it.</td>
+                    </tr>
+                    <tr>
+                        <td><code>removeConnection(connection)</code></td>
+                        <td>Removes the edge with matching source and target endpoints.</td>
+                    </tr>
+                    <tr>
+                        <td><code>clearSelection()</code></td>
+                        <td>Clears the selected node or connection without changing the graph.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            Camera commands accept scale factors where
+            <code>1</code>
+            is 100%. Scale outputs and store snapshots expose percentages where
+            <code>100</code>
+            is actual size.
+        </section>
+        <p>
+            Component outputs, store signals and RxJS streams are covered in the
             <a
                 routerLink="/documentation/state-and-events"
                 tuiLink
             >
                 state and events guide
+            </a>
+            . Camera options are listed in the
+            <a
+                routerLink="/documentation/pan-zoom-configuration"
+                tuiLink
+            >
+                pan and zoom guide
             </a>
             .
         </p>

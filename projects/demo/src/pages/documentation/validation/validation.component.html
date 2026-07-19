@@ -1,124 +1,130 @@
 <tui-doc-page header="Validation">
-    <p>
-        ng-draw-flow provides a flexible graph validation system at two levels: at the individual node level and at the
-        entire graph level. This allows you to create complex validation rules for your diagrams and visually display
-        errors.
+    <p class="docs-lead">
+        Combine local node validity with Angular validators on the complete
+        <code>DfDataModel</code>
+        . Core maps validator node ids back to rendered nodes and applies the standard invalid wrapper state.
     </p>
 
-    <h2>Node-level Validation</h2>
+    <div class="docs-summary">
+        <div>
+            <strong>Local node state</strong>
+            <span>Forms and controls inside one custom node.</span>
+        </div>
+        <div>
+            <strong>Graph validators</strong>
+            <span>Pure Angular validators over nodes and connections.</span>
+        </div>
+        <div>
+            <strong>Visual feedback</strong>
+            <span>Invalid node ids receive the core wrapper style.</span>
+        </div>
+    </div>
 
-    <p>
-        Each node in ng-draw-flow can have its own validation logic. For this purpose, the base class
-        <code>DrawFlowBaseNode</code>
-        has an
-        <code>invalid</code>
-        flag, which when set to
-        <code>true</code>
-        automatically adds the CSS class
-        <code>.df-invalid</code>
-        to the node.
-    </p>
-
-    <h3>How to Use</h3>
-
-    <p>
-        You can independently manage the validity state of a node within your component. This is especially useful when
-        a node contains a form or other input elements that require validation.
-    </p>
-
-    @if (validationExamples.LocalValidation; as localValidation) {
-        <tui-doc-code
-            filename="Example: Node with Form and Validation"
-            [code]="localValidation"
-        />
-    }
-
-    <h2>Graph-level Validation</h2>
-
-    <p>
-        ng-draw-flow also provides the ability to validate the entire graph as a whole. For this purpose, ready-made
-        validators are available that can be applied to the FormControl associated with the ng-draw-flow component.
-    </p>
-    @if (validationExamples.Setup; as setup) {
-        <tui-doc-code
-            filename="editor.component.ts"
-            [code]="setup"
-        />
-    }
-
-    <h3>Built-in Validators</h3>
-
-    <b>
-        1.
-        <code>dfCycleDetectionValidator</code>
-    </b>
-
-    <p>
-        Checks the graph for cycles (cyclicity). A cycle occurs when there is a path that starts and ends at the same
-        node.
-    </p>
-
-    @if (validationExamples.CycleDetectionValidatorError; as cycleDetectionValidatorError) {
-        <tui-doc-code
-            filename="dfCycleDetectionValidator error"
-            class="tui-space_bottom-4"
-            [code]="cycleDetectionValidatorError"
-        />
-    }
-
-    <b>
-        2.
-        <code>dfIsolatedNodesValidator</code>
-    </b>
-
-    <p>Checks the graph for isolated nodes - nodes that have neither incoming nor outgoing connections.</p>
-
-    @if (validationExamples.IsolatedNodesValidatorError; as isolatedNodesValidatorError) {
-        <tui-doc-code
-            filename="dfIsolatedNodesValidator error"
-            [code]="isolatedNodesValidatorError"
-        />
-    }
-
-    <h2>Creating Custom Validators</h2>
-
-    <p>
-        You can create your own validators for the graph by implementing a function that conforms to the
-        <code>ValidatorFn</code>
-        interface from Angular.
-    </p>
-
-    <section
-        appearance="warning"
-        size="m"
-        tuiNotification
-    >
-        To highlight problematic nodes, return their ids either as a string array value or as a nested
-        <code>&#123; nodeIds: string[] &#125;</code>
-        value. The built-in errors directive collects these ids and passes
-        <code>invalid</code>
-        to the corresponding node components.
+    <section>
+        <h2>Node-Level Validation</h2>
+        <p>
+            Override the protected
+            <code>invalidState</code>
+            getter to combine local UI validity with
+            <code>invalidSignal()</code>
+            supplied by graph validators. Core uses the result to apply
+            <code>.df-invalid</code>
+            to the custom node host.
+        </p>
+        @if (validationExamples.LocalValidation; as localValidation) {
+            <tui-doc-code
+                filename="form-node.component.ts"
+                [code]="localValidation"
+            />
+        }
     </section>
 
-    @if (validationExamples.CustomValidator; as customValidator) {
-        <tui-doc-code
-            filename="required-root.validator.ts"
-            [code]="customValidator"
-        />
-    }
+    <section>
+        <h2>Graph-Level Validation</h2>
+        <p>
+            Attach validators to the same non-nullable form control bound to
+            <code>ng-draw-flow</code>
+            . They receive the complete graph value and participate in normal Angular form status and errors.
+        </p>
+        @if (validationExamples.Setup; as setup) {
+            <tui-doc-code
+                filename="editor.component.ts"
+                [code]="setup"
+            />
+        }
 
-    <p>
-        Validators run on the complete graph value. Keep them pure and avoid mutating nodes or connections. The cycle
-        validator caches its previous result by connection structure, while isolated-node validation also depends on the
-        node list.
-    </p>
+        <div class="docs-table-scroll">
+            <table class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Validator</th>
+                        <th>Checks</th>
+                        <th>Node ids</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>dfCycleDetectionValidator()</code></td>
+                        <td>Directed cycles in the connection structure.</td>
+                        <td><code>cycleNodes</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dfIsolatedNodesValidator()</code></td>
+                        <td>Nodes absent from every source and target endpoint.</td>
+                        <td><code>isolatedNodes</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Built-in Error Shapes</h3>
+        @if (validationExamples.CycleDetectionValidatorError; as cycleDetectionValidatorError) {
+            <tui-doc-code
+                filename="cycle-error.ts"
+                [code]="cycleDetectionValidatorError"
+            />
+        }
+        @if (validationExamples.IsolatedNodesValidatorError; as isolatedNodesValidatorError) {
+            <tui-doc-code
+                filename="isolated-nodes-error.ts"
+                [code]="isolatedNodesValidatorError"
+            />
+        }
+    </section>
+
+    <section>
+        <h2>Custom Validators</h2>
+        <p>
+            Implement a standard Angular
+            <code>ValidatorFn</code>
+            and keep it pure. Return affected ids either as a top-level string array value or in a nested
+            <code>&#123;nodeIds: string[]&#125;</code>
+            object so the editor can highlight those nodes.
+        </p>
+        <section
+            appearance="warning"
+            size="m"
+            tuiNotification
+        >
+            Do not mutate nodes or connections inside a validator. Return validation metadata and let application code
+            decide how the graph should be repaired.
+        </section>
+        @if (validationExamples.CustomValidator; as customValidator) {
+            <tui-doc-code
+                filename="required-root.validator.ts"
+                [code]="customValidator"
+            />
+        }
+        <p>
+            The built-in cycle validator caches by connection structure. Isolated-node validation also reads the node
+            list, so replacing graph arrays and objects remains the predictable update model.
+        </p>
+    </section>
 
     <a
         routerLink="/examples/editor"
-        style="display: block"
         tuiLink
-        class="tui-space_top-4"
     >
-        Example
+        Open the editor validation example
     </a>
 </tui-doc-page>

@@ -6,12 +6,13 @@
 <df-output
   title="Add child"
   [connectorData]="{
-    nodeId,
-    connectorId: nodeId + '-add-child',
+    nodeId: nodeIdSignal(),
+    connectorId: nodeIdSignal() + '-add-child',
     single: false,
     data: {childType: 'task'},
   }"
   [content]="addChildIcon"
+  [layoutOrder]="0"
   [mode]="outputMode.Action"
   (activated)="addChild($event)"
 />

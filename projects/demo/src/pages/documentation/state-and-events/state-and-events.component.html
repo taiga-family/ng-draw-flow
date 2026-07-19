@@ -1,12 +1,26 @@
 <tui-doc-page header="State & Events">
     <section>
-        <p>
+        <p class="docs-lead">
             <code>ng-draw-flow</code>
             is a ControlValueAccessor. Use an Angular form control as the source of truth, component outputs for local
             template reactions, and
             <code>NgDrawFlowStoreService</code>
             when controls or observers live outside the editor component.
         </p>
+        <div class="docs-summary">
+            <div>
+                <strong>Form control</strong>
+                <span>Persistent graph state and application-side mutations.</span>
+            </div>
+            <div>
+                <strong>Component outputs</strong>
+                <span>Template-local reactions to user interactions.</span>
+            </div>
+            <div>
+                <strong>Store facade</strong>
+                <span>Signal snapshots, RxJS events and commands for surrounding UI.</span>
+            </div>
+        </div>
         <section
             appearance="info"
             size="m"
@@ -148,8 +162,10 @@
             <code>setDataModel()</code>
             ,
             <code>removeNode()</code>
-            and
+            ,
             <code>removeConnection()</code>
+            and
+            <code>setDataModel()</code>
             forward to the attached editor. Model replacement preserves node selection by node id and connection
             selection by source and target connector endpoints while those items still exist.
         </p>
@@ -169,6 +185,14 @@
             <code>form.disable()</code>
             .
         </p>
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            Use the form control as the persistent source of truth. Store snapshots are cloned runtime views intended
+            for computed UI state and commands, not objects to mutate in place.
+        </section>
     </section>
 
     <section>

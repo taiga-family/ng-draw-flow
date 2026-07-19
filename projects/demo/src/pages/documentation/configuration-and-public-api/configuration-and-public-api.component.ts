@@ -1,12 +1,12 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
-import {TuiLink} from '@taiga-ui/core';
+import {TuiLink, TuiNotification} from '@taiga-ui/core';
 
 @Component({
     standalone: true,
     selector: 'configuration-and-public-api',
-    imports: [RouterLink, TuiAddonDoc, TuiLink],
+    imports: [RouterLink, TuiAddonDoc, TuiLink, TuiNotification],
     templateUrl: './configuration-and-public-api.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })

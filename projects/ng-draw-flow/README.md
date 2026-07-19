@@ -242,7 +242,7 @@ including dynamic tree layouts.
 See the [connector documentation](https://taiga-family.github.io/ng-draw-flow/documentation/connectors) for regular and
 action-output examples.
 
-## Automatic Layouts
+## Dynamic Layouts
 
 Automatic positioning is provided separately by
 [`@ng-draw-flow/layouts`](https://npmjs.com/package/@ng-draw-flow/layouts). Core has no runtime dependency on the
