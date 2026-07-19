@@ -128,6 +128,7 @@ export interface DfDataConnectorConfig {
     readonly nodeId: DfId;
     readonly connectorId: DfId;
     readonly single: boolean;
+    readonly data?: Record<string, unknown>;
 }
 
 export interface DfConnectorContentContext {
@@ -142,6 +143,11 @@ export interface DfConnectorData {
 export enum DfConnectionPoint {
     Input = 'input',
     Output = 'output',
+}
+
+export enum DfOutputMode {
+    Action = 'action',
+    Connection = 'connection',
 }
 
 export interface DfEvent<T> {

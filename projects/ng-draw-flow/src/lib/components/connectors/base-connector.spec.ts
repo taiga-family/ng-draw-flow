@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 
+import {DRAW_FLOW_DEFAULT_OPTIONS, DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {DfConnectionPoint} from '../../ng-draw-flow.interfaces';
 import {ConnectionsService} from '../connections/connections.service';
 import {DfInputComponent} from './input.component';
@@ -41,6 +42,7 @@ describe('BaseConnector', () => {
 
         expect(connector.classList.contains('df-disabled')).toBe(false);
         expect(connector.classList.contains('df-has-content')).toBe(true);
+        expect(connector.classList.contains('df-not-creatable')).toBe(false);
         expect(connector.hasAttribute('data-connected')).toBe(false);
         expect(connector.textContent?.trim()).toBe('Input');
 
@@ -64,5 +66,25 @@ describe('BaseConnector', () => {
 
         expect(connector.classList.contains('df-disabled')).toBe(true);
         expect(connector.getAttribute('data-connected')).toBe('true');
+    });
+
+    it('marks connectors as non-interactive when connections cannot be created', () => {
+        TestBed.overrideProvider(DRAW_FLOW_OPTIONS, {
+            useValue: {
+                ...DRAW_FLOW_DEFAULT_OPTIONS,
+                options: {
+                    ...DRAW_FLOW_DEFAULT_OPTIONS.options,
+                    connectionsCreatable: false,
+                },
+            },
+        });
+
+        const fixture = TestBed.createComponent(HostComponent);
+
+        fixture.detectChanges();
+
+        const connector = fixture.nativeElement.querySelector('df-input') as HTMLElement;
+
+        expect(connector.classList).toContain('df-not-creatable');
     });
 });

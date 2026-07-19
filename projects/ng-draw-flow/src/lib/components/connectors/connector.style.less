@@ -44,8 +44,18 @@
         pointer-events: none;
     }
 
+    &.df-action {
+        cursor: pointer;
+    }
+
     &.df-has-content::before {
         display: none;
+    }
+
+    &.df-not-creatable {
+        visibility: hidden;
+        pointer-events: none;
+        cursor: default;
     }
 }
 
