@@ -1,0 +1,224 @@
+<tui-doc-page header="Automatic Layouts">
+    <section>
+        <p>
+            The optional
+            <code>&commat;ng-draw-flow/layouts</code>
+            package calculates node positions without coupling layout algorithms to the core editor. The first bundled
+            implementation produces strict trees and uses
+            <code>d3-hierarchy</code>
+            internally; applications configure only the supported strict-tree options.
+        </p>
+        <a
+            routerLink="/examples/dynamic-layout"
+            tuiLink
+        >
+            Open the interactive dynamic tree example
+        </a>
+    </section>
+
+    <section>
+        <h2>Installation</h2>
+        <p>
+            This guide assumes that
+            <code>&commat;ng-draw-flow/core</code>
+            is already installed. Add the optional layouts package with the same compatible release line.
+        </p>
+        <tui-doc-code [code]="examples.installation" />
+    </section>
+
+    <section>
+        <h2>Built-in Strict Tree</h2>
+        <p>
+            <code>DfAutoLayoutService</code>
+            uses the bundled strict-tree implementation by default. Applications do not instantiate or call D3. Inject
+            the service and request a layout when the editor is initialized or its model changes:
+        </p>
+        <tui-doc-code
+            filename="dynamic-tree.component.ts"
+            [code]="examples.treeEngine"
+        />
+        <p>
+            Without configuration, the tree flows left to right, uses a fixed 180 x 64px node size, an 80px level gap
+            and a 32px sibling gap, and preserves the current root position. Provide only the options that differ for a
+            graph. A component-level provider scopes both configuration and the auto-layout service to that editor:
+        </p>
+        <tui-doc-code
+            filename="dynamic-tree.component.ts"
+            [code]="examples.treeEngineOptions"
+        />
+        <p>The engine supports four explicit directions:</p>
+        <ul class="tui-list tui-list_extra-small">
+            <li class="tui-list__item"><code>LeftToRight</code></li>
+            <li class="tui-list__item"><code>RightToLeft</code></li>
+            <li class="tui-list__item"><code>TopToBottom</code></li>
+            <li class="tui-list__item"><code>BottomToTop</code></li>
+        </ul>
+        <p>
+            <code>levelGap</code>
+            controls spacing between generations and
+            <code>siblingGap</code>
+            controls spacing within a generation.
+            <code>preserveRootPosition</code>
+            defaults to true; disable it to position the root at
+            <code>origin</code>
+            instead. Use
+            <code>rootId</code>
+            to require a particular node as the root; it must still have no incoming connection and be the graph's only
+            root.
+        </p>
+    </section>
+
+    <section>
+        <h2>Node Sizing</h2>
+        <p>
+            Use
+            <code>DfNodeSizingStrategy.Fixed</code>
+            when every node has the same dimensions. Its
+            <code>size</code>
+            is used directly during every calculation and does not require DOM measurements.
+        </p>
+        <p>
+            Use
+            <code>DfNodeSizingStrategy.Measured</code>
+            for nodes whose dimensions depend on content, templates or expanded sections. Core then publishes actual
+            wrapper dimensions through its existing resize observation. Layouts performs an initial calculation with the
+            required
+            <code>fallback</code>
+            and automatically reapplies the layout after all current nodes are measured. Later size changes are
+            coalesced per animation frame and also trigger a recalculation.
+        </p>
+        <tui-doc-code
+            filename="dynamic-tree.component.ts"
+            [code]="examples.measuredSizing"
+        />
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            Measured dimensions are runtime view state and are not written to
+            <code>DfDataModel</code>
+            . The fallback is also used before rendering and whenever a newly added node has not been measured yet.
+        </section>
+    </section>
+
+    <section>
+        <h2>Connectors</h2>
+        <p>
+            Layouts calculate node positions but do not synthesize connection points. Core measures the user-provided
+            <code>df-input</code>
+            and
+            <code>df-output</code>
+            components, preserving full freedom over their number and placement. Every connector id referenced by a
+            connection must therefore be rendered by its node.
+        </p>
+        <tui-doc-code
+            filename="tree-node.component.html"
+            [code]="examples.model"
+        />
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            When regular connection creation is disabled, input connectors become invisible but remain available as
+            target anchors. Action outputs stay visible and each connector can create an independent tree branch.
+        </section>
+    </section>
+
+    <section>
+        <h2>Apply and Reapply the Layout</h2>
+        <p>
+            <code>DfAutoLayoutService</code>
+            reads the current model from
+            <code>NgDrawFlowStoreService</code>
+            , runs the configured engine, and writes the returned model back to the editor. Calling
+            <code>apply()</code>
+            does not return a Promise or require a subscription. Its
+            <code>running</code>
+            ,
+            <code>result</code>
+            and
+            <code>error</code>
+            signals expose the latest operation state.
+        </p>
+        <tui-doc-code
+            filename="dynamic-tree.component.ts"
+            [code]="examples.apply"
+        />
+        <p>
+            After an interactive mutation, pass
+            <code>anchorNodeId</code>
+            together with the new
+            <code>model</code>
+            to keep that node at its current canvas position without waiting for form synchronization. The service
+            translates the complete result while preserving relative positions, so a repeatedly activated action output
+            stays under the pointer. Selection is also retained across model updates while the selected node id or
+            selected connection endpoints still exist.
+        </p>
+        <p>
+            Layouting does not change editor interaction options. Keep
+            <code>nodesDraggable</code>
+            enabled to arrange an ordinary graph once and then let users adjust it, or disable dragging when every graph
+            mutation must remain under automatic layout control.
+        </p>
+    </section>
+
+    <section>
+        <h2>Smooth Position Changes</h2>
+        <p>
+            Node animation belongs to core and is opt-in, so it can also be used when positions come from another layout
+            package or from application code. A duration of
+            <code>0</code>
+            keeps the existing immediate behavior.
+        </p>
+        <tui-doc-code
+            filename="app.config.ts"
+            [code]="examples.animation"
+        />
+    </section>
+
+    <section>
+        <h2>Strict Tree Requirements</h2>
+        <p>
+            The built-in strict-tree layout accepts exactly one root, unique node ids, existing connection endpoints,
+            one parent per child, and a graph where every node is reachable from the root. Validation failures are
+            published to the
+            <code>error</code>
+            signal as
+            <code>DfTreeLayoutError</code>
+            instances.
+        </p>
+        <tui-doc-code
+            filename="layout-errors.ts"
+            [code]="examples.strictTreeErrors"
+        />
+        <section
+            appearance="warning"
+            size="m"
+            tuiNotification
+        >
+            The bundled engine is intentionally a strict-tree implementation. DAGs, cyclic graphs and nodes with
+            multiple parents are not currently supported by the layouts package.
+        </section>
+    </section>
+
+    <section>
+        <h2>Dynamic Node Creation</h2>
+        <p>
+            A custom node can render one or more action outputs that create children. Each output controls its own id,
+            content, constraints and application data; activating it changes the model and then reapplies the layout.
+            When children use multiple outputs of the same node, assign each output a unique
+            <code>layoutOrder</code>
+            . Horizontal trees interpret it from top to bottom and vertical trees from left to right. Children created
+            from the same output retain their model order. See the
+            <a
+                routerLink="/documentation/connectors"
+                tuiLink
+            >
+                connector documentation
+            </a>
+            for the complete action-output and custom-content API.
+        </p>
+    </section>
+</tui-doc-page>

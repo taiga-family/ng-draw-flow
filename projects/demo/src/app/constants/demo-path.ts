@@ -7,6 +7,7 @@ export const DemoPath = {
     PanZoom: 'documentation/pan-zoom-configuration',
     Nodes: 'documentation/creating-nodes',
     Connectors: 'documentation/connectors',
+    Layouts: 'documentation/layouts',
     Connections: 'documentation/connections',
     Labels: 'documentation/labels',
     Validation: 'documentation/validation',

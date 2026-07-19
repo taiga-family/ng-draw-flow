@@ -52,6 +52,12 @@ export const appRoutes: Routes = [
         data: {title: 'Connectors'},
     },
     {
+        path: DemoPath.Layouts,
+        loadComponent: async () =>
+            import('../pages/documentation/layouts/layouts.component'),
+        data: {title: 'Automatic Layouts'},
+    },
+    {
         path: DemoPath.Connections,
         loadComponent: async () =>
             import('../pages/documentation/connections/connections.component'),

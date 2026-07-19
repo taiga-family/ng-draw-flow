@@ -44,6 +44,11 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Documentation',
+        title: 'Automatic Layouts',
+        route: DemoPath.Layouts,
+    },
+    {
+        section: 'Documentation',
         title: 'Connection Lines',
         route: DemoPath.Connections,
     },
