@@ -50,8 +50,8 @@ describe('DraftConnectionService', () => {
         });
 
         (service as any).onDragMove(
-            {clientX: 10, clientY: 20} as PointerEvent,
-            {clientX: 30, clientY: 10} as PointerEvent,
+            {clientX: 10, clientY: 20},
+            {clientX: 30, clientY: 10},
         );
 
         expect(service.target().point.x).toBeCloseTo(110, 6);
@@ -76,7 +76,7 @@ describe('DraftConnectionService', () => {
 
         expect(service.activeConnector()).toEqual(sourceConnector);
 
-        (service as any).onDragEnd({target: targetElement} as unknown as PointerEvent);
+        (service as any).onDragEnd({target: targetElement});
 
         expect(service.activeConnector()).toBeNull();
         expect(service.lastConnectionCreated()).toEqual({

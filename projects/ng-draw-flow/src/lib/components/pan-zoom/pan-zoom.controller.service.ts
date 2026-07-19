@@ -33,8 +33,7 @@ export interface DfPanZoomViewportZoomGesture {
 }
 
 export type DfPanZoomViewportGesture =
-    | DfPanZoomViewportPanGesture
-    | DfPanZoomViewportZoomGesture;
+    DfPanZoomViewportPanGesture | DfPanZoomViewportZoomGesture;
 
 @Injectable()
 export class PanZoomControllerService {

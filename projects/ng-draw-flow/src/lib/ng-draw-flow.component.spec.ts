@@ -100,10 +100,7 @@ describe('NgDrawFlowComponent', () => {
     it('frames only on the first non-empty external model write', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest.spyOn(
-            component as never,
-            'scheduleViewportFraming' as never,
-        );
+        const scheduleViewportFraming = jest.spyOn(component, 'scheduleViewportFraming');
         const model = {
             nodes: [
                 {
@@ -132,10 +129,7 @@ describe('NgDrawFlowComponent', () => {
     it('allows framing again after the external model becomes empty', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest.spyOn(
-            component as never,
-            'scheduleViewportFraming' as never,
-        );
+        const scheduleViewportFraming = jest.spyOn(component, 'scheduleViewportFraming');
 
         component.writeValue({
             nodes: [

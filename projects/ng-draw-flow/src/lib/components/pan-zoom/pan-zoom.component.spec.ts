@@ -31,9 +31,7 @@ describe('PanZoomComponent', () => {
     };
 
     const resizeBoard = (width = 1000, height = 800): void => {
-        (component as any).onBoardResize([
-            {contentRect: {width, height}},
-        ] as unknown as ResizeObserverEntry[]);
+        (component as any).onBoardResize([{contentRect: {width, height}}]);
 
         flushAnimationFrames();
     };
@@ -42,21 +40,23 @@ describe('PanZoomComponent', () => {
         scheduledAnimationFrameCallbacks = [];
         animationFrameScheduleSpy = jest
             .spyOn(animationFrameScheduler, 'schedule')
-            .mockImplementation(((
-                work: (this: Subscription, state?: unknown) => void,
-                _delay?: number,
-                state?: unknown,
-            ): Subscription => {
-                const subscription = new Subscription();
+            .mockImplementation(
+                (
+                    work: (this: Subscription, state?: unknown) => void,
+                    _delay?: number,
+                    state?: unknown,
+                ): Subscription => {
+                    const subscription = new Subscription();
 
-                scheduledAnimationFrameCallbacks.push(() => {
-                    if (!subscription.closed) {
-                        work.call(subscription, state);
-                    }
-                });
+                    scheduledAnimationFrameCallbacks.push(() => {
+                        if (!subscription.closed) {
+                            work.call(subscription, state);
+                        }
+                    });
 
-                return subscription;
-            }) as typeof animationFrameScheduler.schedule);
+                    return subscription;
+                },
+            );
 
         TestBed.overrideComponent(PanZoomComponent, {
             set: {
@@ -258,12 +258,8 @@ describe('PanZoomComponent', () => {
 
         syncContainerOffsetsSpy.mockClear();
 
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
-        (component as any).onBoardResize([
-            {contentRect: {width: 1000, height: 800}},
-        ] as unknown as ResizeObserverEntry[]);
+        (component as any).onBoardResize([{contentRect: {width: 1000, height: 800}}]);
+        (component as any).onBoardResize([{contentRect: {width: 1000, height: 800}}]);
 
         expect(syncContainerOffsetsSpy).not.toHaveBeenCalled();
 

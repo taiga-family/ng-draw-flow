@@ -60,7 +60,7 @@ export class PanZoomService {
                 return false;
             }
 
-            this.patchCamera({[property]: value} as Partial<DfPanzoomModel>);
+            this.patchCamera({[property]: value});
 
             return true;
         },

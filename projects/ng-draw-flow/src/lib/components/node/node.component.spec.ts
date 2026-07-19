@@ -241,7 +241,7 @@ describe('NodeComponent', () => {
         geometry.measureContent({
             offsetWidth: 120,
             offsetHeight: 80,
-        } as HTMLElement);
+        });
         component.resolvedNodeValue = {
             id: 'node-1',
             data: {type: 'simpleNode'},

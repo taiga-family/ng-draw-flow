@@ -175,7 +175,7 @@ describe('PanZoomGesturesService', () => {
             width: 200,
             height: 200,
             toJSON: () => ({}),
-        } as DOMRect);
+        });
 
         const gesturePromise = nextGesture(
             (item) => item.type === 'zoom',
