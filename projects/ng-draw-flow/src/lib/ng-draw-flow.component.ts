@@ -224,8 +224,8 @@ export class NgDrawFlowComponent
         this.panzoom().zoomOut();
     }
 
-    /** Set both zoom and coordinates. */
-    public setPosition(position?: DfPoint & {zoom?: number}): void {
+    /** Partially updates zoom and coordinates. */
+    public setPosition(position?: Partial<DfPoint> & {zoom?: number}): void {
         this.panzoom().setPosition(position);
     }
 
