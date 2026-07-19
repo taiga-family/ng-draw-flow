@@ -166,6 +166,28 @@ describe('NgDrawFlowComponent', () => {
         expect(scheduleViewportFraming).toHaveBeenCalledTimes(1);
     });
 
+    it('preserves selection while updating the model', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const store = fixture.debugElement.injector.get(NgDrawFlowStoreService);
+        const model = {
+            nodes: [
+                {
+                    id: 'node-1',
+                    data: {type: 'simpleNode'},
+                },
+            ],
+            connections: [],
+        };
+
+        component.writeValue(model);
+        component.setDataModel(model);
+
+        expect(store.clearSelectedNode).not.toHaveBeenCalled();
+        expect(store.clearSelectedConnection).not.toHaveBeenCalled();
+        expect(store.updateDataModel).toHaveBeenCalledTimes(2);
+    });
+
     it('removes a node with related connections through public API', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;

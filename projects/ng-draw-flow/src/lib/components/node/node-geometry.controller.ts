@@ -1,6 +1,7 @@
 import {
     type DfDataInitialNode,
     type DfDataNode,
+    type DfNodeSize,
     type DfPoint,
 } from '../../ng-draw-flow.interfaces';
 import {getViewportZeroPoint} from '../pan-zoom/pan-zoom.camera.math';
@@ -68,13 +69,24 @@ export class NodeGeometryController {
         this.nodeHeight = nativeElement.offsetHeight;
     }
 
+    public measureElement(nativeElement: HTMLElement): DfNodeSize {
+        return {
+            width: nativeElement.offsetWidth,
+            height: nativeElement.offsetHeight,
+        };
+    }
+
     public getCenteredPosition(node: DfDataNode): DfPoint {
+        return this.getCenteredPoint(node.position);
+    }
+
+    public getCenteredPoint(position: DfPoint): DfPoint {
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
 
         return {
-            x: node.position.x - halfOfNodeWidth,
-            y: node.position.y - halfOfNodeHeight,
+            x: position.x - halfOfNodeWidth,
+            y: position.y - halfOfNodeHeight,
         };
     }
 
@@ -89,14 +101,18 @@ export class NodeGeometryController {
     }
 
     public syncWorkspaceGeometry(node: DfDataNode): void {
+        this.syncWorkspaceGeometryAt(node.id, node.position);
+    }
+
+    public syncWorkspaceGeometryAt(nodeId: string, position: DfPoint): void {
         const halfOfNodeWidth = this.nodeWidth / 2;
         const halfOfNodeHeight = this.nodeHeight / 2;
 
-        this.options.panZoomService.upsertNodeBounds(node.id, {
-            minX: node.position.x - halfOfNodeWidth,
-            minY: node.position.y - halfOfNodeHeight,
-            maxX: node.position.x + halfOfNodeWidth,
-            maxY: node.position.y + halfOfNodeHeight,
+        this.options.panZoomService.upsertNodeBounds(nodeId, {
+            minX: position.x - halfOfNodeWidth,
+            minY: position.y - halfOfNodeHeight,
+            maxX: position.x + halfOfNodeWidth,
+            maxY: position.y + halfOfNodeHeight,
         });
     }
 

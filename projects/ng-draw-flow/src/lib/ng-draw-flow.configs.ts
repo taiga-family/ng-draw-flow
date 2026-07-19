@@ -21,6 +21,10 @@ export const DRAW_FLOW_DEFAULT_OPTIONS: DfOptions = {
         connectionsDeletable: true,
         connectionsCreatable: true,
     },
+    positionAnimation: {
+        duration: 0,
+        easing: 'ease-in-out',
+    },
 };
 
 export const DRAW_FLOW_OPTIONS = new InjectionToken('[DRAW_FLOW_OPTIONS]: Options', {
@@ -46,6 +50,10 @@ export function provideNgDrawFlowConfigs(options: DfOptionsInput = {}): FactoryP
             options: {
                 ...DRAW_FLOW_DEFAULT_OPTIONS.options,
                 ...options.options,
+            },
+            positionAnimation: {
+                ...DRAW_FLOW_DEFAULT_OPTIONS.positionAnimation!,
+                ...options.positionAnimation,
             },
         }),
     };

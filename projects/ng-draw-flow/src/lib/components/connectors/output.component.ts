@@ -1,4 +1,11 @@
-import {ChangeDetectionStrategy, Component, inject, input, output} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    effect,
+    inject,
+    input,
+    output,
+} from '@angular/core';
 import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
 
 import {
@@ -8,6 +15,7 @@ import {
     type DfDataConnectorConfig,
     DfOutputMode,
 } from '../../ng-draw-flow.interfaces';
+import {DF_CONNECTOR_ORDER_REGISTRY} from '../../services/connector-order-registry.service';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {BaseConnector} from './base-connector';
 
@@ -30,6 +38,7 @@ import {BaseConnector} from './base-connector';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.aria-disabled]': 'isAction && disabled ? true : null',
+        '[attr.data-layout-order]': 'layoutOrder() ?? null',
         '[attr.role]': 'isAction ? "button" : null',
         '[attr.tabindex]': 'isAction ? 0 : null',
         '[class.df-action]': 'isAction',
@@ -41,6 +50,7 @@ import {BaseConnector} from './base-connector';
 })
 export class DfOutputComponent extends BaseConnector {
     private readonly draftConnectionService = inject(DraftConnectionService);
+    private readonly connectorOrderRegistry = inject(DF_CONNECTOR_ORDER_REGISTRY);
     private connectionLabelOverride?: DfConnectionLabel;
 
     protected override connectorType = DfConnectionPoint.Output;
@@ -59,7 +69,25 @@ export class DfOutputComponent extends BaseConnector {
     );
 
     public readonly mode = input(DfOutputMode.Connection);
+    public readonly layoutOrder = input<number | undefined>();
     public readonly activated = output<DfDataConnectorConfig>();
+
+    constructor() {
+        super();
+
+        const registry = this.connectorOrderRegistry;
+
+        if (!registry) {
+            return;
+        }
+
+        effect((onCleanup) => {
+            const {nodeId, connectorId} = this.dataInput();
+
+            registry.set(nodeId, connectorId, this.layoutOrder());
+            onCleanup(() => registry.remove(nodeId, connectorId));
+        });
+    }
 
     public get data(): DfDataConnectorConfig {
         return this.dataInput();

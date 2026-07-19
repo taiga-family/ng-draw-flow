@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import {TestBed} from '@angular/core/testing';
 
 import {DRAW_FLOW_DEFAULT_OPTIONS, DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
@@ -7,6 +7,10 @@ import {
     type DfDataConnectorConfig,
     DfOutputMode,
 } from '../../ng-draw-flow.interfaces';
+import {
+    DF_CONNECTOR_ORDER_REGISTRY,
+    DfConnectorOrderRegistryService,
+} from '../../services/connector-order-registry.service';
 import {ConnectionsService} from '../connections/connections.service';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {DfOutputComponent} from './output.component';
@@ -25,6 +29,7 @@ import {DfOutputComponent} from './output.component';
         <df-output
             [connectorData]="connectorData"
             [content]="connectorContent"
+            [layoutOrder]="layoutOrder()"
             [mode]="mode"
             (activated)="onActivated($event)"
         />
@@ -40,6 +45,7 @@ class HostComponent {
     };
 
     public mode = DfOutputMode.Action;
+    public readonly layoutOrder = signal(2);
     public readonly onActivated = jest.fn();
 }
 
@@ -53,6 +59,11 @@ describe('DfOutputComponent', () => {
             imports: [HostComponent],
             providers: [
                 ConnectionsService,
+                DfConnectorOrderRegistryService,
+                {
+                    provide: DF_CONNECTOR_ORDER_REGISTRY,
+                    useExisting: DfConnectorOrderRegistryService,
+                },
                 {
                     provide: DraftConnectionService,
                     useValue: {connection$: {next: startDraft}},
@@ -116,6 +127,27 @@ describe('DfOutputComponent', () => {
             connectionLabel: undefined,
         });
         expect(fixture.componentInstance.onActivated).not.toHaveBeenCalled();
+    });
+
+    it('registers and updates its layout order', () => {
+        const fixture = TestBed.createComponent(HostComponent);
+        const registry = TestBed.inject(DfConnectorOrderRegistryService);
+
+        fixture.detectChanges();
+
+        const connector = fixture.nativeElement.querySelector('df-output') as HTMLElement;
+
+        expect(registry.orders().get('node-1')?.get('output-1')).toBe(2);
+        expect(connector.dataset.layoutOrder).toBe('2');
+
+        fixture.componentInstance.layoutOrder.set(0);
+        fixture.detectChanges();
+
+        expect(registry.orders().get('node-1')?.get('output-1')).toBe(0);
+
+        fixture.destroy();
+
+        expect(registry.orders().has('node-1')).toBe(false);
     });
 
     it('honors the single connection constraint in action mode', async () => {

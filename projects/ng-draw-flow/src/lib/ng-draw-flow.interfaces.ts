@@ -53,16 +53,25 @@ export interface DfWorkspaceOptions {
     connectionsCreatable: boolean;
 }
 
+export type DfNodePositionAnimationEasing = 'ease-in-out' | 'linear';
+
+export interface DfNodePositionAnimationOptions {
+    duration: number;
+    easing: DfNodePositionAnimationEasing;
+}
+
 export interface DfOptions {
     connection: DfConnectionOptions;
     nodes: DfComponents;
     options: DfWorkspaceOptions;
+    positionAnimation?: DfNodePositionAnimationOptions;
 }
 
 export interface DfOptionsInput {
     connection?: Partial<DfConnectionOptionsInput>;
     nodes?: DfComponents;
     options?: Partial<DfWorkspaceOptions>;
+    positionAnimation?: Partial<DfNodePositionAnimationOptions>;
 }
 
 export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;
@@ -70,6 +79,11 @@ export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;
 export interface DfPoint {
     x: number;
     y: number;
+}
+
+export interface DfNodeSize {
+    width: number;
+    height: number;
 }
 
 export interface DfDelta {

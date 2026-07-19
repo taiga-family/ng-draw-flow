@@ -24,6 +24,7 @@ export interface DfNodeConnectorsControllerOptions {
     readonly getCenteredPosition: (node: DfDataNode) => DfPoint;
     readonly getNode: () => DfDataNode;
     readonly getNodeContentRenderer: () => DfNodeContentRenderer;
+    readonly getZoom: () => number;
     readonly onConnectorDeleted: (connectorId: string) => void;
 }
 
@@ -36,13 +37,18 @@ export class NodeConnectorsController {
 
     public updateCoordinates(): void {
         const node = this.options.getNode();
-        const nodeContentRenderer = this.options.getNodeContentRenderer();
         const centeredCoordinates = this.options.getCenteredPosition(node);
+
+        this.updateCoordinatesAt(centeredCoordinates, node.id);
+    }
+
+    public updateCoordinatesAt(centeredCoordinates: DfPoint, nodeId: string): void {
+        const nodeContentRenderer = this.options.getNodeContentRenderer();
 
         nodeContentRenderer.inputConnectors().forEach((input: DfInputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
-                node.id,
+                nodeId,
                 input,
                 DfConnectionPoint.Input,
             );
@@ -51,7 +57,7 @@ export class NodeConnectorsController {
         nodeContentRenderer.outputConnectors().forEach((output: DfOutputComponent) => {
             this.updateConnectorCoordinates(
                 centeredCoordinates,
-                node.id,
+                nodeId,
                 output,
                 DfConnectionPoint.Output,
             );
@@ -170,19 +176,29 @@ export class NodeConnectorsController {
         element: HTMLElement,
         nodePosition: DfPoint,
     ): DfPoint {
-        let x = nodePosition.x + element.offsetLeft + element.clientWidth / 2;
-        let y = nodePosition.y + element.offsetTop + element.clientHeight / 2;
+        const nodeElement = element.closest<HTMLElement>('[data-draw-flow-node]');
 
-        while (element && !element.hasAttribute('data-draw-flow-node')) {
-            element = element.offsetParent as HTMLElement;
-
-            if (element) {
-                x += element.offsetLeft;
-                y += element.offsetTop;
-            }
+        if (!nodeElement) {
+            return {
+                x: nodePosition.x + element.offsetLeft + element.clientWidth / 2,
+                y: nodePosition.y + element.offsetTop + element.clientHeight / 2,
+            };
         }
 
-        return {x, y};
+        // Layout offsets ignore transforms commonly used to center connector hosts.
+        const connectorRect = element.getBoundingClientRect();
+        const nodeRect = nodeElement.getBoundingClientRect();
+        const currentZoom = this.options.getZoom();
+        const zoom = currentZoom > 0 ? currentZoom : 1;
+
+        return {
+            x:
+                nodePosition.x +
+                (connectorRect.left + connectorRect.width / 2 - nodeRect.left) / zoom,
+            y:
+                nodePosition.y +
+                (connectorRect.top + connectorRect.height / 2 - nodeRect.top) / zoom,
+        };
     }
 
     private collectConnectorUpdateSources(
