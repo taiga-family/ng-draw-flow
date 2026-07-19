@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject, input} from '@angular/core';
+import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
 
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {
@@ -14,7 +15,18 @@ import {BaseConnector} from './base-connector';
 @Component({
     standalone: true,
     selector: 'df-output',
-    template: '',
+    imports: [PolymorpheusOutlet],
+    template: `
+        @if (hasContent) {
+            <span class="df-connector-content">
+                <ng-container
+                    *polymorpheusOutlet="content() as value; context: contentContext()"
+                >
+                    {{ value }}
+                </ng-container>
+            </span>
+        }
+    `,
     styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {'(pointerdown)': 'this.onDragStart($event)'},

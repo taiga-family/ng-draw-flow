@@ -130,6 +130,10 @@ export interface DfDataConnectorConfig {
     readonly single: boolean;
 }
 
+export interface DfConnectorContentContext {
+    readonly $implicit: DfDataConnectorConfig;
+}
+
 export interface DfConnectorData {
     point: DfPoint;
     position: DfConnectorPosition | null;

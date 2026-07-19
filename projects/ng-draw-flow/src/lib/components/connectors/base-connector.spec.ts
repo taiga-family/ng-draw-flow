@@ -10,19 +10,17 @@ import {DfInputComponent} from './input.component';
     imports: [DfInputComponent],
     template: `
         <df-input
+            content="Input"
             [connectorData]="{
                 nodeId: 'node-1',
                 connectorId: 'input-1',
-                connectorType: connectorType,
                 single: true,
             }"
         />
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class HostComponent {
-    public readonly connectorType = DfConnectionPoint.Input;
-}
+class HostComponent {}
 
 describe('BaseConnector', () => {
     beforeEach(async () => {
@@ -42,7 +40,9 @@ describe('BaseConnector', () => {
         const connector = fixture.nativeElement.querySelector('df-input') as HTMLElement;
 
         expect(connector.classList.contains('df-disabled')).toBe(false);
+        expect(connector.classList.contains('df-has-content')).toBe(true);
         expect(connector.hasAttribute('data-connected')).toBe(false);
+        expect(connector.textContent?.trim()).toBe('Input');
 
         connectionsService.setConnections([
             {

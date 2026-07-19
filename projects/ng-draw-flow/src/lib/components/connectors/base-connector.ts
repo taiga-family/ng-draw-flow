@@ -1,7 +1,9 @@
-import {Directive, effect, ElementRef, inject} from '@angular/core';
+import {computed, Directive, effect, ElementRef, inject, input} from '@angular/core';
+import {type PolymorpheusContent} from '@taiga-ui/polymorpheus';
 
 import {
     type DfConnectionPoint,
+    type DfConnectorContentContext,
     type DfConnectorPosition,
     type DfDataConnectorConfig,
     type DfPoint,
@@ -14,6 +16,7 @@ import {ConnectionsService} from '../connections/connections.service';
         '[attr.data-node-id]': 'bindNodeId',
         '[attr.data-connector-id]': 'bindConnectorId',
         '[attr.data-position]': 'bindPosition',
+        '[class.df-has-content]': 'hasContent',
     },
 })
 export abstract class BaseConnector {
@@ -21,6 +24,14 @@ export abstract class BaseConnector {
 
     protected isDisabled = false;
     protected readonly connectionsService = inject(ConnectionsService);
+
+    public readonly content = input<
+        PolymorpheusContent<DfConnectorContentContext> | undefined
+    >();
+
+    public readonly contentContext = computed<DfConnectorContentContext>(() => ({
+        $implicit: this.data,
+    }));
 
     public coordinates?: DfPoint;
     public readonly nativeElement = inject(ElementRef).nativeElement;
@@ -42,6 +53,10 @@ export abstract class BaseConnector {
     public abstract get position(): DfConnectorPosition | undefined;
 
     protected abstract get data(): DfDataConnectorConfig;
+
+    public get hasContent(): boolean {
+        return this.content() !== undefined && this.content() !== null;
+    }
 
     public get bindNodeId(): string | undefined {
         return this.data?.nodeId;
