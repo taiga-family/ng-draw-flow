@@ -103,9 +103,25 @@ describe('DfOutputComponent', () => {
         expect(connector.classList).toContain('df-action');
         expect(connector.classList).toContain('df-has-content');
         expect(connector.classList).not.toContain('df-not-creatable');
-        expect(connector.getAttribute('role')).toBe('button');
-        expect(connector.getAttribute('tabindex')).toBe('0');
+        expect(connector.hasAttribute('role')).toBe(false);
+        expect(connector.hasAttribute('tabindex')).toBe(false);
         expect(connector.textContent?.trim()).toBe('output-1');
+    });
+
+    it('does not activate from the keyboard', () => {
+        const fixture = TestBed.createComponent(HostComponent);
+
+        fixture.detectChanges();
+
+        const connector = fixture.nativeElement.querySelector('df-output') as HTMLElement;
+
+        connector.dispatchEvent(
+            new KeyboardEvent('keydown', {key: 'Enter', bubbles: true}),
+        );
+        connector.dispatchEvent(new KeyboardEvent('keydown', {key: ' ', bubbles: true}));
+
+        expect(fixture.componentInstance.onActivated).not.toHaveBeenCalled();
+        expect(connector.hasAttribute('tabindex')).toBe(false);
     });
 
     it('preserves regular connection behavior by default', () => {

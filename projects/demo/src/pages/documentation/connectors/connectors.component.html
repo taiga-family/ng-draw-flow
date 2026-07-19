@@ -128,7 +128,7 @@
         when activating it should run an application action instead of starting a draggable connection. Action outputs
         emit their connector config through
         <code>(activated)</code>
-        and support mouse, Enter and Space activation.
+        when clicked.
     </p>
     <p>
         They remain visible when
@@ -155,9 +155,8 @@
 
     <h2>Interactive Example</h2>
     <p>
-        The orange connector creates ordinary edges by dragging. The icon connector is an action output: click it or
-        focus it and press Enter or Space. It never creates a draft edge and exposes its application data through the
-        activation event.
+        The orange connector creates ordinary edges by dragging. The icon connector is an action output: click it to
+        emit the activation event with its application data without creating a draft edge.
     </p>
     <tui-doc-example
         style="padding: 0"

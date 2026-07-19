@@ -37,14 +37,9 @@ import {BaseConnector} from './base-connector';
     styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.aria-disabled]': 'isAction && disabled ? true : null',
         '[attr.data-layout-order]': 'layoutOrder() ?? null',
-        '[attr.role]': 'isAction ? "button" : null',
-        '[attr.tabindex]': 'isAction ? 0 : null',
         '[class.df-action]': 'isAction',
         '(click)': 'this.onActivate($event)',
-        '(keydown.enter)': 'this.onActivate($event)',
-        '(keydown.space)': 'this.onActivate($event)',
         '(pointerdown)': 'this.onDragStart($event)',
     },
 })
