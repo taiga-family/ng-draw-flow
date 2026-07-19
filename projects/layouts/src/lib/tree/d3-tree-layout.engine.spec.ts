@@ -1,5 +1,5 @@
 import {
-    DfConnectionPoint,
+    type DfConnectionPoint,
     type DfDataConnection,
     type DfDataModel,
     type DfDataNode,
@@ -9,17 +9,20 @@ import {DfNodeSizingStrategy, DfTreeLayoutDirection} from '../layout.interfaces'
 import {D3TreeLayoutEngine} from './d3-tree-layout.engine';
 import {type DfTreeLayoutError} from './tree-layout.error';
 
+const INPUT_CONNECTOR = 'input' as DfConnectionPoint;
+const OUTPUT_CONNECTOR = 'output' as DfConnectionPoint;
+
 function connection(source: string, target: string): DfDataConnection {
     return {
         source: {
             nodeId: source,
             connectorId: `${source}-output`,
-            connectorType: DfConnectionPoint.Output,
+            connectorType: OUTPUT_CONNECTOR,
         },
         target: {
             nodeId: target,
             connectorId: `${target}-input`,
-            connectorType: DfConnectionPoint.Input,
+            connectorType: INPUT_CONNECTOR,
         },
     };
 }

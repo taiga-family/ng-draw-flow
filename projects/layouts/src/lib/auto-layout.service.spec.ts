@@ -3,7 +3,7 @@ import {TestBed} from '@angular/core/testing';
 import {
     DF_CONNECTOR_ORDER_REGISTRY,
     DF_NODE_SIZE_REGISTRY,
-    DfConnectionPoint,
+    type DfConnectionPoint,
     type DfDataConnection,
     type DfDataModel,
     type DfDataNode,
@@ -15,6 +15,9 @@ import {
 import {DfAutoLayoutService} from './auto-layout.service';
 import {DfNodeSizingStrategy} from './layout.interfaces';
 import {DF_TREE_LAYOUT_OPTIONS} from './tree-layout-options.token';
+
+const INPUT_CONNECTOR = 'input' as DfConnectionPoint;
+const OUTPUT_CONNECTOR = 'output' as DfConnectionPoint;
 
 jest.mock('@ng-draw-flow/core', () => ({
     DF_CONNECTOR_ORDER_REGISTRY: Symbol('DF_CONNECTOR_ORDER_REGISTRY'),
@@ -31,12 +34,12 @@ function connection(
         source: {
             nodeId: source,
             connectorId: sourceConnectorId,
-            connectorType: DfConnectionPoint.Output,
+            connectorType: OUTPUT_CONNECTOR,
         },
         target: {
             nodeId: target,
             connectorId: `${target}-input`,
-            connectorType: DfConnectionPoint.Input,
+            connectorType: INPUT_CONNECTOR,
         },
     };
 }
