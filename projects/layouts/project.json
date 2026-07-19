@@ -1,0 +1,52 @@
+{
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "name": "ng-draw-flow-layouts",
+    "prefix": "df",
+    "projectType": "library",
+    "sourceRoot": "projects/layouts/src",
+    "tags": ["ng-draw-flow", "layout", "graph"],
+    "targets": {
+        "build": {
+            "executor": "@nx/angular:package",
+            "outputs": ["{workspaceRoot}/dist/layouts"],
+            "options": {
+                "project": "projects/layouts/ng-package.json"
+            },
+            "configurations": {
+                "production": {
+                    "tsConfig": "projects/layouts/tsconfig.lib.prod.json"
+                },
+                "development": {
+                    "tsConfig": "projects/layouts/tsconfig.lib.json"
+                }
+            },
+            "defaultConfiguration": "production",
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "dependencies": true,
+                    "params": "forward"
+                }
+            ]
+        },
+        "publish": {
+            "executor": "nx:run-commands",
+            "dependsOn": [
+                {
+                    "target": "build",
+                    "params": "ignore"
+                }
+            ],
+            "options": {
+                "command": "npm publish ./dist/layouts --ignore-scripts"
+            }
+        },
+        "test": {
+            "executor": "@nx/jest:jest",
+            "outputs": ["{workspaceRoot}/coverage/projects/layouts"],
+            "options": {
+                "jestConfig": "projects/layouts/jest.config.ts"
+            }
+        }
+    }
+}

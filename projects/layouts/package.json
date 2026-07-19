@@ -1,0 +1,32 @@
+{
+    "name": "@ng-draw-flow/layouts",
+    "version": "1.1.0",
+    "description": "Strict-tree automatic layouts for @ng-draw-flow/core",
+    "keywords": [
+        "angular",
+        "graph",
+        "layout",
+        "tree",
+        "d3"
+    ],
+    "homepage": "https://github.com/taiga-family/ng-draw-flow",
+    "bugs": "https://github.com/taiga-family/ng-draw-flow/issues",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/taiga-family/ng-draw-flow"
+    },
+    "license": "Apache-2.0",
+    "author": {
+        "name": "Airat Khairullin",
+        "email": "a1rat91@yandex.ru",
+        "url": "https://t.me/a1rat91"
+    },
+    "dependencies": {
+        "d3-hierarchy": "3.1.2",
+        "tslib": "2.8.1"
+    },
+    "peerDependencies": {
+        "@angular/core": ">=19.0.0",
+        "@ng-draw-flow/core": "^1.1.0"
+    }
+}
