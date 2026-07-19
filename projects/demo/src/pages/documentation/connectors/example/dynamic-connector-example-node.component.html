@@ -1,0 +1,32 @@
+<ng-template #addChildIcon>
+    <tui-icon icon="@tui.plus" />
+</ng-template>
+
+@if (!startNodeSignal()) {
+    <df-input
+        class="input"
+        [connectorData]="{
+            nodeId: nodeIdSignal(),
+            connectorId: nodeIdSignal() + '-input-1',
+            single: true,
+        }"
+    />
+}
+
+<strong>{{ modelSignal().title }}</strong>
+<span>Dynamic tree node</span>
+
+<df-output
+    title="Add child"
+    class="action-output"
+    [connectorData]="{
+        nodeId: nodeIdSignal(),
+        connectorId: nodeIdSignal() + '-output-1',
+        single: false,
+        data: {childType: 'dynamicConnectorExample'},
+    }"
+    [content]="addChildIcon"
+    [layoutOrder]="0"
+    [mode]="outputMode.Action"
+    (activated)="addChild($event)"
+/>

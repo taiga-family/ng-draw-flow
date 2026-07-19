@@ -1,7 +1,3 @@
-<ng-template #actionIcon>
-    <tui-icon icon="@tui.sparkles" />
-</ng-template>
-
 @if (!startNodeSignal()) {
     <df-input
         class="input"
@@ -26,17 +22,3 @@
         }"
     />
 }
-
-<df-output
-    title="Run node action"
-    class="action"
-    [connectorData]="{
-        nodeId: nodeIdSignal(),
-        connectorId: nodeIdSignal() + '-action-1',
-        single: false,
-        data: {action: 'inspect', nodeType: modelSignal().type},
-    }"
-    [content]="actionIcon"
-    [mode]="outputMode.Action"
-    (activated)="activate($event)"
-/>

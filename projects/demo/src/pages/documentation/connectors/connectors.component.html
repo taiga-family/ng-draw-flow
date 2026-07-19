@@ -121,19 +121,35 @@
         [code]="examples.customContent"
     />
 
-    <h2>Action Outputs</h2>
+    <h2>Regular Graph Connectors</h2>
     <p>
-        Set an output connector to
+        In a regular graph,
+        <code>df-output</code>
+        uses
+        <code>DfOutputMode.Connection</code>
+        by default. Dragging from an output starts a draft connection, and dropping it on an input adds an edge to the
+        graph. These connectors do not emit application actions.
+    </p>
+    <tui-doc-example
+        style="padding: 0"
+        [content]="examples.regular"
+    >
+        <connector-example />
+    </tui-doc-example>
+
+    <h2>Dynamic Layout Graph</h2>
+    <p>
+        Dynamic trees use a separate, opt-in connector mode. Set an output to
         <code>DfOutputMode.Action</code>
-        when activating it should run an application action instead of starting a draggable connection. Action outputs
-        emit their connector config through
+        when a click should request a graph mutation instead of starting a draggable connection. The connector only
+        emits its config through
         <code>(activated)</code>
-        when clicked.
+        ; the application handler adds the node and connection, then asks the layouts package to arrange the new model.
     </p>
     <p>
-        They remain visible when
+        Action outputs are not regular connection handles. They remain visible when
         <code>connectionsCreatable</code>
-        is disabled, never create a draft edge, and still respect the
+        is disabled, never create a draft edge on their own, and still respect the
         <code>single</code>
         constraint. Multiple action outputs can be rendered in one node; give each one a unique
         <code>connectorId</code>
@@ -153,16 +169,16 @@
         [code]="examples.actionOutput"
     />
 
-    <h2>Interactive Example</h2>
+    <h3>Dynamic Tree Example</h3>
     <p>
-        The orange connector creates ordinary edges by dragging. The icon connector is an action output: click it to
-        emit the activation event with its application data without creating a draft edge.
+        In this example, every plus connector identifies its parent node. Clicking it creates a child and its edge in
+        the action handler; automatic layout then recalculates the tree positions.
     </p>
     <tui-doc-example
         style="padding: 0"
-        [content]="examples.interactive"
+        [content]="examples.dynamic"
     >
-        <connector-example />
+        <dynamic-connector-example />
     </tui-doc-example>
 
     <p>

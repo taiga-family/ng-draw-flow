@@ -12,13 +12,8 @@
 }
 
 .input,
-.output,
-.action {
-    position: absolute;
-}
-
-.input,
 .output {
+    position: absolute;
     inset-block-start: 50%;
     transform: translateY(-50%);
 }
@@ -29,20 +24,4 @@
 
 .output {
     inset-inline-end: -1rem;
-}
-
-.action {
-    display: grid;
-    inset-block-start: -1rem;
-    inset-inline-end: 0.25rem;
-    place-items: center;
-    color: var(--tui-text-action);
-    background: var(--tui-background-base);
-    border: 0.0625rem solid var(--tui-border-normal);
-
-    tui-icon {
-        inline-size: 0.875rem;
-        block-size: 0.875rem;
-        font-size: 0.875rem;
-    }
 }

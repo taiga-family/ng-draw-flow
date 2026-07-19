@@ -1,38 +1,24 @@
-import {JsonPipe} from '@angular/common';
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {
     DfArrowhead,
-    DfConnectionPoint,
     DfConnectionType,
     type DfDataModel,
     dfPanZoomOptionsProvider,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
-import {TuiNotification} from '@taiga-ui/core';
 
-import {ConnectorExampleActionsService} from './connector-example-actions.service';
 import {ConnectorExampleNodeComponent} from './connector-example-node.component';
 
 @Component({
     standalone: true,
     selector: 'connector-example',
-    imports: [JsonPipe, NgDrawFlowComponent, ReactiveFormsModule, TuiNotification],
+    imports: [NgDrawFlowComponent, ReactiveFormsModule],
     template: `
         <div class="editor">
             <ng-draw-flow [formControl]="form" />
         </div>
-        <section
-            appearance="info"
-            size="s"
-            tuiNotification
-        >
-            Action activations: {{ actions.activations() }}.
-            @if (actions.lastData(); as data) {
-                Last payload: {{ data | json }}
-            }
-        </section>
     `,
     styles: `
         :host {
@@ -43,14 +29,9 @@ import {ConnectorExampleNodeComponent} from './connector-example-node.component'
             block-size: 22rem;
             background: #fff;
         }
-
-        [tuiNotification] {
-            border-radius: 0;
-        }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        ConnectorExampleActionsService,
         dfPanZoomOptionsProvider({leftPosition: 60}),
         provideNgDrawFlowConfigs({
             connection: {
@@ -63,8 +44,6 @@ import {ConnectorExampleNodeComponent} from './connector-example-node.component'
     ],
 })
 export default class ConnectorExampleComponent {
-    public readonly actions = inject(ConnectorExampleActionsService);
-
     public readonly form = new FormControl<DfDataModel>(
         {
             nodes: [
@@ -81,20 +60,7 @@ export default class ConnectorExampleComponent {
                     endNode: true,
                 },
             ],
-            connections: [
-                {
-                    source: {
-                        nodeId: 'source',
-                        connectorType: DfConnectionPoint.Output,
-                        connectorId: 'source-output-1',
-                    },
-                    target: {
-                        nodeId: 'target',
-                        connectorType: DfConnectionPoint.Input,
-                        connectorId: 'target-input-1',
-                    },
-                },
-            ],
+            connections: [],
         },
         {nonNullable: true},
     );
