@@ -1,0 +1,46 @@
+:host {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-inline-size: 8rem;
+    min-block-size: 2.5rem;
+}
+
+.title {
+    padding-inline-start: 0.5rem;
+    padding-inline-end: 1.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.input {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: -1.0625rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.add-child {
+    position: absolute;
+    display: grid;
+    inset-inline-end: -0.75rem;
+    place-items: center;
+    inline-size: 1rem;
+    block-size: 1rem;
+    color: #155eef;
+    background: #fff;
+    border: 0.0625rem solid #84adff;
+    border-radius: 50%;
+
+    &::after {
+        opacity: 0;
+    }
+}
+
+.add-child-icon {
+    inline-size: 1rem;
+    block-size: 1rem;
+    font-size: 0.625rem;
+}

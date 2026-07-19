@@ -1,0 +1,17 @@
+<tui-doc-page header="Dynamic Layouting">
+    <div class="toolbar">
+        <button
+            appearance="secondary"
+            size="s"
+            tuiButton
+            type="button"
+            (click)="reset()"
+        >
+            Reset graph
+        </button>
+    </div>
+
+    <div class="editor">
+        <ng-draw-flow [formControl]="form" />
+    </div>
+</tui-doc-page>

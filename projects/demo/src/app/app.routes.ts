@@ -82,6 +82,12 @@ export const appRoutes: Routes = [
         data: {title: 'Editor example'},
     },
     {
+        path: DemoPath.DynamicLayout,
+        loadComponent: async () =>
+            import('../pages/examples/dynamic-layout/dynamic-layout.component'),
+        data: {title: 'Dynamic Layouting'},
+    },
+    {
         path: DemoPath.StressTest,
         loadComponent: async () =>
             import('../pages/examples/stress-test/stress-test.component'),

@@ -1,0 +1,74 @@
+<ng-template #addChildIcon>
+    <tui-icon
+        icon="@tui.plus"
+        class="add-child-icon"
+    />
+</ng-template>
+
+@if (!startNode) {
+    <df-input
+        class="input"
+        [connectorData]="{
+            nodeId,
+            connectorId: nodeId + '-input-1',
+            single: true,
+        }"
+    />
+}
+
+<strong class="title">{{ model.title }}</strong>
+
+<div class="fields">
+    @for (field of fields.controls; track field) {
+        <div class="field">
+            <tui-textfield
+                tuiTextfieldSize="s"
+                tuiTheme="light"
+                class="text-field"
+            >
+                <input
+                    placeholder="Field {{ $index + 1 }}"
+                    tuiInput
+                    [formControl]="field"
+                />
+            </tui-textfield>
+
+            <df-output
+                class="field-output"
+                [connectorData]="{
+                    nodeId,
+                    connectorId: nodeId + '-field-' + ($index + 1),
+                    single: false,
+                    data: {childType: 'dynamicNode', fieldIndex: $index},
+                }"
+                [content]="addChildIcon"
+                [layoutOrder]="$index"
+                [mode]="outputMode.Action"
+                [title]="'Add child from field ' + ($index + 1)"
+                (activated)="addChild($event)"
+            />
+        </div>
+    }
+</div>
+
+<div class="field-actions">
+    <button
+        appearance="secondary"
+        size="s"
+        tuiButton
+        type="button"
+        (click)="addField()"
+    >
+        Add field
+    </button>
+    <button
+        appearance="flat"
+        size="s"
+        tuiButton
+        type="button"
+        [disabled]="fields.length === 1"
+        (click)="removeField()"
+    >
+        Remove
+    </button>
+</div>

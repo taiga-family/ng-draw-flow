@@ -12,6 +12,7 @@ export const DemoPath = {
     SimpleExample: 'examples/simple-example',
     Overview: 'examples/overview',
     Editor: 'examples/editor',
+    DynamicLayout: 'examples/dynamic-layout',
     StressTest: 'examples/stress-test',
     CustomNodes: 'examples/nodes-example/custom-nodes-example',
 } as const;

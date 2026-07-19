@@ -69,6 +69,11 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Examples',
+        title: 'Dynamic Layouting',
+        route: DemoPath.DynamicLayout,
+    },
+    {
+        section: 'Examples',
         title: 'Stress Test',
         route: DemoPath.StressTest,
     },
