@@ -139,7 +139,7 @@ _FirstExampleComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODU
     }
   },
   dependencies: [_ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControlDirective],
-  styles: [".editor[_ngcontent-%COMP%] {\n  block-size: 25rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcXVpY2tzdGFydC9leGFtcGxlcy9maXJzdC1leGFtcGxlL3N0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKIiwic291cmNlc0NvbnRlbnQiOlsiLmVkaXRvciB7XG4gICAgYmxvY2stc2l6ZTogMjVyZW07XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */"],
+  styles: [".editor[_ngcontent-%COMP%] {\n  block-size: 25rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKIiwiZmlsZSI6InN0eWxlcy5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmVkaXRvciB7XG4gICAgYmxvY2stc2l6ZTogMjVyZW07XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcXVpY2tzdGFydC9leGFtcGxlcy9maXJzdC1leGFtcGxlL3N0eWxlcy5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKOztBQUVBLHdaQUF3WiIsInNvdXJjZXNDb250ZW50IjpbIi5lZGl0b3Ige1xuICAgIGJsb2NrLXNpemU6IDI1cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
   changeDetection: 0
 });
 
@@ -156,12 +156,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ QuickstartComponent)
 /* harmony export */ });
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/forms */ 48015);
-/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
-/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @taiga-ui/core */ 71534);
-/* harmony import */ var _examples_first_example_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./examples/first-example/component */ 74856);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 96623);
-/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ 76380);
+/* harmony import */ var _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ng-draw-flow/core */ 85577);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @taiga-ui/core */ 11498);
+/* harmony import */ var _examples_first_example_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./examples/first-example/component */ 74856);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 96623);
+/* harmony import */ var _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @taiga-ui/addon-doc/components */ 94841);
+/* harmony import */ var _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @taiga-ui/core */ 90795);
 var _QuickstartComponent;
+
+
 
 
 
@@ -172,11 +176,8 @@ var _QuickstartComponent;
 class QuickstartComponent {
   constructor() {
     this.gettingStarted = {
-      imports: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_imports_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/imports.md?raw */ 74698, 17)),
-      providing: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_providing_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/providing.md?raw */ 48638, 17)),
-      data1: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_data-1_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-1.md?raw */ 73562, 17)),
-      template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_template_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.md?raw */ 37290, 17)),
-      data2: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_data-2_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/data-2.md?raw */ 90739, 17))
+      editor: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_editor_component_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/editor.component.md?raw */ 45552, 17)),
+      installation: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_installation_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/installation.md?raw */ 6264, 17))
     };
     this.customNodeExample = {
       TypeScript: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_quickstart_examples_node_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/node.component.ts?raw */ 8341, 17)),
@@ -197,248 +198,172 @@ class QuickstartComponent {
       }],
       connections: []
     };
-    this.nodeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControl(this.nodeData);
+    this.nodeForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControl(this.nodeData, {
+      nonNullable: true
+    });
   }
 }
 _QuickstartComponent = QuickstartComponent;
 _QuickstartComponent.ɵfac = function QuickstartComponent_Factory(__ngFactoryType__) {
   return new (__ngFactoryType__ || _QuickstartComponent)();
 };
-_QuickstartComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineComponent"]({
+_QuickstartComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefineComponent"]({
   type: _QuickstartComponent,
   selectors: [["quickstart-doc-page"]],
-  decls: 159,
-  vars: 7,
-  consts: [["header", "Getting started"], ["alt", "ng-draw-flow logo", "src", "assets/icons/logo.svg", 1, "logo"], ["href", "https://codesandbox.io/p/devbox/ng-drae-flow-demo-y9qd4s?file=%2Fsrc%2Fapp%2Fapp.component.ts", "target", "_blank", "tuiLink", ""], [1, "tui-list", "tui-list_small"], [1, "tui-list__item"], ["href", "https://nodejs.org/", "tuiLink", ""], ["href", "https://angular.dev/", "tuiLink", ""], ["filename", "app.module.ts", 3, "code"], ["filename", "app.connectors.component.ts", 3, "code"], ["filename", "app.component.html", 3, "code"], [1, "tui-space_top-4"], [2, "padding", "0", 3, "content"], [1, "node-demo"], [3, "formControl"]],
+  decls: 113,
+  vars: 4,
+  consts: [["header", "Getting Started"], [1, "docs-lead"], [1, "docs-summary"], [1, "docs-actions"], ["appearance", "secondary", "routerLink", "/examples/overview", "size", "m", "tuiButton", ""], ["appearance", "flat", "routerLink", "/documentation/terms-and-definitions", "size", "m", "tuiButton", ""], [3, "code"], [1, "docs-flow"], [2, "padding", "0", 3, "content"], [1, "node-demo"], [3, "formControl"], ["appearance", "info", "size", "m", "tuiNotification", ""], ["filename", "graph-editor.component.ts", 3, "code"]],
   template: function QuickstartComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](0, "tui-doc-page", 0)(1, "section");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](2, "img", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](3, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](4, " If you're looking to get up and running swiftly, you're in the right spot! This guide will expedite your journey from the starting point to a working application with NgDrawFlow in just a few minutes. Following this, you'll have the opportunity to explore NgDrawFlow more thoroughly through examples or by delving into the API documentation. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](5, "section")(6, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](7, "Play online");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](8, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](9, " You can try NgDrawFlow without setting anything up locally by checking out the starter projects we have on ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](10, "a", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](11, " CodeSandbox ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](12, "section")(13, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](14, "Installation");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](15, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](16, "To get started locally you should have a few things:");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](17, "ul", 3)(18, "li", 4)(19, "a", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](20, " Node.js ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](21, " installed. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](22, "li", 4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](23, " A working knowledge of ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](24, "a", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](25, " Angular ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](26, " . You don't need to be an expert, but you should be comfortable with the basics. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](27, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](28, "First, spin up a new Angular project");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](29, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](30, "ng new my-app");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](31, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](32, "NgDrawFlow is published on npm as ng-draw-flow, so go ahead and add it next.");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](33, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](34, "npm i @ng-draw-flow/core --save");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](35, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](36, "Lastly, spin up the dev server and we're good to go!");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](37, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](38, "ng serve");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](39, "section")(40, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](41, "Import Dependencies and Register Node Components");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](42, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](43, " To get started with the ng-draw-flow library, begin by setting up your module with the necessary imports and component registrations. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](44, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](45, " Add the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](46, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](47, "NgDrawFlowComponent");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](48, " and ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](49, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](50, "ReactiveFormsModule");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](51, " to your module's imports array: ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](52, "tui-doc-code", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](53, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](54, " Then, within the providers section, register the components that you want to be available for use as nodes within the graph editor: ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](55, "tui-doc-code", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](56, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](57, " Make sure to replace ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](58, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](59, "yourNode");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](60, " with your specific component identifier for the node within the editor, and ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](61, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](62, "YourNodeComponent");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](63, " with the actual component class you intend to use. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](64, "section")(65, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](66, "Set Up Data Model and Control for Graph Structure");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](67, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](68, " In the component where you intend to construct your graph, you need to create a data structure that defines the nodes and connections. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](69, "tui-doc-code", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](70, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](71, " Next, link this data structure to your ng-draw-flow component using a ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](72, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](73, "FormControl");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](74, " . This will allow for reactive updates and interactions within your graph editor: ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](75, "tui-doc-code", 9);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](76, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](77, " This setup ensures that your ng-draw-flow component is fully integrated with the Angular forms system, enabling seamless data flow and state management for your graph. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](78, "section")(79, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](80, "Populate Example DfDataModel");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](81, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](82, " To illustrate how to set up the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](83, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](84, "DfDataModel");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](85, " with actual data, the following example lays out a scenario with a collection of nodes and their connections: ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](86, "tui-doc-code", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](87, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](88, " Each ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](89, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](90, "node");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](91, " mainly consists of an ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](92, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](93, "id");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](94, " , a ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](95, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](96, "position");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](97, " , and a ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](98, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](99, "data");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](100, " field. Inside the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](101, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](102, "data");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](103, " field, you need to specify the node type that was previously registered and all the data you want to provide to the node. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](104, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](105, " The ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](106, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](107, "connections");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](108, " array contains objects that describe the start and end points of each connection. The ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](109, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](110, "source");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](111, " and ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](112, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](113, "target");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](114, " holds information about which node and specific connector are used for each connection. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](115, "section", 10);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](116, "first-example");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](117, "section")(118, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](119, "Creating Nodes");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](120, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](121, " In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own node, you should develop a component that extends from the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](122, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](123, "DrawFlowBaseNode");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](124, " class. This component can render connector components such as ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](125, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](126, "DfInputComponent");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](127, " and ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](128, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](129, "DfOutputComponent");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](130, " . ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](131, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](132, " The base class supports both styles: the classic properties ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](133, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](134, "nodeId");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](135, " / ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](136, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](137, "model");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](138, " / ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](139, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](140, "startNode");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](141, " and the signal API ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](142, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](143, "nodeIdSignal()");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](144, " / ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](145, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](146, "modelSignal()");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](147, " / ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](148, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](149, "startNodeSignal()");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](150, " when you need to build ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](151, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](152, "computed()");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](153, " values. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](154, "p");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵtext"](155, "Here is a basic blueprint for a simple node component:");
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementStart"](156, "tui-doc-example", 11)(157, "div", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelement"](158, "ng-draw-flow", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](0, "tui-doc-page", 0)(1, "p", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](2, " Build a working Angular graph from one custom node component, one immutable data model and one reactive form control. Core owns the editor surface and interactions; your application owns node content and graph data. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](3, "div", 2)(4, "div")(5, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](6, "Angular components");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](7, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](8, "Render any domain UI inside a node.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](9, "div")(10, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](11, "Reactive Forms");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](12, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](13, "Read and replace the complete graph as one value.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](14, "div")(15, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](16, "Application-owned data");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](17, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](18, "Persist, validate and synchronize plain node and connection objects.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](19, "div", 3)(20, "a", 4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](21, " Explore the feature overview ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](22, "a", 5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](23, " Learn the graph model ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](24, "section")(25, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](26, "Install Core");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](27, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](28, " NgDrawFlow requires Angular 19 or later. Install the core package, then import ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](29, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](30, "ReactiveFormsModule");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](31, " in the standalone component that owns the graph. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](32, "tui-doc-code", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](33, "section")(34, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](35, "Build the First Graph");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](36, "ol", 7)(37, "li")(38, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](39, "Render a node");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](40, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](41, " Extend ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](42, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](43, "DrawFlowBaseNode");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](44, " and place input and output connectors. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](45, "li")(46, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](47, "Register its type");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](48, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](49, " Map ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](50, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](51, "data.type");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](52, " to the Angular component in the core provider. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](53, "li")(54, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](55, "Bind the model");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](56, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](57, " Pass a non-nullable ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](58, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](59, "FormControl<DfDataModel>");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](60, " to the editor. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](61, "section")(62, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](63, "1. Custom Node Component");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](64, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](65, " Connector placement belongs to the custom node. The example hides the input for a start node and the output for an end node, and uses signal inputs from the base class. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](66, "tui-doc-example", 8)(67, "div", 9);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](68, "ng-draw-flow", 10);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](69, "section", 11);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](70, " Connector ids must be unique across the complete graph. Prefix them with the node id, for example ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](71, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](72, "task-1-output-1");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](73, " . ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](74, "section")(75, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](76, "2. Standalone Editor Component");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](77, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](78, " This complete component registers the node, configures the editor, defines two positioned nodes and connects their rendered connector ids. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](79, "tui-doc-code", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](80, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](81, " User interactions write a new value to the control. For application-side changes, create the next immutable model and call ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](82, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](83, "form.setValue(nextModel)");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](84, " . Disable the control with ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](85, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](86, "form.disable()");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](87, " when the graph should remain visible but non-interactive. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](88, "section")(89, "h3");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](90, "3. Working Result");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](91, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](92, " The same model can branch, merge and use multiple connectors. Positions are world coordinates for the top-left corner of each node wrapper. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelement"](93, "first-example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](94, "section")(95, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](96, "Where to Go Next");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](97, "div", 2)(98, "div")(99, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](100, "Custom nodes");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](101, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](102, "Typed node data, reactive content and wrapper styling.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](103, "div")(104, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](105, "Connectors");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](106, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](107, "Multiple handles, custom content and connection constraints.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](108, "div")(109, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](110, "Dynamic layouts");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementStart"](111, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵtext"](112, "Optional strict-tree positioning with measured node sizes.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵelementEnd"]()()()()();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](52);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("code", ctx.gettingStarted.imports);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("code", ctx.gettingStarted.providing);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](14);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("code", ctx.gettingStarted.data1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("code", ctx.gettingStarted.template);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](11);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("code", ctx.gettingStarted.data2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](70);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("content", ctx.customNodeExample);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵproperty"]("formControl", ctx.nodeForm);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](32);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("code", ctx.gettingStarted.installation);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](34);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("content", ctx.customNodeExample);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("formControl", ctx.nodeForm);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵadvance"](11);
+      _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵproperty"]("code", ctx.gettingStarted.editor);
     }
   },
-  dependencies: [_examples_first_example_component__WEBPACK_IMPORTED_MODULE_3__["default"], _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_1__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControlDirective, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_5__.TuiDocCode, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_5__.TuiDocExample, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_5__.TuiDocPage, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__.TuiLink],
-  styles: [".editor[_ngcontent-%COMP%] {\n  block-size: 31.25rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\n.logo[_ngcontent-%COMP%] {\n  display: block;\n  inline-size: 9.375rem;\n  block-size: 9.375rem;\n  margin: 0 auto 2.5rem;\n}\n.node-demo[_ngcontent-%COMP%] {\n  block-size: 6.25rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcXVpY2tzdGFydC9xdWlja3N0YXJ0LmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksb0JBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKO0FBRUE7RUFDSSxjQUFBO0VBQ0EscUJBQUE7RUFDQSxvQkFBQTtFQUNBLHFCQUFBO0FBQUo7QUFHQTtFQUNJLG1CQUFBO0VBQ0EsaUJBQUE7RUFDQSxjQUFBO0VBQ0EsZ0JBQUE7QUFESiIsInNvdXJjZXNDb250ZW50IjpbIi5lZGl0b3Ige1xuICAgIGJsb2NrLXNpemU6IDMxLjI1cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG59XG5cbi5sb2dvIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBpbmxpbmUtc2l6ZTogOS4zNzVyZW07XG4gICAgYmxvY2stc2l6ZTogOS4zNzVyZW07XG4gICAgbWFyZ2luOiAwIGF1dG8gMi41cmVtO1xufVxuXG4ubm9kZS1kZW1vIHtcbiAgICBibG9jay1zaXplOiA2LjI1cmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
+  dependencies: [_examples_first_example_component__WEBPACK_IMPORTED_MODULE_4__["default"], _ng_draw_flow_core__WEBPACK_IMPORTED_MODULE_2__.NgDrawFlowComponent, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.ReactiveFormsModule, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_0__.FormControlDirective, _angular_router__WEBPACK_IMPORTED_MODULE_1__.RouterLink, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_6__.TuiDocCode, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_6__.TuiDocExample, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_6__.TuiDocPage, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_3__.TuiButton, _taiga_ui_core__WEBPACK_IMPORTED_MODULE_7__.TuiNotificationDirective],
+  styles: [".node-demo[_ngcontent-%COMP%] {\n  block-size: 6.25rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\ntui-doc-code[_ngcontent-%COMP%], \ntui-doc-example[_ngcontent-%COMP%], \n[tuiNotification][_ngcontent-%COMP%] {\n  display: block;\n  margin-block: 1rem;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInF1aWNrc3RhcnQuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxtQkFBQTtFQUNBLGlCQUFBO0VBQ0EsY0FBQTtFQUNBLGdCQUFBO0FBQ0o7QUFFQTs7O0VBR0ksY0FBQTtFQUNBLGtCQUFBO0FBQUoiLCJmaWxlIjoicXVpY2tzdGFydC5jb21wb25lbnQubGVzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ub2RlLWRlbW8ge1xuICAgIGJsb2NrLXNpemU6IDYuMjVyZW07XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbn1cblxudHVpLWRvYy1jb2RlLFxudHVpLWRvYy1leGFtcGxlLFxuW3R1aU5vdGlmaWNhdGlvbl0ge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIG1hcmdpbi1ibG9jazogMXJlbTtcbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vcXVpY2tzdGFydC9xdWlja3N0YXJ0LmNvbXBvbmVudC5sZXNzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKO0FBRUE7OztFQUdJLGNBQUE7RUFDQSxrQkFBQTtBQUFKOztBQUVBLDRuQkFBNG5CIiwic291cmNlc0NvbnRlbnQiOlsiLm5vZGUtZGVtbyB7XG4gICAgYmxvY2stc2l6ZTogNi4yNXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMTAwJTtcbiAgICBtYXJnaW46IDAgYXV0bztcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xufVxuXG50dWktZG9jLWNvZGUsXG50dWktZG9jLWV4YW1wbGUsXG5bdHVpTm90aWZpY2F0aW9uXSB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgbWFyZ2luLWJsb2NrOiAxcmVtO1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"],
   changeDetection: 0
 });
 

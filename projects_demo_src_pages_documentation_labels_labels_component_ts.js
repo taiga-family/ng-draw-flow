@@ -261,7 +261,7 @@ _CopyComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["
     }
   },
   dependencies: [_taiga_ui_core__WEBPACK_IMPORTED_MODULE_2__.TuiIcon],
-  styles: ["[_nghost-%COMP%] {\n  cursor: pointer;\n}\n.copy-icon[_ngcontent-%COMP%] {\n  block-size: 0.75rem;\n  inline-size: 0.75rem;\n  color: var(--tui-text-secondary);\n}\n.copy-icon.copied[_ngcontent-%COMP%] {\n  color: var(--tui-text-positive);\n}\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vbGFiZWxzL2V4YW1wbGVzL2xhYmVscy9jb3B5L2NvcHkuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxlQUFBO0FBQ0o7QUFFQTtFQUNJLG1CQUFBO0VBQ0Esb0JBQUE7RUFDQSxnQ0FBQTtBQUFKO0FBRUk7RUFDSSwrQkFBQTtBQUFSIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLmNvcHktaWNvbiB7XG4gICAgYmxvY2stc2l6ZTogMC43NXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMC43NXJlbTtcbiAgICBjb2xvcjogdmFyKC0tdHVpLXRleHQtc2Vjb25kYXJ5KTtcblxuICAgICYuY29waWVkIHtcbiAgICAgICAgY29sb3I6IHZhcigtLXR1aS10ZXh0LXBvc2l0aXZlKTtcbiAgICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
+  styles: ["[_nghost-%COMP%] {\n  cursor: pointer;\n}\n.copy-icon[_ngcontent-%COMP%] {\n  block-size: 0.75rem;\n  inline-size: 0.75rem;\n  color: var(--tui-text-secondary);\n}\n.copy-icon.copied[_ngcontent-%COMP%] {\n  color: var(--tui-text-positive);\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvcHkuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxlQUFBO0FBQ0o7QUFFQTtFQUNJLG1CQUFBO0VBQ0Esb0JBQUE7RUFDQSxnQ0FBQTtBQUFKO0FBRUk7RUFDSSwrQkFBQTtBQUFSIiwiZmlsZSI6ImNvcHkuY29tcG9uZW50Lmxlc3MiLCJzb3VyY2VzQ29udGVudCI6WyI6aG9zdCB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4uY29weS1pY29uIHtcbiAgICBibG9jay1zaXplOiAwLjc1cmVtO1xuICAgIGlubGluZS1zaXplOiAwLjc1cmVtO1xuICAgIGNvbG9yOiB2YXIoLS10dWktdGV4dC1zZWNvbmRhcnkpO1xuXG4gICAgJi5jb3BpZWQge1xuICAgICAgICBjb2xvcjogdmFyKC0tdHVpLXRleHQtcG9zaXRpdmUpO1xuICAgIH1cbn1cbiJdfQ== */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vbGFiZWxzL2V4YW1wbGVzL2xhYmVscy9jb3B5L2NvcHkuY29tcG9uZW50Lmxlc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxlQUFBO0FBQ0o7QUFFQTtFQUNJLG1CQUFBO0VBQ0Esb0JBQUE7RUFDQSxnQ0FBQTtBQUFKO0FBRUk7RUFDSSwrQkFBQTtBQUFSOztBQUVBLG9tQkFBb21CIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLmNvcHktaWNvbiB7XG4gICAgYmxvY2stc2l6ZTogMC43NXJlbTtcbiAgICBpbmxpbmUtc2l6ZTogMC43NXJlbTtcbiAgICBjb2xvcjogdmFyKC0tdHVpLXRleHQtc2Vjb25kYXJ5KTtcblxuICAgICYuY29waWVkIHtcbiAgICAgICAgY29sb3I6IHZhcigtLXR1aS10ZXh0LXBvc2l0aXZlKTtcbiAgICB9XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
   changeDetection: 0
 });
 
@@ -286,6 +286,7 @@ var _LabelsComponent;
 
 class LabelsComponent {
   constructor() {
+    this.labelCreation = __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_labels_examples_label-creation_md_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/label-creation.md?raw */ 81598, 17));
     this.labelsExample = {
       TypeScript: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_labels_examples_component_ts_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/component.ts?raw */ 62781, 17)),
       Template: __webpack_require__.e(/*! import() */ "projects_demo_src_pages_documentation_labels_examples_template_html_raw").then(__webpack_require__.t.bind(__webpack_require__, /*! ./examples/template.html?raw */ 69724, 17)),
@@ -302,79 +303,107 @@ _LabelsComponent.ɵfac = function LabelsComponent_Factory(__ngFactoryType__) {
 _LabelsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
   type: _LabelsComponent,
   selectors: [["ng-component"]],
-  decls: 51,
-  vars: 1,
-  consts: [["header", "Labels"], [1, "tui-space_top-4"], [1, "tui-list", "tui-list_extra-small"], [1, "tui-list__item"], [2, "padding", "0", 3, "content"], ["tuiTheme", "light", 1, "editor"]],
+  decls: 74,
+  vars: 2,
+  consts: [["header", "Connection Labels"], [1, "docs-lead"], [1, "docs-summary"], ["filename", "graph-model.ts", 3, "code"], [1, "docs-flow"], [2, "padding", "0", 3, "content"], ["tuiTheme", "light", 1, "editor"]],
   template: function LabelsComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "tui-doc-page", 0)(1, "section")(2, "h2");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "Overview");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "tui-doc-page", 0)(1, "p", 1)(2, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](3, "DfConnectionLabel");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "p")(5, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, "DfConnectionLabel");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, " adds text, templates or Angular components to an edge. Labels can be persisted on one connection or supplied as defaults while users create new connections. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](7, " adds textual or templated annotations to connections. A label is defined by the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](8, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9, "content");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "div", 2)(6, "div")(7, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Connection label");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, " that can be a string, template or component and an optional ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](12, "context");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](13, " passed to it. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, "Final persisted value for one edge.");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "section", 1)(15, "h3");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](16, "Creation scenarios");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](11, "div")(12, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](13, "Output label");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](17, "ul", 2)(18, "li", 3)(19, "b");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](20, "Connection level");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](14, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](15, "Default inherited by edges created from that output.");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](16, "div")(17, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](18, "Node label");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](21, " \u2013 specify the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](22, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](23, "label");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](24, " property for a particular item in the ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26, "connections");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](27, " array of the data model. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](28, "li", 3)(29, "b");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](30, "Connector level");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, " \u2013 provide ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](33, "connectionLabel");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](34, " to a connector (for example, ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, "df-output");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](37, " ) so every created connection inherits it. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](38, "li", 3)(39, "b");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](40, "Node level");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, " \u2013 define ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "code");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](43, "data.connectionLabel");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](44, " for a node to apply the same label to all of its output connectors. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "span");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](20, "Shared default applied to all outputs in a node.");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](45, "section", 1)(46, "h3");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](47, "Example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "section")(22, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](23, "Define Labels");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](48, "tui-doc-example", 4)(49, "div", 5);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](50, "example-component");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](24, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](25, " Label ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](27, "content");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, " is Polymorpheus content and optional ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](30, "context");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](31, " is passed through unchanged. Use a typed application object when a template or component exposes controls. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](32, "tui-doc-code", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "section")(34, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](35, "Precedence");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](36, "ol", 4)(37, "li")(38, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](39, "Connection");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "span")(41, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](42, "connection.label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](43, " is the stored value rendered for that edge. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](44, "li")(45, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](46, "Output connector");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](47, "span")(48, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](49, "[connectionLabel]");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](50, " is copied during interactive creation. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](51, "li")(52, "strong");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](53, "Node data");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](54, "span")(55, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](56, "data.connectionLabel");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](57, " supplies a fallback to every output. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](58, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](59, " An output connector label overrides the node-level default. Call ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](60, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](61, "setConnectionLabel()");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](62, " on a ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](63, "code");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](64, "DfOutputComponent");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](65, " reference when the next created edge needs an imperative override. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](66, "section")(67, "h2");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](68, "Interactive Example");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](69, "p");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](70, " This graph demonstrates text labels and a component label with a copy action. Inspect the source tabs for the model, label component and node template. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](71, "tui-doc-example", 5)(72, "div", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](73, "example-component");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](48);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](32);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("code", ctx.labelCreation);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](39);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("content", ctx.labelsExample);
     }
   },
-  dependencies: [_examples_component__WEBPACK_IMPORTED_MODULE_0__["default"], _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__.TuiDocExample, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__.TuiDocPage],
-  styles: [".editor[_ngcontent-%COMP%] {\n  position: relative;\n  block-size: 20rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vbGFiZWxzL2xhYmVscy5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKIiwic291cmNlc0NvbnRlbnQiOlsiLmVkaXRvciB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIGJsb2NrLXNpemU6IDIwcmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
+  dependencies: [_examples_component__WEBPACK_IMPORTED_MODULE_0__["default"], _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__.TuiDocCode, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__.TuiDocExample, _taiga_ui_addon_doc_components__WEBPACK_IMPORTED_MODULE_2__.TuiDocPage],
+  styles: [".editor[_ngcontent-%COMP%] {\n  position: relative;\n  block-size: 20rem;\n  inline-size: 100%;\n  margin: 0 auto;\n  background: #fff;\n}\ntui-doc-code[_ngcontent-%COMP%], \ntui-doc-example[_ngcontent-%COMP%] {\n  display: block;\n  margin-block: 1rem;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxhYmVscy5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKO0FBRUE7O0VBRUksY0FBQTtFQUNBLGtCQUFBO0FBQUoiLCJmaWxlIjoibGFiZWxzLmNvbXBvbmVudC5sZXNzIiwic291cmNlc0NvbnRlbnQiOlsiLmVkaXRvciB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIGJsb2NrLXNpemU6IDIwcmVtO1xuICAgIGlubGluZS1zaXplOiAxMDAlO1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG59XG5cbnR1aS1kb2MtY29kZSxcbnR1aS1kb2MtZXhhbXBsZSB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgbWFyZ2luLWJsb2NrOiAxcmVtO1xufVxuIl19 */\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3Byb2plY3RzL2RlbW8vc3JjL3BhZ2VzL2RvY3VtZW50YXRpb24vbGFiZWxzL2xhYmVscy5jb21wb25lbnQubGVzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7RUFDQSxnQkFBQTtBQUNKO0FBRUE7O0VBRUksY0FBQTtFQUNBLGtCQUFBO0FBQUo7O0FBRUEsNG5CQUE0bkIiLCJzb3VyY2VzQ29udGVudCI6WyIuZWRpdG9yIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYmxvY2stc2l6ZTogMjByZW07XG4gICAgaW5saW5lLXNpemU6IDEwMCU7XG4gICAgbWFyZ2luOiAwIGF1dG87XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbn1cblxudHVpLWRvYy1jb2RlLFxudHVpLWRvYy1leGFtcGxlIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBtYXJnaW4tYmxvY2s6IDFyZW07XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"],
   changeDetection: 0
 });
 

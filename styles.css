@@ -3,21 +3,18 @@
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 :root,
 :host {
+	--tui-duration: 300ms;
 	--tui-curve-expressive-standard: cubic-bezier(0.4, 0.1, 0.2, 1);
 	--tui-curve-expressive-entrance: cubic-bezier(0.35, 1.3, 0.25, 1);
 	--tui-curve-expressive-exit: cubic-bezier(0.4, 0, 1, 1);
 	--tui-curve-productive-standard: cubic-bezier(0.2, 0, 0.4, 0.9);
 	--tui-curve-productive-entrance: cubic-bezier(0, 0, 0.4, 0.9);
 	--tui-curve-productive-exit: cubic-bezier(0.2, 0, 1, 1);
-	--tui-duration-moderate: 300ms;
-	--tui-duration-slowest: calc(var(--tui-duration-moderate) / 0.429);
-	--tui-duration-slow: calc(var(--tui-duration-moderate) / 0.6);
-	--tui-duration-fast: calc(var(--tui-duration-moderate) / 2);
-	--tui-duration-fastest: calc(var(--tui-duration-moderate) / 4);
 }
 
 :root,
-:host {
+:host,
+[tuiTheme='light'] {
 	--tui-shadow-small: 0px 5px 20px 0px rgba(0, 0, 0, 0.1);  /* Тень для мелких элементов интерфейса, например Chips */
 	--tui-shadow-small-hover: 0px 14px 42px 0px rgba(0, 0, 0, 0.12);
 	--tui-shadow-medium: 0px 6px 34px 0px rgba(0, 0, 0, 0.12);  /* Тень для карточек и других больших объектов, например тултипов */
@@ -29,36 +26,23 @@
 :host {
   --tui-typography-family-text: 'Manrope', system-ui, sans-serif;
   --tui-typography-family-display: 'Manrope', system-ui, sans-serif;
-  --tui-font-offset: 0rem;
-  --tui-typography-heading-h1: bold calc(var(--tui-font-offset) + 3.125rem) / calc(56 / 50)
-        var(--tui-typography-family-display);
-  --tui-typography-heading-h2: bold calc(var(--tui-font-offset) + 2.75rem) / calc(48 / 44)
-        var(--tui-typography-family-display);
-  --tui-typography-heading-h3: bold calc(var(--tui-font-offset) + 2.25rem) / calc(40 / 36)
-        var(--tui-typography-family-display);
-  --tui-typography-heading-h4: bold calc(var(--tui-font-offset) + 1.75rem) / calc(32 / 28)
-        var(--tui-typography-family-display);
-  --tui-typography-heading-h5: bold calc(var(--tui-font-offset) + 1.5rem) / calc(28 / 24)
-        var(--tui-typography-family-display);
-  --tui-typography-heading-h6: bold calc(var(--tui-font-offset) + 1.25rem) / calc(24 / 20)
-        var(--tui-typography-family-display);
-  --tui-typography-body-l: normal calc(var(--tui-font-offset) + 1.0625rem) / calc(28 / 17)
-        var(--tui-typography-family-text);
-  --tui-typography-body-m: normal calc(var(--tui-font-offset) + 1rem) / calc(24 / 16)
-        var(--tui-typography-family-text);
-  --tui-typography-body-s: normal calc(var(--tui-font-offset) + 0.875rem) / calc(20 / 14)
-        var(--tui-typography-family-text);
-  --tui-typography-body-xs: normal calc(var(--tui-font-offset) + 0.75rem) / calc(16 / 12)
-        var(--tui-typography-family-text);
-  --tui-typography-ui-l: normal calc(var(--tui-font-offset) + 1.0625rem) / calc(24 / 17)
-        var(--tui-typography-family-text);
+  --tui-font-offset: calc(var(--t-font-offset, 0) * 1px);
+  --tui-font-scale: calc((22 + var(--t-font-offset, 0)) / 22);
+  --tui-typography-heading-h1: bold calc(var(--tui-font-offset) + 3.125rem) / calc(56 / 50) var(--tui-typography-family-display);
+  --tui-typography-heading-h2: bold calc(var(--tui-font-offset) + 2.75rem) / calc(48 / 44) var(--tui-typography-family-display);
+  --tui-typography-heading-h3: bold calc(var(--tui-font-offset) + 2.25rem) / calc(40 / 36) var(--tui-typography-family-display);
+  --tui-typography-heading-h4: bold calc(var(--tui-font-offset) + 1.75rem) / calc(32 / 28) var(--tui-typography-family-display);
+  --tui-typography-heading-h5: bold calc(var(--tui-font-offset) + 1.5rem) / calc(28 / 24) var(--tui-typography-family-display);
+  --tui-typography-heading-h6: bold calc(var(--tui-font-offset) + 1.25rem) / calc(24 / 20) var(--tui-typography-family-display);
+  --tui-typography-body-l: normal calc(var(--tui-font-offset) + 1.0625rem) / calc(28 / 17) var(--tui-typography-family-text);
+  --tui-typography-body-m: normal calc(var(--tui-font-offset) + 1rem) / calc(24 / 16) var(--tui-typography-family-text);
+  --tui-typography-body-s: normal calc(var(--tui-font-offset) + 0.875rem) / calc(20 / 14) var(--tui-typography-family-text);
+  --tui-typography-body-xs: normal calc(var(--tui-font-offset) + 0.75rem) / calc(16 / 12) var(--tui-typography-family-text);
+  --tui-typography-ui-l: normal calc(var(--tui-font-offset) + 1.0625rem) / calc(24 / 17) var(--tui-typography-family-text);
   --tui-typography-ui-m: normal calc(var(--tui-font-offset) + 1rem) / calc(20 / 16) var(--tui-typography-family-text);
-  --tui-typography-ui-s: normal calc(var(--tui-font-offset) + 0.875rem) / calc(16 / 14)
-        var(--tui-typography-family-text);
-  --tui-typography-ui-xs: normal calc(var(--tui-font-offset) + 0.75rem) / calc(15 / 12)
-        var(--tui-typography-family-text);
-  --tui-typography-ui-2xs: normal calc(var(--tui-font-offset) + 0.6875rem) / calc(12 / 11)
-        var(--tui-typography-family-text);
+  --tui-typography-ui-s: normal calc(var(--tui-font-offset) + 0.875rem) / calc(16 / 14) var(--tui-typography-family-text);
+  --tui-typography-ui-xs: normal calc(var(--tui-font-offset) + 0.75rem) / calc(15 / 12) var(--tui-typography-family-text);
+  --tui-typography-ui-2xs: normal calc(var(--tui-font-offset) + 0.6875rem) / calc(12 / 11) var(--tui-typography-family-text);
   --tui-radius-xs: 0.25rem;
   --tui-radius-s: 0.5rem;
   --tui-radius-m: 0.625rem;
@@ -78,6 +62,10 @@
   --tui-inline-start: left;
   --tui-inline-end: right;
   --tui-inline: 1;
+  --tui-duration-slowest: calc(var(--tui-duration) / 0.429);
+  --tui-duration-slow: calc(var(--tui-duration) / 0.6);
+  --tui-duration-fast: calc(var(--tui-duration) / 2);
+  --tui-duration-fastest: calc(var(--tui-duration) / 4);
 }
 @supports (font-size: 1lh) {
   :root,
@@ -111,9 +99,9 @@
     --tui-border-normal: rgba(255, 255, 255, 0.14);
     --tui-border-hover: rgba(255, 255, 255, 0.6);
     --tui-border-focus: rgba(255, 255, 255, 0.64);
-    --tui-status-negative: #ff8c67;
-    --tui-status-negative-pale: rgba(244, 87, 37, 0.32);
-    --tui-status-negative-pale-hover: rgba(244, 87, 37, 0.4);
+    --tui-status-negative: #ff4d4d;
+    --tui-status-negative-pale: rgba(255, 77, 77, 0.24);
+    --tui-status-negative-pale-hover: rgba(255, 77, 77, 0.32);
     --tui-status-positive: #4ac99b;
     --tui-status-positive-pale: rgba(74, 201, 155, 0.32);
     --tui-status-positive-pale-hover: rgba(74, 201, 155, 0.4);
@@ -131,8 +119,8 @@
     --tui-text-action-hover: #526ed3;
     --tui-text-positive: #44c596;
     --tui-text-positive-hover: #3aa981;
-    --tui-text-negative: #ff8c67;
-    --tui-text-negative-hover: #bb593a;
+    --tui-text-negative: #ff4d4d;
+    --tui-text-negative-hover: #f66;
   }
   [tuiTheme='light'] {
     color-scheme: light;
@@ -166,9 +154,9 @@
     --tui-border-normal: rgba(0, 0, 0, 0.1);
     --tui-border-hover: rgba(0, 0, 0, 0.16);
     --tui-border-focus: rgba(51, 51, 51, 0.64);
-    --tui-status-negative: #f45725;
-    --tui-status-negative-pale: rgba(244, 87, 37, 0.12);
-    --tui-status-negative-pale-hover: rgba(244, 87, 37, 0.24);
+    --tui-status-negative: #ff291a;
+    --tui-status-negative-pale: rgba(245, 34, 34, 0.08);
+    --tui-status-negative-pale-hover: rgba(245, 34, 34, 0.16);
     --tui-status-positive: #4ac99b;
     --tui-status-positive-pale: rgba(74, 201, 155, 0.12);
     --tui-status-positive-pale-hover: rgba(74, 201, 155, 0.24);
@@ -188,8 +176,8 @@
     --tui-text-action-hover: #6c86e2;
     --tui-text-positive: #3aa981;
     --tui-text-positive-hover: #7ac5aa;
-    --tui-text-negative: #dd4c1e;
-    --tui-text-negative-hover: #e38163;
+    --tui-text-negative: #ff291a;
+    --tui-text-negative-hover: #ff4d4d;
     --tui-chart-categorical-00: var(--tui-background-accent-1);
     --tui-chart-categorical-01: #ea97c4;
     --tui-chart-categorical-02: #a0c5df;
@@ -251,9 +239,9 @@
     --tui-border-normal: rgba(0, 0, 0, 0.1);
     --tui-border-hover: rgba(0, 0, 0, 0.16);
     --tui-border-focus: rgba(51, 51, 51, 0.64);
-    --tui-status-negative: #f45725;
-    --tui-status-negative-pale: rgba(244, 87, 37, 0.12);
-    --tui-status-negative-pale-hover: rgba(244, 87, 37, 0.24);
+    --tui-status-negative: #ff291a;
+    --tui-status-negative-pale: rgba(245, 34, 34, 0.08);
+    --tui-status-negative-pale-hover: rgba(245, 34, 34, 0.16);
     --tui-status-positive: #4ac99b;
     --tui-status-positive-pale: rgba(74, 201, 155, 0.12);
     --tui-status-positive-pale-hover: rgba(74, 201, 155, 0.24);
@@ -273,8 +261,8 @@
     --tui-text-action-hover: #6c86e2;
     --tui-text-positive: #3aa981;
     --tui-text-positive-hover: #7ac5aa;
-    --tui-text-negative: #dd4c1e;
-    --tui-text-negative-hover: #e38163;
+    --tui-text-negative: #ff291a;
+    --tui-text-negative-hover: #ff4d4d;
     --tui-chart-categorical-00: var(--tui-background-accent-1);
     --tui-chart-categorical-01: #ea97c4;
     --tui-chart-categorical-02: #a0c5df;
@@ -411,7 +399,7 @@
   color: var(--tui-text-primary);
 }
 [tuiAppearance][data-appearance='floating'] {
-  background: var(--tui-background-elevation-2);
+  background-color: var(--tui-background-elevation-2);
   color: var(--tui-text-primary);
   box-shadow: var(--tui-shadow-small);
 }
@@ -428,11 +416,11 @@
   box-shadow: var(--tui-shadow-small-hover);
 }
 [tuiAppearance][data-appearance='floating']:is(a, button, select, textarea, input, label, .tui-interactive):not(:disabled):active:not([data-state]) {
-  background: var(--tui-background-base-alt);
+  background-color: var(--tui-background-base-alt);
   box-shadow: var(--tui-shadow-small);
 }
 [tuiAppearance][data-appearance='floating'][data-state='active'] {
-  background: var(--tui-background-base-alt);
+  background-color: var(--tui-background-base-alt);
   box-shadow: var(--tui-shadow-small);
 }
 [tuiAppearance][data-appearance='outline'],
@@ -1509,10 +1497,13 @@ input[type='radio'][data-appearance='secondary'] {
   background-color: transparent;
   border-image: conic-gradient(var(--tui-status-negative) 0 0) 1 / 1px / 0 0 1px;
 }
+/**
+ * @deprecated remove in v6
+ */
 [tuiAppearance][data-appearance='textfield'] {
   transition-property: box-shadow, background-color, outline-color, border-color, color;
-  transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
+  transition-duration: calc(var(--tui-duration) / 2);
+  transition-timing-function: var(--tui-curve-productive-standard);
   --t-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.1);
   background-color: var(--tui-background-base);
   color: var(--tui-text-tertiary);
@@ -1626,6 +1617,9 @@ input[type='radio'][data-appearance='secondary'] {
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[8].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[8].rules[0].oneOf[0].use[2]!./node_modules/less-loader/dist/cjs.js??ruleSet[1].rules[8].rules[1].use[0]!./node_modules/@taiga-ui/legacy/styles/taiga-ui-global.less?ngGlobalStyle ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/**
+ * @deprecated remove in v6
+ */
 @keyframes tuiReveal {
   from {
     transform: scale(0);
@@ -1918,7 +1912,7 @@ svg use {
 .tui-island_hoverable {
   transition-property: all;
   transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
+  transition-timing-function: var(--tui-curve-productive-standard);
   background: var(--tui-background-elevation-2);
   box-shadow: var(--tui-shadow-small);
   cursor: pointer;
@@ -3333,7 +3327,7 @@ svg use {
 .tui-table__tr {
   transition-property: background;
   transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
+  transition-timing-function: var(--tui-curve-productive-standard);
   outline: none;
 }
 .tui-table__tr:not(.tui-table__tr_hover_disabled):hover {
@@ -3462,7 +3456,7 @@ svg use {
   text-decoration: none;
   transition-property: color;
   transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
+  transition-timing-function: var(--tui-curve-productive-standard);
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -3493,7 +3487,7 @@ svg use {
 .tui-table__sort:hover .tui-table__sort-icon {
   transition-property: transform;
   transition-duration: var(--tui-duration, 300ms);
-  transition-timing-function: ease-in-out;
+  transition-timing-function: var(--tui-curve-productive-standard);
   opacity: 1;
 }
 .tui-table__sort_active.tui-table__sort_up .tui-table__sort-icon {
@@ -3559,6 +3553,123 @@ ng-draw-flow {
     --df-node-color: #000;
     --df-node-selected-border-color: var(--tui-text-action);
     --df-node-invalid-border-color: var(--tui-text-negative);
+}
+
+.docs-lead {
+    max-inline-size: 52rem;
+    margin-block: 0 1.5rem;
+    color: var(--tui-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.docs-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem;
+    margin-block: 1.5rem 2rem;
+    padding-block: 1.5rem;
+    border-block: 0.0625rem solid var(--tui-border-normal);
+}
+
+.docs-summary > div {
+    padding-inline-start: 1rem;
+    border-inline-start: 0.1875rem solid var(--tui-background-accent-1);
+}
+
+.docs-summary strong,
+.docs-summary span {
+    display: block;
+}
+
+.docs-summary span {
+    margin-block-start: 0.375rem;
+    color: var(--tui-text-secondary);
+    line-height: 1.45;
+}
+
+.docs-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1rem;
+    margin-block: 1.5rem 2rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: docs-step;
+}
+
+.docs-flow > li {
+    min-inline-size: 0;
+    padding-block-start: 0.875rem;
+    border-block-start: 0.125rem solid var(--tui-border-normal);
+    counter-increment: docs-step;
+}
+
+.docs-flow > li::before {
+    content: counter(docs-step, decimal-leading-zero);
+    display: block;
+    margin-block-end: 0.5rem;
+    color: var(--tui-text-action);
+    font-weight: bold;
+}
+
+.docs-flow strong,
+.docs-flow span {
+    display: block;
+}
+
+.docs-flow span {
+    margin-block-start: 0.25rem;
+    color: var(--tui-text-secondary);
+    line-height: 1.45;
+}
+
+.docs-table-scroll {
+    overflow-x: auto;
+    margin-block: 1rem 2rem;
+}
+
+.docs-table {
+    inline-size: 100%;
+    min-inline-size: 38rem;
+    border-collapse: collapse;
+    text-align: start;
+}
+
+.docs-table th,
+.docs-table td {
+    padding: 0.75rem 1rem;
+    border-block-end: 0.0625rem solid var(--tui-border-normal);
+    vertical-align: top;
+    text-align: start;
+}
+
+.docs-table th {
+    color: var(--tui-text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.docs-table td:first-child {
+    white-space: nowrap;
+}
+
+.docs-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block: 1rem 2rem;
+}
+
+@media (max-width: 47.9375rem) {
+    .docs-lead {
+        font-size: 1rem;
+    }
+
+    .docs-summary,
+    .docs-flow {
+        grid-template-columns: 1fr;
+    }
 }
 
 

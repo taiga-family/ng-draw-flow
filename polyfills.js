@@ -1,12 +1,12 @@
-"use strict";
 (self["webpackChunkdemo"] = self["webpackChunkdemo"] || []).push([["polyfills"],{
 
 /***/ 27203
 /*!***********************************************!*\
   !*** ./node_modules/zone.js/fesm2015/zone.js ***!
   \***********************************************/
-() {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
+"use strict";
 
 
 /**
@@ -14,6 +14,7 @@
  * (c) 2010-2025 Google LLC. https://angular.io/
  * License: MIT
  */
+var _defineProperty = (__webpack_require__(/*! ./node_modules/@babel/runtime/helpers/defineProperty.js */ 51237)["default"]);
 const global = globalThis;
 // __Zone_symbol_prefix global can be used to override the default zone
 // symbol prefix with a custom one if needed.
@@ -31,7 +32,6 @@ function initZone() {
   }
   mark('Zone');
   class ZoneImpl {
-    static __symbol__ = (() => __symbol__)();
     static assertZonePatched() {
       if (global['Promise'] !== patches['ZoneAwarePromise']) {
         throw new Error('Zone.js has detected that ZoneAwarePromise `(window|global).Promise` ' + 'has been overwritten.\n' + 'Most likely cause is that a Promise polyfill has been loaded ' + 'after Zone.js (Polyfilling Promise api is not necessary when zone.js is loaded. ' + 'If you must load one, do so before loading zone.js.)');
@@ -72,11 +72,11 @@ function initZone() {
     get name() {
       return this._name;
     }
-    _parent;
-    _name;
-    _properties;
-    _zoneDelegate;
     constructor(parent, zoneSpec) {
+      _defineProperty(this, "_parent", void 0);
+      _defineProperty(this, "_name", void 0);
+      _defineProperty(this, "_properties", void 0);
+      _defineProperty(this, "_zoneDelegate", void 0);
       this._parent = parent;
       this._name = zoneSpec ? zoneSpec.name || 'unnamed' : '<root>';
       this._properties = zoneSpec && zoneSpec.properties || {};
@@ -268,6 +268,7 @@ function initZone() {
       }
     }
   }
+  _defineProperty(ZoneImpl, "__symbol__", __symbol__);
   const DELEGATE_ZS = {
     name: '',
     onHasTask: (delegate, _, target, hasTaskState) => delegate.hasTask(target, hasTaskState),
@@ -279,39 +280,39 @@ function initZone() {
     get zone() {
       return this._zone;
     }
-    _zone;
-    _taskCounts = {
-      'microTask': 0,
-      'macroTask': 0,
-      'eventTask': 0
-    };
-    _parentDelegate;
-    _forkDlgt;
-    _forkZS;
-    _forkCurrZone;
-    _interceptDlgt;
-    _interceptZS;
-    _interceptCurrZone;
-    _invokeDlgt;
-    _invokeZS;
-    _invokeCurrZone;
-    _handleErrorDlgt;
-    _handleErrorZS;
-    _handleErrorCurrZone;
-    _scheduleTaskDlgt;
-    _scheduleTaskZS;
-    _scheduleTaskCurrZone;
-    _invokeTaskDlgt;
-    _invokeTaskZS;
-    _invokeTaskCurrZone;
-    _cancelTaskDlgt;
-    _cancelTaskZS;
-    _cancelTaskCurrZone;
-    _hasTaskDlgt;
-    _hasTaskDlgtOwner;
-    _hasTaskZS;
-    _hasTaskCurrZone;
     constructor(zone, parentDelegate, zoneSpec) {
+      _defineProperty(this, "_zone", void 0);
+      _defineProperty(this, "_taskCounts", {
+        'microTask': 0,
+        'macroTask': 0,
+        'eventTask': 0
+      });
+      _defineProperty(this, "_parentDelegate", void 0);
+      _defineProperty(this, "_forkDlgt", void 0);
+      _defineProperty(this, "_forkZS", void 0);
+      _defineProperty(this, "_forkCurrZone", void 0);
+      _defineProperty(this, "_interceptDlgt", void 0);
+      _defineProperty(this, "_interceptZS", void 0);
+      _defineProperty(this, "_interceptCurrZone", void 0);
+      _defineProperty(this, "_invokeDlgt", void 0);
+      _defineProperty(this, "_invokeZS", void 0);
+      _defineProperty(this, "_invokeCurrZone", void 0);
+      _defineProperty(this, "_handleErrorDlgt", void 0);
+      _defineProperty(this, "_handleErrorZS", void 0);
+      _defineProperty(this, "_handleErrorCurrZone", void 0);
+      _defineProperty(this, "_scheduleTaskDlgt", void 0);
+      _defineProperty(this, "_scheduleTaskZS", void 0);
+      _defineProperty(this, "_scheduleTaskCurrZone", void 0);
+      _defineProperty(this, "_invokeTaskDlgt", void 0);
+      _defineProperty(this, "_invokeTaskZS", void 0);
+      _defineProperty(this, "_invokeTaskCurrZone", void 0);
+      _defineProperty(this, "_cancelTaskDlgt", void 0);
+      _defineProperty(this, "_cancelTaskZS", void 0);
+      _defineProperty(this, "_cancelTaskCurrZone", void 0);
+      _defineProperty(this, "_hasTaskDlgt", void 0);
+      _defineProperty(this, "_hasTaskDlgtOwner", void 0);
+      _defineProperty(this, "_hasTaskZS", void 0);
+      _defineProperty(this, "_hasTaskCurrZone", void 0);
       this._zone = zone;
       this._parentDelegate = parentDelegate;
       this._forkZS = zoneSpec && (zoneSpec && zoneSpec.onFork ? zoneSpec : parentDelegate._forkZS);
@@ -439,18 +440,18 @@ function initZone() {
     }
   }
   class ZoneTask {
-    type;
-    source;
-    invoke;
-    callback;
-    data;
-    scheduleFn;
-    cancelFn;
-    _zone = null;
-    runCount = 0;
-    _zoneDelegates = null;
-    _state = 'notScheduled';
     constructor(type, source, callback, options, scheduleFn, cancelFn) {
+      _defineProperty(this, "type", void 0);
+      _defineProperty(this, "source", void 0);
+      _defineProperty(this, "invoke", void 0);
+      _defineProperty(this, "callback", void 0);
+      _defineProperty(this, "data", void 0);
+      _defineProperty(this, "scheduleFn", void 0);
+      _defineProperty(this, "cancelFn", void 0);
+      _defineProperty(this, "_zone", null);
+      _defineProperty(this, "runCount", 0);
+      _defineProperty(this, "_zoneDelegates", null);
+      _defineProperty(this, "_state", 'notScheduled');
       this.type = type;
       this.source = source;
       this.data = options;
@@ -637,6 +638,7 @@ function initZone() {
   return ZoneImpl;
 }
 function loadZone() {
+  var _Zone, _global$_Zone;
   // if global['Zone'] already exists (maybe zone.js was already loaded or
   // some other lib also registered a global object named Zone), we may need
   // to throw an error, but sometimes user may not want this error.
@@ -652,7 +654,7 @@ function loadZone() {
     throw new Error('Zone already loaded.');
   }
   // Initialize global `Zone` constant.
-  global['Zone'] ??= initZone();
+  (_global$_Zone = global[_Zone = 'Zone']) !== null && _global$_Zone !== void 0 ? _global$_Zone : global[_Zone] = initZone();
   return global['Zone'];
 }
 
@@ -849,7 +851,7 @@ function patchProperty(obj, prop, prototype) {
     // https://github.com/angular/zone.js/issues/978
     // If an inline handler (like `onload`) was defined before zone.js was loaded,
     // call the original descriptor's setter to clean it up.
-    originalDescSet?.call(target, null);
+    originalDescSet === null || originalDescSet === void 0 || originalDescSet.call(target, null);
     target[eventNameSymbol] = newValue;
     if (typeof newValue === 'function') {
       target.addEventListener(eventName, wrapFn, false);
@@ -1308,7 +1310,7 @@ function patchEventTarget(_global, api, apis, patchOptions) {
       const typeOfDelegate = typeof delegate;
       return typeOfDelegate === 'function' && task.callback === delegate || typeOfDelegate === 'object' && task.originalDelegate === delegate;
     };
-    const compare = patchOptions?.diff || compareTaskCallbackVsDelegate;
+    const compare = (patchOptions === null || patchOptions === void 0 ? void 0 : patchOptions.diff) || compareTaskCallbackVsDelegate;
     const unpatchedEvents = Zone[zoneSymbol('UNPATCHED_EVENTS')];
     const passiveEvents = _global[zoneSymbol('PASSIVE_EVENTS')];
     function copyEventListenerOptions(options) {
@@ -1367,8 +1369,8 @@ function patchEventTarget(_global, api, apis, patchOptions) {
         }
         const passive = !!passiveEvents && passiveEvents.indexOf(eventName) !== -1;
         const options = copyEventListenerOptions(buildEventListenerOptions(arguments[2], passive));
-        const signal = options?.signal;
-        if (signal?.aborted) {
+        const signal = options === null || options === void 0 ? void 0 : options.signal;
+        if (signal !== null && signal !== void 0 && signal.aborted) {
           // the signal is an aborted one, just return without attaching the event listener.
           return;
         }
@@ -1745,10 +1747,11 @@ function patchTimer(window, setName, cancelName, nameSuffix) {
       handle,
       handleId
     } = task.data;
-    return clearNative.call(window, handle ?? handleId);
+    return clearNative.call(window, handle !== null && handle !== void 0 ? handle : handleId);
   }
   setNative = patchMethod(window, setName, delegate => function (self, args) {
     if (isFunction(args[0])) {
+      var _ref;
       const options = {
         isRefreshable: false,
         isPeriodic: nameSuffix === 'Interval',
@@ -1822,13 +1825,14 @@ function patchTimer(window, setName, cancelName, nameSuffix) {
           };
         }
       }
-      return handle ?? handleId ?? task;
+      return (_ref = handle !== null && handle !== void 0 ? handle : handleId) !== null && _ref !== void 0 ? _ref : task;
     } else {
       // cause an error by calling it directly.
       return delegate.apply(window, args);
     }
   });
   clearNative = patchMethod(window, cancelName, delegate => function (self, args) {
+    var _task;
     const id = args[0];
     let task;
     if (isNumber(id)) {
@@ -1837,14 +1841,14 @@ function patchTimer(window, setName, cancelName, nameSuffix) {
       delete tasksByHandleId[id];
     } else {
       // nodejs env ?? other environments.
-      task = id?.[taskSymbol];
+      task = id === null || id === void 0 ? void 0 : id[taskSymbol];
       if (task) {
         id[taskSymbol] = null;
       } else {
         task = id;
       }
     }
-    if (task?.type) {
+    if ((_task = task) !== null && _task !== void 0 && _task.type) {
       if (task.cancelFn) {
         // Do not cancel already canceled functions
         task.zone.cancelTask(task);
@@ -1956,7 +1960,7 @@ function propertyDescriptorPatch(api, _global) {
   patchTargets = patchTargets.concat(['XMLHttpRequest', 'XMLHttpRequestEventTarget', 'IDBIndex', 'IDBRequest', 'IDBOpenDBRequest', 'IDBDatabase', 'IDBTransaction', 'IDBCursor', 'WebSocket']);
   for (let i = 0; i < patchTargets.length; i++) {
     const target = _global[patchTargets[i]];
-    target?.prototype && patchFilteredProperties(target.prototype, getOnEventNames(target.prototype), ignoreProperties);
+    (target === null || target === void 0 ? void 0 : target.prototype) && patchFilteredProperties(target.prototype, getOnEventNames(target.prototype), ignoreProperties);
   }
 }
 
@@ -2608,6 +2612,7 @@ function patchPromise(Zone) {
         return ZoneAwarePromise;
       }
       then(onFulfilled, onRejected) {
+        var _this$constructor;
         // We must read `Symbol.species` safely because `this` may be anything. For instance, `this`
         // may be an object without a prototype (created through `Object.create(null)`); thus
         // `this.constructor` will be undefined. One of the use cases is SystemJS creating
@@ -2616,7 +2621,7 @@ function patchPromise(Zone) {
         // function). The zone.js then checks if the resolved value has the `then` method and
         // invokes it with the `value` context. Otherwise, this will throw an error: `TypeError:
         // Cannot read properties of undefined (reading 'Symbol(Symbol.species)')`.
-        let C = this.constructor?.[Symbol.species];
+        let C = (_this$constructor = this.constructor) === null || _this$constructor === void 0 ? void 0 : _this$constructor[Symbol.species];
         if (!C || typeof C !== 'function') {
           C = this.constructor || ZoneAwarePromise;
         }
@@ -2633,8 +2638,9 @@ function patchPromise(Zone) {
         return this.then(null, onRejected);
       }
       finally(onFinally) {
+        var _this$constructor2;
         // See comment on the call to `then` about why thee `Symbol.species` is safely accessed.
-        let C = this.constructor?.[Symbol.species];
+        let C = (_this$constructor2 = this.constructor) === null || _this$constructor2 === void 0 ? void 0 : _this$constructor2[Symbol.species];
         if (!C || typeof C !== 'function') {
           C = ZoneAwarePromise;
         }
@@ -2855,10 +2861,86 @@ patchBrowser(Zone$1);
   \****************************************/
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zone.js */ 27203);
 /* harmony import */ var zone_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(zone_js__WEBPACK_IMPORTED_MODULE_0__);
 
+
+/***/ },
+
+/***/ 51237
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 70560);
+function _defineProperty(e, r, t) {
+  return (r = toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
+    value: t,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[r] = t, e;
+}
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ },
+
+/***/ 90669
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+var _typeof = (__webpack_require__(/*! ./typeof.js */ 71682)["default"]);
+function toPrimitive(t, r) {
+  if ("object" != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof(i)) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+module.exports = toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ },
+
+/***/ 70560
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \**************************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+var _typeof = (__webpack_require__(/*! ./typeof.js */ 71682)["default"]);
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 90669);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : i + "";
+}
+module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ },
+
+/***/ 71682
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+(module) {
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
+}
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }
 
