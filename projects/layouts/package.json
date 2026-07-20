@@ -28,5 +28,8 @@
     "peerDependencies": {
         "@angular/core": ">=19.0.0",
         "@ng-draw-flow/core": "^1.2.0"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
