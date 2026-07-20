@@ -1,0 +1,97 @@
+<div class="toolbar">
+    <button
+        appearance="secondary"
+        size="s"
+        tuiButton
+        type="button"
+        (click)="store.zoomOut()"
+    >
+        <tui-icon icon="@tui.minus" />
+        Zoom out
+    </button>
+    <button
+        appearance="secondary"
+        size="s"
+        tuiButton
+        type="button"
+        (click)="store.zoomIn()"
+    >
+        <tui-icon icon="@tui.plus" />
+        Zoom in
+    </button>
+    <button
+        appearance="secondary"
+        size="s"
+        tuiButton
+        type="button"
+        (click)="store.resetPosition()"
+    >
+        <tui-icon icon="@tui.rotate-ccw" />
+        Reset
+    </button>
+    <button
+        appearance="primary"
+        size="s"
+        tuiButton
+        type="button"
+        (click)="addNode()"
+    >
+        <tui-icon icon="@tui.circle-plus" />
+        Add node
+    </button>
+    <button
+        appearance="secondary"
+        size="s"
+        tuiButton
+        type="button"
+        [disabled]="!store.selectedNode()"
+        (click)="removeSelectedNode()"
+    >
+        <tui-icon icon="@tui.trash-2" />
+        Remove selected
+    </button>
+</div>
+
+<div class="workspace">
+    <div class="editor">
+        <ng-draw-flow
+            [formControl]="form"
+            (connectionCreated)="recordConnectionEvent('Created edge', $event)"
+            (connectionDeleted)="recordConnectionEvent('Deleted edge', $event)"
+            (connectionSelected)="recordConnection('Selected edge', $event)"
+            (nodeDeleted)="recordNodeEvent('Deleted node', $event)"
+            (nodeMoved)="recordNodeEvent('Moved node', $event)"
+            (nodeSelected)="recordNode('Selected node', $event)"
+            (scale)="recordScale($event)"
+        />
+    </div>
+
+    <aside class="inspector">
+        <h3>Live state</h3>
+        <dl>
+            <div>
+                <dt>Scale</dt>
+                <dd>{{ store.scale() }}%</dd>
+            </div>
+            <div>
+                <dt>Selected node</dt>
+                <dd>{{ store.selectedNode()?.id ?? 'None' }}</dd>
+            </div>
+            <div>
+                <dt>Selected edge</dt>
+                <dd>{{ selectedConnection() }}</dd>
+            </div>
+            <div>
+                <dt>Nodes</dt>
+                <dd>{{ store.dataModel()?.nodes?.length ?? 0 }}</dd>
+            </div>
+        </dl>
+
+        <h3>Recent events</h3>
+        <ol>
+            @for (event of events(); track event.id) {
+                <li>{{ event.text }}</li>
+            }
+        </ol>
+    </aside>
+</div>

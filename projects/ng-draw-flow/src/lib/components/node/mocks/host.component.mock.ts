@@ -6,13 +6,17 @@ import {NodeComponent} from '../node.component';
 @Component({
     standalone: true,
     imports: [NodeComponent],
-    template: '<df-node [invalid]="invalid" [node]="node()" />',
+    template: `
+        <df-node
+            [invalid]="invalid"
+            [node]="node()"
+        />
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HostComponent {
     public readonly nodeComponent = viewChild.required(NodeComponent);
     public invalid = false;
-
     public readonly node = signal<DfDataInitialNode | DfDataNode>({
         id: 'draft-node',
         data: {type: 'simpleNode'},

@@ -1,212 +1,235 @@
-<tui-doc-page header="PanZoom Configuration Guide">
-    <h2>Introduction to PanZoom Component</h2>
-    <p>
-        The PanZoom component is a critical element in NgDrawFlow. It provides an interactive "board" on which nodes are
-        placed, allowing users to easily navigate the graph by moving (panning) and zooming the viewport to focus on
-        different parts of the data set. The component enhances the user experience by making complex graphs readable
-        and navigable, even when dealing with extensive data.
+<tui-doc-page header="Pan and Zoom">
+    <p class="docs-lead">
+        The camera maps graph world coordinates to the visible viewport. Users can pan, wheel, pinch and zoom while
+        application controls use the same camera through the component or store API.
     </p>
 
-    <h2>Configuring PanZoom in Your Application</h2>
-    <p>
-        To configure the Panzoom component for your Angular application, you can set up the PanzoomOptions in your
-        app.module.ts file as follows:
-    </p>
-    <tui-doc-code [code]="gettingStarted.data0" />
-    <p>
-        This example shows the most common non-default placement options:
-        <code>leftPosition</code>
-        and
-        <code>topPosition</code>
-        . They control initial and reset framing relative to the viewport edges. Deprecated options such as
-        <code>panSize</code>
-        are documented separately in the options reference below.
-    </p>
-
-    <h2>Placement of Elements on the Screen.</h2>
-
-    <app-pan-zoom-configuration-example-3 />
-
-    <p>
-        By default, the base node is positioned at the coordinates
-        <code>x&#58; 0, y&#58; 0</code>
-        , which is centered on the screen.
-    </p>
-
-    <div class="pan-position-demo">
-        <div class="pan-position-demo-item">
-            <div class="content">
-                <h3>Horizontal Alignment</h3>
-                <app-pan-zoom-configuration-example-1 />
-                <p>
-                    However, the initial viewport can be shifted. Configure
-                    <code>leftPosition</code>
-                    in
-                    <code>dfPanZoomOptionsProvider</code>
-                    to place the left edge of the
-                    <code>startNode</code>
-                    at an exact offset from the left viewport edge. If there is no
-                    <code>startNode</code>
-                    , the left edge of all rendered content is used instead.
-                    <code>leftPosition: 100</code>
-                    means the initial camera targets that left edge at 100px from the viewport.
-                </p>
-            </div>
-            <div class="code-example">
-                <tui-doc-code
-                    filename="app.module.ts"
-                    [code]="gettingStarted.data1"
-                />
-            </div>
+    <div class="docs-summary">
+        <div>
+            <strong>World coordinates</strong>
+            <span>Node positions stay stable while the camera moves.</span>
         </div>
-
-        <div class="pan-position-demo-item">
-            <div class="content">
-                <h3>Vertical Alignment</h3>
-
-                <app-pan-zoom-configuration-example-2 />
-
-                <p>
-                    Similarly, configure
-                    <code>topPosition</code>
-                    to place the top edge of the
-                    <code>startNode</code>
-                    or, if there is no
-                    <code>startNode</code>
-                    , the top edge of the rendered content at an exact offset from the top viewport edge.
-                </p>
-            </div>
-            <div class="code-example">
-                <tui-doc-code
-                    filename="app.module.ts"
-                    [code]="gettingStarted.data2"
-                />
-            </div>
+        <div>
+            <strong>Dynamic workspace</strong>
+            <span>Bounds grow from rendered node dimensions.</span>
+        </div>
+        <div>
+            <strong>Content framing</strong>
+            <span>Initial and reset positions can align to the start node.</span>
         </div>
     </div>
 
-    <h2>Other options for setting up PanZoom</h2>
-    <p>
-        The PanZoom component is highly customizable, offering several options to tailor the graph layout to your
-        specific needs. Below is a detailed guide on the available
-        <code>DfPanZoomOptions</code>
-        :
-    </p>
-    <ul class="tui-list tui-list_extra-small tui-space_bottom-4">
-        <li class="tui-list__item">
+    <section>
+        <h2>Configure the Camera</h2>
+        <p>
+            Scope
+            <code>dfPanZoomOptionsProvider()</code>
+            to one editor component or provide shared defaults at application level.
+        </p>
+        <tui-doc-code
+            filename="graph-editor.component.ts"
+            [code]="gettingStarted.data0"
+        />
+    </section>
+
+    <section>
+        <h2>Initial and Reset Framing</h2>
+        <p>
+            With no placement options, world origin
+            <code>&#123;x: 0, y: 0&#125;</code>
+            is centered. Configure either axis independently to align rendered content to an exact viewport offset.
+        </p>
+        <app-pan-zoom-configuration-example-3 />
+
+        <div class="pan-position-demo">
+            <div class="pan-position-demo-item">
+                <div class="content">
+                    <h3>Horizontal Alignment</h3>
+                    <app-pan-zoom-configuration-example-1 />
+                    <p>
+                        <code>leftPosition</code>
+                        aligns the left edge of the first
+                        <code>startNode</code>
+                        to the requested viewport offset. Without a start node it uses the left edge of all rendered
+                        content.
+                    </p>
+                </div>
+                <div class="code-example">
+                    <tui-doc-code
+                        filename="graph-editor.component.ts"
+                        [code]="gettingStarted.data1"
+                    />
+                </div>
+            </div>
+
+            <div class="pan-position-demo-item">
+                <div class="content">
+                    <h3>Vertical Alignment</h3>
+                    <app-pan-zoom-configuration-example-2 />
+                    <p>
+                        <code>topPosition</code>
+                        applies the same rule to the top edge. A
+                        <code>null</code>
+                        value keeps centered framing on that axis.
+                    </p>
+                </div>
+                <div class="code-example">
+                    <tui-doc-code
+                        filename="graph-editor.component.ts"
+                        [code]="gettingStarted.data2"
+                    />
+                </div>
+            </div>
+        </div>
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            Placement options affect initial and reset framing only. They do not change saved node coordinates or the
+            position assigned to a newly created node.
+        </section>
+    </section>
+
+    <section>
+        <h2>Options</h2>
+        <div class="docs-table-scroll">
+            <table class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Default</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>leftPosition</code></td>
+                        <td><code>null</code></td>
+                        <td>Initial/reset offset from the left viewport edge.</td>
+                    </tr>
+                    <tr>
+                        <td><code>topPosition</code></td>
+                        <td><code>null</code></td>
+                        <td>Initial/reset offset from the top viewport edge.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>minZoom</code>
+                            /
+                            <code>maxZoom</code>
+                        </td>
+                        <td>
+                            <code>0.25</code>
+                            /
+                            <code>3</code>
+                        </td>
+                        <td>Lower and upper bounds for every zoom command and gesture.</td>
+                    </tr>
+                    <tr>
+                        <td><code>zoomStep</code></td>
+                        <td><code>0.25</code></td>
+                        <td>
+                            Step used by
+                            <code>zoomIn()</code>
+                            and
+                            <code>zoomOut()</code>
+                            .
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>zoomAnimationDuration</code></td>
+                        <td><code>300</code></td>
+                        <td>Camera zoom transition duration in milliseconds.</td>
+                    </tr>
+                    <tr>
+                        <td><code>wheelBehavior</code></td>
+                        <td><code>zoom</code></td>
+                        <td>
+                            Uses the wheel for
+                            <code>zoom</code>
+                            or viewport
+                            <code>scroll</code>
+                            .
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>wheelStep</code></td>
+                        <td><code>0.008</code></td>
+                        <td>Base wheel zoom step; takes priority over legacy sensitivity.</td>
+                    </tr>
+                    <tr>
+                        <td><code>wheelSpeed</code></td>
+                        <td><code>1</code></td>
+                        <td>Additional multiplier for wheel zoom.</td>
+                    </tr>
+                    <tr>
+                        <td><code>pinchZoomSpeed</code></td>
+                        <td><code>1</code></td>
+                        <td>Multiplier for trackpad pinch zoom.</td>
+                    </tr>
+                    <tr>
+                        <td><code>touchSensitivity</code></td>
+                        <td><code>0.01</code></td>
+                        <td>Touch gesture sensitivity.</td>
+                    </tr>
+                    <tr>
+                        <td><code>backgroundCanvas.visible</code></td>
+                        <td><code>true</code></td>
+                        <td>Renders the workspace fill, border and point grid.</td>
+                    </tr>
+                    <tr>
+                        <td><code>panSize</code></td>
+                        <td>Deprecated</td>
+                        <td>Ignored by dynamic workspace sizing and retained for compatibility only.</td>
+                    </tr>
+                    <tr>
+                        <td><code>zoomWheelSensitivity</code></td>
+                        <td><code>0.01</code></td>
+                        <td>
+                            Used only when
+                            <code>wheelStep</code>
+                            is undefined.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>Dynamic Workspace</h2>
+        <p>
+            The usable workspace is recalculated from rendered node bounds as nodes move or resize. There is no fixed
             <code>panSize</code>
-            (default: 2000, deprecated): Previously defined the fixed size of the working area. Dynamic workspace sizing
-            now ignores this option and derives bounds from rendered nodes instead.
-            <code>number</code>
-            still means square area (
-            <code>width = height = value</code>
-            ).
-            <code>&#123; width, height &#125;</code>
-            still means rectangular area, but both forms are preserved only for backward compatibility and no longer
-            affect runtime workspace sizing.
-        </li>
-        <li class="tui-list__item">
-            <code>topPosition</code>
-            (default: null): Initial and reset viewport padding from the top edge. If a
-            <code>startNode</code>
-            exists, its top edge is aligned to this offset; otherwise the top edge of the rendered node content is used.
-            Null keeps default centered framing on Y.
-        </li>
-        <li class="tui-list__item">
-            <code>leftPosition</code>
-            (default: null): Initial and reset viewport padding from the left edge. If a
-            <code>startNode</code>
-            exists, its left edge is aligned to this offset; otherwise the left edge of the rendered node content is
-            used. Null keeps default centered framing on X. This option does not redefine node world coordinates.
-        </li>
-        <li class="tui-list__item">
-            <code>minZoom</code>
-            (default: 0.25): The minimum zoom level allowed. This can prevent the graph from becoming too small to
-            interact with. The default value 0.25 implies that the graph can be reduced to a quarter of its original
-            size.
-        </li>
-        <li class="tui-list__item">
-            <code>maxZoom</code>
-            (default: 3): The maximum zoom level. It restricts how much the graph can be enlarged, thus avoiding
-            excessive zoom-ins. A default value of 3 means that the graph can be magnified up to three times its normal
-            size.
-        </li>
-        <li class="tui-list__item">
-            <code>zoomStep</code>
-            (default: 0.25): The incremental step for zooming in or out. Setting the zoomStep to 0.25 offers a
-            comfortable gradual scaling at each zoom action, providing smooth transitions.
-        </li>
-        <li class="tui-list__item">
-            <code>zoomAnimationDuration</code>
-            (default: 300): The time, in milliseconds, it takes to animate the zoom action. A value of 300 represents a
-            quick yet smooth transition that enhances the interactivity without causing disorientation.
-        </li>
-        <li class="tui-list__item">
-            <code>zoomWheelSensitivity</code>
-            (default: 0.01): Legacy fallback value for wheel zoom sensitivity. If
-            <code>wheelStep</code>
-            is set (it is by default), it has priority.
-        </li>
-        <li class="tui-list__item">
-            <code>touchSensitivity</code>
-            (default: 0.01): Adjusts the pan and zoom sensitivity on touch devices. A low value such as 0.01 is used to
-            achieve a fine-tuned control over the touch interactions.
-        </li>
-        <li class="tui-list__item">
-            <code>wheelBehavior</code>
-            (default:
-            <code>'zoom'</code>
-            ): Defines wheel behavior:
-            <code>'zoom'</code>
-            for mouse wheel zoom, or
-            <code>'scroll'</code>
-            for panning with the wheel.
-        </li>
-        <li class="tui-list__item">
-            <code>wheelSpeed</code>
-            (default: 1): Additional multiplier for wheel zoom speed.
-        </li>
-        <li class="tui-list__item">
-            <code>wheelStep</code>
-            (default: 0.008): Base wheel zoom step. This option has priority over
-            <code>zoomWheelSensitivity</code>
-            .
-        </li>
-        <li class="tui-list__item">
-            <code>pinchZoomSpeed</code>
-            (default: 1): Multiplier for trackpad pinch-to-zoom speed.
-        </li>
-        <li class="tui-list__item">
-            <code>backgroundCanvas.visible</code>
-            (default: true): Toggles the dedicated canvas background layer that renders the workspace fill, border, and
-            point grid behind the scene.
-        </li>
-    </ul>
-    <p>
-        Deprecated pan size examples kept for backward compatibility:
-        <code>dfPanZoomOptionsProvider(&#123; panSize: 6000 &#125;)</code>
-        and
-        <code>dfPanZoomOptionsProvider(&#123; panSize: &#123; width: 8000, height: 4000 &#125; &#125;)</code>
-    </p>
-    <p>
-        The workspace is now dynamic rather than a fixed rectangle. Node coordinates are stored in world space, and the
-        usable workspace bounds are recalculated from the rendered node bounds as nodes move or resize.
-    </p>
-    <p>
-        As a result, there is no longer a hard
-        <code>panSize</code>
-        border that blocks node dragging. Camera clamping and initial or reset framing are derived from the current
-        rendered content instead.
-    </p>
-    <p>
-        Example for wheel scrolling mode:
-        <code>dfPanZoomOptionsProvider(&#123; wheelBehavior: 'scroll' &#125;)</code>
-    </p>
-    <p>
-        <code>leftPosition</code>
-        /
-        <code>topPosition</code>
-        affect initial and reset framing only. They do not change the meaning of saved node coordinates, and new nodes
-        are still created from the current viewport center.
-    </p>
+            border that blocks dragging. Camera clamping follows the current content instead.
+        </p>
+    </section>
+
+    <section>
+        <h2>Programmatic Camera Control</h2>
+        <p>
+            Inject
+            <code>NgDrawFlowStoreService</code>
+            in a toolbar or call the same methods on a
+            <code>viewChild(NgDrawFlowComponent)</code>
+            . Coordinates and zoom are optional, so omitted camera fields keep their current values.
+        </p>
+        <tui-doc-code
+            filename="editor-toolbar.component.ts"
+            [code]="gettingStarted.commands"
+        />
+    </section>
+
+    <section>
+        <h2>Background Theming</h2>
+        <p>
+            The dedicated canvas follows camera movement and workspace CSS variables. Disable it when the application
+            supplies its own background.
+        </p>
+        <tui-doc-code
+            filename="styles.less"
+            [code]="gettingStarted.theming"
+        />
+    </section>
 </tui-doc-page>

@@ -54,6 +54,7 @@ describe('NgDrawFlowStoreService', () => {
             setScale: jest.fn(),
             removeConnection: jest.fn(),
             removeNode: jest.fn(),
+            setDataModel: jest.fn(),
             clearSelection: jest.fn(),
         } as unknown as NgDrawFlowComponent;
 
@@ -65,6 +66,7 @@ describe('NgDrawFlowStoreService', () => {
         service.setScale(1.25);
         service.removeConnection(connection);
         service.removeNode(node);
+        service.setDataModel(model);
 
         expect(host.zoomIn).toHaveBeenCalled();
         expect(host.zoomOut).toHaveBeenCalled();
@@ -72,6 +74,7 @@ describe('NgDrawFlowStoreService', () => {
         expect(host.setScale).toHaveBeenCalledWith(1.25);
         expect(host.removeConnection).toHaveBeenCalledWith(connection);
         expect(host.removeNode).toHaveBeenCalledWith(node);
+        expect(host.setDataModel).toHaveBeenCalledWith(model);
         expect(service.scale()).toBe(125);
 
         service.detach(host);
@@ -95,12 +98,34 @@ describe('NgDrawFlowStoreService', () => {
 
         // remove node clears selection automatically
         service.emitNodeSelected(node);
+
+        const updatedNode = {
+            ...node,
+            data: {...node.data, title: 'Updated node'},
+        };
+
+        service.updateDataModel({...model, nodes: [updatedNode]});
+
+        expect(service.selectedNode()).toEqual(updatedNode);
+        expect(service.selectedNode()).not.toBe(updatedNode);
+
         service.updateDataModel({...model, nodes: []});
 
         expect(service.selectedNode()).toBeNull();
 
         // remove connection clears connection selection
         service.emitConnectionSelected(connection);
+
+        const updatedConnection = {
+            ...connection,
+            label: {content: 'Updated connection'},
+        };
+
+        service.updateDataModel({...model, connections: [updatedConnection]});
+
+        expect(service.selectedConnection()).toEqual(updatedConnection);
+        expect(service.selectedConnection()).not.toBe(updatedConnection);
+
         service.updateDataModel({...model, connections: []});
 
         expect(service.selectedConnection()).toBeNull();

@@ -1,17 +1,26 @@
 .pan-position-demo {
     display: flex;
+    gap: 1rem;
 
     &-item {
         display: flex;
-        padding-inline-end: 0.3125rem;
         inline-size: 50%;
         box-sizing: border-box;
         flex-direction: column;
         justify-content: space-between;
+    }
+}
 
-        &:last-child {
-            padding-inline-start: 0.3125rem;
-            padding-inline-end: 0;
+[tuiNotification] {
+    margin-block: 1rem;
+}
+
+@media (max-width: 47.9375rem) {
+    .pan-position-demo {
+        flex-direction: column;
+
+        &-item {
+            inline-size: 100%;
         }
     }
 }

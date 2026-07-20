@@ -1,102 +1,147 @@
 <tui-doc-page header="Connection Lines">
+    <p class="docs-lead">
+        Connections are SVG paths between measured connector elements. Choose a flowing Bezier curve or an orthogonal
+        SmoothStep path, then configure arrowheads, labels and CSS variables independently from the graph data.
+    </p>
+
+    <div class="docs-summary">
+        <div>
+            <strong>Bezier</strong>
+            <span>Cubic curves driven by source and target directions.</span>
+        </div>
+        <div>
+            <strong>SmoothStep</strong>
+            <span>Horizontal and vertical segments with rounded corners.</span>
+        </div>
+        <div>
+            <strong>Arrowheads</strong>
+            <span>None, open arrow or closed arrow at the target.</span>
+        </div>
+    </div>
+
     <section>
-        <h2>Overview</h2>
+        <h2>Configure Connection Rendering</h2>
         <p>
-            Connection lines define how nodes are visually linked in NgDrawFlow. The library provides two styles:
-            <code>Bezier</code>
+            Connection rendering is shared by existing model edges and interactive draft creation. The connector's
+            <code>position</code>
+            input supplies the path direction.
+        </p>
+        <tui-doc-code
+            filename="graph-editor.component.ts"
+            [code]="examples.configuration"
+        />
+        <div class="docs-table-scroll">
+            <table class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Default</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>type</code></td>
+                        <td><code>Bezier</code></td>
+                        <td>Selects Bezier or SmoothStep calculation.</td>
+                    </tr>
+                    <tr>
+                        <td><code>curvature</code></td>
+                        <td><code>0.25</code></td>
+                        <td>Bezier bend coefficient or SmoothStep radius in pixels.</td>
+                    </tr>
+                    <tr>
+                        <td><code>arrowhead.type</code></td>
+                        <td><code>None</code></td>
+                        <td>
+                            Uses
+                            <code>Arrow</code>
+                            ,
+                            <code>ArrowClosed</code>
+                            or no marker.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>arrowhead.width</code>
+                            /
+                            <code>height</code>
+                        </td>
+                        <td>
+                            <code>8</code>
+                            /
+                            <code>4</code>
+                        </td>
+                        <td>Target marker dimensions in pixels.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section>
+        <h2>Bezier</h2>
+        <p>
+            Bezier edges are cubic curves. Their dimensionless curvature coefficient scales with connector distance, so
+            the same value remains useful across short and long edges.
+        </p>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.bezier"
+        >
+            <div class="editor">
+                <bezier-example />
+            </div>
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2>SmoothStep</h2>
+        <p>
+            SmoothStep edges use horizontal and vertical segments joined by rounded bends. Their curvature value is the
+            corner radius in pixels, making them suitable for tree and process layouts.
+        </p>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.smoothStep"
+        >
+            <div class="editor">
+                <smooth-step-example />
+            </div>
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2>Selection and Deletion</h2>
+        <p>
+            Selecting a node distinguishes both directions: incoming edges use the input highlight palette and outgoing
+            edges use the output palette. Selecting an edge applies the active connection color. Delete or Backspace
+            removes the selected edge when
+            <code>connectionsDeletable</code>
+            is enabled.
+        </p>
+        <p>
+            Programmatic deletion is available through
+            <code>removeConnection()</code>
+            on
+            <code>NgDrawFlowComponent</code>
             and
-            <code>SmoothStep</code>
-            . Select the style via the
-            <code>connection.type</code>
-            option.
-        </p>
-
-        <p>
-            When a node is selected, NgDrawFlow highlights every outgoing connection from that node. Lines that
-            originate at the node&rsquo;s output connectors receive the emphasis so you can immediately follow the path
-            of data leaving the selection instead of manually inspecting each edge.
-        </p>
-        <p>
-            The highlight palette ties into the same CSS custom properties that drive connector styling. Override
-            <code>--df-connection-selected-node-output-color</code>
-            (and its hover counterpart
-            <code>--df-connection-selected-node-output-hover-color</code>
-            ) to adjust the accent used for these emphasized connections and align them with your application&rsquo;s
-            branding.
+            <code>NgDrawFlowStoreService</code>
+            . The source and target endpoints identify the matching connection.
         </p>
     </section>
 
-    <section class="tui-space_top-4">
-        <h3>Arrowheads</h3>
+    <section>
+        <h2>Connection Theming</h2>
         <p>
-            Customize connection arrowheads using the
-            <code>connection.arrowhead</code>
-            option.
+            Style the visible path, larger selectable hit area, active edge, directional node highlights and labels with
+            CSS variables on
+            <code>ng-draw-flow</code>
+            . The hit area width does not change the visible stroke.
         </p>
-
-        <ul class="tui-list tui-list_extra-small">
-            <li class="tui-list__item">
-                <code>type</code>
-                : arrowhead style (
-                <code>DfArrowhead.None</code>
-                ,
-                <code>DfArrowhead.Arrow</code>
-                ,
-                <code>DfArrowhead.ArrowClosed</code>
-                )
-            </li>
-            <li class="tui-list__item">
-                <code>width</code>
-                : width in pixels
-            </li>
-            <li class="tui-list__item">
-                <code>height</code>
-                : height in pixels
-            </li>
-        </ul>
-    </section>
-
-    <section class="tui-space_top-4">
-        <h3>SmoothStep</h3>
-        <p>
-            SmoothStep edges use horizontal and vertical segments joined by rounded bends, making them suitable for
-            orthogonal layouts.
-        </p>
-
-        <ul class="tui-list tui-list_extra-small">
-            <li class="tui-list__item">
-                <code>curvature</code>
-                : radius of each bend in pixels.
-            </li>
-        </ul>
-    </section>
-
-    <section class="tui-space_top-4">
-        <h3>Example</h3>
-        <div class="editor tui-space_top-4">
-            <smooth-step-example />
-        </div>
-    </section>
-
-    <section class="tui-space_top-4">
-        <h3>Bezier</h3>
-        <p>
-            Bezier edges are cubic Bézier curves calculated from connector directions, creating smooth flowing lines
-            between nodes.
-        </p>
-        <ul class="tui-list tui-list_extra-small">
-            <li class="tui-list__item">
-                <code>curvature</code>
-                : dimensionless coefficient that controls how strongly the curve bends when connectors face away from
-                each other.
-            </li>
-        </ul>
-    </section>
-
-    <section class="tui-space_top-4">
-        <h3>Example</h3>
-        <div class="editor tui-space_top-4">
-            <bezier-example />
-        </div>
+        <tui-doc-code
+            filename="styles.less"
+            [code]="examples.theming"
+        />
     </section>
 </tui-doc-page>

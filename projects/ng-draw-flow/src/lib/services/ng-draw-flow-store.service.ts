@@ -145,8 +145,8 @@ export class NgDrawFlowStoreService {
         this.host?.resetPosition();
     }
 
-    /** Set both zoom and coordinates. */
-    public setPosition(position?: DfPoint & {zoom?: number}): void {
+    /** Partially updates zoom and coordinates. */
+    public setPosition(position?: Partial<DfPoint> & {zoom?: number}): void {
         this.host?.setPosition(position);
     }
 
@@ -177,6 +177,20 @@ export class NgDrawFlowStoreService {
     }
 
     /**
+     * Applies a model to the live editor and propagates it through the bound
+     * form control. Without an attached editor, only the cached snapshot changes.
+     */
+    public setDataModel(model: DfDataModel): void {
+        if (this.host) {
+            this.host.setDataModel(model);
+
+            return;
+        }
+
+        this.updateDataModel(model);
+    }
+
+    /**
      * Replaces the cached data model and revalidates current selections.
      */
     public updateDataModel(model: DfDataModel): void {
@@ -184,19 +198,30 @@ export class NgDrawFlowStoreService {
 
         const selectedNode = this.selectedNodeSignal();
 
-        if (selectedNode && !model.nodes.some((node) => node.id === selectedNode.id)) {
-            this.selectedNodeSignal.set(null);
+        if (selectedNode) {
+            const nextSelectedNode = model.nodes.find(
+                (node) => node.id === selectedNode.id,
+            );
+
+            if (!nextSelectedNode) {
+                this.selectedNodeSignal.set(null);
+            } else if ('position' in nextSelectedNode) {
+                this.selectedNodeSignal.set(this.cloneNode(nextSelectedNode));
+            }
         }
 
         const selectedConnection = this.selectedConnectionSignal();
 
-        if (
-            selectedConnection &&
-            !model.connections.some((connection) =>
+        if (selectedConnection) {
+            const nextSelectedConnection = model.connections.find((connection) =>
                 this.isSameConnection(connection, selectedConnection),
-            )
-        ) {
-            this.selectedConnectionSignal.set(null);
+            );
+
+            this.selectedConnectionSignal.set(
+                nextSelectedConnection
+                    ? this.cloneConnection(nextSelectedConnection)
+                    : null,
+            );
         }
 
         this.clearSelectionOnScene();

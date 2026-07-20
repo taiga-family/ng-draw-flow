@@ -1,0 +1,27 @@
+:host {
+    position: relative;
+    display: grid;
+    gap: 0.25rem;
+    inline-size: 11rem;
+    min-block-size: 3rem;
+
+    span {
+        color: var(--tui-text-secondary);
+        font-size: 0.75rem;
+    }
+}
+
+.input,
+.output {
+    position: absolute;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+}
+
+.input {
+    inset-inline-start: -1rem;
+}
+
+.output {
+    inset-inline-end: -1rem;
+}

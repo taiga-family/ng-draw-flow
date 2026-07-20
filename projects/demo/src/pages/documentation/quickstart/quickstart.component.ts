@@ -1,8 +1,9 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
 import {type DfDataModel, NgDrawFlowComponent} from '@ng-draw-flow/core';
 import {TuiAddonDoc, type TuiRawLoaderContent} from '@taiga-ui/addon-doc';
-import {TuiLink} from '@taiga-ui/core';
+import {TuiButton, TuiNotification} from '@taiga-ui/core';
 
 import FirstExampleComponent from './examples/first-example/component';
 
@@ -13,8 +14,10 @@ import FirstExampleComponent from './examples/first-example/component';
         FirstExampleComponent,
         NgDrawFlowComponent,
         ReactiveFormsModule,
+        RouterLink,
         TuiAddonDoc,
-        TuiLink,
+        TuiButton,
+        TuiNotification,
     ],
     templateUrl: './quickstart.component.html',
     styleUrl: './quickstart.component.less',
@@ -22,11 +25,8 @@ import FirstExampleComponent from './examples/first-example/component';
 })
 export default class QuickstartComponent {
     public gettingStarted = {
-        imports: import('./examples/imports.md?raw'),
-        providing: import('./examples/providing.md?raw'),
-        data1: import('./examples/data-1.md?raw'),
-        template: import('./examples/template.md?raw'),
-        data2: import('./examples/data-2.md?raw'),
+        editor: import('./examples/editor.component.md?raw'),
+        installation: import('./examples/installation.md?raw'),
     };
 
     public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
@@ -35,7 +35,7 @@ export default class QuickstartComponent {
         Template: import('./examples/node.template.html?raw'),
     };
 
-    public nodeData: DfDataModel = {
+    public readonly nodeData: DfDataModel = {
         nodes: [
             {
                 id: 'node-1',
@@ -46,5 +46,7 @@ export default class QuickstartComponent {
         connections: [],
     };
 
-    public nodeForm = new FormControl(this.nodeData);
+    public readonly nodeForm = new FormControl<DfDataModel>(this.nodeData, {
+        nonNullable: true,
+    });
 }

@@ -100,10 +100,7 @@ describe('NgDrawFlowComponent', () => {
     it('frames only on the first non-empty external model write', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest.spyOn(
-            component as never,
-            'scheduleViewportFraming' as never,
-        );
+        const scheduleViewportFraming = jest.spyOn(component, 'scheduleViewportFraming');
         const model = {
             nodes: [
                 {
@@ -132,10 +129,7 @@ describe('NgDrawFlowComponent', () => {
     it('allows framing again after the external model becomes empty', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest.spyOn(
-            component as never,
-            'scheduleViewportFraming' as never,
-        );
+        const scheduleViewportFraming = jest.spyOn(component, 'scheduleViewportFraming');
 
         component.writeValue({
             nodes: [
@@ -164,6 +158,28 @@ describe('NgDrawFlowComponent', () => {
         });
 
         expect(scheduleViewportFraming).toHaveBeenCalledTimes(1);
+    });
+
+    it('preserves selection while updating the model', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const store = fixture.debugElement.injector.get(NgDrawFlowStoreService);
+        const model = {
+            nodes: [
+                {
+                    id: 'node-1',
+                    data: {type: 'simpleNode'},
+                },
+            ],
+            connections: [],
+        };
+
+        component.writeValue(model);
+        component.setDataModel(model);
+
+        expect(store.clearSelectedNode).not.toHaveBeenCalled();
+        expect(store.clearSelectedConnection).not.toHaveBeenCalled();
+        expect(store.updateDataModel).toHaveBeenCalledTimes(2);
     });
 
     it('removes a node with related connections through public API', () => {

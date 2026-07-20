@@ -28,10 +28,16 @@ export const appRoutes: Routes = [
         data: {title: 'Configuration & Public API'},
     },
     {
+        path: DemoPath.StateAndEvents,
+        loadComponent: async () =>
+            import('../pages/documentation/state-and-events/state-and-events.component'),
+        data: {title: 'State & Events'},
+    },
+    {
         path: DemoPath.PanZoom,
         loadComponent: async () =>
             import('../pages/documentation/pan-zoom-configuration/pan-zoom-configuration.component'),
-        data: {title: 'PanZoom Configuration'},
+        data: {title: 'Pan and Zoom'},
     },
     {
         path: DemoPath.Nodes,
@@ -44,6 +50,12 @@ export const appRoutes: Routes = [
         loadComponent: async () =>
             import('../pages/documentation/connectors/connectors.component'),
         data: {title: 'Connectors'},
+    },
+    {
+        path: DemoPath.Layouts,
+        loadComponent: async () =>
+            import('../pages/documentation/layouts/layouts.component'),
+        data: {title: 'Dynamic Layouts'},
     },
     {
         path: DemoPath.Connections,
@@ -80,6 +92,12 @@ export const appRoutes: Routes = [
         path: DemoPath.Editor,
         loadComponent: async () => import('../pages/examples/editor/editor.component'),
         data: {title: 'Editor example'},
+    },
+    {
+        path: DemoPath.DynamicLayout,
+        loadComponent: async () =>
+            import('../pages/examples/dynamic-layout/dynamic-layout.component'),
+        data: {title: 'Dynamic Layouts'},
     },
     {
         path: DemoPath.StressTest,

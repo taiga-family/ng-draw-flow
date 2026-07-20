@@ -21,7 +21,8 @@
         "checkJs": false,
         "paths": {
             "@demo/constants": ["projects/demo/src/app/constants/index.ts"],
-            "@ng-draw-flow/core": ["projects/ng-draw-flow/src/index.ts"]
+            "@ng-draw-flow/core": ["projects/ng-draw-flow/src/index.ts"],
+            "@ng-draw-flow/layouts": ["projects/layouts/src/index.ts"]
         },
         "types": ["node", "ng-dev-mode"]
     }

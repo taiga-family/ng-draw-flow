@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {TuiAddonDoc} from '@taiga-ui/addon-doc';
+import {TuiNotification} from '@taiga-ui/core';
 
 import {
     PanZoomConfigurationExample1Component,
@@ -15,6 +16,7 @@ import {
         PanZoomConfigurationExample2Component,
         PanZoomConfigurationExample3Component,
         TuiAddonDoc,
+        TuiNotification,
     ],
     templateUrl: './pan-zoom-configuration.component.html',
     styleUrl: './pan-zoom-configuration.component.less',
@@ -25,5 +27,7 @@ export default class PanZoomConfigurationComponent {
         data0: import('./examples/data-0.md?raw'),
         data1: import('./examples/data-1.md?raw'),
         data2: import('./examples/data-2.md?raw'),
+        commands: import('./examples/camera-commands.md?raw'),
+        theming: import('./examples/background-theming.md?raw'),
     };
 }

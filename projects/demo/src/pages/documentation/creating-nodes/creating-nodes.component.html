@@ -1,77 +1,169 @@
 <tui-doc-page header="Creating Nodes">
-    <p>
-        In ng-draw-flow, nodes can be customized to look and function just how you want them to. To create your own
-        node, you should develop a component that extends from the
+    <p class="docs-lead">
+        A node is a standalone Angular component rendered inside the editor wrapper. Extend
         <code>DrawFlowBaseNode</code>
-        class. This component can render connector components such as
-        <code>DfInputComponent</code>
-        and
-        <code>DfOutputComponent</code>
-        .
+        to receive graph data and to expose any input and output connectors in the component view.
     </p>
 
-    <p>Here is what the DrawFlowBaseNode class entails:</p>
-    <tui-doc-code [code]="gettingStarted.baseNode" />
-
-    <p>
-        The base class uses signal queries
-        <code>viewChildren()</code>
-        for
-        <code>DfInputComponent</code>
-        and
-        <code>DfOutputComponent</code>
-        . These signals keep the node aware of existing connectors and detect changes in their count, which is essential
-        for maintaining the flow&#39;s data integrity and interaction logic.
-    </p>
-
-    <p>
-        The
-        <code>nodeId</code>
-        provides a unique identifier for each node while
-        <code>model</code>
-        holds the necessary data for the node&#39;s functionality.
-    </p>
-    <p>
-        For backward compatibility these values are also available as plain properties on the base class. If you want to
-        work with Angular signals directly, use
-        <code>nodeIdSignal()</code>
-        ,
-        <code>modelSignal()</code>
-        ,
-        <code>startNodeSignal()</code>
-        ,
-        <code>endNodeSignal()</code>
-        ,
-        <code>selectedSignal()</code>
-        and
-        <code>invalidSignal()</code>
-        in your custom nodes.
-    </p>
-    <p>
-        The
-        <code>selected</code>
-        attribute is still passed to the node content for custom behavior, while the default wrapper selection styles
-        are handled by
-        <code>NodeComponent</code>
-        and configured with CSS variables.
-    </p>
-    <p>
-        The optional
-        <code>startNode</code>
-        and
-        <code>endNode</code>
-        inputs determine the node&#39;s ability to connect with others, defining its role within the flow as either the
-        initiation or termination point.
-    </p>
-
-    <p>Here is a basic blueprint for a simple node component:</p>
-
-    <tui-doc-example
-        style="padding: 0"
-        [content]="customNodeExample"
-    >
-        <div class="node-demo">
-            <ng-draw-flow [formControl]="nodeForm" />
+    <div class="docs-summary">
+        <div>
+            <strong>Graph inputs</strong>
+            <span>Id, model, role, selection and validation arrive as signals.</span>
         </div>
-    </tui-doc-example>
+        <div>
+            <strong>Local UI</strong>
+            <span>Forms, menus and expanded state stay inside the Angular component.</span>
+        </div>
+        <div>
+            <strong>Wrapper styling</strong>
+            <span>Core owns selection and validation chrome through CSS variables.</span>
+        </div>
+    </div>
+
+    <section>
+        <h2>Base Node API</h2>
+        <div class="docs-table-scroll">
+            <table class="docs-table">
+                <thead>
+                    <tr>
+                        <th>Signal</th>
+                        <th>Value</th>
+                        <th>Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>nodeIdSignal()</code></td>
+                        <td><code>string</code></td>
+                        <td>Build graph-wide unique connector ids.</td>
+                    </tr>
+                    <tr>
+                        <td><code>modelSignal()</code></td>
+                        <td><code>Record&lt;string, any&gt; &amp; &#123;type: string&#125;</code></td>
+                        <td>
+                            Render application data from
+                            <code>node.data</code>
+                            .
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>startNodeSignal()</code>
+                            /
+                            <code>endNodeSignal()</code>
+                        </td>
+                        <td><code>boolean</code></td>
+                        <td>Apply application role rules in the template.</td>
+                    </tr>
+                    <tr>
+                        <td><code>selectedSignal()</code></td>
+                        <td><code>boolean</code></td>
+                        <td>React to editor selection inside node content.</td>
+                    </tr>
+                    <tr>
+                        <td><code>invalidSignal()</code></td>
+                        <td><code>boolean</code></td>
+                        <td>Combine graph validation with local node validity.</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>inputs()</code>
+                            /
+                            <code>outputs()</code>
+                        </td>
+                        <td>Connector arrays</td>
+                        <td>Observe connectors currently rendered by conditional templates.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Read-only compatibility getters such as
+            <code>nodeId</code>
+            and
+            <code>model</code>
+            are also available. Prefer signals in templates and
+            <code>computed()</code>
+            values.
+        </p>
+        <tui-doc-code
+            filename="typed-task-node.component.ts"
+            [code]="gettingStarted.typedModel"
+        />
+    </section>
+
+    <section>
+        <h2>Role Metadata</h2>
+        <p>
+            Core does not automatically forbid incoming connections for
+            <code>startNode</code>
+            or outgoing connections for
+            <code>endNode</code>
+            . These values are metadata passed to the custom component. Render or hide the corresponding connectors to
+            enforce that policy in the UI. The editor also uses the first start node as a preferred camera-framing
+            anchor.
+        </p>
+        <section
+            appearance="info"
+            size="m"
+            tuiNotification
+        >
+            The physical connector position comes from your component CSS. The connector
+            <code>position</code>
+            input only describes the direction used to calculate the path.
+        </section>
+    </section>
+
+    <section>
+        <h2>Register the Node Type</h2>
+        <p>
+            Register every component under the same key used by
+            <code>node.data.type</code>
+            . Providers can be application-wide or scoped to one editor.
+        </p>
+        <tui-doc-code
+            filename="graph-editor.component.ts"
+            [code]="gettingStarted.providing"
+        />
+    </section>
+
+    <section>
+        <h2>Complete Custom Node</h2>
+        <p>
+            The preview combines a component, template and styles. Wrapper background, border, padding, selection and
+            invalid states remain configurable on
+            <code>ng-draw-flow</code>
+            instead of being duplicated in every node type.
+        </p>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="customNodeExample"
+        >
+            <div class="node-demo">
+                <ng-draw-flow [formControl]="nodeForm" />
+            </div>
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2>Dynamic Content</h2>
+        <p>
+            Signal queries automatically detect connectors added or removed by Angular control flow. Emit
+            <code>connectorsUpdated</code>
+            after a local UI change moves an existing connector without changing the query, so core can remeasure its
+            anchor. Use
+            <code>markForCheck()</code>
+            only after imperative state changes Angular cannot observe.
+        </p>
+        <p>
+            Continue with the
+            <a
+                routerLink="/documentation/connectors"
+                tuiLink
+            >
+                connector guide
+            </a>
+            for multiple handles, Polymorpheus content and action outputs.
+        </p>
+    </section>
 </tui-doc-page>

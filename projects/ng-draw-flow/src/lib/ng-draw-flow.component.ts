@@ -124,7 +124,7 @@ export class NgDrawFlowComponent
     protected readonly panzoom = viewChild.required(PanZoomComponent);
     protected readonly disabled = signal(false);
 
-    /** Emits the *current* zoom factor each time it changes. */
+    /** Emits the current zoom percentage (100 === actual size) each time it changes. */
     protected readonly scale = output<number>();
 
     /** Fired after a new edge is successfully created. */
@@ -183,8 +183,6 @@ export class NgDrawFlowComponent
             return;
         }
 
-        this.store.clearSelectedNode();
-        this.store.clearSelectedConnection();
         this.store.updateDataModel(value);
         this.form.setValue(value, {emitEvent: false});
 
@@ -226,8 +224,8 @@ export class NgDrawFlowComponent
         this.panzoom().zoomOut();
     }
 
-    /** Set both zoom and coordinates. */
-    public setPosition(position?: DfPoint & {zoom?: number}): void {
+    /** Partially updates zoom and coordinates. */
+    public setPosition(position?: Partial<DfPoint> & {zoom?: number}): void {
         this.panzoom().setPosition(position);
     }
 
@@ -243,6 +241,12 @@ export class NgDrawFlowComponent
      */
     public setScale(scale: number): void {
         this.panzoom().setScale(scale);
+    }
+
+    /** Replaces the current model and propagates the change to the bound control. */
+    public setDataModel(model: DfDataModel): void {
+        this.store.updateDataModel(model);
+        this.form.setValue(model);
     }
 
     /** Method that removes an existing edge. */

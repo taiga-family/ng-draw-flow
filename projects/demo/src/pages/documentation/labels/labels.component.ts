@@ -12,6 +12,8 @@ import ExampleComponent from './examples/component';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LabelsComponent {
+    public readonly labelCreation = import('./examples/label-creation.md?raw');
+
     public readonly labelsExample: Record<string, TuiRawLoaderContent> = {
         TypeScript: import('./examples/component.ts?raw'),
         Template: import('./examples/template.html?raw'),

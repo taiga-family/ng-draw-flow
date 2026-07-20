@@ -15,6 +15,7 @@ import {
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
+import {DF_NODE_SIZE_REGISTRY} from '../../services/node-size-registry.service';
 import {ConnectionsService} from '../connections/connections.service';
 import {
     DF_PAN_ZOOM_OPTIONS,
@@ -39,6 +40,8 @@ describe('NodeComponent', () => {
     let clearSelectedNode: jest.Mock;
     let emitNodeSelected: jest.Mock;
     let highlightConnectionsForNode: jest.Mock;
+    let setNodeSize: jest.Mock;
+    let removeNodeSize: jest.Mock;
     let panZoomServiceMock: {
         panzoomModel: {
             x: number;
@@ -116,6 +119,8 @@ describe('NodeComponent', () => {
         clearSelectedNode = jest.fn();
         emitNodeSelected = jest.fn();
         highlightConnectionsForNode = jest.fn();
+        setNodeSize = jest.fn();
+        removeNodeSize = jest.fn();
 
         panZoomServiceMock = {
             panzoomModel: {
@@ -160,6 +165,11 @@ describe('NodeComponent', () => {
                     selectedNodeId: signal<string | null>(null),
                     highlightConnectionsForNode,
                 } as ConnectionsService),
+                MockProvider(DF_NODE_SIZE_REGISTRY, {
+                    sizes: signal(new Map()).asReadonly(),
+                    set: setNodeSize,
+                    remove: removeNodeSize,
+                }),
             ]);
     });
 
@@ -231,7 +241,7 @@ describe('NodeComponent', () => {
         geometry.measureContent({
             offsetWidth: 120,
             offsetHeight: 80,
-        } as HTMLElement);
+        });
         component.resolvedNodeValue = {
             id: 'node-1',
             data: {type: 'simpleNode'},
@@ -433,29 +443,112 @@ describe('NodeComponent', () => {
             component as any,
             'refreshRenderedGeometry',
         );
-        const syncWorkspaceGeometrySpy = jest.spyOn(
-            component as any,
-            'syncWorkspaceGeometry',
-        );
 
         measureNodeContentSpy.mockClear();
         refreshRenderedGeometrySpy.mockClear();
-        syncWorkspaceGeometrySpy.mockClear();
+        upsertNodeBounds.mockClear();
 
         (component as any).scheduleNodeSizeSync();
         (component as any).scheduleNodeSizeSync();
 
         expect(measureNodeContentSpy).not.toHaveBeenCalled();
         expect(refreshRenderedGeometrySpy).not.toHaveBeenCalled();
-        expect(syncWorkspaceGeometrySpy).not.toHaveBeenCalled();
+        expect(upsertNodeBounds).not.toHaveBeenCalled();
 
         tick(16);
 
         expect(measureNodeContentSpy).toHaveBeenCalledTimes(1);
-        expect(syncWorkspaceGeometrySpy).toHaveBeenCalledTimes(1);
         expect(refreshRenderedGeometrySpy).toHaveBeenCalledTimes(1);
         expect(refreshRenderedGeometrySpy).toHaveBeenCalledWith(false);
+        expect(upsertNodeBounds).toHaveBeenCalledTimes(1);
     }));
+
+    it('publishes the rendered wrapper size to the opt-in registry', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent();
+        const nodeElement = fixture.nativeElement.querySelector(
+            '.draw-flow-node',
+        ) as HTMLElement;
+
+        Object.defineProperties(nodeElement, {
+            offsetWidth: {value: 220},
+            offsetHeight: {value: 96},
+        });
+        setNodeSize.mockClear();
+        removeNodeSize.mockClear();
+
+        (component as any).syncNodeSizeRegistry();
+
+        expect(setNodeSize).toHaveBeenCalledWith('draft-node', {
+            width: 220,
+            height: 96,
+        });
+
+        fixture.destroy();
+
+        expect(removeNodeSize).toHaveBeenCalledWith('draft-node');
+    });
+
+    it('translates connector coordinates without remeasuring animated frames', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent() as any;
+        const connectors = component.nodeConnectors;
+        const animationFrames: FrameRequestCallback[] = [];
+        const requestAnimationFrameSpy = jest
+            .spyOn(globalThis, 'requestAnimationFrame')
+            .mockImplementation((callback) => {
+                animationFrames.push(callback);
+
+                return animationFrames.length;
+            });
+        const translateCoordinatesSpy = jest.spyOn(connectors, 'translateCoordinates');
+        const updateCoordinatesSpy = jest.spyOn(connectors, 'updateCoordinatesAt');
+        const previousPosition = {...component.renderedPositionValue};
+        const nextPosition = {
+            x: previousPosition.x + 24,
+            y: previousPosition.y - 12,
+        };
+
+        component.drawFlowOptions.positionAnimation = {
+            duration: 100,
+            easing: 'linear',
+        };
+
+        expect(component.animatePositionChange(previousPosition, nextPosition)).toBe(
+            true,
+        );
+
+        animationFrames.shift()?.(0);
+        animationFrames.shift()?.(50);
+
+        expect(translateCoordinatesSpy).toHaveBeenLastCalledWith({
+            deltaX: 12,
+            deltaY: -6,
+        });
+        expect(updateCoordinatesSpy).not.toHaveBeenCalled();
+
+        fixture.destroy();
+        requestAnimationFrameSpy.mockRestore();
+    });
+
+    it('cancels an active animation when the target is already rendered', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent() as any;
+        const position = {...component.renderedPositionValue};
+        const cancelPositionAnimationSpy = jest.spyOn(
+            component,
+            'cancelPositionAnimation',
+        );
+
+        component.drawFlowOptions.positionAnimation = {
+            duration: 100,
+            easing: 'linear',
+        };
+
+        expect(component.animatePositionChange(position, {...position})).toBe(false);
+        expect(cancelPositionAnimationSpy).toHaveBeenCalledTimes(1);
+        expect(component.positionAnimationFrameId).toBeNull();
+    });
 
     it('throws readable error when node type is not registered', () => {
         expect(() => {
@@ -575,6 +668,7 @@ describe('NodeComponent', () => {
         const fixture = MockRender(HostComponent);
         const component = ngMocks.findInstance(NodeComponent);
 
+        expect(upsertNodeBounds).toHaveBeenCalledTimes(1);
         expect(upsertNodeBounds).toHaveBeenCalledWith(
             'draft-node',
             expect.objectContaining({

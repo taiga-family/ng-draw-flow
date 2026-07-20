@@ -1,100 +1,170 @@
 <tui-doc-page header="Connectors">
-    <p>
-        Connectors play a pivotal role in defining the interactions within a node-based flow architecture. They form the
-        interactive endpoints for establishing relationships between different nodes in the system.
+    <p class="docs-lead">
+        Connectors are real elements rendered by custom nodes. They identify edge endpoints, provide path direction and
+        can carry custom content, constraints and application data.
     </p>
-    <h3>Input Connectors (df-input)</h3>
-    <p>
-        To ensure the correct functioning and tracking of connections, input connectors require specific parameters to
-        be passed via the
-        <code>[connectorData]</code>
-        parameter. These parameters include
-        <code>nodeId</code>
-        and
-        <code>connectorId</code>
-        .
-    </p>
-    <p>
-        <code>nodeId</code>
-        is the unique identifier of the node, while
-        <code>connectorId</code>
-        uniquely identifies the connector within that node. The
-        <code>single</code>
-        parameter dictates whether the input connector can accept multiple connections or just one. If
-        <code>single</code>
-        is set to
-        <b>true</b>
-        , it means that once a connection is made to this input connector, no additional connections will be accepted.
-    </p>
-    <h3>Output Connectors (df-output)</h3>
-    <p>
-        Similarly, output connectors are the points from which connections originate to other node&#39;s input
-        connectors. Much like input connectors, output connectors also require the
-        <code>nodeId</code>
-        and
-        <code>connectorId</code>
-        parameters for identification and functionality purposes. The
-        <code>single</code>
-        parameter, when set to true for an output connector, restricts it to create only one connection to another node,
-        ensuring a one-to-one relationship.
-    </p>
-    <h2>Customizing Connectors</h2>
-    <p>
-        Input and output connectors ship with distinct default colors so that their roles are visually apparent at a
-        glance. You can override these defaults—or any other visual treatment—to align with your own design system.
-        Color customization is achieved by altering CSS custom properties:
-    </p>
-    <ul class="tui-list tui-list_extra-small">
-        <li class="tui-list__item">
-            <code>--df-connector-color</code>
-            : This property controls the default color of the connectors. By setting this variable, you can ensure that
-            all connectors in your application adhere to a consistent color scheme that matches your branding or design
-            specifications.
-        </li>
-        <li class="tui-list__item">
-            <code>--df-connector-input-color</code>
-            and
-            <code>--df-connector-output-color</code>
-            : These properties let you independently tailor the default colors of input and output connectors. By
-            default, NgDrawFlow differentiates them to make the direction of data flow obvious, but you can swap or
-            restyle the palette as needed.
-        </li>
-        <li class="tui-list__item">
-            <code>--df-connector-color-hover</code>
-            : When a user hovers over a connector, this property determines the color that the connector will change to.
-            This interactive feedback is important for user experience, making it clear which connector is currently
-            under consideration for connection creation.
-        </li>
-        <li class="tui-list__item">
-            <code>--df-connector-input-color-hover</code>
-            and
-            <code>--df-connector-output-color-hover</code>
-            : Define the hover feedback for each connector type individually so that directional cues remain clear even
-            during interaction.
-        </li>
-    </ul>
-    <h2>Connector Positions</h2>
-    <p>
-        The
-        <code>position</code>
-        input param specifies where connectors appear on a node:
-        <code>DfConnectorPosition.Top</code>
-        ,
-        <code>DfConnectorPosition.Right</code>
-        ,
-        <code>DfConnectorPosition.Bottom</code>
-        , or
-        <code>DfConnectorPosition.Left</code>
-        .
-    </p>
-    <p>
-        For information on adjusting connection curvature and line styles, refer to the
-        <a
-            routerLink="/documentation/connections"
-            tuiLink
+
+    <div class="docs-summary">
+        <div>
+            <strong><code>df-input</code></strong>
+            <span>Accepts regular draggable connections.</span>
+        </div>
+        <div>
+            <strong><code>df-output</code></strong>
+            <span>Starts a regular connection by default.</span>
+        </div>
+        <div>
+            <strong>Action output</strong>
+            <span>Emits a click request without creating a draft edge.</span>
+        </div>
+    </div>
+
+    <section>
+        <h2>Connector Data</h2>
+        <p>
+            Both connector types require
+            <code>[connectorData]</code>
+            with a node id, connector id and
+            <code>single</code>
+            constraint. When
+            <code>single</code>
+            is true, a connected input rejects another edge and a connected output cannot start another edge or action.
+        </p>
+        <section
+            appearance="warning"
+            size="m"
+            tuiNotification
         >
-            connections documentation
-        </a>
-        .
-    </p>
+            Connector ids must be unique across the complete graph, not only inside one node. Use a convention such as
+            <code>&#123;nodeId&#125;-input-1</code>
+            and
+            <code>&#123;nodeId&#125;-output-1</code>
+            .
+        </section>
+    </section>
+
+    <section>
+        <h2>Placement and Path Direction</h2>
+        <p>
+            Place connectors with the custom node's CSS. The
+            <code>position</code>
+            input accepts
+            <code>Top</code>
+            ,
+            <code>Right</code>
+            ,
+            <code>Bottom</code>
+            or
+            <code>Left</code>
+            and tells Bezier or SmoothStep calculation which direction the path should leave or approach. It does not
+            move the connector element.
+        </p>
+    </section>
+
+    <section>
+        <h2>Custom Content</h2>
+        <p>
+            The
+            <code>[content]</code>
+            input accepts any Polymorpheus content: text, a component or an
+            <code>ng-template</code>
+            . A template receives the complete
+            <code>DfDataConnectorConfig</code>
+            as its implicit context, including optional application
+            <code>data</code>
+            .
+        </p>
+        <tui-doc-code
+            filename="task-node.component.html"
+            [code]="examples.customContent"
+        />
+    </section>
+
+    <section>
+        <h2>Regular Graph Connectors</h2>
+        <p>
+            <code>DfOutputMode.Connection</code>
+            is the default output mode. A pointer drag starts a draft edge and dropping it on an input appends a
+            connection to the bound model. Regular outputs do not emit application actions.
+        </p>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.regular"
+        >
+            <connector-example />
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2>Dynamic Layout Connectors</h2>
+        <p>
+            Set
+            <code>DfOutputMode.Action</code>
+            when a click should request an application-owned graph mutation. The output remains visible when regular
+            connection creation is disabled, never starts a draft edge and emits its connector config through
+            <code>(activated)</code>
+            .
+        </p>
+        <tui-doc-code
+            filename="tree-node.component.html"
+            [code]="examples.actionOutput"
+        />
+        <p>
+            The connector does not add a node itself. The handler creates both the child and its edge, then passes the
+            complete next model to the layouts service.
+        </p>
+        <tui-doc-code
+            filename="dynamic-tree.component.ts"
+            [code]="examples.actionHandler"
+        />
+        <p>
+            Multiple action outputs can carry different
+            <code>data</code>
+            or constraints. In strict-tree layouts, assign connected outputs a unique zero-based
+            <code>layoutOrder</code>
+            in visual order: top to bottom for horizontal trees and left to right for vertical trees.
+        </p>
+
+        <h3>Working Dynamic Tree</h3>
+        <tui-doc-example
+            style="padding: 0"
+            [content]="examples.dynamic"
+        >
+            <dynamic-connector-example />
+        </tui-doc-example>
+    </section>
+
+    <section>
+        <h2>Connector Theming</h2>
+        <p>
+            Override
+            <code>--df-connector-input-color</code>
+            ,
+            <code>--df-connector-output-color</code>
+            and their
+            <code>-hover</code>
+            variants on
+            <code>ng-draw-flow</code>
+            . The generic
+            <code>--df-connector-color</code>
+            remains a fallback for both types.
+        </p>
+        <p>
+            Continue with
+            <a
+                routerLink="/documentation/connections"
+                tuiLink
+            >
+                connection rendering
+            </a>
+            or the
+            <a
+                routerLink="/documentation/layouts"
+                tuiLink
+            >
+                dynamic layouts guide
+            </a>
+            .
+        </p>
+    </section>
 </tui-doc-page>

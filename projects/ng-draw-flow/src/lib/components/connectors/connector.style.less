@@ -43,6 +43,32 @@
     &.df-disabled {
         pointer-events: none;
     }
+
+    &.df-action {
+        cursor: pointer;
+    }
+
+    &.df-has-content::before {
+        display: none;
+    }
+
+    &.df-not-creatable {
+        visibility: hidden;
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+.df-connector-content {
+    position: absolute;
+    z-index: 2;
+    display: grid;
+    inset-inline-start: 50%;
+    inset-block-start: 50%;
+    place-items: center;
+    line-height: 1;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
 }
 
 :host([data-connector-type='input']) {

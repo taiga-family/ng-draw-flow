@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
+import {PolymorpheusOutlet} from '@taiga-ui/polymorpheus';
 
 import {
     DfConnectionPoint,
@@ -10,7 +11,18 @@ import {BaseConnector} from './base-connector';
 @Component({
     standalone: true,
     selector: 'df-input',
-    template: '',
+    imports: [PolymorpheusOutlet],
+    template: `
+        @if (hasContent) {
+            <span class="df-connector-content">
+                <ng-container
+                    *polymorpheusOutlet="content() as value; context: contentContext()"
+                >
+                    {{ value }}
+                </ng-container>
+            </span>
+        }
+    `,
     styleUrl: './connector.style.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -76,13 +76,11 @@ export class DragDropService {
                 const pointerUpStream$ = this.pointerUp$.pipe(
                     filter((e) => e.pointerId === id),
                     take(1),
-                    map(
-                        (): DfDragDrop => ({
-                            stage: DfDragDropStage.End,
-                            sourceElement: el,
-                            distance: {deltaX: 0, deltaY: 0},
-                        }),
-                    ),
+                    map((): DfDragDrop => ({
+                        stage: DfDragDropStage.End,
+                        sourceElement: el,
+                        distance: {deltaX: 0, deltaY: 0},
+                    })),
                     shareReplay({bufferSize: 1, refCount: false}),
                 );
 

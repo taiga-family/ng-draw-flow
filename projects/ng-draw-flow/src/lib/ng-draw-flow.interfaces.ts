@@ -53,16 +53,25 @@ export interface DfWorkspaceOptions {
     connectionsCreatable: boolean;
 }
 
+export type DfNodePositionAnimationEasing = 'ease-in-out' | 'linear';
+
+export interface DfNodePositionAnimationOptions {
+    duration: number;
+    easing: DfNodePositionAnimationEasing;
+}
+
 export interface DfOptions {
     connection: DfConnectionOptions;
     nodes: DfComponents;
     options: DfWorkspaceOptions;
+    positionAnimation?: DfNodePositionAnimationOptions;
 }
 
 export interface DfOptionsInput {
     connection?: Partial<DfConnectionOptionsInput>;
     nodes?: DfComponents;
     options?: Partial<DfWorkspaceOptions>;
+    positionAnimation?: Partial<DfNodePositionAnimationOptions>;
 }
 
 export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;
@@ -70,6 +79,11 @@ export type DfComponents = Record<string, Type<DrawFlowBaseNode>>;
 export interface DfPoint {
     x: number;
     y: number;
+}
+
+export interface DfNodeSize {
+    width: number;
+    height: number;
 }
 
 export interface DfDelta {
@@ -128,6 +142,11 @@ export interface DfDataConnectorConfig {
     readonly nodeId: DfId;
     readonly connectorId: DfId;
     readonly single: boolean;
+    readonly data?: Record<string, unknown>;
+}
+
+export interface DfConnectorContentContext {
+    readonly $implicit: DfDataConnectorConfig;
 }
 
 export interface DfConnectorData {
@@ -138,6 +157,11 @@ export interface DfConnectorData {
 export enum DfConnectionPoint {
     Input = 'input',
     Output = 'output',
+}
+
+export enum DfOutputMode {
+    Action = 'action',
+    Connection = 'connection',
 }
 
 export interface DfEvent<T> {

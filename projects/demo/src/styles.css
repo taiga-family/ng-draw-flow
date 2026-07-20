@@ -13,3 +13,120 @@ ng-draw-flow {
     --df-node-selected-border-color: var(--tui-text-action);
     --df-node-invalid-border-color: var(--tui-text-negative);
 }
+
+.docs-lead {
+    max-inline-size: 52rem;
+    margin-block: 0 1.5rem;
+    color: var(--tui-text-secondary);
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.docs-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1.5rem;
+    margin-block: 1.5rem 2rem;
+    padding-block: 1.5rem;
+    border-block: 0.0625rem solid var(--tui-border-normal);
+}
+
+.docs-summary > div {
+    padding-inline-start: 1rem;
+    border-inline-start: 0.1875rem solid var(--tui-background-accent-1);
+}
+
+.docs-summary strong,
+.docs-summary span {
+    display: block;
+}
+
+.docs-summary span {
+    margin-block-start: 0.375rem;
+    color: var(--tui-text-secondary);
+    line-height: 1.45;
+}
+
+.docs-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1rem;
+    margin-block: 1.5rem 2rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: docs-step;
+}
+
+.docs-flow > li {
+    min-inline-size: 0;
+    padding-block-start: 0.875rem;
+    border-block-start: 0.125rem solid var(--tui-border-normal);
+    counter-increment: docs-step;
+}
+
+.docs-flow > li::before {
+    content: counter(docs-step, decimal-leading-zero);
+    display: block;
+    margin-block-end: 0.5rem;
+    color: var(--tui-text-action);
+    font-weight: bold;
+}
+
+.docs-flow strong,
+.docs-flow span {
+    display: block;
+}
+
+.docs-flow span {
+    margin-block-start: 0.25rem;
+    color: var(--tui-text-secondary);
+    line-height: 1.45;
+}
+
+.docs-table-scroll {
+    overflow-x: auto;
+    margin-block: 1rem 2rem;
+}
+
+.docs-table {
+    inline-size: 100%;
+    min-inline-size: 38rem;
+    border-collapse: collapse;
+    text-align: start;
+}
+
+.docs-table th,
+.docs-table td {
+    padding: 0.75rem 1rem;
+    border-block-end: 0.0625rem solid var(--tui-border-normal);
+    vertical-align: top;
+    text-align: start;
+}
+
+.docs-table th {
+    color: var(--tui-text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.docs-table td:first-child {
+    white-space: nowrap;
+}
+
+.docs-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block: 1rem 2rem;
+}
+
+@media (max-width: 47.9375rem) {
+    .docs-lead {
+        font-size: 1rem;
+    }
+
+    .docs-summary,
+    .docs-flow {
+        grid-template-columns: 1fr;
+    }
+}

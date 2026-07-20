@@ -33,8 +33,7 @@ export interface DfPanZoomViewportZoomGesture {
 }
 
 export type DfPanZoomViewportGesture =
-    | DfPanZoomViewportPanGesture
-    | DfPanZoomViewportZoomGesture;
+    DfPanZoomViewportPanGesture | DfPanZoomViewportZoomGesture;
 
 @Injectable()
 export class PanZoomControllerService {
@@ -90,7 +89,7 @@ export class PanZoomControllerService {
         });
     }
 
-    public setPosition(position?: DfPoint & {zoom?: number}): void {
+    public setPosition(position?: Partial<DfPoint> & {zoom?: number}): void {
         const camera = this.panZoomService.snapshot();
         const nextCamera = {
             ...camera,

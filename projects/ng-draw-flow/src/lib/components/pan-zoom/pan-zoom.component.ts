@@ -79,7 +79,7 @@ export class PanZoomComponent implements OnInit, OnDestroy {
         this.panZoomController.resetPanzoom();
     }
 
-    public setPosition(position?: DfPoint & {zoom?: number}): void {
+    public setPosition(position?: Partial<DfPoint> & {zoom?: number}): void {
         this.panZoomController.setPosition(position);
     }
 

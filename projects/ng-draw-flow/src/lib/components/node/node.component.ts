@@ -27,11 +27,14 @@ import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {
     type DfDataInitialNode,
     type DfDataNode,
+    type DfNodePositionAnimationEasing,
     type DfOptions,
+    type DfPoint,
 } from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {CoordinatesService} from '../../services/coordinates.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
+import {DF_NODE_SIZE_REGISTRY} from '../../services/node-size-registry.service';
 import {ConnectionsService} from '../connections/connections.service';
 import {DF_PAN_ZOOM_OPTIONS} from '../pan-zoom/pan-zoom.options';
 import {PanZoomService} from '../pan-zoom/pan-zoom.service';
@@ -62,6 +65,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
+    private readonly nodeSizeRegistry = inject(DF_NODE_SIZE_REGISTRY);
     private readonly drawFlowOptions = inject<DfOptions>(DRAW_FLOW_OPTIONS);
     private readonly environmentInjector = inject(EnvironmentInjector);
     private readonly drawFlowComponents = this.drawFlowOptions.nodes;
@@ -76,6 +80,8 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private readonly nodeContentHost = new NodeContentHost(this.environmentInjector);
 
     private resolvedNodeValue: DfDataNode | null = null;
+    private renderedPositionValue: DfPoint | null = null;
+    private positionAnimationFrameId: number | null = null;
     private readonly nodeConnectors: NodeConnectorsController;
     private readonly nodeInteraction: NodeInteractionController;
     private nodeSizeSyncSubscription: Subscription | null = null;
@@ -127,12 +133,13 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.measureNodeContent();
         this.nodeConnectors.applyOutputsConnectionLabel();
         this.nodeConnectors.watch();
-        this.syncWorkspaceGeometry();
         this.refreshRenderedGeometry(false);
+        this.syncNodeSizeRegistry();
         this.observeNodeSize();
     }
 
     public ngOnDestroy(): void {
+        this.cancelPositionAnimation();
         this.cancelScheduledNodeSizeSync();
 
         if (!this.resolvedNodeValue) {
@@ -143,6 +150,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         }
 
         this.nodeInteraction.clearHighlightedConnectionsFor(this.getResolvedNode().id);
+        this.nodeSizeRegistry?.remove(this.getResolvedNode().id);
         this.nodeConnectors.disconnect();
         this.nodeGeometry.disconnect();
         this.nodeGeometry.removeWorkspaceGeometry(this.getResolvedNode().id);
@@ -171,6 +179,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     protected onDrag(event: DfDragDrop): void {
+        this.cancelPositionAnimationForInteraction();
         this.nodeInteraction.handleDrag(event);
     }
 
@@ -202,6 +211,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             getCenteredPosition: (node) => this.nodeGeometry.getCenteredPosition(node),
             getNode: () => this.getResolvedNode(),
             getNodeContentRenderer: () => this.getNodeContentRenderer(),
+            getZoom: () => this.panZoomService.snapshot().zoom,
             onConnectorDeleted: (connectorId) => {
                 this.connectorDeleted.emit(connectorId);
             },
@@ -238,7 +248,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
                 this.nodeSelected.emit(node);
             },
             recalculateConnectorsPosition: (distance, zoom) => {
-                this.nodeConnectors.recalculatePositions(distance, zoom);
+                this.recalculateConnectorPositions(distance, zoom);
             },
             refreshRenderedGeometry: (dynamic) => {
                 this.refreshRenderedGeometry(dynamic);
@@ -261,6 +271,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
 
     private initializeResolvedNode(): void {
         this.resolvedNodeValue = this.nodeGeometry.resolveNode(this.node());
+        this.renderedPositionValue = {...this.resolvedNodeValue.position};
     }
 
     private applyNodeInputUpdate(node: DfDataInitialNode | DfDataNode): void {
@@ -311,6 +322,10 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             this.nodeContentHost.syncInputs(this.getNodeContentInputs());
         }
 
+        if (nodeIdentityChanged) {
+            this.nodeSizeRegistry?.remove(previousNode.id);
+        }
+
         if (nodeTypeChanged || connectionLabelChanged) {
             this.nodeConnectors.applyOutputsConnectionLabel();
         }
@@ -322,8 +337,22 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             startNodeChanged ||
             endNodeChanged
         ) {
-            this.syncWorkspaceGeometry();
-            this.refreshRenderedGeometry(false);
+            const animating =
+                positionChanged &&
+                !nodeTypeChanged &&
+                !nodeIdentityChanged &&
+                this.animatePositionChange(
+                    this.renderedPositionValue ?? previousNode.position,
+                    this.resolvedNodeValue.position,
+                );
+
+            if (!animating) {
+                this.refreshRenderedGeometry(false);
+            }
+
+            if (nodeTypeChanged || nodeIdentityChanged) {
+                this.syncNodeSizeRegistry();
+            }
         }
     }
 
@@ -363,21 +392,148 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
 
     private syncNodeSize(): void {
         this.measureNodeContent();
-        this.syncWorkspaceGeometry();
         this.refreshRenderedGeometry(false);
+        this.syncNodeSizeRegistry();
+    }
+
+    private syncNodeSizeRegistry(): void {
+        if (!this.nodeSizeRegistry || !this.resolvedNodeValue) {
+            return;
+        }
+
+        this.nodeSizeRegistry.set(
+            this.resolvedNodeValue.id,
+            this.nodeGeometry.measureElement(this.nodeElementRef().nativeElement),
+        );
     }
 
     private refreshRenderedGeometry(dynamic: boolean): void {
+        this.renderPosition(this.getResolvedNode().position, dynamic);
+    }
+
+    private renderPosition(
+        position: DfPoint,
+        dynamic: boolean,
+        translateConnectorCoordinates = false,
+    ): void {
+        const node = this.getResolvedNode();
+        const centeredPosition = this.nodeGeometry.getCenteredPoint(position);
+
         this.nodeGeometry.applyPositionToStyle(
             this.nodeElementRef().nativeElement,
-            this.nodeGeometry.getCenteredPosition(this.getResolvedNode()),
+            centeredPosition,
             dynamic,
         );
-        this.nodeConnectors.updateCoordinates();
+
+        if (translateConnectorCoordinates && this.renderedPositionValue) {
+            this.nodeConnectors.translateCoordinates({
+                deltaX: position.x - this.renderedPositionValue.x,
+                deltaY: position.y - this.renderedPositionValue.y,
+            });
+        } else {
+            this.nodeConnectors.updateCoordinatesAt(centeredPosition, node.id);
+        }
+
+        this.nodeGeometry.syncWorkspaceGeometryAt(node.id, position);
+        this.renderedPositionValue = {...position};
+    }
+
+    private recalculateConnectorPositions(
+        distance: DfDragDrop['distance'],
+        zoom: number,
+    ): void {
+        this.nodeConnectors.recalculatePositions(distance, zoom);
     }
 
     private syncWorkspaceGeometry(): void {
         this.nodeGeometry.syncWorkspaceGeometry(this.getResolvedNode());
+    }
+
+    private animatePositionChange(from: DfPoint, to: DfPoint): boolean {
+        const animation = this.drawFlowOptions.positionAnimation;
+        const duration = animation?.duration ?? 0;
+
+        this.cancelPositionAnimation();
+
+        if (
+            (from.x === to.x && from.y === to.y) ||
+            duration <= 0 ||
+            typeof requestAnimationFrame !== 'function' ||
+            this.prefersReducedMotion()
+        ) {
+            return false;
+        }
+
+        let startedAt: number | null = null;
+
+        const renderFrame = (timestamp: number): void => {
+            startedAt ??= timestamp;
+
+            const progress = Math.min((timestamp - startedAt) / duration, 1);
+            const eased = this.ease(progress, animation?.easing ?? 'ease-in-out');
+
+            this.renderPosition(
+                {
+                    x: from.x + (to.x - from.x) * eased,
+                    y: from.y + (to.y - from.y) * eased,
+                },
+                true,
+                true,
+            );
+
+            if (progress < 1) {
+                this.positionAnimationFrameId = requestAnimationFrame(renderFrame);
+
+                return;
+            }
+
+            this.positionAnimationFrameId = null;
+            this.refreshRenderedGeometry(false);
+        };
+
+        this.positionAnimationFrameId = requestAnimationFrame(renderFrame);
+
+        return true;
+    }
+
+    private cancelPositionAnimationForInteraction(): void {
+        if (this.positionAnimationFrameId === null || !this.renderedPositionValue) {
+            return;
+        }
+
+        this.cancelPositionAnimation();
+        this.resolvedNodeValue = {
+            ...this.getResolvedNode(),
+            position: {...this.renderedPositionValue},
+        };
+    }
+
+    private cancelPositionAnimation(): void {
+        if (
+            this.positionAnimationFrameId !== null &&
+            typeof cancelAnimationFrame === 'function'
+        ) {
+            cancelAnimationFrame(this.positionAnimationFrameId);
+        }
+
+        this.positionAnimationFrameId = null;
+    }
+
+    private prefersReducedMotion(): boolean {
+        return (
+            typeof matchMedia === 'function' &&
+            matchMedia('(prefers-reduced-motion: reduce)').matches
+        );
+    }
+
+    private ease(progress: number, easing: DfNodePositionAnimationEasing): number {
+        if (easing === 'linear') {
+            return progress;
+        }
+
+        return progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
     }
 
     private getNodeContentComponent(nodeType: string): DfOptions['nodes'][string] {

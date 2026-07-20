@@ -24,7 +24,12 @@ export const DEMO_PAGES: TuiDocRoutePages = [
     },
     {
         section: 'Documentation',
-        title: 'PanZoom Configuration',
+        title: 'State & Events',
+        route: DemoPath.StateAndEvents,
+    },
+    {
+        section: 'Documentation',
+        title: 'Pan and Zoom',
         route: DemoPath.PanZoom,
     },
     {
@@ -36,6 +41,11 @@ export const DEMO_PAGES: TuiDocRoutePages = [
         section: 'Documentation',
         title: 'Connectors',
         route: DemoPath.Connectors,
+    },
+    {
+        section: 'Documentation',
+        title: 'Dynamic Layouts',
+        route: DemoPath.Layouts,
     },
     {
         section: 'Documentation',
@@ -66,6 +76,11 @@ export const DEMO_PAGES: TuiDocRoutePages = [
         section: 'Examples',
         title: 'Editor example',
         route: DemoPath.Editor,
+    },
+    {
+        section: 'Examples',
+        title: 'Dynamic Layouts',
+        route: DemoPath.DynamicLayout,
     },
     {
         section: 'Examples',

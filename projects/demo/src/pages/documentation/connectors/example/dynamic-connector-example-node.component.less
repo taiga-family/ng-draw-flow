@@ -1,0 +1,44 @@
+:host {
+    position: relative;
+    display: grid;
+    gap: 0.25rem;
+    inline-size: 9rem;
+    min-block-size: 2.5rem;
+
+    span {
+        color: var(--tui-text-secondary);
+        font-size: 0.75rem;
+    }
+}
+
+.input,
+.action-output {
+    position: absolute;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+}
+
+.input {
+    inset-inline-start: -1rem;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.action-output {
+    display: grid;
+    inset-inline-end: -1rem;
+    place-items: center;
+    color: var(--tui-text-action);
+    background: var(--tui-background-base);
+    border: 0.0625rem solid var(--tui-border-normal);
+
+    &::after {
+        opacity: 0;
+    }
+
+    tui-icon {
+        inline-size: 0.875rem;
+        block-size: 0.875rem;
+        font-size: 0.875rem;
+    }
+}
