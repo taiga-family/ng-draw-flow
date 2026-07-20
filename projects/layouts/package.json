@@ -1,6 +1,6 @@
 {
     "name": "@ng-draw-flow/layouts",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Strict-tree automatic layouts for @ng-draw-flow/core",
     "keywords": [
         "angular",
@@ -27,6 +27,6 @@
     },
     "peerDependencies": {
         "@angular/core": ">=19.0.0",
-        "@ng-draw-flow/core": "^1.1.0"
+        "@ng-draw-flow/core": "^1.2.0"
     }
 }

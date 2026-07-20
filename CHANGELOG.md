@@ -1,3 +1,27 @@
+### [1.2.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.1.0...v1.2.0) (2026-07-20)
+
+### 🚀 Features
+
+- **layouts**: add measured strict tree auto-layout
+  [(136bc14)](https://github.com/taiga-family/ng-draw-flow/commit/136bc14a8d4004e60e5ba1ebb0c2f61671914105)
+- **ng-draw-flow**: add automatic layout primitives
+  [(fb19db4)](https://github.com/taiga-family/ng-draw-flow/commit/fb19db4e4b5e285037711149e16cc06d329fc270)
+- **ng-draw-flow**: add action output connectors
+  [(4ce702e)](https://github.com/taiga-family/ng-draw-flow/commit/4ce702ed40d6a270ae414cc9454d55acd3d4bd06)
+- **ng-draw-flow**: support custom connector content
+  [(8ed08a6)](https://github.com/taiga-family/ng-draw-flow/commit/8ed08a694478ae42ac9398e0a46247f41d1d2a37)
+
+### 🐞 Bug Fixes
+
+- optimize layout animations and error state
+  [(3ba7f97)](https://github.com/taiga-family/ng-draw-flow/commit/3ba7f97ae6a4018d620f089c1b2915a8b50e59c1)
+- **ng-draw-flow**: remove keyboard activation from action outputs
+  [(d6cf2fb)](https://github.com/taiga-family/ng-draw-flow/commit/d6cf2fb80933e05b7aa2ecc881eb1830382b9a55)
+- **demo**: prevent Angular DI failure in production builds
+  [(3de4d21)](https://github.com/taiga-family/ng-draw-flow/commit/3de4d215bd40b0b4139fec19b577d86fa71f7362)
+- **ng-draw-flow**: allow partial camera position updates
+  [(6e4b0c7)](https://github.com/taiga-family/ng-draw-flow/commit/6e4b0c7b03b039714405f71303887293536c3a68)
+
 ### [1.1.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.0.2...v1.1.0) (2026-06-04)
 
 ### 🚀 Features
