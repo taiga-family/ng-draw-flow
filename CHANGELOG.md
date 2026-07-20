@@ -1,3 +1,10 @@
+### [1.2.1](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.0...v1.2.1) (2026-07-20)
+
+### 🚀 Features
+
+- **layouts**: enable public publishing configuration
+  [(ec3dfd4)](https://github.com/taiga-family/ng-draw-flow/commit/ec3dfd4aa04d81454f45cf6546a0c34477274b1b)
+
 ### [1.2.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.1.0...v1.2.0) (2026-07-20)
 
 ### 🚀 Features
