@@ -187,10 +187,14 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         return this.nodeInteraction.selected();
     }
 
+    protected isInvalid(): boolean {
+        return this.invalid() || this.nodeContentHost.renderer()?.invalid === true;
+    }
+
     protected nodeClassName(): string {
         const classNames = ['draw-flow-node'];
 
-        if (this.invalid()) {
+        if (this.isInvalid()) {
             classNames.push('df-invalid');
         }
 

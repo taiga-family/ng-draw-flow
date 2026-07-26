@@ -23,6 +23,7 @@ export interface DfNodeContentInputs {
 
 export interface DfNodeContentRenderer {
     readonly nativeElement: HTMLElement;
+    readonly invalid: boolean;
     readonly inputConnectors: Signal<readonly DfInputComponent[]>;
     readonly outputConnectors: Signal<readonly DfOutputComponent[]>;
     readonly connectorUpdates$: Observable<void>;
@@ -42,6 +43,10 @@ class ComponentNodeContentRenderer implements DfNodeContentRenderer {
 
     public get nativeElement(): HTMLElement {
         return this.componentRef.location.nativeElement;
+    }
+
+    public get invalid(): boolean {
+        return this.componentRef.instance.invalid;
     }
 
     public syncInputs(inputs: DfNodeContentInputs): void {

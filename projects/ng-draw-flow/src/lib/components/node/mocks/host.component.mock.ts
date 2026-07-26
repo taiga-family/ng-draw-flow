@@ -8,7 +8,7 @@ import {NodeComponent} from '../node.component';
     imports: [NodeComponent],
     template: `
         <df-node
-            [invalid]="invalid"
+            [invalid]="invalid()"
             [node]="node()"
         />
     `,
@@ -16,7 +16,7 @@ import {NodeComponent} from '../node.component';
 })
 export class HostComponent {
     public readonly nodeComponent = viewChild.required(NodeComponent);
-    public invalid = false;
+    public readonly invalid = signal(false);
     public readonly node = signal<DfDataInitialNode | DfDataNode>({
         id: 'draft-node',
         data: {type: 'simpleNode'},

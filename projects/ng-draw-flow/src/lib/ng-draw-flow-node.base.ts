@@ -13,13 +13,7 @@ import {DfInputComponent, DfOutputComponent} from './components/connectors';
  * Base abstract class for DrawFlow nodes.
  * Provides common functionality and structure for all node types in the flow diagram.
  */
-@Directive({
-    standalone: true,
-    host: {
-        '[class.df-invalid]': 'this.invalidState',
-        '[class.df-selected]': 'this.selected',
-    },
-})
+@Directive({standalone: true})
 export abstract class DrawFlowBaseNode {
     private readonly cdr = inject(ChangeDetectorRef);
     /**
@@ -68,16 +62,15 @@ export abstract class DrawFlowBaseNode {
     /**
      * Selection state of the node.
      * Changes when the node is clicked or deselected.
-     * Applied as 'df-selected' CSS class when true.
+     * The editor applies the visual state to the node wrapper.
      * @default false
      */
     public readonly selectedSignal = input(false, {alias: 'selected'});
 
     /**
      * Validation state of the node.
-     * Can be manually set to highlight the node with red color,
-     * for example when a form inside the node is invalid.
-     * Applied as 'df-invalid' CSS class when true.
+     * Supplied by graph validators. Override `invalidState` to combine
+     * this input with local validation before the editor styles the wrapper.
      * @default false
      */
     public readonly invalidSignal = input(false, {alias: 'invalid'});
@@ -110,6 +103,11 @@ export abstract class DrawFlowBaseNode {
         this.cdr.markForCheck();
     }
 
+    /**
+     * Effective validation state read by the editor wrapper.
+     * Override to combine graph validation with local component state,
+     * for example when a form inside the node is invalid.
+     */
     protected get invalidState(): boolean {
         return this.invalidSignal();
     }

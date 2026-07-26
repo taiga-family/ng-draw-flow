@@ -27,9 +27,9 @@
             <code>invalidState</code>
             getter to combine local UI validity with
             <code>invalidSignal()</code>
-            supplied by graph validators. Core uses the result to apply
+            supplied by graph validators. Core reads the result from the custom component and applies
             <code>.df-invalid</code>
-            to the custom node host.
+            to the editor node wrapper.
         </p>
         @if (validationExamples.LocalValidation; as localValidation) {
             <tui-doc-code
