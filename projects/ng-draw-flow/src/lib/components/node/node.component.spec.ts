@@ -289,6 +289,118 @@ describe('NodeComponent', () => {
         expect(innerComponent.selected).toBe(true);
     });
 
+    it('applies selected and graph-invalid classes only to the node wrapper', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const component = host.nodeComponent();
+        const innerComponent = ngMocks.findInstance(MockNodeContentComponent);
+        const nodeElement = fixture.nativeElement.querySelector(
+            '.draw-flow-node',
+        ) as HTMLElement;
+        const contentElement = fixture.nativeElement.querySelector(
+            'mock-node-content',
+        ) as HTMLElement;
+
+        (component as any).onSelectedChanged(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-selected')).toBe(true);
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(contentElement.classList.contains('df-selected')).toBe(false);
+        expect(contentElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.selected).toBe(true);
+        expect(innerComponent.invalid).toBe(false);
+
+        host.invalid.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-selected')).toBe(true);
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+        expect(contentElement.classList.contains('df-selected')).toBe(false);
+        expect(contentElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.selected).toBe(true);
+        expect(innerComponent.invalid).toBe(true);
+
+        (component as any).onSelectedChanged(false);
+        host.invalid.set(false);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-selected')).toBe(false);
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(contentElement.classList.contains('df-selected')).toBe(false);
+        expect(contentElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.selected).toBe(false);
+        expect(innerComponent.invalid).toBe(false);
+    });
+
+    it('combines graph and local custom-node errors on the invalid wrapper class', async () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const innerComponent = ngMocks.findInstance(MockNodeContentComponent);
+        const nodeElement = fixture.nativeElement.querySelector(
+            '.draw-flow-node',
+        ) as HTMLElement;
+        const formInput = fixture.nativeElement.querySelector(
+            'mock-node-content input',
+        ) as HTMLInputElement;
+        const contentElement = fixture.nativeElement.querySelector(
+            'mock-node-content',
+        ) as HTMLElement;
+
+        expect(innerComponent.control.touched).toBe(false);
+        expect(innerComponent.control.invalid).toBe(true);
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(contentElement.classList.contains('df-invalid')).toBe(false);
+
+        formInput.dispatchEvent(new Event('blur'));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+        expect(innerComponent.control.touched).toBe(true);
+        expect(innerComponent.control.invalid).toBe(true);
+        expect(contentElement.classList.contains('df-invalid')).toBe(false);
+
+        host.invalid.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+
+        formInput.value = 'valid';
+        formInput.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+        expect(innerComponent.control.invalid).toBe(false);
+
+        formInput.value = '';
+        formInput.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+        expect(innerComponent.control.invalid).toBe(true);
+
+        host.invalid.set(false);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+
+        formInput.value = 'valid';
+        formInput.dispatchEvent(new Event('input'));
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.control.invalid).toBe(false);
+    });
+
     it('synchronizes dynamic content when node input is replaced', async () => {
         const fixture = MockRender(HostComponent);
         const host = fixture.point.componentInstance;
