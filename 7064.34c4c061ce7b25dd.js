@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[7064],{7064(o){o.exports="```less\nng-draw-flow {\n  --df-pan-zoom-viewport-background: #f4f4f5;\n  --df-pan-zoom-workspace-background: #fff;\n  --df-pan-zoom-grid-color: #d4d4d8;\n  --df-pan-zoom-border-color: #e4e4e7;\n}\n```\n"}}]);

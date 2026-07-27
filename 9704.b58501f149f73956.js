@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[9704],{9704(n){n.exports="```ts\nprovideNgDrawFlowConfigs({\n  positionAnimation: {\n    duration: 280,\n    easing: 'ease-in-out',\n  },\n});\n```\n"}}]);

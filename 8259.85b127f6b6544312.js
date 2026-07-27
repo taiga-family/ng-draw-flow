@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[8259],{8259(o){o.exports='```ts\n@Component({\n  // The editor and every child toolbar resolve this local instance.\n  providers: [NgDrawFlowStoreService],\n  template: `\n    <editor-toolbar />\n    <ng-draw-flow [formControl]="form" />\n  `,\n})\nexport class EditorHostComponent {}\n```\n'}}]);

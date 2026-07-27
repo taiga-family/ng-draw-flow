@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[3433],{3433(e){e.exports="```ts\n{\n  hasIsolatedNodes: boolean;\n  isolatedNodes: DfId[] // array of nodeIds without connections\n}\n```\n"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[4106],{4106(e){e.exports=":host {\n    display: block;\n    inline-size: 30rem;\n}\n\n.tui-list__item {\n    color: #000;\n}\n"}}]);

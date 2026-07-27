@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[6264],{6264(e){e.exports="```bash\nnpm install @ng-draw-flow/core\n```\n"}}]);

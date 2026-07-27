@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[4403],{4403(n){n.exports="```ts\nprovideNgDrawFlowConfigs({\n  connection: {\n    type: DfConnectionType.SmoothStep,\n    curvature: 16,\n    arrowhead: {\n      type: DfArrowhead.ArrowClosed,\n      width: 10,\n      height: 6,\n    },\n  },\n});\n```\n"}}]);

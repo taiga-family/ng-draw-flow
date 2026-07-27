@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[4042],{4042(o){o.exports="```ts\nimport {dfPanZoomOptionsProvider} from '@ng-draw-flow/core';\n\nproviders: [\n  dfPanZoomOptionsProvider({\n    leftPosition: 80,\n    topPosition: 40,\n    minZoom: 0.4,\n    maxZoom: 2,\n    wheelBehavior: 'zoom',\n    backgroundCanvas: {visible: true},\n  }),\n];\n```\n"}}]);

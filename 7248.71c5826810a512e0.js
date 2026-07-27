@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[7248],{7248(n){n.exports="```ts\nproviders: [\n  provideNgDrawFlowConfigs({\n    nodes: {\n      yourNode: YourNodeComponent,\n    },\n  }),\n];\n```\n"}}]);

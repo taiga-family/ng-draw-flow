@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[3270],{3270(e){e.exports="```ts\n{\n  hasCycle: boolean;\n  cycleNodes: DfId[]; // array of nodeIds that form a cycle\n}\n```\n"}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdemo=self.webpackChunkdemo||[]).push([[5825],{5825(e){e.exports="```ts\nreadonly store = inject(NgDrawFlowStoreService);\n\nzoomToOverview(): void {\n  this.store.setPosition({x: 40, y: 40, zoom: 0.75});\n}\n\nzoomToActualSize(): void {\n  this.store.setScale(1);\n}\n\nresetCamera(): void {\n  this.store.resetPosition();\n}\n```\n"}}]);
