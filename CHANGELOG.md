@@ -1,3 +1,10 @@
+### [1.2.2](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.1...v1.2.2) (2026-07-27)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: centralize node state classes on wrapper
+  [(4b9ebc2)](https://github.com/taiga-family/ng-draw-flow/commit/4b9ebc24c77d5f68fee78cecf5503382dc9dfd6a)
+
 ### [1.2.1](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.0...v1.2.1) (2026-07-20)
 
 ### 🚀 Features
