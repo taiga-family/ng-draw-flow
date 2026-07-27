@@ -10,7 +10,27 @@
             "configurations": {
                 "development": {},
                 "github": {
-                    "baseHref": "/ng-draw-flow/"
+                    "baseHref": "/ng-draw-flow/",
+                    "budgets": [
+                        {
+                            "maximumError": "5mb",
+                            "maximumWarning": "2mb",
+                            "type": "initial"
+                        }
+                    ],
+                    "buildOptimizer": true,
+                    "extractLicenses": true,
+                    "fileReplacements": [
+                        {
+                            "replace": "projects/demo/src/environments/environment.ts",
+                            "with": "projects/demo/src/environments/environment.prod.ts"
+                        }
+                    ],
+                    "namedChunks": false,
+                    "optimization": true,
+                    "outputHashing": "all",
+                    "sourceMap": false,
+                    "vendorChunk": false
                 },
                 "production": {
                     "budgets": [
@@ -82,7 +102,7 @@
                     "echo 'Github pages require special 404.html'",
                     "echo 'Read more: https://angular.io/guide/deployment#deploy-to-github-pages'",
                     "echo ------",
-                    "nx build demo -c production,github",
+                    "nx build demo -c github",
                     "nx run demo:prerender -c github",
                     "cp dist/demo/browser/index.html dist/demo/browser/404.html"
                 ],
