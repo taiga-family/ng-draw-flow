@@ -1,3 +1,10 @@
+### [1.2.3](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.2...v1.2.3) (2026-07-28)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: emit connection event with updated model
+  [(d244901)](https://github.com/taiga-family/ng-draw-flow/commit/d24490112d24033a6a4385037372ae6c15128566)
+
 ### [1.2.2](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.1...v1.2.2) (2026-07-27)
 
 ### 🐞 Bug Fixes
