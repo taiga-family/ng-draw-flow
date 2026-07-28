@@ -87,9 +87,15 @@ export class SceneComponent implements ControlValueAccessor {
 
     protected onConnectionCreated(connection: DfDataConnection): void {
         this.connectionsService.addConnections([connection]);
+
+        const model = this.updateModel((current) => ({
+            ...current,
+            connections: this.connectionsService.connections(),
+        }));
+
         const event: DfEvent<DfDataConnection> = {
             target: connection,
-            model: this.model(),
+            model,
         };
 
         this.store.emitConnectionCreated(event);
