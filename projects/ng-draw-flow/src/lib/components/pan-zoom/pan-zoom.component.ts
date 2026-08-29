@@ -11,8 +11,10 @@ import {
     type OnInit,
     output,
     PLATFORM_ID,
+    signal,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {WA_IS_E2E} from '@ng-web-apis/platform';
 import {WaResizeObserver} from '@ng-web-apis/resize-observer';
 import {animationFrameScheduler, type Subscription} from 'rxjs';
 
@@ -52,6 +54,7 @@ export class PanZoomComponent implements OnInit, OnDestroy {
     private readonly panZoomController = inject(PanZoomControllerService);
     private readonly panZoomGestures = inject(PanZoomGesturesService);
     private readonly dragDropService = inject(DragDropService);
+    private readonly isE2E = inject(WA_IS_E2E);
     private renderFrameSubscription: Subscription | null = null;
     private containerOffsetSyncSubscription: Subscription | null = null;
 
@@ -59,7 +62,9 @@ export class PanZoomComponent implements OnInit, OnDestroy {
 
     protected readonly cursor = this.panZoomController.cursor;
     protected readonly panTransform = this.panZoomController.panTransform;
-    protected readonly transitionDuration = this.panZoomController.transitionDuration;
+    protected readonly transitionDuration = !this.isE2E
+        ? signal('0s')
+        : this.panZoomController.transitionDuration;
 
     constructor() {
         this.watchController();
