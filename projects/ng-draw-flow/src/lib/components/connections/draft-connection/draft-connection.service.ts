@@ -75,12 +75,12 @@ export class DraftConnectionService implements OnDestroy {
     constructor() {
         this.connectionSubscription();
 
-        this.interactionState?.cancellation$
+        this.interactionState?.connectionCreationCancellation$
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => this.cancelConnection());
 
         effect(() => {
-            if (this.interactionState?.editingDisabled()) {
+            if (!this.connectionsCreatable()) {
                 untracked(() => this.cancelConnection());
             }
         });
@@ -96,11 +96,7 @@ export class DraftConnectionService implements OnDestroy {
     private connectionSubscription(): void {
         this.connection$
             .pipe(
-                filter(
-                    () =>
-                        this.options.options.connectionsCreatable &&
-                        !(this.interactionState?.editingDisabled() ?? false),
-                ),
+                filter(() => this.connectionsCreatable()),
                 tap((connectorData) => this.onDragStart(connectorData)),
                 switchMap(() =>
                     fromEvent<PointerEvent>(this.document, 'pointermove').pipe(
@@ -129,7 +125,7 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private onDragStart(connector: DfDataConnector): void {
-        if (!this.options.options.connectionsCreatable) {
+        if (!this.connectionsCreatable()) {
             return;
         }
 
@@ -188,7 +184,7 @@ export class DraftConnectionService implements OnDestroy {
 
         if (
             targetConnector?.connectorType === DfConnectionPoint.Input &&
-            !(this.interactionState?.editingDisabled() ?? false)
+            this.connectionsCreatable()
         ) {
             const connection: DfDataConnection = {
                 source: this.sourceConnector,
@@ -207,6 +203,13 @@ export class DraftConnectionService implements OnDestroy {
         this.resetConnectors();
         this.isConnectionCreating.set(false);
         this.connectionCancelled$.next();
+    }
+
+    private connectionsCreatable(): boolean {
+        return (
+            this.interactionState?.connectionsCreatable() ??
+            this.options.options.connectionsCreatable
+        );
     }
 
     private resetConnectors(): void {

@@ -5,11 +5,14 @@ import {By} from '@angular/platform-browser';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {type NgDrawFlowComponent as NgDrawFlowComponentInstance} from './ng-draw-flow.component';
+import {DRAW_FLOW_DEFAULT_OPTIONS, DRAW_FLOW_OPTIONS} from './ng-draw-flow.configs';
 import {
     DfConnectionPoint,
     type DfDataConnection,
     type DfDataModel,
+    type DfInteractionOptions,
 } from './ng-draw-flow.interfaces';
+import {DfInteractionStateService} from './services/interaction-state.service';
 import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
 import {INVALID_NODES} from './validators/invalid-nodes.token';
 
@@ -48,10 +51,11 @@ const UPDATED_MODEL: DfDataModel = {
     standalone: true,
     selector: 'df-reactive-host',
     imports: [NgDrawFlowComponent, ReactiveFormsModule],
-    template: '<ng-draw-flow [formControl]="graph" />',
+    template: '<ng-draw-flow [formControl]="graph" [interactionOptions]="options()" />',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ReactiveHost {
+    public readonly options = signal<Partial<DfInteractionOptions>>({});
     public readonly editor =
         viewChild.required<NgDrawFlowComponentInstance>(NgDrawFlowComponent);
 
@@ -181,6 +185,53 @@ describe('NgDrawFlowComponent forms integration', () => {
     });
 
     afterEach(() => TestBed.resetTestingModule());
+
+    it('updates input permissions without changing form value or interaction state', () => {
+        const fixture = TestBed.createComponent(ReactiveHost);
+
+        fixture.detectChanges();
+        const state = fixture.debugElement
+            .query(By.directive(NgDrawFlowComponent))
+            .injector.get(DfInteractionStateService);
+
+        fixture.componentInstance.options.set({
+            nodesDraggable: false,
+            connectionsDeletable: false,
+        });
+        fixture.detectChanges();
+        expect(state.nodesDraggable()).toBe(false);
+        expect(state.connectionsDeletable()).toBe(false);
+        expect(state.nodesDeletable()).toBe(true);
+        fixture.componentInstance.options.set({});
+        fixture.detectChanges();
+        expect(state.nodesDraggable()).toBe(true);
+        expect(fixture.componentInstance.graph.value).toBe(INITIAL_MODEL);
+        expect(fixture.componentInstance.graph.pristine).toBe(true);
+        expect(fixture.componentInstance.graph.untouched).toBe(true);
+    });
+
+    it('preserves provider defaults and lets an input explicitly override false', () => {
+        TestBed.overrideProvider(DRAW_FLOW_OPTIONS, {
+            useValue: {
+                ...DRAW_FLOW_DEFAULT_OPTIONS,
+                options: {...DRAW_FLOW_DEFAULT_OPTIONS.options, nodesDraggable: false},
+            },
+        });
+        const fixture = TestBed.createComponent(ReactiveHost);
+
+        fixture.detectChanges();
+        const state = fixture.debugElement
+            .query(By.directive(NgDrawFlowComponent))
+            .injector.get(DfInteractionStateService);
+
+        expect(state.nodesDraggable()).toBe(false);
+        fixture.componentInstance.options.set({nodesDraggable: true});
+        fixture.detectChanges();
+        expect(state.nodesDraggable()).toBe(true);
+        fixture.componentInstance.options.set({});
+        fixture.detectChanges();
+        expect(state.nodesDraggable()).toBe(false);
+    });
 
     it('keeps formControl value propagation synchronous without echo', () => {
         const fixture = TestBed.createComponent(ReactiveHost);

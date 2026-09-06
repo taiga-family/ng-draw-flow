@@ -132,7 +132,6 @@ export class ConnectionComponent {
         {initialValue: false},
     );
 
-    public deletable = this.options.options.connectionsDeletable;
     protected readonly selectedNodeInput = computed(
         () => this.connection.target.nodeId === this.connectionsService.selectedNodeId(),
     );
@@ -151,12 +150,15 @@ export class ConnectionComponent {
         return this.connectionInput();
     }
 
+    public get deletable(): boolean {
+        return (
+            this.interactionState?.connectionsDeletable() ??
+            this.options.options.connectionsDeletable
+        );
+    }
+
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (
-            !this.selected ||
-            !this.deletable ||
-            this.interactionState?.editingDisabled()
-        ) {
+        if (!this.selected || !this.deletable) {
             return;
         }
 

@@ -96,35 +96,46 @@ describe('DraftConnectionService', () => {
         expect(createdSpy).toHaveBeenCalledWith(service.lastConnectionCreated());
     });
 
-    it('cancels an active draft and does not create a connection after disabling', () => {
-        const createdSpy = jest.fn();
-        const sourceConnector: DfDataConnector = {
-            nodeId: 'source',
-            connectorId: 'source-output',
-            connectorType: DfConnectionPoint.Output,
-        };
-        const targetElement = document.createElement('div');
+    it.each(['disabled', 'connectionsCreatable'])(
+        'cancels an active draft when %s blocks it',
+        (reason) => {
+            const createdSpy = jest.fn();
+            const sourceConnector: DfDataConnector = {
+                nodeId: 'source',
+                connectorId: 'source-output',
+                connectorType: DfConnectionPoint.Output,
+            };
+            const targetElement = document.createElement('div');
 
-        targetElement.dataset.nodeId = 'target';
-        targetElement.dataset.connectorId = 'target-input';
-        targetElement.dataset.connectorType = DfConnectionPoint.Input;
-        service.connectionCreated$.subscribe(createdSpy);
+            targetElement.dataset.nodeId = 'target';
+            targetElement.dataset.connectorId = 'target-input';
+            targetElement.dataset.connectorType = DfConnectionPoint.Input;
+            service.connectionCreated$.subscribe(createdSpy);
 
-        const draft = service as unknown as {
-            onDragStart(connector: DfDataConnector): void;
-            onDragEnd(event: {readonly target: EventTarget | null}): void;
-        };
+            const draft = service as unknown as {
+                onDragStart(connector: DfDataConnector): void;
+                onDragEnd(event: {readonly target: EventTarget | null}): void;
+            };
 
-        draft.onDragStart(sourceConnector);
-        expect(service.isConnectionCreating()).toBe(true);
+            draft.onDragStart(sourceConnector);
+            expect(service.isConnectionCreating()).toBe(true);
 
-        interactionState.setDisabled(true);
-        TestBed.flushEffects();
-        draft.onDragEnd({target: targetElement});
+            interactionState.setOptions({connectionsDeletable: false});
+            expect(service.isConnectionCreating()).toBe(true);
 
-        expect(service.isConnectionCreating()).toBe(false);
-        expect(createdSpy).not.toHaveBeenCalled();
-    });
+            if (reason === 'disabled') {
+                interactionState.setDisabled(true);
+            } else {
+                interactionState.setOptions({connectionsCreatable: false});
+            }
+
+            TestBed.flushEffects();
+            draft.onDragEnd({target: targetElement});
+
+            expect(service.isConnectionCreating()).toBe(false);
+            expect(createdSpy).not.toHaveBeenCalled();
+        },
+    );
 
     it('discards queued pointer moves when disabled and starts the next draft cleanly', fakeAsync(() => {
         const sourceConnector: DfDataConnector = {

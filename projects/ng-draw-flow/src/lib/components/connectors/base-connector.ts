@@ -33,15 +33,13 @@ import {ConnectionsService} from '../connections/connections.service';
 })
 export abstract class BaseConnector {
     private readonly isDisabled = signal(false);
+    private readonly options = inject(DRAW_FLOW_OPTIONS);
 
     protected connectorType!: DfConnectionPoint;
     protected readonly connectionsService = inject(ConnectionsService);
     protected readonly interactionState = inject(DfInteractionStateService, {
         optional: true,
     });
-
-    public readonly connectionsCreatable =
-        inject(DRAW_FLOW_OPTIONS).options.connectionsCreatable;
 
     public readonly content = input<
         PolymorpheusContent<DfConnectorContentContext> | undefined
@@ -71,6 +69,13 @@ export abstract class BaseConnector {
     public abstract get position(): DfConnectorPosition | undefined;
 
     protected abstract get data(): DfDataConnectorConfig;
+
+    public get connectionsCreatable(): boolean {
+        return (
+            this.interactionState?.connectionsCreatable() ??
+            this.options.options.connectionsCreatable
+        );
+    }
 
     public get connectorVisible(): boolean {
         return this.connectionsCreatable;

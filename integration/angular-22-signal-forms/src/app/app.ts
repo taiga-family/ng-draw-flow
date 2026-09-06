@@ -11,6 +11,7 @@ import {
     dfCycleDetectionSignalValidator,
     dfIsolatedNodesSignalValidator,
     dfPanZoomOptionsProvider,
+    type DfInteractionOptions,
     NgDrawFlowComponent,
     provideNgDrawFlowConfigs,
 } from '@ng-draw-flow/core';
@@ -42,6 +43,7 @@ import {
     ],
 })
 export class App {
+    public readonly interactionOptions = signal<Partial<DfInteractionOptions>>({});
     public readonly disabledState = signal(false);
     public readonly readonlyState = signal(false);
     public readonly rendered = signal(true);

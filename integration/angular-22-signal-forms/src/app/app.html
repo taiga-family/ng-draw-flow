@@ -104,7 +104,10 @@
     </p>
 
     @if (rendered()) {
-        <ng-draw-flow [formField]="editorForm.graph" />
+        <ng-draw-flow
+            [formField]="editorForm.graph"
+            [interactionOptions]="interactionOptions()"
+        />
     } @else {
         <p class="editor-hidden">The editor is unmounted. Toggle rendering to restore it.</p>
     }

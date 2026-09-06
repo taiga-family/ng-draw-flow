@@ -45,11 +45,23 @@ export interface DfConnectionOptionsInput {
     curvature: number;
 }
 
+/** Per-editor permissions. Omitted input fields inherit provider defaults. */
+export interface DfInteractionOptions {
+    readonly nodesDraggable: boolean;
+    readonly nodesDeletable: boolean;
+    readonly connectionsDeletable: boolean;
+    readonly connectionsCreatable: boolean;
+}
+
 export interface DfWorkspaceOptions {
     nodeDragThreshold: number;
+    /** @deprecated Bind interactionOptions.nodesDraggable on ng-draw-flow instead. */
     nodesDraggable: boolean;
+    /** @deprecated Bind interactionOptions.nodesDeletable on ng-draw-flow instead. */
     nodesDeletable: boolean;
+    /** @deprecated Bind interactionOptions.connectionsDeletable on ng-draw-flow instead. */
     connectionsDeletable: boolean;
+    /** @deprecated Bind interactionOptions.connectionsCreatable on ng-draw-flow instead. */
     connectionsCreatable: boolean;
 }
 

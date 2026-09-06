@@ -231,6 +231,38 @@ inherited `disabledSignal()` and `readonlySignal()` states.
 
 See the package README for the supported validation error shapes, reset and conditional-rendering details.
 
+## Dynamic interaction permissions
+
+Bind `[interactionOptions]="interactionOptions()"` on `ng-draw-flow` alongside your form binding:
+
+```ts
+import {signal} from '@angular/core';
+import {type DfInteractionOptions} from '@ng-draw-flow/core';
+
+readonly interactionOptions = signal<Partial<DfInteractionOptions>>({
+  nodesDraggable: true,
+  nodesDeletable: false,
+  connectionsCreatable: true,
+  connectionsDeletable: false,
+});
+
+allowDeletion(): void {
+  this.interactionOptions.update((options) => ({...options, nodesDeletable: true}));
+}
+```
+
+Replace the object when changing permissions. Each supplied field overrides its provider default. Omitted fields
+(including after setting `{}`) inherit that default; all four defaults are `true`. Form `disabled` or `readonly` always
+blocks all four actions; unlocking restores the latest configured permissions. Individual restrictions do not set the
+form's readonly state.
+
+Revoking dragging or connection creation cancels the matching active gesture; changing deletion permissions does not.
+These permissions restrict user gestures only: programmatic model writes and public commands remain available. Custom
+node content remains application-controlled.
+
+The four matching fields under `provideNgDrawFlowConfigs({options: ...})` are deprecated but still supported as static
+defaults. Other provider options are unchanged.
+
 ## Core Scenarios
 
 `@ng-draw-flow/core` supports:

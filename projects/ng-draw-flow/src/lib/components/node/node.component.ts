@@ -113,7 +113,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.nodeConnectors = this.createNodeConnectorsController();
         this.nodeInteraction = this.createNodeInteractionController();
 
-        this.interactionState?.cancellation$
+        this.interactionState?.nodeDragCancellation$
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() => this.nodeInteraction.cancelDrag());
 
@@ -128,7 +128,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         });
 
         effect(() => {
-            if (this.interactionState?.editingDisabled()) {
+            if (this.interactionState && !this.interactionState.nodesDraggable()) {
                 untracked(() => this.nodeInteraction.cancelDrag());
             }
         });
@@ -240,9 +240,12 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private createNodeInteractionController(): NodeInteractionController {
         return new NodeInteractionController({
             connectionsService: this.connectionsService,
-            deletable: this.drawFlowOptions.options.nodesDeletable,
-            draggable: this.drawFlowOptions.options.nodesDraggable,
-            editingDisabled: () => this.interactionState?.editingDisabled() ?? false,
+            deletable: () =>
+                this.interactionState?.nodesDeletable() ??
+                this.drawFlowOptions.options.nodesDeletable,
+            draggable: () =>
+                this.interactionState?.nodesDraggable() ??
+                this.drawFlowOptions.options.nodesDraggable,
             getCenteredPosition: (node) => this.nodeGeometry.getCenteredPosition(node),
             getNode: () => this.getResolvedNode(),
             isStartNode: () => this.node().startNode === true,

@@ -317,6 +317,101 @@ describe('Angular 22 Signal Forms consumer', () => {
         expect(component.formModel().graph).toBe(original);
     });
 
+    it('updates deletion permissions through the packaged input without dirtying the field', async () => {
+        const fixture = await render(App);
+        const component = fixture.componentInstance;
+        const editor = getEditorElement(fixture);
+
+        component.interactionOptions.set({nodesDeletable: false});
+        await refresh(fixture);
+        expect(component.editorForm.graph().dirty()).toBe(false);
+        expect(component.editorForm.graph().touched()).toBe(false);
+        selectNodeAndDelete(editor, 'source');
+        await refresh(fixture);
+        expect(getNode(editor, 'source')).not.toBeNull();
+        component.interactionOptions.set({nodesDeletable: true});
+        await refresh(fixture);
+        selectNodeAndDelete(editor, 'source');
+        await refresh(fixture);
+        expect(getNode(editor, 'source')).toBeNull();
+        expect(component.editorForm.graph().dirty()).toBe(true);
+    });
+
+    it('toggles connection deletion independently of node deletion', async () => {
+        const fixture = await render(App);
+        const component = fixture.componentInstance;
+        const editor = getEditorElement(fixture);
+
+        for (const allowed of [false, true]) {
+            component.interactionOptions.set({
+                connectionsDeletable: allowed,
+                nodesDeletable: false,
+            });
+            await refresh(fixture);
+            editor
+                .querySelector('.selectable-area')!
+                .dispatchEvent(new MouseEvent('mousedown', {bubbles: true}));
+            document.dispatchEvent(
+                new KeyboardEvent('keydown', {bubbles: true, key: 'Delete'}),
+            );
+            expect(component.formModel().graph.connections).toHaveLength(allowed ? 0 : 1);
+        }
+    });
+
+    it('toggles dragging and cancels a gesture even if reenabled before release', async () => {
+        const fixture = await render(App);
+        const component = fixture.componentInstance;
+        const handle = getNode(
+            getEditorElement(fixture),
+            'source',
+        )!.querySelector<HTMLElement>('.node-content')!;
+
+        handle.dispatchEvent(pointerEvent('pointerdown', 20, 120, 120));
+        document.dispatchEvent(pointerEvent('pointermove', 20, 160, 145));
+        component.interactionOptions.set({nodesDraggable: false});
+        await refresh(fixture);
+        component.interactionOptions.set({nodesDraggable: true});
+        await refresh(fixture);
+        document.dispatchEvent(pointerEvent('pointerup', 20, 160, 145));
+        expect(component.formModel().graph.nodes[0]).toMatchObject({
+            position: {x: 120, y: 120},
+        });
+        expect(component.editorForm.graph().dirty()).toBe(false);
+
+        handle.dispatchEvent(pointerEvent('pointerdown', 21, 120, 120));
+        document.dispatchEvent(pointerEvent('pointermove', 21, 160, 145));
+        document.dispatchEvent(pointerEvent('pointerup', 21, 160, 145));
+        expect(component.formModel().graph.nodes[0]).toMatchObject({
+            position: {x: 160, y: 145},
+        });
+    });
+
+    it('toggles connection creation and cancels the old draft', async () => {
+        const fixture = await render(App);
+        const component = fixture.componentInstance;
+        const editor = getEditorElement(fixture);
+        const output = editor.querySelector<HTMLElement>(
+            'df-output[data-connector-id="target-output"]',
+        )!;
+        const input = editor.querySelector<HTMLElement>(
+            'df-input[data-connector-id="source-input"]',
+        )!;
+
+        output.dispatchEvent(pointerEvent('pointerdown', 30, 460, 120));
+        fixture.detectChanges();
+        component.interactionOptions.set({connectionsCreatable: false});
+        await refresh(fixture);
+        expect(output.classList.contains('df-not-creatable')).toBe(true);
+        component.interactionOptions.set({connectionsCreatable: true});
+        await refresh(fixture);
+        input.dispatchEvent(pointerEvent('pointerup', 30, 120, 120));
+        expect(component.formModel().graph.connections).toHaveLength(1);
+        output.dispatchEvent(pointerEvent('pointerdown', 31, 460, 120));
+        fixture.detectChanges();
+        input.dispatchEvent(pointerEvent('pointerup', 31, 120, 120));
+        expect(component.formModel().graph.connections).toHaveLength(2);
+    });
+
     it('propagates disabled and readonly state, blocks keyboard edits, and still accepts writes', async () => {
         const fixture = await render(App);
         const component = fixture.componentInstance;

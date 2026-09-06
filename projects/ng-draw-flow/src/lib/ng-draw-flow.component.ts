@@ -42,11 +42,13 @@ import {
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
 import {ErrorsDirective} from './directives';
+import {DRAW_FLOW_OPTIONS} from './ng-draw-flow.configs';
 import {
     type DfDataConnection,
     type DfDataModel,
     type DfDataNode,
     type DfEvent,
+    type DfInteractionOptions,
     type DfPoint,
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
@@ -159,6 +161,8 @@ export class NgDrawFlowComponent
     public readonly touched = input(false);
     public readonly dirty = input(false);
     public readonly pending = input(false);
+    /** Dynamic overrides for the legacy provider's interaction defaults. */
+    public readonly interactionOptions = input<Partial<DfInteractionOptions>>({});
 
     protected readonly disabled = computed(
         () => this.cvaDisabled() || this.disabledInput(),
@@ -200,6 +204,8 @@ export class NgDrawFlowComponent
     protected readonly $rootReady = signal<boolean>(false);
 
     constructor() {
+        this.interactionState.setDefaults(inject(DRAW_FLOW_OPTIONS).options);
+        effect(() => this.interactionState.setOptions(this.interactionOptions()));
         effect(() => this.interactionState.setDisabled(this.disabled()));
         effect(() => this.interactionState.setReadonly(this.readonly()));
         this.destroyRef.onDestroy(

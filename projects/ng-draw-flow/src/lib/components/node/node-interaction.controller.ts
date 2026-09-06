@@ -13,9 +13,8 @@ import {type PanZoomService} from '../pan-zoom/pan-zoom.service';
 
 export interface DfNodeInteractionControllerOptions {
     readonly connectionsService: ConnectionsService;
-    readonly deletable: boolean;
-    readonly draggable: boolean;
-    readonly editingDisabled: () => boolean;
+    readonly deletable: () => boolean;
+    readonly draggable: () => boolean;
     readonly getCenteredPosition: (node: DfDataNode) => DfPoint;
     readonly getNode: () => DfDataNode;
     readonly isStartNode: () => boolean;
@@ -55,8 +54,7 @@ export class NodeInteractionController {
     public handleKeyboardEvent(event: KeyboardEvent): void {
         if (
             !this.selectedSignal() ||
-            !this.options.deletable ||
-            this.options.editingDisabled() ||
+            !this.options.deletable() ||
             this.options.isStartNode()
         ) {
             return;
@@ -86,13 +84,13 @@ export class NodeInteractionController {
     }
 
     public handleDrag(event: DfDragDrop): void {
-        if (this.options.editingDisabled()) {
+        if (!this.options.draggable()) {
             this.cancelDrag();
 
             return;
         }
 
-        if (this.options.isStartNode() || !this.options.draggable) {
+        if (this.options.isStartNode()) {
             return;
         }
 

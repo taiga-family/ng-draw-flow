@@ -815,36 +815,47 @@ describe('NodeComponent', () => {
         expect(emitNodeDeletedSpy).not.toHaveBeenCalled();
     });
 
-    it('cancels an active node drag when the form becomes readonly', () => {
-        const fixture = MockRender(HostComponent);
-        const component = fixture.point.componentInstance.nodeComponent();
-        const interaction = component as unknown as {
-            getResolvedNode(): DfDataNode;
-            onDrag(event: {
-                readonly stage: DfDragDropStage;
-                readonly sourceElement: HTMLElement;
-                readonly distance: {readonly deltaX: number; readonly deltaY: number};
-            }): void;
-        };
-        const emitNodeMovedSpy = jest.spyOn(component.nodeMoved, 'emit');
-        const node = interaction.getResolvedNode();
-        const initialPosition = {...node.position};
+    it.each(['readonly', 'nodesDraggable'])(
+        'cancels an active node drag when %s blocks it',
+        (reason) => {
+            const fixture = MockRender(HostComponent);
+            const component = fixture.point.componentInstance.nodeComponent();
+            const interaction = component as unknown as {
+                getResolvedNode(): DfDataNode;
+                onDrag(event: {
+                    readonly stage: DfDragDropStage;
+                    readonly sourceElement: HTMLElement;
+                    readonly distance: {readonly deltaX: number; readonly deltaY: number};
+                }): void;
+            };
+            const emitNodeMovedSpy = jest.spyOn(component.nodeMoved, 'emit');
+            const node = interaction.getResolvedNode();
+            const initialPosition = {...node.position};
 
-        interaction.onDrag({
-            stage: DfDragDropStage.Move,
-            sourceElement: document.createElement('div'),
-            distance: {deltaX: 10, deltaY: -5},
-        });
-        expect(node.position).not.toEqual(initialPosition);
+            interaction.onDrag({
+                stage: DfDragDropStage.Move,
+                sourceElement: document.createElement('div'),
+                distance: {deltaX: 10, deltaY: -5},
+            });
+            expect(node.position).not.toEqual(initialPosition);
 
-        interactionState.setReadonly(true);
-        fixture.detectChanges();
+            interactionState.setOptions({nodesDeletable: false});
+            expect(node.position).not.toEqual(initialPosition);
 
-        expect(node.position).toEqual(initialPosition);
-        expect(emitNodeMovedSpy).not.toHaveBeenCalled();
-        expect(panZoomServiceMock.setDisabled).toHaveBeenLastCalledWith(false);
-        expect(component.cursor()).toBe('initial');
-    });
+            if (reason === 'readonly') {
+                interactionState.setReadonly(true);
+            } else {
+                interactionState.setOptions({nodesDraggable: false});
+            }
+
+            fixture.detectChanges();
+
+            expect(node.position).toEqual(initialPosition);
+            expect(emitNodeMovedSpy).not.toHaveBeenCalled();
+            expect(panZoomServiceMock.setDisabled).toHaveBeenLastCalledWith(false);
+            expect(component.cursor()).toBe('initial');
+        },
+    );
 
     it('passes disabled and readonly state to custom node content', () => {
         const fixture = MockRender(HostComponent);

@@ -18,7 +18,7 @@ export class DragDropDirective {
 
     protected readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
     protected readonly dfDragDrop = outputFromObservable(
-        (this.interactionState?.cancellation$ ?? EMPTY).pipe(
+        (this.interactionState?.nodeDragCancellation$ ?? EMPTY).pipe(
             startWith(undefined),
             switchMap(() =>
                 this.dragDropService.streamFor(this.elementRef.nativeElement),
