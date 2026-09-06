@@ -3,7 +3,7 @@ import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {MockBuilder, MockProvider, MockRender, ngMocks} from 'ng-mocks';
 
 import {INITIAL_COORDINATES} from '../../consts';
-import {DfDragDropStage} from '../../directives';
+import {type DfDragDrop, DfDragDropStage} from '../../directives';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {
     DfArrowhead,
@@ -14,6 +14,7 @@ import {
 } from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {CoordinatesService} from '../../services/coordinates.service';
+import {DfInteractionStateService} from '../../services/interaction-state.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {DF_NODE_SIZE_REGISTRY} from '../../services/node-size-registry.service';
 import {ConnectionsService} from '../connections/connections.service';
@@ -42,6 +43,7 @@ describe('NodeComponent', () => {
     let highlightConnectionsForNode: jest.Mock;
     let setNodeSize: jest.Mock;
     let removeNodeSize: jest.Mock;
+    let interactionState: DfInteractionStateService;
     let panZoomServiceMock: {
         panzoomModel: {
             x: number;
@@ -121,6 +123,7 @@ describe('NodeComponent', () => {
         highlightConnectionsForNode = jest.fn();
         setNodeSize = jest.fn();
         removeNodeSize = jest.fn();
+        interactionState = new DfInteractionStateService();
 
         panZoomServiceMock = {
             panzoomModel: {
@@ -150,6 +153,7 @@ describe('NodeComponent', () => {
                     clearSelectedNode,
                     emitNodeSelected,
                 }),
+                MockProvider(DfInteractionStateService, interactionState),
                 MockProvider(DRAW_FLOW_OPTIONS, options),
                 MockProvider(DRAW_FLOW_ROOT_ELEMENT, {
                     offsetWidth: 1000,
@@ -752,6 +756,144 @@ describe('NodeComponent', () => {
         expect(emitNodeMovedSpy).toHaveBeenCalledWith(node);
         expect(panZoomServiceMock.setDisabled).toHaveBeenLastCalledWith(false);
         expect(component.cursor()).toBe('initial');
+    });
+
+    it('does not mutate a positioned node supplied by the application', () => {
+        const fixture = MockRender(HostComponent);
+        const host = fixture.point.componentInstance;
+        const component = host.nodeComponent();
+        const emitNodeMovedSpy = jest.spyOn(component.nodeMoved, 'emit');
+        const inputNode: DfDataNode = {
+            id: 'draft-node',
+            data: {type: 'simpleNode'},
+            position: {x: 20, y: 30},
+        };
+        const interaction = component as unknown as {
+            onDrag(event: {
+                stage: DfDragDropStage;
+                sourceElement: HTMLElement;
+                distance: {deltaX: number; deltaY: number};
+            }): void;
+        };
+
+        host.node.set(inputNode);
+        fixture.detectChanges();
+        interaction.onDrag({
+            stage: DfDragDropStage.Move,
+            sourceElement: document.createElement('div'),
+            distance: {deltaX: 10, deltaY: -5},
+        });
+        interaction.onDrag({
+            stage: DfDragDropStage.End,
+            sourceElement: document.createElement('div'),
+            distance: {deltaX: 0, deltaY: 0},
+        });
+
+        expect(inputNode.position).toEqual({x: 20, y: 30});
+        expect(emitNodeMovedSpy).toHaveBeenCalledWith(
+            expect.objectContaining({position: {x: 30, y: 25}}),
+        );
+    });
+
+    it('blocks keyboard deletion while form editing is disabled', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent();
+        const interaction = component as unknown as {
+            handleKeyboardEvent(event: KeyboardEvent): void;
+            onSelectedChanged(selected: boolean): void;
+        };
+        const emitNodeDeletedSpy = jest.spyOn(component.nodeDeleted, 'emit');
+        const event = new KeyboardEvent('keydown', {key: 'Delete'});
+        const preventDefaultSpy = jest.spyOn(event, 'preventDefault');
+
+        interaction.onSelectedChanged(true);
+        interactionState.setDisabled(true);
+        fixture.detectChanges();
+        interaction.handleKeyboardEvent(event);
+
+        expect(preventDefaultSpy).not.toHaveBeenCalled();
+        expect(emitNodeDeletedSpy).not.toHaveBeenCalled();
+    });
+
+    it('cancels an active node drag when the form becomes readonly', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent();
+        const interaction = component as unknown as {
+            getResolvedNode(): DfDataNode;
+            onDrag(event: {
+                readonly stage: DfDragDropStage;
+                readonly sourceElement: HTMLElement;
+                readonly distance: {readonly deltaX: number; readonly deltaY: number};
+            }): void;
+        };
+        const emitNodeMovedSpy = jest.spyOn(component.nodeMoved, 'emit');
+        const node = interaction.getResolvedNode();
+        const initialPosition = {...node.position};
+
+        interaction.onDrag({
+            stage: DfDragDropStage.Move,
+            sourceElement: document.createElement('div'),
+            distance: {deltaX: 10, deltaY: -5},
+        });
+        expect(node.position).not.toEqual(initialPosition);
+
+        interactionState.setReadonly(true);
+        fixture.detectChanges();
+
+        expect(node.position).toEqual(initialPosition);
+        expect(emitNodeMovedSpy).not.toHaveBeenCalled();
+        expect(panZoomServiceMock.setDisabled).toHaveBeenLastCalledWith(false);
+        expect(component.cursor()).toBe('initial');
+    });
+
+    it('passes disabled and readonly state to custom node content', () => {
+        const fixture = MockRender(HostComponent);
+        const innerComponent = ngMocks.findInstance(MockNodeContentComponent);
+
+        interactionState.setDisabled(true);
+        interactionState.setReadonly(true);
+        fixture.detectChanges();
+
+        expect(innerComponent.disabled).toBe(true);
+        expect(innerComponent.readonly).toBe(true);
+    });
+
+    it('cancels drag geometry before an external replacement of the same node', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent();
+        const interaction = component as unknown as {
+            getResolvedNode(): DfDataNode;
+            onDrag(event: DfDragDrop): void;
+        };
+        const emitNodeMovedSpy = jest.spyOn(component.nodeMoved, 'emit');
+        const oldNode = interaction.getResolvedNode();
+        const initialPosition = {...oldNode.position};
+
+        interaction.onDrag({
+            stage: DfDragDropStage.Move,
+            sourceElement: document.createElement('div'),
+            distance: {deltaX: 10, deltaY: -5},
+        });
+
+        interactionState.cancelEditing();
+
+        expect(oldNode.position).toEqual(initialPosition);
+        fixture.point.componentInstance.node.set({
+            ...fixture.point.componentInstance.node(),
+            position: {x: 200, y: 300},
+        });
+        fixture.detectChanges();
+
+        interaction.onDrag({
+            stage: DfDragDropStage.End,
+            sourceElement: document.createElement('div'),
+            distance: {deltaX: 0, deltaY: 0},
+        });
+
+        expect(interaction.getResolvedNode().position).toEqual({x: 200, y: 300});
+        expect(emitNodeMovedSpy).not.toHaveBeenCalled();
+        expect(component.cursor()).toBe('initial');
+        expect(panZoomServiceMock.setDisabled).toHaveBeenLastCalledWith(false);
     });
 
     it('keeps drag threshold accumulation local to the node interaction state', () => {

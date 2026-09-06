@@ -45,7 +45,6 @@ export class SceneComponent implements ControlValueAccessor {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly store = inject(NgDrawFlowStoreService);
-    private syncingExternalValue = false;
 
     protected readonly nodeSelected = output<DfDataNode>();
     protected readonly nodeMoved = output<DfEvent<DfDataNode>>();
@@ -64,34 +63,25 @@ export class SceneComponent implements ControlValueAccessor {
         this.initializeConnectionsSubscription();
     }
 
-    public writeValue(value: DfDataModel): void {
-        if (!value) {
-            return;
-        }
+    public writeValue(value: DfDataModel | null | undefined): void {
+        const model = value ?? {nodes: [], connections: []};
 
-        this.model.set(value);
-        this.store.updateDataModel(value);
-        this.syncingExternalValue = true;
-        this.connectionsService.setConnections(value.connections);
+        this.model.set(model);
+        this.store.updateDataModel(model);
+        this.connectionsService.setConnections(model.connections);
     }
 
     public registerOnChange(fn: (value: DfDataModel) => void): void {
         this.onChange = fn;
     }
 
-    public registerOnTouched(fn: () => void): void {
-        this.onTouched = fn;
-    }
+    public registerOnTouched(_fn: () => void): void {}
 
     public setDisabledState(_isDisabled: boolean): void {}
 
     protected onConnectionCreated(connection: DfDataConnection): void {
         this.connectionsService.addConnections([connection]);
-
-        const model = this.updateModel((current) => ({
-            ...current,
-            connections: this.connectionsService.connections(),
-        }));
+        const model = this.model();
 
         const event: DfEvent<DfDataConnection> = {
             target: connection,
@@ -99,23 +89,23 @@ export class SceneComponent implements ControlValueAccessor {
         };
 
         this.store.emitConnectionCreated(event);
-        this.connectionCreated.emit(event);
+
+        if (this.model() === model) {
+            this.connectionCreated.emit(event);
+        }
     }
 
     protected onConnectionDeleted(connection: DfDataConnection): void {
-        const model = this.updateModel((current) => ({
-            ...current,
-            connections: current.connections.filter(
-                (existing) => !this.isSameConnection(existing, connection),
-            ),
-        }));
         const event: DfEvent<DfDataConnection> = {
             target: connection,
-            model,
+            model: this.model(),
         };
 
         this.store.emitConnectionDeleted(event);
-        this.connectionDeleted.emit(event);
+
+        if (this.model() === event.model) {
+            this.connectionDeleted.emit(event);
+        }
     }
 
     protected onConnectionSelected(connection: DfDataConnection): void {
@@ -137,24 +127,67 @@ export class SceneComponent implements ControlValueAccessor {
         };
 
         this.store.emitNodeMoved(event);
+
+        if (this.model() !== model) {
+            return;
+        }
+
         this.nodeMoved.emit(event);
-        this.emitModelChange();
+        this.emitModelChange(model);
     }
 
     protected onNodeDeleted(id: string): void {
-        const deleted = this.model().nodes.find((n) => n.id === id) as DfDataNode;
+        const current = this.model();
+        const deleted = current.nodes.find((node) => node.id === id) as
+            DfDataNode | undefined;
 
-        const model = this.updateModel((current) => ({
+        if (!deleted) {
+            return;
+        }
+
+        const deletedConnections = current.connections.filter(
+            (connection) =>
+                connection.source.nodeId === id || connection.target.nodeId === id,
+        );
+        const model = this.updateModel(() => ({
             ...current,
-            nodes: current.nodes.filter((n) => n.id !== id),
+            nodes: current.nodes.filter((node) => node.id !== id),
+            connections: current.connections.filter(
+                (connection) =>
+                    connection.source.nodeId !== id && connection.target.nodeId !== id,
+            ),
         }));
         const event: DfEvent<DfDataNode> = {target: deleted, model};
 
+        this.connectionsService.setConnections(model.connections);
         this.store.emitNodeDeleted(event);
+
+        if (this.model() !== model) {
+            return;
+        }
+
         this.nodeDeleted.emit(event);
-        this.emitConnectionDeletedByNodeId(id);
-        this.connectionsService.removeConnectionsByNodeId(id);
-        this.emitModelChange();
+
+        for (const connection of deletedConnections) {
+            if (this.model() !== model) {
+                return;
+            }
+
+            const connectionEvent: DfEvent<DfDataConnection> = {
+                target: connection,
+                model,
+            };
+
+            this.store.emitConnectionDeleted(connectionEvent);
+
+            if (this.model() !== model) {
+                return;
+            }
+
+            this.connectionDeleted.emit(connectionEvent);
+        }
+
+        this.emitModelChange(model);
     }
 
     protected onNodeSelected(node: DfDataNode): void {
@@ -170,7 +203,7 @@ export class SceneComponent implements ControlValueAccessor {
     }
 
     private initializeConnectionsSubscription(): void {
-        this.connectionsService.connections$
+        this.connectionsService.connectionsChanged$
             .pipe(takeUntilDestroyed())
             .subscribe((connections: DfDataConnection[]) => {
                 const model = this.updateModel((current) => ({
@@ -179,47 +212,11 @@ export class SceneComponent implements ControlValueAccessor {
                 }));
 
                 this.store.updateDataModel(model);
-                this.emitModelChange();
+                this.emitModelChange(model);
             });
-    }
-
-    private emitConnectionDeletedByNodeId(nodeId: string): void {
-        this.connectionsService
-            .connections()
-            .filter(
-                (connection) =>
-                    connection.source.nodeId === nodeId ||
-                    connection.target.nodeId === nodeId,
-            )
-            .forEach((connection) => {
-                const model = this.updateModel((current) => ({
-                    ...current,
-                    connections: current.connections.filter(
-                        (existing) => !this.isSameConnection(existing, connection),
-                    ),
-                }));
-                const event: DfEvent<DfDataConnection> = {
-                    target: connection,
-                    model,
-                };
-
-                this.store.emitConnectionDeleted(event);
-                this.connectionDeleted.emit(event);
-            });
-    }
-
-    private isSameConnection(left: DfDataConnection, right: DfDataConnection): boolean {
-        return (
-            left.source.nodeId === right.source.nodeId &&
-            left.source.connectorId === right.source.connectorId &&
-            left.target.nodeId === right.target.nodeId &&
-            left.target.connectorId === right.target.connectorId
-        );
     }
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
-    private onTouched: () => void = () => {};
-
     private updateModel(update: (model: DfDataModel) => DfDataModel): DfDataModel {
         const model = update(this.model());
 
@@ -228,14 +225,9 @@ export class SceneComponent implements ControlValueAccessor {
         return model;
     }
 
-    private emitModelChange(): void {
-        if (this.syncingExternalValue) {
-            this.syncingExternalValue = false;
-
-            return;
+    private emitModelChange(model: DfDataModel): void {
+        if (this.model() === model) {
+            this.onChange(model);
         }
-
-        this.onTouched();
-        this.onChange(this.model());
     }
 }

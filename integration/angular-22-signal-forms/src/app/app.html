@@ -1,0 +1,128 @@
+<main>
+    <h1>Angular 22 Signal Forms consumer</h1>
+    <p class="intro">
+        Angular 22.1.4 with the locally built Angular 19 library. Drag nodes, create a connection from an output to an
+        input, or select a node or connection and press Delete. Watch the field state and model below.
+    </p>
+
+    <div class="toolbar">
+        <button
+            type="button"
+            (click)="replaceFromApplication()"
+        >
+            Replace from application
+        </button>
+        <button
+            type="button"
+            (click)="loadCycleFromApplication()"
+        >
+            Load cyclic graph
+        </button>
+        <button
+            type="button"
+            [disabled]="!rendered()"
+            (click)="addIsolatedNodeThroughEditor()"
+        >
+            Add isolated node through editor
+        </button>
+        <button
+            type="button"
+            [disabled]="!rendered()"
+            (click)="removeFirstConnectionThroughEditor()"
+        >
+            Remove connection through editor
+        </button>
+        <button
+            type="button"
+            (click)="resetForm()"
+        >
+            Reset form
+        </button>
+        <button
+            type="button"
+            (click)="resetEmpty()"
+        >
+            Reset to empty
+        </button>
+        <button
+            type="button"
+            [disabled]="!rendered()"
+            (click)="focusEditor()"
+        >
+            Focus editor
+        </button>
+        <button
+            type="button"
+            [attr.aria-pressed]="disabledState()"
+            (click)="disabledState.update((value) => !value)"
+        >
+            Toggle disabled
+        </button>
+        <button
+            type="button"
+            [attr.aria-pressed]="readonlyState()"
+            (click)="readonlyState.update((value) => !value)"
+        >
+            Toggle readonly
+        </button>
+        <button
+            type="button"
+            [attr.aria-pressed]="!rendered()"
+            (click)="rendered.update((value) => !value)"
+        >
+            Toggle rendering
+        </button>
+        <button
+            type="button"
+            [attr.aria-pressed]="manualErrorNodeIds().length > 0"
+            [disabled]="!formModel().graph.nodes.length && !manualErrorNodeIds().length"
+            (click)="toggleSchemaError()"
+        >
+            Toggle schema error
+        </button>
+    </div>
+
+    <dl>
+        <dt>dirty</dt>
+        <dd data-test-dirty>{{ editorForm.graph().dirty() }}</dd>
+        <dt>touched</dt>
+        <dd data-test-touched>{{ editorForm.graph().touched() }}</dd>
+        <dt>invalid</dt>
+        <dd data-test-invalid>{{ editorForm.graph().invalid() }}</dd>
+        <dt>pending</dt>
+        <dd>{{ editorForm.graph().pending() }}</dd>
+        <dt>disabled</dt>
+        <dd>{{ editorForm.graph().disabled() }}</dd>
+        <dt>readonly</dt>
+        <dd>{{ editorForm.graph().readonly() }}</dd>
+    </dl>
+
+    <p class="hint">
+        Disabled and readonly block editing gestures. Application writes and the buttons marked “through editor” are
+        programmatic commands and remain available. Reset clears dirty/touched; schema errors and the disabled/readonly
+        toggles are separate state.
+    </p>
+
+    @if (rendered()) {
+        <ng-draw-flow [formField]="editorForm.graph" />
+    } @else {
+        <p class="editor-hidden">The editor is unmounted. Toggle rendering to restore it.</p>
+    }
+
+    <section class="diagnostics">
+        <div>
+            <h2>Field errors</h2>
+            <ul aria-live="polite">
+                @for (error of editorForm.graph().errors(); track $index) {
+                    <li>{{ error.kind }}: {{ error.message }}</li>
+                } @empty {
+                    <li>No errors</li>
+                }
+            </ul>
+        </div>
+        <div>
+            <h2>Live form model</h2>
+            <pre data-test-model>{{ formModel().graph | json }}</pre>
+        </div>
+    </section>
+</main>

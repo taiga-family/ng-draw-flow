@@ -1,6 +1,6 @@
 {
     "extends": "@taiga-ui/tsconfig",
-    "exclude": ["projects/**/*.spec.ts"],
+    "exclude": ["projects/**/*.spec.ts", "integration/angular-22-signal-forms"],
     "angularCompilerOptions": {
         "strictTemplates": true,
         "extendedDiagnostics": {

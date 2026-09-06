@@ -11,6 +11,7 @@ import {
     DF_CONNECTOR_ORDER_REGISTRY,
     DfConnectorOrderRegistryService,
 } from '../../services/connector-order-registry.service';
+import {DfInteractionStateService} from '../../services/interaction-state.service';
 import {ConnectionsService} from '../connections/connections.service';
 import {DraftConnectionService} from '../connections/draft-connection/draft-connection.service';
 import {DfOutputComponent} from './output.component';
@@ -51,14 +52,17 @@ class HostComponent {
 
 describe('DfOutputComponent', () => {
     const startDraft = jest.fn();
+    let interactionState: DfInteractionStateService;
 
     beforeEach(async () => {
         startDraft.mockReset();
+        interactionState = new DfInteractionStateService();
 
         await TestBed.configureTestingModule({
             imports: [HostComponent],
             providers: [
                 ConnectionsService,
+                {provide: DfInteractionStateService, useValue: interactionState},
                 DfConnectorOrderRegistryService,
                 {
                     provide: DF_CONNECTOR_ORDER_REGISTRY,
@@ -143,6 +147,28 @@ describe('DfOutputComponent', () => {
             connectionLabel: undefined,
         });
         expect(fixture.componentInstance.onActivated).not.toHaveBeenCalled();
+    });
+
+    it('blocks connection and action activation for disabled and readonly forms', () => {
+        const fixture = TestBed.createComponent(HostComponent);
+
+        fixture.detectChanges();
+        interactionState.setReadonly(true);
+        fixture.detectChanges();
+
+        const connector = fixture.nativeElement.querySelector('df-output') as HTMLElement;
+
+        connector.click();
+        expect(fixture.componentInstance.onActivated).not.toHaveBeenCalled();
+
+        fixture.componentInstance.mode = DfOutputMode.Connection;
+        interactionState.setReadonly(false);
+        interactionState.setDisabled(true);
+        fixture.detectChanges();
+        connector.dispatchEvent(new MouseEvent('pointerdown', {bubbles: true}));
+
+        expect(startDraft).not.toHaveBeenCalled();
+        expect(connector.classList).toContain('df-disabled');
     });
 
     it('registers and updates its layout order', () => {

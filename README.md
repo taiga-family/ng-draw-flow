@@ -37,7 +37,8 @@ arranged diagrams and applications that calculate positions themselves.
 
 - Angular 19 or later
 - Taiga UI Polymorpheus 5
-- Angular reactive forms
+- Angular forms: Reactive Forms on Angular 19+, or the Signal Forms CVA interoperability path on a compatible Angular
+  release
 
 ## Installation
 
@@ -172,6 +173,63 @@ export class EditorComponent {
 
 Changes made through the editor are written back to the control. Applications can also replace the complete model with
 `graph.setValue(nextModel)`.
+
+## Forms Compatibility
+
+`NgDrawFlowComponent` remains a `ControlValueAccessor`. This preserves the Angular 19 baseline and the existing Reactive
+Forms API while allowing newer Signal Forms consumers to bind the same component through `[formField]`. Core does not
+implement `FormValueControl` and does not import `@angular/forms/signals`; that package is needed only by an application
+that uses Signal Forms.
+
+| Forms integration        | Version pinned in this repository | Verification                                                                        |
+| ------------------------ | --------------------------------- | ----------------------------------------------------------------------------------- |
+| Reactive Forms           | Angular 19.2.25                   | Covered by the main workspace unit tests and production build.                      |
+| Signal Forms through CVA | Angular 22.1.4                    | Packaged-consumer AOT build and 13 real `FormField` runtime tests pass from `.tgz`. |
+
+The Angular 22 row describes the pinned verification target, not a claim for Angular 21.2 or other untested versions.
+The isolated consumer installs a tarball built from this workspace, compiles with strict templates and exercises the
+real `FormField` directive; the Angular 19 demo intentionally remains on Reactive Forms.
+
+A Signal Forms consumer can bind the graph without an adapter directive or an intermediate `FormControl`:
+
+```ts
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
+import {form, FormField, validate} from '@angular/forms/signals';
+import {
+  type DfDataModel,
+  dfCycleDetectionSignalValidator,
+  dfIsolatedNodesSignalValidator,
+  NgDrawFlowComponent,
+} from '@ng-draw-flow/core';
+
+@Component({
+  standalone: true,
+  selector: 'app-signal-editor',
+  imports: [FormField, NgDrawFlowComponent],
+  template: `
+    <ng-draw-flow [formField]="editorForm.graph" />
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class SignalEditorComponent {
+  readonly model = signal<{graph: DfDataModel}>({
+    graph: {nodes: [], connections: []},
+  });
+
+  readonly editorForm = form(this.model, (path) => {
+    validate(path.graph, dfCycleDetectionSignalValidator());
+    validate(path.graph, dfIsolatedNodesSignalValidator());
+  });
+}
+```
+
+Completed graph edits are reported synchronously and atomically. Incoming values and form resets do not echo a change or
+mark the field dirty/touched; resetting a nullable binding to `null` clears the rendered graph. Touch is reported when a
+canvas interaction completes or focus leaves the editor as a whole, so moving focus between child controls is not a
+blur. Form-level `disabled` and Signal Forms `readonly` block editing; custom node controls can explicitly bind the
+inherited `disabledSignal()` and `readonlySignal()` states.
+
+See the package README for the supported validation error shapes, reset and conditional-rendering details.
 
 ## Core Scenarios
 

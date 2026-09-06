@@ -117,7 +117,7 @@ export class DfOutputComponent extends BaseConnector {
 
         const {nodeId, connectorId} = this.data;
 
-        if (!nodeId || !connectorId || this.isDisabled || !this.connectionsCreatable) {
+        if (!nodeId || !connectorId || this.disabled || !this.connectionsCreatable) {
             return;
         }
 
@@ -138,7 +138,7 @@ export class DfOutputComponent extends BaseConnector {
         event.preventDefault();
         event.stopPropagation();
 
-        if (!this.isDisabled) {
+        if (!this.disabled) {
             this.activated.emit(this.data);
         }
     }

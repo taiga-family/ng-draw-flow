@@ -16,6 +16,7 @@ import {
     viewChild,
     ViewContainerRef,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {animationFrameScheduler, type Subscription} from 'rxjs';
 
 import {
@@ -33,6 +34,7 @@ import {
 } from '../../ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {CoordinatesService} from '../../services/coordinates.service';
+import {DfInteractionStateService} from '../../services/interaction-state.service';
 import {NgDrawFlowStoreService} from '../../services/ng-draw-flow-store.service';
 import {DF_NODE_SIZE_REGISTRY} from '../../services/node-size-registry.service';
 import {ConnectionsService} from '../connections/connections.service';
@@ -70,6 +72,9 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     private readonly environmentInjector = inject(EnvironmentInjector);
     private readonly drawFlowComponents = this.drawFlowOptions.nodes;
     private readonly connectionsService = inject(ConnectionsService);
+    private readonly interactionState = inject(DfInteractionStateService, {
+        optional: true,
+    });
 
     private readonly nodeGeometry = new NodeGeometryController({
         drawFlowElement: inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT),
@@ -108,6 +113,10 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
         this.nodeConnectors = this.createNodeConnectorsController();
         this.nodeInteraction = this.createNodeInteractionController();
 
+        this.interactionState?.cancellation$
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.nodeInteraction.cancelDrag());
+
         effect(() => {
             const nodeContentRenderer = this.nodeContentHost.renderer();
 
@@ -116,6 +125,12 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             }
 
             this.nodeContentHost.syncInputs(this.getNodeContentInputs());
+        });
+
+        effect(() => {
+            if (this.interactionState?.editingDisabled()) {
+                untracked(() => this.nodeInteraction.cancelDrag());
+            }
         });
 
         effect(() => {
@@ -227,6 +242,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             connectionsService: this.connectionsService,
             deletable: this.drawFlowOptions.options.nodesDeletable,
             draggable: this.drawFlowOptions.options.nodesDraggable,
+            editingDisabled: () => this.interactionState?.editingDisabled() ?? false,
             getCenteredPosition: (node) => this.nodeGeometry.getCenteredPosition(node),
             getNode: () => this.getResolvedNode(),
             isStartNode: () => this.node().startNode === true,
@@ -572,6 +588,8 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
             model: node.data,
             selected: this.nodeInteraction.selected(),
             invalid: this.invalid(),
+            disabled: this.interactionState?.disabled() ?? false,
+            readonly: this.interactionState?.readonly() ?? false,
         };
     }
 }

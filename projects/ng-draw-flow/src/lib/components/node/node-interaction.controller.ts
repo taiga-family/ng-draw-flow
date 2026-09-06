@@ -15,6 +15,7 @@ export interface DfNodeInteractionControllerOptions {
     readonly connectionsService: ConnectionsService;
     readonly deletable: boolean;
     readonly draggable: boolean;
+    readonly editingDisabled: () => boolean;
     readonly getCenteredPosition: (node: DfDataNode) => DfPoint;
     readonly getNode: () => DfDataNode;
     readonly isStartNode: () => boolean;
@@ -43,6 +44,7 @@ export class NodeInteractionController {
     private readonly selectedSignal = signal(false);
 
     private accumulatedDelta = createInitialCoordinates();
+    private dragStartPosition: DfPoint | null = null;
     private moved = false;
 
     public readonly cursor = this.cursorSignal.asReadonly();
@@ -54,6 +56,7 @@ export class NodeInteractionController {
         if (
             !this.selectedSignal() ||
             !this.options.deletable ||
+            this.options.editingDisabled() ||
             this.options.isStartNode()
         ) {
             return;
@@ -83,6 +86,12 @@ export class NodeInteractionController {
     }
 
     public handleDrag(event: DfDragDrop): void {
+        if (this.options.editingDisabled()) {
+            this.cancelDrag();
+
+            return;
+        }
+
         if (this.options.isStartNode() || !this.options.draggable) {
             return;
         }
@@ -100,9 +109,35 @@ export class NodeInteractionController {
         }
     }
 
+    public cancelDrag(): void {
+        const startPosition = this.dragStartPosition;
+
+        if (startPosition) {
+            const node = this.options.getNode();
+            const {zoom} = this.options.panZoomService.snapshot();
+            const delta = {
+                deltaX: (startPosition.x - node.position.x) * zoom,
+                deltaY: (startPosition.y - node.position.y) * zoom,
+            };
+
+            node.position = {...startPosition};
+            this.options.syncWorkspaceGeometry();
+            this.options.applyPositionToStyle(
+                this.options.getCenteredPosition(node),
+                false,
+            );
+            this.options.recalculateConnectorsPosition(delta, zoom);
+            this.options.refreshRenderedGeometry(false);
+        }
+
+        this.resetDragState();
+    }
+
     private handleDragMove(distance: DfDragDropDistance): void {
         const node = this.options.getNode();
         const {zoom} = this.options.panZoomService.snapshot();
+
+        this.dragStartPosition ??= {...node.position};
 
         if (distance.deltaX || distance.deltaY) {
             this.moved = true;
@@ -155,14 +190,20 @@ export class NodeInteractionController {
     }
 
     private handleDragEnd(): void {
-        this.cursorSignal.set('initial');
-
         if (this.moved) {
-            this.options.emitNodeMoved(this.options.getNode());
+            const node = this.options.getNode();
+
+            this.options.emitNodeMoved({...node, position: {...node.position}});
             this.options.refreshRenderedGeometry(false);
         }
 
+        this.resetDragState();
+    }
+
+    private resetDragState(): void {
+        this.cursorSignal.set('initial');
         this.accumulatedDelta = createInitialCoordinates();
+        this.dragStartPosition = null;
         this.moved = false;
         this.options.panZoomService.setDisabled(false);
     }

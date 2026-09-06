@@ -1,0 +1,37 @@
+{
+    "name": "ng-draw-flow-angular-22-signal-forms-consumer",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "ng build --configuration production",
+        "prepare:core": "node ./scripts/install-built-core.mjs",
+        "start": "ng serve --host 127.0.0.1 --port 4222",
+        "test": "ng test --watch=false",
+        "verify": "npm run prepare:core && npm run build && npm test"
+    },
+    "dependencies": {
+        "@angular/common": "22.1.4",
+        "@angular/compiler": "22.1.4",
+        "@angular/core": "22.1.4",
+        "@angular/forms": "22.1.4",
+        "@angular/platform-browser": "22.1.4",
+        "@ng-web-apis/platform": "5.3.0",
+        "@ng-web-apis/resize-observer": "5.3.0",
+        "@taiga-ui/polymorpheus": "5.0.1",
+        "rxjs": "7.8.2",
+        "tslib": "2.8.1",
+        "zone.js": "0.16.0"
+    },
+    "devDependencies": {
+        "@angular/build": "22.1.4",
+        "@angular/cli": "22.1.4",
+        "@angular/compiler-cli": "22.1.4",
+        "jsdom": "28.1.0",
+        "typescript": "6.0.2",
+        "vitest": "4.0.18"
+    },
+    "engines": {
+        "node": "^22.22.3 || ^24.15.0 || >=26.0.0"
+    }
+}

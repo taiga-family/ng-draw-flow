@@ -42,7 +42,8 @@
         "start": "nx serve demo",
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
         "stylelint:fix": "stylelint '**/*.{less,css}' --config package.json --fix",
-        "test": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts"
+        "test": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts",
+        "test:signal-forms": "npx nx build ng-draw-flow --configuration=production && npm --prefix integration/angular-22-signal-forms run verify"
     },
     "commitlint": {
         "extends": [
