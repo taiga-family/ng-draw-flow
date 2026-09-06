@@ -244,7 +244,7 @@ describe('Angular 22 Signal Forms consumer', () => {
         expect(component.formModel().graph.connections).toEqual([]);
     });
 
-    it('publishes keyboard node and connection edits synchronously', async () => {
+    it('flushes keyboard edits when focus leaves the editor', async () => {
         const fixture = await render(App);
         const component = fixture.componentInstance;
         const editor = getEditorElement(fixture);
@@ -261,6 +261,9 @@ describe('Angular 22 Signal Forms consumer', () => {
             new KeyboardEvent('keydown', {bubbles: true, key: 'Delete'}),
         );
 
+        expect(component.formModel().graph.connections).toHaveLength(1);
+        blurOutside(editor, fixture.nativeElement as HTMLElement);
+        await refresh(fixture);
         expect(component.formModel().graph.connections).toEqual([]);
         expect(component.editorForm.graph().dirty()).toBe(true);
 
@@ -268,6 +271,8 @@ describe('Angular 22 Signal Forms consumer', () => {
         await refresh(fixture);
         selectNodeAndDelete(editor, 'target');
 
+        blurOutside(editor, fixture.nativeElement as HTMLElement);
+        await refresh(fixture);
         expect(component.formModel().graph.nodes.map(({id}) => id)).toEqual(['source']);
         expect(component.formModel().graph.connections).toEqual([]);
     });
@@ -354,6 +359,8 @@ describe('Angular 22 Signal Forms consumer', () => {
             document.dispatchEvent(
                 new KeyboardEvent('keydown', {bubbles: true, key: 'Delete'}),
             );
+            blurOutside(editor, fixture.nativeElement as HTMLElement);
+            await refresh(fixture);
             expect(component.formModel().graph.connections).toHaveLength(allowed ? 0 : 1);
         }
     });
@@ -381,6 +388,7 @@ describe('Angular 22 Signal Forms consumer', () => {
         handle.dispatchEvent(pointerEvent('pointerdown', 21, 120, 120));
         document.dispatchEvent(pointerEvent('pointermove', 21, 160, 145));
         document.dispatchEvent(pointerEvent('pointerup', 21, 160, 145));
+        await refresh(fixture);
         expect(component.formModel().graph.nodes[0]).toMatchObject({
             position: {x: 160, y: 145},
         });
@@ -409,6 +417,7 @@ describe('Angular 22 Signal Forms consumer', () => {
         output.dispatchEvent(pointerEvent('pointerdown', 31, 460, 120));
         fixture.detectChanges();
         input.dispatchEvent(pointerEvent('pointerup', 31, 120, 120));
+        await refresh(fixture);
         expect(component.formModel().graph.connections).toHaveLength(2);
     });
 
@@ -522,7 +531,7 @@ describe('Angular 22 Signal Forms consumer', () => {
         document.dispatchEvent(pointerEvent('pointerup', 10, 160, 145));
 
         expect(component.editorForm.graph().controlValue().nodes[0]).toMatchObject({
-            position: {x: 160, y: 145},
+            position: {x: 120, y: 120},
         });
         expect(component.formModel().graph.nodes[0]).toMatchObject(initialNode);
 
@@ -557,7 +566,7 @@ describe('Angular 22 Signal Forms consumer', () => {
 
         input!.dispatchEvent(pointerEvent('pointerup', 11, 120, 120));
 
-        expect(component.editorForm.graph().controlValue().connections).toHaveLength(2);
+        expect(component.editorForm.graph().controlValue().connections).toHaveLength(1);
         expect(component.formModel().graph.connections).toHaveLength(1);
 
         await refresh(fixture);

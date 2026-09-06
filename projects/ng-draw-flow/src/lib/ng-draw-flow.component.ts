@@ -25,6 +25,7 @@ import {
     ReactiveFormsModule,
 } from '@angular/forms';
 import {WaResizeObserver} from '@ng-web-apis/resize-observer';
+import {debounceTime, startWith, Subject, switchMap, tap} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
@@ -133,6 +134,8 @@ export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
 {
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly cancelPendingChanges$ = new Subject<void>();
+    private pendingChange: DfDataModel | undefined;
     private readonly destroyRef = inject(DestroyRef);
     private readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
     private readonly renderer = inject(Renderer2);
@@ -236,6 +239,7 @@ export class NgDrawFlowComponent
 
     public ngOnDestroy(): void {
         this.destroyed = true;
+        this.cancelPendingChange();
         this.cancelViewportFraming();
         this.store.detach(this);
     }
@@ -499,17 +503,47 @@ export class NgDrawFlowComponent
 
     protected markAsTouched(): void {
         if (!this.disabled()) {
-            this.onTouched();
+            const version = this.interactionVersion;
+
+            this.flushPendingChange();
+
+            if (version === this.interactionVersion && !this.destroyed) {
+                this.onTouched();
+            }
         }
     }
 
     private watchFormChanges(): void {
-        this.form.valueChanges
-            .pipe(takeUntilDestroyed(this.destroyRef))
-            .subscribe((value: DfDataModel) => {
-                this.store.updateDataModel(value);
-                this.onChange(value);
-            });
+        this.cancelPendingChanges$
+            .pipe(
+                startWith(undefined),
+                switchMap(() =>
+                    this.form.valueChanges.pipe(
+                        tap((value) => {
+                            this.pendingChange = value;
+                            this.store.updateDataModel(value);
+                        }),
+                        debounceTime(10),
+                    ),
+                ),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe(() => this.flushPendingChange());
+    }
+
+    private flushPendingChange(): void {
+        const value = this.pendingChange;
+
+        this.cancelPendingChange();
+
+        if (value) {
+            this.onChange(value);
+        }
+    }
+
+    private cancelPendingChange(): void {
+        this.pendingChange = undefined;
+        this.cancelPendingChanges$.next();
     }
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
@@ -517,6 +551,7 @@ export class NgDrawFlowComponent
     private onTouched: () => void = () => {};
 
     private applyModel(model: DfDataModel, emitChange: boolean): void {
+        this.cancelPendingChange();
         this.form.setValue(model, {emitEvent: false});
         this.store.updateDataModel(model);
         this.connectionsService.setConnections(model.connections);

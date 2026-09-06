@@ -92,9 +92,9 @@ When implementing or changing Signal Forms compatibility:
 - Normalize external errors at the boundary. Test legacy error maps, Signal Forms error arrays, wrapped error contexts,
   empty errors, and unrecognized errors. Graph-level errors must coexist with custom node validation; clearing one
   source must not erase the other or affect another editor instance.
-- Publish completed graph edits through CVA without a hidden debounce delay or inconsistent intermediate models. Keep
-  any necessary drag/render scheduling separate from the final value notification. `writeValue` must not echo an
-  `onChange` callback or mark the field dirty/touched.
+- Debounce internal form value notifications by 10ms while keeping graph/store updates immediate and atomic. Flush
+  pending values before touch/blur; cancel them on reset, model replacement, public commands and destruction. Public
+  commands remain synchronous. `writeValue` must not echo `onChange` or mark the field dirty/touched.
 - Treat the editor as a composite control: moving focus between its children is not leaving the editor. Report touch
   when focus leaves it, and ensure `touch -> reset -> touch` works without a permanent local touched latch. Preserve
   focus behavior of editable content inside custom nodes.

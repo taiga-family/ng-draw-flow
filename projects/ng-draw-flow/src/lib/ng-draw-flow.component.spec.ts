@@ -1,4 +1,4 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {
@@ -200,6 +200,90 @@ describe('NgDrawFlowComponent', () => {
         expect(onChange).toHaveBeenCalledTimes(1);
         expect(onChange).toHaveBeenCalledWith(model);
     });
+
+    it('debounces internal values for 10ms while keeping the store current', fakeAsync(() => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const store = fixture.debugElement.injector.get(NgDrawFlowStoreService);
+        const component = fixture.componentInstance;
+        const onChange = jest.fn();
+        const first = {
+            nodes: [{id: 'first', data: {type: 'simpleNode'}}],
+            connections: [],
+        };
+        const last = {nodes: [{id: 'last', data: {type: 'simpleNode'}}], connections: []};
+
+        component.registerOnChange(onChange);
+        fixture.detectChanges();
+        component['form'].setValue(first);
+        tick(5);
+        component['form'].setValue(last);
+        expect(store.updateDataModel).toHaveBeenLastCalledWith(last);
+        tick(9);
+        expect(onChange).not.toHaveBeenCalled();
+        tick(1);
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith(last);
+    }));
+
+    it.each(['reset', 'replacement', 'command', 'destroy'])(
+        'cancels a pending value on %s',
+        (action) => {
+            fakeAsync(() => {
+                const fixture = TestBed.createComponent(NgDrawFlowComponent);
+                const component = fixture.componentInstance;
+                const onChange = jest.fn();
+                const model = {nodes: [], connections: []};
+
+                component.registerOnChange(onChange);
+                fixture.detectChanges();
+                component['form'].setValue(model);
+
+                if (action === 'destroy') {
+                    fixture.destroy();
+                } else if (action === 'command') {
+                    component.setDataModel(model);
+                } else {
+                    component.writeValue(action === 'reset' ? null : model);
+                }
+
+                tick(10);
+                expect(onChange).toHaveBeenCalledTimes(action === 'command' ? 1 : 0);
+            })();
+        },
+    );
+
+    it('flushes the pending value before touch without a delayed duplicate', fakeAsync(() => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const events: string[] = [];
+
+        component.registerOnChange(() => {
+            events.push('change');
+        });
+        component.registerOnTouched(() => {
+            events.push('touch');
+        });
+        fixture.detectChanges();
+        component['form'].setValue({nodes: [], connections: []});
+        component['markAsTouched']();
+        expect(events).toEqual(['change', 'touch']);
+        tick(10);
+        expect(events).toEqual(['change', 'touch']);
+    }));
+
+    it('does not touch a reset performed by the change callback', fakeAsync(() => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const touched = jest.fn();
+
+        component.registerOnChange(() => component.writeValue(null));
+        component.registerOnTouched(touched);
+        fixture.detectChanges();
+        component['form'].setValue({nodes: [], connections: []});
+        component['markAsTouched']();
+        tick(10);
+        expect(touched).not.toHaveBeenCalled();
+    }));
 
     it('does not echo incoming values and clears a nullable reset', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);

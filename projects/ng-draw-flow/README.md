@@ -279,8 +279,8 @@ instance and continues to combine with a custom node's `invalidState` override.
 
 ### Value, touch and reset semantics
 
-- A completed node or connection edit produces one consistent `DfDataModel` synchronously. Removing a node publishes the
-  node and all of its related connections as one atomic result.
+- A completed node or connection edit produces one consistent `DfDataModel`. Removing a node publishes the node and all
+  of its related connections as one atomic result.
 - Incoming form values and `writeValue` never echo `onChange`. A public mutating command such as `setDataModel()`,
   `removeNode()` or `removeConnection()` still updates the bound form and its documented outputs.
 - The editor does not mutate the application-owned input model. Node data may continue to contain component references,
@@ -293,9 +293,10 @@ instance and continues to combine with a custom node's `invalidState` override.
   interaction can mark the reset field touched again.
 - `resetPosition()` keeps its separate public meaning: it resets pan/zoom camera state, not the form value.
 
-There is no hidden debounce in the editor. If the Signal Forms schema uses `debounce(path.graph, 'blur')`, or a Reactive
-Forms control uses `updateOn: 'blur'`, that delay belongs to the form. Repeated completed interactions/focus exits
-provide the touch/blur boundary needed to flush it.
+Internal form value notifications use `debounceTime(10)`, while the graph and store update immediately. Public commands
+remain synchronous and replace any pending notification. Reset, incoming model replacement and destruction cancel
+pending notifications. The editor flushes the pending value before reporting touch, preserving Signal Forms
+`debounce(path.graph, 'blur')` and Reactive Forms `updateOn: 'blur'` behavior without a delayed duplicate.
 
 ### Disabled, readonly and custom nodes
 

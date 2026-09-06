@@ -223,11 +223,12 @@ export class SignalEditorComponent {
 }
 ```
 
-Completed graph edits are reported synchronously and atomically. Incoming values and form resets do not echo a change or
-mark the field dirty/touched; resetting a nullable binding to `null` clears the rendered graph. Touch is reported when a
-canvas interaction completes or focus leaves the editor as a whole, so moving focus between child controls is not a
-blur. Form-level `disabled` and Signal Forms `readonly` block editing; custom node controls can explicitly bind the
-inherited `disabledSignal()` and `readonlySignal()` states.
+Graph edits remain atomic. Internal form notifications use a 10ms debounce, flushed before touch/blur; public commands
+remain synchronous. Reset, replacement and destruction cancel pending notifications. Incoming values do not echo a
+change or mark the field dirty/touched; resetting a nullable binding to `null` clears the rendered graph. Touch is
+reported when a canvas interaction completes or focus leaves the editor as a whole, so moving focus between child
+controls is not a blur. Form-level `disabled` and Signal Forms `readonly` block editing; custom node controls can
+explicitly bind the inherited `disabledSignal()` and `readonlySignal()` states.
 
 See the package README for the supported validation error shapes, reset and conditional-rendering details.
 
