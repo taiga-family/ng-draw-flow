@@ -7,9 +7,6 @@
 
 # dependencies
 /node_modules
-/integration/angular-22-signal-forms/.tarballs
-/integration/angular-22-signal-forms/dist
-/integration/angular-22-signal-forms/node_modules
 
 # profiling files
 chrome-profiler-events.json

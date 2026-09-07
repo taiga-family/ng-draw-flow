@@ -27,6 +27,6 @@ export default [
         },
     },
     {
-        ignores: ['**/*.html', '**/*.js', 'integration/angular-22-signal-forms/**'],
+        ignores: ['**/*.html', '**/*.js'],
     },
 ];
