@@ -23,7 +23,10 @@ export class NodeGeometryController {
 
     public resolveNode(node: DfDataInitialNode | DfDataNode): DfDataNode {
         if (this.hasPosition(node)) {
-            return node;
+            return {
+                ...node,
+                position: {...node.position},
+            };
         }
 
         return {
@@ -37,7 +40,10 @@ export class NodeGeometryController {
         currentNode: DfDataNode,
     ): DfDataNode {
         if (this.hasPosition(node)) {
-            return node;
+            return {
+                ...node,
+                position: {...node.position},
+            };
         }
 
         if (node.id === currentNode.id) {

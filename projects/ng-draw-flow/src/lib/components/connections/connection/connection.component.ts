@@ -34,6 +34,7 @@ import {
     type DfOptions,
 } from '../../../ng-draw-flow.interfaces';
 import {CoordinatesService} from '../../../services/coordinates.service';
+import {DfInteractionStateService} from '../../../services/interaction-state.service';
 import {NgDrawFlowStoreService} from '../../../services/ng-draw-flow-store.service';
 import {ConnectionsService} from '../connections.service';
 import {createBezierPath, createSmoothStepPath} from '../utils';
@@ -57,6 +58,10 @@ export class ConnectionComponent {
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
+    private readonly interactionState = inject(DfInteractionStateService, {
+        optional: true,
+    });
+
     private readonly arrowhead = this.options.connection.arrowhead;
     private readonly arrowWidth = this.arrowhead.width;
     private readonly arrowHeight = this.arrowhead.height;
@@ -127,7 +132,6 @@ export class ConnectionComponent {
         {initialValue: false},
     );
 
-    public deletable = this.options.options.connectionsDeletable;
     protected readonly selectedNodeInput = computed(
         () => this.connection.target.nodeId === this.connectionsService.selectedNodeId(),
     );
@@ -144,6 +148,13 @@ export class ConnectionComponent {
 
     public get connection(): DfDataConnection {
         return this.connectionInput();
+    }
+
+    public get deletable(): boolean {
+        return (
+            this.interactionState?.connectionsDeletable() ??
+            this.options.options.connectionsDeletable
+        );
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {

@@ -1,4 +1,12 @@
-import {computed, Directive, effect, ElementRef, inject, input} from '@angular/core';
+import {
+    computed,
+    Directive,
+    effect,
+    ElementRef,
+    inject,
+    input,
+    signal,
+} from '@angular/core';
 import {type PolymorpheusContent} from '@taiga-ui/polymorpheus';
 
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
@@ -9,6 +17,7 @@ import {
     type DfDataConnectorConfig,
     type DfPoint,
 } from '../../ng-draw-flow.interfaces';
+import {DfInteractionStateService} from '../../services/interaction-state.service';
 import {ConnectionsService} from '../connections/connections.service';
 
 @Directive({
@@ -19,16 +28,18 @@ import {ConnectionsService} from '../connections/connections.service';
         '[attr.data-position]': 'bindPosition',
         '[class.df-has-content]': 'hasContent',
         '[class.df-not-creatable]': '!connectorVisible',
+        '[class.df-disabled]': 'disabled',
     },
 })
 export abstract class BaseConnector {
+    private readonly isDisabled = signal(false);
+    private readonly options = inject(DRAW_FLOW_OPTIONS);
+
     protected connectorType!: DfConnectionPoint;
-
-    protected isDisabled = false;
     protected readonly connectionsService = inject(ConnectionsService);
-
-    public readonly connectionsCreatable =
-        inject(DRAW_FLOW_OPTIONS).options.connectionsCreatable;
+    protected readonly interactionState = inject(DfInteractionStateService, {
+        optional: true,
+    });
 
     public readonly content = input<
         PolymorpheusContent<DfConnectorContentContext> | undefined
@@ -59,12 +70,19 @@ export abstract class BaseConnector {
 
     protected abstract get data(): DfDataConnectorConfig;
 
+    public get connectionsCreatable(): boolean {
+        return (
+            this.interactionState?.connectionsCreatable() ??
+            this.options.options.connectionsCreatable
+        );
+    }
+
     public get connectorVisible(): boolean {
         return this.connectionsCreatable;
     }
 
     public get disabled(): boolean {
-        return this.isDisabled;
+        return this.isDisabled() || (this.interactionState?.editingDisabled() ?? false);
     }
 
     public get hasContent(): boolean {
@@ -98,8 +116,6 @@ export abstract class BaseConnector {
             this.nativeElement.removeAttribute('data-connected');
         }
 
-        this.isDisabled = (this.data?.single satisfies boolean) && connected;
-
-        this.nativeElement.classList.toggle('df-disabled', this.isDisabled);
+        this.isDisabled.set((this.data?.single satisfies boolean) && connected);
     }
 }

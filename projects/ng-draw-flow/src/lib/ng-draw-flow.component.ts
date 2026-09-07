@@ -3,13 +3,17 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    computed,
     DestroyRef,
+    effect,
     ElementRef,
     forwardRef,
     inject,
+    input,
     type OnDestroy,
     type OnInit,
     output,
+    Renderer2,
     signal,
     viewChild,
 } from '@angular/core';
@@ -21,7 +25,7 @@ import {
     ReactiveFormsModule,
 } from '@angular/forms';
 import {WaResizeObserver} from '@ng-web-apis/resize-observer';
-import {debounceTime} from 'rxjs';
+import {debounceTime, startWith, Subject, switchMap, tap} from 'rxjs';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
@@ -39,17 +43,21 @@ import {
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {SceneComponent} from './components/scene/scene.component';
 import {ErrorsDirective} from './directives';
+import {DRAW_FLOW_OPTIONS} from './ng-draw-flow.configs';
 import {
     type DfDataConnection,
     type DfDataModel,
     type DfDataNode,
     type DfEvent,
+    type DfInteractionOptions,
     type DfPoint,
 } from './ng-draw-flow.interfaces';
 import {DRAW_FLOW_ROOT_ELEMENT} from './ng-draw-flow.token';
 import {CoordinatesService} from './services/coordinates.service';
+import {DfInteractionStateService} from './services/interaction-state.service';
 import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
 import {SelectionService} from './services/selection.service';
+import {INVALID_NODES} from './validators/invalid-nodes.token';
 
 /**
  * Root component of **ng-draw-flow** – a lightweight graph editor
@@ -78,6 +86,11 @@ import {SelectionService} from './services/selection.service';
         CoordinatesService,
         DraftConnectionService,
         SelectionService,
+        DfInteractionStateService,
+        {
+            provide: INVALID_NODES,
+            useFactory: () => signal<string[]>([]),
+        },
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => NgDrawFlowComponent),
@@ -90,7 +103,10 @@ import {SelectionService} from './services/selection.service';
         },
     ],
     hostDirectives: [
-        ErrorsDirective,
+        {
+            directive: ErrorsDirective,
+            inputs: ['errors'],
+        },
         {
             directive: WaResizeObserver,
             outputs: ['waResizeObserver'],
@@ -98,31 +114,64 @@ import {SelectionService} from './services/selection.service';
     ],
     host: {
         '(waResizeObserver)': 'this.onResize($event)',
-        '(focusout)': 'this.markAsTouched()',
-        '(pointerdown)': 'this.markAsTouched()',
+        '(focusout)': 'this.onFocusOut($event)',
+        '(document:pointerup)': 'this.onPointerEnd($event)',
+        '(document:pointercancel)': 'this.onPointerEnd($event)',
+        '[attr.tabindex]': 'disabled() ? -1 : 0',
+        '[attr.aria-disabled]': 'disabled() || null',
+        '[attr.aria-readonly]': 'readonly() || null',
+        '[attr.aria-invalid]': 'invalid() || null',
+        '[attr.aria-busy]': 'pending() || null',
         '[class.ng-draw-flow_disabled]': 'disabled()',
+        '[class.ng-draw-flow_readonly]': 'readonly()',
+        '[class.ng-draw-flow_invalid]': 'invalid()',
+        '[class.ng-draw-flow_touched]': 'touched()',
+        '[class.ng-draw-flow_dirty]': 'dirty()',
+        '[class.ng-draw-flow_pending]': 'pending()',
     },
 })
 export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
 {
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly cancelPendingChanges$ = new Subject<void>();
+    private pendingChange: DfDataModel | undefined;
     private readonly destroyRef = inject(DestroyRef);
     private readonly hostElement = inject<ElementRef<HTMLElement>>(ElementRef);
+    private readonly renderer = inject(Renderer2);
     private readonly connectionsService = inject(ConnectionsService);
     private readonly panZoomService = inject(PanZoomService);
     private readonly panZoomOptions = inject<DfPanZoomOptions>(DF_PAN_ZOOM_OPTIONS);
     private readonly selectionService = inject(SelectionService);
     private readonly store = inject(NgDrawFlowStoreService);
+    private readonly interactionState = inject(DfInteractionStateService);
+    private readonly cvaDisabled = signal(false);
     private readonly maxViewportFrameRetries = 5;
     private frameRequestId: number | null = null;
     private viewportFrameRetryCount = 0;
     private shouldFrameViewport = false;
     private hasFramedExternalModel = false;
-    private touched = false;
+    private destroyed = false;
+    private interactionVersion = 0;
+    private readonly activePointers = new Set<number>();
 
     protected readonly panzoom = viewChild.required(PanZoomComponent);
-    protected readonly disabled = signal(false);
+
+    /** Form state inputs are populated automatically by Signal Forms. */
+    public readonly disabledInput = input(false, {alias: 'disabled'});
+    public readonly readonlyInput = input(false, {alias: 'readonly'});
+    public readonly invalid = input(false);
+    public readonly touched = input(false);
+    public readonly dirty = input(false);
+    public readonly pending = input(false);
+    /** Dynamic overrides for the legacy provider's interaction defaults. */
+    public readonly interactionOptions = input<Partial<DfInteractionOptions>>({});
+
+    protected readonly disabled = computed(
+        () => this.cvaDisabled() || this.disabledInput(),
+    );
+
+    protected readonly readonly = computed(() => this.readonlyInput());
 
     /** Emits the current zoom percentage (100 === actual size) each time it changes. */
     protected readonly scale = output<number>();
@@ -157,6 +206,21 @@ export class NgDrawFlowComponent
 
     protected readonly $rootReady = signal<boolean>(false);
 
+    constructor() {
+        this.interactionState.setDefaults(inject(DRAW_FLOW_OPTIONS).options);
+        effect(() => this.interactionState.setOptions(this.interactionOptions()));
+        effect(() => this.interactionState.setDisabled(this.disabled()));
+        effect(() => this.interactionState.setReadonly(this.readonly()));
+        this.destroyRef.onDestroy(
+            this.renderer.listen(
+                this.hostElement.nativeElement,
+                'pointerdown',
+                (event: PointerEvent) => this.onPointerDown(event),
+                {capture: true},
+            ),
+        );
+    }
+
     public ngOnInit(): void {
         this.watchFormChanges();
     }
@@ -174,19 +238,21 @@ export class NgDrawFlowComponent
     }
 
     public ngOnDestroy(): void {
+        this.destroyed = true;
+        this.cancelPendingChange();
         this.cancelViewportFraming();
         this.store.detach(this);
     }
 
-    public writeValue(value: DfDataModel): void {
-        if (!value) {
-            return;
-        }
+    public writeValue(value: DfDataModel | null | undefined): void {
+        const model = value ?? {nodes: [], connections: []};
 
-        this.store.updateDataModel(value);
-        this.form.setValue(value, {emitEvent: false});
+        this.interactionVersion += 1;
+        this.activePointers.clear();
+        this.interactionState.cancelEditing();
+        this.applyModel(model, false);
 
-        if (value.nodes.length) {
+        if (model.nodes.length) {
             if (!this.hasFramedExternalModel) {
                 this.hasFramedExternalModel = true;
                 this.scheduleViewportFraming();
@@ -205,7 +271,8 @@ export class NgDrawFlowComponent
     }
 
     public setDisabledState(isDisabled: boolean): void {
-        this.disabled.set(isDisabled);
+        this.cvaDisabled.set(isDisabled);
+        this.interactionState.setDisabled(isDisabled || this.disabledInput());
 
         if (isDisabled) {
             this.form.disable({emitEvent: false});
@@ -245,13 +312,38 @@ export class NgDrawFlowComponent
 
     /** Replaces the current model and propagates the change to the bound control. */
     public setDataModel(model: DfDataModel): void {
-        this.store.updateDataModel(model);
-        this.form.setValue(model);
+        this.applyModel(model, true);
     }
 
     /** Method that removes an existing edge. */
     public removeConnection(connection: DfDataConnection): void {
-        this.connectionsService.removeConnection(connection);
+        const current = this.form.value;
+        const deleted = current.connections.find((existing) =>
+            this.isSameConnection(existing, connection),
+        );
+
+        if (!deleted) {
+            return;
+        }
+
+        const model: DfDataModel = {
+            ...current,
+            connections: current.connections.filter(
+                (existing) => !this.isSameConnection(existing, connection),
+            ),
+        };
+        const event: DfEvent<DfDataConnection> = {target: deleted, model};
+
+        this.applyModel(model, false);
+        const version = this.interactionVersion;
+
+        this.store.emitConnectionDeleted(event);
+
+        if (version === this.interactionVersion && this.form.value === model) {
+            this.onChange(model);
+        }
+
+        this.connectionDeleted.emit(event);
     }
 
     /** Method that removes an existing node and all related edges. */
@@ -280,10 +372,10 @@ export class NgDrawFlowComponent
         };
         const event: DfEvent<DfDataNode> = {target: deleted as DfDataNode, model};
 
-        this.form.setValue(model);
-        this.connectionsService.setConnections(model.connections);
+        this.applyModel(model, false);
+        const version = this.interactionVersion;
+
         this.store.emitNodeDeleted(event);
-        this.nodeDeleted.emit(event);
 
         deletedConnections.forEach((connection) => {
             const connectionEvent: DfEvent<DfDataConnection> = {
@@ -291,8 +383,18 @@ export class NgDrawFlowComponent
                 model,
             };
 
-            this.store.emitConnectionDeleted(connectionEvent);
-            this.connectionDeleted.emit(connectionEvent);
+            if (version === this.interactionVersion && this.form.value === model) {
+                this.store.emitConnectionDeleted(connectionEvent);
+            }
+        });
+
+        if (version === this.interactionVersion && this.form.value === model) {
+            this.onChange(model);
+        }
+
+        this.nodeDeleted.emit(event);
+        deletedConnections.forEach((connection) => {
+            this.connectionDeleted.emit({target: connection, model});
         });
     }
 
@@ -335,27 +437,150 @@ export class NgDrawFlowComponent
         this.scheduleViewportFraming();
     }
 
-    protected markAsTouched(): void {
-        if (this.touched) {
+    protected onFocusOut(event: FocusEvent): void {
+        const nextTarget = event.relatedTarget;
+
+        if (
+            nextTarget instanceof Node &&
+            this.hostElement.nativeElement.contains(nextTarget)
+        ) {
             return;
         }
 
-        this.touched = true;
-        this.onTouched();
+        if (this.activePointers.size) {
+            return;
+        }
+
+        if (nextTarget === null) {
+            const version = this.interactionVersion;
+
+            queueMicrotask(() => {
+                if (
+                    !this.destroyed &&
+                    version === this.interactionVersion &&
+                    !this.hostElement.nativeElement.contains(
+                        this.hostElement.nativeElement.ownerDocument.activeElement,
+                    )
+                ) {
+                    this.markAsTouched();
+                }
+            });
+
+            return;
+        }
+
+        this.markAsTouched();
+    }
+
+    protected onPointerDown(event: PointerEvent): void {
+        if (
+            this.interactionState.editingDisabled() ||
+            this.isFocusableDescendant(event.target)
+        ) {
+            return;
+        }
+
+        this.activePointers.add(event.pointerId);
+    }
+
+    protected onPointerEnd(event: PointerEvent): void {
+        if (!this.activePointers.delete(event.pointerId)) {
+            return;
+        }
+
+        if (!this.interactionState.editingDisabled()) {
+            const version = this.interactionVersion;
+
+            // Descendant document listeners finish the drag before the form's
+            // blur/touch boundary flushes a pending value.
+            queueMicrotask(() => {
+                if (!this.destroyed && version === this.interactionVersion) {
+                    this.markAsTouched();
+                }
+            });
+        }
+    }
+
+    protected markAsTouched(): void {
+        if (!this.disabled()) {
+            const version = this.interactionVersion;
+
+            this.flushPendingChange();
+
+            if (version === this.interactionVersion && !this.destroyed) {
+                this.onTouched();
+            }
+        }
     }
 
     private watchFormChanges(): void {
-        this.form.valueChanges
-            .pipe(debounceTime(10), takeUntilDestroyed(this.destroyRef))
-            .subscribe((value: DfDataModel) => {
-                this.store.updateDataModel(value);
-                this.onChange(value);
-            });
+        this.cancelPendingChanges$
+            .pipe(
+                startWith(undefined),
+                switchMap(() =>
+                    this.form.valueChanges.pipe(
+                        tap((value) => {
+                            this.pendingChange = value;
+                            this.store.updateDataModel(value);
+                        }),
+                        debounceTime(10),
+                    ),
+                ),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe(() => this.flushPendingChange());
+    }
+
+    private flushPendingChange(): void {
+        const value = this.pendingChange;
+
+        this.cancelPendingChange();
+
+        if (value) {
+            this.onChange(value);
+        }
+    }
+
+    private cancelPendingChange(): void {
+        this.pendingChange = undefined;
+        this.cancelPendingChanges$.next();
     }
 
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
 
     private onTouched: () => void = () => {};
+
+    private applyModel(model: DfDataModel, emitChange: boolean): void {
+        this.cancelPendingChange();
+        this.form.setValue(model, {emitEvent: false});
+        this.store.updateDataModel(model);
+        this.connectionsService.setConnections(model.connections);
+
+        if (emitChange) {
+            this.onChange(model);
+        }
+    }
+
+    private isFocusableDescendant(target: EventTarget | null): boolean {
+        if (!(target instanceof Element)) {
+            return false;
+        }
+
+        const focusable = target.closest(
+            'input, textarea, select, button, a[href], [contenteditable="true"], [tabindex]:not([tabindex="-1"])',
+        );
+
+        return Boolean(focusable && focusable !== this.hostElement.nativeElement);
+    }
+
+    private isSameConnection(left: DfDataConnection, right: DfDataConnection): boolean {
+        return (
+            left.source.nodeId === right.source.nodeId &&
+            left.source.connectorId === right.source.connectorId &&
+            left.target.nodeId === right.target.nodeId &&
+            left.target.connectorId === right.target.connectorId
+        );
+    }
 
     private scheduleViewportFraming(retry = false): void {
         if (

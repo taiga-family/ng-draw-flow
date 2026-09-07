@@ -1,47 +1,48 @@
-import {
-    Directive,
-    effect,
-    inject,
-    Injector,
-    type OnInit,
-    runInInjectionContext,
-} from '@angular/core';
-import {toSignal} from '@angular/core/rxjs-interop';
-import {NgControl} from '@angular/forms';
-import {combineLatest, distinctUntilChanged, map, startWith} from 'rxjs';
+import {DestroyRef, Directive, effect, inject, input, type OnInit} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {AbstractControl, NgControl} from '@angular/forms';
+import {merge} from 'rxjs';
 
-import {deepEqual} from '../../helpers';
 import {collectInvalidNodeIds} from '../../helpers/collect-invalid-node-ids';
 import {INVALID_NODES} from '../../validators/invalid-nodes.token';
 
+const NO_ERRORS_INPUT = Symbol('NO_ERRORS_INPUT');
+
 @Directive({standalone: true, selector: '[dfErrors]'})
 export class ErrorsDirective implements OnInit {
-    private readonly injector = inject(Injector);
-    private readonly ngControl = inject(NgControl);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly ngControl = inject(NgControl, {optional: true, self: true});
     private readonly $invalidNodes = inject(INVALID_NODES);
 
+    /**
+     * Graph validation errors supplied by a form binding. Signal Forms binds
+     * this state input automatically through the host directive exposure.
+     */
+    public readonly errors = input<unknown>(NO_ERRORS_INPUT);
+
+    constructor() {
+        effect(() => this.syncInvalidNodes());
+    }
+
     public ngOnInit(): void {
-        if (!this.ngControl.control) {
+        const control = this.ngControl?.control;
+
+        if (!(control instanceof AbstractControl)) {
             return;
         }
 
-        const control = this.ngControl.control;
+        merge(control.statusChanges, control.valueChanges)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.syncInvalidNodes());
+    }
 
-        runInInjectionContext(this.injector, () => {
-            const invalidNodeIds = toSignal(
-                combineLatest([
-                    control.statusChanges.pipe(startWith(control.status)),
-                    control.valueChanges.pipe(startWith(control.value)),
-                ]).pipe(
-                    map(() => collectInvalidNodeIds(control.errors)),
-                    distinctUntilChanged(deepEqual),
-                ),
-                {initialValue: collectInvalidNodeIds(control.errors)},
-            );
+    private syncInvalidNodes(): void {
+        const inputErrors = this.errors();
+        const errors =
+            inputErrors === NO_ERRORS_INPUT
+                ? (this.ngControl?.control?.errors ?? null)
+                : inputErrors;
 
-            effect(() => {
-                this.$invalidNodes.set(Array.from(invalidNodeIds()));
-            });
-        });
+        this.$invalidNodes.set(Array.from(collectInvalidNodeIds(errors)));
     }
 }

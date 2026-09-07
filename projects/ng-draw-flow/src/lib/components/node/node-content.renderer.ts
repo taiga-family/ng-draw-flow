@@ -19,6 +19,8 @@ export interface DfNodeContentInputs {
     readonly model: Record<string, any> & {type: string};
     readonly selected: boolean;
     readonly invalid: boolean;
+    readonly disabled: boolean;
+    readonly readonly: boolean;
 }
 
 export interface DfNodeContentRenderer {
@@ -56,6 +58,8 @@ class ComponentNodeContentRenderer implements DfNodeContentRenderer {
         this.componentRef.setInput('model', inputs.model);
         this.componentRef.setInput('selected', inputs.selected);
         this.componentRef.setInput('invalid', inputs.invalid);
+        this.componentRef.setInput('disabled', inputs.disabled);
+        this.componentRef.setInput('readonly', inputs.readonly);
     }
 
     public applyConnectionLabel(label: DfConnectionLabel | undefined): void {

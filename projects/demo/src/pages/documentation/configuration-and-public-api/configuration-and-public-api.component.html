@@ -22,6 +22,27 @@
     <section>
         <h2>Core Configuration</h2>
         <p>
+            Bind
+            <code>[interactionOptions]</code>
+            on
+            <code>ng-draw-flow</code>
+            to a
+            <code>Partial&lt;DfInteractionOptions&gt;</code>
+            object for dynamic permissions. It supports
+            <code>nodesDraggable</code>
+            ,
+            <code>nodesDeletable</code>
+            ,
+            <code>connectionsCreatable</code>
+            and
+            <code>connectionsDeletable</code>
+            . Replace the object when changing permissions. Supplied fields override provider defaults; omitted fields
+            inherit them. The four matching provider options below are deprecated but still supported. Disabled or
+            readonly overrides all permissions without losing their configured values. Revoking drag or connection
+            creation cancels the matching active gesture. Public commands and model writes remain available; custom node
+            content is application-controlled.
+        </p>
+        <p>
             Call
             <code>provideNgDrawFlowConfigs()</code>
             in application-level providers for shared defaults or in component providers when editors need independent

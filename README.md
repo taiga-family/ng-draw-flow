@@ -37,7 +37,8 @@ arranged diagrams and applications that calculate positions themselves.
 
 - Angular 19 or later
 - Taiga UI Polymorpheus 5
-- Angular reactive forms
+- Angular forms: Reactive Forms on Angular 19+, or the Signal Forms CVA interoperability path on a compatible Angular
+  release
 
 ## Installation
 

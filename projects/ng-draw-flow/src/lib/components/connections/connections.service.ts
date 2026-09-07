@@ -1,5 +1,6 @@
 import {Injectable, signal} from '@angular/core';
 import {toObservable} from '@angular/core/rxjs-interop';
+import {Subject} from 'rxjs';
 
 import {type DfDataConnection} from '../../ng-draw-flow.interfaces';
 
@@ -8,6 +9,7 @@ export class ConnectionsService {
     private readonly connectionsSignal = signal<DfDataConnection[]>([]);
     private readonly usedConnectorsSignal = signal<string[]>([]);
     private readonly selectedNodeIdSignal = signal<string | null>(null);
+    private readonly connectionsChangedSubject = new Subject<DfDataConnection[]>();
 
     public readonly connections = this.connectionsSignal.asReadonly();
     public readonly usedConnectors = this.usedConnectorsSignal.asReadonly();
@@ -16,6 +18,8 @@ export class ConnectionsService {
     public readonly connections$ = toObservable(this.connectionsSignal);
     public readonly usedConnectors$ = toObservable(this.usedConnectorsSignal);
     public readonly selectedNodeId$ = toObservable(this.selectedNodeIdSignal);
+    /** Emits synchronous, user-originated connection changes. */
+    public readonly connectionsChanged$ = this.connectionsChangedSubject.asObservable();
 
     public setConnections(connections: DfDataConnection[]): void {
         const usedConnectors = this.collectUsedConnectors(connections);
@@ -49,7 +53,7 @@ export class ConnectionsService {
         });
 
         this.usedConnectorsSignal.set(updatedUsedConnectors);
-        this.connectionsSignal.set([...this.connectionsSignal(), ...newConnections]);
+        this.commitUserChange([...this.connectionsSignal(), ...newConnections]);
     }
 
     public removeConnection(connectionToRemove: DfDataConnection): void {
@@ -66,8 +70,12 @@ export class ConnectionsService {
             ),
         );
 
+        if (filteredConnections.length === this.connectionsSignal().length) {
+            return;
+        }
+
         this.usedConnectorsSignal.set(usedConnectors);
-        this.connectionsSignal.set(filteredConnections);
+        this.commitUserChange(filteredConnections);
     }
 
     public removeConnectionsByNodeId(id: string): void {
@@ -84,8 +92,12 @@ export class ConnectionsService {
             ),
         );
 
+        if (connectionsToKeep.length === this.connectionsSignal().length) {
+            return;
+        }
+
         this.usedConnectorsSignal.set(usedConnectors);
-        this.connectionsSignal.set(connectionsToKeep);
+        this.commitUserChange(connectionsToKeep);
     }
 
     public removeConnectionsByConnectorId(connectorIdToRemove: string): void {
@@ -103,8 +115,12 @@ export class ConnectionsService {
             (connectorId) => connectorId !== connectorIdToRemove,
         );
 
+        if (connectionsToKeep.length === this.connectionsSignal().length) {
+            return;
+        }
+
         this.usedConnectorsSignal.set(usedConnectors);
-        this.connectionsSignal.set(connectionsToKeep);
+        this.commitUserChange(connectionsToKeep);
     }
 
     public highlightConnectionsForNode(nodeId: string | null): void {
@@ -138,5 +154,10 @@ export class ConnectionsService {
         });
 
         return Array.from(connectorIds);
+    }
+
+    private commitUserChange(connections: DfDataConnection[]): void {
+        this.connectionsSignal.set(connections);
+        this.connectionsChangedSubject.next(connections);
     }
 }

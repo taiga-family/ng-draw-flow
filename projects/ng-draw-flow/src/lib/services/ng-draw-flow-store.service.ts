@@ -298,36 +298,36 @@ export class NgDrawFlowStoreService {
     /** Emits a node deletion event and reconciles cached state. */
     public emitNodeDeleted(event: DfEvent<DfDataNode>): void {
         this.lastNodeDeletedSignal.set(this.cloneNodeEvent(event));
-        this.nodeDeletedSubject.next(event);
 
         if (this.selectedNodeSignal()?.id === event.target.id) {
             this.selectedNodeSignal.set(null);
         }
 
         this.updateDataModel(event.model);
+        this.nodeDeletedSubject.next(event);
     }
 
     /** Emits a node movement event and reconciles cached state. */
     public emitNodeMoved(event: DfEvent<DfDataNode>): void {
         this.lastNodeMovedSignal.set(this.cloneNodeEvent(event));
-        this.nodeMovedSubject.next(event);
         this.updateSelectedNode(event.target);
         this.updateDataModel(event.model);
+        this.nodeMovedSubject.next(event);
     }
 
     /** Emits a connection creation event and reconciles cached state. */
     public emitConnectionCreated(event: DfEvent<DfDataConnection>): void {
         this.lastConnectionCreatedSignal.set(this.cloneConnectionEvent(event));
-        this.connectionCreatedSubject.next(event);
         this.updateDataModel(event.model);
+        this.connectionCreatedSubject.next(event);
     }
 
     /** Emits a connection deletion event and reconciles cached state. */
     public emitConnectionDeleted(event: DfEvent<DfDataConnection>): void {
         this.lastConnectionDeletedSignal.set(this.cloneConnectionEvent(event));
-        this.connectionDeletedSubject.next(event);
         this.clearSelectedConnection(event.target);
         this.updateDataModel(event.model);
+        this.connectionDeletedSubject.next(event);
     }
 
     /** Records a connection as selected and notifies subscribers. */

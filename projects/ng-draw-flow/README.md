@@ -10,7 +10,7 @@ components.
 ## Features
 
 - Angular components as graph nodes
-- Reactive Forms data model
+- Reactive Forms and Signal Forms CVA data model
 - Custom input and output connectors
 - Bezier and smooth-step connections
 - Selection, dragging and deletion
@@ -26,9 +26,10 @@ over manually placed, draggable or externally calculated positions.
 ## Requirements
 
 - `@angular/common` and `@angular/core` 19 or later
-- `@angular/forms` for the Reactive Forms integration
+- `@angular/forms` 19 or later
 - `@taiga-ui/polymorpheus` 5
-- `@ng-web-apis/resize-observer` 5.2
+- `@ng-web-apis/platform` and `@ng-web-apis/resize-observer` 5.2
+- RxJS 7 or later
 
 ## Installation
 

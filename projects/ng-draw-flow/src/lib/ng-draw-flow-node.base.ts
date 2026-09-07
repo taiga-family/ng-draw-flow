@@ -75,6 +75,12 @@ export abstract class DrawFlowBaseNode {
      */
     public readonly invalidSignal = input(false, {alias: 'invalid'});
 
+    /** Form-level disabled state. Custom node controls may bind to this explicitly. */
+    public readonly disabledSignal = input(false, {alias: 'disabled'});
+
+    /** Form-level readonly state. Custom node controls may bind to this explicitly. */
+    public readonly readonlySignal = input(false, {alias: 'readonly'});
+
     public get nodeId(): string {
         return this.nodeIdSignal();
     }
@@ -97,6 +103,14 @@ export abstract class DrawFlowBaseNode {
 
     public get invalid(): boolean {
         return this.invalidState;
+    }
+
+    public get disabled(): boolean {
+        return this.disabledSignal();
+    }
+
+    public get readonly(): boolean {
+        return this.readonlySignal();
     }
 
     public markForCheck(): void {

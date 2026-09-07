@@ -1,6 +1,8 @@
 import {Directive, ElementRef, inject} from '@angular/core';
 import {outputFromObservable} from '@angular/core/rxjs-interop';
+import {EMPTY, startWith, switchMap} from 'rxjs';
 
+import {DfInteractionStateService} from '../../services/interaction-state.service';
 import {DragDropService} from './drag-drop.service';
 
 @Directive({
@@ -8,9 +10,20 @@ import {DragDropService} from './drag-drop.service';
     selector: '[dfDragDrop]',
 })
 export class DragDropDirective {
+    private readonly interactionState = inject(DfInteractionStateService, {
+        optional: true,
+    });
+
+    private readonly dragDropService = inject(DragDropService);
+
     protected readonly elementRef: ElementRef<HTMLElement> = inject(ElementRef);
     protected readonly dfDragDrop = outputFromObservable(
-        inject(DragDropService).streamFor(this.elementRef.nativeElement),
+        (this.interactionState?.nodeDragCancellation$ ?? EMPTY).pipe(
+            startWith(undefined),
+            switchMap(() =>
+                this.dragDropService.streamFor(this.elementRef.nativeElement),
+            ),
+        ),
         {alias: 'dfDragDrop'},
     );
 }

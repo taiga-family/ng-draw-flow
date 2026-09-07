@@ -30,19 +30,41 @@ describe('ConnectionsService', () => {
     });
 
     it('adds connections without duplicates', () => {
+        const changed = jest.fn();
+
+        service.connectionsChanged$.subscribe(changed);
         service.addConnections([connection]);
         service.addConnections([connection]);
 
         expect(service.connections().length).toBe(1);
         expect(service.usedConnectors()).toEqual(['o1', 'i1']);
+        expect(changed).toHaveBeenCalledTimes(1);
+        expect(changed).toHaveBeenCalledWith([connection]);
+    });
+
+    it('does not report external synchronization as a user change', () => {
+        const changed = jest.fn();
+
+        service.connectionsChanged$.subscribe(changed);
+        service.setConnections([connection]);
+
+        expect(service.connections()).toEqual([connection]);
+        expect(changed).not.toHaveBeenCalled();
     });
 
     it('removes connection and updates used connectors', () => {
+        const changed = jest.fn();
+
+        service.connectionsChanged$.subscribe(changed);
         service.addConnections([connection]);
+        changed.mockClear();
+        service.removeConnection(connection);
         service.removeConnection(connection);
 
         expect(service.connections().length).toBe(0);
         expect(service.usedConnectors().length).toBe(0);
+        expect(changed).toHaveBeenCalledTimes(1);
+        expect(changed).toHaveBeenCalledWith([]);
     });
 
     it('removes connections by node id', () => {

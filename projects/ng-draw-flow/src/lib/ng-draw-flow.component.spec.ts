@@ -1,4 +1,4 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {ConnectionsService} from './components/connections/connections.service';
 import {
@@ -8,6 +8,7 @@ import {
 import {PanZoomService} from './components/pan-zoom/pan-zoom.service';
 import {NgDrawFlowComponent} from './ng-draw-flow.component';
 import {DfConnectionPoint} from './ng-draw-flow.interfaces';
+import {DfInteractionStateService} from './services/interaction-state.service';
 import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
 import {SelectionService} from './services/selection.service';
 
@@ -36,6 +37,7 @@ describe('NgDrawFlowComponent', () => {
                 imports: [],
                 hostDirectives: [],
                 providers: [
+                    DfInteractionStateService,
                     {
                         provide: PanZoomService,
                         useValue: {
@@ -182,6 +184,155 @@ describe('NgDrawFlowComponent', () => {
         expect(store.updateDataModel).toHaveBeenCalledTimes(2);
     });
 
+    it('publishes a completed public model change synchronously and only once', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const onChange = jest.fn();
+        const model = {
+            nodes: [{id: 'node-1', data: {type: 'simpleNode'}}],
+            connections: [],
+        };
+
+        component.registerOnChange(onChange);
+        fixture.detectChanges();
+        component.setDataModel(model);
+
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith(model);
+    });
+
+    it('debounces internal values for 10ms while keeping the store current', fakeAsync(() => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const store = fixture.debugElement.injector.get(NgDrawFlowStoreService);
+        const component = fixture.componentInstance;
+        const onChange = jest.fn();
+        const first = {
+            nodes: [{id: 'first', data: {type: 'simpleNode'}}],
+            connections: [],
+        };
+        const last = {nodes: [{id: 'last', data: {type: 'simpleNode'}}], connections: []};
+
+        component.registerOnChange(onChange);
+        fixture.detectChanges();
+        component['form'].setValue(first);
+        tick(5);
+        component['form'].setValue(last);
+        expect(store.updateDataModel).toHaveBeenLastCalledWith(last);
+        tick(9);
+        expect(onChange).not.toHaveBeenCalled();
+        tick(1);
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith(last);
+    }));
+
+    it.each(['reset', 'replacement', 'command', 'destroy'])(
+        'cancels a pending value on %s',
+        (action) => {
+            fakeAsync(() => {
+                const fixture = TestBed.createComponent(NgDrawFlowComponent);
+                const component = fixture.componentInstance;
+                const onChange = jest.fn();
+                const model = {nodes: [], connections: []};
+
+                component.registerOnChange(onChange);
+                fixture.detectChanges();
+                component['form'].setValue(model);
+
+                if (action === 'destroy') {
+                    fixture.destroy();
+                } else if (action === 'command') {
+                    component.setDataModel(model);
+                } else {
+                    component.writeValue(action === 'reset' ? null : model);
+                }
+
+                tick(10);
+                expect(onChange).toHaveBeenCalledTimes(action === 'command' ? 1 : 0);
+            })();
+        },
+    );
+
+    it('flushes the pending value before touch without a delayed duplicate', fakeAsync(() => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const events: string[] = [];
+
+        component.registerOnChange(() => {
+            events.push('change');
+        });
+        component.registerOnTouched(() => {
+            events.push('touch');
+        });
+        fixture.detectChanges();
+        component['form'].setValue({nodes: [], connections: []});
+        component['markAsTouched']();
+        expect(events).toEqual(['change', 'touch']);
+        tick(10);
+        expect(events).toEqual(['change', 'touch']);
+    }));
+
+    it('does not touch a reset performed by the change callback', fakeAsync(() => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const touched = jest.fn();
+
+        component.registerOnChange(() => component.writeValue(null));
+        component.registerOnTouched(touched);
+        fixture.detectChanges();
+        component['form'].setValue({nodes: [], connections: []});
+        component['markAsTouched']();
+        tick(10);
+        expect(touched).not.toHaveBeenCalled();
+    }));
+
+    it('does not echo incoming values and clears a nullable reset', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const onChange = jest.fn();
+
+        component.registerOnChange(onChange);
+        fixture.detectChanges();
+        component.writeValue({
+            nodes: [{id: 'node-1', data: {type: 'simpleNode'}}],
+            connections: [],
+        });
+        component.writeValue(null);
+
+        expect(onChange).not.toHaveBeenCalled();
+        expect(component['form'].value).toEqual({nodes: [], connections: []});
+    });
+
+    it('reports touch for every completed interaction', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const onTouched = jest.fn();
+
+        component.registerOnTouched(onTouched);
+        component['markAsTouched']();
+        component['markAsTouched']();
+
+        expect(onTouched).toHaveBeenCalledTimes(2);
+    });
+
+    it('synchronizes disabled state with descendant interaction guards', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const interactionState = fixture.debugElement.injector.get(
+            DfInteractionStateService,
+        );
+
+        component.setDisabledState(true);
+        fixture.detectChanges();
+
+        expect(interactionState.disabled()).toBe(true);
+        expect(interactionState.editingDisabled()).toBe(true);
+
+        component.setDisabledState(false);
+        fixture.detectChanges();
+
+        expect(interactionState.editingDisabled()).toBe(false);
+    });
+
     it('removes a node with related connections through public API', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
@@ -253,6 +404,40 @@ describe('NgDrawFlowComponent', () => {
                 nodes: [model.nodes[1]],
                 connections: [],
             },
+        });
+    });
+
+    it('removes a connection atomically through public API', () => {
+        const fixture = TestBed.createComponent(NgDrawFlowComponent);
+        const component = fixture.componentInstance;
+        const store = fixture.debugElement.injector.get(NgDrawFlowStoreService);
+        const connectionsService = fixture.debugElement.injector.get(ConnectionsService);
+        const onChange = jest.fn();
+        const connection = {
+            source: {
+                nodeId: 'node-1',
+                connectorId: 'source',
+                connectorType: DfConnectionPoint.Output,
+            },
+            target: {
+                nodeId: 'node-2',
+                connectorId: 'target',
+                connectorType: DfConnectionPoint.Input,
+            },
+        };
+        const model = {nodes: [], connections: [connection]};
+
+        component.registerOnChange(onChange);
+        fixture.detectChanges();
+        component.writeValue(model);
+        component.removeConnection(connection);
+
+        expect(onChange).toHaveBeenCalledTimes(1);
+        expect(onChange).toHaveBeenCalledWith({nodes: [], connections: []});
+        expect(connectionsService.setConnections).toHaveBeenCalledWith([]);
+        expect(store.emitConnectionDeleted).toHaveBeenCalledWith({
+            target: connection,
+            model: {nodes: [], connections: []},
         });
     });
 });
