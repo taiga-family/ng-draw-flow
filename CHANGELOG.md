@@ -1,3 +1,19 @@
+### [1.4.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.3.0...v1.4.0) (2026-09-07)
+
+### 🚀 Features
+
+- **ng-draw-flow**: brought out the ng22 sandbox
+  [(9cb5605)](https://github.com/taiga-family/ng-draw-flow/commit/9cb5605290ab7dc134b70f5b9b27dd02d7e6ebb5)
+- **ng-draw-flow**: add dynamic interaction options
+  [(cc1c285)](https://github.com/taiga-family/ng-draw-flow/commit/cc1c285fdf575a2ba74400dd04d7f3045ccf8cdc)
+- **ng-draw-flow**: restore debounced form value updates
+  [(1a7be2b)](https://github.com/taiga-family/ng-draw-flow/commit/1a7be2b55ff0f1c52ad8fa69760e201b970021ce)
+
+### 🐞 Bug Fixes
+
+- support Signal Forms through CVA
+  [(edf0756)](https://github.com/taiga-family/ng-draw-flow/commit/edf0756ca651077452d43034a04a119775c21611)
+
 ### [1.3.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.3...v1.3.0) (2026-08-29)
 
 ### [1.2.3](https://github.com/taiga-family/ng-draw-flow/compare/v1.2.2...v1.2.3) (2026-07-28)
