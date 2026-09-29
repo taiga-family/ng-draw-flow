@@ -70,7 +70,7 @@ describe('DfOutputComponent', () => {
                 },
                 {
                     provide: DraftConnectionService,
-                    useValue: {connection$: {next: startDraft}},
+                    useValue: {startConnection: startDraft},
                 },
             ],
         }).compileComponents();
@@ -139,13 +139,16 @@ describe('DfOutputComponent', () => {
         connector.dispatchEvent(new MouseEvent('pointerdown', {bubbles: true}));
         connector.click();
 
-        expect(startDraft).toHaveBeenCalledWith({
-            nodeId: 'node-1',
-            connectorId: 'output-1',
-            connectorType: DfConnectionPoint.Output,
-            position: expect.any(String),
-            connectionLabel: undefined,
-        });
+        expect(startDraft).toHaveBeenCalledWith(
+            {
+                nodeId: 'node-1',
+                connectorId: 'output-1',
+                connectorType: DfConnectionPoint.Output,
+                position: expect.any(String),
+                connectionLabel: undefined,
+            },
+            expect.any(MouseEvent),
+        );
         expect(fixture.componentInstance.onActivated).not.toHaveBeenCalled();
     });
 
@@ -169,6 +172,20 @@ describe('DfOutputComponent', () => {
 
         expect(startDraft).not.toHaveBeenCalled();
         expect(connector.classList).toContain('df-disabled');
+    });
+
+    it('does not start a draft for a secondary mouse button', () => {
+        const fixture = TestBed.createComponent(HostComponent);
+
+        fixture.componentInstance.mode = DfOutputMode.Connection;
+        fixture.detectChanges();
+        const connector: HTMLElement = fixture.nativeElement.querySelector('df-output');
+
+        connector.dispatchEvent(
+            new MouseEvent('pointerdown', {bubbles: true, button: 2}),
+        );
+
+        expect(startDraft).not.toHaveBeenCalled();
     });
 
     it('registers and updates its layout order', () => {

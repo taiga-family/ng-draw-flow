@@ -1,6 +1,6 @@
 import {computed, DestroyRef, inject, Injectable, signal} from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {animationFrameScheduler, Subject, take, timer} from 'rxjs';
+import {animationFrameScheduler, Subject, type Subscription, take, timer} from 'rxjs';
 
 import {INITIAL_COORDINATES} from '../../consts';
 import {type DfDragDrop, DfDragDropStage} from '../../directives/drag-drop';
@@ -54,7 +54,7 @@ export class PanZoomControllerService {
     private readonly scaleChangesSubject = new Subject<number>();
     private readonly pendingGestures: DfPanZoomViewportGesture[] = [];
     private emittedZoom = Number.NaN;
-    private flushScheduled = false;
+    private gestureFlushSubscription: Subscription | null = null;
     public readonly dragging = this.draggingSignal.asReadonly();
     public readonly transitioned = this.transitionedSignal.asReadonly();
     public readonly viewportSize = this.viewportSizeSignal.asReadonly();
@@ -81,6 +81,14 @@ export class PanZoomControllerService {
             ? `${this.panZoomOptions.zoomAnimationDuration}ms`
             : '0s',
     );
+
+    constructor() {
+        this.destroyRef.onDestroy(() => {
+            this.gestureFlushSubscription?.unsubscribe();
+            this.gestureFlushSubscription = null;
+            this.pendingGestures.length = 0;
+        });
+    }
 
     public resetPanzoom(): void {
         this.setPosition({
@@ -198,7 +206,8 @@ export class PanZoomControllerService {
     }
 
     public flushGestures(): void {
-        this.flushScheduled = false;
+        this.gestureFlushSubscription?.unsubscribe();
+        this.gestureFlushSubscription = null;
 
         if (!this.pendingGestures.length) {
             return;
@@ -253,12 +262,13 @@ export class PanZoomControllerService {
     }
 
     private scheduleGestureFlush(): void {
-        if (this.flushScheduled) {
+        if (this.gestureFlushSubscription) {
             return;
         }
 
-        this.flushScheduled = true;
-        animationFrameScheduler.schedule(() => this.flushGestures());
+        this.gestureFlushSubscription = animationFrameScheduler.schedule(() =>
+            this.flushGestures(),
+        );
     }
 
     private setZoom(zoom: number): void {

@@ -14,8 +14,12 @@ export function isConnectorType(type: string): type is DfConnectionPoint {
  * for tracking and updating connector positions.
  *
  * @param connector - Connector object containing nodeId, connectorType, and connectorId
- * @returns String identifier in the format "nodeId:value,connectorType:value,connectorId:value"
+ * @returns Collision-free JSON encoding of the connector identity tuple.
  */
 export function createConnectorHash(connector: DfDataConnector): string {
-    return `nodeId:${connector.nodeId},connectorType:${connector.connectorType},connectorId:${connector.connectorId}`;
+    return JSON.stringify([
+        connector.nodeId,
+        connector.connectorType,
+        connector.connectorId,
+    ]);
 }

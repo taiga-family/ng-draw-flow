@@ -247,9 +247,7 @@ export class NgDrawFlowComponent
     public writeValue(value: DfDataModel | null | undefined): void {
         const model = value ?? {nodes: [], connections: []};
 
-        this.interactionVersion += 1;
-        this.activePointers.clear();
-        this.interactionState.cancelEditing();
+        this.cancelInteraction();
         this.applyModel(model, false);
 
         if (model.nodes.length) {
@@ -312,6 +310,7 @@ export class NgDrawFlowComponent
 
     /** Replaces the current model and propagates the change to the bound control. */
     public setDataModel(model: DfDataModel): void {
+        this.cancelInteraction();
         this.applyModel(model, true);
     }
 
@@ -549,6 +548,12 @@ export class NgDrawFlowComponent
     private onChange: (value: DfDataModel) => void = (_: DfDataModel) => {};
 
     private onTouched: () => void = () => {};
+
+    private cancelInteraction(): void {
+        this.interactionVersion += 1;
+        this.activePointers.clear();
+        this.interactionState.cancelEditing();
+    }
 
     private applyModel(model: DfDataModel, emitChange: boolean): void {
         this.cancelPendingChange();

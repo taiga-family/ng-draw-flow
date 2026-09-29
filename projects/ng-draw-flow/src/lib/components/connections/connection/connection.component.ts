@@ -24,6 +24,7 @@ import {
 
 import {SelectableElementDirective} from '../../../directives';
 import {createConnectorHash} from '../../../helpers';
+import {isEditorKeyboardEvent} from '../../../helpers/editor-keyboard-event';
 import {DRAW_FLOW_OPTIONS} from '../../../ng-draw-flow.configs';
 import {
     DfArrowhead,
@@ -33,6 +34,7 @@ import {
     type DfDataConnector,
     type DfOptions,
 } from '../../../ng-draw-flow.interfaces';
+import {DRAW_FLOW_ROOT_ELEMENT} from '../../../ng-draw-flow.token';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {DfInteractionStateService} from '../../../services/interaction-state.service';
 import {NgDrawFlowStoreService} from '../../../services/ng-draw-flow-store.service';
@@ -54,6 +56,7 @@ import {createBezierPath, createSmoothStepPath} from '../utils';
     },
 })
 export class ConnectionComponent {
+    private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly connectionsService = inject(ConnectionsService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly store = inject(NgDrawFlowStoreService);
@@ -158,7 +161,11 @@ export class ConnectionComponent {
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        if (!this.selected || !this.deletable) {
+        if (
+            !this.selected ||
+            !this.deletable ||
+            !isEditorKeyboardEvent(event, this.drawFlowElement)
+        ) {
             return;
         }
 

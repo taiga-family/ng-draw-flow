@@ -4,6 +4,8 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular
 import {By} from '@angular/platform-browser';
 
 import {ConnectionsService} from './components/connections/connections.service';
+import {DraftConnectionService} from './components/connections/draft-connection/draft-connection.service';
+import {SceneComponent} from './components/scene/scene.component';
 import {type NgDrawFlowComponent as NgDrawFlowComponentInstance} from './ng-draw-flow.component';
 import {DRAW_FLOW_DEFAULT_OPTIONS, DRAW_FLOW_OPTIONS} from './ng-draw-flow.configs';
 import {
@@ -278,12 +280,35 @@ describe('NgDrawFlowComponent forms integration', () => {
     });
 
     it('flushes blur-based updates after descendant pointerup handlers', fakeAsync(() => {
+        TestBed.overrideComponent(SceneComponent, {set: {template: '', imports: []}});
+        TestBed.overrideComponent(NgDrawFlowComponent, {
+            set: {
+                imports: [SceneComponent, ReactiveFormsModule],
+                template: '<div data-test-canvas><df-scene [formControl]="form" /></div>',
+            },
+        });
         const fixture = TestBed.createComponent(BlurHost);
-        const commitDrag = (): void => {
-            fixture.componentInstance.editor().setDataModel(UPDATED_MODEL);
+        const connection: DfDataConnection = {
+            source: {
+                nodeId: 'initial',
+                connectorId: 'output',
+                connectorType: DfConnectionPoint.Output,
+            },
+            target: {
+                nodeId: 'target',
+                connectorId: 'input',
+                connectorType: DfConnectionPoint.Input,
+            },
         };
+        const updatedModel = {...INITIAL_MODEL, connections: [connection]};
 
         fixture.detectChanges();
+        const editor = fixture.debugElement.query(By.directive(NgDrawFlowComponent));
+        const connections = editor.injector.get(ConnectionsService);
+        const commitDrag = (): void => {
+            connections.addConnections([connection]);
+        };
+
         document.addEventListener('pointerup', commitDrag);
 
         try {
@@ -294,7 +319,7 @@ describe('NgDrawFlowComponent forms integration', () => {
 
             expect(fixture.componentInstance.graph.value).toBe(INITIAL_MODEL);
             flushMicrotasks();
-            expect(fixture.componentInstance.graph.value).toBe(UPDATED_MODEL);
+            expect(fixture.componentInstance.graph.value).toEqual(updatedModel);
             expect(fixture.componentInstance.graph.touched).toBe(true);
 
             fixture.componentInstance.graph.reset(INITIAL_MODEL);
@@ -303,7 +328,7 @@ describe('NgDrawFlowComponent forms integration', () => {
             completeCanvasInteraction(fixture.nativeElement, 2);
             flushMicrotasks();
 
-            expect(fixture.componentInstance.graph.value).toBe(UPDATED_MODEL);
+            expect(fixture.componentInstance.graph.value).toEqual(updatedModel);
             expect(fixture.componentInstance.graph.touched).toBe(true);
         } finally {
             document.removeEventListener('pointerup', commitDrag);
@@ -364,6 +389,52 @@ describe('NgDrawFlowComponent forms integration', () => {
         expect(fixture.componentInstance.graph.pristine).toBe(true);
     }));
 
+    it('cancels an active draft before a synchronous public model replacement', () => {
+        const fixture = TestBed.createComponent(ReactiveHost);
+
+        fixture.detectChanges();
+        const editor = fixture.debugElement.query(By.directive(NgDrawFlowComponent));
+        const draft = editor.injector.get(DraftConnectionService);
+        const store = editor.injector.get(NgDrawFlowStoreService);
+        const created = jest.fn();
+        const changes = jest.fn();
+        const target = document.createElement('df-input');
+
+        target.dataset.nodeId = 'old-target';
+        target.dataset.connectorId = 'old-input';
+        target.dataset.connectorType = DfConnectionPoint.Input;
+        editor.nativeElement.append(target);
+        draft.connectionCreated$.subscribe(created);
+        fixture.componentInstance.graph.valueChanges.subscribe(changes);
+        draft.startConnection({
+            nodeId: 'initial',
+            connectorId: 'old-output',
+            connectorType: DfConnectionPoint.Output,
+        });
+        expect(draft.isConnectionCreating()).toBe(true);
+
+        store.setDataModel(UPDATED_MODEL);
+
+        expect(fixture.componentInstance.graph.value).toBe(UPDATED_MODEL);
+        expect(changes).toHaveBeenCalledTimes(1);
+        expect(draft.isConnectionCreating()).toBe(false);
+        target.dispatchEvent(new MouseEvent('pointerup', {bubbles: true}));
+        expect(created).not.toHaveBeenCalled();
+        expect(store.dataModel()).toEqual(UPDATED_MODEL);
+    });
+
+    it('drops a queued touch from the previous model after public replacement', fakeAsync(() => {
+        const fixture = TestBed.createComponent(ReactiveHost);
+
+        fixture.detectChanges();
+        completeCanvasInteraction(fixture.nativeElement, 1);
+        fixture.componentInstance.editor().setDataModel(UPDATED_MODEL);
+        expect(fixture.componentInstance.graph.value).toBe(UPDATED_MODEL);
+        flushMicrotasks();
+
+        expect(fixture.componentInstance.graph.untouched).toBe(true);
+    }));
+
     it('does not apply a queued touch after disabling the form', fakeAsync(() => {
         const fixture = TestBed.createComponent(ReactiveHost);
 
@@ -409,8 +480,8 @@ describe('NgDrawFlowComponent forms integration', () => {
         fixture.detectChanges();
 
         const editors = fixture.debugElement.queryAll(By.directive(NgDrawFlowComponent));
-        const firstInvalidNodes = editors[0].injector.get(INVALID_NODES);
-        const secondInvalidNodes = editors[1].injector.get(INVALID_NODES);
+        const firstInvalidNodes = editors[0]!.injector.get(INVALID_NODES);
+        const secondInvalidNodes = editors[1]!.injector.get(INVALID_NODES);
 
         expect(firstInvalidNodes()).toEqual(['first-node']);
         expect(secondInvalidNodes()).toEqual(['second-node']);

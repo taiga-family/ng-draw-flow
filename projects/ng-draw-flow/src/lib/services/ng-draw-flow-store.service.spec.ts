@@ -51,7 +51,7 @@ describe('NgDrawFlowStoreService', () => {
             zoomIn: jest.fn(),
             zoomOut: jest.fn(),
             resetPosition: jest.fn(),
-            setScale: jest.fn(),
+            setScale: jest.fn((scale: number) => service.setScaleValue(scale * 100)),
             removeConnection: jest.fn(),
             removeNode: jest.fn(),
             setDataModel: jest.fn(),
@@ -218,5 +218,18 @@ describe('NgDrawFlowStoreService', () => {
         service.setScaleValue(85);
 
         expect(service.scale()).toBe(85);
+    });
+
+    it('preserves the actual scale reported synchronously by the attached editor', () => {
+        const host = {
+            setScale: jest.fn(() => service.setScaleValue(200)),
+            clearSelection: jest.fn(),
+        } as unknown as NgDrawFlowComponent;
+
+        service.attach(host);
+        service.setScale(100);
+
+        expect(host.setScale).toHaveBeenCalledWith(100);
+        expect(service.scale()).toBe(200);
     });
 });

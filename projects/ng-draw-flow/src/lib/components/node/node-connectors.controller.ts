@@ -1,10 +1,12 @@
 import {
     type DestroyRef,
+    effect,
     type EnvironmentInjector,
-    runInInjectionContext,
+    type Signal,
+    untracked,
 } from '@angular/core';
-import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
-import {map, merge, type Observable, type Subscription, tap} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {map, merge, Observable, type Subscription, tap} from 'rxjs';
 
 import {type DfDragDropDistance} from '../../directives';
 import {createConnectorHash} from '../../helpers';
@@ -29,6 +31,7 @@ export interface DfNodeConnectorsControllerOptions {
 }
 
 export class NodeConnectorsController {
+    private readonly coordinateKeys = new Set<string>();
     private previousInputs: DfInputComponent[] = [];
     private previousOutputs: DfOutputComponent[] = [];
     private connectorUpdatesSubscription: Subscription | null = null;
@@ -94,7 +97,7 @@ export class NodeConnectorsController {
     public watch(): void {
         const nodeContentRenderer = this.options.getNodeContentRenderer();
 
-        this.connectorUpdatesSubscription?.unsubscribe();
+        this.disconnect();
         this.previousOutputs = [...nodeContentRenderer.outputConnectors()];
         this.previousInputs = [...nodeContentRenderer.inputConnectors()];
 
@@ -115,6 +118,12 @@ export class NodeConnectorsController {
     public disconnect(): void {
         this.connectorUpdatesSubscription?.unsubscribe();
         this.connectorUpdatesSubscription = null;
+        this.coordinateKeys.forEach((key) =>
+            this.options.coordinatesService.removeConnectionPoint(key),
+        );
+        this.coordinateKeys.clear();
+        this.previousInputs = [];
+        this.previousOutputs = [];
     }
 
     public applyOutputsConnectionLabel(): void {
@@ -141,6 +150,7 @@ export class NodeConnectorsController {
         });
 
         connector.coordinates = newConnectorPosition;
+        this.coordinateKeys.add(connectorData);
 
         this.options.coordinatesService.addConnectionPoint(
             connectorData,
@@ -167,6 +177,8 @@ export class NodeConnectorsController {
             connectorType,
             connectorId: connector.nativeElement.dataset.connectorId,
         });
+
+        this.coordinateKeys.add(connectorData);
 
         this.options.coordinatesService.addConnectionPoint(
             connectorData,
@@ -228,16 +240,14 @@ export class NodeConnectorsController {
         sources: Array<Observable<void>>,
         nodeContentRenderer: DfNodeContentRenderer,
     ): void {
-        runInInjectionContext(this.options.environmentInjector, () => {
-            sources.push(
-                toObservable(nodeContentRenderer.inputConnectors).pipe(
-                    tap((currentInputs: readonly DfInputComponent[]) => {
-                        this.handleRemovedInputs(currentInputs);
-                    }),
-                    map(() => undefined),
-                ),
-            );
-        });
+        sources.push(
+            this.observeConnectors(nodeContentRenderer.inputConnectors).pipe(
+                tap((currentInputs: readonly DfInputComponent[]) => {
+                    this.handleRemovedInputs(currentInputs);
+                }),
+                map(() => undefined),
+            ),
+        );
     }
 
     private addOutputsUpdates(
@@ -245,16 +255,29 @@ export class NodeConnectorsController {
         nodeContentRenderer: DfNodeContentRenderer,
         onOutputsChanged: () => void,
     ): void {
-        runInInjectionContext(this.options.environmentInjector, () => {
-            sources.push(
-                toObservable(nodeContentRenderer.outputConnectors).pipe(
-                    tap((currentOutputs: readonly DfOutputComponent[]) => {
-                        this.handleRemovedOutputs(currentOutputs);
-                        onOutputsChanged();
-                    }),
-                    map(() => undefined),
-                ),
+        sources.push(
+            this.observeConnectors(nodeContentRenderer.outputConnectors).pipe(
+                tap((currentOutputs: readonly DfOutputComponent[]) => {
+                    this.handleRemovedOutputs(currentOutputs);
+                    onOutputsChanged();
+                }),
+                map(() => undefined),
+            ),
+        );
+    }
+
+    private observeConnectors<T>(connectors: Signal<T>): Observable<T> {
+        return new Observable((subscriber) => {
+            const watcher = effect(
+                () => {
+                    const value = connectors();
+
+                    untracked(() => subscriber.next(value));
+                },
+                {injector: this.options.environmentInjector, manualCleanup: true},
             );
+
+            return () => watcher.destroy();
         });
     }
 
@@ -265,6 +288,7 @@ export class NodeConnectorsController {
 
         if (removedInputs.length > 0) {
             removedInputs.forEach((input: DfInputComponent) => {
+                this.removeCoordinates(input, DfConnectionPoint.Input);
                 this.options.onConnectorDeleted(input.data.connectorId);
             });
         }
@@ -279,10 +303,21 @@ export class NodeConnectorsController {
 
         if (removedOutputs.length > 0) {
             removedOutputs.forEach((output: DfOutputComponent) => {
+                this.removeCoordinates(output, DfConnectionPoint.Output);
                 this.options.onConnectorDeleted(output.data.connectorId);
             });
         }
 
         this.previousOutputs = [...currentArray];
+    }
+
+    private removeCoordinates(
+        connector: DfInputComponent | DfOutputComponent,
+        connectorType: DfConnectionPoint,
+    ): void {
+        const key = createConnectorHash({...connector.data, connectorType});
+
+        this.coordinateKeys.delete(key);
+        this.options.coordinatesService.removeConnectionPoint(key);
     }
 }

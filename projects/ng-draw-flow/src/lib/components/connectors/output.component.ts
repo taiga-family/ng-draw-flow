@@ -111,7 +111,7 @@ export class DfOutputComponent extends BaseConnector {
     protected onDragStart(event: PointerEvent): void {
         event.stopPropagation();
 
-        if (this.isAction) {
+        if (this.isAction || event.button !== 0) {
             return;
         }
 
@@ -121,13 +121,16 @@ export class DfOutputComponent extends BaseConnector {
             return;
         }
 
-        this.draftConnectionService.connection$.next({
-            nodeId,
-            connectorId,
-            connectorType: DfConnectionPoint.Output,
-            position: this.position,
-            connectionLabel: this.connectionLabel,
-        });
+        this.draftConnectionService.startConnection(
+            {
+                nodeId,
+                connectorId,
+                connectorType: DfConnectionPoint.Output,
+                position: this.position,
+                connectionLabel: this.connectionLabel,
+            },
+            event,
+        );
     }
 
     protected onActivate(event: Event): void {

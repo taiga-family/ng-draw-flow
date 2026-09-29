@@ -170,25 +170,12 @@ function processNeighbors({
 }
 
 /**
- * Generates a hash for an array of connections
+ * Generates a collision-free key for the directed node topology.
  * @param connections Array of connections
- * @returns String hash representing the current state of connections
+ * @returns Serialized endpoint tuples; connector metadata cannot affect cycles.
  */
-export function generateConnectionsHash(connections: DfDataConnection[]): string {
-    let hash = 0;
-
-    for (const conn of connections) {
-        // Create a string representation of the connection
-        const connStr = `${conn.source.nodeId}:${conn.source.connectorId}->${conn.target.nodeId}:${conn.target.connectorId}`;
-
-        // Calculate the string hash (simple hash function)
-        for (let i = 0; i < connStr.length; i++) {
-            const char = connStr.charCodeAt(i);
-
-            hash = (hash << 5) - hash + char;
-            hash &= hash; // Convert to 32-bit integer
-        }
-    }
-
-    return hash.toString(36); // Convert to base-36 string for compactness
+export function generateConnectionsKey(connections: DfDataConnection[]): string {
+    return JSON.stringify(
+        connections.map(({source, target}) => [source.nodeId, target.nodeId]),
+    );
 }

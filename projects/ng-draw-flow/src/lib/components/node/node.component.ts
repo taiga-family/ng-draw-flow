@@ -24,6 +24,7 @@ import {
     DragDropDirective,
     SelectableElementDirective,
 } from '../../directives';
+import {isEditorKeyboardEvent} from '../../helpers/editor-keyboard-event';
 import {DRAW_FLOW_OPTIONS} from '../../ng-draw-flow.configs';
 import {
     type DfDataInitialNode,
@@ -63,6 +64,7 @@ import {NodeInteractionController} from './node-interaction.controller';
 })
 export class NodeComponent implements AfterViewInit, OnDestroy {
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly drawFlowElement = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly destroyRef = inject(DestroyRef);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
@@ -172,7 +174,9 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     }
 
     protected handleKeyboardEvent(event: KeyboardEvent): void {
-        this.nodeInteraction.handleKeyboardEvent(event);
+        if (isEditorKeyboardEvent(event, this.drawFlowElement)) {
+            this.nodeInteraction.handleKeyboardEvent(event);
+        }
     }
 
     protected createNodeContentComponent(): void {

@@ -11,7 +11,7 @@ import {
     viewChild,
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {animationFrameScheduler} from 'rxjs';
+import {animationFrameScheduler, type Subscription} from 'rxjs';
 
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
 import {PanZoomControllerService} from './pan-zoom.controller.service';
@@ -61,12 +61,13 @@ export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
     private readonly platformId = inject(PLATFORM_ID);
     private readonly panZoomService = inject(PanZoomService);
     private readonly panZoomController = inject(PanZoomControllerService);
-    private renderScheduled = false;
+    private scheduledRender?: Subscription;
     private backgroundCanvas: HTMLCanvasElement | null = null;
     private backgroundContext: CanvasRenderingContext2D | null = null;
     private backgroundPatterns: DfPanZoomBackgroundPatterns | null = null;
 
     constructor() {
+        this.destroyRef.onDestroy(() => this.scheduledRender?.unsubscribe());
         this.watchRenderRequests();
 
         effect(() => {
@@ -108,18 +109,19 @@ export class PanZoomBackgroundCanvasComponent implements AfterViewInit {
     }
 
     private requestDraw(): void {
-        if (this.renderScheduled) {
+        if (this.scheduledRender && !this.scheduledRender.closed) {
             return;
         }
 
-        this.renderScheduled = true;
-        animationFrameScheduler.schedule(() => {
-            this.renderScheduled = false;
+        this.scheduledRender = animationFrameScheduler.schedule(() => {
+            this.scheduledRender = undefined;
             this.drawBackground();
         });
     }
 
     private drawNow(): void {
+        this.scheduledRender?.unsubscribe();
+        this.scheduledRender = undefined;
         this.drawBackground();
     }
 

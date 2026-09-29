@@ -3,6 +3,11 @@ export default {
     preset: '../../jest.preset.js',
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     coverageDirectory: '../../coverage/projects/layouts',
-    transform: {'^.+.(ts|mjs|js|html|svg)$': 'jest-preset-angular'},
+    transform: {
+        '^.+\\.(ts|mjs|js|html|svg)$': [
+            'jest-preset-angular',
+            {stringifyContentPathRegex: String.raw`\.(html|svg)$`},
+        ],
+    },
     transformIgnorePatterns: ['node_modules/(?!.*.mjs$|d3-hierarchy/)'],
 };
