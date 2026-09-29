@@ -1,0 +1,1 @@
+{"extends": "../demo/tsconfig.app.json", "files": ["main.ts", "../demo/src/typings.d.ts", "../demo/src/polyfills.ts"]}

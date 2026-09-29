@@ -43,6 +43,10 @@
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
         "stylelint:fix": "stylelint '**/*.{less,css}' --config package.json --fix",
         "test": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts",
+        "e2e:install": "playwright install chromium",
+        "e2e": "playwright test --config projects/demo-playwright/playwright.config.ts",
+        "e2e:ui": "npm run e2e -- --ui",
+        "e2e:perf": "npm run e2e -- --project=performance",
         "test:coverage": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts --coverage --runInBand",
         "typecheck:tests": "tsc --noEmit --incremental false -p projects/ng-draw-flow/tsconfig.spec.json && tsc --noEmit --incremental false -p projects/layouts/tsconfig.spec.json"
     },
@@ -107,6 +111,7 @@
         "@nx/js": "20.8.4",
         "@nx/node": "20.8.4",
         "@nx/workspace": "20.8.4",
+        "@playwright/test": "1.62.1",
         "@schematics/angular": "19.2.27",
         "@taiga-ui/addon-doc": "5.15.0",
         "@taiga-ui/addon-mobile": "5.15.0",
