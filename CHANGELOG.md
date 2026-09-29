@@ -1,3 +1,16 @@
+### [1.5.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.4.0...v1.5.0) (2026-09-29)
+
+### 🐞 Bug Fixes
+
+- **ng-draw-flow**: stabilize interactions and resource cleanup
+  [(40c625b)](https://github.com/taiga-family/ng-draw-flow/commit/40c625b724490fc9a552f4e9f898bc1c97f753bf)
+- **ng-draw-flow**: show node errors after editor touch
+  [(f3844ef)](https://github.com/taiga-family/ng-draw-flow/commit/f3844ef8a5a043cbb1afd34c401fd48efd3bc24a)
+- **all**: reduce graph traversal and tree layout work
+  [(2b0a10c)](https://github.com/taiga-family/ng-draw-flow/commit/2b0a10c195bffac1413f88ff6dfbf444ee76e460)
+- **ng-draw-flow**: remove the editor outline
+  [(e8dea26)](https://github.com/taiga-family/ng-draw-flow/commit/e8dea26311d7028ba388c5043e378476f513ccf5)
+
 ### [1.4.0](https://github.com/taiga-family/ng-draw-flow/compare/v1.3.0...v1.4.0) (2026-09-07)
 
 ### 🚀 Features
