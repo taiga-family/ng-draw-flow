@@ -100,6 +100,13 @@ function checkNodeForCycle(
             continue;
         }
 
+        // Another pending path may already have completed this node.
+        if (nodeStates.get(nodeId) !== 0) {
+            stack.pop();
+
+            continue;
+        }
+
         // Mark the node as being in the current path
         nodeStates.set(nodeId, 1);
         stack[stack.length - 1]!.processed = true;

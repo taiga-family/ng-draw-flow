@@ -37,7 +37,7 @@ export class D3TreeLayoutEngine {
     ): DfLayoutResult {
         const direction = this.options.direction ?? DfTreeLayoutDirection.LeftToRight;
 
-        if (!model.nodes.length) {
+        if (!model.nodes.length && !model.connections.length) {
             return {
                 model: {
                     ...model,
@@ -76,18 +76,15 @@ export class D3TreeLayoutEngine {
             );
         });
 
-        const depthOffsets = maxDepthSizes.map((_, depth) => {
-            let offset = 0;
+        const depthOffsets = [0];
+        const levelGap = this.options.levelGap ?? DEFAULT_LEVEL_GAP;
+        let depthOffset = 0;
 
-            for (let index = 1; index <= depth; index++) {
-                offset +=
-                    maxDepthSizes[index - 1]! / 2 +
-                    (this.options.levelGap ?? DEFAULT_LEVEL_GAP) +
-                    maxDepthSizes[index]! / 2;
-            }
-
-            return offset;
-        });
+        for (let depth = 1; depth < maxDepthSizes.length; depth++) {
+            depthOffset +=
+                maxDepthSizes[depth - 1]! / 2 + levelGap + maxDepthSizes[depth]! / 2;
+            depthOffsets.push(depthOffset);
+        }
 
         tree<DfAnyNode>()
             .nodeSize([1, 1])
@@ -213,10 +210,14 @@ export class D3TreeLayoutEngine {
 
             parentByChild.set(childId, parentId);
             sourceConnectorByChild.set(childId, connection.source.connectorId);
-            childrenByParent.set(parentId, [
-                ...(childrenByParent.get(parentId) ?? []),
-                child,
-            ]);
+
+            const children = childrenByParent.get(parentId);
+
+            if (children) {
+                children.push(child);
+            } else {
+                childrenByParent.set(parentId, [child]);
+            }
         });
 
         this.sortChildrenByOutputOrder(
@@ -254,7 +255,10 @@ export class D3TreeLayoutEngine {
             }
 
             visited.add(current.id);
-            pending.push(...(childrenByParent.get(current.id) ?? []));
+
+            for (const child of childrenByParent.get(current.id) ?? []) {
+                pending.push(child);
+            }
         }
 
         if (visited.size !== model.nodes.length) {
