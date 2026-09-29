@@ -61,7 +61,8 @@
         "test": {
             "executor": "@nx/jest:jest",
             "options": {
-                "jestConfig": "projects/ng-draw-flow/jest.config.ts"
+                "jestConfig": "projects/ng-draw-flow/jest.config.ts",
+                "passWithNoTests": false
             },
             "outputs": ["{workspaceRoot}/coverage/projects/ng-draw-flow"]
         }

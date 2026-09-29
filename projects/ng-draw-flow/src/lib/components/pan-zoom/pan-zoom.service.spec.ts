@@ -18,6 +18,7 @@ describe('PanZoomService', () => {
         wheelSpeed: 1,
         wheelStep: 0.008,
         pinchZoomSpeed: 1,
+        backgroundCanvas: {visible: true},
     };
 
     const setup = (overrides?: Partial<DfPanZoomOptions>): PanZoomService => {

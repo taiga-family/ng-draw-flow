@@ -45,7 +45,8 @@
             "executor": "@nx/jest:jest",
             "outputs": ["{workspaceRoot}/coverage/projects/layouts"],
             "options": {
-                "jestConfig": "projects/layouts/jest.config.ts"
+                "jestConfig": "projects/layouts/jest.config.ts",
+                "passWithNoTests": false
             }
         }
     }

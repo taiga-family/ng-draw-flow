@@ -42,7 +42,9 @@
         "start": "nx serve demo",
         "stylelint": "stylelint '**/*.{less,css}' --config package.json",
         "stylelint:fix": "stylelint '**/*.{less,css}' --config package.json --fix",
-        "test": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts"
+        "test": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts",
+        "test:coverage": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts --coverage --runInBand",
+        "typecheck:tests": "tsc --noEmit --incremental false -p projects/ng-draw-flow/tsconfig.spec.json && tsc --noEmit --incremental false -p projects/layouts/tsconfig.spec.json"
     },
     "commitlint": {
         "extends": [

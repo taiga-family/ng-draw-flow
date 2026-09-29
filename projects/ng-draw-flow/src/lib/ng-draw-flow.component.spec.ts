@@ -97,12 +97,21 @@ describe('NgDrawFlowComponent', () => {
 
     afterEach(() => {
         TestBed.resetTestingModule();
+        jest.restoreAllMocks();
     });
 
     it('frames only on the first non-empty external model write', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest.spyOn(component, 'scheduleViewportFraming');
+        const scheduleViewportFraming = jest
+            .spyOn(globalThis, 'requestAnimationFrame')
+            .mockReturnValue(1);
+
+        fixture.debugElement.injector.get(DF_PAN_ZOOM_OPTIONS).leftPosition = 0;
+        fixture.debugElement.triggerEventHandler('waResizeObserver', [
+            {contentRect: {width: 1000, height: 800}},
+        ]);
+        scheduleViewportFraming.mockClear();
         const model = {
             nodes: [
                 {
@@ -131,7 +140,15 @@ describe('NgDrawFlowComponent', () => {
     it('allows framing again after the external model becomes empty', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest.spyOn(component, 'scheduleViewportFraming');
+        const scheduleViewportFraming = jest
+            .spyOn(globalThis, 'requestAnimationFrame')
+            .mockReturnValue(1);
+
+        fixture.debugElement.injector.get(DF_PAN_ZOOM_OPTIONS).leftPosition = 0;
+        fixture.debugElement.triggerEventHandler('waResizeObserver', [
+            {contentRect: {width: 1000, height: 800}},
+        ]);
+        scheduleViewportFraming.mockClear();
 
         component.writeValue({
             nodes: [
