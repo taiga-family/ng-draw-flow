@@ -15,7 +15,7 @@
         </div>
         <div>
             <strong>Application-owned data</strong>
-            <span>Persist, validate and synchronize plain node and connection objects.</span>
+            <span>Validate and synchronize node and connection objects.</span>
         </div>
     </div>
 
@@ -121,13 +121,17 @@
             <code>form.disable()</code>
             when the graph should remain visible but non-interactive.
         </p>
+        <p>
+            Give the editor an explicit height, as in this example, or place it inside a parent with a definite height.
+            Its default height fills the container.
+        </p>
     </section>
 
     <section>
         <h3>3. Working Result</h3>
         <p>
-            The same model can branch, merge and use multiple connectors. Positions are world coordinates for the
-            top-left corner of each node wrapper.
+            The same model can branch, merge and use multiple connectors. Positions are node anchors in graph
+            coordinates, independent of viewport pan and zoom.
         </p>
         <first-example />
     </section>

@@ -19,6 +19,11 @@ import {YourNodeComponent} from './your-node.component';
   template: `
     <ng-draw-flow [formControl]="form" />
   `,
+  styles: `
+    ng-draw-flow {
+      block-size: 32rem;
+    }
+  `,
   providers: [
     provideNgDrawFlowConfigs({
       nodes: {task: YourNodeComponent},

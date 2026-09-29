@@ -4,7 +4,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@ng-draw-flow/core.svg)](https://npmjs.com/package/@ng-draw-flow/core)
 [![codecov](https://codecov.io/gh/taiga-family/ng-draw-flow/branch/main/graphs/badge.svg)](https://app.codecov.io/gh/taiga-family/ng-draw-flow/tree/main/projects)
-[![All packages CI](https://github.com/taiga-family/taiga-ui/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/taiga-family/ng-draw-flow/actions/workflows/build.yml)
+[![All packages CI](https://github.com/taiga-family/ng-draw-flow/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/taiga-family/ng-draw-flow/actions/workflows/ci.yml)
 [![Deploy](https://github.com/taiga-family/ng-draw-flow/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/taiga-family/ng-draw-flow/actions/workflows/deploy.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -49,7 +49,7 @@ npm install @ng-draw-flow/core
 ## Quick Start
 
 Create a standalone component for a node. The node decides where its connectors are rendered and what application data
-is displayed.
+is displayed. Connector ids must be unique across the complete graph; include the node id in each connector id.
 
 ```ts
 import {ChangeDetectionStrategy, Component} from '@angular/core';
@@ -127,6 +127,11 @@ import {BasicNodeComponent} from './basic-node.component';
   template: `
     <ng-draw-flow [formControl]="graph" />
   `,
+  styles: `
+    ng-draw-flow {
+      block-size: 32rem;
+    }
+  `,
   providers: [
     provideNgDrawFlowConfigs({
       nodes: {basic: BasicNodeComponent},
@@ -172,7 +177,12 @@ export class EditorComponent {
 ```
 
 Changes made through the editor are written back to the control. Applications can also replace the complete model with
-`graph.setValue(nextModel)`.
+`graph.setValue(nextModel)`. Give the editor an explicit height, as above, or place it inside a parent with a definite
+height; its default height fills its container.
+
+`DfDataModel` is a runtime value. Custom data and Polymorpheus labels can contain Angular components, templates or other
+values that JSON cannot preserve. For persistence, save application-defined serializable data and restore runtime
+content through your component or label registry when loading it.
 
 ## Core Scenarios
 

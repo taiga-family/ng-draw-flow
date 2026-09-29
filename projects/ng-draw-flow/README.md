@@ -125,6 +125,11 @@ import {TaskNodeComponent} from './task-node.component';
   template: `
     <ng-draw-flow [formControl]="graph" />
   `,
+  styles: `
+    ng-draw-flow {
+      block-size: 32rem;
+    }
+  `,
   providers: [
     provideNgDrawFlowConfigs({
       nodes: {task: TaskNodeComponent},
@@ -174,7 +179,12 @@ export class TaskEditorComponent {
 ```
 
 User interactions update the form control. To apply an application-side graph change, create the next immutable model
-and call `graph.setValue(nextModel)`.
+and call `graph.setValue(nextModel)`. Set an explicit editor height, as above, or give its parent a definite height; the
+editor fills the available container.
+
+The graph is a runtime value: custom data and Polymorpheus labels may contain component references, templates and other
+values that are not JSON-serializable. Persist application-defined serializable fields, then restore runtime node and
+label content on load. Do not JSON-clone the live model.
 
 ## Configuration
 
@@ -242,6 +252,10 @@ including dynamic tree layouts.
 
 See the [connector documentation](https://taiga-family.github.io/ng-draw-flow/documentation/connectors) for regular and
 action-output examples.
+
+Delete and Backspace remove the selected graph element while focus is inside that editor. Input, textarea, select and
+editable content retain their normal keyboard behavior. A disabled editor blocks user edits while application-side model
+updates remain available.
 
 ## Dynamic Layouts
 

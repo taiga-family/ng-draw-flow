@@ -7,7 +7,7 @@
     <div class="docs-summary">
         <div>
             <strong>Model</strong>
-            <span>The complete serializable graph value.</span>
+            <span>The complete application-owned runtime graph value.</span>
         </div>
         <div>
             <strong>Node</strong>
@@ -35,6 +35,11 @@
             operate on one application-owned value.
         </p>
         <p>
+            The runtime model is not guaranteed to be JSON-serializable: custom data and Polymorpheus labels can contain
+            Angular component references, templates or other application objects. Persist serializable fields in your
+            own storage format, then restore runtime content through your application's component or label registry.
+        </p>
+        <p>
             A
             <code>DfDataNode</code>
             stores an explicit
@@ -52,8 +57,8 @@
         <p>
             A node renders a registered Angular component that extends
             <code>DrawFlowBaseNode</code>
-            . Its X and Y values identify the top-left corner of the visual wrapper in world coordinates. The workspace
-            grows from rendered node bounds instead of using a fixed board size.
+            . Its X and Y values identify the node anchor in graph coordinates. Pan and zoom change the viewport without
+            changing these values. The workspace grows from rendered node bounds instead of using a fixed board size.
         </p>
         <p>
             <code>startNode</code>
@@ -69,7 +74,8 @@
             <code>Backspace</code>
             to remove it when
             <code>nodesDeletable</code>
-            is enabled.
+            is enabled and focus is inside the editor. Typing in an input, textarea, select or editable content does not
+            delete the selected graph element.
         </p>
     </section>
 
@@ -113,7 +119,8 @@
             <code>Backspace</code>
             to remove it when
             <code>connectionsDeletable</code>
-            is enabled.
+            is enabled and focus is inside the editor. Editable node or label content keeps its normal keyboard
+            behavior.
         </p>
         <a
             routerLink="/documentation/connections"

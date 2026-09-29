@@ -1,7 +1,7 @@
 @if (!startNode) {
     <df-input
         class="input"
-        [connectorData]="{nodeId, connectorId: 'input-1', single: false}"
+        [connectorData]="{nodeId, connectorId: nodeId + '-input-1', single: false}"
     />
 }
 
@@ -10,6 +10,6 @@
 @if (!endNode) {
     <df-output
         class="output"
-        [connectorData]="{nodeId, connectorId: 'output-1', single: false}"
+        [connectorData]="{nodeId, connectorId: nodeId + '-output-1', single: false}"
     />
 }

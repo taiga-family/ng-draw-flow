@@ -231,13 +231,16 @@ When one parent has children connected through multiple outputs, assign every us
 
 ## Strict-tree Constraints
 
-The current package supports strict trees only. A valid model must have:
+The current package supports strict trees only. A non-empty valid model must have:
 
 - exactly one root with no incoming connection;
 - no cycles;
 - at most one parent for every non-root node;
 - no disconnected nodes;
 - connections that reference existing nodes.
+
+An empty model is supported when both `nodes` and `connections` are empty. Connections without their referenced nodes
+are rejected, including when the complete node collection is empty.
 
 Invalid models are exposed through `DfAutoLayoutService.error` as `DfTreeLayoutError`. General DAG layouts and custom
 layout engines are not supported.
