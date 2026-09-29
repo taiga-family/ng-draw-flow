@@ -47,6 +47,8 @@
         "e2e": "playwright test --config projects/demo-playwright/playwright.config.ts",
         "e2e:ui": "npm run e2e -- --ui",
         "e2e:perf": "npm run e2e -- --project=performance",
+        "benchmark": "node tools/performance/benchmark.mjs",
+        "benchmark:bundles": "node tools/performance/bundles.mjs",
         "test:coverage": "nx run-many --target=test --projects=ng-draw-flow,ng-draw-flow-layouts --coverage --runInBand",
         "typecheck:tests": "tsc --noEmit --incremental false -p projects/ng-draw-flow/tsconfig.spec.json && tsc --noEmit --incremental false -p projects/layouts/tsconfig.spec.json"
     },
