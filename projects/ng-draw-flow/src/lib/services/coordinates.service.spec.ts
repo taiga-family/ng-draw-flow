@@ -37,4 +37,21 @@ describe('CoordinatesService', () => {
             position: DfConnectorPosition.Bottom,
         });
     });
+
+    it('invalidates and releases removed points while allowing the id to be reused', () => {
+        service.addConnectionPoint('connector', {x: 1, y: 2}, DfConnectorPosition.Left);
+        const removed = service.getConnectionPointSignal('connector');
+
+        service.removeConnectionPoint('connector');
+        expect(removed()).toBeNull();
+        const replacement = service.getConnectionPointSignal('connector');
+
+        expect(replacement).not.toBe(removed);
+        service.addConnectionPoint('connector', {x: 3, y: 4}, DfConnectorPosition.Right);
+        expect(replacement()).toEqual({
+            point: {x: 3, y: 4},
+            position: DfConnectorPosition.Right,
+        });
+        expect(removed()).toBeNull();
+    });
 });

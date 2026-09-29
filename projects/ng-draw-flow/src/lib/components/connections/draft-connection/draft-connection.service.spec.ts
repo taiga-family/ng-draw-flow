@@ -10,6 +10,7 @@ import {
     DfConnectorPosition,
     type DfDataConnector,
 } from '../../../ng-draw-flow.interfaces';
+import {DRAW_FLOW_ROOT_ELEMENT} from '../../../ng-draw-flow.token';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {DfInteractionStateService} from '../../../services/interaction-state.service';
 import {PanZoomService} from '../../pan-zoom/pan-zoom.service';
@@ -19,13 +20,41 @@ describe('DraftConnectionService', () => {
     let service: DraftConnectionService;
     let panZoomService: PanZoomService;
     let interactionState: DfInteractionStateService;
+    let root: HTMLElement;
+
+    const source: DfDataConnector = {
+        nodeId: 'source',
+        connectorId: 'source-output',
+        connectorType: DfConnectionPoint.Output,
+    };
+
+    function inputElement(): HTMLElement {
+        const element = document.createElement('df-input');
+
+        element.dataset.nodeId = 'target';
+        element.dataset.connectorId = 'target-input';
+        element.dataset.connectorType = DfConnectionPoint.Input;
+
+        return element;
+    }
+
+    function pointer(type: string, pointerId: number, clientX = 0): PointerEvent {
+        const event = new MouseEvent(type, {bubbles: true, clientX});
+
+        Object.defineProperty(event, 'pointerId', {value: pointerId});
+
+        return event as PointerEvent;
+    }
 
     beforeEach(() => {
+        root = document.createElement('ng-draw-flow');
+        document.body.append(root);
         TestBed.configureTestingModule({
             providers: [
                 DraftConnectionService,
                 DfInteractionStateService,
                 PanZoomService,
+                {provide: DRAW_FLOW_ROOT_ELEMENT, useValue: root},
                 {provide: DRAW_FLOW_OPTIONS, useValue: DRAW_FLOW_DEFAULT_OPTIONS},
                 {
                     provide: CoordinatesService,
@@ -43,7 +72,85 @@ describe('DraftConnectionService', () => {
 
     afterEach(() => {
         service.ngOnDestroy();
+        root.remove();
     });
+
+    it('rejects a connector belonging to another editor', () => {
+        const target = inputElement();
+        const otherEditor = document.createElement('ng-draw-flow');
+
+        root.append(otherEditor);
+        otherEditor.append(target);
+        service.startConnection(source);
+        target.dispatchEvent(new MouseEvent('pointerup', {bubbles: true}));
+
+        expect(service.lastConnectionCreated()).toBeNull();
+        expect(service.isConnectionCreating()).toBe(false);
+    });
+
+    it('resolves nested connector content within its owning editor', () => {
+        const target = inputElement();
+        const content = document.createElement('span');
+
+        target.append(content);
+        root.append(target);
+        service.startConnection(source);
+        content.dispatchEvent(new MouseEvent('pointerup', {bubbles: true}));
+
+        expect(service.lastConnectionCreated()?.target.connectorId).toBe('target-input');
+    });
+
+    it.each(['df-disabled', 'df-not-creatable'])(
+        'rejects a %s target despite a synthetic drop',
+        (className) => {
+            const target = inputElement();
+
+            target.classList.add(className);
+            root.append(target);
+            service.startConnection(source);
+            target.dispatchEvent(new MouseEvent('pointerup', {bubbles: true}));
+
+            expect(service.lastConnectionCreated()).toBeNull();
+        },
+    );
+
+    it('tracks the starting pointer and its first movement without accepting a second pointer', fakeAsync(() => {
+        const target = inputElement();
+        const created = jest.fn();
+
+        root.append(target);
+        service.connectionCreated$.subscribe(created);
+        service.startConnection(source, pointer('pointerdown', 1, 100));
+        service.startConnection(
+            {...source, nodeId: 'second-source'},
+            pointer('pointerdown', 2, 500),
+        );
+        document.dispatchEvent(pointer('pointermove', 2, 900));
+        document.dispatchEvent(pointer('pointermove', 1, 110));
+        tick(16);
+
+        expect(service.target().point).toEqual({x: 10, y: 0});
+        target.dispatchEvent(pointer('pointerup', 2));
+        document.dispatchEvent(pointer('pointercancel', 2));
+        expect(service.isConnectionCreating()).toBe(true);
+        expect(created).not.toHaveBeenCalled();
+        target.dispatchEvent(pointer('pointerup', 1));
+
+        expect(created).toHaveBeenCalledTimes(1);
+        expect(service.lastConnectionCreated()?.source).toEqual(source);
+        expect(service.isConnectionCreating()).toBe(false);
+    }));
+
+    it('discards queued movement when the starting pointer is cancelled', fakeAsync(() => {
+        service.startConnection(source, pointer('pointerdown', 1));
+        document.dispatchEvent(pointer('pointermove', 1, 50));
+        document.dispatchEvent(pointer('pointercancel', 1));
+        tick(16);
+
+        expect(service.isConnectionCreating()).toBe(false);
+        expect(service.target().point).toEqual({x: 0, y: 0});
+        expect(service.lastConnectionCreated()).toBeNull();
+    }));
 
     it('updates draft target with pointer delta normalized by zoom', () => {
         panZoomService.setCamera({x: 0, y: 0, zoom: 2, offsetX: 0, offsetY: 0});
@@ -74,6 +181,7 @@ describe('DraftConnectionService', () => {
         targetElement.dataset.nodeId = 'target';
         targetElement.dataset.connectorId = 'target-input';
         targetElement.dataset.connectorType = DfConnectionPoint.Input;
+        root.append(targetElement);
         service.connectionCreated$.subscribe(createdSpy);
 
         (service as any).onDragStart(sourceConnector);
@@ -110,6 +218,7 @@ describe('DraftConnectionService', () => {
             targetElement.dataset.nodeId = 'target';
             targetElement.dataset.connectorId = 'target-input';
             targetElement.dataset.connectorType = DfConnectionPoint.Input;
+            root.append(targetElement);
             service.connectionCreated$.subscribe(createdSpy);
 
             const draft = service as unknown as {
@@ -144,7 +253,7 @@ describe('DraftConnectionService', () => {
             connectorType: DfConnectionPoint.Output,
         };
 
-        service.connection$.next(sourceConnector);
+        service.startConnection(sourceConnector);
         document.dispatchEvent(new MouseEvent('pointermove', {clientX: 10}));
         document.dispatchEvent(new MouseEvent('pointermove', {clientX: 30}));
 
@@ -157,7 +266,7 @@ describe('DraftConnectionService', () => {
 
         interactionState.setDisabled(false);
         TestBed.flushEffects();
-        service.connection$.next(sourceConnector);
+        service.startConnection(sourceConnector);
         document.dispatchEvent(new MouseEvent('pointermove', {clientX: 100}));
         tick(16);
 
@@ -171,7 +280,7 @@ describe('DraftConnectionService', () => {
     }));
 
     it('cancels a draft on pointercancel and discards its scheduled frame', fakeAsync(() => {
-        service.connection$.next({
+        service.startConnection({
             nodeId: 'source',
             connectorId: 'source-output',
             connectorType: DfConnectionPoint.Output,
@@ -194,11 +303,11 @@ describe('DraftConnectionService', () => {
             connectorType: DfConnectionPoint.Output,
         };
 
-        service.connection$.next(sourceConnector);
+        service.startConnection(sourceConnector);
         document.dispatchEvent(new MouseEvent('pointermove', {clientX: 10}));
         document.dispatchEvent(new MouseEvent('pointermove', {clientX: 30}));
         service.ngOnDestroy();
-        service.connection$.next(sourceConnector);
+        service.startConnection(sourceConnector);
         document.dispatchEvent(new MouseEvent('pointermove', {clientX: 50}));
         tick(16);
 
@@ -215,11 +324,11 @@ describe('DraftConnectionService', () => {
         targetElement.dataset.nodeId = 'target';
         targetElement.dataset.connectorId = 'target-input';
         targetElement.dataset.connectorType = DfConnectionPoint.Input;
-        document.body.appendChild(targetElement);
+        root.appendChild(targetElement);
         service.connectionCreated$.subscribe(createdSpy);
 
         try {
-            service.connection$.next({
+            service.startConnection({
                 nodeId: 'old-source',
                 connectorId: 'output',
                 connectorType: DfConnectionPoint.Output,
@@ -234,7 +343,7 @@ describe('DraftConnectionService', () => {
             expect(service.isConnectionCreating()).toBe(false);
             expect(service.target().point).toEqual({x: 0, y: 0});
 
-            service.connection$.next({
+            service.startConnection({
                 nodeId: 'new-source',
                 connectorId: 'output',
                 connectorType: DfConnectionPoint.Output,

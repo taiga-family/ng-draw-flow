@@ -16,6 +16,7 @@ import {
     merge,
     observeOn,
     pairwise,
+    startWith,
     Subject,
     switchMap,
     takeUntil,
@@ -33,6 +34,7 @@ import {
     type DfDataConnector,
     type DfOptions,
 } from '../../../ng-draw-flow.interfaces';
+import {DRAW_FLOW_ROOT_ELEMENT} from '../../../ng-draw-flow.token';
 import {CoordinatesService} from '../../../services/coordinates.service';
 import {DfInteractionStateService} from '../../../services/interaction-state.service';
 import {PanZoomService} from '../../pan-zoom/pan-zoom.service';
@@ -41,6 +43,7 @@ import {getConnectorDataset} from '../utils/get-coonector-dataset.util';
 @Injectable()
 export class DraftConnectionService implements OnDestroy {
     private readonly document = inject(DOCUMENT);
+    private readonly root = inject<HTMLElement>(DRAW_FLOW_ROOT_ELEMENT);
     private readonly panZoomService = inject(PanZoomService);
     private readonly coordinatesService = inject(CoordinatesService);
     private readonly options = inject<DfOptions>(DRAW_FLOW_OPTIONS);
@@ -52,6 +55,11 @@ export class DraftConnectionService implements OnDestroy {
     private readonly lastConnectionCreatedSignal = signal<DfDataConnection | null>(null);
     private sourceConnector!: DfDataConnector;
     private readonly connectionCancelled$ = new Subject<void>();
+    private readonly connectionStart$ = new Subject<{
+        readonly connector: DfDataConnector;
+        readonly event?: PointerEvent;
+    }>();
+
     protected readonly destroy$ = new Subject<void>();
 
     public source = signal<DfConnectorData>({
@@ -70,8 +78,6 @@ export class DraftConnectionService implements OnDestroy {
     public readonly lastConnectionCreated = this.lastConnectionCreatedSignal.asReadonly();
 
     public readonly connectionCreated$ = new Subject<DfDataConnection>();
-    public readonly connection$ = new Subject<DfDataConnector>();
-
     constructor() {
         this.connectionSubscription();
 
@@ -91,15 +97,26 @@ export class DraftConnectionService implements OnDestroy {
         this.destroy$.next();
         this.destroy$.complete();
         this.connectionCancelled$.complete();
+        this.connectionStart$.complete();
+    }
+
+    public startConnection(connector: DfDataConnector, event?: PointerEvent): void {
+        if (this.isConnectionCreating()) {
+            return;
+        }
+
+        this.connectionStart$.next({connector, event});
     }
 
     private connectionSubscription(): void {
-        this.connection$
+        this.connectionStart$
             .pipe(
                 filter(() => this.connectionsCreatable()),
-                tap((connectorData) => this.onDragStart(connectorData)),
-                switchMap(() =>
+                tap(({connector}) => this.onDragStart(connector)),
+                switchMap(({event: startEvent}) =>
                     fromEvent<PointerEvent>(this.document, 'pointermove').pipe(
+                        filter((event) => this.matchesPointer(event, startEvent)),
+                        startWith(...(startEvent ? [startEvent] : [])),
                         observeOn(animationFrameScheduler),
                         pairwise(),
                         map(([previousEvent, currentEvent]) =>
@@ -109,12 +126,20 @@ export class DraftConnectionService implements OnDestroy {
                             merge(
                                 this.connectionCancelled$,
                                 fromEvent<PointerEvent>(this.document, 'pointerup').pipe(
+                                    filter((event) =>
+                                        this.matchesPointer(event, startEvent),
+                                    ),
                                     tap((event) => this.onDragEnd(event)),
                                 ),
                                 fromEvent<PointerEvent>(
                                     this.document,
                                     'pointercancel',
-                                ).pipe(tap(() => this.cancelConnection())),
+                                ).pipe(
+                                    filter((event) =>
+                                        this.matchesPointer(event, startEvent),
+                                    ),
+                                    tap(() => this.cancelConnection()),
+                                ),
                             ),
                         ),
                     ),
@@ -178,11 +203,19 @@ export class DraftConnectionService implements OnDestroy {
     }
 
     private onDragEnd(event: PointerEvent): void {
-        const target = event.target;
-        const targetConnector =
-            target instanceof HTMLElement ? getConnectorDataset(target) : null;
+        const target =
+            event.target instanceof Element
+                ? event.target.closest<HTMLElement>('[data-connector-type]')
+                : null;
+        const targetConnector = target ? getConnectorDataset(target) : null;
 
         if (
+            this.isConnectionCreating() &&
+            target &&
+            this.root.contains(target) &&
+            target.closest('ng-draw-flow') === this.root &&
+            !target.classList.contains('df-disabled') &&
+            !target.classList.contains('df-not-creatable') &&
             targetConnector?.connectorType === DfConnectionPoint.Input &&
             this.connectionsCreatable()
         ) {
@@ -197,6 +230,13 @@ export class DraftConnectionService implements OnDestroy {
         }
 
         this.cancelConnection();
+    }
+
+    private matchesPointer(event: PointerEvent, startEvent?: PointerEvent): boolean {
+        return (
+            startEvent?.pointerId === undefined ||
+            event.pointerId === startEvent.pointerId
+        );
     }
 
     private cancelConnection(): void {

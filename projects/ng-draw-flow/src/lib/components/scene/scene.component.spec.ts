@@ -170,7 +170,7 @@ describe('SceneComponent', () => {
             connections: [connection],
         };
         const finalModel: DfDataModel = {
-            nodes: [initial.nodes[1]],
+            nodes: [initial.nodes[1]!],
             connections: [],
         };
 

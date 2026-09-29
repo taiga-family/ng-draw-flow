@@ -53,6 +53,14 @@
                     "outputHashing": "all",
                     "sourceMap": false,
                     "vendorChunk": false
+                },
+                "e2e": {
+                    "index": "projects/demo-playwright/index.html",
+                    "main": "projects/demo-playwright/main.ts",
+                    "tsConfig": "projects/demo-playwright/tsconfig.app.json",
+                    "outputPath": "dist/demo-e2e",
+                    "styles": [],
+                    "assets": []
                 }
             },
             "defaultConfiguration": "production",

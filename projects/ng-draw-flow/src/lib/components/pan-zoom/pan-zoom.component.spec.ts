@@ -1,5 +1,5 @@
 import {type ComponentFixture, TestBed} from '@angular/core/testing';
-import {animationFrameScheduler, Subscription} from 'rxjs';
+import {animationFrameScheduler, type SchedulerAction, Subscription} from 'rxjs';
 
 import {type DfDragDrop, DfDragDropStage} from '../../directives/drag-drop';
 import {DRAW_FLOW_ROOT_ELEMENT} from '../../ng-draw-flow.token';
@@ -42,11 +42,16 @@ describe('PanZoomComponent', () => {
             .spyOn(animationFrameScheduler, 'schedule')
             .mockImplementation(
                 (
-                    work: (this: Subscription, state?: unknown) => void,
+                    work: (this: SchedulerAction<unknown>, state?: unknown) => void,
                     _delay?: number,
                     state?: unknown,
                 ): Subscription => {
-                    const subscription = new Subscription();
+                    const subscription: SchedulerAction<unknown> = Object.assign(
+                        new Subscription(),
+                        {
+                            schedule: () => subscription,
+                        },
+                    );
 
                     scheduledAnimationFrameCallbacks.push(() => {
                         if (!subscription.closed) {

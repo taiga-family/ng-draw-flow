@@ -1,0 +1,39 @@
+name: Performance metrics
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+      - uses: taiga-family/ci/actions/setup/variables@e9c5cd341c28d9aeb357b757df41cddcbb674b2d # v1.222.0
+      - uses: taiga-family/ci/actions/setup/node@e9c5cd341c28d9aeb357b757df41cddcbb674b2d # v1.222.0
+      - name: Check benchmark scripts
+        run: |
+          node --check tools/performance/benchmark.mjs
+          node --check tools/performance/bundles.mjs
+      - name: Record algorithm metrics
+        run: npm run benchmark
+      - name: Build published library entries
+        run: npx nx run-many --target=build --projects=ng-draw-flow,ng-draw-flow-layouts --configuration=production
+      - name: Check package boundaries and record bundle metrics
+        run: npm run benchmark:bundles
+      - name: Archive performance reports
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: performance-${{ github.run_id }}
+          path: coverage/performance
+          retention-days: 30
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true

@@ -3,7 +3,7 @@ const {resolve} = require('node:path');
 
 module.exports = {
     ...nxPreset,
-    coverageReporters: ['lcov', 'clover'],
+    coverageReporters: ['lcov', 'clover', 'json-summary', 'text-summary'],
     transform: {
         ...nxPreset.transform,
         '^.+\\.(ts|js|html)$': [

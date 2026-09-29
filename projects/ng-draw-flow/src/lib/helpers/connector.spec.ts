@@ -15,6 +15,29 @@ describe('connector helpers', () => {
             connectorId: '1',
         });
 
-        expect(hash).toBe('nodeId:a,connectorType:input,connectorId:1');
+        expect(hash).toBe('["a","input","1"]');
+    });
+
+    it('distinguishes identifiers containing key delimiters', () => {
+        const first = createConnectorHash({
+            nodeId: 'a',
+            connectorType: DfConnectionPoint.Input,
+            connectorId: 'b,connectorType:input,connectorId:c',
+        });
+        const second = createConnectorHash({
+            nodeId: 'a,connectorType:input,connectorId:b',
+            connectorType: DfConnectionPoint.Input,
+            connectorId: 'c',
+        });
+
+        expect(first).not.toBe(second);
+    });
+
+    it('distinguishes encoded-looking identifiers from literal delimiters', () => {
+        const connector = {nodeId: 'node', connectorType: DfConnectionPoint.Output};
+
+        expect(createConnectorHash({...connector, connectorId: ','})).not.toBe(
+            createConnectorHash({...connector, connectorId: '%2C'}),
+        );
     });
 });

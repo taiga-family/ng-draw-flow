@@ -27,6 +27,6 @@ export default [
         },
     },
     {
-        ignores: ['**/*.html', '**/*.js'],
+        ignores: ['.local/**', '**/*.html', '**/*.js', 'tools/**/*.mjs'],
     },
 ];

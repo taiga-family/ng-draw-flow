@@ -2,6 +2,7 @@
     @if ($rootReady()) {
         <df-scene
             [formControl]="form"
+            [touched]="isTouched()"
             (connectionCreated)="onConnectionCreated($event)"
             (connectionDeleted)="onConnectionDeleted($event)"
             (connectionSelected)="connectionSelected.emit($event)"

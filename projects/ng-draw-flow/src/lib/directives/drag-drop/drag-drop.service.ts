@@ -44,9 +44,9 @@ export class DragDropService {
     ).pipe(share());
 
     /** Shared `pointerup` stream on the whole document (ref-counted). */
-    private readonly pointerUp$ = fromEvent<PointerEvent>(
-        this.document,
-        'pointerup',
+    private readonly pointerUp$ = merge(
+        fromEvent<PointerEvent>(this.document, 'pointerup'),
+        fromEvent<PointerEvent>(this.document, 'pointercancel'),
     ).pipe(share());
 
     /**
@@ -81,7 +81,7 @@ export class DragDropService {
                         sourceElement: el,
                         distance: {deltaX: 0, deltaY: 0},
                     })),
-                    shareReplay({bufferSize: 1, refCount: false}),
+                    shareReplay({bufferSize: 1, refCount: true}),
                 );
 
                 const pointerMoveStream$ = this.pointerMove$.pipe(

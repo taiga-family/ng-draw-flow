@@ -1,9 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    type OnInit,
-    ViewEncapsulation,
-} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {
     DfConnectionPoint,
@@ -35,19 +30,13 @@ const COLUMNS_COUNT = 23;
         }),
     ],
 })
-export default class StressTestComponent implements OnInit {
+export default class StressTestComponent {
     public data: DfDataModel = {
         nodes: this.createNodesMap(ROWS_COUNT, COLUMNS_COUNT),
         connections: this.createConnectionsArray(ROWS_COUNT, COLUMNS_COUNT),
     };
 
     public form = new FormControl(this.data, [dfCycleDetectionValidator()]);
-
-    public ngOnInit(): void {
-        this.form.statusChanges.subscribe((s) => {
-            console.warn(s, this.form, 'form status');
-        });
-    }
 
     public createNodesMap(rows: number, columns: number): DfDataNode[] {
         const nodes = [];
@@ -86,12 +75,12 @@ export default class StressTestComponent implements OnInit {
                         source: {
                             nodeId: sourceId,
                             connectorType: DfConnectionPoint.Output,
-                            connectorId: 'output-1',
+                            connectorId: `${sourceId}-output-1`,
                         },
                         target: {
                             nodeId: targetId,
                             connectorType: DfConnectionPoint.Input,
-                            connectorId: 'input-1',
+                            connectorId: `${targetId}-input-1`,
                         },
                     });
                 } else if (row < rows) {
@@ -102,12 +91,12 @@ export default class StressTestComponent implements OnInit {
                         source: {
                             nodeId: sourceId,
                             connectorType: DfConnectionPoint.Output,
-                            connectorId: 'output-1',
+                            connectorId: `${sourceId}-output-1`,
                         },
                         target: {
                             nodeId: firstNodeNextRowId,
                             connectorType: DfConnectionPoint.Input,
-                            connectorId: 'input-1',
+                            connectorId: `${firstNodeNextRowId}-input-1`,
                         },
                     });
                 }

@@ -1,3 +1,16 @@
 <tui-root>
-    <tui-doc-main />
+    <tui-doc-main>
+        <button
+            appearance="flat-grayscale"
+            aria-label="Dark mode"
+            ngProjectAs="tuiDocHeader"
+            size="s"
+            tuiIconButton
+            type="button"
+            [attr.aria-pressed]="darkMode()"
+            [iconStart]="darkMode() ? '@tui.sun' : '@tui.moon'"
+            [title]="darkMode() ? 'Switch to light theme' : 'Switch to dark theme'"
+            (click)="darkMode.set(!darkMode())"
+        ></button>
+    </tui-doc-main>
 </tui-root>

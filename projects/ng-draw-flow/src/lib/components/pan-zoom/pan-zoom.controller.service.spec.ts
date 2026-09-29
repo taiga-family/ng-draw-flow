@@ -1,4 +1,4 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {type DfDragDrop, DfDragDropStage} from '../../directives/drag-drop';
 import {
@@ -50,6 +50,19 @@ describe('PanZoomControllerService', () => {
     afterEach(() => {
         TestBed.resetTestingModule();
     });
+
+    it('cancels a pending gesture frame when its injector is destroyed', fakeAsync(() => {
+        const update = jest.spyOn(panZoomService, 'setCamera');
+        const render = jest.fn();
+
+        service.renderRequests$.subscribe(render);
+        service.queueGesture({type: 'pan', deltaX: 10, deltaY: 20});
+        TestBed.resetTestingModule();
+        tick(20);
+
+        expect(update).not.toHaveBeenCalled();
+        expect(render).not.toHaveBeenCalled();
+    }));
 
     it('batches mixed gestures into a single camera commit per flush', () => {
         const setCameraSpy = jest.spyOn(panZoomService, 'setCamera');

@@ -27,11 +27,11 @@ describe('computeWaypoints', () => {
 
         // 1) Start / end points
         expect(poly[0]).toEqual(source.point);
-        expect(poly.at(-1)).toEqual(target.point);
+        expect(poly[poly.length - 1]).toEqual(target.point);
 
         // 2) Gaps = MIN_SEGMENT_LENGTH along the connector direction
         expect(poly[1]).toEqual({x: 0 + MIN_SEGMENT_LENGTH, y: 0});
-        expect(poly.at(-2)).toEqual({x: 100 - MIN_SEGMENT_LENGTH, y: 50});
+        expect(poly[poly.length - 2]).toEqual({x: 100 - MIN_SEGMENT_LENGTH, y: 50});
 
         // 3) Two elbows share the same X (vertical split through center)
         const elbow1 = poly[2]!;
@@ -88,7 +88,7 @@ describe('computeWaypoints', () => {
 
         // Gap values should equal `custom`
         expect(poly[1]).toEqual({x: 0, y: 0 + custom});
-        expect(poly.at(-2)).toEqual({x: 0, y: 80 - custom});
+        expect(poly[poly.length - 2]).toEqual({x: 0, y: 80 - custom});
     });
 
     /** centerOverride should remain untouched (Case A scenario) */

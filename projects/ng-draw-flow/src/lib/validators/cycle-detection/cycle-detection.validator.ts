@@ -9,7 +9,7 @@ import {
     type DfNodeValidationError,
     type DfSignalValidator,
 } from '../graph-validation.interfaces';
-import {buildAdjacencyMap, findCycleNodes, generateConnectionsHash} from './helpers';
+import {buildAdjacencyMap, findCycleNodes, generateConnectionsKey} from './helpers';
 
 export interface DfCycleDetectionError {
     readonly hasCycle: true;
@@ -60,24 +60,24 @@ export function dfCycleDetectionSignalValidator(): DfSignalValidator {
 function createCachedCycleValidator(): (
     model: DfDataModel | null | undefined,
 ) => DfCycleDetectionError | null {
-    let previousConnectionsHash: string | null = null;
+    let previousConnectionsKey: string | null = null;
     let previousResult: DfCycleDetectionError | null = null;
 
     return (model) => {
         if (!model?.connections.length) {
-            previousConnectionsHash = null;
+            previousConnectionsKey = null;
             previousResult = null;
 
             return null;
         }
 
-        const currentConnectionsHash = generateConnectionsHash(model.connections);
+        const currentConnectionsKey = generateConnectionsKey(model.connections);
 
-        if (previousConnectionsHash === currentConnectionsHash) {
+        if (previousConnectionsKey === currentConnectionsKey) {
             return previousResult;
         }
 
-        previousConnectionsHash = currentConnectionsHash;
+        previousConnectionsKey = currentConnectionsKey;
         previousResult = dfValidateCycles(model);
 
         return previousResult;

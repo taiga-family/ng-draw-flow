@@ -32,6 +32,7 @@ jest.mock('./node.component.html', () => '', {virtual: true});
 jest.mock('./node.component.less', () => '', {virtual: true});
 
 describe('NodeComponent', () => {
+    let rootElement: HTMLElement;
     let panZoomOptions: DfPanZoomOptions;
     let panSizeSignal: WritableSignal<DfPanSizeDimensions>;
     let workspaceOriginSignal: WritableSignal<{x: number; y: number}>;
@@ -68,6 +69,13 @@ describe('NodeComponent', () => {
     };
 
     beforeEach(async () => {
+        rootElement = document.createElement('ng-draw-flow');
+        Object.defineProperties(rootElement, {
+            offsetWidth: {value: 1000},
+            offsetHeight: {value: 1000},
+        });
+        document.body.append(rootElement);
+
         TestBed.overrideComponent(NodeComponent, {
             set: {
                 template: `
@@ -142,7 +150,7 @@ describe('NodeComponent', () => {
                 return this.panzoomModel;
             },
             setDisabled: jest.fn((value: boolean) => {
-                this.panzoomDisabled = value;
+                panZoomServiceMock.panzoomDisabled = value;
             }),
         };
 
@@ -155,20 +163,18 @@ describe('NodeComponent', () => {
                 }),
                 MockProvider(DfInteractionStateService, interactionState),
                 MockProvider(DRAW_FLOW_OPTIONS, options),
-                MockProvider(DRAW_FLOW_ROOT_ELEMENT, {
-                    offsetWidth: 1000,
-                    offsetHeight: 1000,
-                } as HTMLElement),
+                MockProvider(DRAW_FLOW_ROOT_ELEMENT, rootElement),
                 MockProvider(PanZoomService, panZoomServiceMock),
                 MockProvider(CoordinatesService, {
                     addConnectionPoint,
+                    removeConnectionPoint: jest.fn(),
                     getConnectionPointSignal: () => signal(null),
                 }),
                 MockProvider(DF_PAN_ZOOM_OPTIONS, panZoomOptions),
                 MockProvider(ConnectionsService, {
                     selectedNodeId: signal<string | null>(null),
                     highlightConnectionsForNode,
-                } as ConnectionsService),
+                }),
                 MockProvider(DF_NODE_SIZE_REGISTRY, {
                     sizes: signal(new Map()).asReadonly(),
                     set: setNodeSize,
@@ -179,6 +185,7 @@ describe('NodeComponent', () => {
 
     afterEach(() => {
         ngMocks.flushTestBed();
+        rootElement.remove();
     });
 
     it('centres new node relative to viewport and pan/zoom', () => {
@@ -320,6 +327,13 @@ describe('NodeComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.invalid).toBe(true);
+
+        host.touched.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
         expect(nodeElement.classList.contains('df-selected')).toBe(true);
         expect(nodeElement.classList.contains('df-invalid')).toBe(true);
         expect(contentElement.classList.contains('df-selected')).toBe(false);
@@ -363,11 +377,25 @@ describe('NodeComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
-        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
         expect(innerComponent.control.touched).toBe(true);
         expect(innerComponent.control.invalid).toBe(true);
         expect(contentElement.classList.contains('df-invalid')).toBe(false);
 
+        host.touched.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+
+        host.touched.set(false);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.invalid).toBe(true);
+
+        host.touched.set(true);
         host.invalid.set(true);
         fixture.detectChanges();
         await fixture.whenStable();
@@ -696,14 +724,69 @@ describe('NodeComponent', () => {
             expect.objectContaining({id: 'draft-node'}),
         );
 
-        const keyboardEvent = new KeyboardEvent('keydown', {key: 'Delete'});
+        const keyboardEvent = new KeyboardEvent('keydown', {
+            key: 'Delete',
+            bubbles: true,
+        });
         const preventDefaultSpy = jest.spyOn(keyboardEvent, 'preventDefault');
 
-        (component as any).handleKeyboardEvent(keyboardEvent);
+        rootElement.append(fixture.nativeElement);
+        fixture.nativeElement.dispatchEvent(keyboardEvent);
 
         expect(preventDefaultSpy).toHaveBeenCalled();
         expect(clearSelectedNode).toHaveBeenCalledWith('draft-node');
         expect(emitNodeDeletedSpy).toHaveBeenCalled();
+    });
+
+    it.each(['input', 'textarea', 'select', 'contenteditable'])(
+        'preserves a selected node when typing in %s',
+        (kind) => {
+            const fixture = MockRender(HostComponent);
+            const component = fixture.point.componentInstance.nodeComponent();
+            const deleted = jest.fn();
+            const editor = document.createElement(
+                kind === 'contenteditable' ? 'div' : kind,
+            );
+
+            if (kind === 'contenteditable') {
+                editor.setAttribute('contenteditable', '');
+            }
+
+            rootElement.append(fixture.nativeElement);
+            fixture.nativeElement.append(editor);
+            component.nodeDeleted.subscribe(deleted);
+            (
+                component as unknown as {onSelectedChanged(value: boolean): void}
+            ).onSelectedChanged(true);
+
+            const event = new KeyboardEvent('keydown', {
+                key: 'Backspace',
+                bubbles: true,
+                cancelable: true,
+            });
+
+            editor.dispatchEvent(event);
+
+            expect(deleted).not.toHaveBeenCalled();
+            expect(event.defaultPrevented).toBe(false);
+        },
+    );
+
+    it('ignores Delete outside the owning editor while its node remains selected', () => {
+        const fixture = MockRender(HostComponent);
+        const component = fixture.point.componentInstance.nodeComponent();
+        const deleted = jest.fn();
+
+        rootElement.append(fixture.nativeElement);
+        component.nodeDeleted.subscribe(deleted);
+        (
+            component as unknown as {onSelectedChanged(value: boolean): void}
+        ).onSelectedChanged(true);
+        document.body.dispatchEvent(
+            new KeyboardEvent('keydown', {key: 'Delete', bubbles: true}),
+        );
+
+        expect(deleted).not.toHaveBeenCalled();
     });
 
     it('does not emit nodeDeleted for start nodes even when selected', () => {

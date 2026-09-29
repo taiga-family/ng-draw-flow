@@ -36,6 +36,12 @@ npm start                                         # Serve the demo
 npx nx test ng-draw-flow --runInBand               # Core unit tests
 npx nx test ng-draw-flow-layouts --runInBand        # Layouts unit tests
 npm run test                                      # Both library test suites
+npm run test:coverage                             # Source-wide coverage and per-library floors
+npm run typecheck:tests                           # Strict test types, independently of Jest transpilation
+npm run e2e:install                               # Install the pinned Chromium browser
+npm run e2e                                       # Build and test the real editor in Chromium
+npm run benchmark                                 # Algorithm/layout metrics (reporting only)
+npm run benchmark:bundles                         # Check built entries and record raw/gzip sizes
 npx nx build ng-draw-flow --configuration=production
 npx nx build ng-draw-flow-layouts --configuration=production
 npm run build                                     # All production build targets
@@ -44,7 +50,12 @@ npm run stylelint                                 # Workspace Less/CSS checks
 npx prettier --check AGENTS.md                     # Example: check a specific changed file
 ```
 
-- For a focused spec, use the relevant Nx test target with `--runTestsByPath` and its repository-relative path.
+- For a focused spec, use the relevant Nx test target with `--testPathPattern=filename.spec.ts`. Keep the value attached
+  to the flag: Nx can discard a bare positional path instead of forwarding it to Jest.
+- Install the pinned browser with `npm run e2e:install` before the first UI run. UI fixtures live separately from the
+  public demo entry. Reports belong in `coverage/`; do not commit generated traces or performance results.
+- Performance reports are observational until a stable runner baseline exists. Record environment and fixture metadata;
+  do not introduce wall-clock assertions into unit tests. Build libraries before measuring bundle sizes.
 - `npm run prettier`, `npm run lint:fix`, and `npm run stylelint:fix` modify files. Prefer formatting only the files
   touched by the task; do not introduce workspace-wide formatting churn.
 - CI also builds the GitHub Pages demo with `npx nx build-gh-pages demo`, including prerendering. Check this target when

@@ -54,6 +54,86 @@ function setSourceConnectorIds(source: DfDataModel, connectorIds: string[]): voi
 }
 
 describe('D3TreeLayoutEngine', () => {
+    it('accepts an empty graph without mutating its collections', () => {
+        const source: DfDataModel = {nodes: [], connections: []};
+        const result = new D3TreeLayoutEngine().layout(source);
+
+        expect(result).toEqual({model: source, diagnostics: []});
+        expect(result.model.nodes).not.toBe(source.nodes);
+        expect(result.model.connections).not.toBe(source.connections);
+    });
+
+    it('rejects connections to missing nodes even when the node collection is empty', () => {
+        expect(() =>
+            new D3TreeLayoutEngine().layout({
+                nodes: [],
+                connections: [connection('missing-source', 'missing-target')],
+            }),
+        ).toThrow(
+            expect.objectContaining<Partial<DfTreeLayoutError>>({
+                code: 'missing-node',
+                nodeIds: ['missing-source', 'missing-target'],
+            }),
+        );
+    });
+
+    it.each([
+        [DfTreeLayoutDirection.LeftToRight, {x: 560, y: 200}],
+        [DfTreeLayoutDirection.RightToLeft, {x: -360, y: 200}],
+        [DfTreeLayoutDirection.TopToBottom, {x: 100, y: 460}],
+        [DfTreeLayoutDirection.BottomToTop, {x: 100, y: -60}],
+    ])('keeps cumulative variable-size level gaps for %s', (direction, position) => {
+        const source = model();
+
+        source.connections = [connection('root', 'first'), connection('first', 'second')];
+
+        const result = new D3TreeLayoutEngine({
+            direction,
+            nodeSizing: {
+                strategy: DfNodeSizingStrategy.Measured,
+                fallback: {width: 100, height: 40},
+            },
+            levelGap: 50,
+        }).layout(
+            source,
+            new Map([
+                ['first', {width: 200, height: 80}],
+                ['root', {width: 100, height: 40}],
+                ['second', {width: 220, height: 120}],
+            ]),
+        );
+
+        expect((result.model.nodes[2] as DfDataNode).position).toEqual(position);
+        expect(source.nodes[2]).not.toHaveProperty('position');
+    });
+
+    it('preserves source order for a wide branch and application-owned values', () => {
+        const payload = new Map([['setting', 'value']]);
+        const source: DfDataModel = {
+            nodes: [
+                {id: 'root', data: {type: 'node', payload}},
+                ...Array.from({length: 1000}, (_, index) => ({
+                    id: String(index),
+                    data: {type: 'node'},
+                })),
+            ],
+            connections: Array.from({length: 1000}, (_, index) =>
+                connection('root', String(index)),
+            ),
+        };
+        const result = new D3TreeLayoutEngine().layout(source);
+        const children = result.model.nodes.slice(1) as DfDataNode[];
+
+        expect(result.model.nodes[0]!.data.payload).toBe(payload);
+        expect(result.model.connections).toEqual(source.connections);
+        expect(children).toHaveLength(1000);
+
+        children.slice(1).forEach((node, index) => {
+            expect(node.position.x).toBe(children[index]!.position.x);
+            expect(node.position.y).toBeGreaterThan(children[index]!.position.y);
+        });
+    });
+
     it('lays out a left-to-right tree and preserves the root position', () => {
         const result = new D3TreeLayoutEngine({
             nodeSizing: {

@@ -155,7 +155,11 @@ export class NgDrawFlowStoreService {
      * percentage representation.
      */
     public setScale(scale: number): void {
-        this.host?.setScale(scale);
+        if (this.host) {
+            this.host.setScale(scale);
+
+            return;
+        }
 
         const percent = Math.round(scale * 100);
 

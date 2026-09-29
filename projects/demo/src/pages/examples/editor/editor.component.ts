@@ -77,9 +77,9 @@ export default class EditorComponent implements OnInit {
     public readonly drawFlowStore = inject(NgDrawFlowStoreService);
 
     public readonly customNodeExample: Record<string, TuiRawLoaderContent> = {
-        Typescript: import('./examples/editor.component.md?raw'),
+        Typescript: import('./editor.component.ts?raw'),
         Styles: import('./editor.component.less?raw'),
-        Template: import('./examples/editor.template.md?raw'),
+        Template: import('./editor.component.html?raw'),
     };
 
     public data: DfDataModel = {

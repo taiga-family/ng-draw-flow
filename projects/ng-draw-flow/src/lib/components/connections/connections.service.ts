@@ -29,12 +29,20 @@ export class ConnectionsService {
     }
 
     public addConnections(connections: DfDataConnection[]): void {
-        const newConnections = connections.filter(
-            (newConnection) =>
-                !this.connectionsSignal().some((existingConnection) =>
+        const accepted = [...this.connectionsSignal()];
+        const newConnections = connections.filter((newConnection) => {
+            if (
+                accepted.some((existingConnection) =>
                     this.areConnectionsEqual(existingConnection, newConnection),
-                ),
-        );
+                )
+            ) {
+                return false;
+            }
+
+            accepted.push(newConnection);
+
+            return true;
+        });
 
         if (newConnections.length === 0) {
             return;
@@ -111,9 +119,7 @@ export class ConnectionsService {
                 connection.target.connectorId !== connectorIdToRemove,
         );
 
-        const usedConnectors = this.usedConnectorsSignal().filter(
-            (connectorId) => connectorId !== connectorIdToRemove,
-        );
+        const usedConnectors = this.collectUsedConnectors(connectionsToKeep);
 
         if (connectionsToKeep.length === this.connectionsSignal().length) {
             return;

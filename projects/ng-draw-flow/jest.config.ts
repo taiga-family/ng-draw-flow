@@ -4,7 +4,21 @@ export default {
     setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
     globals: {},
     coverageDirectory: '../../coverage/projects/ng-draw-flow',
-    transform: {'^.+.(ts|mjs|js|html|svg)$': 'jest-preset-angular'},
+    collectCoverageFrom: [
+        '<rootDir>/src/lib/**/*.ts',
+        '!<rootDir>/src/lib/**/*.spec.ts',
+        '!<rootDir>/src/lib/**/index.ts',
+        '!<rootDir>/src/lib/**/mocks/**',
+    ],
+    coverageThreshold: {
+        global: {statements: 88, branches: 73, functions: 86, lines: 88},
+    },
+    transform: {
+        '^.+\\.(ts|mjs|js|html|svg)$': [
+            'jest-preset-angular',
+            {stringifyContentPathRegex: String.raw`\.(html|svg)$`},
+        ],
+    },
     transformIgnorePatterns: ['node_modules/(?!.*.mjs$)'],
     snapshotSerializers: [
         'jest-preset-angular/build/serializers/no-ng-attributes',
