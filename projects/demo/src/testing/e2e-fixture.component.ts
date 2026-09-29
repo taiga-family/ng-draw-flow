@@ -1,10 +1,11 @@
 import {JsonPipe} from '@angular/common';
 import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {
     type DfDataModel,
     DfInputComponent,
+    dfIsolatedNodesValidator,
     DfOutputComponent,
     dfPanZoomOptionsProvider,
     DrawFlowBaseNode,
@@ -70,11 +71,62 @@ import {
 })
 export class E2eNodeComponent extends DrawFlowBaseNode {}
 
-function initialModel(): DfDataModel {
+@Component({
+    standalone: true,
+    selector: 'app-test-validation-node',
+    imports: [DfInputComponent, DfOutputComponent, ReactiveFormsModule],
+    template: `
+        <df-input
+            [connectorData]="{nodeId, connectorId: nodeId + '-in', single: false}"
+        />
+        <label>
+            Required node text
+            <input [formControl]="text" />
+        </label>
+        <output [attr.data-testid]="nodeId + '-local-invalid'">{{ text.invalid }}</output>
+        <df-output
+            [connectorData]="{nodeId, connectorId: nodeId + '-out', single: false}"
+        />
+    `,
+    styles: `
+        :host {
+            display: block;
+            inline-size: 150px;
+            padding: 8px;
+        }
+        input {
+            inline-size: 130px;
+        }
+        df-input,
+        df-output {
+            position: absolute;
+            inset-block-start: 50%;
+        }
+        df-input {
+            inset-inline-start: -8px;
+        }
+        df-output {
+            inset-inline-end: -8px;
+        }
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class E2eValidationNodeComponent extends DrawFlowBaseNode {
+    public readonly text = new FormControl('', {
+        nonNullable: true,
+        validators: Validators.required,
+    });
+
+    protected override get invalidState(): boolean {
+        return this.invalidSignal() || this.text.invalid;
+    }
+}
+
+function initialModel(type = 'test'): DfDataModel {
     return {
         nodes: [
-            {id: 'first', data: {type: 'test'}, position: {x: -220, y: 0}},
-            {id: 'second', data: {type: 'test'}, position: {x: 180, y: 0}},
+            {id: 'first', data: {type}, position: {x: -220, y: 0}},
+            {id: 'second', data: {type}, position: {x: 180, y: 0}},
         ],
         connections: [],
     };
@@ -111,6 +163,26 @@ function initialModel(): DfDataModel {
             >
                 Load 500 nodes
             </button>
+            <button
+                type="button"
+                (click)="enableValidation()"
+            >
+                Enable validation
+            </button>
+            @if (validationEnabled()) {
+                <button
+                    type="button"
+                    (click)="graph.markAllAsTouched()"
+                >
+                    Mark all as touched
+                </button>
+                <button
+                    type="button"
+                    (click)="graph.markAsUntouched()"
+                >
+                    Mark as untouched
+                </button>
+            }
             <button type="button">Outside editor</button>
             @if (mounted()) {
                 <ng-draw-flow
@@ -127,6 +199,8 @@ function initialModel(): DfDataModel {
                         disabled: graph.disabled,
                         touched: graph.touched,
                         dirty: graph.dirty,
+                        invalid: graph.invalid,
+                        errors: graph.errors,
                         moves: moves(),
                         created: created(),
                         deleted: deleted(),
@@ -159,7 +233,9 @@ function initialModel(): DfDataModel {
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        provideNgDrawFlowConfigs({nodes: {test: E2eNodeComponent}}),
+        provideNgDrawFlowConfigs({
+            nodes: {test: E2eNodeComponent, validation: E2eValidationNodeComponent},
+        }),
         dfPanZoomOptionsProvider({zoomAnimationDuration: 0}),
     ],
 })
@@ -170,6 +246,7 @@ export class E2eFixtureComponent {
     });
 
     public readonly mounted = signal(true);
+    public readonly validationEnabled = signal(false);
     public readonly moves = signal(0);
     public readonly created = signal(0);
     public readonly deleted = signal(0);
@@ -183,7 +260,13 @@ export class E2eFixtureComponent {
     }
 
     public reset(): void {
-        this.graph.reset(initialModel());
+        this.graph.reset(initialModel(this.validationEnabled() ? 'validation' : 'test'));
+    }
+
+    public enableValidation(): void {
+        this.validationEnabled.set(true);
+        this.graph.setValidators(dfIsolatedNodesValidator());
+        this.reset();
     }
 
     public loadMany(): void {

@@ -16,7 +16,7 @@
         </div>
         <div>
             <strong>Visual feedback</strong>
-            <span>Invalid node ids receive the core wrapper style.</span>
+            <span>Invalid nodes are highlighted after the editor is touched.</span>
         </div>
     </div>
 
@@ -29,7 +29,8 @@
             <code>invalidSignal()</code>
             supplied by graph validators. Core reads the result from the custom component and applies
             <code>.df-invalid</code>
-            to the editor node wrapper.
+            to the editor node wrapper only after the editor is touched. This applies to both local errors and graph
+            errors; their validation state is still available before touch.
         </p>
         @if (validationExamples.LocalValidation; as localValidation) {
             <tui-doc-code
@@ -37,6 +38,28 @@
                 [code]="localValidation"
             />
         }
+    </section>
+
+    <section>
+        <h2>When Errors Become Visible</h2>
+        <p>
+            The editor reads touched state from its bound Angular form control or the
+            <code>[touched]</code>
+            input. Initial errors stay unhighlighted. Moving focus between fields inside the editor does not touch the
+            editor; leaving it or completing a canvas interaction does.
+        </p>
+        <p>
+            Call
+            <code>markAllAsTouched()</code>
+            on submit to reveal errors. Calling
+            <code>markAsUntouched()</code>
+            or
+            <code>reset()</code>
+            hides the highlights again without suppressing validation. Editors without a form binding can control
+            feedback through
+            <code>[touched]</code>
+            explicitly.
+        </p>
     </section>
 
     <section>

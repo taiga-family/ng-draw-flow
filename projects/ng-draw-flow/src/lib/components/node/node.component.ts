@@ -103,6 +103,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     public readonly node = input.required<DfDataInitialNode | DfDataNode>();
 
     public readonly invalid = input(false);
+    public readonly touched = input(false);
 
     public readonly nodeMoved = output<DfDataNode>();
     public readonly nodeDeleted = output();
@@ -213,7 +214,7 @@ export class NodeComponent implements AfterViewInit, OnDestroy {
     protected nodeClassName(): string {
         const classNames = ['draw-flow-node'];
 
-        if (this.isInvalid()) {
+        if (this.touched() && this.isInvalid()) {
             classNames.push('df-invalid');
         }
 

@@ -10,6 +10,7 @@ import {NodeComponent} from '../node.component';
         <df-node
             [invalid]="invalid()"
             [node]="node()"
+            [touched]="touched()"
         />
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,7 @@ import {NodeComponent} from '../node.component';
 export class HostComponent {
     public readonly nodeComponent = viewChild.required(NodeComponent);
     public readonly invalid = signal(false);
+    public readonly touched = signal(false);
     public readonly node = signal<DfDataInitialNode | DfDataNode>({
         id: 'draft-node',
         data: {type: 'simpleNode'},

@@ -257,6 +257,16 @@ Delete and Backspace remove the selected graph element while focus is inside tha
 editable content retain their normal keyboard behavior. A disabled editor blocks user edits while application-side model
 updates remain available.
 
+## Validation Feedback
+
+Graph validators and local node validation run immediately. The editor adds `df-invalid` to a node wrapper only when the
+bound form control is touched or the editor's `[touched]` input is true. Moving focus between controls inside the editor
+does not mark the editor as touched; leaving it or completing a canvas interaction does.
+
+Use `markAllAsTouched()` to reveal errors on form submission. `markAsUntouched()` and `reset()` hide the highlights
+again while the editor is untouched. This only controls visual feedback: validation errors and the custom node's
+`invalidSignal()` remain available. Without a form binding, supply `[touched]` explicitly.
+
 ## Dynamic Layouts
 
 Automatic positioning is provided separately by

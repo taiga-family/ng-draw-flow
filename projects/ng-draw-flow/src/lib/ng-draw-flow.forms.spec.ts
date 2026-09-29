@@ -1,6 +1,12 @@
 import {ChangeDetectionStrategy, Component, signal, viewChild} from '@angular/core';
 import {fakeAsync, flushMicrotasks, TestBed} from '@angular/core/testing';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {
+    FormControl,
+    FormGroup,
+    FormsModule,
+    NgControl,
+    ReactiveFormsModule,
+} from '@angular/forms';
 import {By} from '@angular/platform-browser';
 
 import {ConnectionsService} from './components/connections/connections.service';
@@ -64,6 +70,19 @@ class ReactiveHost {
     public readonly graph = new FormControl<DfDataModel>(INITIAL_MODEL, {
         nonNullable: true,
     });
+}
+
+@Component({
+    standalone: true,
+    selector: 'df-rebinding-host',
+    imports: [NgDrawFlowComponent, ReactiveFormsModule],
+    template: '<ng-draw-flow [formControl]="graph()" />',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class RebindingHost {
+    public readonly graph = signal(
+        new FormControl<DfDataModel>(INITIAL_MODEL, {nonNullable: true}),
+    );
 }
 
 @Component({
@@ -165,6 +184,17 @@ class ErrorIsolationHost {
     ]);
 }
 
+@Component({
+    standalone: true,
+    selector: 'df-explicit-touched-host',
+    imports: [NgDrawFlowComponent],
+    template: '<ng-draw-flow [touched]="touched()" />',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
+class ExplicitTouchedHost {
+    public readonly touched = signal(false);
+}
+
 describe('NgDrawFlowComponent forms integration', () => {
     beforeEach(async () => {
         TestBed.overrideComponent(NgDrawFlowComponent, {
@@ -178,10 +208,12 @@ describe('NgDrawFlowComponent forms integration', () => {
             imports: [
                 BlurHost,
                 ErrorIsolationHost,
+                ExplicitTouchedHost,
                 FormControlNameHost,
                 NgModelHost,
                 NullableHost,
                 ReactiveHost,
+                RebindingHost,
             ],
         }).compileComponents();
     });
@@ -265,6 +297,189 @@ describe('NgDrawFlowComponent forms integration', () => {
 
         expect(fixture.componentInstance.form.controls.graph.value).toBe(UPDATED_MODEL);
         expect(fixture.componentInstance.form.controls.graph.dirty).toBe(true);
+    });
+
+    it('reflects form-group touch and reset without changing the graph value', () => {
+        const fixture = TestBed.createComponent(FormControlNameHost);
+
+        fixture.detectChanges();
+        const editor = fixture.nativeElement.querySelector('ng-draw-flow') as HTMLElement;
+        const form = fixture.componentInstance.form;
+        const changes = jest.fn();
+        const subscription = form.controls.graph.valueChanges.subscribe(changes);
+
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        form.markAllAsTouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+        expect(form.controls.graph.value).toBe(INITIAL_MODEL);
+        expect(form.controls.graph.pristine).toBe(true);
+        expect(changes).not.toHaveBeenCalled();
+
+        form.reset({graph: INITIAL_MODEL});
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+        expect(form.controls.graph.untouched).toBe(true);
+
+        form.markAllAsTouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        form.markAsUntouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+        subscription.unsubscribe();
+    });
+
+    it('renders a control that was already touched before the editor initialized', () => {
+        const fixture = TestBed.createComponent(ReactiveHost);
+
+        fixture.componentInstance.graph.markAsTouched({emitEvent: false});
+        fixture.detectChanges();
+        const editor = fixture.nativeElement.querySelector('ng-draw-flow') as HTMLElement;
+
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+        expect(fixture.componentInstance.graph.value).toBe(INITIAL_MODEL);
+        expect(fixture.componentInstance.graph.pristine).toBe(true);
+    });
+
+    it('reflects silent touch and reset changes without emitting form events', () => {
+        const fixture = TestBed.createComponent(ReactiveHost);
+
+        fixture.detectChanges();
+        const editor = fixture.nativeElement.querySelector('ng-draw-flow') as HTMLElement;
+        const graph = fixture.componentInstance.graph;
+        const events = jest.fn();
+        const subscription = graph.events.subscribe(events);
+
+        graph.markAsTouched({emitEvent: false});
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        fixture.componentInstance.options.set({nodesDraggable: false});
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        graph.markAsUntouched({emitEvent: false});
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        graph.markAsTouched({emitEvent: false});
+        fixture.detectChanges();
+        graph.reset(INITIAL_MODEL, {emitEvent: false});
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        fixture.componentInstance.options.set({});
+        fixture.detectChanges();
+        expect(graph.value).toBe(INITIAL_MODEL);
+        expect(graph.pristine).toBe(true);
+        expect(events).not.toHaveBeenCalled();
+        subscription.unsubscribe();
+    });
+
+    it('follows a replacement formControl and ignores touch changes on the old control', () => {
+        const fixture = TestBed.createComponent(RebindingHost);
+        const previous = fixture.componentInstance.graph();
+
+        previous.markAsTouched();
+        fixture.detectChanges();
+        const editor = fixture.nativeElement.querySelector('ng-draw-flow') as HTMLElement;
+        const replacement = new FormControl<DfDataModel>(UPDATED_MODEL, {
+            nonNullable: true,
+        });
+
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        fixture.componentInstance.graph.set(replacement);
+        fixture.detectChanges();
+        const boundControl = fixture.debugElement
+            .query(By.directive(NgDrawFlowComponent))
+            .injector.get(NgControl);
+
+        expect(boundControl.control === replacement).toBe(true);
+        expect(boundControl.touched).toBe(false);
+        expect(editor.classList.contains('ng-touched')).toBe(false);
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        previous.markAsUntouched();
+        previous.markAsTouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        replacement.markAsTouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        previous.markAsUntouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        replacement.reset(UPDATED_MODEL);
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+        expect(previous.value).toBe(INITIAL_MODEL);
+        expect(replacement.value).toBe(UPDATED_MODEL);
+    });
+
+    it('follows a formControlName replaced through FormGroup.setControl', () => {
+        const fixture = TestBed.createComponent(FormControlNameHost);
+
+        fixture.detectChanges();
+        const editor = fixture.nativeElement.querySelector('ng-draw-flow') as HTMLElement;
+        const form = fixture.componentInstance.form;
+        const previous = form.controls.graph;
+        const replacement = new FormControl<DfDataModel>(UPDATED_MODEL, {
+            nonNullable: true,
+        });
+
+        replacement.markAsTouched({emitEvent: false});
+        form.setControl('graph', replacement);
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+        expect(form.controls.graph).toBe(replacement);
+
+        previous.markAsTouched();
+        previous.markAsUntouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        replacement.markAsUntouched({emitEvent: false});
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        previous.markAsTouched();
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        fixture.componentInstance.editor().setDataModel(INITIAL_MODEL);
+        expect(replacement.value).toBe(INITIAL_MODEL);
+        expect(replacement.dirty).toBe(true);
+        expect(previous.pristine).toBe(true);
+    });
+
+    it('respects explicit touched state without an Angular form binding', () => {
+        const fixture = TestBed.createComponent(ExplicitTouchedHost);
+
+        fixture.detectChanges();
+        const editor = fixture.nativeElement.querySelector('ng-draw-flow') as HTMLElement;
+
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        fixture.componentInstance.touched.set(true);
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(true);
+
+        fixture.componentInstance.touched.set(false);
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        editor.dispatchEvent(
+            new FocusEvent('focusout', {bubbles: true, relatedTarget: document.body}),
+        );
+        fixture.detectChanges();
+        expect(editor.classList.contains('ng-draw-flow_touched')).toBe(false);
     });
 
     it('continues to support ngModel', async () => {
@@ -490,6 +705,35 @@ describe('NgDrawFlowComponent forms integration', () => {
         fixture.detectChanges();
 
         expect(firstInvalidNodes()).toEqual([]);
+        expect(secondInvalidNodes()).toEqual(['second-node']);
+    });
+
+    it('keeps touched state independent between editors and retains their errors', () => {
+        const fixture = TestBed.createComponent(ErrorIsolationHost);
+
+        fixture.detectChanges();
+        const editors = fixture.debugElement.queryAll(By.directive(NgDrawFlowComponent));
+        const first = editors[0]!;
+        const second = editors[1]!;
+        const firstElement = first.nativeElement as HTMLElement;
+        const secondElement = second.nativeElement as HTMLElement;
+        const firstInvalidNodes = first.injector.get(INVALID_NODES);
+        const secondInvalidNodes = second.injector.get(INVALID_NODES);
+
+        expect(firstElement.classList.contains('ng-draw-flow_touched')).toBe(false);
+        expect(secondElement.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        fixture.componentInstance.first.markAsTouched();
+        fixture.detectChanges();
+        expect(firstElement.classList.contains('ng-draw-flow_touched')).toBe(true);
+        expect(secondElement.classList.contains('ng-draw-flow_touched')).toBe(false);
+
+        fixture.componentInstance.second.markAsTouched();
+        fixture.componentInstance.first.reset(INITIAL_MODEL);
+        fixture.detectChanges();
+        expect(firstElement.classList.contains('ng-draw-flow_touched')).toBe(false);
+        expect(secondElement.classList.contains('ng-draw-flow_touched')).toBe(true);
+        expect(firstInvalidNodes()).toEqual(['first-node']);
         expect(secondInvalidNodes()).toEqual(['second-node']);
     });
 

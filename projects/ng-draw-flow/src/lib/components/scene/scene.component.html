@@ -2,6 +2,7 @@
     <df-node
         [invalid]="$invalidNodes().includes(node.id)"
         [node]="node"
+        [touched]="touched()"
         (connectorDeleted)="onConnectorDeleted($event)"
         (nodeDeleted)="onNodeDeleted(node.id)"
         (nodeMoved)="onNodeMoved($event)"

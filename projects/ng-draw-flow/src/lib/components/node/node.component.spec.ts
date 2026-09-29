@@ -327,6 +327,13 @@ describe('NodeComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.invalid).toBe(true);
+
+        host.touched.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
         expect(nodeElement.classList.contains('df-selected')).toBe(true);
         expect(nodeElement.classList.contains('df-invalid')).toBe(true);
         expect(contentElement.classList.contains('df-selected')).toBe(false);
@@ -370,11 +377,25 @@ describe('NodeComponent', () => {
         fixture.detectChanges();
         await fixture.whenStable();
 
-        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
         expect(innerComponent.control.touched).toBe(true);
         expect(innerComponent.control.invalid).toBe(true);
         expect(contentElement.classList.contains('df-invalid')).toBe(false);
 
+        host.touched.set(true);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(true);
+
+        host.touched.set(false);
+        fixture.detectChanges();
+        await fixture.whenStable();
+
+        expect(nodeElement.classList.contains('df-invalid')).toBe(false);
+        expect(innerComponent.invalid).toBe(true);
+
+        host.touched.set(true);
         host.invalid.set(true);
         fixture.detectChanges();
         await fixture.whenStable();

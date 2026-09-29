@@ -9,6 +9,7 @@ import {
     ElementRef,
     forwardRef,
     inject,
+    Injector,
     input,
     type OnDestroy,
     type OnInit,
@@ -22,6 +23,8 @@ import {
     type ControlValueAccessor,
     FormControl,
     NG_VALUE_ACCESSOR,
+    NgControl,
+    NgControlStatus,
     ReactiveFormsModule,
 } from '@angular/forms';
 import {WaResizeObserver} from '@ng-web-apis/resize-observer';
@@ -58,6 +61,13 @@ import {DfInteractionStateService} from './services/interaction-state.service';
 import {NgDrawFlowStoreService} from './services/ng-draw-flow-store.service';
 import {SelectionService} from './services/selection.service';
 import {INVALID_NODES} from './validators/invalid-nodes.token';
+
+/** Reuse Angular's reactive touched getter, including silent form updates. */
+class ControlStatusReader extends NgControlStatus {
+    public get touched(): boolean {
+        return this.isTouched;
+    }
+}
 
 /**
  * Root component of **ng-draw-flow** – a lightweight graph editor
@@ -125,7 +135,7 @@ import {INVALID_NODES} from './validators/invalid-nodes.token';
         '[class.ng-draw-flow_disabled]': 'disabled()',
         '[class.ng-draw-flow_readonly]': 'readonly()',
         '[class.ng-draw-flow_invalid]': 'invalid()',
-        '[class.ng-draw-flow_touched]': 'touched()',
+        '[class.ng-draw-flow_touched]': 'isTouched()',
         '[class.ng-draw-flow_dirty]': 'dirty()',
         '[class.ng-draw-flow_pending]': 'pending()',
     },
@@ -134,6 +144,8 @@ export class NgDrawFlowComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy
 {
     private readonly cdr = inject(ChangeDetectorRef);
+    private readonly injector = inject(Injector);
+    private controlStatus: ControlStatusReader | null = null;
     private readonly cancelPendingChanges$ = new Subject<void>();
     private pendingChange: DfDataModel | undefined;
     private readonly destroyRef = inject(DestroyRef);
@@ -222,6 +234,10 @@ export class NgDrawFlowComponent
     }
 
     public ngOnInit(): void {
+        // Resolve after CVA construction to avoid a NgControl injection cycle.
+        const ngControl = this.injector.get(NgControl, null, {self: true});
+
+        this.controlStatus = ngControl ? new ControlStatusReader(ngControl) : null;
         this.watchFormChanges();
     }
 
@@ -249,6 +265,7 @@ export class NgDrawFlowComponent
 
         this.cancelInteraction();
         this.applyModel(model, false);
+        this.cdr.markForCheck();
 
         if (model.nodes.length) {
             if (!this.hasFramedExternalModel) {
@@ -498,6 +515,10 @@ export class NgDrawFlowComponent
                 }
             });
         }
+    }
+
+    protected isTouched(): boolean {
+        return this.touched() || this.controlStatus?.touched === true;
     }
 
     protected markAsTouched(): void {

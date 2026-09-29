@@ -100,18 +100,28 @@ describe('NgDrawFlowComponent', () => {
         jest.restoreAllMocks();
     });
 
-    it('frames only on the first non-empty external model write', () => {
+    it('frames only on the first non-empty external model write', fakeAsync(() => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest
-            .spyOn(globalThis, 'requestAnimationFrame')
-            .mockReturnValue(1);
+        const panZoom = fixture.debugElement.injector.get(PanZoomService);
+        const options = fixture.debugElement.injector.get(DF_PAN_ZOOM_OPTIONS);
 
-        fixture.debugElement.injector.get(DF_PAN_ZOOM_OPTIONS).leftPosition = 0;
+        Object.defineProperties(fixture.nativeElement, {
+            offsetWidth: {value: 1000},
+            offsetHeight: {value: 800},
+        });
+        jest.spyOn(panZoom, 'getBoundsForNodeIds').mockReturnValue({
+            minX: -100,
+            minY: -60,
+            maxX: 200,
+            maxY: 180,
+        });
+        options.leftPosition = 0;
+        options.topPosition = 0;
+        fixture.detectChanges();
         fixture.debugElement.triggerEventHandler('waResizeObserver', [
             {contentRect: {width: 1000, height: 800}},
         ]);
-        scheduleViewportFraming.mockClear();
         const model = {
             nodes: [
                 {
@@ -123,32 +133,55 @@ describe('NgDrawFlowComponent', () => {
         };
 
         component.writeValue(model);
+        expect(panZoom.setCamera).not.toHaveBeenCalled();
+        tick(16);
+        expect(panZoom.setCamera).not.toHaveBeenCalled();
+        tick(16);
 
-        expect(scheduleViewportFraming).toHaveBeenCalledTimes(1);
+        expect(panZoom.getBoundsForNodeIds).toHaveBeenCalledWith(['node-1']);
+        expect(panZoom.setCamera).toHaveBeenCalledTimes(1);
+        expect(panZoom.setCamera).toHaveBeenCalledWith({
+            x: 100,
+            y: 60,
+            zoom: 1,
+            offsetX: 0,
+            offsetY: 0,
+        });
 
-        scheduleViewportFraming.mockClear();
         model.nodes.push({
             id: 'node-2',
             data: {type: 'simpleNode'},
         });
 
         component.writeValue(model);
+        tick(32);
 
-        expect(scheduleViewportFraming).not.toHaveBeenCalled();
-    });
+        expect(panZoom.setCamera).toHaveBeenCalledTimes(1);
+        expect(panZoom.getBoundsForNodeIds).toHaveBeenCalledTimes(1);
+    }));
 
-    it('allows framing again after the external model becomes empty', () => {
+    it('allows framing again after the external model becomes empty', fakeAsync(() => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);
         const component = fixture.componentInstance;
-        const scheduleViewportFraming = jest
-            .spyOn(globalThis, 'requestAnimationFrame')
-            .mockReturnValue(1);
+        const panZoom = fixture.debugElement.injector.get(PanZoomService);
+        const options = fixture.debugElement.injector.get(DF_PAN_ZOOM_OPTIONS);
+        const bounds = jest.spyOn(panZoom, 'getBoundsForNodeIds').mockReturnValue({
+            minX: -100,
+            minY: -60,
+            maxX: 200,
+            maxY: 180,
+        });
 
-        fixture.debugElement.injector.get(DF_PAN_ZOOM_OPTIONS).leftPosition = 0;
+        Object.defineProperties(fixture.nativeElement, {
+            offsetWidth: {value: 1000},
+            offsetHeight: {value: 800},
+        });
+        options.leftPosition = 0;
+        options.topPosition = 0;
+        fixture.detectChanges();
         fixture.debugElement.triggerEventHandler('waResizeObserver', [
             {contentRect: {width: 1000, height: 800}},
         ]);
-        scheduleViewportFraming.mockClear();
 
         component.writeValue({
             nodes: [
@@ -159,13 +192,17 @@ describe('NgDrawFlowComponent', () => {
             ],
             connections: [],
         });
+        tick(32);
+        expect(panZoom.setCamera).toHaveBeenCalledTimes(1);
+
         component.writeValue({
             nodes: [],
             connections: [],
         });
+        tick(32);
+        expect(panZoom.setCamera).toHaveBeenCalledTimes(1);
 
-        scheduleViewportFraming.mockClear();
-
+        bounds.mockReturnValue({minX: -300, minY: -150, maxX: 200, maxY: 180});
         component.writeValue({
             nodes: [
                 {
@@ -175,9 +212,19 @@ describe('NgDrawFlowComponent', () => {
             ],
             connections: [],
         });
+        expect(panZoom.setCamera).toHaveBeenCalledTimes(1);
+        tick(32);
 
-        expect(scheduleViewportFraming).toHaveBeenCalledTimes(1);
-    });
+        expect(panZoom.getBoundsForNodeIds).toHaveBeenLastCalledWith(['node-3']);
+        expect(panZoom.setCamera).toHaveBeenCalledTimes(2);
+        expect(panZoom.setCamera).toHaveBeenLastCalledWith({
+            x: 300,
+            y: 150,
+            zoom: 1,
+            offsetX: 0,
+            offsetY: 0,
+        });
+    }));
 
     it('preserves selection while updating the model', () => {
         const fixture = TestBed.createComponent(NgDrawFlowComponent);

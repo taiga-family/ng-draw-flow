@@ -3,6 +3,7 @@ import {
     Component,
     forwardRef,
     inject,
+    input,
     output,
     type Signal,
     signal,
@@ -45,6 +46,8 @@ export class SceneComponent implements ControlValueAccessor {
     private readonly connectionsService = inject(ConnectionsService);
     private readonly draftConnectionService = inject(DraftConnectionService);
     private readonly store = inject(NgDrawFlowStoreService);
+
+    public readonly touched = input(false);
 
     protected readonly nodeSelected = output<DfDataNode>();
     protected readonly nodeMoved = output<DfEvent<DfDataNode>>();
