@@ -37,7 +37,7 @@ over manually placed, draggable or externally calculated positions.
 npm install @ng-draw-flow/core
 ```
 
-## Basic Usage
+## Basic usage
 
 Create a custom node component. Connector ids must be unique across the complete graph; prefixing them with the node id
 is the recommended convention.
